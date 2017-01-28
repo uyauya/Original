@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MultiWayShoot : MonoBehaviour {
 
-	public GameObject MultiWayBullet;
+	/*public GameObject MultiWayBullet;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
 	public float speed = 10F;
@@ -42,5 +42,5 @@ public class MultiWayShoot : MonoBehaviour {
 		GameObject bulletObject = GameObject.Instantiate (MultiWayBullet)as GameObject;
 		bulletObject.transform.position = muzzle.position;
 		bulletObject.GetComponent<MultiWayBullet> ().damage = this.damage;
-	}
+	}*/
 }
