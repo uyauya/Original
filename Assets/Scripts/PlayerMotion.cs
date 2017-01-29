@@ -1,42 +1,67 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Security.Cryptography;
 
 public class PlayerMotion : MonoBehaviour {
-	// Animatorをこれ以降animatorと略す
-	private Animator animator;
-	public Transform target;
+		[SerializeField]
+		private Animator _animator;
+		[SerializeField]
+		private CharacterController _controller;
+		[SerializeField,Range (0, 1)]
+		private float _moveSpeed;
 
-	void Start () {
-		//animatorを使えるようにする為にAnimatorをゲットコンポーネント
-		animator = GetComponent<Animator> ();
-	}
+		// Use this for initialization
+		void Start ()
+		{
 
-	void Update () {
-	
-		//モーションを切り替える
-		// Horizontalはプラスが右でマイナスが左、Verticalはプラスが前でマイナスが後
-		// 右に押したらプラス１以上になるので、右に設定したモーションに切り替わる
-		if(Input.GetAxis ("Horizontal") > 0){
-			target.transform.Rotate(0, Input.GetAxis("Horizontal") * 6, 0);
-			animator.SetInteger("Horizontal",1);
-		}else if(Input.GetAxis ("Horizontal") < 0){	
-			target.transform.Rotate(0, Input.GetAxis("Horizontal") * 6, 0);
-			animator.SetInteger("Horizontal",-1);
-		}else{
-			animator.SetInteger("Horizontal",0);
 		}
-		if(Input.GetAxis ("Vertical") > 0){
-			animator.SetInteger("Vertical",1);
-		}else if(Input.GetAxis ("Vertical") < 0){
-			animator.SetInteger("Vertical",-1);
-		}else{
-			animator.SetInteger("Vertical",0);
+
+		// Update is called once per frame
+		void Update ()
+		{
+			//===キャラクターのアニメーション部分===//
+			if (Input.GetAxis ("Horizontal") > 0) {
+				_animator.SetInteger ("Horizontal", 1);
+			} else if (Input.GetAxis ("Horizontal") < 0) {	
+				_animator.SetInteger ("Horizontal", -1);
+			} else {
+				_animator.SetInteger ("Horizontal", 0);
+			}
+			if (Input.GetAxis ("Vertical") > 0) {
+				_animator.SetInteger ("Vertical", 1);
+			} else if (Input.GetAxis ("Vertical") < 0) {
+				_animator.SetInteger ("Vertical", -1);
+			} else {
+				_animator.SetInteger ("Vertical", 0);
+			}
+			//=======================//
+
+			//ジャンプモーションに切り替える
+			_animator.SetBool ("Jump", Input.GetButton ("Jump"));
+
+			//ブーストキーが押されたらにパラメータを切り替える
+			_animator.SetBool ("Boost", Input.GetButton ("Boost"));
+
+			//===キャラクターの回転部分===//
+			//目標の回転角(Y値)
+			float targetRotateY = 0;
+			if (Input.GetAxis ("Horizontal") != 0) {
+				targetRotateY = Input.GetAxis ("Horizontal") * 90f;
+			} else if (Input.GetAxis ("Vertical") < 0) {
+				targetRotateY = 180f;
+			}
+			//プレイヤーを回転させる
+			transform.Rotate (0, targetRotateY - transform.localEulerAngles.y, 0);
+
+			//=======================//
+
+			//===キャラクターの移動===//
+			Vector3 moveVector = new Vector3 (
+				Input.GetAxis ("Horizontal") * _moveSpeed,
+				0,
+				Input.GetAxis ("Vertical") * _moveSpeed);
+			_controller.Move (moveVector);
+			//=======================//
 		}
-		
-		//ジャンプモーションに切り替える
-		animator.SetBool("Jump", Input.GetButton ("Jump"));
-		
-		//ブーストキーが押されたらにパラメータを切り替える
-		animator.SetBool("Boost",Input.GetButton ("Boost"));
 	}
-}
