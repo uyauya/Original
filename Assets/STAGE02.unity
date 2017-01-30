@@ -1347,35 +1347,6 @@ TrailRenderer:
       rgba: 16777215
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!1 &719755535
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 719755536}
-  m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &719755536
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 719755535}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 1944655963}
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
 --- !u!1001 &768966756
 Prefab:
   m_ObjectHideFlags: 0
@@ -2800,7 +2771,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 719755536}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 417062, guid: 3886001691da2124688a8816d352423a, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2832,7 +2803,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 417062, guid: 3886001691da2124688a8816d352423a, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 417062, guid: 3886001691da2124688a8816d352423a, type: 2}
       propertyPath: m_LocalScale.x
@@ -3500,7 +3471,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750ce0e97344ee547aa8aeef31a56493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1944655963}
+  _animator: {fileID: 1944655988}
+  _controller: {fileID: 1944655966}
+  _moveSpeed: 0
 --- !u!114 &1944655971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3788,6 +3761,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1944655988 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 9541508, guid: 3886001691da2124688a8816d352423a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1944655961}
 --- !u!1 &1951469161
 GameObject:
   m_ObjectHideFlags: 0
@@ -3956,8 +3934,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85e0e6358fb8368439fcbd7d3933933f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 719755536}
-  smoothing: 5
+  target: {fileID: 1944655963}
+  smoothing: 6
 --- !u!114 &2046404158
 MonoBehaviour:
   m_ObjectHideFlags: 0
