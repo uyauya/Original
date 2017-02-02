@@ -126,7 +126,7 @@ public class PlayerMove : MonoBehaviour {
 			// ブーストポイントが最大以上にはならない
 			boostPoint = Mathf.Clamp(boostPoint, 0, boostPointMax);
 			// コントローラの進行方向にそって動く
-			controller.Move(moveDirection * 0.2f * Time.deltaTime);
+			controller.Move(moveDirection *  Time.deltaTime);
 		
 		//移動速度に合わせてモーションブラーの値を変える（MainCameraにCameraMotionBlurスクリプトを追加)
 		//MainCameraのInspectorのCameraMotionBlurのExcludeLayersでプレイヤーと敵を選択して

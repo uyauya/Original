@@ -45,7 +45,7 @@ public class PlayerMotion : MonoBehaviour {
 
 			//===キャラクターの回転部分===//
 			//目標の回転角(Y値)
-			float targetRotateY = 0;
+			/*float targetRotateY = 0;
 			if (Input.GetAxis ("Horizontal") != 0) {
 				targetRotateY = Input.GetAxis ("Horizontal") * 90f;
 			} else if (Input.GetAxis ("Vertical") < 0) {
@@ -61,7 +61,7 @@ public class PlayerMotion : MonoBehaviour {
 				Input.GetAxis ("Horizontal") * _moveSpeed,
 				0,
 				Input.GetAxis ("Vertical") * _moveSpeed);
-			_controller.Move (moveVector);
+			_controller.Move (moveVector);*/
 			//=======================//
 		}
 	}
