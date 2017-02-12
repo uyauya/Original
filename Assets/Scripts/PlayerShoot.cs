@@ -23,30 +23,30 @@ public class PlayerShoot : MonoBehaviour {
 	Bullet01 bullet01_script;
 	public GameObject effectPrefab;
 	public GameObject effectObject;
-	
+
 	void Start () {
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 	}
-	
+
 	void Update () {
 		// Fire1（標準ではCtrlキー)を押された瞬間.
 		if (Input.GetButtonDown ("Fire1")) {
+			// Fire1を押してチャージ開始.
+			triggerDownTimeStart = Time.time;
 			//エフェクトをInstantiate
 			effectObject = Instantiate (effectPrefab);
 			// bullet01生成、Bullet01のゲームオブジェクトを生成.
 			bullet01 = GameObject.Instantiate (Bullet01)as GameObject;
-		// Fire1（標準ではCtrlキー)を押してチャージ開始
-		} else if (Input.GetButtonDown ("Fire1")) {
+		} else if (Input.GetButton ("Fire1")) {
 			// Fire1を押してチャージ開始.
-			triggerDownTimeStart = Time.time;
 			// 2秒たったら.
-			if (Time.time - triggerDownTimeStart >= 2.0f) {
+			if (Time.time - triggerDownTimeStart >= 1.0f) {
 				// スケールを大きくする.
-				bullet01.transform.localScale *= 2.00f;
+				bullet01.transform.localScale *= 7.00f;
 			}
-		// キーを離すことによりチャージ終了
+			// キーを離すことによりチャージ終了
 		} else if (Input.GetButtonUp ("Fire1")) {
 			triggerDownTimeEnd = Time.time;
 			//エフェクトを削除
@@ -59,7 +59,7 @@ public class PlayerShoot : MonoBehaviour {
 			// Shotのアニメーションに切り替え
 			animator.SetTrigger ("Shot");
 			// 一定以上間が空いたらチャージタイムのリセット
-			if (time >= interval) {	
+			if (time >= interval) {    
 				time = 0f;
 			}
 			// Bulletnoを設定（下記参照）
@@ -67,7 +67,7 @@ public class PlayerShoot : MonoBehaviour {
 		}
 		//マズルフラッシュを表示する
 		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
-		
+
 		//音を重ねて再生する
 		audioSource.PlayOneShot(audioSource.clip);
 	}
