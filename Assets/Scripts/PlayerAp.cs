@@ -15,12 +15,13 @@ public class PlayerAp : MonoBehaviour {
 	public Color myRed;
 	public Image gaugeImage;
 	private Renderer renderer;
-
+	private ModelColorChange modelColorChange;
 
 	void Start () {	
 		armorPoint = armorPointMax;
 		displayArmorPoint = armorPoint;
 		renderer = GetComponent<Renderer>();
+		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 	}
 	
 
@@ -66,18 +67,19 @@ public class PlayerAp : MonoBehaviour {
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 		}	
 		//Enemyとぶつかった時にコルーチンを実行
-		/*if (collider.gameObject.tag == "Enemy") {
+		if (collider.gameObject.tag == "Enemy") {
 			StartCoroutine ("DamageCoroutine");
+			Debug.Log ("ダメージ");
 		}
 		else if (collider.gameObject.tag == "ShotEnemy") {
 			StartCoroutine ("DamageCoroutine");
-		}*/
+		}
 		else if (collider.gameObject.tag == "Item") {
 			armorPoint += 1000;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 		}
 	}
-	/*IEnumerator DamageCoroutine ()
+	IEnumerator DamageCoroutine ()
 	{
 		//レイヤーをPlayerDamageに変更
 		gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
@@ -85,17 +87,19 @@ public class PlayerAp : MonoBehaviour {
 		int count = 10;
 		while (count > 0){
 			//透明にする
-			renderer.material.color = new Color (1,1,1,0);
+			Debug.Log ("色変える");
+			modelColorChange.ColorChange(new Color (1,1,1,0));
 			//0.05秒待つ
+			Debug.Log ("戻す");
 			yield return new WaitForSeconds(0.05f);
 			//元に戻す
-			renderer.material.color = new Color (1,1,1,1);
+			modelColorChange.ColorChange(new Color (1,1,1,1));
 			//0.05秒待つ
 			yield return new WaitForSeconds(0.05f);
 			count--;
 		}
 		//レイヤーをPlayerに戻す
 		gameObject.layer = LayerMask.NameToLayer("Player");
-	}*/
+	}
 
 }

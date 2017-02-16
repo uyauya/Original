@@ -16,31 +16,27 @@ public class PlayerMotion : MonoBehaviour {
 	void Update () {
 
 		//モーションを切り替える
-		if(Input.GetAxis ("Horizontal") > 0){
-			transform.rotation = Quaternion.Euler(0, 90, 0);
-			animator.SetInteger("Horizontal",1);
+		if (Input.GetAxis ("Horizontal") > 0) {
+			transform.rotation = Quaternion.Euler (0, 90, 0);
+			animator.SetBool ("Move", true);
+			gameObject.GetComponent<Rigidbody> ().AddForce (transform.forward * 30);
+		} else if (Input.GetAxis ("Horizontal") < 0) {
+			transform.rotation = Quaternion.Euler (0, -90, 0);
+			animator.SetBool ("Move", true);
+			gameObject.GetComponent<Rigidbody> ().AddForce (transform.forward * 30);
 
-		}else if(Input.GetAxis ("Horizontal") < 0){
-			transform.rotation = Quaternion.Euler(0, -90, 0);
-
-			animator.SetInteger("Horizontal",-1);
-
-		}else{
-
-			animator.SetInteger("Horizontal",0);
-		}
-
-		if(Input.GetAxis ("Vertical") > 0){
-
-			animator.SetInteger("Vertical",1);
+		} else if(Input.GetAxis ("Vertical") > 0){
+			transform.rotation = Quaternion.Euler(0, 0, 0);
+			animator.SetBool("Move",true);
+			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 30);
 
 		}else if(Input.GetAxis ("Vertical") < 0){
-
-			animator.SetInteger("Vertical",-1);
+			transform.rotation = Quaternion.Euler(0, -180, 0);
+			animator.SetBool("Move",true);
+			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 30);
 
 		}else{
-
-			animator.SetInteger("Vertical",0);
+			animator.SetBool("Move",false);
 		}
 
 		//ジャンプモーションに切り替える

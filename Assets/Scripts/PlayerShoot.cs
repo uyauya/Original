@@ -31,20 +31,23 @@ public class PlayerShoot : MonoBehaviour {
 	}
 
 	void Update () {
+
+		Debug.Log(bullet01);
+
 		// Fire1（標準ではCtrlキー)を押された瞬間.
 		if (Input.GetButtonDown ("Fire1")) {
 			// Fire1を押してチャージ開始.
 			triggerDownTimeStart = Time.time;
 			//エフェクトをInstantiate
-			effectObject = Instantiate (effectPrefab);
+			effectObject = Instantiate (effectPrefab, this.transform.position, Quaternion.identity);
 			// bullet01生成、Bullet01のゲームオブジェクトを生成.
-			bullet01 = GameObject.Instantiate (Bullet01)as GameObject;
+			bullet01 = GameObject.Instantiate (Bullet01, this.transform.position, Quaternion.identity)as GameObject;
 		} else if (Input.GetButton ("Fire1")) {
 			// Fire1を押してチャージ開始.
 			// 2秒たったら.
 			if (Time.time - triggerDownTimeStart >= 1.0f) {
 				// スケールを大きくする.
-				bullet01.transform.localScale *= 7.00f;
+				bullet01.transform.localScale *= 1.07f;
 			}
 			// キーを離すことによりチャージ終了
 		} else if (Input.GetButtonUp ("Fire1")) {
