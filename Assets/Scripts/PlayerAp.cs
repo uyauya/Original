@@ -16,6 +16,7 @@ public class PlayerAp : MonoBehaviour {
 	public Image gaugeImage;
 	private Renderer renderer;
 	private ModelColorChange modelColorChange;
+	//private GameObject gameObject;
 
 	void Start () {	
 		armorPoint = armorPointMax;
@@ -69,7 +70,7 @@ public class PlayerAp : MonoBehaviour {
 		//Enemyとぶつかった時にコルーチンを実行
 		if (collider.gameObject.tag == "Enemy") {
 			StartCoroutine ("DamageCoroutine");
-			Debug.Log ("ダメージ");
+			//Debug.Log ("ダメージ");
 		}
 		else if (collider.gameObject.tag == "ShotEnemy") {
 			StartCoroutine ("DamageCoroutine");
@@ -79,6 +80,7 @@ public class PlayerAp : MonoBehaviour {
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 		}
 	}
+		
 	IEnumerator DamageCoroutine ()
 	{
 		//レイヤーをPlayerDamageに変更
@@ -87,19 +89,24 @@ public class PlayerAp : MonoBehaviour {
 		int count = 10;
 		while (count > 0){
 			//透明にする
-			Debug.Log ("色変える");
-			modelColorChange.ColorChange(new Color (1,1,1,0));
+			//Debug.Log ("色変える");
+			modelColorChange.ColorChange(new Color (1,0,0,1));
 			//0.05秒待つ
-			Debug.Log ("戻す");
-			yield return new WaitForSeconds(0.05f);
+			//Debug.Log ("戻す");
+			yield return new WaitForSeconds(0.1f);
 			//元に戻す
 			modelColorChange.ColorChange(new Color (1,1,1,1));
 			//0.05秒待つ
-			yield return new WaitForSeconds(0.05f);
+			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
 		//レイヤーをPlayerに戻す
 		gameObject.layer = LayerMask.NameToLayer("Player");
 	}
 
+	/*iTween.MoveTo(gameObject, iTweenHash(
+		"position",transform.position - (transform.forward * 10f),
+		"time",0.5f,
+		"easetype",iTween.EasyType.linear
+	));*/
 }
