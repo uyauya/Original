@@ -46,9 +46,7 @@ public class Zombie : MonoBehaviour {
 		}
 
 		armorPoint -= damage;
-		Debug.Log(armorPoint);
-		Debug.Log(damage);
-		//Debug.Log ("受け取った");
+		//Debug.Log(armorPoint);
 		
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0){

@@ -32,7 +32,7 @@ public class PlayerShoot : MonoBehaviour {
 
 	void Update () {
 
-		Debug.Log(bullet01);
+		//Debug.Log(bullet01);
 
 		// Fire1（標準ではCtrlキー)を押された瞬間.
 		if (Input.GetButtonDown ("Fire1")) {

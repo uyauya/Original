@@ -19,21 +19,21 @@ public class PlayerMotion : MonoBehaviour {
 		if (Input.GetAxis ("Horizontal") > 0) {
 			transform.rotation = Quaternion.Euler (0, 90, 0);
 			animator.SetBool ("Move", true);
-			gameObject.GetComponent<Rigidbody> ().AddForce (transform.forward * 30);
+			gameObject.GetComponent<Rigidbody> ().AddForce (transform.forward * 20);
 		} else if (Input.GetAxis ("Horizontal") < 0) {
 			transform.rotation = Quaternion.Euler (0, -90, 0);
 			animator.SetBool ("Move", true);
-			gameObject.GetComponent<Rigidbody> ().AddForce (transform.forward * 30);
+			gameObject.GetComponent<Rigidbody> ().AddForce (transform.forward * 20);
 
 		} else if(Input.GetAxis ("Vertical") > 0){
 			transform.rotation = Quaternion.Euler(0, 0, 0);
 			animator.SetBool("Move",true);
-			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 30);
+			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 20);
 
 		}else if(Input.GetAxis ("Vertical") < 0){
 			transform.rotation = Quaternion.Euler(0, -180, 0);
 			animator.SetBool("Move",true);
-			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 30);
+			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 20);
 
 		}else{
 			animator.SetBool("Move",false);

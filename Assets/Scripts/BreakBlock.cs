@@ -11,6 +11,8 @@ public class BreakBlock : MonoBehaviour {
 	float timer = 0;
 	RedSphere Red;
 	public GameObject RedSphere;
+	public GameObject BlueSphere;
+	public GameObject GreenSphere;
 
 	void Start () {
 
@@ -35,8 +37,12 @@ public class BreakBlock : MonoBehaviour {
 			if (armorPoint <= 0){
 				Destroy (gameObject);
 				Instantiate(exprosion, transform.position, transform.rotation);
-				if(Random.Range(0, 4) == 0){
-					Instantiate(Red, transform.position, transform.rotation);
+				if (Random.Range (0, 6) == 0) {
+					Instantiate (RedSphere, transform.position, transform.rotation);
+				} else if (Random.Range (0, 4) == 0) {
+					Instantiate (BlueSphere, transform.position, transform.rotation);
+				} else if (Random.Range (0, 10) == 0) {
+					Instantiate (GreenSphere, transform.position, transform.rotation);
 				}
 				//リザルト用のスコアを加算する
 				BattleManager.score ++;

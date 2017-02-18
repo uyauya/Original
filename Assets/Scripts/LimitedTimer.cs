@@ -10,7 +10,7 @@ public class LimitedTimer : MonoBehaviour {
 		//float型からint型へCastし、String型に変換して表示 
 		int minute = (int)time / 60;
 		int second = (int)time % 60;
-		GetComponent<Text> ().text = minute.ToString("D2") + "分" + second.ToString("D2") + "秒";
+		GetComponent<Text> ().text = minute.ToString("D2") + ":" + second.ToString("D2") + "";
 		//GetComponent<Text>().text = ((int)time).ToString(); 
 	} 
 
@@ -23,7 +23,7 @@ public class LimitedTimer : MonoBehaviour {
 		time += Time.deltaTime;
 		//マイナスは表示しない 
 		if (time < 0) time = 0; 
-		GetComponent<Text> ().text = minute.ToString("D2") + "分" + second.ToString("D2") + "秒";
+		GetComponent<Text> ().text = minute.ToString("D2") + ":" + second.ToString("D2") + "";
 		//GetComponent<Text> ().text = ((int)time).ToString (); 
 	} 
 } 

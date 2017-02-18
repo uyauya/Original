@@ -87,6 +87,11 @@ public class PlayerAp : MonoBehaviour {
 		gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
 		//while文を10回ループ
 		int count = 10;
+		iTween.MoveTo(gameObject, iTween.Hash(
+			"position", transform.position - (transform.forward * 3f),
+			"time", 0.5f, // 好きな時間（秒）
+			"easetype", iTween.EaseType.linear
+		));
 		while (count > 0){
 			//透明にする
 			//Debug.Log ("色変える");
@@ -102,11 +107,9 @@ public class PlayerAp : MonoBehaviour {
 		}
 		//レイヤーをPlayerに戻す
 		gameObject.layer = LayerMask.NameToLayer("Player");
+		//iTweenのアニメーション
+
 	}
 
-	/*iTween.MoveTo(gameObject, iTweenHash(
-		"position",transform.position - (transform.forward * 10f),
-		"time",0.5f,
-		"easetype",iTween.EasyType.linear
-	));*/
+
 }
