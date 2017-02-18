@@ -76,14 +76,28 @@ public class MultiWayShoot : MonoBehaviour {
 	}
 
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
-	void Bullet() {
-		// Bullet01のゲームオブジェクトを生成してbulletObjectとする
-		GameObject bulletObject = GameObject.Instantiate (Bullet05)as GameObject;
-		//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
-		bulletObject.transform.position = muzzle.position;
-		// bulletObjectのオブジェクトにダメージ計算を渡す
-		bulletObject.GetComponent<Bullet01> ().damage = this.damage;
+	void Bullet ()
+	{
+		// 15度間隔の散弾
+		// -2,-1,0,1,2といった具合に5発を設定
+		for (int i = -2; i < 5; i++) {
+			//初期配置の半径(弾の生成元からの半径)
+			float rad = 5f;
+			//真ん中を中心に15度間隔に配置位置　
+			Vector3 pos = new Vector3 (
+				rad * Mathf.Sin (Mathf.Deg2Rad * (i * 15f)),
+				0,
+				rad * Mathf.Cos (Mathf.Deg2Rad * (i * 15f))
+			);
+			//生成
+			GameObject bulletObject = Instantiate (Bullet05);
+			//弾を配置
+			bulletObject.transform.position = transform.TransformPoint (pos);
+			//回転を設定（弾を拡散するよう回転させる）
+			bulletObject.transform.rotation = Quaternion.LookRotation (bulletObject.transform.position - transform.position);
+			// bulletObjectのオブジェクトにダメージ計算を渡す
+			bulletObject.GetComponent<Bullet05> ().damage = this.damage;
+		}
 	}
-
 
 }

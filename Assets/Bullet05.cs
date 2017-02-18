@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class Bullet05 : MonoBehaviour {
 
-	[Range(0f, 1f)]
-	public float diffusionAngle;
 	public GameObject explosion;
 	public float damage;
 	Enemy enemy;
-	PlayerShoot Plshoot;
+	MultiWayShoot multiwayshoot;
 	private Rigidbody rb;
 	private Vector3 forward;
 
 	void Start () {
 		rb = this.GetComponent<Rigidbody>();
-		float angle_x = Random.Range(-diffusionAngle, diffusionAngle);
-		float angle_y = Random.Range(-diffusionAngle, diffusionAngle);
-		float angle_z = Random.Range(-diffusionAngle, diffusionAngle);
-
-		forward = transform.forward + new Vector3(angle_x, angle_y, angle_z);
-		Plshoot = GameObject.Find ("Utc_sum_humanoid").GetComponent<PlayerShoot> ();
+		multiwayshoot = GameObject.Find ("Utc_sum_humanoid").GetComponent<MultiWayShoot> ();
 
 	}	
 	void Update () {		
-		transform.position += transform.forward * Time.deltaTime * 100;
+		transform.position += transform.forward * Time.deltaTime * 20;
 	}	
 	private void OnCollisionEnter(Collision collider) {
 
