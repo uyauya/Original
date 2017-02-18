@@ -16,7 +16,7 @@ public class PlayerAp : MonoBehaviour {
 	public Image gaugeImage;
 	private Renderer renderer;
 	private ModelColorChange modelColorChange;
-	//private GameObject gameObject;
+	private bool isInvincible;
 
 	void Start () {	
 		armorPoint = armorPointMax;
@@ -92,6 +92,7 @@ public class PlayerAp : MonoBehaviour {
 			"time", 0.5f, // 好きな時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
+		isInvincible = true;
 		while (count > 0){
 			//透明にする
 			//Debug.Log ("色変える");
@@ -105,6 +106,7 @@ public class PlayerAp : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
+		isInvincible = false;
 		//レイヤーをPlayerに戻す
 		gameObject.layer = LayerMask.NameToLayer("Player");
 		//iTweenのアニメーション
