@@ -24,6 +24,7 @@ public class PlayerShoot : MonoBehaviour {
 	public GameObject effectPrefab;
 	public GameObject effectObject;
 
+
 	void Start () {
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
