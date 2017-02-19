@@ -24,6 +24,7 @@ public class PlayerShoot : MonoBehaviour {
 	public GameObject effectPrefab;
 	public GameObject effectObject;
 
+	public bool isCharging = false;
 
 	void Start () {
 		audioSource = gameObject.GetComponent<AudioSource>();
@@ -39,6 +40,8 @@ public class PlayerShoot : MonoBehaviour {
 		if (Input.GetButtonDown ("Fire1")) {
 			// Fire1を押してチャージ開始.
 			triggerDownTimeStart = Time.time;
+			// チャージ開始のフラグを立てる
+			isCharging = true;
 			//エフェクトをInstantiate
 			effectObject = Instantiate (effectPrefab, this.transform.position, Quaternion.identity);
 			// bullet01生成、Bullet01のゲームオブジェクトを生成.
@@ -48,11 +51,13 @@ public class PlayerShoot : MonoBehaviour {
 			// 2秒たったら.
 			if (Time.time - triggerDownTimeStart >= 1.0f) {
 				// スケールを大きくする.
-				bullet01.transform.localScale *= 1.07f;
+				bullet01.transform.localScale *= 1.01f;
 			}
 			// キーを離すことによりチャージ終了
 		} else if (Input.GetButtonUp ("Fire1")) {
 			triggerDownTimeEnd = Time.time;
+			// チャージ開始のフラグを消す
+			isCharging = false;
 			//エフェクトを削除
 			Destroy (effectObject);
 			// キーを離した状態から押し始めたじかんの差分を計測して

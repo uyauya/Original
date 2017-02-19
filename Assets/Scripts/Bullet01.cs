@@ -10,11 +10,15 @@ public class Bullet01 : MonoBehaviour {
 	PlayerShoot Plshoot;
 
 	void Start () {
+
 		// Utc_sum_humanoid（プレイヤーの名前）のオブジェクトを見つけて
 		// PlayerShootのスクリプトを見つけて以後Plshootと略す
 		Plshoot = GameObject.Find ("Utc_sum_humanoid").GetComponent<PlayerShoot> ();
 		//（発射して）三秒後に消滅
-		Destroy (gameObject, 3);
+		// チャージ中は生成3秒後に消滅させない
+		if( Plshoot.isCharging == false ) {
+			Destroy (gameObject, 3);
+		}
 		// 以下ビームっぽい演出の作り方
 		// ShotオブジェクトにAddComponentでTrailRenderer追加
 		// SimpleParticlePackをダウンロードしてMaterial追加
@@ -23,7 +27,15 @@ public class Bullet01 : MonoBehaviour {
 	void Update () {
 
 		//弾を前進させる
-		transform.position += transform.forward * Time.deltaTime * 100;
+		// チャージ中は前進させない
+		if( Plshoot.isCharging == false ) {
+			transform.position += transform.forward * Time.deltaTime * 100;
+			// チャージされていない時はコリジョン有効
+			GetComponent<SphereCollider>().enabled = true;
+		} else {
+			// チャージ中はコリジョン無効
+			GetComponent<SphereCollider>().enabled = false;
+		}
 		// 弾を発射した瞬間、プレイヤーと弾が衝突してしまうので、メインメニューからEdit→ProjectSettings
 		// →Tags and Layers →PlayerとShotを追加。プレイヤーのレイヤーをPlayer,Bullet01のレイヤーをShotにし、
 		// プレイヤーを選択してEdit→ProjectSettings→Physicsにし、InspectorでPhysicsManagerを開く
@@ -31,6 +43,11 @@ public class Bullet01 : MonoBehaviour {
 		// 設定変えた時ChangeLayerの表示が出たらYes
 	}	
 	private void OnCollisionEnter(Collision collider) {
+
+		// チャージ中は当たり判定をしないで処理を抜ける
+		if( Plshoot == null && Plshoot.isCharging == true ) {
+			return;
+		}
 
 		//地形とぶつかったら消滅させる
 		if (collider.gameObject.name == "Terrain") {		

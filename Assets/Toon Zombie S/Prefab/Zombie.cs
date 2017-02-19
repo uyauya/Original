@@ -39,12 +39,13 @@ public class Zombie : MonoBehaviour {
 		
 		if (collider.gameObject.tag == "Shot") {
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
-		} else {
-			if (collider.gameObject.tag == "Shot2") {
-				damage = collider.gameObject.GetComponent<Bullet02> ().damage;
-			}
+		} else if (collider.gameObject.tag == "Shot2") {
+			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
+		} else if (collider.gameObject.tag == "Shot3") {
+			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
+		} else if (collider.gameObject.tag == "Shot5") {
+			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 		}
-
 		armorPoint -= damage;
 		//Debug.Log(armorPoint);
 		

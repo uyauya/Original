@@ -97,16 +97,15 @@ public class Enemy : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision collider) {
 		//Debug.Log (collider);
-		// Enemyオブジェックトにコライダーを付けておく。
-		// 敵の当たり判定が小さいとストレスが溜まるので、プレイヤーのコライダーは小さめ、敵は大きめにした方がいい
-		// タグやレイヤーもEnemyにして、ProjectSettings→Physicsで本体と発射する弾の交差する所のチェックを外す
-		// Shotタグに衝突したらShotのBulletスクリプトのダメージを受け取る
+
 		if (collider.gameObject.tag == "Shot") {
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
-		} else {
-			if (collider.gameObject.tag == "Shot2") {
-				damage = collider.gameObject.GetComponent<Bullet02> ().damage;
-			}
+		} else if (collider.gameObject.tag == "Shot2") {
+			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
+		} else if (collider.gameObject.tag == "Shot3") {
+			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
+		} else if (collider.gameObject.tag == "Shot5") {
+			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 		}
 			//Debug.Log ("ダメージ");
 			//プレイヤーの弾のダメージを引く

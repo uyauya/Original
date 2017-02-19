@@ -88,7 +88,7 @@ public class PlayerAp : MonoBehaviour {
 		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
-			"position", transform.position - (transform.forward * 3f),
+			"position", transform.position - (transform.forward * 5f),
 			"time", 0.5f, // 好きな時間（秒）
 			"easetype", iTween.EaseType.linear
 		));

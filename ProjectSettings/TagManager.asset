@@ -15,6 +15,7 @@ TagManager:
   - Item2
   - SubCamera
   - Fire
+  - Shot05
   layers:
   - Default
   - TransparentFX
