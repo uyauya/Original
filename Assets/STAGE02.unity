@@ -1171,13 +1171,13 @@ Prefab:
       propertyPath: m_Name
       value: ZombieEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 161242, guid: a51ae6c75d01e084db1d7ab7b771d6d8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a51ae6c75d01e084db1d7ab7b771d6d8, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &821416020 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 161242, guid: a51ae6c75d01e084db1d7ab7b771d6d8, type: 2}
-  m_PrefabInternal: {fileID: 821416019}
 --- !u!1 &835048106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,7 +1352,7 @@ MonoBehaviour:
   prefab_WALL:
   - {fileID: 160858, guid: be400dba39119e0448163986d2426402, type: 2}
   prefab_enemy:
-  - {fileID: 821416020}
+  - {fileID: 161242, guid: a51ae6c75d01e084db1d7ab7b771d6d8, type: 2}
   prefab_BreakBlock:
   - {fileID: 1509994010933452, guid: 730c39bbd564f11459510769a101bb40, type: 2}
 --- !u!4 &974667648
@@ -1914,7 +1914,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1377488596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.42, y: 0.77, z: -0.57}
+  m_LocalPosition: {x: -3.9, y: 0.77, z: -1.4}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 473268595}

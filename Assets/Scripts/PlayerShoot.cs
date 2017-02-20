@@ -33,7 +33,7 @@ public class PlayerShoot : MonoBehaviour {
 	}
 
 	void Update () {
-
+		
 		//Debug.Log(bullet01);
 
 		// Fire1（標準ではCtrlキー)を押された瞬間.
@@ -67,10 +67,13 @@ public class PlayerShoot : MonoBehaviour {
 			//Debug.Log (damage);
 			// Shotのアニメーションに切り替え
 			animator.SetTrigger ("Shot");
+			//animator.SetBool("Shot",true);
 			// 一定以上間が空いたらチャージタイムのリセット
 			if (time >= interval) {    
 				time = 0f;
+				//animator.SetBool("Shot",false);
 			}
+
 			// Bulletnoを設定（下記参照）
 			Bullet();
 		}
