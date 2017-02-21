@@ -18,7 +18,7 @@ public class Bullet03 : MonoBehaviour {
 
 	// ボム設定（StartCoroutine("bom")の内容）
 	IEnumerator bom(){		
-		yield return new WaitForSeconds(2.0f);		// 2.0秒、処理を待機.	
+		yield return new WaitForSeconds(0.0f);		// 2.0秒、処理を待機.	
 		GameObject effect = Instantiate(prefab_HitEffect2 , transform.position , Quaternion.identity) as GameObject;	// ボムエフェクト発生
 		Destroy(effect , 2.0f);		// ボムエフェクトを、2秒後に消滅させる
 		BomAttack();				// ボムによる攻撃処理

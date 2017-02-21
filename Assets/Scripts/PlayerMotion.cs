@@ -20,24 +20,24 @@ public class PlayerMotion : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
 			//transform.rotation = Quaternion.Euler (0, 90, 0);
 			animator.SetBool ("Move", true);
-			gameObject.GetComponent<Rigidbody> ().AddForce (transform.forward * 30);
+			gameObject.GetComponent<Rigidbody> ().AddForce (transform.forward * 20);
 		} else if (Input.GetAxis ("Horizontal") < 0) {
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
 			//transform.rotation = Quaternion.Euler (0, -90, 0);
 			animator.SetBool ("Move", true);
-			gameObject.GetComponent<Rigidbody> ().AddForce (transform.forward * 30);
+			gameObject.GetComponent<Rigidbody> ().AddForce (transform.forward * 20);
 
 		} else if(Input.GetAxis ("Vertical") > 0){
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 			//transform.rotation = Quaternion.Euler(0, 0, 0);
 			animator.SetBool("Move",true);
-			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 30);
+			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 20);
 
 		}else if(Input.GetAxis ("Vertical") < 0){
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * 5.0f);
 			//transform.rotation = Quaternion.Euler(0, -180, 0);
 			animator.SetBool("Move",true);
-			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 30);
+			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 20);
 
 		}else{
 			animator.SetBool("Move",false);

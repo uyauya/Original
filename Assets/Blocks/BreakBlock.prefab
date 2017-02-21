@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114161286626745962}
   m_Layer: 0
   m_Name: BreakBlock
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,3 +109,4 @@ MonoBehaviour:
   armorPointMax: 100
   RedSphere: {fileID: 100576, guid: 8bcadb38d3e27b749ab7fef5f7d48339, type: 2}
   BlueSphere: {fileID: 133498, guid: 0b12e93063b3af54faf20b6954e8651d, type: 2}
+  GreenSphere: {fileID: 0}
