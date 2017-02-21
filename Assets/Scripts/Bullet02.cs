@@ -6,6 +6,7 @@ public class Bullet02 : MonoBehaviour {
 	public GameObject explosion;
 	public float damage;
 	PlayerShoot02 Plshoot02;
+	private  GameObject Enemy;
 
 	void Start () {
 		Plshoot02 = GameObject.Find ("Utc_sum_humanoid").GetComponent<PlayerShoot02> ();
@@ -13,13 +14,43 @@ public class Bullet02 : MonoBehaviour {
 		Destroy (gameObject, 3);
 	}	
 
-	void Update(){
-		GameObject Enemy = GameObject.Find ("Enemy");
-		float speed = 6.0f;
-		float step = Time.deltaTime * speed;
-		transform.position = Vector3.MoveTowards(transform.position, Enemy.transform.position, step);
-	}
+	void Update ()
 
+	{
+
+		//ホーミング対象がnull(何もない)であれば
+
+		if (Enemy == null) {
+
+			//Enemyというタグがつけられたゲームオブジェクトを配列で取得
+
+			GameObject[] allEnemies = GameObject.FindGameObjectsWithTag ("Enemy");
+
+			//allEnemiesがnullじゃない かつ 要素数が0でなければ
+
+			if (allEnemies != null && allEnemies.Length != 0) {
+
+
+
+				Enemy = allEnemies [UnityEngine.Random.Range (0, allEnemies.Length)];
+
+			} else {
+
+				//何もしない
+
+				return;
+
+			}
+
+		}
+
+		float speed = 6.0f;
+
+		float step = Time.deltaTime * speed;
+
+		transform.position = Vector3.MoveTowards (transform.position, Enemy.transform.position, step);
+
+	}
 
 	private void OnCollisionEnter(Collision collider) {
 

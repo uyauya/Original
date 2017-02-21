@@ -32,7 +32,18 @@ public class Bullet03 : MonoBehaviour {
 		foreach (Collider col in targets) {		// targets配列を順番に処理 (その時に仮名をobjとする)
 			if (col.gameObject.tag == "Enemy") {			// タグ名がEnemyなら
 			Enemy enemyinsta = col.gameObject.GetComponent<Enemy>();
-			enemyinsta.Damaged(bombDamage);	// ダメージを与える
+				//nullだったら
+
+				if (enemyinsta == null) {
+
+					//この先をスキップして次の処理を行う
+
+					continue;
+
+				}
+
+
+				enemyinsta.Damaged(bombDamage);	// ダメージを与える
 			// プレイヤーからの距離を計測
 			float distance = Vector3.Distance(GetComponent<Collider>().transform.position, transform.position);
 			//発光をプレイヤーからの距離に応じて９から下げていく
