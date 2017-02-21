@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c22d12b87b941a489031b7b51201384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shot: {fileID: 157144, guid: 595b34477e2faa84ead169094d6448c7, type: 2}
+  shot: {fileID: 0}
   exprosion: {fileID: 171398, guid: 34381845015d0114a81a9e09387a1868, type: 2}
   armorPoint: 0
   armorPointMax: 1000
