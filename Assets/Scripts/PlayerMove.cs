@@ -14,10 +14,10 @@ public class PlayerMove : MonoBehaviour {
 	public int boostPointMax = 1000;
 	public Image gaugeImage;
 	Vector3 moveSpeed;
-	const float addNormalSpeed = 0.5F;				//通常時の加算速度
-	const float addBoostSpeed = 1;					//ブースト時の加算速度
-	const float moveSpeedMax = 6;					//通常時の最大速度
-	const float boostSpeedMax = 8;					//ブースト時の最大速度
+	const float addNormalSpeed = 10F;				//通常時の加算速度
+	const float addBoostSpeed = 10;					//ブースト時の加算速度
+	const float moveSpeedMax = 40;					//通常時の最大速度
+	const float boostSpeedMax = 80;					//ブースト時の最大速度
 	bool isBoost;
 	
 	void Start () {	// ゲーム起動時の処理
@@ -115,7 +115,7 @@ public class PlayerMove : MonoBehaviour {
 			else
 				// ジャンプの最大値までは上昇してブースト消費
 				moveDirection.y += gravity * Time.deltaTime;
-			boostPoint -= 20;
+			boostPoint -= 10;
 		} else {
 			// それ以外の場合は重力にそって落下
 			moveDirection.y -= gravity * Time.deltaTime;

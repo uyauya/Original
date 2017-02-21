@@ -35,7 +35,7 @@ public class Zombie : MonoBehaviour {
 	
 
 	void OnCollisionEnter(Collision collider) {
-		//Debug.Log (collider);
+		Debug.Log (collider);
 		
 		if (collider.gameObject.tag == "Shot") {
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
@@ -45,15 +45,16 @@ public class Zombie : MonoBehaviour {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
+			Debug.Log(armorPoint);
 		}
 		armorPoint -= damage;
-		//Debug.Log(armorPoint);
+
 		
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0){
 			animator.SetBool("dead" , true);		// 《Animator》の変数deadを true に変更.
 			Destroy (gameObject);
-			
+		Debug.Log("消滅");	
 			//リザルト用のスコアを加算する
 			BattleManager.score ++;
 		}

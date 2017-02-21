@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-using UnityEngine;
-using System.Collections;
-
 // ★★★マップ座標を扱うクラス★★★
 public class MapAxis{
 	public struct Axis_XZ{ public int x,z; }	// int型の構造体を宣言

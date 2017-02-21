@@ -13,7 +13,7 @@ public class MultiWayShoot : MonoBehaviour {
 	private float triggerDownTime = 0F;
 	private float triggerDownTimeStart = 0F;
 	private float triggerDownTimeEnd = 0F;
-	private float Attack = 100;
+	private float Attack = 2000;
 	private float power = 0;
 	public float damage;
 	private float chargeTime;
