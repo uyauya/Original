@@ -47,7 +47,7 @@ public class MultiWayShoot : MonoBehaviour {
 			// 2秒たったら.
 			if (Time.time - triggerDownTimeStart >= 1.0f) {
 				// スケールを大きくする.
-				bullet05.transform.localScale *= 1.01f;
+				bullet05.transform.localScale *= 1.00f;
 			}
 			// キーを離すことによりチャージ終了
 		} else if (Input.GetButtonUp ("Fire5")) {
