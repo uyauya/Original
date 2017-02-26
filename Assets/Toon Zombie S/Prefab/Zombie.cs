@@ -36,8 +36,8 @@ public class Zombie : MonoBehaviour {
 			transform.position += transform.forward * Time.deltaTime * 1;	
 		}
 			
-		// ターゲット（プレイヤー）との距離が0.1以内なら
-		if (Vector3.Distance (target.transform.position, transform.position) <= 0.1f) {
+		// ターゲット（プレイヤー）との距離が0.5以内なら
+		if (Vector3.Distance (target.transform.position, transform.position) <= 1) {
 			//ターゲットの方を徐々に向く
 			// Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
 			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
@@ -46,6 +46,8 @@ public class Zombie : MonoBehaviour {
 			animator.SetBool ("attack", true);
 			Debug.Log ("hit");
 		}
+		// Animator の dead が true なら Update 処理を抜ける
+		if( animator.GetBool("dead") == true ) return;
 	}
 	
 
@@ -70,7 +72,7 @@ public class Zombie : MonoBehaviour {
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0){
 			animator.SetBool("dead" , true);		// 《Animator》の変数deadを true に変更.
-			Destroy (gameObject);
+			Destroy (gameObject, 3.0f);
 		Debug.Log("消滅");	
 			//リザルト用のスコアを加算する
 			BattleManager.score ++;
