@@ -90,6 +90,8 @@ public class PlayerShoot : MonoBehaviour {
 		GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
 		//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 		bulletObject.transform.position = muzzle.position;
+
+
 		// bulletObjectのオブジェクトにダメージ計算を渡す
 		bulletObject.GetComponent<Bullet01> ().damage = this.damage;
 	}

@@ -95,6 +95,8 @@ public class MultiWayShoot : MonoBehaviour {
 			bulletObject.transform.position = transform.TransformPoint (pos);
 			//回転を設定（弾を拡散するよう回転させる）
 			bulletObject.transform.rotation = Quaternion.LookRotation (bulletObject.transform.position - transform.position);
+			// 回転計算をした後に弾の座標を上に上げる
+			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
 			// bulletObjectのオブジェクトにダメージ計算を渡す
 			bulletObject.GetComponent<Bullet05> ().damage = this.damage;
 		}

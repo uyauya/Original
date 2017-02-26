@@ -9,6 +9,10 @@ public class Zombie : MonoBehaviour {
 	float timer = 0;
 	float damage;							// playerに与えるダメージ
 	Bullet01 b1;
+	bool attack = false;
+	bool damaged = false;
+	bool dead = false;
+
 	public void Damaged(float damagedPoint){
 		this.armorPoint -= damagedPoint;	// Playerから受けたダメージの設定
 	}
@@ -31,6 +35,17 @@ public class Zombie : MonoBehaviour {
 				                                       (target.transform.position - transform.position), Time.deltaTime * 5);
 			transform.position += transform.forward * Time.deltaTime * 1;	
 		}
+			
+		// ターゲット（プレイヤー）との距離が0.1以内なら
+		if (Vector3.Distance (target.transform.position, transform.position) <= 0.1f) {
+			//ターゲットの方を徐々に向く
+			// Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
+			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
+			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
+				(target.transform.position - transform.position), Time.deltaTime * 5);
+			animator.SetBool ("attack", true);
+			Debug.Log ("hit");
+		}
 	}
 	
 
@@ -47,6 +62,8 @@ public class Zombie : MonoBehaviour {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			Debug.Log(armorPoint);
 		}
+		animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+		Debug.Log("いたい");
 		armorPoint -= damage;
 
 		

@@ -1530,7 +1530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armorPoint: 0
-  armorPointMax: 100
+  armorPointMax: 1000
 --- !u!136 &13646494
 CapsuleCollider:
   m_ObjectHideFlags: 1
