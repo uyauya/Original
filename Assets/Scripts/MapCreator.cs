@@ -17,11 +17,13 @@ public class MapCreator : MonoBehaviour {
 	public	GameObject[]	prefab_BreakBlock;
 	private float timer = 0.0f;
 	private float interval = 2.0f;
+	public GameObject[] 	Prefab_Player;
 
 	// ■■■
 	void Start(){
-		player		= GameObject.FindGameObjectWithTag("Player");						// プレイヤーオブジェクト格納
-		
+
+		//player		= GameObject.FindGameObjectWithTag("Player");						// プレイヤーオブジェクト格納
+		player = Instantiate(Prefab_Player[GameObject.Find ("BattleManager").GetComponent<BattleManager> ().PlayerNo]);
 		size		= new MapSize(MAP_SIZE_X , MAP_SIZE_Z);								// MapSizeクラスのインスタンス生成
 		playerAxis	= new MapAxis(player , size , prefab_BL[0].transform.localScale);	// PlayerAxisクラスのインスタンス生成
 		mapBlock	= new MapArrayBlock(prefab_BL , "BL" , size , playerAxis);			// 地面用MapArrayクラスのインスタンス生成
