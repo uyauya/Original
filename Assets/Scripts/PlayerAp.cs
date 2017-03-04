@@ -63,10 +63,12 @@ public class PlayerAp : MonoBehaviour {
 
 		//敵の弾と衝突したらダメージ
 		if (collider.gameObject.tag == "ShotEnemy") {
-
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
-		}	
+		} else if (collider.gameObject.tag == "Enemy") {
+			armorPoint -= damage;
+			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
+		}
 		//Enemyとぶつかった時にコルーチンを実行
 		if (collider.gameObject.tag == "Enemy") {
 			StartCoroutine ("DamageCoroutine");
