@@ -3034,7 +3034,7 @@ CharacterController:
   m_GameObject: {fileID: 1944655965}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Height: 1
   m_Radius: 0.2
@@ -3179,7 +3179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6ab101639d777418abffc07b484063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 60
+  speed: 10
   jumpSpeed: 10
   gravity: 20
   boostPointMax: 1000

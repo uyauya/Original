@@ -15,13 +15,13 @@ public class PlayerMove : MonoBehaviour
 	public int boostPointMax = 1000;
 	public Image gaugeImage;
 	Vector3 moveSpeed;
-	const float addNormalSpeed = 10F;
+	const float addNormalSpeed = 1;
 	//通常時の加算速度
-	const float addBoostSpeed = 10;
+	const float addBoostSpeed = 2;
 	//ブースト時の加算速度
-	const float moveSpeedMax = 40;
+	const float moveSpeedMax = 4;
 	//通常時の最大速度
-	const float boostSpeedMax = 80;
+	const float boostSpeedMax = 8;
 	//ブースト時の最大速度
 	private Animator animator;
 	bool isBoost;
@@ -117,12 +117,14 @@ public class PlayerMove : MonoBehaviour
 		moveDirection = transform.TransformDirection (moveDirection);
 
 		//ジャンプキーによる上昇
-		if (Input.GetButtonDown ("Jump")) {
+		if (Input.GetButton ("Jump")) {
 			// ジャンプの最大値より上に上昇しない（一定以上なら上昇ゼロ）
-			if (transform.position.y > 20)
+			if (transform.position.y > 3) {
 				moveDirection.y = 0;
-			// ジャンプの最大値までは上昇
-			moveDirection.y += gravity * Time.deltaTime;
+			} else {
+				// ジャンプの最大値までは上昇
+				moveDirection.y += gravity * Time.deltaTime;
+			}
 		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 20)) {
 			// ジャンプの最大値より上に上昇しない（一定以上なら上昇ゼロ）
 			animator.SetBool("BoostUp", Input.GetButton ("Jump"));
@@ -134,6 +136,7 @@ public class PlayerMove : MonoBehaviour
 		} else {
 			// それ以外の場合は重力にそって落下
 			moveDirection.y -= gravity * Time.deltaTime;
+			if( moveDirection.y <= -10 ) moveDirection.y = -10;
 		}
 		// ブーストやジャンプが入力されていなければブースとポイントが徐々に回復
 		if (!Input.GetButton ("Boost") && !Input.GetButton ("Jump"))
@@ -141,6 +144,8 @@ public class PlayerMove : MonoBehaviour
 		// ブーストポイントが最大以上にはならない
 		boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);
 		// コントローラの進行方向にそって動く
+
+		Debug.Log(moveDirection);
 		controller.Move (moveDirection * Time.deltaTime);
 
 		//移動速度に合わせてモーションブラーの値を変える（MainCameraにCameraMotionBlurスクリプトを追加)
