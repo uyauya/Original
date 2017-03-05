@@ -48,5 +48,9 @@ public class PlayerMotion : MonoBehaviour {
 
 		//ブーストキーが押されたらにパラメータを切り替える
 		animator.SetBool("Boost",Input.GetButton ("Boost"));
+
+
+
+
 	}
 }

@@ -17,12 +17,14 @@ public class PlayerAp : MonoBehaviour {
 	private Renderer renderer;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
+	private Animator animator;
 
 	void Start () {	
 		armorPoint = armorPointMax;
 		displayArmorPoint = armorPoint;
 		renderer = GetComponent<Renderer>();
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
+		animator = GetComponent<Animator> ();
 	}
 	
 
@@ -65,9 +67,11 @@ public class PlayerAp : MonoBehaviour {
 		if (collider.gameObject.tag == "ShotEnemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
+			animator.SetTrigger ("Damage");
 		} else if (collider.gameObject.tag == "Enemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
+			animator.SetTrigger ("Damage");
 		}
 		//Enemyとぶつかった時にコルーチンを実行
 		if (collider.gameObject.tag == "Enemy") {

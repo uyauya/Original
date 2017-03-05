@@ -3180,7 +3180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 60
-  jumpSpeed: 8
+  jumpSpeed: 10
   gravity: 20
   boostPointMax: 1000
   gaugeImage: {fileID: 381407792}
