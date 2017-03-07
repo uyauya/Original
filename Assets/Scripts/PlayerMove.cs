@@ -24,6 +24,7 @@ public class PlayerMove : MonoBehaviour
 	const float boostSpeedMax = 8;
 	//ブースト時の最大速度
 	private Animator animator;
+	private int JumpCount;
 	bool isBoost;
 
 	void Start ()
@@ -108,7 +109,7 @@ public class PlayerMove : MonoBehaviour
 				addSpeed.z = addNormalSpeed;
 			}
 
-			targetSpeed.z *= Mathf.Sign (Input.GetAxis ("Vertical"));
+			//targetSpeed.z *= Mathf.Sign (Input.GetAxis ("Vertical"));
 		}
 
 		//水平移動の速度
@@ -117,14 +118,15 @@ public class PlayerMove : MonoBehaviour
 		moveDirection = transform.TransformDirection (moveDirection);
 
 		//ジャンプキーによる上昇
-		if (Input.GetButton ("Jump")) {
+		if (Input.GetButton ("Jump") == true && JumpCount < 2 ) {
+			JumpCount++;
 			// ジャンプの最大値より上に上昇しない（一定以上なら上昇ゼロ）
-			if (transform.position.y > 3) {
-				moveDirection.y = 0;
-			} else {
+			//if (transform.position.y > 3) {
+			//	moveDirection.y = 0;
+			//} else {
 				// ジャンプの最大値までは上昇
 				moveDirection.y += gravity * Time.deltaTime;
-			}
+			//}
 		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 20)) {
 			// ジャンプの最大値より上に上昇しない（一定以上なら上昇ゼロ）
 			animator.SetBool("BoostUp", Input.GetButton ("Jump"));
