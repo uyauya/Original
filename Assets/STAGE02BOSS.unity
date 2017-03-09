@@ -1245,7 +1245,7 @@ MonoBehaviour:
   MAP_SIZE_Z: 10
   player: {fileID: 0}
   bossPrefab:
-  - {fileID: 1984376716680330, guid: 656a9ddb1e4a90d41847b1d22350ffee, type: 2}
+  - {fileID: 1787213012138056, guid: 6460980c6b7d7c64185db2c19c22b1e4, type: 2}
   prefab_BL:
   - {fileID: 169498, guid: 0b5de3c2c0ec7a944a089de41f25b9d3, type: 2}
   - {fileID: 163042, guid: 32ddef6897c6c4a46808cd7ff58af6a1, type: 2}

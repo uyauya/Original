@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
 	public float jumpSpeed = 8.0F;
 	public float gravity = 9.8F;
 	private Vector3 moveDirection = Vector3.zero;
-	int boostPoint;
+	public int boostPoint;
 	public int boostPointMax = 1000;
 	public Image gaugeImage;
 	Vector3 moveSpeed;

@@ -49,7 +49,7 @@ public class PlayerShoot : MonoBehaviour {
 		} else if (Input.GetButton ("Fire1")) {
 			// Fire1を押してチャージ開始.
 			// 2秒たったら.
-			if (Time.time - triggerDownTimeStart >= 1.0f) {
+			if (Time.time - triggerDownTimeStart >= 1.0f && bullet01.transform.localScale.x < 2.0f ) {
 				// スケールを大きくする.
 				bullet01.transform.localScale *= 1.01f;
 			}
@@ -94,6 +94,10 @@ public class PlayerShoot : MonoBehaviour {
 
 		// bulletObjectのオブジェクトにダメージ計算を渡す
 		bulletObject.GetComponent<Bullet01> ().damage = this.damage;
+	}
+
+	public void KickEvent (){
+		Debug.Log("kick");
 	}
 
 

@@ -30,6 +30,7 @@ public class PlayerShoot02 : MonoBehaviour {
 	}
 
 	void Update () {
+		int boostpoint = GetComponent<PlayerMove> ().boostPoint;
 		if (Input.GetButton("Fire2")) {
 			triggerDownTimeStart = Time.time;
 			//Debug.Log (time);
@@ -42,6 +43,7 @@ public class PlayerShoot02 : MonoBehaviour {
 			if (time >= interval) {	
 				time = 0f;
 			}
+			GetComponent<PlayerMove> ().boostPoint -= 10;
 			Bullets();
 		//マズルフラッシュを表示する
 		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);

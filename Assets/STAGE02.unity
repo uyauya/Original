@@ -3088,7 +3088,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1944655965}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 750ce0e97344ee547aa8aeef31a56493, type: 3}
   m_Name: 
@@ -3174,7 +3174,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1944655965}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa6ab101639d777418abffc07b484063, type: 3}
   m_Name: 
@@ -3182,6 +3182,7 @@ MonoBehaviour:
   speed: 10
   jumpSpeed: 10
   gravity: 20
+  boostPoint: 0
   boostPointMax: 1000
   gaugeImage: {fileID: 381407792}
 --- !u!114 &1944655977
@@ -3248,6 +3249,22 @@ MonoBehaviour:
   damage: 1000
   effectPrefab: {fileID: 100004, guid: b49e37c2e747d4ed4bd2369d30fa0d68, type: 2}
   effectObject: {fileID: 0}
+--- !u!114 &1944655981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1944655965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf05438f1197fd43b7f9c7abb9893aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  jumpSpeed: 8
+  gravity: 9.8
+  boostPointMax: 1000
+  gaugeImage: {fileID: 381407792}
 --- !u!82 &1944655984
 AudioSource:
   m_ObjectHideFlags: 0
