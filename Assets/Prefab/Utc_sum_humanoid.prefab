@@ -847,6 +847,7 @@ GameObject:
   - component: {fileID: 114300115028174674}
   - component: {fileID: 114093488666434262}
   - component: {fileID: 114988363406088918}
+  - component: {fileID: 114957336417257538}
   m_Layer: 8
   m_Name: Utc_sum_humanoid
   m_TagString: Player
@@ -4288,7 +4289,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1303073355525554}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa6ab101639d777418abffc07b484063, type: 3}
   m_Name: 
@@ -4296,6 +4297,7 @@ MonoBehaviour:
   speed: 40
   jumpSpeed: 8
   gravity: 1
+  boostPoint: 0
   boostPointMax: 1000
   gaugeImage: {fileID: 0}
 --- !u!114 &114135786539446922
@@ -4752,7 +4754,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1303073355525554}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 750ce0e97344ee547aa8aeef31a56493, type: 3}
   m_Name: 
@@ -5365,6 +5367,24 @@ MonoBehaviour:
   _threshold: 0.5
   _interval: 10
   isGUI: 0
+--- !u!114 &114957336417257538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1303073355525554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf05438f1197fd43b7f9c7abb9893aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 25
+  Speed: 3
+  jumpSpeed: 30
+  gravity: 9.8
+  boostPointMax: 1000
+  gaugeImage: {fileID: 0}
+  weight: 1
 --- !u!114 &114974024794107910
 MonoBehaviour:
   m_ObjectHideFlags: 1

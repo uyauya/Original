@@ -4,7 +4,6 @@ using System.Collections;
 public class BoostEffect : MonoBehaviour {
 	// ImportPackageでEffectsをインポート
 	// プレイヤーの任意の場所にライトを追加してboostKightに名前変更
-	// 
 	// CullingMaskをプレイヤーに設定すればプレイヤーの周りだけ光るようになる
 	public GameObject boostLight;
 
