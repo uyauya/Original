@@ -4318,7 +4318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 5
   Speed: 3
-  jumpSpeed: 30
+  jumpSpeed: 10
   gravity: 9.8
   boostPointMax: 1000
   gaugeImage: {fileID: 0}
@@ -4713,7 +4713,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1263696272710478}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83c249db3d7112447b534dcfe7aa1869, type: 3}
   m_Name: 
