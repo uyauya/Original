@@ -33,6 +33,7 @@ public class PlayerMove : MonoBehaviour
 		moveSpeed = Vector3.zero;
 		isBoost = false;
 		animator = GetComponent<Animator> ();
+		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 	}
 
 	void Update ()

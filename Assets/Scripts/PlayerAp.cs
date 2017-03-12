@@ -25,6 +25,8 @@ public class PlayerAp : MonoBehaviour {
 		renderer = GetComponent<Renderer>();
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 		animator = GetComponent<Animator> ();
+		gaugeImage = GameObject.Find ("ApGauge").GetComponent<Image> ();
+		armorText = GameObject.Find ("TextAp").GetComponent<Text> ();
 	}
 	
 

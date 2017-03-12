@@ -14,6 +14,10 @@ public class LockOn : MonoBehaviour {
 
 	void Start () {
 		// 基本設定、最初はfalseにしておく
+		lockOnImage = GameObject.Find ("LockOnCursor").GetComponent<Image> ();
+		enemyAp = GameObject.Find ("EnemyApBase").GetComponent<GameObject> ();
+		gaugeImage = GameObject.Find ("EnemyApGauge").GetComponent<Image> ();
+		textDistance = GameObject.Find ("TextDistance").GetComponent<Text> ();
 		isSearch = false;
 		lockOnImage.enabled = false;
 		enemyAp.SetActive (false);
