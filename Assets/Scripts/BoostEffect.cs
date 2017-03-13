@@ -16,7 +16,7 @@ public class BoostEffect : MonoBehaviour {
 		bool flgBoost = false;
 		
 		//ブーストorジャンプ時エフェエクト効果
-		if (Input.GetButton ("Boost") || Input.GetButton ("Jump"))
+		if (Input.GetButton ("Boost"))
 			flgBoost = true;
 			
 		boostLight.SetActive (flgBoost);
