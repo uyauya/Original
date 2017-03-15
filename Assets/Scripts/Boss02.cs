@@ -15,6 +15,8 @@ public class Boss02 : MonoBehaviour {
 	float timer = 0;	
 	int enemyLevel = 0;
 	Bullet01 b1;
+	private ModelColorChange modelColorChange;
+	private bool isInvincible;
 	public void Damaged(float damagedPoint){
 		this.armorPoint -= damagedPoint;	// Playerから受けたダメージの設定
 	}
@@ -24,13 +26,16 @@ public class Boss02 : MonoBehaviour {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
 		target = GameObject.Find("PlayerTarget");	//ターゲットを取得
 		armorPoint = armorPointMax;
+		if (Vector3.Distance (target.transform.position, transform.position) >= 21) {
+			return;
+		}
 	}
 	
 	
 	void Update () {
 		timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
-		if (Vector3.Distance (target.transform.position, transform.position) <= 30) {
+		 if (Vector3.Distance (target.transform.position, transform.position) <= 20) {
 			
 			//ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
@@ -61,8 +66,9 @@ public class Boss02 : MonoBehaviour {
 		}
 		
 		armorPoint -= damage;
-		Debug.Log(armorPoint);
-		Debug.Log(damage);
+		animator.SetTrigger ("Damage");
+		StartCoroutine ("DamageCoroutine");
+
 		//Debug.Log ("受け取った");
 		
 		//体力が0以下になったら消滅する
@@ -72,7 +78,37 @@ public class Boss02 : MonoBehaviour {
 			
 			//リザルト用のスコアを加算する
 			BattleManager.score ++;
+		}		
+	}
+
+	IEnumerator DamageCoroutine () {
+		//レイヤーをPlayerDamageに変更
+		gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
+		//while文を10回ループ
+		int count = 10;
+		iTween.MoveTo(gameObject, iTween.Hash(
+			"position", transform.position - (transform.forward * 0f),
+			"time", 0.5f, // 好きな時間（秒）
+			"easetype", iTween.EaseType.linear
+		));
+		isInvincible = true;
+		while (count > 0){
+			//透明にする
+			//Debug.Log ("色変える");
+			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//0.05秒待つ
+			//Debug.Log ("戻す");
+			yield return new WaitForSeconds(0.1f);
+			//元に戻す
+			modelColorChange.ColorChange(new Color (1,1,1,1));
+			//0.05秒待つ
+			yield return new WaitForSeconds(0.1f);
+			count--;
 		}
-		
+		isInvincible = false;
+		//レイヤーをPlayerに戻す
+		gameObject.layer = LayerMask.NameToLayer("Boss02");
+		//iTweenのアニメーション
+
 	}
 }

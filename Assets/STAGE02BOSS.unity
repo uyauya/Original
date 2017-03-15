@@ -263,6 +263,15 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -0.241
       objectReference: {fileID: 0}
+    - target: {fileID: 114575629916974720, guid: 6460980c6b7d7c64185db2c19c22b1e4,
+        type: 2}
+      propertyPath: exprosion
+      value: 
+      objectReference: {fileID: 100000, guid: 07725ad1d903f4ea891afbc5b4a253f8, type: 2}
+    - target: {fileID: 4223071250491836, guid: 6460980c6b7d7c64185db2c19c22b1e4, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 6460980c6b7d7c64185db2c19c22b1e4, type: 2}
@@ -272,6 +281,22 @@ Transform:
   m_PrefabParentObject: {fileID: 4921923696227388, guid: 6460980c6b7d7c64185db2c19c22b1e4,
     type: 2}
   m_PrefabInternal: {fileID: 51315801}
+--- !u!1 &51315803 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1787213012138056, guid: 6460980c6b7d7c64185db2c19c22b1e4,
+    type: 2}
+  m_PrefabInternal: {fileID: 51315801}
+--- !u!114 &51315804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 51315803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8b7dd34ea68b54eaafd841433f0d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &99766989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,7 +1279,7 @@ MonoBehaviour:
   prefab_enemy: []
   prefab_BreakBlock: []
   Prefab_Player:
-  - {fileID: 1303073355525554, guid: 405690101a2aadd4699abecaa1ab9fa9, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!4 &974667648

@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
 	// 移動時に加える力
-	public float force = 10.0f;
-	public float Speed = 3.0F;
+	public float force = 15.0f;
+	//public float Speed = 3.0F;
 	public float jumpSpeed = 25.0F;
 	public float gravity = 9.8F;
 	private Vector3 moveDirection = Vector3.zero;
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour {
 		boostPoint = boostPointMax;
 		moveSpeed = Vector3.zero;
 		isBoost = false;
-
+		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 	}
 
 
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 		if (isBoost)
 		{
 			// ブースト時
-			if (force < 40.0f) {
+			if (force < 30.0f) {
 				force += Time.deltaTime;
 			}
 			//ブーストキーが押されたらにパラメータを切り替える
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else
 		{
-			force = 20.0f;
+			force = 15.0f;
 			animator.SetBool("Boost", Input.GetButton("Boost"));
 		}
 
