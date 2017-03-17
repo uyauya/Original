@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
 	// 移動時に加える力
-	public float force = 15.0f;
+	public float force = 30.0f;
 	//public float Speed = 3.0F;
 	public float jumpSpeed = 25.0F;
 	public float gravity = 9.8F;
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else
 		{
-			force = 15.0f;
+			force = 30.0f;
 			animator.SetBool("Boost", Input.GetButton("Boost"));
 		}
 

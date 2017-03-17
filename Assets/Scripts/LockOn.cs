@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LockOn : MonoBehaviour {
 
-	GameObject target = null;
+	/*GameObject target = null;
 	bool isSearch;
 	public Image lockOnImage;
 	public GameObject enemyAp;
@@ -85,5 +85,5 @@ public class LockOn : MonoBehaviour {
 				closest = null;
 		}
 		return closest;
-	}
+	}*/
 }

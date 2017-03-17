@@ -50,7 +50,8 @@ public class Bullet01 : MonoBehaviour {
 		}
 
 		//地形とぶつかったら消滅させる
-		if (collider.gameObject.name == "Terrain") {		
+		//if (collider.gameObject.name == "Terrain") {
+		if (collider.gameObject.tag == "Floor") {
 			Destroy (gameObject);
 			// ぶつかった場所に爆発を設定
 			Instantiate (explosion, transform.position, transform.rotation);

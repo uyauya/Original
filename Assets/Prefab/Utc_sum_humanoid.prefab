@@ -4316,7 +4316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf05438f1197fd43b7f9c7abb9893aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 5
+  force: 30
   jumpSpeed: 10
   gravity: 9.8
   boostPointMax: 1000
@@ -4476,7 +4476,7 @@ MonoBehaviour:
   Bullet01: {fileID: 157144, guid: 3200dee3a95bda945a11c6b7ad753785, type: 2}
   muzzle: {fileID: 4904132567684704}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  speed: 100
+  speed: 1000
   interval: 0.3
   damage: 0
   effectPrefab: {fileID: 100004, guid: b49e37c2e747d4ed4bd2369d30fa0d68, type: 2}
@@ -4712,15 +4712,11 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1263696272710478}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83c249db3d7112447b534dcfe7aa1869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockOnImage: {fileID: 0}
-  enemyAp: {fileID: 0}
-  gaugeImage: {fileID: 0}
-  textDistance: {fileID: 0}
 --- !u!114 &114589414707354200
 MonoBehaviour:
   m_ObjectHideFlags: 1
