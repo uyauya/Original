@@ -4060,7 +4060,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1263696272710478}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5c7f6ca5c33955b4caffb3978342b7c1, type: 3}
@@ -4317,7 +4317,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5
-  Speed: 3
   jumpSpeed: 10
   gravity: 9.8
   boostPointMax: 1000
