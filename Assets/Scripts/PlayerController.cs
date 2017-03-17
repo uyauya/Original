@@ -144,10 +144,11 @@ public class PlayerController : MonoBehaviour {
 		// 座標を移動させる
 		//Debug.LogFormat("MoveDir: {0}", moveDirection );
 		//this.transform.position = this.transform.position + moveDirection;
-
+		Debug.Log((float)boostPoint / boostPointMax);
 		//ブーストゲージの伸縮
 		// ゲージの最大以上には上がらない
 		gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / boostPointMax, 1, 1);
+		//gaugeImage.transform.localScale = new Vector3(0.5f,1,1);
 
 	}
 
