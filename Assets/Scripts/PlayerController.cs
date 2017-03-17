@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 		if (isBoost)
 		{
 			// ブースト時
-			if (force < 30.0f) {
+			if (force < 45.0f) {
 				force += Time.deltaTime;
 			}
 			//ブーストキーが押されたらにパラメータを切り替える

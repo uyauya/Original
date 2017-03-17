@@ -7,7 +7,7 @@ public class Bullet03 : MonoBehaviour {
 	public float damage;
 	PlayerShoot03 Plshoot03;
 	public GameObject prefab_HitEffect2;
-	public int bombDamage = 2000;		// ボムの攻撃値
+	public int bombDamage = 3000;		// ボムの攻撃値
 	
 
 	void Start () {
