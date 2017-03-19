@@ -43,9 +43,9 @@ public class PlayerShoot : MonoBehaviour {
 			// チャージ開始のフラグを立てる
 			isCharging = true;
 			//エフェクトをInstantiate
-			effectObject = Instantiate (effectPrefab, this.transform.position, Quaternion.identity);
+			effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
 			// bullet01生成、Bullet01のゲームオブジェクトを生成.
-			bullet01 = GameObject.Instantiate (Bullet01, this.transform.position, Quaternion.identity)as GameObject;
+			bullet01 = GameObject.Instantiate (Bullet01, muzzle.position, Quaternion.identity)as GameObject;
 		} else if (Input.GetButton ("Fire1")) {
 			// Fire1を押してチャージ開始.
 			// 2秒たったら.

@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -268,10 +268,6 @@ Prefab:
       propertyPath: exprosion
       value: 
       objectReference: {fileID: 100000, guid: 07725ad1d903f4ea891afbc5b4a253f8, type: 2}
-    - target: {fileID: 4223071250491836, guid: 6460980c6b7d7c64185db2c19c22b1e4, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 6460980c6b7d7c64185db2c19c22b1e4, type: 2}
@@ -1270,7 +1266,7 @@ MonoBehaviour:
   MAP_SIZE_Z: 10
   player: {fileID: 0}
   bossPrefab:
-  - {fileID: 1787213012138056, guid: 6460980c6b7d7c64185db2c19c22b1e4, type: 2}
+  - {fileID: 51315803}
   prefab_BL:
   - {fileID: 169498, guid: 0b5de3c2c0ec7a944a089de41f25b9d3, type: 2}
   - {fileID: 163042, guid: 32ddef6897c6c4a46808cd7ff58af6a1, type: 2}
@@ -1279,7 +1275,7 @@ MonoBehaviour:
   prefab_enemy: []
   prefab_BreakBlock: []
   Prefab_Player:
-  - {fileID: 0}
+  - {fileID: 1263696272710478, guid: 405690101a2aadd4699abecaa1ab9fa9, type: 2}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!4 &974667648
@@ -1955,6 +1951,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  player: {fileID: 0}
+  Prefab_Player: []
 --- !u!92 &1633551578
 Behaviour:
   m_ObjectHideFlags: 0
@@ -2524,6 +2522,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  player: {fileID: 0}
+  Prefab_Player: []
 --- !u!114 &2046404158
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -55,7 +55,7 @@ public class Bullet02 : MonoBehaviour {
 	private void OnCollisionEnter(Collision collider) {
 
 		//地形とぶつかったら消滅させる
-		if (collider.gameObject.tag == "Floor") {	
+		if (collider.gameObject.name == "Terrain") {		
 			Destroy (gameObject);
 			Instantiate (explosion, transform.position, transform.rotation);
 		}	

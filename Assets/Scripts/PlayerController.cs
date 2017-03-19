@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
 	// 移動時に加える力
-	public float force = 30.0f;
+	public float force = 50.0f;
 	//public float Speed = 3.0F;
 	public float jumpSpeed = 25.0F;
 	public float gravity = 9.8F;
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 		if (isBoost)
 		{
 			// ブースト時
-			if (force < 45.0f) {
+			if (force < 65.0f) {
 				force += Time.deltaTime;
 			}
 			//ブーストキーが押されたらにパラメータを切り替える
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else
 		{
-			force = 30.0f;
+			force = 50.0f;
 			animator.SetBool("Boost", Input.GetButton("Boost"));
 		}
 
@@ -150,7 +150,11 @@ public class PlayerController : MonoBehaviour {
 		gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / boostPointMax, 1, 1);
 		//gaugeImage.transform.localScale = new Vector3(0.5f,1,1);
 
+		//ブーストキーが押されたらにパラメータを切り替える
+		animator.SetBool("Boost",Input.GetButton ("Boost"));
 	}
+
+
 
 	// アイテム２タグの物に接触したらブーストポイント回復
 	private void OnCollisionEnter (Collision collider)
