@@ -4,7 +4,6 @@ using System.Collections;
 public class CameraFollow : MonoBehaviour 
 {
 	public Transform target;
-	public	GameObject		player;				// プレイヤーオブジェクト格納用
 
 	//public float smoothing = 5f;
 	Vector3 offset;
