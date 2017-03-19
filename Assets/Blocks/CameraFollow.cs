@@ -5,7 +5,6 @@ public class CameraFollow : MonoBehaviour
 {
 	public Transform target;
 	public	GameObject		player;				// プレイヤーオブジェクト格納用
-	public GameObject[] 	Prefab_Player;
 
 	//public float smoothing = 5f;
 	Vector3 offset;
@@ -15,7 +14,6 @@ public class CameraFollow : MonoBehaviour
 	/// </summary>
 	void Start ()
 	{
-		player = Instantiate(Prefab_Player[GameObject.Find ("BattleManager").GetComponent<BattleManager> ().PlayerNo]);
 		// カメラとターゲット（プレイヤー)の距離を設定
 		offset = transform.position - target.position;
 	}
