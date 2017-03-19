@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour {
@@ -16,7 +16,8 @@ public class BattleManager : MonoBehaviour {
 	public Image messageLose;
 	public static int score;	//敵を倒した数。Enemyスクリプトでカウントアップ  
 	public int PlayerNo;
-
+	private int ItemCount;
+	PlayerController playerController;
 
 	int clearScore;	//クリア条件となるスコア  
 
@@ -29,7 +30,7 @@ public class BattleManager : MonoBehaviour {
 		messageWin.enabled = false;
 		messageLose.enabled = false;
 		score = 0;
-
+		playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController> ();
 		//敵の最大生成数をクリア数にする
 		//instantiateValueに値を代入するのをBattleManagerより早くするため
 		//EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
@@ -73,6 +74,10 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 			}
+			if( playerController.ItemCount >= 5 ) {
+				SceneManager.LoadScene ("STAGE02BOSS");
+			}	
+
 			break;
 			
 		case BATTLE_END:

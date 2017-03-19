@@ -20,9 +20,10 @@ public class PlayerController : MonoBehaviour {
 	//ブースト時の最大速度
 	private int JumpCount;
 	bool isBoost;
-
+	private float timer = 0.0f;
 	bool onFloor = true;
-
+	private float interval = 2.0f;
+	public int ItemCount;
 	Vector3 targetSpeed = Vector3.zero;      //目標速度
 	Vector3 addSpeed = Vector3.zero;        //加算速度
 
@@ -173,6 +174,10 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<Rigidbody>().velocity = new Vector3( v.x, 0, v.z );
 			onFloor = true;
 			animator.SetBool("Jump", false);
+		}
+		if(collider.gameObject.tag == "Item3") {
+			animator.SetTrigger ("ItemGet");
+			ItemCount += 1;
 		}
 	}
 
