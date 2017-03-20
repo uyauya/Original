@@ -17,3 +17,5 @@ EditorBuildSettings:
     path: Assets/Misaki.unity
   - enabled: 1
     path: Assets/Start.unity
+  - enabled: 1
+    path: Assets/STAGE02BOSS.unity
