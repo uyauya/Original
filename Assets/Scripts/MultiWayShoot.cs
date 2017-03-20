@@ -39,9 +39,9 @@ public class MultiWayShoot : MonoBehaviour {
 			// Fire1を押してチャージ開始.
 			triggerDownTimeStart = Time.time;
 			//エフェクトをInstantiate
-			effectObject = Instantiate (effectPrefab, this.transform.position, Quaternion.identity);
+			effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
 			// bullet01生成、Bullet01のゲームオブジェクトを生成.
-			bullet05 = GameObject.Instantiate (Bullet05, this.transform.position, Quaternion.identity)as GameObject;
+			bullet05 = GameObject.Instantiate (Bullet05, muzzle.position, Quaternion.identity)as GameObject;
 		} else if (Input.GetButton ("Fire5")) {
 			// Fire1を押してチャージ開始.
 			// 2秒たったら.
