@@ -110,8 +110,6 @@ public class Enemy : MonoBehaviour {
 			//Debug.Log ("ダメージ");
 			//プレイヤーの弾のダメージを引く
 			armorPoint -= damage;
-			//Debug.Log(armorPoint);
-			//Debug.Log(damage);
 			//Debug.Log ("受け取った");
 
 			//体力が0以下になったら消滅する

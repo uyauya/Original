@@ -32,12 +32,13 @@ public class Bullet03 : MonoBehaviour {
 		foreach (Collider col in targets) {		// targets配列を順番に処理 (その時に仮名をobjとする)
 			if (col.gameObject.tag == "Enemy") {			// タグ名がEnemyなら
 			Enemy enemyinsta = col.gameObject.GetComponent<Enemy>();
-				//nullだったら
-				if (enemyinsta == null) {
-					//この先をスキップして次の処理を行う
-					continue;
-				}
+			Zombie zombieinsta = col.gameObject.GetComponent<Zombie>();
+				if (!enemyinsta == null) {
 				enemyinsta.Damaged(bombDamage);	// ダメージを与える
+				} else if (enemyinsta == null && !zombieinsta == null ) {
+				zombieinsta.Damaged(bombDamage);	// ダメージを与える
+				}
+			}
 			// プレイヤーからの距離を計測
 			float distance = Vector3.Distance(GetComponent<Collider>().transform.position, transform.position);
 			//発光をプレイヤーからの距離に応じて９から下げていく
@@ -47,12 +48,8 @@ public class Bullet03 : MonoBehaviour {
 			CamVibrationManager.vibration += Mathf.Clamp(0.5F - (distance / 200), 0, 0.5F);
 		}
 	}
-				//Debug.Log (damage);
-				//Destroy (GetComponent<Collider>().gameObject);
-	}
 
 	void Update(){
 		transform.position += transform.forward * Time.deltaTime * 1;
-
 	}
 }
