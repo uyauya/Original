@@ -13,6 +13,7 @@ public class CameraFollow : MonoBehaviour
 	/// </summary>
 	void Start ()
 	{
+		target = GameObject.FindGameObjectWithTag ("Player").transform;
 		// カメラとターゲット（プレイヤー)の距離を設定
 		offset = transform.position - target.position;
 	}

@@ -15,6 +15,7 @@ public class BattleManager : MonoBehaviour {
 	public Image messageWin;
 	public Image messageLose;
 	public static int score;	//敵を倒した数。Enemyスクリプトでカウントアップ  
+
 	public int PlayerNo;
 	private int ItemCount;
 	PlayerController playerController;
@@ -35,20 +36,19 @@ public class BattleManager : MonoBehaviour {
 		//instantiateValueに値を代入するのをBattleManagerより早くするため
 		//EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
 		clearScore = EnemyInstantiate.instantiateValue;
+		score = 0;
 	}
 
 	void Update () {
 	
-		switch(battleStatus)
-		{
+		switch (battleStatus) {
 		
 		case BATTLE_START:
 			
 			//時間経過でメッセージを消して状態移行
 			timer += Time.deltaTime;
 
-			if(timer > 3)
-			{
+			if (timer > 3) {
 
 				messageStart.enabled = false;
 
@@ -62,30 +62,29 @@ public class BattleManager : MonoBehaviour {
 		case BATTLE_PLAY:
 			
 			//スコアが出現数に到達したら勝利	
-			if(score >= clearScore)
-			{
+			if (score >= clearScore) {
 				battleStatus = BATTLE_END;
 				messageWin.enabled = true;
 			}
 			
 			//プレイヤーの体力が0以下になったら敗北
-			if(PlayerAp.armorPoint <= 0)
-			{
+			if (PlayerAp.armorPoint <= 0) {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 			}
-			if( playerController.ItemCount >= 5 ) {
+			if (playerController.ItemCount >= 5) {
 				SceneManager.LoadScene ("STAGE02BOSS");
 			}	
 
 			break;
 			
 		case BATTLE_END:
-			
+			if (score >= 10000) {
+			}
 			//一定時間経過したら遷移可能にする
 			timer += Time.deltaTime;
 			
-			if(timer > 3)
+		 if(timer > 3)
 			{
 				//動きを止める
 				//TimeScaleで制御できるのはタイマーにより制御されている処理だけ
@@ -98,6 +97,7 @@ public class BattleManager : MonoBehaviour {
 				}
 			}
 			break;
+
 			
 		default:
 			break;

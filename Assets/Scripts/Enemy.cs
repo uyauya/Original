@@ -119,7 +119,7 @@ public class Enemy : MonoBehaviour {
 				Instantiate(exprosion, transform.position, transform.rotation);
 
 				//リザルト用のスコアを加算する
-				BattleManager.score ++;
+				BattleManager.score += 10;
 			}
 	
 	}

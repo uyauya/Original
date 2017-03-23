@@ -14,6 +14,7 @@ public class Bullet01 : MonoBehaviour {
 		// Utc_sum_humanoid（プレイヤーの名前）のオブジェクトを見つけて
 		// PlayerShootのスクリプトを見つけて以後Plshootと略す
 		Plshoot = GameObject.FindWithTag("Player").GetComponent<PlayerShoot> ();
+		transform.rotation = Plshoot.transform.rotation;
 		//（発射して）三秒後に消滅
 		// チャージ中は生成3秒後に消滅させない
 		if( Plshoot.isCharging == false ) {
@@ -29,8 +30,8 @@ public class Bullet01 : MonoBehaviour {
 		//弾を前進させる
 		// チャージ中は前進させない
 		if( Plshoot.isCharging == false ) {
-			transform.rotation = Plshoot.transform.rotation;
-			transform.position += transform.forward * Time.deltaTime * 1;
+			//transform.rotation = Plshoot.transform.rotation;
+			transform.position += transform.forward * Time.deltaTime * 3;
 			// チャージされていない時はコリジョン有効
 			GetComponent<SphereCollider>().enabled = true;
 		} else {
@@ -57,7 +58,7 @@ public class Bullet01 : MonoBehaviour {
 			Instantiate (explosion, transform.position, transform.rotation);
 		}	
 		//敵と衝突したら消滅させる
-		if (collider.gameObject.tag == "Enemy") {
+		if (collider.gameObject.tag == "Enemy"||collider.gameObject.tag == "Wall") {
 			//collider.gameObject.SendMessage ("damage");
 			Destroy (gameObject);
 		}
