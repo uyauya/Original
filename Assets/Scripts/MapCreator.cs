@@ -5,11 +5,12 @@ public class MapCreator : MonoBehaviour {
 	public int				MAP_SIZE_X = 7;		// マップ横幅 (偶数指定の場合は、自動的に奇数にされる)
 	public int				MAP_SIZE_Z = 10;	// マップ奥幅 (偶数指定の場合は、自動的に奇数にされる)
 	public	GameObject		player;				// プレイヤーオブジェクト格納用
+	public	GameObject		Boss02;	
 	private MapSize		size;					// マップサイズ型の変数
 	private MapAxis		playerAxis;				// プレイヤー座標を扱うPlayerAxis型の変数
 	private MapArrayBlock	mapBlock;			// 地面用MapArrayBlock型の変数
 	private MapArrayFloor	mapFloor;			// 地上用MapArrayFloor型の変数
-	public  GameObject[]    bossPrefab;
+	//public  GameObject[]    bossPrefab;
 	private GameObject[]	tagObjects;
 	public	GameObject[]	prefab_BL;			// 床ブロック格納用のプレファブ配列
 	public	GameObject[]	prefab_WALL;		// 壁ブロック格納用のプレファブ配列
