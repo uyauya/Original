@@ -9,7 +9,7 @@ public class Bullet02 : MonoBehaviour {
 	private  GameObject Enemy;
 
 	void Start () {
-		Plshoot02 = GameObject.Find ("Utc_sum_humanoid").GetComponent<PlayerShoot02> ();
+		Plshoot02 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot02> ();
 		//現後一定時間で自動的に消滅させる
 		Destroy (gameObject, 3);
 	}	

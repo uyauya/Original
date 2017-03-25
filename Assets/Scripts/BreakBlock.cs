@@ -37,11 +37,11 @@ public class BreakBlock : MonoBehaviour {
 			if (armorPoint <= 0){
 				Destroy (gameObject);
 				Instantiate(exprosion, transform.position, transform.rotation);
-				if (Random.Range (0, 6) == 0) {
+				if (Random.Range (0, 16) == 0) {
 					Instantiate (RedSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, 4) == 0) {
+				} else if (Random.Range (0, 14) == 0) {
 					Instantiate (BlueSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, 10) == 0) {
+				} else if (Random.Range (0, 2) == 0) {
 					Instantiate (GreenSphere, transform.position, transform.rotation);
 				}
 				//リザルト用のスコアを加算する

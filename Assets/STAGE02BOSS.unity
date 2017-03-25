@@ -1246,9 +1246,9 @@ MonoBehaviour:
   prefab_enemy: []
   prefab_BreakBlock: []
   Prefab_Player:
-  - {fileID: 1789407941783556, guid: 405690101a2aadd4699abecaa1ab9fa9, type: 2}
-  - {fileID: 1320003349820944, guid: f310598b3f191bb4e9a3ca2051dd31da, type: 2}
-  - {fileID: 1175321610131172, guid: 31a9ab490ae146b4094856d87bf0e673, type: 2}
+  - {fileID: 1697289305068994, guid: 405690101a2aadd4699abecaa1ab9fa9, type: 2}
+  - {fileID: 1647243158286332, guid: f310598b3f191bb4e9a3ca2051dd31da, type: 2}
+  - {fileID: 1375426664305316, guid: 31a9ab490ae146b4094856d87bf0e673, type: 2}
 --- !u!4 &974667648
 Transform:
   m_ObjectHideFlags: 0

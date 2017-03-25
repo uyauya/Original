@@ -62,10 +62,10 @@ public class BattleManager : MonoBehaviour {
 		case BATTLE_PLAY:
 			
 			//スコアが出現数に到達したら勝利	
-			if (score >= clearScore) {
+			/*if (score >= clearScore) {
 				battleStatus = BATTLE_END;
 				messageWin.enabled = true;
-			}
+			}*/
 			
 			//プレイヤーの体力が0以下になったら敗北
 			if (PlayerAp.armorPoint <= 0) {
