@@ -56,7 +56,7 @@ public class MapCreator : MonoBehaviour {
 		
 		timer += Time.deltaTime;
 		if (timer >= interval) {
-			Check ("GreenSphere");
+			Check ("Item3");
 			timer = 0;
 		}
 	

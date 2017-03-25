@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerStatus : MonoBehaviour {
 
-	private	CharacterController charaCon;		// キャラクターコンポーネント用の変数	
+	/*private	CharacterController charaCon;		// キャラクターコンポーネント用の変数	
 	private Vector3		move = Vector3.zero;	// キャラ移動量.	
 	private float		speed = 5.0f;			// 移動速度	
 	private float		jumpPower = 10.0f;		// 跳躍力.	
@@ -34,5 +34,5 @@ public class PlayerStatus : MonoBehaviour {
 		}		
 		// ▼▼▼移動処理▼▼▼		
 		charaCon.Move(move * Time.deltaTime);	// プレイヤー移動.	
-	}
+	}*/
 }

@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
 	public float jumpSpeed = 25.0F;
 	public float gravity = 9.8F;
 	private Vector3 moveDirection = Vector3.zero;
-	int boostPoint;
+	public int boostPoint;
 	public int boostPointMax = 1000;
 	public Image gaugeImage;
 	Vector3 moveSpeed;
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour {
 		// 座標を移動させる
 		//Debug.LogFormat("MoveDir: {0}", moveDirection );
 		//this.transform.position = this.transform.position + moveDirection;
-		Debug.Log((float)boostPoint / boostPointMax);
+		//Debug.Log((float)boostPoint / boostPointMax);
 		//ブーストゲージの伸縮
 		// ゲージの最大以上には上がらない
 		gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / boostPointMax, 1, 1);
@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour {
 			boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);
 		}
 		if( collider.gameObject.tag == "Floor" ) {
-			Debug.Log("Floor");
+			//Debug.Log("Floor");
 			JumpCount = 0;
 			moveDirection.y = 0;
 			Vector3 v = GetComponent<Rigidbody>().velocity;

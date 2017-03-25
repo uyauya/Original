@@ -3,13 +3,13 @@ using System.Collections;
 
 public class BlockForce : MonoBehaviour {
 
-	Rigidbody rigidbody;
+	Rigidbody freezebody;
 	
 	void Start () {
-		rigidbody = gameObject.GetComponent<Rigidbody>();
+		freezebody = gameObject.GetComponent<Rigidbody>();
 		// 空中で発生しても固定して落ちないようにする
-		if (rigidbody) {
-			rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		if (GetComponent<Rigidbody>()) {
+			freezebody.constraints = RigidbodyConstraints.FreezeAll;
 		}
 	}
 	
@@ -19,10 +19,10 @@ public class BlockForce : MonoBehaviour {
 	
 	void _Move() {
 		// rigidbodyがぶつかったら固定解除
-		if (rigidbody) {
-			rigidbody.constraints = RigidbodyConstraints.None;
+		if (freezebody) {
+			freezebody.constraints = RigidbodyConstraints.None;
 			// 解除された時グラグラ揺らす
-			rigidbody.AddTorque(new Vector3(
+			freezebody.AddTorque(new Vector3(
 				2f*Random.value-1f, 2f*Random.value-1f, 2f*Random.value-1f));
 			Invoke("TimeOut", 10f);
 		}

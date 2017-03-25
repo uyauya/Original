@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Start.unity
+  - enabled: 1
     path: Assets/STAGE02.unity
   - enabled: 1
-    path: Assets/Select.unity
-  - enabled: 1
-    path: Assets/Kohaku.unity
+    path: Assets/STAGE02BOSS.unity
   - enabled: 1
     path: Assets/Yuko.unity
   - enabled: 1
     path: Assets/Misaki.unity
   - enabled: 1
-    path: Assets/Start.unity
+    path: Assets/Kohaku.unity
   - enabled: 1
-    path: Assets/STAGE02BOSS.unity
+    path: Assets/Select.unity

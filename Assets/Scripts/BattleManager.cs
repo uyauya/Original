@@ -92,7 +92,7 @@ public class BattleManager : MonoBehaviour {
 				// Fire1ボタンを押してタイトルに戻すようにする
 				if (Input.GetButtonDown ("Fire1"))
 				{
-					Application.LoadLevel("Title");					
+					Application.LoadLevel("Start");					
 					Time.timeScale = 1;
 				}
 			}

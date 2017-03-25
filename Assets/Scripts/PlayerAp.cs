@@ -14,7 +14,6 @@ public class PlayerAp : MonoBehaviour {
 	public Color myYellow;
 	public Color myRed;
 	public Image gaugeImage;
-	private Renderer renderer;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
 	private Animator animator;
@@ -22,7 +21,6 @@ public class PlayerAp : MonoBehaviour {
 	void Start () {	
 		armorPoint = armorPointMax;
 		displayArmorPoint = armorPoint;
-		renderer = GetComponent<Renderer>();
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 		animator = GetComponent<Animator> ();
 		gaugeImage = GameObject.Find ("ApGauge").GetComponent<Image> ();

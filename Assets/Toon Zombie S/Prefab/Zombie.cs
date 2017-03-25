@@ -44,7 +44,7 @@ public class Zombie : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(target.transform.position - transform.position), Time.deltaTime * 5);
 			animator.SetBool ("attack", true);
-			Debug.Log ("hit");
+			//Debug.Log ("hit");
 		}
 		// Animator の dead が true なら Update 処理を抜ける
 		if( animator.GetBool("dead") == true ) return;
@@ -52,7 +52,7 @@ public class Zombie : MonoBehaviour {
 	
 
 	void OnCollisionEnter(Collision collider) {
-		Debug.Log (collider);
+		//Debug.Log (collider);
 		
 		if (collider.gameObject.tag == "Shot") {
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
@@ -65,7 +65,7 @@ public class Zombie : MonoBehaviour {
 			Debug.Log(armorPoint);
 		}
 		animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-		Debug.Log("いたい");
+		//Debug.Log("いたい");
 		armorPoint -= damage;
 
 		
@@ -73,7 +73,7 @@ public class Zombie : MonoBehaviour {
 		if (armorPoint <= 0){
 			animator.SetBool("dead" , true);		// 《Animator》の変数deadを true に変更.
 			Destroy (gameObject, 3.0f);
-		Debug.Log("消滅");	
+			//Debug.Log("消滅");	
 			//リザルト用のスコアを加算する
 			BattleManager.score ++;
 		}
