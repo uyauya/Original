@@ -72,7 +72,7 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 			}
-			if (playerController.ItemCount >= 5) {
+			if (playerController.ItemCount >= 1) {
 				SceneManager.LoadScene ("STAGE02BOSS");
 			}	
 
