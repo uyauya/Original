@@ -23,7 +23,7 @@ public class BattleManager : MonoBehaviour {
 	int clearScore;	//クリア条件となるスコア  
 
 	void Start () {	
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(gameObject);
 		battleStatus = BATTLE_START;	//時間0秒、最初にスタートを表示させる
 		timer = 0;
 		//スタート時はStartは表示、WinとLoseは非表示
