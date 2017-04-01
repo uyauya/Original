@@ -102,4 +102,7 @@ public class MultiWayShoot : MonoBehaviour {
 		}
 	}
 
+	public void KickEvent (){
+		Debug.Log("kick");
+	}
 }

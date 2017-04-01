@@ -54,5 +54,9 @@ public class PlayerShoot03 : MonoBehaviour {
 		bulletObject.transform.position = muzzle.position;
 		bulletObject.GetComponent<Bullet03> ().damage = this.damage;
 	}
+
+	public void KickEvent (){
+		Debug.Log("kick");
+	}
 }
 

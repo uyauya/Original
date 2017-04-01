@@ -9,9 +9,7 @@ public class Zombie : MonoBehaviour {
 	float timer = 0;
 	float damage;							// playerに与えるダメージ
 	Bullet01 b1;
-	bool attack = false;
-	bool damaged = false;
-	bool dead = false;
+
 
 	public void Damaged(float damagedPoint){
 		this.armorPoint -= damagedPoint;	// Playerから受けたダメージの設定

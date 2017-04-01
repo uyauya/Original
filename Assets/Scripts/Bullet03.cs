@@ -11,7 +11,8 @@ public class Bullet03 : MonoBehaviour {
 	
 
 	void Start () {
-		Plshoot03 = GameObject.Find ("Utc_sum_humanoid").GetComponent<PlayerShoot03> ();
+		Plshoot03 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();
+		transform.rotation = Plshoot03.transform.rotation;
 		StartCoroutine("bom");	
 		//Enemy = GetComponent<Enemy>();
 	}	

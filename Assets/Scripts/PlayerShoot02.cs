@@ -58,5 +58,8 @@ public class PlayerShoot02 : MonoBehaviour {
 		bulletObject.GetComponent<Bullet02> ().damage = this.damage;
 	}
 
+	public void KickEvent (){
+		Debug.Log("kick");
+	}
 
 }

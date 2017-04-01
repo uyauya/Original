@@ -52,7 +52,7 @@ public class PlayerShoot : MonoBehaviour {
 			// 2秒たったら.
 			if (Time.time - triggerDownTimeStart >= 1.0f && bullet01.transform.localScale.x < 2.0f ) {
 				// スケールを大きくする.
-				bullet01.transform.localScale *= 1.01f;
+				bullet01.transform.localScale *= 1.1f;
 			}
 			// キーを離すことによりチャージ終了
 		}

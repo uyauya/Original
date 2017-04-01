@@ -6,10 +6,11 @@ public class Bullet04 : MonoBehaviour {
 	public GameObject explosion;
 	public float damage;
 	Enemy enemy;
-	PlayerShoot Plshoot;
+	PlayerShoot04 Plshoot04;
 	
 	void Start () {
-		Plshoot = GameObject.Find ("Utc_sum_humanoid").GetComponent<PlayerShoot> ();
+		Plshoot04 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot04> ();
+		transform.rotation = Plshoot04.transform.rotation;
 		//現後一定時間で自動的に消滅させる
 		Destroy (gameObject, 9);
 	}	

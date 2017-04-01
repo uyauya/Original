@@ -10,6 +10,7 @@ public class Bullet02 : MonoBehaviour {
 
 	void Start () {
 		Plshoot02 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot02> ();
+		transform.rotation = Plshoot02.transform.rotation;
 		//現後一定時間で自動的に消滅させる
 		Destroy (gameObject, 3);
 	}	
@@ -55,12 +56,12 @@ public class Bullet02 : MonoBehaviour {
 	private void OnCollisionEnter(Collision collider) {
 
 		//地形とぶつかったら消滅させる
-		if (collider.gameObject.name == "Terrain") {		
+		if (collider.gameObject.tag == "Floor") {		
 			Destroy (gameObject);
 			Instantiate (explosion, transform.position, transform.rotation);
 		}	
 		//敵と衝突したら消滅させる
-		if (collider.gameObject.tag == "Enemy") {
+		if (collider.gameObject.tag == "Enemy"||collider.gameObject.tag == "Wall") {
 			//collider.gameObject.SendMessage ("damage");
 			Destroy (gameObject);
 			//	Debug.Log ("当たらない");
