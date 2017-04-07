@@ -10,20 +10,19 @@ public class BattleManager : MonoBehaviour {
 	const int BATTLE_START = 0;
 	const int BATTLE_PLAY  = 1;
 	const int BATTLE_END   = 2;
-	float timer;				//時間計測洋
+	float timer;						//時間計測洋
 	public Image messageStart;
 	public Image messageWin;
 	public Image messageLose;
-	public static int score;	//敵を倒した数。Enemyスクリプトでカウントアップ  
+	public static int score;			//敵を倒した数。Enemyスクリプトでカウントアップ  
 
-	public int PlayerNo;
-	private int ItemCount;
+	public int PlayerNo;				//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
+	private int ItemCount;				//アイテム取得数をカウント
 	PlayerController playerController;
 
-	int clearScore;	//クリア条件となるスコア  
+	int clearScore;						//クリア条件となるスコア  
 
 	void Start () {	
-		//DontDestroyOnLoad(gameObject);
 		battleStatus = BATTLE_START;	//時間0秒、最初にスタートを表示させる
 		timer = 0;
 		//スタート時はStartは表示、WinとLoseは非表示
@@ -44,41 +43,29 @@ public class BattleManager : MonoBehaviour {
 		switch (battleStatus) {
 		
 		case BATTLE_START:
-			
 			//時間経過でメッセージを消して状態移行
 			timer += Time.deltaTime;
-
-			if (timer > 3) {
-
+				if (timer > 3) {
 				messageStart.enabled = false;
-
 				battleStatus = BATTLE_PLAY;
-
 				timer = 0;
 			}
-			
 			break;
 			
 		case BATTLE_PLAY:
-			
-			//スコアが出現数に到達したら勝利	
-			/*if (score >= clearScore) {
-				battleStatus = BATTLE_END;
-				messageWin.enabled = true;
-			}*/
-			
 			//プレイヤーの体力が0以下になったら敗北
 			if (PlayerAp.armorPoint <= 0) {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 			}
+			// プレイヤーのアイテム（グリーンスフィア）取得数が1以上ならボス面に移行
 			if (playerController.ItemCount >= 1) {
 				SceneManager.LoadScene ("STAGE02BOSS");
 			}	
-
 			break;
 			
 		case BATTLE_END:
+			// スコアが10000点以上ならボスステージクリア
 			if (score >= 10000) {
 			}
 			//一定時間経過したら遷移可能にする

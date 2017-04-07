@@ -25,18 +25,17 @@ public class BreakBlock : MonoBehaviour {
 	
 		if (collider.gameObject.tag == "Shot") {
 
-			//プレイヤーの弾と衝突したら消滅する
-			//Destroy (gameObject);
+			//プレイヤーの弾と衝突したら爆発処理
 			Instantiate(exprosion, transform.position, transform.rotation);
 
 			//プレイヤーの弾と衝突したらダメージ
-			//armorPoint -= damage;
 			armorPoint -= collider.gameObject.GetComponent<Bullet01>().damage;
 
 			//体力が0以下になったら消滅する
 			if (armorPoint <= 0){
 				Destroy (gameObject);
 				Instantiate(exprosion, transform.position, transform.rotation);
+				// ブロック消滅時、一定確率（0,16で16分の1）でアイテム出現
 				if (Random.Range (0, 16) == 0) {
 					Instantiate (RedSphere, transform.position, transform.rotation);
 				} else if (Random.Range (0, 14) == 0) {

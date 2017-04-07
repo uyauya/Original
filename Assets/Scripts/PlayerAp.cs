@@ -29,9 +29,6 @@ public class PlayerAp : MonoBehaviour {
 	
 
 	void Update () {
-	
-		//体力を文字列にしてUI Textに表示する
-		//armorText.text = armorPoint.ToString();
 		
 		//現在の体力と表示用体力が異なっていれば、現在の体力になるまで加減算する
 		if (displayArmorPoint != armorPoint) 
@@ -63,30 +60,34 @@ public class PlayerAp : MonoBehaviour {
 	
 	private void OnCollisionEnter(Collision collider) {
 
-		//敵の弾と衝突したらダメージ
+		//ShotEnemyの弾と衝突したらダメージ
 		if (collider.gameObject.tag == "ShotEnemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 			animator.SetTrigger ("Damage");
+			//Enemyと接触したらダメージ
 		} else if (collider.gameObject.tag == "Enemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 			animator.SetTrigger ("Damage");
 		}
-		//Enemyとぶつかった時にコルーチンを実行
+		//Enemyとぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		if (collider.gameObject.tag == "Enemy") {
 			StartCoroutine ("DamageCoroutine");
-			//Debug.Log ("ダメージ");
 		}
+		//ShotEnemyとぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		else if (collider.gameObject.tag == "ShotEnemy") {
 			StartCoroutine ("DamageCoroutine");
 		}
+		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
 		else if (collider.gameObject.tag == "Item") {
 			armorPoint += 1000;
+			// 体力上限以上には回復しない。
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 		}
 	}
-		
+
+	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
 	IEnumerator DamageCoroutine ()
 	{
 		//レイヤーをPlayerDamageに変更

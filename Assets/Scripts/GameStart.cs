@@ -9,8 +9,9 @@ public class GameStart : MonoBehaviour {
 	public Text blinkText;
 	public void Onclick_Select()
 	{
+		// ボタンを押してセレクト画面に移行
 		SceneManager.LoadScene("Select");
-		//Debug.Log("START");
+		// テキスト点滅
 		blinkText.color = new Color(0, 0, 0, Mathf.PingPong(Time.time, 1));
 	}
 }

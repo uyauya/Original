@@ -25,8 +25,6 @@ public class PlayerShoot02 : MonoBehaviour {
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
-
-
 	}
 
 	void Update () {

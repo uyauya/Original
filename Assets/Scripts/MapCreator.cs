@@ -20,14 +20,12 @@ public class MapCreator : MonoBehaviour {
 	private float interval = 2.0f;
 	public GameObject[] 	Prefab_Player;
 
-	// ■■■
+	// 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはバトルマネージャースクリプトで判別・管理）
 	void Awake(){
 		player = Instantiate (Prefab_Player [GameObject.Find ("BattleManager").GetComponent<BattleManager> ().PlayerNo]);
 	}
 
 	void Start(){
-
-		//player		= GameObject.FindGameObjectWithTag("Player");						// プレイヤーオブジェクト格納
 		
 		size		= new MapSize(MAP_SIZE_X , MAP_SIZE_Z);								// MapSizeクラスのインスタンス生成
 		playerAxis	= new MapAxis(player , size , prefab_BL[0].transform.localScale);	// PlayerAxisクラスのインスタンス生成
@@ -51,10 +49,10 @@ public class MapCreator : MonoBehaviour {
 	// ■■■■■■
 	void Update(){
 		playerAxis.updateAxis ();						// プレイヤー座標を更新
-		mapBlock.renewal ();								// マップ(床)の更新
-		mapFloor.renewal ();								// マップ(地上)の更新
+		mapBlock.renewal ();							// マップ(床)の更新
+		mapFloor.renewal ();							// マップ(地上)の更新
 		
-		timer += Time.deltaTime;
+		timer += Time.deltaTime;						// グリーンスフィア取得数計算 battlemanagerスクリプト参照
 		if (timer >= interval) {
 			Check ("Item3");
 			timer = 0;
@@ -63,7 +61,7 @@ public class MapCreator : MonoBehaviour {
 	}
 
 	void Check(string tagname){
-		tagObjects = GameObject.FindGameObjectsWithTag(tagname);
+		tagObjects = GameObject.FindGameObjectsWithTag(tagname);	// タグ判別用スクリプト
 	}
 
 	// ■■■敵出現用のコルーチン■■■

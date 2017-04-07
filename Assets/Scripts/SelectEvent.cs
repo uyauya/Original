@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加する
 
 public class SelectEvent : MonoBehaviour {
-
+	//BattleManagerスクリプト参照
 	public void Onclick_Kohaku() 
 	{
 		GameObject.Find ("BattleManager").GetComponent<BattleManager> ().PlayerNo = 0;

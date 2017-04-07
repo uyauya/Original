@@ -33,9 +33,7 @@ public class Enemy02Move : MonoBehaviour {
 			//プレイヤーの弾と衝突したらダメージ
 			//armorPoint -= damage;
 			armorPoint -= damage;
-			Debug.Log(armorPoint);
-			Debug.Log(damage);
-			//Debug.Log ("受け取った");
+			//Debug.Log(armorPoint);
 
 			//体力が0以下になったら消滅する
 			if (armorPoint <= 0){
