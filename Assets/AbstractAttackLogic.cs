@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EnemyLogic.Attack {
+/*namespace EnemyLogic.Attack {
 	public abstract class AbstractAttackLogic : AbstractLogic, IEnemyAttackLogic {
 		public const int CLOSE_RANGE_HIT_TYPE = 1;
 		public const int RANGE_HIT_TYPE = 2;
@@ -22,5 +22,5 @@ namespace EnemyLogic.Attack {
 		public abstract int getAttackType();
 		public abstract string getAttackMotion();
 	}
-}
+}*/
 

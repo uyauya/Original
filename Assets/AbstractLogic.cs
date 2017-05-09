@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EnemyLogic {
+/*namespace EnemyLogic {
 	public abstract class AbstractLogic : MonoBehaviour {
 
 		protected Enemy enemy;
@@ -11,4 +11,4 @@ namespace EnemyLogic {
 			enemy = this.GetComponent<Enemy>();
 		}
 	}
-}
+}*/

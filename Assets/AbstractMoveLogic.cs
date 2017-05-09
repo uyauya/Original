@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EnemyLogic.Move {
+/*namespace EnemyLogic.Move {
 	public abstract class AbstractMoveLogic : AbstractLogic, IEnemyMoveLogic {
 		public float move_speed;
 
@@ -14,6 +14,6 @@ namespace EnemyLogic.Move {
 
 		public abstract Vector3 getMoveVelocity();
 	}
-}
+}*/
 
 
