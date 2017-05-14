@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour {
-	/*public static int PlayerNo;
+	public static int PlayerNo;
+
 	// Use this for initialization
 	void Start () {
-		DontDestroyOnLoad("Kohaku");
-		DontDestroyOnLoad("Yuko");
-		DontDestroyOnLoad("Misaki");
+		DontDestroyOnLoad(this.gameObject);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-	}*/
+	}
 }
