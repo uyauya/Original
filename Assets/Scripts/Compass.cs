@@ -8,7 +8,7 @@ public class Compass : MonoBehaviour {
 	public Image compassImage;
 	
 	void Start () {
-	
+		compassImage = GameObject.Find ("Compass").GetComponent<Image> ();
 	}
 
 	void Update () {

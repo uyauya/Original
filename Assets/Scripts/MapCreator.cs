@@ -22,7 +22,8 @@ public class MapCreator : MonoBehaviour {
 
 	// 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはバトルマネージャースクリプトで判別・管理）
 	void Awake(){
-		player = Instantiate (Prefab_Player [GameObject.Find ("BattleManager").GetComponent<BattleManager> ().PlayerNo]);
+		//player = Instantiate (Prefab_Player [GameObject.Find ("DataManager").GetComponent<DataManager> ().PlayerNo]);
+		player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
 	}
 
 	void Start(){

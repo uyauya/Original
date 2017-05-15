@@ -16,7 +16,7 @@ public class BattleManager : MonoBehaviour {
 	public Image messageLose;
 	public static int score;			//敵を倒した数。Enemyスクリプトでカウントアップ  
 
-	public int PlayerNo;				//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
+	//public int PlayerNo;				//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	private int ItemCount;				//アイテム取得数をカウント
 	PlayerController playerController;
 
