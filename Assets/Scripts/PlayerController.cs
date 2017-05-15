@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 	public int boostPoint;
 	public int boostPointMax = 1000;
 	public Image gaugeImage;
+	public Image compassImage;
 	Vector3 moveSpeed;
 	//ブースト時の最大速度
 	private int JumpCount;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour {
 		moveSpeed = Vector3.zero;
 		isBoost = false;
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
+		compassImage = GameObject.Find ("Compass").GetComponent<Image> ();
 	}
 
 
