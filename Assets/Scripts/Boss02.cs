@@ -26,6 +26,7 @@ public class Boss02 : MonoBehaviour {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
 		target = GameObject.Find("PlayerTarget");	//ターゲットを取得
 		armorPoint = armorPointMax;
+		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 		if (Vector3.Distance (target.transform.position, transform.position) >= 21) {
 			return;
 		}
@@ -40,14 +41,16 @@ public class Boss02 : MonoBehaviour {
 			//ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 			                                       (target.transform.position - transform.position), Time.deltaTime * 5);
-			transform.position += transform.forward * Time.deltaTime * 5;	
+			transform.position += transform.forward * Time.deltaTime * 5;
+			//Debug.Log("狙い");
 		}
 		//一定間隔でショット
 		shotInterval += Time.deltaTime;
-		
+			//Debug.Log("ショット準備");
 		if (shotInterval > shotIntervalMax) {
 			Instantiate (Boss02shot, transform.position, transform.rotation);
 			shotInterval = 0;
+			//Debug.Log("ショット出ないよ");
 		}
 	}
 	

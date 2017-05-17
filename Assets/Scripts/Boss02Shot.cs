@@ -31,7 +31,9 @@ public class Boss02Shot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//弾を前進させる
+		//Debug.Log("進め");
 		gameObject.transform.Translate (_dir * _speed);
+		//Debug.Log("進まない");
 	}
 
 	private void OnCollisionEnter(Collision collider) {
