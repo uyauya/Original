@@ -4525,6 +4525,7 @@ MonoBehaviour:
   boostPoint: 0
   boostPointMax: 1000
   gaugeImage: {fileID: 0}
+  compassImage: {fileID: 0}
   ItemCount: 0
 --- !u!114 &114259483187215430
 MonoBehaviour:

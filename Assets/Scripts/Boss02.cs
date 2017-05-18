@@ -26,6 +26,7 @@ public class Boss02 : MonoBehaviour {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
 		target = GameObject.Find("PlayerTarget");	//ターゲットを取得
 		armorPoint = armorPointMax;
+		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 		if (Vector3.Distance (target.transform.position, transform.position) >= 21) {
 			return;
 		}
