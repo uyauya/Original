@@ -13,15 +13,15 @@ public class Boss02Shot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// スピードをランダムにする
-		float x = Random.Range (-3, 3);
-		float y = Random.Range (-3, 3);
-		float z = Random.Range (-3, 3);
+		float x = Random.Range (-2, 2);
+		float y = Random.Range (-2, 2);
+		float z = Random.Range (-2, 2);
 		gameObject.transform.position = new Vector3 (x, y, z);
 		_speed = Random.Range (1, 9) / 10f;
 		// 方向をランダムにする
-		x = Random.Range (-3, 3);
-		y = Random.Range (-3, 3);
-		z = Random.Range (-3, 3);
+		x = Random.Range (-0.5f, 0.5f);
+		y = Random.Range (-0.5f, 0.5f);
+		z = Random.Range (-0.5f, 0.5f);
 		_dir = new Vector3 (x, y, z);
 
 		//現後一定時間で自動的に消滅させる
