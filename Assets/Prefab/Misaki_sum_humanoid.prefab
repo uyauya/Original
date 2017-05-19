@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4578226722135130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_HairSide_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4272471411556756}
   - component: {fileID: 198771060015473076}
   - component: {fileID: 199573291336168614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BoostLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4638855431414846}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Locator_Ribbon10_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4410731822397972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4903259272675174}
   - component: {fileID: 114549772862376218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4378022064426442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt13_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4226820451685488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4099591303183820}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4733840802261338}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair62_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4762679972348210}
   - component: {fileID: 114991993396615928}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair10_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4807606021113896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_HairFront_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4463250848293654}
   - component: {fileID: 114607468522674818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt21_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4647927400744724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_Elbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4883103957675784}
   - component: {fileID: 114105237800167126}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4731887134781552}
   - component: {fileID: 114790702223787600}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair50_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4783163448608082}
   - component: {fileID: 114406980317612294}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4133320085048996}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_HeadRibbon_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4957496515064172}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4243879306687262}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_HeadRibbon_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4277916173628680}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4600176130257224}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_Spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4614030146649672}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ribbon_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4311391479236182}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4140485308708716}
   - component: {fileID: 114738752907546104}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair60_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4716054614602908}
   - component: {fileID: 114092415653515260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair10_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4783910640388840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Locator_Ribbon10_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4396625604849854}
   - component: {fileID: 114266794151878780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt12_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4086899939930766}
   - component: {fileID: 114433363158469714}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4795447127833816}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -481,7 +481,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4704264937629014}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt22_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4695817063599228}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4982487135554008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4195337048079980}
   - component: {fileID: 114071454216061336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair51_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +542,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4558513986328696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_HeadRibbon_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,7 +557,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4610885746137044}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_ForeArm_00_tw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,7 +572,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4589681244987662}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_HairSide2_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4898833782498950}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4522309304067290}
   - component: {fileID: 114858291573031172}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt11_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4173223143600964}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -634,7 +634,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4522582441940982}
   - component: {fileID: 114491664310569500}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt21_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,7 +649,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4588390602551882}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -664,7 +664,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4787124410338504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bone_eye_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -679,7 +679,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4519424896542142}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair32_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -694,7 +694,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4230521944077530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair62_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,7 +709,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4912785117419280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -724,7 +724,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4516198939309564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +739,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4179650134571400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_HairTail_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,7 +755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4575308751842846}
   - component: {fileID: 114159597831000452}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt11_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -770,7 +770,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4343958670643262}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -786,7 +786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4239861037445088}
   - component: {fileID: 114099539519319936}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Locator_Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -801,7 +801,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4657963349261024}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +816,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4732373311014920}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +831,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4635484977230206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_FHair11_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -846,7 +846,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4270673502195072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -861,7 +861,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4358708748987778}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_HairFront_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -877,7 +877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4461539622808000}
   - component: {fileID: 114548013589501780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair30_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -892,7 +892,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4141748888118782}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -908,7 +908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4900891745026922}
   - component: {fileID: 114684620619014072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair61_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -923,7 +923,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4416339756694112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -940,7 +940,7 @@ GameObject:
   - component: {fileID: 224750961001279078}
   - component: {fileID: 222007312215763998}
   - component: {fileID: 114870590492561134}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BoostGauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -956,7 +956,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4526823166096208}
   - component: {fileID: 114400565831738766}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt20_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -971,7 +971,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4969067107510008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_HairSide_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -986,7 +986,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4589608159821644}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1002,7 +1002,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4412922017203826}
   - component: {fileID: 114900918961152670}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Locator_AboveHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1018,7 +1018,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4506942369455160}
   - component: {fileID: 114836769958636946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair21_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1034,7 +1034,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4823155670672772}
   - component: {fileID: 114937510873249912}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair70
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1049,7 +1049,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4645405134015030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1085,7 +1085,7 @@ GameObject:
   - component: {fileID: 114167839949354256}
   - component: {fileID: 114961314550753990}
   - component: {fileID: 54416605156796806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Misaki_sum_humanoid
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1100,7 +1100,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4261313946323878}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bone_eye_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1116,7 +1116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4329579792750348}
   - component: {fileID: 114285470929695320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair31_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1131,7 +1131,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4677582781553852}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_Reference
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1146,7 +1146,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4489234772187040}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_HairTail_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1162,7 +1162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4412038005217274}
   - component: {fileID: 137299852322265856}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1178,7 +1178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4606235378306144}
   - component: {fileID: 114127149151673128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1193,7 +1193,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4214847197907958}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_Arm_00_tw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1209,7 +1209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4053493156187188}
   - component: {fileID: 114852012310039132}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt20_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1225,7 +1225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4278111657477686}
   - component: {fileID: 114681797306361026}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Locator_UpperBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1241,7 +1241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4974758685087250}
   - component: {fileID: 114928671722104166}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_FHair00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1257,7 +1257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4580546449187456}
   - component: {fileID: 114383245238049154}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Ribbon10_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1272,7 +1272,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4950185132118472}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1287,7 +1287,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4539360455528326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_ForeArm_00_tw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1302,7 +1302,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4690491381268122}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1317,7 +1317,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4952425318715400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_HairSide2_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1333,7 +1333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4312173914618772}
   - component: {fileID: 114139458970297998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1348,7 +1348,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4884884025207198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1364,7 +1364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4730809935053460}
   - component: {fileID: 114374013892693432}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair20_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1380,7 +1380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4338673684733878}
   - component: {fileID: 114654222094750904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1395,7 +1395,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4245215850868650}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1411,7 +1411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4221349228412838}
   - component: {fileID: 114521118727900050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1426,7 +1426,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4784829300477498}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_Arm_00_tw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1441,7 +1441,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4076091055130796}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1456,7 +1456,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4890802829615464}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1471,7 +1471,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4741006063784726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1486,7 +1486,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4880200485044420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_HairTail_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1502,7 +1502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4825758657290290}
   - component: {fileID: 114212521148643876}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair20_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1518,7 +1518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4955383040203720}
   - component: {fileID: 114936871231417290}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt31_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1534,7 +1534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4153459229579632}
   - component: {fileID: 114393284780570236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Locator_LeftUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1549,7 +1549,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4787668275291116}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair32_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1564,7 +1564,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4708837611019616}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1579,7 +1579,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4440072591341468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair72
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1595,7 +1595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4991123320161426}
   - component: {fileID: 114116235008406744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Locator_RightUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1610,7 +1610,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4189252147737598}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_HeadRibbon_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1625,7 +1625,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4221292549739070}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt32_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1640,7 +1640,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4012848893728148}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1655,7 +1655,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4517031302611882}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1670,7 +1670,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4497747481334196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Locator_Ribbon00_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1686,7 +1686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4636763266987044}
   - component: {fileID: 114376174592624716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair11_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1702,7 +1702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4718546262887792}
   - component: {fileID: 114390376474158312}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Ribbon00_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1717,7 +1717,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4752427848680532}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1733,7 +1733,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4056577133750760}
   - component: {fileID: 114723612248664768}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1748,7 +1748,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4547432388007244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1763,7 +1763,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4952191967189744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair52_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1778,7 +1778,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4678233838924296}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Locator_Ribbon00_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1794,7 +1794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4024587162977374}
   - component: {fileID: 114879002321676702}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_FHair10_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1810,7 +1810,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4226775696894464}
   - component: {fileID: 114440055800190808}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt30_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1841,7 +1841,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4498105406146004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1857,7 +1857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4791235685718964}
   - component: {fileID: 114143117491578574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair50_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1872,7 +1872,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4352978020611870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_FHair01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1887,7 +1887,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4005826224340510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1902,7 +1902,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4302208207374788}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_HeadRibbon_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1917,7 +1917,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4271490093567996}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_HairTail_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1932,7 +1932,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4563475862852016}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_HairTail_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1948,7 +1948,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4082685579550312}
   - component: {fileID: 137543141786897922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1963,7 +1963,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4075004297086048}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1978,7 +1978,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4820118109903634}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair52_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1994,7 +1994,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4930658349498830}
   - component: {fileID: 114415203743084680}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair21_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2010,7 +2010,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4521789898805970}
   - component: {fileID: 114364235157199654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair51_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2026,7 +2026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4175951664141918}
   - component: {fileID: 114125062945946600}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt31_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2041,7 +2041,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4421805984731562}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt13_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2057,7 +2057,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4622044760572152}
   - component: {fileID: 114970597215717264}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair31_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2073,7 +2073,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4721185479304066}
   - component: {fileID: 137365240266468924}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2089,7 +2089,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4326611782323742}
   - component: {fileID: 114020403310818420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Ribbon00_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2104,7 +2104,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4996934119538206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2119,7 +2119,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4020272990268212}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2135,7 +2135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4096750135903078}
   - component: {fileID: 114303501355479342}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt12_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2150,7 +2150,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4445272049110166}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2165,7 +2165,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4223816419647904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt22_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2180,7 +2180,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4798905900866222}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2195,7 +2195,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4419624302991014}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair22_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2210,7 +2210,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4269191939252084}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_L_HairSide_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2225,7 +2225,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4944615655850102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt32_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2241,7 +2241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4910226228989512}
   - component: {fileID: 114561454137635340}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_FHair10_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2256,7 +2256,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4173332133793076}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_HeadRibbon_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2271,7 +2271,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4287191678722232}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2287,7 +2287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4942895673014094}
   - component: {fileID: 114600150187198324}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skirt30_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2302,7 +2302,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4992364697779364}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2318,7 +2318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4156024242075628}
   - component: {fileID: 114480731280443900}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Ribbon10_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2334,7 +2334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4019310491613784}
   - component: {fileID: 137591823348772442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: _body_summer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2350,7 +2350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4474642007438814}
   - component: {fileID: 114067346469670052}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair61_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2365,7 +2365,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4999699262257812}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2381,7 +2381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4162057519968508}
   - component: {fileID: 114335470766517410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2397,7 +2397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4799589710284682}
   - component: {fileID: 114497489346057414}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair30_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2412,7 +2412,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4696486877364264}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_LeftHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2428,7 +2428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4441038458602632}
   - component: {fileID: 114038576971944692}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair60_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2443,7 +2443,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4906399595313042}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair12_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2458,7 +2458,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4942111552404548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_FHair11_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2474,7 +2474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4389802109610006}
   - component: {fileID: 114009534333075274}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair71
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2489,7 +2489,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4057699797635908}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_HairTail_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2505,7 +2505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4905550701396416}
   - component: {fileID: 114005618748612974}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair11_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2520,7 +2520,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4093425135593546}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2535,7 +2535,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4251267524304214}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_HairSide_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2565,7 +2565,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4326817201518114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ribbon_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2580,7 +2580,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4874348283257182}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2595,7 +2595,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4119435451760660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair22_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2610,7 +2610,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4662841073431138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: J_R_Elbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2625,7 +2625,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4965541998461198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: misaki_Hair12_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2640,7 +2640,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4903347399312074}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2655,7 +2655,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4608979802820114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character1_RightHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6733,7 +6733,6 @@ MonoBehaviour:
   boostPoint: 0
   boostPointMax: 1000
   gaugeImage: {fileID: 0}
-  compassImage: {fileID: 0}
   ItemCount: 0
 --- !u!114 &114970597215717264
 MonoBehaviour:
