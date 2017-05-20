@@ -4519,13 +4519,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf05438f1197fd43b7f9c7abb9893aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 20
+  force: 25
   jumpSpeed: 10
   gravity: 9.8
   boostPoint: 0
   boostPointMax: 1000
   gaugeImage: {fileID: 0}
-  compassImage: {fileID: 0}
   ItemCount: 0
 --- !u!114 &114259483187215430
 MonoBehaviour:
