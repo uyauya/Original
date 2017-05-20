@@ -31,7 +31,7 @@ public class Zombie : MonoBehaviour {
 			//ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				                                       (target.transform.position - transform.position), Time.deltaTime * 5);
-			transform.position += transform.forward * Time.deltaTime * 1;	
+			transform.position += transform.forward * Time.deltaTime * 1;
 		}
 			
 		// ターゲット（プレイヤー）との距離が0.5以内なら
@@ -54,17 +54,23 @@ public class Zombie : MonoBehaviour {
 		
 		if (collider.gameObject.tag == "Shot") {
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
+			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
+			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
+			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
-			Debug.Log(armorPoint);
+			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			armorPoint -= damage;
 		}
-		animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-		//Debug.Log("いたい");
-		armorPoint -= damage;
+		//animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+		//armorPoint -= damage;
 
 		
 		//体力が0以下になったら消滅する

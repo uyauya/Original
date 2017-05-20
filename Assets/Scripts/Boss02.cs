@@ -54,7 +54,7 @@ public class Boss02 : MonoBehaviour {
 			//Boss02shot.transform.localPosition= new Vector3(0, 0, 1);
 
 			GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
-			Debug.Log(bossshot.transform.position); //生成したオブジェクトの座標をコンソールに表示する
+			//Debug.Log(bossshot.transform.position); //生成したオブジェクトの座標をコンソールに表示する
 			shotInterval = 0;
 		}
 	}
