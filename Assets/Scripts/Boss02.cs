@@ -17,7 +17,7 @@ public class Boss02 : MonoBehaviour {
 	Bullet01 b1;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
-	private Transform Boss02muzzle;
+	private GameObject Boss02muzzle;
 	public void Damaged(float damagedPoint){
 		this.armorPoint -= damagedPoint;	// Playerから受けたダメージの設定
 	}
@@ -28,7 +28,7 @@ public class Boss02 : MonoBehaviour {
 		target = GameObject.Find("PlayerTarget");	//ターゲットを取得
 		armorPoint = armorPointMax;
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
-		Boss02muzzle=GameObject.Find("face").transform;
+		Boss02muzzle=GameObject.Find("face");
 		if (Vector3.Distance (target.transform.position, transform.position) >= 21) {
 			return;
 		}
@@ -47,12 +47,14 @@ public class Boss02 : MonoBehaviour {
 		}
 		//一定間隔でショット
 		shotInterval += Time.deltaTime;
-		
+
 		if (shotInterval > shotIntervalMax) {
 			//Instantiate (Boss02shot, transform.position, transform.rotation);
-			Boss02shot = Instantiate (Boss02shot, Boss02muzzle);
-			Boss02shot.transform.localPosition= new Vector3(0, 0, 1);
-			Debug.Log(Boss02shot.transform.position); //生成したオブジェクトの座標をコンソールに表示する
+			//Boss02shot = Instantiate (Boss02shot, Boss02muzzle,.identity);
+			//Boss02shot.transform.localPosition= new Vector3(0, 0, 1);
+
+			GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
+			Debug.Log(bossshot.transform.position); //生成したオブジェクトの座標をコンソールに表示する
 			shotInterval = 0;
 		}
 	}

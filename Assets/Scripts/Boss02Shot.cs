@@ -13,15 +13,15 @@ public class Boss02Shot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// スピードをランダムにする
-		float x = Random.Range (-2, 2);
-		float y = Random.Range (-2, 2);
-		float z = Random.Range (-2, 2);
+		float x = Random.Range (-0.5f,0.5f);
+		float y = Random.Range (-0.5f,0.5f);
+		float z = Random.Range (-0.5f,0.5f);
 		gameObject.transform.position = new Vector3 (x, y, z);
 		_speed = Random.Range (1, 9) / 10f;
 		// 方向をランダムにする
-		x = Random.Range (-0.5f, 0.5f);
-		y = Random.Range (-0.5f, 0.5f);
-		z = Random.Range (-0.5f, 0.5f);
+		x = Random.Range (-0.1f, 0.1f);
+		y = Random.Range (-0.1f, 0.1f);
+		z = Random.Range (-0.1f, 0.1f);
 		_dir = new Vector3 (x, y, z);
 
 		//現後一定時間で自動的に消滅させる
@@ -31,7 +31,7 @@ public class Boss02Shot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//弾を前進させる
-		gameObject.transform.Translate (_dir * _speed);
+		//gameObject.transform.Translate (_dir * _speed);
 	}
 
 	private void OnCollisionEnter(Collision collider) {
