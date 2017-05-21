@@ -4519,7 +4519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf05438f1197fd43b7f9c7abb9893aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 19
+  force: 17
   jumpSpeed: 10
   gravity: 9.8
   boostPoint: 0

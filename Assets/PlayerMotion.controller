@@ -282,7 +282,7 @@ AnimatorStateMachine:
     m_Position: {x: 336, y: 204, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102263098003586024}
-    m_Position: {x: -216, y: 108, z: 0}
+    m_Position: {x: -204, y: 108, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102443485888204324}
     m_Position: {x: -216, y: 276, z: 0}
@@ -876,7 +876,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Shot
-  m_Speed: 1
+  m_Speed: 1.7
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101640635387823402}
