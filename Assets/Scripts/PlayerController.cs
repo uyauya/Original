@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour {
 	public int ItemCount;
 	Vector3 targetSpeed = Vector3.zero;      //目標速度
 	Vector3 addSpeed = Vector3.zero;        //加算速度
+	//string inputCommands = "";			//コマンド
+	//bool commandEnable = true;			//コマンド判定
+	//int recCommandLength = 100;			//コマンド許容時間
 
 	void Start()
 	{
@@ -34,8 +37,34 @@ public class PlayerController : MonoBehaviour {
 		moveSpeed = Vector3.zero;
 		isBoost = false;
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
+		//inputCommands = inputCommands.Padforward(100);	// キャラクタが前向きの時
+		//StartCoroutine("confirmCommand");					// コマンドコルーチン採用
 	}
 
+	//IEnumerator("confirmCommand");				
+	//	while (true){
+			//Axis
+	//		if(commandEnable){			//方向キーとショット（fire）が入ってない状態で
+	//			getAxis();
+	//			getFire();
+	//		}else{
+	//			inputCommands += " ";　 // なおかつコマンドが入ってない状態で
+	//		}
+	//		confirmCommand();			//コマンド開始
+	//		yield return null;
+	//	}//end While
+	//}
+
+	//void getAxis(){
+	//	if(Input.GetAxisRaw("Vertical") > 0.9){
+	//		if(Input.GetAxisRaw("Horizontal") > 0.9){inputCommands += "8";}
+	//		else if (Input.GetAxisRaw("Horizontal") < -0.9){inputCommands += "8";}
+	//		else {inputCommands += "8";}
+	//	}
+	//	if(inputCommands.Length > recCommandLength){
+	//		inputCommands = inputCommands.Remove(0,1);
+	//	}    
+	//}
 
 	void Update()
 	{
