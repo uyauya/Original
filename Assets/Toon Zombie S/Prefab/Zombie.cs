@@ -41,7 +41,7 @@ public class Zombie : MonoBehaviour {
 			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(target.transform.position - transform.position), Time.deltaTime * 5);
-			animator.SetBool ("attack", true);
+			animator.SetTrigger ("attack");
 			//Debug.Log ("hit");
 		}
 		// Animator の dead が true なら Update 処理を抜ける
