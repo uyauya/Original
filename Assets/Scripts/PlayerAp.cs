@@ -149,23 +149,5 @@ public class PlayerAp : MonoBehaviour {
 	//		inputCommands = inputCommands.Remove(0,1);
 	//	}    
 	//}
-	//IEnumerator DefenseCoroutine ()
-	//{
-	//	gameObject.layer = LayerMask.NameToLayer("PlayerDefense");
-	//	int count = 1;
-	//	iTween.MoveTo(gameObject, iTween.Hash(
-	//		"position", transform.position - (transform.forward * 0f),
-	//		"time", 0.5f, 
-	//		"easetype", iTween.EaseType.linear
-	//	));
-	//	isInvincible = true;
-	//	while (count > 0){
-	//		modelColorChange.ColorChange(new Color (1,0,0,1));
-	//		yield return new WaitForSeconds(0.1f);
-	//		count--;
-	//	}
-	//	isInvincible = false;
-	//	gameObject.layer = LayerMask.NameToLayer("Player");
 
-	//}
 }
