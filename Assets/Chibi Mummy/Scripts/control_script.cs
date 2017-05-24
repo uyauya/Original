@@ -1,99 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class control_script : MonoBehaviour {
+public class buttonControl_script : MonoBehaviour 
+{
 
 	Animator anim;
-	bool boolper, boolper2, boolper3;
-
 
 	void Awake ()
 	{
 		anim = GetComponentInChildren<Animator>();
 	}
 
-	public void Walk ()
+	public void CrippledWalk ()
 	{
+		anim.SetBool("crippled", !(anim.GetBool("crippled")));
+		anim.SetBool("isIdle", false);
+	}
 
-		boolper = anim.GetBool("isWalk");
-		anim.SetBool ("isWalk", !boolper);
-		anim.SetBool ("isRun", false);
-		anim.SetBool ("isAnother", false);
-		anim.SetBool ("Attack", false);
-		anim.SetBool ("LowKick", false);
-		anim.SetBool ("isDeath", false);
-		anim.SetBool ("isDeath2", false);
-		anim.SetBool ("HitStrike", false);
-
-
-
-
+	public void Idle ()
+	{
+		anim.SetBool("isIdle", true);
+		anim.SetBool("isRun", false);
+		anim.SetBool("crippled", false);
+		anim.SetBool("dancing", false);
 	}
 
 	public void Run ()
 	{
-
-		boolper2 = anim.GetBool("isRun");
-		anim.SetBool ("isRun", !boolper2);
-		anim.SetBool ("isWalk", false);
-		anim.SetBool ("isAnother", false);
-		anim.SetBool ("Attack", false);
-		anim.SetBool ("LowKick", false);
-		anim.SetBool ("isDeath", false);
-		anim.SetBool ("isDeath2", false);
-		anim.SetBool ("HitStrike", false);
-
-
-
+		anim.SetBool("isRun",!(anim.GetBool("isRun")));
+		anim.SetBool("isIdle", false);
 
 	}
 
-	public void OtherIdle ()
+	public void Dance()
 	{
-		
-		boolper3 = anim.GetBool("isAnother");
-		anim.SetBool ("isAnother", !boolper3);
-		anim.SetBool ("isWalk", false);
-		anim.SetBool ("isRun", false);
-		anim.SetBool ("Attack", false);
-		anim.SetBool ("LowKick", false);
-		anim.SetBool ("isDeath", false);
-		anim.SetBool ("isDeath2", false);
-		anim.SetBool ("HitStrike", false);
-
-
-
-
-	}
-	public void Attack()
-	{
-		anim.SetBool ("Attack", true);
-	}
-
-	public void LowKick ()
-	{
-		anim.SetBool ("LowKick", true);
-	}
-
-	public void Death ()
-	{
-		anim.SetBool ("isDeath", true);
-	}
-	public void Death2 ()
-	{
-		anim.SetBool ("isDeath2", true);
-	}
-	public void Strike ()
-	{
-		anim.SetBool ("HitStrike", true);
-	}
-
-	public void Damage ()
-	{
-		anim.SetBool ("isDamage", true);
-	}
-
-	void Update () {
-	
+		anim.SetBool ("dancing", !(anim.GetBool("dancing")));
 	}
 }
