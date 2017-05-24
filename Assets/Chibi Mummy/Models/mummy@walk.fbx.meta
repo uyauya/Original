@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: fc51b29d46a171a4c9dc651386b220bf
-timeCreated: 1460333365
+guid: 32a38bd89e1d4804f8fddd2188c41b18
+timeCreated: 1493752284
 licenseType: Store
 ModelImporter:
   serializedVersion: 18
@@ -39,9 +39,8 @@ ModelImporter:
     100062: jDrv_l_foot01
     100064: jDrv_r_foot01
     100066: //RootNode
-    100068: mummy_GRP
-    100070: mummy_LP
-    100072: root01
+    100068: mummy_LP
+    100070: root01
     400000: be_l_palm01
     400002: be_l_thumb01
     400004: be_l_toe01
@@ -76,9 +75,8 @@ ModelImporter:
     400062: jDrv_l_foot01
     400064: jDrv_r_foot01
     400066: //RootNode
-    400068: mummy_GRP
-    400070: mummy_LP
-    400072: root01
+    400068: mummy_LP
+    400070: root01
     4300000: mummy_LP
     7400000: walk
     9500000: //RootNode
@@ -115,11 +113,11 @@ ModelImporter:
       loop: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
-      keepOriginalPositionY: 0
+      keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
@@ -129,9 +127,7 @@ ModelImporter:
       transformMask:
       - path: 
         weight: 1
-      - path: mummy_GRP
-        weight: 1
-      - path: mummy_GRP/mummy_LP
+      - path: mummy_LP
         weight: 1
       - path: root01
         weight: 1
@@ -209,7 +205,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -239,7 +235,7 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: root01
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 862b97509d211ce41b1532b569e1d4ce,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 4ee39bc25eeaa144891bd0eadcc1bc51,
     type: 3}
   animationType: 2
   additionalBone: 0

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 862b97509d211ce41b1532b569e1d4ce
-timeCreated: 1460332654
+guid: 4ee39bc25eeaa144891bd0eadcc1bc51
+timeCreated: 1493738708
 licenseType: Store
 ModelImporter:
   serializedVersion: 18
@@ -38,10 +38,9 @@ ModelImporter:
     100060: bind_root01
     100062: jDrv_l_foot01
     100064: jDrv_r_foot01
-    100066: mummy_GRP
-    100068: mummy_LP
-    100070: //RootNode
-    100072: root01
+    100066: mummy_LP
+    100068: //RootNode
+    100070: root01
     400000: be_l_palm01
     400002: be_l_thumb01
     400004: be_l_toe01
@@ -75,10 +74,9 @@ ModelImporter:
     400060: bind_root01
     400062: jDrv_l_foot01
     400064: jDrv_r_foot01
-    400066: mummy_GRP
-    400068: mummy_LP
-    400070: //RootNode
-    400072: root01
+    400066: mummy_LP
+    400068: //RootNode
+    400070: root01
     4300000: mummy_LP
     9500000: //RootNode
     13700000: mummy_LP
@@ -95,7 +93,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -108,7 +106,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

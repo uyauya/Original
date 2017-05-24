@@ -69,15 +69,11 @@ public class Zombie : MonoBehaviour {
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
 		}
-		//animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-		//armorPoint -= damage;
-
-		
+			
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0){
 			animator.SetBool("dead" , true);		// 《Animator》の変数deadを true に変更.
-			Destroy (gameObject, 3.0f);
-			//Debug.Log("消滅");	
+			Destroy (gameObject, 3.0f);	
 			//リザルト用のスコアを加算する
 			BattleManager.score ++;
 		}

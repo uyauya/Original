@@ -17,9 +17,6 @@ public class PlayerAp : MonoBehaviour {
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
 	private Animator animator;
-	//string inputCommands = "";			//コマンド
-	//bool commandEnable = true;			//コマンド判定
-	//int recCommandLength = 100;			//コマンド許容時間
 
 	void Start () {	
 		armorPoint = armorPointMax;
@@ -28,8 +25,6 @@ public class PlayerAp : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		gaugeImage = GameObject.Find ("ApGauge").GetComponent<Image> ();
 		armorText = GameObject.Find ("TextAp").GetComponent<Text> ();
-		//inputCommands = inputCommands.Padforward(100);	// キャラクタが前向きの時
-		//StartCoroutine("confirmCommand");					// コマンドコルーチン採用
 	}
 	
 
@@ -86,6 +81,7 @@ public class PlayerAp : MonoBehaviour {
 		}
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
 		else if (collider.gameObject.tag == "Item") {
+			animator.SetTrigger ("ItemGet");
 			armorPoint += 1000;
 			// 体力上限以上には回復しない。
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
@@ -125,47 +121,4 @@ public class PlayerAp : MonoBehaviour {
 
 	}
 
-	//IEnumerator("confirmCommand");				
-	//	while (true){
-	//Axis
-	//		if(commandEnable){				//方向キーとショット（fire）が入ってない状態で
-	//			getAxis();
-	//			getFire();
-	//		}else{
-	//			inputCommands += " ";　 	//なおかつコマンドが入ってない状態で
-	//		}
-	//		confirmCommand();				//コマンド開始
-	//		yield return null;
-	//	}//end While
-	//}
-
-	//void getAxis(){						//制限時間内にコマンド入力
-	//	if(Input.GetAxisRaw("Vertical") > 0.9){
-	//		if(Input.GetAxisRaw("Horizontal") > 0.9){Input.GetButtonDown("");}
-	//		else if (Input.GetAxisRaw("Horizontal") < -0.9){Input.GetButtonDown("");}
-	//		else {Input.GetButtonDown("");}
-	//	}
-	//	if(inputCommands.Length > recCommandLength){
-	//		inputCommands = inputCommands.Remove(0,1);
-	//	}    
-	//}
-	//IEnumerator DefenseCoroutine ()
-	//{
-	//	gameObject.layer = LayerMask.NameToLayer("PlayerDefense");
-	//	int count = 1;
-	//	iTween.MoveTo(gameObject, iTween.Hash(
-	//		"position", transform.position - (transform.forward * 0f),
-	//		"time", 0.5f, 
-	//		"easetype", iTween.EaseType.linear
-	//	));
-	//	isInvincible = true;
-	//	while (count > 0){
-	//		modelColorChange.ColorChange(new Color (1,0,0,1));
-	//		yield return new WaitForSeconds(0.1f);
-	//		count--;
-	//	}
-	//	isInvincible = false;
-	//	gameObject.layer = LayerMask.NameToLayer("Player");
-
-	//}
 }
