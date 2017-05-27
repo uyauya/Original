@@ -2744,4 +2744,3 @@ MonoBehaviour:
   messageStart: {fileID: 1346141177}
   messageWin: {fileID: 185461083}
   messageLose: {fileID: 1517671694}
-  PlayerNo: 0

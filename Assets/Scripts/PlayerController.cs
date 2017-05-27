@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour {
 			animator.SetBool("Move", false);
 			// アッドフォースされた速度が0でなければフォースにマイナス処理して減速（滑り止め）
 			// プレイヤの滑り具合がグラビティを変えることによって調節できるが、変更すると重い軽いでジャンプなどにも影響が出てくる
+			// Edit→Project Settings→Physicsで全体的な重力は変えられるがインスペクタ上でGravity変更した方がよい
 			if(force != 0){ force -= 1.2f; }
 		}
 
