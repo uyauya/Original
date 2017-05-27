@@ -37,7 +37,7 @@ public class JumpEnemy : MonoBehaviour {
 		}
 		timeElapsed += Time.deltaTime;
 		if (timeElapsed >= timeOut) {
-			transform.position += transform.up * Time.deltaTime * 4;
+			//transform.position += transform.up * Time.deltaTime * 4;
 			timeElapsed = 0.0f;
 		}
 		// ターゲット（プレイヤー）との距離が0.5以内なら

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BeltPlayer : MonoBehaviour {
+	// プレイヤー側に適用。コンベアにはBeltConveyorを適用する。
 
 	// 移動に与える力
 	[SerializeField] private float   m_movePower = 500.0f;
