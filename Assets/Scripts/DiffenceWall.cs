@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DiffenceWall : MonoBehaviour {
 
-	/*Enemy enemy;
+	Enemy enemy;
 	Diffence Dif;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
@@ -54,5 +54,5 @@ public class DiffenceWall : MonoBehaviour {
 		}
 		isInvincible = false;
 		gameObject.layer = LayerMask.NameToLayer("DiffenceWall");
-	}*/
+	}
 }
