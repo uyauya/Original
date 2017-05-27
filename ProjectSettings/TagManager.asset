@@ -17,6 +17,8 @@ TagManager:
   - Fire
   - Shot5
   - Item3
+  - DiffenceWall
+  - Diffence
   layers:
   - Default
   - TransparentFX

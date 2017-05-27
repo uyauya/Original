@@ -33,46 +33,50 @@ public class PlayerController : MonoBehaviour {
 		boostPoint = boostPointMax;
 		moveSpeed = Vector3.zero;
 		isBoost = false;
+		// Canvas上のゲージイメージを取得（オブジェクトに直接付いていない場合はゲットコンポーネントで取得する）
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 	}
 
 	void Update()
 	{
 
-		//ブーストボタンが押されていればフラグを立てブーストポイントを消費
+		//ブーストボタンが押されてブーストポイント残が10以上あればフラグを立てブーストポイントを消費
 		if (Input.GetButton("Boost") && boostPoint > 10)
 		{
-			boostPoint -= 10;
-			isBoost = true;
+			boostPoint -= 10;				//ブーストポイント10消費
+			isBoost = true;					//ブースト状態
 		}
 		else
 		{
-			isBoost = false;
+			isBoost = false;				//それ以外ならブーストなし（通常状態）
 		}
 
 		//通常時とブースト時で変化
-		if (isBoost)
+		if (isBoost)						//ブーストなら
 		{
 			// ブースト時
-			if (force < 19.0f) {
-				force += Time.deltaTime;
+			if (force < 19.0f) {			//速度19まで
+				force += Time.deltaTime;	//通常速度（下の設定速度）に加速		
 			}
 			//ブーストキーが押されたらにパラメータを切り替える
 			animator.SetBool("Boost", Input.GetButton("Boost"));
 		}
 		else
 		{
-			force = 15.0f;
+			force = 15.0f;					//通常速度
 			animator.SetBool("Boost", Input.GetButton("Boost"));
 		}
-
-
+			
 
 		//モーションを切り替える
-		if (Input.GetAxis("Horizontal") > 0)
+		if (Input.GetAxis("Horizontal") > 0)	// 横軸操作（右か左か押されている場合）
 		{
+			// クォータリオン（球体を動かすような処理）で5.0の速度でプレイヤを横に向かせる
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
+			// アニメーターをムーブに切り替え
 			animator.SetBool("Move", true);
+			// プレイヤに速度を加える（transform.Translateは移動だが、アッドフォースは後ろから押すような操作なので、坂道など段差が
+			// ある場合、自動で加減速処理して移動する
 			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * force);
 		}
 		else if (Input.GetAxis("Horizontal") < 0)
@@ -82,7 +86,7 @@ public class PlayerController : MonoBehaviour {
 			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * force);
 
 		}
-		else if (Input.GetAxis("Vertical") > 0)
+		else if (Input.GetAxis("Vertical") > 0)	// 縦軸操作（前か後か押されている場合）
 		{
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 			animator.SetBool("Move", true);
@@ -98,41 +102,51 @@ public class PlayerController : MonoBehaviour {
 		}
 		else
 		{
+			// 何も押されていないニュートラル状態で
 			animator.SetBool("Move", false);
+			// アッドフォースされた速度が0でなければフォースにマイナス処理して減速（滑り止め）
+			// プレイヤの滑り具合がグラビティを変えることによって調節できるが、変更すると重い軽いでジャンプなどにも影響が出てくる
 			if(force != 0){ force -= 1.2f; }
 		}
 
-		//ジャンプキーによる上昇
+		//ジャンプキーによる上昇（二段ジャンプ）
+		//ジャンプが押されて1回目なら（2回目でないなら）（一番下のコライダー処理が関係してる）
 		if (Input.GetButtonDown("Jump") == true && JumpCount < 2 ) {
+			// ジャンプ数加算
 			JumpCount++;
-			// ジャンプの上昇力を設定
+
+			// ジャンプの上昇力を設定( v.x, 4, v.z )で縦方向に加算
 			Vector3 v = GetComponent<Rigidbody>().velocity;
 			GetComponent<Rigidbody>().velocity = new Vector3( v.x, 4, v.z );
-	
 			//ジャンプモーションに切り替える
 			animator.SetBool("Jump", true);
-
-		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 20)) {
-			// ジャンプの最大値より上に上昇しない（一定以上なら上昇ゼロ）
+			// ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
+		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 10)) {
 			animator.SetBool("BoostUp", Input.GetButton ("Jump"));
+			// ジャンプの最大値までは上昇（ボタン押し続けている間は上昇し、最大値まで行ったら上昇値を0にする）
 			if (transform.position.y > 120)
 				moveDirection.y = 0;
-			// ジャンプの最大値までは上昇
 			moveDirection.y += gravity * Time.deltaTime;
+			//ブーストポイント消費
 			boostPoint -= 10;
-			//ジャンプモーションに切り替える
+			//ブーストアップモーションに切り替える
 			animator.SetBool("BoostUp", Input.GetButton("Jump"));
+
 		} else {
-			// それ以外の場合は重力にそって落下
+			// それ以外の場合は落下
+			// フロア（地上）にいないなら
 			if( onFloor == false ) {
+				// 自重に-0.05ずつ下降値を加算して落下
 				moveDirection.y -= 0.05f * Time.deltaTime;
+				// 加速が-1以下なら-1にする（ふわっと落下させるため減速処理）
 				if( moveDirection.y <= -1 ) moveDirection.y = -1;
 			}
 		}
-		// ブーストやジャンプが入力されていなければブースとポイントが徐々に回復
+		// ブーストやジャンプが入力されていなければブースとポイントが徐々に回復（！は～されなければという否定形）
 		if (!Input.GetButton ("Boost"))
 			boostPoint += 5;
 		// ブーストポイントが最大以上にはならない
+		//ブーストポイント使用 ＝ 最大値を超えない(ポイントが,0から,マックスまで); の処理
 		boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);
 
 		//移動速度に合わせてモーションブラーの値を変える（MainCameraにCameraMotionBlurスクリプトを追加)
@@ -157,17 +171,18 @@ public class PlayerController : MonoBehaviour {
 
 
 
-	// アイテム２タグの物に接触したらブーストポイント回復
+
 	private void OnCollisionEnter (Collision collider)
 	{
+		// アイテム２タグの物に接触したらブーストポイント回復
 		if (collider.gameObject.tag == "Item2") {
 			animator.SetTrigger ("ItemGet");
 			boostPoint += 500;
 			// ブーストポイントが最大以上にはならない
 			boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);
 		}
+
 		if( collider.gameObject.tag == "Floor" ) {
-			//Debug.Log("Floor");
 			JumpCount = 0;
 			moveDirection.y = 0;
 			Vector3 v = GetComponent<Rigidbody>().velocity;
@@ -175,6 +190,7 @@ public class PlayerController : MonoBehaviour {
 			onFloor = true;
 			animator.SetBool("Jump", false);
 		}
+
 		if(collider.gameObject.tag == "Item3") {
 			animator.SetTrigger ("ItemGet");
 			ItemCount += 1;
