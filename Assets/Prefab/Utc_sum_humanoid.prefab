@@ -4521,7 +4521,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf05438f1197fd43b7f9c7abb9893aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 15
+  MaxForce: 15
+  MaxBoostForce: 20
+  AddTime: 1
   jumpSpeed: 10
   gravity: 9.8
   boostPoint: 0
@@ -5204,7 +5206,7 @@ MonoBehaviour:
   DiffenceWall: {fileID: 1895374023008884, guid: 84dd1b6a3c08ecc44b12ba21696431c1,
     type: 2}
   muzzle: {fileID: 0}
-  guard: 0
+  diffence: 0
   push: 0
   nextButtonDownTime: 0
   limitAngle: 0

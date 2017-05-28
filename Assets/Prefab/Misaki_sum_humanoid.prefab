@@ -6727,11 +6727,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf05438f1197fd43b7f9c7abb9893aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 15
-  jumpSpeed: 10
+  MaxForce: 16
+  MaxBoostForce: 22
+  AddTime: 2
+  jumpSpeed: 11
   gravity: 9.8
   boostPoint: 0
-  boostPointMax: 1000
+  boostPointMax: 1500
   gaugeImage: {fileID: 0}
   ItemCount: 0
 --- !u!114 &114970597215717264

@@ -37,7 +37,7 @@ public class JumpEnemy : MonoBehaviour {
 		}
 		timeElapsed += Time.deltaTime;
 		if (timeElapsed >= timeOut) {
-			//transform.position += transform.up * Time.deltaTime * 4;
+			transform.position += transform.up * Time.deltaTime * 4;
 			timeElapsed = 0.0f;
 		}
 		// ターゲット（プレイヤー）との距離が0.5以内なら
@@ -45,8 +45,12 @@ public class JumpEnemy : MonoBehaviour {
 			//ターゲットの方を徐々に向く
 			// Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
 			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
+			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 				(target.transform.position - transform.position), Time.deltaTime * 5);
+			transform.position += new Vector3(0,
+				(target.transform.position - transform.position).y,
+				(target.transform.position - transform.position).z)
+				* Time.deltaTime * 1;
 			animator.SetBool ("attack", true);
 			//Debug.Log ("hit");
 		}
