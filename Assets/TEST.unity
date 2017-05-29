@@ -207,22 +207,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d98e62f75bdac449a34bc9fdc7877c7, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &452290832 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1805232816971456, guid: 7d98e62f75bdac449a34bc9fdc7877c7,
-    type: 2}
-  m_PrefabInternal: {fileID: 452290831}
---- !u!114 &452290833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 452290832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d8b7dd34ea68b54eaafd841433f0d4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &692913507
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,14 +335,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 11420228, guid: a51ae6c75d01e084db1d7ab7b771d6d8, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449254, guid: a51ae6c75d01e084db1d7ab7b771d6d8, type: 2}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a51ae6c75d01e084db1d7ab7b771d6d8, type: 2}
   m_IsPrefabParent: 0
@@ -404,24 +380,23 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6460980c6b7d7c64185db2c19c22b1e4, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1521512646 stripped
+--- !u!1 &1123413503 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 161242, guid: a51ae6c75d01e084db1d7ab7b771d6d8, type: 2}
-  m_PrefabInternal: {fileID: 1050374048}
---- !u!114 &1521512647
+  m_PrefabParentObject: {fileID: 1233172008936318, guid: 6460980c6b7d7c64185db2c19c22b1e4,
+    type: 2}
+  m_PrefabInternal: {fileID: 1123413502}
+--- !u!114 &1123413504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1521512646}
-  m_Enabled: 0
+  m_GameObject: {fileID: 1123413503}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc88bdc6489b37b48b370c3a7e432c7a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d505fd755b933642a6bc3ab967246e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armorPoint: 0
-  armorPointMax: 100
-  timeOut: 0
+  localGravity: {x: 0, y: 0, z: 0}
 --- !u!1 &1615835521
 GameObject:
   m_ObjectHideFlags: 0

@@ -66,22 +66,22 @@ public class JumpEnemy : MonoBehaviour {
 
 		if (collider.gameObject.tag == "Shot") {
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
-			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
 			StartCoroutine ("DamageCoroutine");
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
-			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
 			StartCoroutine ("DamageCoroutine");
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
-			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
 			StartCoroutine ("DamageCoroutine");
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
-			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
 			StartCoroutine ("DamageCoroutine");
 		}
@@ -90,12 +90,12 @@ public class JumpEnemy : MonoBehaviour {
 
 
 		//体力が0以下になったら消滅する
-		if (armorPoint <= 0){
-			animator.SetBool("dead" , true);		// 《Animator》の変数deadを true に変更.
+		if (armorPoint <= 0) {
+			animator.SetBool ("dead", true);		// 《Animator》の変数deadを true に変更.
 			Destroy (gameObject, 3.0f);
 			//Debug.Log("消滅");	
 			//リザルト用のスコアを加算する
-			BattleManager.score ++;
+			BattleManager.score++;
 		}
 
 	}
@@ -130,4 +130,5 @@ public class JumpEnemy : MonoBehaviour {
 		//レイヤーをPlayerに戻す
 		gameObject.layer = LayerMask.NameToLayer("Enemy");
 		//iTweenのアニメーション
+	}
 }
