@@ -17,6 +17,7 @@ public class PlayerAp : MonoBehaviour {
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
 	private Animator animator;
+	public float KnockBackRange;
 
 	void Start () {	
 		armorPoint = armorPointMax;
@@ -96,7 +97,7 @@ public class PlayerAp : MonoBehaviour {
 		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
-			"position", transform.position - (transform.forward * 0f),
+			"position", transform.position - (transform.forward * KnockBackRange),
 			"time", 0.5f, // 好きな時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
