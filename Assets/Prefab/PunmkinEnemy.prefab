@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 33272185970763882}
   - component: {fileID: 23507962482844016}
   - component: {fileID: 95195400780968438}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: PumpkinEnemy
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,8 +41,7 @@ GameObject:
   - component: {fileID: 65480170652546256}
   - component: {fileID: 23987847474033932}
   - component: {fileID: 54046696423607830}
-  - component: {fileID: 114130977269791630}
-  - component: {fileID: 114789785273555826}
+  - component: {fileID: 114862325339673960}
   m_Layer: 11
   m_Name: PunmkinEnemy
   m_TagString: Enemy
@@ -199,7 +198,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114130977269791630
+--- !u!114 &114862325339673960
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -211,17 +210,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armorPoint: 0
-  armorPointMax: 100
+  armorPointMax: 1
   timeOut: 0
   KnockBackRange: 0
---- !u!114 &114789785273555826
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1805232816971456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d8b7dd34ea68b54eaafd841433f0d4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

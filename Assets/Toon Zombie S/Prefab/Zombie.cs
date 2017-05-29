@@ -53,10 +53,10 @@ public class Zombie : MonoBehaviour {
 		//Debug.Log (collider);
 		
 		if (collider.gameObject.tag == "Shot") {
+			StartCoroutine ("DamageCoroutine");
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
-			StartCoroutine ("DamageCoroutine");
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
@@ -90,7 +90,7 @@ public class Zombie : MonoBehaviour {
 		//レイヤーをPlayerDamageに変更
 		gameObject.layer = LayerMask.NameToLayer("EnemyDamage");
 		//while文を10回ループ
-		int count = 2;
+		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			"position", transform.position - (transform.forward * KnockBackRange),
 			"time", 0.5f, // 好きな時間（秒）

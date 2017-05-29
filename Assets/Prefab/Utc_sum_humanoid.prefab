@@ -5417,7 +5417,7 @@ MonoBehaviour:
   myYellow: {r: 1, g: 0.80689657, b: 0, a: 1}
   myRed: {r: 0.8602941, g: 0, b: 0, a: 1}
   gaugeImage: {fileID: 0}
-  KnockBackRange: 1
+  KnockBackRange: 0
 --- !u!114 &114925817173165376
 MonoBehaviour:
   m_ObjectHideFlags: 1
