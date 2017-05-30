@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerAp : MonoBehaviour {
 
 	public static int armorPoint;
-	int armorPointMax;
+	public int armorPointMax;
 	int damage = 100;
 	public Text armorText;
 	int displayArmorPoint;

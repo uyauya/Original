@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 moveDirection = Vector3.zero;
 	public int boostPoint;
 	public int boostPointMax;
+	public int RecoverPoint;
 	public Image gaugeImage;
 	Vector3 moveSpeed;
 	//ブースト時の最大速度
@@ -149,7 +150,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		// ブーストやジャンプが入力されていなければブースとポイントが徐々に回復（！は～されなければという否定形）
 		if (!Input.GetButton ("Boost"))
-			boostPoint += 5;
+			boostPoint += 1 * RecoverPoint;
 		// ブーストポイントが最大以上にはならない
 		//ブーストポイント使用 ＝ 最大値を超えない(ポイントが,0から,マックスまで); の処理
 		boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);
