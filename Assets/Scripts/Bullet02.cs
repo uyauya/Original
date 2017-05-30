@@ -5,6 +5,7 @@ public class Bullet02 : MonoBehaviour {
 	
 	public GameObject explosion;
 	public float damage;
+	public float BulletSpeed;
 	PlayerShoot02 Plshoot02;
 	private  GameObject Enemy;
 
@@ -45,7 +46,7 @@ public class Bullet02 : MonoBehaviour {
 
 		}
 
-		float speed = 6.0f;
+		float speed = BulletSpeed;
 
 		float step = Time.deltaTime * speed;
 

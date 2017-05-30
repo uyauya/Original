@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerAp : MonoBehaviour {
 
 	public static int armorPoint;
-	int armorPointMax = 5000;
+	int armorPointMax;
 	int damage = 100;
 	public Text armorText;
 	int displayArmorPoint;
@@ -16,6 +16,7 @@ public class PlayerAp : MonoBehaviour {
 	public Image gaugeImage;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
+	public float InvincibleTime;
 	private Animator animator;
 	public float KnockBackRange;
 
@@ -98,7 +99,7 @@ public class PlayerAp : MonoBehaviour {
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			"position", transform.position - (transform.forward * KnockBackRange),
-			"time", 0.5f, // 好きな時間（秒）
+			"time", InvincibleTime, // 好きな時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
 		isInvincible = true;

@@ -6,13 +6,13 @@ public class PlayerShoot04 : MonoBehaviour {
 	public GameObject Bullet04;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
-	public float speed = 1000F;
+	//public float speed = 1000F;
 	public float interval = 0.5F;
 	private float time = 0F;
 	private float triggerDownTime = 0F;
 	private float triggerDownTimeStart = 0F;
 	private float triggerDownTimeEnd = 0F;
-	private float Attack = 100;
+	public float Attack = 100;
 	private float power = 0;
 	public float damage;
 	private float chargeTime;

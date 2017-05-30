@@ -7,16 +7,19 @@ public class PlayerShoot : MonoBehaviour {
 	private GameObject bullet01;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
-	public float speed = 1000F;
-	public float interval = 0.5F;
+	//public float speed;
+	public float interval;
 	private float time = 0F;
 	private float triggerDownTime = 0F;
 	private float triggerDownTimeStart = 0F;
 	private float triggerDownTimeEnd = 0F;
-	private float Attack = 200;
+	public float Attack;
 	private float power = 0;
 	public float damage;
 	private float chargeTime;
+	private float NormalSize = 1.0F;
+	public float BigSize;
+	public float BiggerTime;
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
@@ -50,9 +53,9 @@ public class PlayerShoot : MonoBehaviour {
 		if (Input.GetButton ("Fire1")) {
 			// Fire1を押してチャージ開始.
 			// 2秒たったら.
-			if (Time.time - triggerDownTimeStart >= 1.0f && bullet01.transform.localScale.x < 2.0f ) {
+			if (Time.time - triggerDownTimeStart >= NormalSize && bullet01.transform.localScale.x < BigSize ) {
 				// スケールを大きくする.
-				bullet01.transform.localScale *= 1.1f;
+				bullet01.transform.localScale *= BiggerTime;
 			}
 			// キーを離すことによりチャージ終了
 		}

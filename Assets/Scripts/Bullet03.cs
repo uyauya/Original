@@ -5,6 +5,7 @@ public class Bullet03 : MonoBehaviour {
 
 	public GameObject explosion;
 	public float damage;
+	public float BulletSpeed;
 	PlayerShoot03 Plshoot03;
 	public GameObject prefab_HitEffect2;
 	public int bombDamage = 2000;		// ボムの攻撃値
@@ -51,6 +52,6 @@ public class Bullet03 : MonoBehaviour {
 	}
 
 	void Update(){
-		transform.position += transform.forward * Time.deltaTime * 1;
+		transform.position += transform.forward * Time.deltaTime * BulletSpeed;
 	}
 }

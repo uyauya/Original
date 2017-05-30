@@ -6,6 +6,7 @@ public class Bullet01 : MonoBehaviour {
 
 	public GameObject explosion;
 	public float damage;
+	public float BulletSpeed;
 	Enemy enemy;
 	PlayerShoot Plshoot;
 
@@ -31,7 +32,7 @@ public class Bullet01 : MonoBehaviour {
 		// チャージ中は前進させない
 		if( Plshoot.isCharging == false ) {
 			//transform.rotation = Plshoot.transform.rotation;
-			transform.position += transform.forward * Time.deltaTime * 3;
+			transform.position += transform.forward * Time.deltaTime * BulletSpeed;
 			// チャージされていない時はコリジョン有効
 			GetComponent<SphereCollider>().enabled = true;
 		} else {

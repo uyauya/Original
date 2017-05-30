@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 	public float MaxBoostForce;
 	public float AddTime;
 	public float jumpSpeed;
+	public float HighPoint;
 	public float gravity;
 	private Vector3 moveDirection = Vector3.zero;
 	public int boostPoint;
@@ -128,7 +129,7 @@ public class PlayerController : MonoBehaviour {
 		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 10)) {
 			animator.SetBool("BoostUp", Input.GetButton ("Jump"));
 			// ジャンプの最大値までは上昇（ボタン押し続けている間は上昇し、最大値まで行ったら上昇値を0にする）
-			if (transform.position.y > 120)
+			if (transform.position.y > HighPoint)
 				moveDirection.y = 0;
 			moveDirection.y += gravity * Time.deltaTime;
 			//ブーストポイント消費

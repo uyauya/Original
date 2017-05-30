@@ -162,6 +162,36 @@ Prefab:
       propertyPath: MaxBoostForce
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 114241188447119344, guid: 405690101a2aadd4699abecaa1ab9fa9,
+        type: 2}
+      propertyPath: HighPoint
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 114920329314263658, guid: 405690101a2aadd4699abecaa1ab9fa9,
+        type: 2}
+      propertyPath: InvincibleTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114167369068322966, guid: 405690101a2aadd4699abecaa1ab9fa9,
+        type: 2}
+      propertyPath: NormalSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114167369068322966, guid: 405690101a2aadd4699abecaa1ab9fa9,
+        type: 2}
+      propertyPath: BigSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114167369068322966, guid: 405690101a2aadd4699abecaa1ab9fa9,
+        type: 2}
+      propertyPath: BiggerTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114920329314263658, guid: 405690101a2aadd4699abecaa1ab9fa9,
+        type: 2}
+      propertyPath: KnockBackRange
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 405690101a2aadd4699abecaa1ab9fa9, type: 2}
   m_IsPrefabParent: 0

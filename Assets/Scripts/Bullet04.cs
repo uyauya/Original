@@ -5,6 +5,7 @@ public class Bullet04 : MonoBehaviour {
 
 	public GameObject explosion;
 	public float damage;
+	public float BulletSpeed;
 	Enemy enemy;
 	PlayerShoot04 Plshoot04;
 	
@@ -16,7 +17,7 @@ public class Bullet04 : MonoBehaviour {
 	}	
 	void Update () {		
 		//弾を前進させる
-		transform.position += transform.forward * Time.deltaTime * 0.1F;
+		transform.position += transform.forward * Time.deltaTime * BulletSpeed;
 	}	
 
 }

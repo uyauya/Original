@@ -6,6 +6,7 @@ public class Bullet05 : MonoBehaviour {
 
 	public GameObject explosion;
 	public float damage;
+	public float BulletSpeed;
 	Enemy enemy;
 	MultiWayShoot multiwayshoot;
 	private Rigidbody rb;
@@ -17,7 +18,7 @@ public class Bullet05 : MonoBehaviour {
 		transform.rotation = multiwayshoot.transform.rotation;
 	}	
 	void Update () {		
-		transform.position += transform.forward * Time.deltaTime * 100;
+		transform.position += transform.forward * Time.deltaTime * BulletSpeed;
 	}	
 	private void OnCollisionEnter(Collision collider) {
 
