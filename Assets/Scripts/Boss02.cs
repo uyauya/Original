@@ -28,7 +28,7 @@ public class Boss02 : MonoBehaviour {
 		target = GameObject.Find("PlayerTarget");	//ターゲットを取得
 		armorPoint = armorPointMax;
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
-		Boss02muzzle=GameObject.Find("face");
+		//Boss02muzzle=GameObject.Find("face");
 		if (Vector3.Distance (target.transform.position, transform.position) >= 21) {
 			return;
 		}

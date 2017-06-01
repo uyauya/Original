@@ -5598,9 +5598,12 @@ MonoBehaviour:
   Bullet02: {fileID: 115984, guid: 3fa959cafea1b534b9aed554273be7b4, type: 2}
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  speed: 600
   interval: 0.5
+  Attack: 0
   damage: 0
+  gaugeImage: {fileID: 0}
+  boostPoint: 0
+  BpDown: 0
 --- !u!114 &114168413891335844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5615,9 +5618,12 @@ MonoBehaviour:
   Bullet04: {fileID: 181316, guid: 0f046369970b721458fc972118ac5e17, type: 2}
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  speed: 1000
   interval: 0.5
+  Attack: 100
   damage: 0
+  gaugeImage: {fileID: 0}
+  boostPoint: 0
+  BpDown: 0
 --- !u!114 &114177824763895576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5632,11 +5638,16 @@ MonoBehaviour:
   Bullet01: {fileID: 157144, guid: 3200dee3a95bda945a11c6b7ad753785, type: 2}
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  speed: 1000
   interval: 0.5
+  Attack: 0
   damage: 0
+  BigSize: 0
+  BiggerTime: 0
+  gaugeImage: {fileID: 0}
+  boostPoint: 0
   effectPrefab: {fileID: 100004, guid: b49e37c2e747d4ed4bd2369d30fa0d68, type: 2}
   effectObject: {fileID: 0}
+  BpDown: 0
   isCharging: 0
 --- !u!114 &114181865683268450
 MonoBehaviour:
@@ -5668,11 +5679,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2ce4beb9c1fc24ebe02658aa6b106b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  armorPointMax: 5000
   armorText: {fileID: 0}
   myWhite: {r: 1, g: 1, b: 1, a: 1}
   myYellow: {r: 1, g: 0.80784315, b: 0, a: 1}
   myRed: {r: 0.85882354, g: 0, b: 0, a: 1}
   gaugeImage: {fileID: 0}
+  InvincibleTime: 0
+  KnockBackRange: 0
 --- !u!114 &114198318310690552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5699,9 +5713,12 @@ MonoBehaviour:
   Bullet03: {fileID: 142680, guid: 3b22c6a562677ac4fa14fc10650eb2fb, type: 2}
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  speed: 10
   interval: 0.5
+  Attack: 500
   damage: 0
+  gaugeImage: {fileID: 0}
+  boostPoint: 0
+  BpDown: 0
 --- !u!114 &114212521148643876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5814,11 +5831,18 @@ MonoBehaviour:
   Bullet05: {fileID: 1604392490407752, guid: 25b0602073f161844ad2c43285e4dfcc, type: 2}
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  speed: 1000
   interval: 0.5
+  Attack: 2000
   damage: 0
+  gaugeImage: {fileID: 0}
+  boostPoint: 0
   effectPrefab: {fileID: 100004, guid: b49e37c2e747d4ed4bd2369d30fa0d68, type: 2}
   effectObject: {fileID: 0}
+  BulletGap: 15
+  BulletRad: 5
+  BulletNumber: 5
+  FirstBullet: -2
+  BpDown: 0
 --- !u!114 &114335470766517410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6731,11 +6755,14 @@ MonoBehaviour:
   MaxBoostForce: 22
   AddTime: 2
   jumpSpeed: 11
+  HighPoint: 0
   gravity: 9.8
   boostPoint: 0
   boostPointMax: 1500
+  RecoverPoint: 0
   gaugeImage: {fileID: 0}
   ItemCount: 0
+  BpDown: 0
 --- !u!114 &114970597215717264
 MonoBehaviour:
   m_ObjectHideFlags: 1
