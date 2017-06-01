@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 	bool onFloor = true;
 	private float interval = 2.0f;
 	public int ItemCount;
+	public int BpDown;
 	Vector3 targetSpeed = Vector3.zero;      //目標速度
 	Vector3 addSpeed = Vector3.zero;        //加算速度
 
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour {
 		//ブーストボタンが押されてブーストポイント残が10以上あればフラグを立てブーストポイントを消費
 		if (Input.GetButton("Boost") && boostPoint > 10)
 		{
-			boostPoint -= 10;				//ブーストポイント10消費
+			boostPoint -= BpDown;				//ブーストポイント10消費
 			isBoost = true;					//ブースト状態
 		}
 		else
@@ -134,7 +135,7 @@ public class PlayerController : MonoBehaviour {
 				moveDirection.y = 0;
 			moveDirection.y += gravity * Time.deltaTime;
 			//ブーストポイント消費
-			boostPoint -= 10;
+			boostPoint -= BpDown;
 			//ブーストアップモーションに切り替える
 			animator.SetBool("BoostUp", Input.GetButton("Jump"));
 

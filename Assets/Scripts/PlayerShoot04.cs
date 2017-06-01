@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerShoot04 : MonoBehaviour {
 
@@ -19,9 +20,13 @@ public class PlayerShoot04 : MonoBehaviour {
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
+	public Image gaugeImage;
+	public int boostPoint;
 	Bullet01 bullet01_script;
+	public int BpDown;
 	
 	void Start () {
+		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();

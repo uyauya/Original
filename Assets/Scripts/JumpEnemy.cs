@@ -18,7 +18,12 @@ public class JumpEnemy : MonoBehaviour {
 	public void Damaged(float damagedPoint){
 		this.armorPoint -= damagedPoint;	// Playerから受けたダメージの設定
 	}
-
+	public float DestroyTime;
+	public float JumpForce;
+	public int TargetRange = 30;
+	public float EnemySpeed = 1;
+	public float EnemyRotate = 5;
+	public float Search = 1;
 
 	void Start () {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
@@ -30,25 +35,25 @@ public class JumpEnemy : MonoBehaviour {
 	void Update () {
 		timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
-		if (Vector3.Distance (target.transform.position, transform.position) <= 30) {
+		if (Vector3.Distance (target.transform.position, transform.position) <= TargetRange) {
 
 			//ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
-				(target.transform.position - transform.position), Time.deltaTime * 5);
-			transform.position += transform.forward * Time.deltaTime * 1;
+				(target.transform.position - transform.position), Time.deltaTime * EnemyRotate);
+			transform.position += transform.forward * Time.deltaTime * EnemySpeed;
 		}
 		timeElapsed += Time.deltaTime;
 		if (timeElapsed >= timeOut) {
-			//transform.position += transform.up * Time.deltaTime * 4;
+			transform.position += transform.up * Time.deltaTime * JumpForce;
 			timeElapsed = 0.0f;
 		}
 		// ターゲット（プレイヤー）との距離が0.5以内なら
-		if (Vector3.Distance (target.transform.position, transform.position) <= 1) {
+		if (Vector3.Distance (target.transform.position, transform.position) <= Search) {
 			//ターゲットの方を徐々に向く
 			// Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
 			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
-				(target.transform.position - transform.position), Time.deltaTime * 5);
+				(target.transform.position - transform.position), Time.deltaTime * EnemySpeed);
 			transform.position += new Vector3(0,
 				(target.transform.position - transform.position).y,
 				(target.transform.position - transform.position).z)
@@ -94,7 +99,7 @@ public class JumpEnemy : MonoBehaviour {
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0) {
 			//animator.SetBool ("dead", true);		// 《Animator》の変数deadを true に変更.
-			Destroy (gameObject, 3.0f);
+			Destroy (gameObject, DestroyTime);
 			//Debug.Log("消滅");	
 			//リザルト用のスコアを加算する
 			BattleManager.score++;

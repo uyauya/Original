@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MultiWayShoot : MonoBehaviour {
 
@@ -20,11 +21,19 @@ public class MultiWayShoot : MonoBehaviour {
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
+	public Image gaugeImage;
+	public int boostPoint;
 	Bullet05 bullet05_script;
 	public GameObject effectPrefab;
 	public GameObject effectObject;
+	public int BulletGap = 15;
+	public float BulletRad = 5;
+	public int BulletNumber = 5;
+	public int FirstBullet = -2;
+	public int BpDown;
 
 	void Start () {
+		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
@@ -80,14 +89,14 @@ public class MultiWayShoot : MonoBehaviour {
 	{
 		// 15度間隔の散弾
 		// -2,-1,0,1,2といった具合に5発を設定
-		for (int i = -2; i < 5; i++) {
+		for (int i = FirstBullet; i < BulletNumber; i++) {
 			//初期配置の半径(弾の生成元からの半径)
-			float rad = 5f;
+			float rad = BulletRad;
 			//真ん中を中心に15度間隔に配置位置　
 			Vector3 pos = new Vector3 (
-				rad * Mathf.Sin (Mathf.Deg2Rad * (i * 15f)),
+				rad * Mathf.Sin (Mathf.Deg2Rad * (i * BulletGap)),
 				0,
-				rad * Mathf.Cos (Mathf.Deg2Rad * (i * 15f))
+				rad * Mathf.Cos (Mathf.Deg2Rad * (i * BulletGap))
 			);
 			//生成
 			GameObject bulletObject = Instantiate (Bullet05);

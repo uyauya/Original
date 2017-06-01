@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 // 銃としてPlayerShootスクリプト、弾をBullet01スクリプトとして作る
 public class PlayerShoot : MonoBehaviour {
@@ -23,13 +24,16 @@ public class PlayerShoot : MonoBehaviour {
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
+	public Image gaugeImage;
+	public int boostPoint;
 	Bullet01 bullet01_script;
 	public GameObject effectPrefab;
 	public GameObject effectObject;
-
+	public int BpDown;
 	public bool isCharging = false;
 
 	void Start () {
+		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();

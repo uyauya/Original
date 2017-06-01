@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerShoot02 : MonoBehaviour {
 
@@ -16,12 +17,16 @@ public class PlayerShoot02 : MonoBehaviour {
 	private float power = 0;
 	public float damage;
 	private float chargeTime;
+	public Image gaugeImage;
+	public int boostPoint;
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
 	Bullet02 bullet02_script;
+	public int BpDown;
 
 	void Start () {
+		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
