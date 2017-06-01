@@ -6755,7 +6755,7 @@ MonoBehaviour:
   MaxBoostForce: 22
   AddTime: 2
   jumpSpeed: 11
-  HighPoint: 0
+  HighPoint: 120
   gravity: 9.8
   boostPoint: 0
   boostPointMax: 1500
