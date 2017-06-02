@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Pause : MonoBehaviour
 {
 	bool isPause;
-	public Image Tutorial;
+	public Text Tutorial;
 
 	void Start()
 	{
