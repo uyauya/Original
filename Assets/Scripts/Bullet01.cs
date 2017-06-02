@@ -9,7 +9,7 @@ public class Bullet01 : MonoBehaviour {
 	public float BulletSpeed;
 	Enemy enemy;
 	PlayerShoot Plshoot;
-
+	public float DestroyTime = 3;
 	void Start () {
 
 		// Utc_sum_humanoid（プレイヤーの名前）のオブジェクトを見つけて
@@ -19,7 +19,7 @@ public class Bullet01 : MonoBehaviour {
 		//（発射して）三秒後に消滅
 		// チャージ中は生成3秒後に消滅させない
 		if( Plshoot.isCharging == false ) {
-			Destroy (gameObject, 3);
+			Destroy (gameObject, DestroyTime);
 		}
 		// 以下ビームっぽい演出の作り方
 		// ShotオブジェクトにAddComponentでTrailRenderer追加
@@ -28,8 +28,7 @@ public class Bullet01 : MonoBehaviour {
 	}	
 	void Update () {
 
-		//弾を前進させる
-		// チャージ中は前進させない
+		// チャージ中でなければ弾を前進させる
 		if( Plshoot.isCharging == false ) {
 			//transform.rotation = Plshoot.transform.rotation;
 			transform.position += transform.forward * Time.deltaTime * BulletSpeed;

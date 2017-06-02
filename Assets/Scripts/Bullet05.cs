@@ -11,11 +11,13 @@ public class Bullet05 : MonoBehaviour {
 	MultiWayShoot multiwayshoot;
 	private Rigidbody rb;
 	private Vector3 forward;
+	public float DestroyTime = 3;
 
 	void Start () {
 		rb = this.GetComponent<Rigidbody>();
 		multiwayshoot = GameObject.FindWithTag("Player").GetComponent<MultiWayShoot> ();
 		transform.rotation = multiwayshoot.transform.rotation;
+		Destroy (gameObject, DestroyTime);
 	}	
 	void Update () {		
 		transform.position += transform.forward * Time.deltaTime * BulletSpeed;

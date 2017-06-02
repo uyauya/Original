@@ -19,6 +19,8 @@ TagManager:
   - Item3
   - DiffenceWall
   - Diffence
+  - Wall
+  - Item4
   layers:
   - Default
   - TransparentFX

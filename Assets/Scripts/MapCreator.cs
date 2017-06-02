@@ -15,10 +15,14 @@ public class MapCreator : MonoBehaviour {
 	public	GameObject[]	prefab_BL;			// 床ブロック格納用のプレファブ配列
 	public	GameObject[]	prefab_WALL;		// 壁ブロック格納用のプレファブ配列
 	public	GameObject[]	prefab_enemy;		// 敵の格納用のプレファブ配列
+	public float EmitterTime = 1.0f;
+	public	GameObject[]	prefab_enemy2;		// 敵の格納用のプレファブ配列
+	public float EmitterTime2 = 1.0f;
 	public	GameObject[]	prefab_BreakBlock;
 	private float timer = 0.0f;
 	private float interval = 2.0f;
 	public GameObject[] 	Prefab_Player;
+
 
 	// 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはバトルマネージャースクリプトで判別・管理）
 	void Awake(){
@@ -37,7 +41,8 @@ public class MapCreator : MonoBehaviour {
 		mapFloor.setObstacle(prefab_BreakBlock);		// 障害物オブジェクトを渡す
 		mapFloor.setEnemy(prefab_enemy);				// 敵オブジェクトを渡す
 		initialize();									// プレイヤー位置／マップ初期化
-		StartCoroutine("enemyEmitter" , 1.0f);			// 敵出現用のコルーチン開始
+		StartCoroutine("enemyEmitter" , EmitterTime);	// 敵出現用のコルーチン開始
+		StartCoroutine("enemyEmitter2" , EmitterTime2);	// 敵出現用のコルーチン開始
 	}
 
 	// ■■■プレイヤー位置／マップ初期化■■■
@@ -67,6 +72,12 @@ public class MapCreator : MonoBehaviour {
 
 	// ■■■敵出現用のコルーチン■■■
 	IEnumerator enemyEmitter(float time){
+		while(true){
+			mapFloor.enemyArrival();					// 敵出現処理
+			yield return new WaitForSeconds(time);		// time秒、処理を待機.
+		}
+	}
+	IEnumerator enemyEmitter2(float time){
 		while(true){
 			mapFloor.enemyArrival();					// 敵出現処理
 			yield return new WaitForSeconds(time);		// time秒、処理を待機.

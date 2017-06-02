@@ -19,7 +19,7 @@ public class LimitedTimer : MonoBehaviour {
 		int second = (int)time % 60;
 		//1秒に1ずつ減らしていく 
 		//time -= Time.deltaTime;
-		//1秒に1ずつ減らしていく
+		//1秒に1ずつ増やしていく
 		time += Time.deltaTime;
 		//マイナスは表示しない 
 		if (time < 0) time = 0; 

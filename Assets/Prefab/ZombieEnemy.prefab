@@ -1532,8 +1532,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armorPoint: 0
-  armorPointMax: 1000
+  armorPointMax: 100
   KnockBackRange: 0
+  DestroyTime: 0
+  TargetRange: 30
+  EnemySpeed: 1
+  EnemyRotate: 5
+  Search: 1
 --- !u!136 &13646494
 CapsuleCollider:
   m_ObjectHideFlags: 1

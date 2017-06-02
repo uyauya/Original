@@ -9,7 +9,7 @@ public class Bullet03 : MonoBehaviour {
 	PlayerShoot03 Plshoot03;
 	public GameObject prefab_HitEffect2;
 	public int bombDamage = 2000;		// ボムの攻撃値
-	
+	public float DestroyTime = 1;
 
 	void Start () {
 		Plshoot03 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();
@@ -22,7 +22,7 @@ public class Bullet03 : MonoBehaviour {
 	IEnumerator bom(){		
 		yield return new WaitForSeconds(0.0f);		// 2.0秒、処理を待機.	
 		GameObject effect = Instantiate(prefab_HitEffect2 , transform.position , Quaternion.identity) as GameObject;	// ボムエフェクト発生
-		Destroy(effect , 2.0f);		// ボムエフェクトを、2秒後に消滅させる
+		Destroy(effect , DestroyTime);		// ボムエフェクトを、2秒後に消滅させる
 		BomAttack();				// ボムによる攻撃処理
 		Destroy(gameObject);	
 	}

@@ -8,12 +8,13 @@ public class Bullet02 : MonoBehaviour {
 	public float BulletSpeed;
 	PlayerShoot02 Plshoot02;
 	private  GameObject Enemy;
+	public float DestroyTime = 3;
 
 	void Start () {
 		Plshoot02 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot02> ();
 		transform.rotation = Plshoot02.transform.rotation;
 		//現後一定時間で自動的に消滅させる
-		Destroy (gameObject, 3);
+		Destroy (gameObject, DestroyTime);
 	}	
 
 	void Update ()

@@ -74,6 +74,7 @@ public class MultiWayShoot : MonoBehaviour {
 			if (time >= interval) {    
 				time = 0f;
 			}
+			GetComponent<PlayerController> ().boostPoint -= BpDown;
 			// Bulletnoを設定（下記参照）
 			Bullet();
 		}

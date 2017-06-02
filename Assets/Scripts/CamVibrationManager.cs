@@ -4,6 +4,9 @@ using System.Collections;
 public class CamVibrationManager : MonoBehaviour {
 
 	public static float vibration;
+	public float VibSizeX = -1;
+	public float VibSizeY = -1;
+	public float VibSizeZ = -1;
 	Vector3 defaultPosition;
 
 	void Start () {
@@ -17,9 +20,9 @@ public class CamVibrationManager : MonoBehaviour {
 		if (vibration > 0) {
 			// カメラ位置をランダムにし、揺れて見せる（下のvibration * の値が揺らす値）
 			Vector3 randomPosition;
-			randomPosition.x = Random.Range (vibration * -1, vibration);
-			randomPosition.y = Random.Range (vibration * -1, vibration);
-			randomPosition.z = Random.Range (vibration * -1, vibration);
+			randomPosition.x = Random.Range (vibration * VibSizeX, vibration);
+			randomPosition.y = Random.Range (vibration * VibSizeY, vibration);
+			randomPosition.z = Random.Range (vibration * VibSizeZ, vibration);
 			transform.localPosition = defaultPosition + randomPosition;
 			vibration -= Time.deltaTime;
 		} else {

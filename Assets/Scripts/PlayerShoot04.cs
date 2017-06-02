@@ -45,6 +45,7 @@ public class PlayerShoot04 : MonoBehaviour {
 			if (time >= interval) {	
 				time = 0f;
 			}
+			GetComponent<PlayerController> ().boostPoint -= BpDown;
 			Bullet();
 		}
 		//マズルフラッシュを表示する

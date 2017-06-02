@@ -10,10 +10,11 @@ public class Boss02Shot : MonoBehaviour {
 	private float _speed;
 	public GameObject SmallBoss02;
 	private float Interval=0;
+	public float DestroyTime = 3;
 
 	// Use this for initialization
 	void Start () {
-		
+		Destroy (gameObject, DestroyTime);
 	}
 	
 	// Update is called once per frame
