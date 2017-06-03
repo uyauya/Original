@@ -25,9 +25,14 @@ public class Zombie : MonoBehaviour {
 		target = GameObject.Find("PlayerTarget");	//ターゲットを取得
 		armorPoint = armorPointMax;
 	}
-	
+
 
 	void Update () {
+		Vector3 Pog = this.gameObject.transform.position;
+		gameObject.transform.position = new Vector3(Pog.x , 1, Pog.z);
+		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
+		gameObject.transform.eulerAngles = new Vector3(Ros.x ,1 ,Ros.z );
+
 		timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
 		if (Vector3.Distance (target.transform.position, transform.position) <= TargetRange) {

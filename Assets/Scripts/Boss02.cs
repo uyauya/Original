@@ -17,7 +17,7 @@ public class Boss02 : MonoBehaviour {
 	Bullet01 b1;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
-	private GameObject Boss02muzzle;
+	public GameObject Boss02muzzle;
 	public void Damaged(float damagedPoint){
 		this.armorPoint -= damagedPoint;	// Playerから受けたダメージの設定
 	}

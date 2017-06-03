@@ -10,29 +10,30 @@ public class Boss02Shot : MonoBehaviour {
 	private float _speed;
 	public GameObject SmallBoss02;
 	private float Interval=0;
-	public float DestroyTime = 3;
+	public float DestroyTime = 5;
 
 	// Use this for initialization
 	void Start () {
-		Destroy (gameObject, DestroyTime);
+		
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if (Interval > 0.5f) {
+		//if (Interval > 0.5f)
+		{
 			// スピードをランダムにする
-			float x = Random.Range (-0.5f,0.5f);
-			float y = Random.Range (-0.5f,0.5f);
-			float z = Random.Range (-0.5f,0.5f);
-			gameObject.transform.position = new Vector3 (x, y, z);
+			float x = Random.Range (-0.1f,0.1f);
+			float y = Random.Range (-0.1f,0.1f);
+			float z = Random.Range (-0.1f,0.1f);
+			gameObject.transform.localPosition += new Vector3 (x, y, z);
 			_speed = Random.Range (1, 9) / 10f;
 			// 方向をランダムにする
 			x = Random.Range (-0.1f, 0.1f);
-			y = Random.Range (-0.1f, 0.1f);
+			y = Random.Range (-0.1f,0.1f);
 			z = Random.Range (-0.1f, 0.1f);
 			_dir = new Vector3 (x, y, z);
 		}
-		Interval += Time.deltaTime;
+		//Interval += Time.deltaTime;
 		//現後一定時間で自動的に消滅させる
 		Destroy(gameObject, 4.0F);
 		//弾を前進させる
