@@ -28,10 +28,6 @@ public class Zombie : MonoBehaviour {
 
 
 	void Update () {
-		Vector3 Pog = this.gameObject.transform.position;
-		gameObject.transform.position = new Vector3(Pog.x , 1, Pog.z);
-		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
-		gameObject.transform.eulerAngles = new Vector3(Ros.x ,1 ,Ros.z );
 
 		timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
@@ -41,7 +37,7 @@ public class Zombie : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(target.transform.position - transform.position), Time.deltaTime * EnemyRotate);
 			transform.position += transform.forward * Time.deltaTime * EnemySpeed;
-		}
+			}
 			
 		// ターゲット（プレイヤー）との距離が0.5以内なら
 		if (Vector3.Distance (target.transform.position, transform.position) <= Search) {
@@ -50,6 +46,7 @@ public class Zombie : MonoBehaviour {
 			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(target.transform.position - transform.position), Time.deltaTime * EnemySpeed);
+
 			animator.SetTrigger ("attack");
 			//Debug.Log ("hit");
 		}

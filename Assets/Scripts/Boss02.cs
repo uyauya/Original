@@ -34,8 +34,12 @@ public class Boss02 : MonoBehaviour {
 		}
 	}
 	
-	
+
 	void Update () {
+		Vector3 Pog = this.gameObject.transform.position;
+		gameObject.transform.position = new Vector3(Pog.x , Pog.y, Pog.z);
+		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
+		gameObject.transform.eulerAngles = new Vector3(1 , Ros.y, 1 );
 		timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
 		 if (Vector3.Distance (target.transform.position, transform.position) <= 20) {
