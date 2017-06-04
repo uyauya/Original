@@ -63,6 +63,7 @@ public class Diffence : MonoBehaviour {
 						}
 					}
 				}
+			return;
 			}
 			
 			//　最初の移動キーを押していれば時間計測

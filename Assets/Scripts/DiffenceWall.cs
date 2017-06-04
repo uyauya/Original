@@ -17,7 +17,7 @@ public class DiffenceWall : MonoBehaviour {
 	}	
 	void Update () {
 		
-		transform.position += transform.forward * Time.deltaTime * 1.0f;
+		transform.position += transform.forward * Time.deltaTime * 0.0f;
 
 		}
 			

@@ -5226,11 +5226,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DiffenceWall: {fileID: 1895374023008884, guid: 84dd1b6a3c08ecc44b12ba21696431c1,
     type: 2}
-  muzzle: {fileID: 0}
+  muzzle: {fileID: 4642337937397932}
   diffence: 0
   push: 0
-  nextButtonDownTime: 0
-  limitAngle: 0
+  nextButtonDownTime: 1
+  limitAngle: 15
 --- !u!114 &114690257930005578
 MonoBehaviour:
   m_ObjectHideFlags: 1
