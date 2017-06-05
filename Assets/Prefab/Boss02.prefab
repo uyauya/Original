@@ -892,7 +892,7 @@ MonoBehaviour:
   shotIntervalMax: 0.5
   exprosion: {fileID: 100000, guid: 07725ad1d903f4ea891afbc5b4a253f8, type: 2}
   armorPoint: 0
-  armorPointMax: 10000
+  armorPointMax: 100
   Boss02muzzle: {fileID: 1082512625802510}
   TargetPosition: 20
   TargetSpeed: 5

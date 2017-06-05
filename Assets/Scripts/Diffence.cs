@@ -12,7 +12,7 @@ public class Diffence : MonoBehaviour {
 		private Vector3 velocity = Vector3.zero;
 		private Vector3 input = Vector3.zero;
 
-		public bool diffence = false;          //　ガードしているか
+		public bool diffence = false;        //　ガードしているか
 		public bool push = false;           //　最初に移動ボタンを押したかどうか
 		public float nextButtonDownTime;    //　次に移動ボタンが押されるまでの時間
 		private float nowTime = 0f;         //　最初に移動ボタンが押されてからの経過時間
@@ -60,10 +60,19 @@ public class Diffence : MonoBehaviour {
 							diffence = true;
 							audioSource.PlayOneShot(audioSource.clip);
 							Diffencer();
+						diffence = false;
+						push = false;
 						}
 					}
+					}else
+					{
+						//if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical"))
+					{
+						diffence = false;
+						push = false;
+					}
 				}
-			return;
+
 			}
 			
 			//　最初の移動キーを押していれば時間計測

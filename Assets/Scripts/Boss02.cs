@@ -40,7 +40,7 @@ public class Boss02 : MonoBehaviour {
 
 	void Update () {
 		Vector3 Pog = this.gameObject.transform.position;
-		gameObject.transform.position = new Vector3(Pog.x , Pog.y, Pog.z);
+		gameObject.transform.position = new Vector3(Pog.x , 0.01f, Pog.z);
 		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
 		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		timer += Time.deltaTime;

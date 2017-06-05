@@ -4527,7 +4527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxForce: 15
-  MaxBoostForce: 20
+  MaxBoostForce: 18
   AddTime: 1
   jumpSpeed: 10
   HighPoint: 120
