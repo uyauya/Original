@@ -1820,7 +1820,7 @@ Prefab:
     - target: {fileID: 114796616421411694, guid: 6460980c6b7d7c64185db2c19c22b1e4,
         type: 2}
       propertyPath: ShotInterval
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114796616421411694, guid: 6460980c6b7d7c64185db2c19c22b1e4,
         type: 2}
@@ -1836,6 +1836,11 @@ Prefab:
         type: 2}
       propertyPath: TargetPosition
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114796616421411694, guid: 6460980c6b7d7c64185db2c19c22b1e4,
+        type: 2}
+      propertyPath: shotIntervalMax
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114699302130430456, guid: 6460980c6b7d7c64185db2c19c22b1e4, type: 2}

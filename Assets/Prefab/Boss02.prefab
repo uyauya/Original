@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 114796616421411694}
   - component: {fileID: 54520169254617058}
   - component: {fileID: 136310787882408204}
-  - component: {fileID: 114699302130430456}
+  - component: {fileID: 114576534325017624}
   m_Layer: 21
   m_Name: Boss02
   m_TagString: Enemy
@@ -491,7 +491,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1233172008936318}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.5, y: 2, z: 34.2}
+  m_LocalPosition: {x: 11.5, y: 1, z: 34.2}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4590229774207440}
@@ -772,13 +772,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1082512625802510}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0.3}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 4148010581403752}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4932219472155092
 Transform:
   m_ObjectHideFlags: 1
@@ -847,7 +847,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!95 &95460535522355246
 Animator:
@@ -866,7 +866,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114699302130430456
+--- !u!114 &114576534325017624
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -889,10 +889,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Boss02shot: {fileID: 1325986715204676, guid: 12879577cfee489449edc8127222d2d4, type: 2}
+  shotIntervalMax: 0.5
   exprosion: {fileID: 100000, guid: 07725ad1d903f4ea891afbc5b4a253f8, type: 2}
   armorPoint: 0
   armorPointMax: 10000
   Boss02muzzle: {fileID: 1082512625802510}
+  TargetPosition: 20
+  TargetSpeed: 5
+  MoveSpeed: 5
+  ShotInterval: 0
 --- !u!136 &136310787882408204
 CapsuleCollider:
   m_ObjectHideFlags: 1

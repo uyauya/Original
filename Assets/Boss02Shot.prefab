@@ -24,9 +24,9 @@ GameObject:
   - component: {fileID: 23649499790170080}
   - component: {fileID: 114554412413605994}
   - component: {fileID: 54836884876290158}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Boss02Shot
-  m_TagString: Untagged
+  m_TagString: ShotEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,19 +114,19 @@ MonoBehaviour:
   SmallBoss02: {fileID: 1612255731186310, guid: 6e87ffb02ea39b14b8cc13d5222a236d,
     type: 2}
   DestroyTime: 5
-  XspeedS: -0.1
-  XspeedL: 0.1
-  YspeedS: -0.1
-  YspeedL: 0.1
-  ZspeedS: -0.1
-  ZspeedL: 0.1
-  XdirectionS: -0.1
-  XdirectionL: 0.1
-  YdirectionS: -0.1
-  YdirectionL: 0.1
-  ZdirectionS: -0.1
-  ZdirectionL: 0.1
-  Insta: 6
+  XspeedS: -0.3
+  XspeedL: 0.3
+  YspeedS: -0.3
+  YspeedL: 0.3
+  ZspeedS: -0.3
+  ZspeedL: 0.3
+  XdirectionS: -0.2
+  XdirectionL: 0.2
+  YdirectionS: -0.2
+  YdirectionL: 0.2
+  ZdirectionS: -0.2
+  ZdirectionL: 0.2
+  Insta: 4
 --- !u!135 &135090136607717282
 SphereCollider:
   m_ObjectHideFlags: 1

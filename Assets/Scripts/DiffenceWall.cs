@@ -12,8 +12,7 @@ public class DiffenceWall : MonoBehaviour {
 	public float Speed;
 
 	void Start () {
-
-		Dif = GameObject.FindWithTag("DiffenceWall").GetComponent<Diffence> ();
+		Dif = GameObject.FindWithTag("Player").GetComponent<Diffence> ();
 		transform.rotation = Dif.transform.rotation;
 		Destroy (gameObject, Destroytime);	
 	}	

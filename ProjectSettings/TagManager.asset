@@ -21,6 +21,7 @@ TagManager:
   - Diffence
   - Wall
   - Item4
+  - BossShot
   layers:
   - Default
   - TransparentFX
@@ -43,8 +44,8 @@ TagManager:
   - Floor
   - Shotsss
   - ShotM
-  - Boss02
-  - 
+  - Boss
+  - BossShot
   - 
   - 
   - 

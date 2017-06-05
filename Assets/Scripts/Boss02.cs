@@ -7,7 +7,7 @@ public class Boss02 : MonoBehaviour {
 	GameObject target;
 	public GameObject Boss02shot;
 	float shotInterval = 0;
-	float shotIntervalMax = 1.0F;	
+	public float shotIntervalMax = 1.0F;	
 	public GameObject exprosion;	
 	public float armorPoint;
 	public float armorPointMax = 10000F; 
@@ -42,7 +42,7 @@ public class Boss02 : MonoBehaviour {
 		Vector3 Pog = this.gameObject.transform.position;
 		gameObject.transform.position = new Vector3(Pog.x , Pog.y, Pog.z);
 		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
-		gameObject.transform.eulerAngles = new Vector3(1 , Ros.y, 1 );
+		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
 		if (Vector3.Distance (target.transform.position, transform.position) <= TargetPosition) {
@@ -122,7 +122,7 @@ public class Boss02 : MonoBehaviour {
 		}
 		isInvincible = false;
 		//レイヤーをPlayerに戻す
-		gameObject.layer = LayerMask.NameToLayer("Boss02");
+		gameObject.layer = LayerMask.NameToLayer("Boss");
 		//iTweenのアニメーション
 
 	}
