@@ -21,7 +21,10 @@ public class Boss02 : MonoBehaviour {
 	public void Damaged(float damagedPoint){
 		this.armorPoint -= damagedPoint;	// Playerから受けたダメージの設定
 	}
-	
+	public int TargetPosition;
+	public float TargetSpeed;
+	public float MoveSpeed;
+	public float ShotInterval;
 	
 	void Start () {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
@@ -29,7 +32,7 @@ public class Boss02 : MonoBehaviour {
 		armorPoint = armorPointMax;
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 		//Boss02muzzle=GameObject.Find("face");
-		if (Vector3.Distance (target.transform.position, transform.position) >= 21) {
+		if (Vector3.Distance (target.transform.position, transform.position) > TargetPosition) {
 			return;
 		}
 	}
@@ -42,12 +45,12 @@ public class Boss02 : MonoBehaviour {
 		gameObject.transform.eulerAngles = new Vector3(1 , Ros.y, 1 );
 		timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
-		 if (Vector3.Distance (target.transform.position, transform.position) <= 20) {
+		if (Vector3.Distance (target.transform.position, transform.position) <= TargetPosition) {
 			
 			//ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
-			                                       (target.transform.position - transform.position), Time.deltaTime * 5);
-			transform.position += transform.forward * Time.deltaTime * 5;	
+			                                       (target.transform.position - transform.position), Time.deltaTime * TargetSpeed);
+			transform.position += transform.forward * Time.deltaTime * MoveSpeed;	
 		}
 		//一定間隔でショット
 		shotInterval += Time.deltaTime;
@@ -59,7 +62,7 @@ public class Boss02 : MonoBehaviour {
 
 			GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
 			//Debug.Log(bossshot.transform.position); //生成したオブジェクトの座標をコンソールに表示する
-			shotInterval = 0;
+			shotInterval = ShotInterval;
 		}
 	}
 	

@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1325986715204676}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,6 +74,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33749817697831802
 MeshFilter:
@@ -112,6 +113,20 @@ MonoBehaviour:
   amplitude: 0.01
   SmallBoss02: {fileID: 1612255731186310, guid: 6e87ffb02ea39b14b8cc13d5222a236d,
     type: 2}
+  DestroyTime: 5
+  XspeedS: -0.1
+  XspeedL: 0.1
+  YspeedS: -0.1
+  YspeedL: 0.1
+  ZspeedS: -0.1
+  ZspeedL: 0.1
+  XdirectionS: -0.1
+  XdirectionL: 0.1
+  YdirectionS: -0.1
+  YdirectionL: 0.1
+  ZdirectionS: -0.1
+  ZdirectionL: 0.1
+  Insta: 6
 --- !u!135 &135090136607717282
 SphereCollider:
   m_ObjectHideFlags: 1

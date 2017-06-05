@@ -8,16 +8,18 @@ public class DiffenceWall : MonoBehaviour {
 	Diffence Dif;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
+	public float Destroytime;
+	public float Speed;
 
 	void Start () {
 
 		Dif = GameObject.FindWithTag("DiffenceWall").GetComponent<Diffence> ();
 		transform.rotation = Dif.transform.rotation;
-			Destroy (gameObject, 0.2f);	
+		Destroy (gameObject, Destroytime);	
 	}	
 	void Update () {
 		
-		transform.position += transform.forward * Time.deltaTime * 0.0f;
+		transform.position += transform.forward * Time.deltaTime * Speed;
 
 		}
 			

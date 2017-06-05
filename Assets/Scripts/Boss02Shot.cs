@@ -9,8 +9,23 @@ public class Boss02Shot : MonoBehaviour {
 	private Vector3 _dir;
 	private float _speed;
 	public GameObject SmallBoss02;
-	private float Interval=0;
+	private float Interval = 0;
 	public float DestroyTime = 5;
+
+	public float XspeedS = -0.1f;
+	public float XspeedL = 0.1f;
+	public float YspeedS = -0.1f;
+	public float YspeedL = 0.1f;
+	public float ZspeedS = -0.1f;
+	public float ZspeedL = 0.1f;
+	public float XdirectionS = -0.1f;
+	public float XdirectionL = 0.1f;
+	public float YdirectionS = -0.1f;
+	public float YdirectionL = 0.1f;
+	public float ZdirectionS = -0.1f;
+	public float ZdirectionL = 0.1f;
+	public int Insta = 6;
+
 
 	// Use this for initialization
 	void Start () {
@@ -22,22 +37,23 @@ public class Boss02Shot : MonoBehaviour {
 		//if (Interval > 0.5f)
 		{
 			// スピードをランダムにする
-			float x = Random.Range (-0.1f,0.1f);
-			float y = Random.Range (-0.1f,0.1f);
-			float z = Random.Range (-0.1f,0.1f);
+			float x = Random.Range (XspeedS,XspeedL);
+			float y = Random.Range (YspeedS,YspeedL);
+			float z = Random.Range (ZspeedS,ZspeedL);
 			gameObject.transform.localPosition += new Vector3 (x, y, z);
 			_speed = Random.Range (1, 9) / 10f;
 			// 方向をランダムにする
-			x = Random.Range (-0.1f, 0.1f);
-			y = Random.Range (-0.1f,0.1f);
-			z = Random.Range (-0.1f, 0.1f);
+			x = Random.Range (XdirectionS,XdirectionL);
+			y = Random.Range (YdirectionS,YdirectionL);
+			z = Random.Range (ZdirectionS,ZdirectionL);
 			_dir = new Vector3 (x, y, z);
 		}
 		//Interval += Time.deltaTime;
 		//現後一定時間で自動的に消滅させる
-		Destroy(gameObject, 4.0F);
+		Destroy(gameObject, DestroyTime);
 		//弾を前進させる
 		gameObject.transform.Translate (_dir * _speed);
+		StartCoroutine ("Boss02ShotCoroutine");
 	}
 
 	private void OnCollisionEnter(Collision collider) {
@@ -46,13 +62,13 @@ public class Boss02Shot : MonoBehaviour {
 		if (collider.gameObject.tag == "Player") {
 			Destroy (gameObject);
 			Instantiate (explosion, transform.position, transform.rotation);
-			if (Random.Range (0, 6) == 0) {
+			if (Random.Range (0, Insta) == 0) {
 				Instantiate (SmallBoss02, transform.position, transform.rotation);
 			}
 		} else if (collider.gameObject.tag == "Shot") {
 			Destroy (gameObject);
 			Instantiate (explosion, transform.position, transform.rotation);
-			if (Random.Range (0, 6) == 0) {
+			if (Random.Range (0, Insta) == 0) {
 				Instantiate (SmallBoss02, transform.position, transform.rotation);
 			}
 		}
