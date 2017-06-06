@@ -19,6 +19,7 @@ public class MapCreator : MonoBehaviour {
 	public	GameObject[]	prefab_enemy2;		// 敵の格納用のプレファブ配列
 	public float EmitterTime2 = 1.0f;
 	public	GameObject[]	prefab_BreakBlock;
+	public	GameObject[]	prefab_BombPoint;
 	private float timer = 0.0f;
 	private float interval = 2.0f;
 	public GameObject[] 	Prefab_Player;
@@ -39,6 +40,7 @@ public class MapCreator : MonoBehaviour {
 		
 		mapFloor.setWall(prefab_WALL);					// 壁オブジェクトの渡す
 		mapFloor.setObstacle(prefab_BreakBlock);		// 障害物オブジェクトを渡す
+		mapFloor.setObstacle(prefab_BombPoint);			// 起爆スイッチを渡す
 		mapFloor.setEnemy(prefab_enemy);				// 敵オブジェクトを渡す
 		initialize();									// プレイヤー位置／マップ初期化
 		StartCoroutine("enemyEmitter" , EmitterTime);	// 敵出現用のコルーチン開始
