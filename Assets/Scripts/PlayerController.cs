@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 moveDirection = Vector3.zero;
 	public int boostPoint;
 	public int boostPointMax;
-	public int RecoverPoint;
+	public int RecoverPoint = 1;
 	public Image gaugeImage;
 	Vector3 moveSpeed;
 	//ブースト時の最大速度
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 	bool onFloor = true;
 	private float interval = 2.0f;
 	public int ItemCount;
-	public int BpDown;
+	public int BpDown = 10;
 	Vector3 targetSpeed = Vector3.zero;      //目標速度
 	Vector3 addSpeed = Vector3.zero;        //加算速度
 

@@ -4534,10 +4534,10 @@ MonoBehaviour:
   gravity: 9.8
   boostPoint: 0
   boostPointMax: 1000
-  RecoverPoint: 0
+  RecoverPoint: 1
   gaugeImage: {fileID: 0}
   ItemCount: 0
-  BpDown: 0
+  BpDown: 10
 --- !u!114 &114259483187215430
 MonoBehaviour:
   m_ObjectHideFlags: 1
