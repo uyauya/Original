@@ -54,20 +54,21 @@ public class JumpEnemy : MonoBehaviour {
 			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 				(target.transform.position - transform.position), Time.deltaTime * EnemySpeed);
-			transform.position += new Vector3(0,
-				(target.transform.position - transform.position).y,
-				(target.transform.position - transform.position).z)
-				* Time.deltaTime * 1;
-			animator.SetBool ("attack", true);
+			transform.position += transform.forward * Time.deltaTime * 1;
+			if (timeElapsed >= timeOut) {
+				transform.position += transform.up * Time.deltaTime * JumpForce;
+				timeElapsed = 0.0f;
+			}
+			//animator.SetBool ("attack", true);
 			//Debug.Log ("hit");
 		}
 		// Animator の dead が true なら Update 処理を抜ける
-		if( animator.GetBool("dead") == true ) return;
+		//if( animator.GetBool("dead") == true ) return;
 	}
 
 
 	void OnCollisionEnter(Collision collider) {
-		Debug.Log (collider);
+		//Debug.Log (collider);
 
 		if (collider.gameObject.tag == "Shot") {
 			Debug.Log (collider.gameObject.name);

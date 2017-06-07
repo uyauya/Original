@@ -213,3 +213,9 @@ MonoBehaviour:
   armorPointMax: 1
   timeOut: 0
   KnockBackRange: 0
+  DestroyTime: 0
+  JumpForce: 3
+  TargetRange: 30
+  EnemySpeed: 1
+  EnemyRotate: 5
+  Search: 1

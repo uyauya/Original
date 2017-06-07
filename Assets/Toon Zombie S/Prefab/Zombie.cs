@@ -4,6 +4,7 @@ using System.Collections;
 public class Zombie : MonoBehaviour {
 	private Animator animator;		// 《Animator》コンポーネント用の変数
 	GameObject target;
+	public GameObject particle;
 	public float armorPoint;
 	public float armorPointMax = 100F; 
 	float timer = 0;
@@ -62,20 +63,24 @@ public class Zombie : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			Instantiate (particle, transform.position,transform.rotation);
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			Instantiate (particle, transform.position,transform.rotation);
 			armorPoint -= damage;
 			StartCoroutine ("DamageCoroutine");
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			Instantiate (particle, transform.position,transform.rotation);
 			armorPoint -= damage;
 			StartCoroutine ("DamageCoroutine");
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			Instantiate (particle, transform.position,transform.rotation);
 			armorPoint -= damage;
 			StartCoroutine ("DamageCoroutine");
 		}
