@@ -214,8 +214,8 @@ MonoBehaviour:
   timeOut: 0
   KnockBackRange: 0
   DestroyTime: 0
-  JumpForce: 3
+  JumpForce: 1
   TargetRange: 30
   EnemySpeed: 1
-  EnemyRotate: 5
-  Search: 1
+  EnemyRotate: 3
+  Search: 2

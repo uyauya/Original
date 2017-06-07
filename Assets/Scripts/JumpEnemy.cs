@@ -76,22 +76,18 @@ public class JumpEnemy : MonoBehaviour {
 			Debug.Log (damage);
 			//animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
-			//StartCoroutine ("DamageCoroutine");
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
-			StartCoroutine ("DamageCoroutine");
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
-			StartCoroutine ("DamageCoroutine");
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
-			StartCoroutine ("DamageCoroutine");
 		}
 		//animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
 		//armorPoint -= damage;
@@ -108,35 +104,4 @@ public class JumpEnemy : MonoBehaviour {
 
 	}
 
-	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
-	IEnumerator DamageCoroutine ()
-	{
-		//レイヤーをPlayerDamageに変更
-		gameObject.layer = LayerMask.NameToLayer("EnemyDamage");
-		//while文を10回ループ
-		int count = 10;
-		iTween.MoveTo(gameObject, iTween.Hash(
-			"position", transform.position - (transform.forward * KnockBackRange),
-			"time", 0.5f, // 好きな時間（秒）
-			"easetype", iTween.EaseType.linear
-		));
-		//isInvincible = true;
-		while (count > 0){
-			//透明にする
-			//Debug.Log ("色変える");
-			modelColorChange.ColorChange(new Color (1,0,0,1));
-			//0.05秒待つ
-			//Debug.Log ("戻す");
-			yield return new WaitForSeconds(0.1f);
-			//元に戻す
-			modelColorChange.ColorChange(new Color (1,1,1,1));
-			//0.05秒待つ
-			yield return new WaitForSeconds(0.1f);
-			count--;
-		}
-		//isInvincible = false;
-		//レイヤーをPlayerに戻す
-		gameObject.layer = LayerMask.NameToLayer("Enemy");
-		//iTweenのアニメーション
-	}
 }
