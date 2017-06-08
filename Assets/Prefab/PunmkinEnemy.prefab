@@ -213,9 +213,12 @@ MonoBehaviour:
   armorPointMax: 1
   timeOut: 0
   KnockBackRange: 0
-  DestroyTime: 0
+  DestroyTime: 2
+  DamageTime: 0.3
   JumpForce: 1
   TargetRange: 30
   EnemySpeed: 1
   EnemyRotate: 3
   Search: 2
+  DamageEffect: {fileID: 0}
+  DestroyEffect: {fileID: 0}

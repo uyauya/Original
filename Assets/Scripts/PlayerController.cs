@@ -2,33 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEditor; 
 
 public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
 	// 移動時に加える力
-	private float force;
-	public float MaxForce;
-	public float MaxBoostForce;
-	public float AddTime;
-	public float jumpSpeed;
-	public float HighPoint;
-	public float gravity;
+	private float force;			// 移動速度
+	public float MaxForce;			// 移動速度最大値
+	public float MaxBoostForce;		// ブースト時の移動速度最大値
+	public float AddTime;			// 移動速度加算時間
+	public float jumpSpeed;			// ジャンプ力
+	public float HighPoint;			// ジャンプの高さ最大値
+	public float gravity;			// 重力（ジャンプ時などに影響）
 	private Vector3 moveDirection = Vector3.zero;
 	public int boostPoint;
 	public int boostPointMax;
-	public int RecoverPoint = 1;
+	public int RecoverPoint = 1;	//　ブーストポイント回復値
 	public Image gaugeImage;
 	Vector3 moveSpeed;
 	//ブースト時の最大速度
-	private int JumpCount;
+	private int JumpCount;			// ジャンプカウント（二段ジャンプ処理に使用）
 	bool isBoost;
-	private float timer = 0.0f;
+	private float timer = 0.0f;		
 	bool onFloor = true;
 	private float interval = 2.0f;
 	public int ItemCount;
-	public int BpDown = 10;
+	public int BpDown = 10;			// ブーストゲージ消費値
 	Vector3 targetSpeed = Vector3.zero;      //目標速度
 	Vector3 addSpeed = Vector3.zero;        //加算速度
 

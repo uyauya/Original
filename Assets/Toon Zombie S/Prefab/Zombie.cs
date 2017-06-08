@@ -16,10 +16,13 @@ public class Zombie : MonoBehaviour {
 		this.armorPoint -= damagedPoint;	// Playerから受けたダメージの設定
 	}
 	public float DestroyTime;
+	public float DamageTime;
 	public int TargetRange = 30;
 	public float EnemySpeed = 1;
 	public float EnemyRotate = 5;
 	public float Search = 1;
+	public GameObject DamageEffect;
+	public GameObject DestroyEffect;
 
 	void Start () {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
@@ -65,28 +68,33 @@ public class Zombie : MonoBehaviour {
 		if (collider.gameObject.tag == "Shot") {
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-			Instantiate (particle, transform.position,transform.rotation);
+			Instantiate(DamageEffect, transform.position, transform.rotation);
+			Destroy (gameObject, DamageTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-			Instantiate (particle, transform.position,transform.rotation);
+			Instantiate(DamageEffect, transform.position, transform.rotation);
+			Destroy (gameObject, DamageTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-			Instantiate (particle, transform.position,transform.rotation);
+			Instantiate(DamageEffect, transform.position, transform.rotation);
+			Destroy (gameObject, DamageTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-			Instantiate (particle, transform.position,transform.rotation);
+			Instantiate(DamageEffect, transform.position, transform.rotation);
+			Destroy (gameObject, DamageTime);	
 			armorPoint -= damage;
 		}
 			
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0){
 			//animator.SetBool("dead" , true);		// 《Animator》の変数deadを true に変更.
+			Instantiate(DestroyEffect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			//リザルト用のスコアを加算する
 			BattleManager.score ++;

@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerAp : MonoBehaviour {
 
-	public static int armorPoint;
-	public int armorPointMax;
-	int damage = 100;
+	public static int armorPoint;		// プレイヤー体力
+	public int armorPointMax;			// プレイヤー体力最大値
+	int damage = 100;					// 敵から受けるダメージ
 	public Text armorText;
 	int displayArmorPoint;
 	public Color myWhite;
@@ -15,10 +15,10 @@ public class PlayerAp : MonoBehaviour {
 	public Color myRed;
 	public Image gaugeImage;
 	private ModelColorChange modelColorChange;
-	private bool isInvincible;
-	public float InvincibleTime;
+	private bool isInvincible;			// 無敵処理（ダメージ受けた際に使用）
+	public float InvincibleTime;		// 無敵時間
 	private Animator animator;
-	public float KnockBackRange;
+	public float KnockBackRange;		// ノックバック距離（ダメージ受けた際に使用）
 
 	void Start () {	
 		armorPoint = armorPointMax;

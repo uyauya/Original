@@ -46,7 +46,7 @@ public class SmallBoss02 : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(target.transform.position - transform.position), Time.deltaTime * 5);
 			animator.SetBool ("attack", true);
-			Debug.Log ("hit");
+			//Debug.Log ("hit");
 		}
 		// Animator の dead が true なら Update 処理を抜ける
 		if( animator.GetBool("dead") == true ) return;

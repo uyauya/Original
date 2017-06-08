@@ -19,11 +19,14 @@ public class JumpEnemy : MonoBehaviour {
 		this.armorPoint -= damagedPoint;	// Playerから受けたダメージの設定
 	}
 	public float DestroyTime;
+	public float DamageTime;
 	public float JumpForce;
 	public int TargetRange = 30;
 	public float EnemySpeed = 1;
 	public float EnemyRotate = 5;
 	public float Search = 1;
+	public GameObject DamageEffect;
+	public GameObject DestroyEffect;
 
 	void Start () {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
@@ -73,20 +76,27 @@ public class JumpEnemy : MonoBehaviour {
 		if (collider.gameObject.tag == "Shot") {
 			Debug.Log (collider.gameObject.name);
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
-			Debug.Log (damage);
+			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			Destroy (gameObject, DestroyTime);	
 			//animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
+			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			Destroy (gameObject, DestroyTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
+			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			Destroy (gameObject, DestroyTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
+			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			Destroy (gameObject, DestroyTime);	
 			armorPoint -= damage;
 		}
 		//animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
@@ -96,7 +106,8 @@ public class JumpEnemy : MonoBehaviour {
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0) {
 			//animator.SetBool ("dead", true);		// 《Animator》の変数deadを true に変更.
-			Destroy (gameObject, DestroyTime);
+			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			Destroy (gameObject, DestroyTime);	
 			//Debug.Log("消滅");	
 			//リザルト用のスコアを加算する
 			BattleManager.score++;
