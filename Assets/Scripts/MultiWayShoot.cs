@@ -10,6 +10,8 @@ public class MultiWayShoot : MonoBehaviour {
 	public GameObject muzzleFlash;
 	//public float speed = 1000F;
 	public float interval = 0.5F;
+	public float shotInterval = 0;
+	public float shotIntervalMax = 0.25F;
 	private float time = 0F;
 	private float triggerDownTime = 0F;
 	private float triggerDownTimeStart = 0F;
@@ -41,30 +43,34 @@ public class MultiWayShoot : MonoBehaviour {
 
 	void Update () {
 
-		//Debug.Log(bullet01);
-
 		// Fire1（標準ではCtrlキー)を押された瞬間.
 		if (Input.GetButtonDown ("Fire5")) {
+			
 			// Fire1を押してチャージ開始.
 			triggerDownTimeStart = Time.time;
 			//エフェクトをInstantiate
 			effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
 			// bullet01生成、Bullet01のゲームオブジェクトを生成.
-			bullet05 = GameObject.Instantiate (Bullet05, muzzle.position, Quaternion.identity)as GameObject;
+			//bullet05 = GameObject.Instantiate (Bullet05, muzzle.position, Quaternion.identity)as GameObject;
+			Bullet ();
 		} else if (Input.GetButton ("Fire5")) {
 			// Fire1を押してチャージ開始.
 			// 2秒たったら.
 			if (Time.time - triggerDownTimeStart >= 1.0f) {
 				// スケールを大きくする.
-				bullet05.transform.localScale *= 1.00f;
+				//bullet05.transform.localScale *= 1.00f;
 			}
 			// キーを離すことによりチャージ終了
 		} else if (Input.GetButtonUp ("Fire5")) {
 			triggerDownTimeEnd = Time.time;
+			Bullet ();
+			// 弾発射間隔設定
+			//shotInterval += Time.deltaTime;
+
 			//エフェクトを削除
 			Destroy (effectObject);
 			// キーを離した状態から押し始めたじかんの差分を計測して
-			float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
+			float chargeTime = triggerDownTimeEnd - triggerDownTimeStart;
 			// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
 			damage = Attack + Attack * 2.5f * chargeTime;
 			//Debug.Log (damage);
@@ -75,19 +81,23 @@ public class MultiWayShoot : MonoBehaviour {
 				time = 0f;
 			}
 			GetComponent<PlayerController> ().boostPoint -= BpDown;
-			// Bulletnoを設定（下記参照）
-			Bullet();
-		}
-		//マズルフラッシュを表示する
-		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
-
-		//音を重ねて再生する
-		audioSource.PlayOneShot(audioSource.clip);
+			//if (shotInterval > shotIntervalMax) {
+				// Bulletnoを設定（下記参照）
+				
+				//マズルフラッシュを表示する
+				//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
+				//弾発射間隔リセット
+				//shotInterval = 0;
+			}
+			//音を重ねて再生する
+			audioSource.PlayOneShot (audioSource.clip);
 	}
 
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
 	void Bullet ()
 	{
+		shotInterval += Time.deltaTime;
+		if(shotInterval > shotIntervalMax) {
 		// 15度間隔の散弾
 		// -2,-1,0,1,2といった具合に5発を設定
 		for (int i = FirstBullet; i < BulletNumber; i++) {
@@ -100,7 +110,9 @@ public class MultiWayShoot : MonoBehaviour {
 				rad * Mathf.Cos (Mathf.Deg2Rad * (i * BulletGap))
 			);
 			//生成
+
 			GameObject bulletObject = Instantiate (Bullet05);
+
 			//弾を配置
 			bulletObject.transform.position = transform.TransformPoint (pos);
 			//回転を設定（弾を拡散するよう回転させる）
@@ -109,6 +121,7 @@ public class MultiWayShoot : MonoBehaviour {
 			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
 			// bulletObjectのオブジェクトにダメージ計算を渡す
 			bulletObject.GetComponent<Bullet05> ().damage = this.damage;
+				shotInterval = 0;}
 		}
 	}
 

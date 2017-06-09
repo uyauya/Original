@@ -5030,6 +5030,8 @@ MonoBehaviour:
   muzzle: {fileID: 4642337937397932}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   interval: 0.5
+  shotInterval: 0.5
+  shotIntervalMax: 0.5
   Attack: 2000
   damage: 1000
   gaugeImage: {fileID: 0}
@@ -5229,7 +5231,7 @@ MonoBehaviour:
   muzzle: {fileID: 4642337937397932}
   diffence: 0
   push: 0
-  nextButtonDownTime: 1
+  nextButtonDownTime: 0.5
   limitAngle: 15
 --- !u!114 &114690257930005578
 MonoBehaviour:
