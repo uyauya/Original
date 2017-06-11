@@ -10,7 +10,7 @@ public class MultiWayShoot : MonoBehaviour {
 	public GameObject muzzleFlash;
 	//public float speed = 1000F;
 	public float interval = 0.5F;
-	public float shotInterval = 0;
+	public float shotIntervalStart = 0;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
 	private float time = 0F;
 	private float triggerDownTime = 0F;
@@ -97,22 +97,22 @@ public class MultiWayShoot : MonoBehaviour {
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
 	void Bullet ()
 	{
-		shotInterval += Time.deltaTime;
-		if(shotInterval > shotIntervalMax) {
+		// ショットの時間間隔
+		if(Time.time - shotIntervalStart > shotIntervalMax) {
+			shotIntervalStart = Time.time;
 		// 15度間隔の散弾
 		// -2,-1,0,1,2といった具合に5発を設定
-		for (int i = FirstBullet; i < BulletNumber; i++) {
-			//初期配置の半径(弾の生成元からの半径)
-			float rad = BulletRad;
-			//真ん中を中心に15度間隔に配置位置　
-			Vector3 pos = new Vector3 (
-				rad * Mathf.Sin (Mathf.Deg2Rad * (i * BulletGap)),
-				0,
-				rad * Mathf.Cos (Mathf.Deg2Rad * (i * BulletGap))
-			);
-			//生成
-
-			GameObject bulletObject = Instantiate (Bullet05);
+			for (int i = FirstBullet; i < BulletNumber; i++) {
+				//初期配置の半径(弾の生成元からの半径)
+				float rad = BulletRad;
+				//真ん中を中心に15度間隔に配置位置　
+				Vector3 pos = new Vector3 (
+					             rad * Mathf.Sin (Mathf.Deg2Rad * (i * BulletGap)),
+					             0,
+					             rad * Mathf.Cos (Mathf.Deg2Rad * (i * BulletGap))
+				             );
+				//生成
+				GameObject bulletObject = Instantiate (Bullet05);			
 
 			//弾を配置
 			bulletObject.transform.position = transform.TransformPoint (pos);
@@ -122,8 +122,9 @@ public class MultiWayShoot : MonoBehaviour {
 			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
 			// bulletObjectのオブジェクトにダメージ計算を渡す
 			bulletObject.GetComponent<Bullet05> ().damage = this.damage;
-				shotInterval = 0;}
+			}
 		}
+
 	}
 
 	public void KickEvent (){
