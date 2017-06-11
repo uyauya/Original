@@ -81,7 +81,7 @@ public class Boss02Shot : MonoBehaviour {
 		}
 		if (0 == frameCnt % 700) {
 			// 上下に振動させる
-			float posYSin = Mathf.Sin (2.0f * Mathf.PI * (float)(frameCnt % 200) / (200.0f - 1.0f));
+			float posYSin = Mathf.Sin (2.0f * Mathf.PI * (float)(frameCnt % 200) / (200.0f - 1.0f) * 0.1f);
 			iTween.MoveAdd (gameObject, new Vector3 (0, amplitude * posYSin, 0), 0.0f);
 			yield return new WaitForSeconds (0.1f);
 		}
