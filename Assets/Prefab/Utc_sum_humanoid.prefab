@@ -4458,6 +4458,8 @@ MonoBehaviour:
   muzzle: {fileID: 4642337937397932}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   interval: 0.3
+  shotInterval: 0
+  shotIntervalMax: 300
   Attack: 0
   damage: 0
   BigSize: 2
@@ -4876,6 +4878,8 @@ MonoBehaviour:
   muzzle: {fileID: 4642337937397932}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   interval: 0.5
+  shotInterval: 0
+  shotIntervalMax: 0.5
   Attack: 500
   damage: 0
   gaugeImage: {fileID: 0}
@@ -5030,7 +5034,7 @@ MonoBehaviour:
   muzzle: {fileID: 4642337937397932}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   interval: 0
-  shotIntervalStart: 0
+  shotInterval: 0
   shotIntervalMax: 0.5
   Attack: 2000
   damage: 1000
@@ -5127,6 +5131,8 @@ MonoBehaviour:
   muzzle: {fileID: 4642337937397932}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   interval: 0.5
+  shotInterval: 0
+  shotIntervalMax: 0.5
   Attack: 100
   damage: 0
   gaugeImage: {fileID: 0}
@@ -5410,6 +5416,8 @@ MonoBehaviour:
   muzzle: {fileID: 4642337937397932}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   interval: 0.3
+  shotInterval: 0
+  shotIntervalMax: 0.25
   Attack: 0
   damage: 0
   gaugeImage: {fileID: 0}

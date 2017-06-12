@@ -86,8 +86,8 @@ public class Zombie : MonoBehaviour {
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-			Instantiate(DamageEffect, transform.position, transform.rotation);
-			Destroy (gameObject, DamageTime);	
+			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			Destroy (gameObject, DestroyTime);	
 			armorPoint -= damage;
 		}
 			

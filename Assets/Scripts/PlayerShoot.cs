@@ -10,6 +10,8 @@ public class PlayerShoot : MonoBehaviour {
 	public GameObject muzzleFlash;
 	//public float speed;
 	public float interval;
+	public float shotInterval;			// ショットの時間間隔
+	public float shotIntervalMax = 0.25F;
 	private float time = 0F;
 	private float triggerDownTime = 0F;
 	private float triggerDownTimeStart = 0F;
@@ -95,14 +97,18 @@ public class PlayerShoot : MonoBehaviour {
 
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
 	void Bullet() {
-		// Bullet01のゲームオブジェクトを生成してbulletObjectとする
-		GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
-		//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
-		bulletObject.transform.position = muzzle.position;
+		// ショットの時間間隔
+		if (Time.time - shotInterval > shotIntervalMax) {
+			shotInterval = Time.time;
+			// Bullet01のゲームオブジェクトを生成してbulletObjectとする
+			GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
+			//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
+			bulletObject.transform.position = muzzle.position;
 
 
-		// bulletObjectのオブジェクトにダメージ計算を渡す
-		bulletObject.GetComponent<Bullet01> ().damage = this.damage;
+			// bulletObjectのオブジェクトにダメージ計算を渡す
+			bulletObject.GetComponent<Bullet01> ().damage = this.damage;
+		}
 	}
 
 	public void KickEvent (){

@@ -9,6 +9,8 @@ public class PlayerShoot04 : MonoBehaviour {
 	public GameObject muzzleFlash;
 	//public float speed = 1000F;
 	public float interval = 0.5F;
+	public float shotInterval;			// ショットの時間間隔
+	public float shotIntervalMax = 0.25F;
 	private float time = 0F;
 	private float triggerDownTime = 0F;
 	private float triggerDownTimeStart = 0F;
@@ -56,11 +58,15 @@ public class PlayerShoot04 : MonoBehaviour {
 	}
 	
 	void Bullet() {
-		GameObject bulletObject = GameObject.Instantiate (Bullet04)as GameObject;
-		bulletObject.transform.position = muzzle.position + transform.TransformDirection(Vector3.forward * 2);
-		bulletObject.GetComponent<Bullet01> ().damage = this.damage;
+		// ショットの時間間隔
+		if (Time.time - shotInterval > shotIntervalMax) {
+			shotInterval = Time.time;
+			GameObject bulletObject = GameObject.Instantiate (Bullet04)as GameObject;
+			bulletObject.transform.position = muzzle.position + transform.TransformDirection (Vector3.forward * 2);
+			bulletObject.GetComponent<Bullet01> ().damage = this.damage;
+		}
 	}
-	
+
 	public void KickEvent (){
 		Debug.Log("kick");
 	}

@@ -10,7 +10,7 @@ public class MultiWayShoot : MonoBehaviour {
 	public GameObject muzzleFlash;
 	//public float speed = 1000F;
 	public float interval = 0.5F;
-	public float shotIntervalStart = 0;			// ショットの時間間隔
+	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
 	private float time = 0F;
 	private float triggerDownTime = 0F;
@@ -98,8 +98,8 @@ public class MultiWayShoot : MonoBehaviour {
 	void Bullet ()
 	{
 		// ショットの時間間隔
-		if(Time.time - shotIntervalStart > shotIntervalMax) {
-			shotIntervalStart = Time.time;
+		if(Time.time - shotInterval > shotIntervalMax) {
+			shotInterval = Time.time;
 		// 15度間隔の散弾
 		// -2,-1,0,1,2といった具合に5発を設定
 			for (int i = FirstBullet; i < BulletNumber; i++) {
