@@ -10,6 +10,8 @@ public class Zombie : MonoBehaviour {
 	float timer = 0;
 	float damage;							// playerに与えるダメージ
 	Bullet01 b1;
+	private bool isInvincible;			// 無敵処理（ダメージ受けた際に使用）
+	public float InvincibleTime;		// 無敵時間
 	private ModelColorChange modelColorChange;
 	public float KnockBackRange;
 	public void Damaged(float damagedPoint){
@@ -67,27 +69,31 @@ public class Zombie : MonoBehaviour {
 		
 		if (collider.gameObject.tag == "Shot") {
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
+			StartCoroutine ("DamageCoroutine");
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
 			Instantiate(DamageEffect, transform.position, transform.rotation);
-			Destroy (gameObject, DamageTime);	
+			//Destroy (gameObject, DamageTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
+			StartCoroutine ("DamageCoroutine");
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
 			Instantiate(DamageEffect, transform.position, transform.rotation);
-			Destroy (gameObject, DamageTime);	
+			//Destroy (gameObject, DamageTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
+			StartCoroutine ("DamageCoroutine");
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
 			Instantiate(DamageEffect, transform.position, transform.rotation);
-			Destroy (gameObject, DamageTime);	
+			//Destroy (gameObject, DamageTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
+			StartCoroutine ("DamageCoroutine");
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
-			Destroy (gameObject, DestroyTime);	
+			//Destroy (gameObject, DestroyTime);	
 			armorPoint -= damage;
 		}
 			
@@ -101,6 +107,38 @@ public class Zombie : MonoBehaviour {
 		}
 		
 	}
-		
+
+	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
+	IEnumerator DamageCoroutine ()
+	{
+		//レイヤーをPlayerDamageに変更
+		gameObject.layer = LayerMask.NameToLayer("EnemyDamage");
+		//while文を10回ループ
+		int count = 10;
+		iTween.MoveTo(gameObject, iTween.Hash(
+			"position", transform.position - (transform.forward * KnockBackRange),
+			"time", InvincibleTime, // 好きな時間（秒）
+			"easetype", iTween.EaseType.linear
+		));
+		isInvincible = true;
+		while (count > 0){
+			//透明にする
+			//Debug.Log ("色変える");
+			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//0.05秒待つ
+			//Debug.Log ("戻す");
+			yield return new WaitForSeconds(0.1f);
+			//元に戻す
+			modelColorChange.ColorChange(new Color (1,1,1,1));
+			//0.05秒待つ
+			yield return new WaitForSeconds(0.1f);
+			count--;
+		}
+		isInvincible = false;
+		//レイヤーをPlayerに戻す
+		gameObject.layer = LayerMask.NameToLayer("Enemy");
+		//iTweenのアニメーション
+
+	}	
 }
 

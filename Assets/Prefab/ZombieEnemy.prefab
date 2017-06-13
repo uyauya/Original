@@ -1533,13 +1533,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle: {fileID: 1035929777161508, guid: d2b5620878cde1144b82728e7d76b517, type: 2}
   armorPoint: 0
-  armorPointMax: 1000
+  armorPointMax: 100000
+  InvincibleTime: 0
   KnockBackRange: 0
   DestroyTime: 2
   DamageTime: 0.3
   TargetRange: 30
   EnemySpeed: 1
-  EnemyRotate: 5
+  EnemyRotate: 3
   Search: 1
   DamageEffect: {fileID: 100004, guid: 6836f5eaa96f845c4ac0909f84272556, type: 2}
   DestroyEffect: {fileID: 100000, guid: 0e60c63a7a6bdba4896433dd90442d2a, type: 3}

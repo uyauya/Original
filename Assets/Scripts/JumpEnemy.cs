@@ -76,7 +76,7 @@ public class JumpEnemy : MonoBehaviour {
 		if (collider.gameObject.tag == "Shot") {
 			Debug.Log (collider.gameObject.name);
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
-			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			//Instantiate(DestroyEffect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			//animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
@@ -106,7 +106,7 @@ public class JumpEnemy : MonoBehaviour {
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0) {
 			//animator.SetBool ("dead", true);		// 《Animator》の変数deadを true に変更.
-			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			//Instantiate(DestroyEffect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			//Debug.Log("消滅");	
 			//リザルト用のスコアを加算する
