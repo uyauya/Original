@@ -15,7 +15,8 @@ public class BattleManager : MonoBehaviour {
 	public Image messageWin;
 	public Image messageLose;
 	public static int score;			//敵を倒した数。Enemyスクリプトでカウントアップ  
-
+	public Text ScoreText;
+	private int Score = 0;
 	//public int PlayerNo;				//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	private int ItemCount;				//アイテム取得数をカウント
 	PlayerController playerController;
@@ -24,19 +25,19 @@ public class BattleManager : MonoBehaviour {
 
 	void Start () {	
 		//DontDestroyOnLoad(this.gameObject);
+		ScoreText.text = "Score:0";
 		battleStatus = BATTLE_START;	//時間0秒、最初にスタートを表示させる
 		timer = 0;
 		//スタート時はStartは表示、WinとLoseは非表示
 		messageStart.enabled = true;
 		messageWin.enabled = false;
 		messageLose.enabled = false;
-		score = 0;
 		playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController> ();
 		//敵の最大生成数をクリア数にする
 		//instantiateValueに値を代入するのをBattleManagerより早くするため
 		//EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
 		clearScore = EnemyInstantiate.instantiateValue;
-		score = 0;
+		Score = 0;
 	}
 
 	void Update () {
@@ -67,7 +68,7 @@ public class BattleManager : MonoBehaviour {
 			
 		case BATTLE_END:
 			// スコアが10000点以上ならボスステージクリア
-			if (score >= 10000) {
+			if (Score >= 10000) {
 			}
 			//一定時間経過したら遷移可能にする
 			timer += Time.deltaTime;

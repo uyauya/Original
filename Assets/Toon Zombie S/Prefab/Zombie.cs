@@ -28,6 +28,7 @@ public class Zombie : MonoBehaviour {
 
 	void Start () {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
+		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 		target = GameObject.Find("PlayerTarget");	//ターゲットを取得
 		armorPoint = armorPointMax;
 	}

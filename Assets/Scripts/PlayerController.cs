@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour {
 	private Animator animator;
 	// 移動時に加える力
 	private float force;			// 移動速度
-	public float MaxForce;			// 移動速度最大値
-	public float MaxBoostForce;		// ブースト時の移動速度最大値
+	[Header("移動速度を調整")]public float MaxForce;			// 移動速度最大値
+	[Header("ブースト時の移動速度を調整")]public float MaxBoostForce;		// ブースト時の移動速度最大値
 	public float AddTime;			// 移動速度加算時間
 	public float jumpSpeed;			// ジャンプ力
 	public float HighPoint;			// ジャンプの高さ最大値

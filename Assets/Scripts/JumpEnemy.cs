@@ -7,7 +7,9 @@ public class JumpEnemy : MonoBehaviour {
 	private Animator animator;		// 《Animator》コンポーネント用の変数
 	GameObject target;
 	public float armorPoint;
-	public float armorPointMax = 100F; 
+	public float armorPointMax = 100F;
+	private bool isInvincible;			// 無敵処理（ダメージ受けた際に使用）
+	public float InvincibleTime;		// 無敵時間
 	float timer = 0;
 	float damage;							// playerに与えるダメージ
 	Bullet01 b1;
@@ -30,6 +32,7 @@ public class JumpEnemy : MonoBehaviour {
 
 	void Start () {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
+		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 		target = GameObject.Find("PlayerTarget");	//ターゲットを取得
 		armorPoint = armorPointMax;
 	}
@@ -70,30 +73,33 @@ public class JumpEnemy : MonoBehaviour {
 	}
 
 
-	void OnCollisionEnter(Collision collider) {
-		//Debug.Log (collider);
+	void OnCollisionEnter(Collision collider) {		//Debug.Log (collider);
 
 		if (collider.gameObject.tag == "Shot") {
 			Debug.Log (collider.gameObject.name);
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
+			StartCoroutine ("DamageCoroutine");
 			//Instantiate(DestroyEffect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			//animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
+			StartCoroutine ("DamageCoroutine");
 			//animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
+			StartCoroutine ("DamageCoroutine");
 			//animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
+			StartCoroutine ("DamageCoroutine");
 			//animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
@@ -115,4 +121,36 @@ public class JumpEnemy : MonoBehaviour {
 
 	}
 
+	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
+	IEnumerator DamageCoroutine ()
+	{
+		//レイヤーをPlayerDamageに変更
+		gameObject.layer = LayerMask.NameToLayer("EnemyDamage");
+		//while文を10回ループ
+		int count = 10;
+		iTween.MoveTo(gameObject, iTween.Hash(
+			"position", transform.position - (transform.forward * KnockBackRange),
+			"time", InvincibleTime, // 好きな時間（秒）
+			"easetype", iTween.EaseType.linear
+		));
+		isInvincible = true;
+		while (count > 0){
+			//透明にする
+			//Debug.Log ("色変える");
+			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//0.05秒待つ
+			//Debug.Log ("戻す");
+			yield return new WaitForSeconds(0.1f);
+			//元に戻す
+			modelColorChange.ColorChange(new Color (1,1,1,1));
+			//0.05秒待つ
+			yield return new WaitForSeconds(0.1f);
+			count--;
+		}
+		isInvincible = false;
+		//レイヤーをPlayerに戻す
+		gameObject.layer = LayerMask.NameToLayer("Enemy");
+		//iTweenのアニメーション
+
+	}	
 }
