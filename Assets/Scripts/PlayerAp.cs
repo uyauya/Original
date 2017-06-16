@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerAp : MonoBehaviour {
 
-	public static int armorPoint;		// プレイヤー体力
+	private static int armorPoint;		// プレイヤー体力
 	public int armorPointMax;			// プレイヤー体力最大値
 	int damage = 100;					// 敵から受けるダメージ
 	public Text armorText;
