@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour {
 	void Start()
 	{
 		animator = GetComponent<Animator>();
+
 		boostPoint = boostPointMax;
 		moveSpeed = Vector3.zero;
 		isBoost = false;

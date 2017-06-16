@@ -5,23 +5,23 @@ using UnityEngine.UI;
 public class Pause : MonoBehaviour
 {
 	bool isPause;
-	public Text Tutorial;
+	public GameObject Tutorial;
 
 	void Start()
 	{
 		isPause = false;
-		Tutorial.enabled = false;
+		Tutorial.SetActive(false);
 	}
 	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			if (isPause) {
 				isPause = false;
-				Tutorial.enabled = false;
+				Tutorial.SetActive(false);
 				Time.timeScale = 1f;
 			} else {
 				isPause = true;
-				Tutorial.enabled = true;
+				Tutorial.SetActive(true);
 				Time.timeScale = 0;
 			}
 

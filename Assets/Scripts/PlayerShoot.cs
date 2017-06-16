@@ -53,15 +53,17 @@ public class PlayerShoot : MonoBehaviour {
 			isCharging = true;
 			//エフェクトをInstantiate
 			effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
+			effectObject.transform.SetParent (muzzle);
 			// bullet01生成、Bullet01のゲームオブジェクトを生成.
-			bullet01 = GameObject.Instantiate (Bullet01, muzzle.position, Quaternion.identity)as GameObject;
+			//bullet01 = GameObject.Instantiate (Bullet01, muzzle.position, Quaternion.identity)as GameObject;
 		} 
 		if (Input.GetButton ("Fire1")) {
 			// Fire1を押してチャージ開始.
 			// 2秒たったら.
-			if (Time.time - triggerDownTimeStart >= NormalSize && bullet01.transform.localScale.x < BigSize ) {
+			if (Time.time - triggerDownTimeStart >= NormalSize && effectObject.transform.localScale.x < BigSize ) {
 				// スケールを大きくする.
-				bullet01.transform.localScale *= BiggerTime;
+				//effectObject.transform.localScale *= BiggerTime;
+				effectObject.GetComponent<ParticleSystem>().startSize = 0.0f;
 			}
 			// キーを離すことによりチャージ終了
 		}
