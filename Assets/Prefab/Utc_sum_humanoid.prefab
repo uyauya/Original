@@ -4462,8 +4462,8 @@ MonoBehaviour:
   shotIntervalMax: 300
   Attack: 0
   damage: 0
-  BigSize: 10
-  BiggerTime: 2
+  BigSize: 2
+  BiggerTime: 50
   gaugeImage: {fileID: 0}
   boostPoint: 0
   effectPrefab: {fileID: 100004, guid: b49e37c2e747d4ed4bd2369d30fa0d68, type: 2}
