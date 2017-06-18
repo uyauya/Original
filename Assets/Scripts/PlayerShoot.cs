@@ -8,6 +8,7 @@ public class PlayerShoot : MonoBehaviour {
 	private GameObject bullet01;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
+	public GameObject ErekiSmoke;
 	//public float speed;
 	public float interval;
 	public float shotInterval;			// ショットの時間間隔
@@ -39,6 +40,7 @@ public class PlayerShoot : MonoBehaviour {
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
+		effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.red;
 	}
 
 	void Update () {
@@ -53,25 +55,37 @@ public class PlayerShoot : MonoBehaviour {
 			isCharging = true;
 			//エフェクトをInstantiate
 			effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
-			Debug.Log("エフェクト");
+			//Debug.Log("エフェクト");
 			effectObject.transform.SetParent (muzzle);
-			Debug.Log("配置");
+			//Debug.Log("配置");
 			// bullet01生成、Bullet01のゲームオブジェクトを生成.
-			bullet01 = GameObject.Instantiate (Bullet01, muzzle.position, Quaternion.identity)as GameObject;
+			//bullet01 = GameObject.Instantiate (Bullet01, muzzle.position, Quaternion.identity)as GameObject;
 		} 
 		if (Input.GetButton ("Fire1")) {
 			// Fire1を押してチャージ開始.
 			// 2秒たったら.
 			//Debug.Log("スイッチオン");
-			if (Time.time - triggerDownTimeStart >= NormalSize || effectObject.transform.localScale.x < BigSize ) {
-			//if (effectObject.transform.localScale.x < BigSize) {
+			//if (Time.time - triggerDownTimeStart >= NormalSize || effectObject.transform.localScale.x < BigSize ) {
+			if (Time.time - triggerDownTimeStart >= 1.0f && Time.time - triggerDownTimeStart<= 3.0f) {
+				effectObject.GetComponent<ParticleSystem> ().startColor = Color.red;
+				//Debug.Log("赤赤");
+				//ErekiSmoke.GetComponent<ParticleSystem> ().startColor = Color.red;
+				effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.yellow;
+				//Debug.Log("赤");
+			} else if (Time.time - triggerDownTimeStart > 3.0f) {
+				effectObject.GetComponent<ParticleSystem> ().startColor = Color.blue;
+				//Debug.Log("青青");
+				//ErekiSmoke.GetComponent<ParticleSystem> ().startColor = Color.blue;
+				effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.white;
+				//Debug.Log("青");
+			}
 				// スケールを大きくする.
-				Debug.Log("巨大化");
+				//Debug.Log("巨大化");
 				effectObject.transform.localScale *= BiggerTime;
 				//スケールを確認
-				Debug.Log(effectObject.transform.localScale);
+				//Debug.Log(effectObject.transform.localScale);
 				effectObject.GetComponent<ParticleSystem>().startSize = 1.0f;
-			}
+			//}
 			// キーを離すことによりチャージ終了
 		}
 		if (Input.GetButtonUp ("Fire1")) {
@@ -86,6 +100,9 @@ public class PlayerShoot : MonoBehaviour {
 			damage = Attack + Attack * 2.5f * chargeTime;
 			//Debug.Log (damage);
 			// Shotのアニメーションに切り替え
+			bullet01 = GameObject.Instantiate (Bullet01, muzzle.position, Quaternion.identity)as GameObject;
+			bullet01.transform.localScale *= chargeTime;
+			Bullet();
 			animator.SetTrigger ("Shot");
 			//animator.SetBool("Shot",true);
 			// 一定以上間が空いたらチャージタイムのリセット
@@ -95,7 +112,7 @@ public class PlayerShoot : MonoBehaviour {
 			}
 
 			// Bulletnoを設定（下記参照）
-			Bullet();
+			//Bullet();
 		}
 		//マズルフラッシュを表示する
 		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
@@ -107,17 +124,20 @@ public class PlayerShoot : MonoBehaviour {
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
 	void Bullet() {
 		// ショットの時間間隔
-		if (Time.time - shotInterval > shotIntervalMax) {
-			shotInterval = Time.time;
+		//if (Time.time - shotInterval > shotIntervalMax) {
+			//shotInterval = Time.time;
 			// Bullet01のゲームオブジェクトを生成してbulletObjectとする
 			GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
+			Debug.Log("バレット");
+			bulletObject.transform.localScale *= chargeTime;
+			Debug.Log("弾ビッグ");
 			//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 			bulletObject.transform.position = muzzle.position;
 
 
 			// bulletObjectのオブジェクトにダメージ計算を渡す
 			bulletObject.GetComponent<Bullet01> ().damage = this.damage;
-		}
+		//}
 	}
 
 	public void KickEvent (){

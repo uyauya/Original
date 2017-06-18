@@ -18,9 +18,9 @@ public class Bullet01 : MonoBehaviour {
 		transform.rotation = Plshoot.transform.rotation;
 		//（発射して）三秒後に消滅
 		// チャージ中は生成3秒後に消滅させない
-		if( Plshoot.isCharging == false ) {
-			Destroy (gameObject, DestroyTime);
-		}
+		//if( Plshoot.isCharging == false ) {
+		//	Destroy (gameObject, DestroyTime);
+		//}
 		// 以下ビームっぽい演出の作り方
 		// ShotオブジェクトにAddComponentでTrailRenderer追加
 		// SimpleParticlePackをダウンロードしてMaterial追加
@@ -29,15 +29,15 @@ public class Bullet01 : MonoBehaviour {
 	void Update () {
 
 		// チャージ中でなければ弾を前進させる
-		if( Plshoot.isCharging == false ) {
+		//if( Plshoot.isCharging == false ) {
 			//transform.rotation = Plshoot.transform.rotation;
 			transform.position += transform.forward * Time.deltaTime * BulletSpeed;
 			// チャージされていない時はコリジョン有効
 			GetComponent<SphereCollider>().enabled = true;
-		} else {
-			// チャージ中はコリジョン無効
-			GetComponent<SphereCollider>().enabled = false;
-		}
+		//} else {
+		//	// チャージ中はコリジョン無効
+		//	GetComponent<SphereCollider>().enabled = false;
+		//}
 		// 弾を発射した瞬間、プレイヤーと弾が衝突してしまうので、メインメニューからEdit→ProjectSettings
 		// →Tags and Layers →PlayerとShotを追加。プレイヤーのレイヤーをPlayer,Bullet01のレイヤーをShotにし、
 		// プレイヤーを選択してEdit→ProjectSettings→Physicsにし、InspectorでPhysicsManagerを開く
