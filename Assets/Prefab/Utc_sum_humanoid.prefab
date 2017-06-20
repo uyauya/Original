@@ -1446,6 +1446,7 @@ GameObject:
   - component: {fileID: 114241188447119344}
   - component: {fileID: 114777758676184788}
   - component: {fileID: 114686086940088714}
+  - component: {fileID: 114079346594583718}
   m_Layer: 8
   m_Name: Utc_sum_humanoid
   m_TagString: Player
@@ -4270,6 +4271,19 @@ MonoBehaviour:
   - {fileID: 114823921883084996}
   debug: 1
   threshold: 0.01
+--- !u!114 &114079346594583718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697289305068994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424de2b17b3f2c347a49e9551e18ea37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationL: {x: 0, y: 0, z: 0}
+  RotationR: {x: 0, y: 0, z: 0}
 --- !u!114 &114095950241663732
 MonoBehaviour:
   m_ObjectHideFlags: 1

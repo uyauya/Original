@@ -1085,6 +1085,7 @@ GameObject:
   - component: {fileID: 114167839949354256}
   - component: {fileID: 114961314550753990}
   - component: {fileID: 54416605156796806}
+  - component: {fileID: 114583845871056498}
   m_Layer: 8
   m_Name: Misaki_sum_humanoid
   m_TagString: Player
@@ -5599,6 +5600,8 @@ MonoBehaviour:
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   interval: 0.5
+  shotInterval: 0
+  shotIntervalMax: 0.25
   Attack: 0
   damage: 0
   gaugeImage: {fileID: 0}
@@ -5619,6 +5622,8 @@ MonoBehaviour:
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   interval: 0.5
+  shotInterval: 0
+  shotIntervalMax: 0.25
   Attack: 100
   damage: 0
   gaugeImage: {fileID: 0}
@@ -5638,7 +5643,10 @@ MonoBehaviour:
   Bullet01: {fileID: 157144, guid: 3200dee3a95bda945a11c6b7ad753785, type: 2}
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
+  ErekiSmoke: {fileID: 0}
   interval: 0.5
+  shotInterval: 0
+  shotIntervalMax: 0.25
   Attack: 0
   damage: 0
   BigSize: 0
@@ -5714,6 +5722,8 @@ MonoBehaviour:
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   interval: 0.5
+  shotInterval: 0
+  shotIntervalMax: 0.25
   Attack: 500
   damage: 0
   gaugeImage: {fileID: 0}
@@ -5832,6 +5842,8 @@ MonoBehaviour:
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   interval: 0.5
+  shotInterval: 0
+  shotIntervalMax: 0.25
   Attack: 2000
   damage: 0
   gaugeImage: {fileID: 0}
@@ -6224,6 +6236,19 @@ MonoBehaviour:
   colliders: []
   debug: 1
   threshold: 0.01
+--- !u!114 &114583845871056498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1375426664305316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424de2b17b3f2c347a49e9551e18ea37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationL: {x: 0, y: 0, z: 0}
+  RotationR: {x: 0, y: 0, z: 0}
 --- !u!114 &114600150187198324
 MonoBehaviour:
   m_ObjectHideFlags: 1
