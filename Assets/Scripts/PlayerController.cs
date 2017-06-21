@@ -32,17 +32,18 @@ public class PlayerController : MonoBehaviour {
 	Vector3 targetSpeed = Vector3.zero;      //目標速度
 	Vector3 addSpeed = Vector3.zero;        //加算速度
 
-	[CustomEditor(typeof(PlayerAp)]
-	public class CharacterEditor : Editor
+	[CustomEditor(typeof(PlayerController))]
+	public class PlayerControllerEditor : Editor
 	{
 		bool folding = false;
 		
 			public override void OnInspectorGUI()
 			{
-				Character chara = target as PlayerAp;
+			PlayerController Ap= target as PlayerController;
 
-				chara.m_ArmorPointmax = EditorGUILayout.FloatField( "最大HP, chara.m_ArmorPointmax);
+				Ap.boostPointMax = EditorGUILayout.IntField( "最大BP", Ap.boostPointMax);
 			}
+	}
 
 	void Start()
 	{
