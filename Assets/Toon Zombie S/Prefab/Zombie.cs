@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class Zombie : MonoBehaviour {
 	private Animator animator;		// 《Animator》コンポーネント用の変数
@@ -25,6 +26,20 @@ public class Zombie : MonoBehaviour {
 	public float Search = 1;
 	public GameObject DamageEffect;
 	public GameObject DestroyEffect;
+
+	[CustomEditor(typeof(Zombie))]
+	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+			Zombie En = target as Zombie;
+			En.armorPointMax = EditorGUILayout.FloatField( "最大HP", En.armorPointMax);
+			En.InvincibleTime = EditorGUILayout.FloatField( "無敵時間", En.InvincibleTime);
+			En.KnockBackRange = EditorGUILayout.FloatField( "ノックバック距離", En.KnockBackRange);
+		}
+	}
 
 	void Start () {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得

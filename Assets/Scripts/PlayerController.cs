@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 	Vector3 addSpeed = Vector3.zero;        //加算速度
 
 	[CustomEditor(typeof(PlayerController))]
-	public class PlayerControllerEditor : Editor
+	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
 		

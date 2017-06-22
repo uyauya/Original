@@ -31,6 +31,8 @@ public class JumpEnemy : MonoBehaviour {
 	public GameObject DamageEffect;
 	public GameObject DestroyEffect;
 
+
+
 	void Start () {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
