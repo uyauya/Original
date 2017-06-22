@@ -8,15 +8,12 @@ public class Diffence : MonoBehaviour {
 		private Animator animator;
 		private AudioSource audioSource;
 		private Rigidbody rb;
-
 		private Vector3 velocity = Vector3.zero;
 		private Vector3 input = Vector3.zero;
-
 		public bool diffence = false;        //　ガードしているか
 		public bool push = false;           //　最初に移動ボタンを押したかどうか
 		public float nextButtonDownTime;    //　次に移動ボタンが押されるまでの時間
 		private float nowTime = 0f;         //　最初に移動ボタンが押されてからの経過時間
-
 		public float limitAngle;            //　最初に押した方向との違いの限度角度
 		private Vector2 direction = Vector2.zero;           //　移動キーの押した方向
 
@@ -79,9 +76,11 @@ public class Diffence : MonoBehaviour {
 			if (push)
 			{
 				//　時間計測
-				nowTime += Time.deltaTime;
-
-				if (nowTime > nextButtonDownTime)
+				//nowTime += Time.deltaTime;
+				//if (nowTime > nextButtonDownTime)
+				
+				nowTime += Time.time;
+				if (nowTime - nextButtonDownTime > 2.0)
 				{
 					push = false;
 				}

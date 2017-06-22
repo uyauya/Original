@@ -38,6 +38,10 @@ public class Zombie : MonoBehaviour {
 			En.armorPointMax = EditorGUILayout.FloatField( "最大HP", En.armorPointMax);
 			En.InvincibleTime = EditorGUILayout.FloatField( "無敵時間", En.InvincibleTime);
 			En.KnockBackRange = EditorGUILayout.FloatField( "ノックバック距離", En.KnockBackRange);
+			En.TargetRange = EditorGUILayout.IntField( "プレイヤー探索範囲", En.TargetRange);
+			En.EnemySpeed  = EditorGUILayout.FloatField( "移動スピード", En.EnemySpeed );
+			En.EnemyRotate = EditorGUILayout.FloatField( "振り向き速度", En.EnemyRotate);
+			En.Search = EditorGUILayout.FloatField( "プレイヤーとの間合い", En.Search);
 		}
 	}
 
