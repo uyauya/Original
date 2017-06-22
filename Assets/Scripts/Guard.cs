@@ -40,7 +40,8 @@ public class Guard : MonoBehaviour
 					push = true;
 					//　最初に移動キーを押した時にその方向ベクトルを取得
 					direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-					nowTime = 0f;
+					//nowTime = 0f;
+					nowTime = Time.time;
 					//　2回目のボタンだったら1→２までの制限時間内だったらガード
 				}
 				else
@@ -50,7 +51,8 @@ public class Guard : MonoBehaviour
 
 					//　押した方向がリミットの角度を越えていない　かつ　制限時間内に移動キーが押されていればガード
 					if (Vector2.Angle(nowDirection, direction) < limitAngle
-					&& nowTime <= nextButtonDownTime)
+					//&& nowTime <= nextButtonDownTime)
+						&& Time.time - nowTime < nextButtonDownTime)
 					{
 						guard = true;
 					}
@@ -70,9 +72,10 @@ public class Guard : MonoBehaviour
 		if (push)
 		{
 			//　時間計測
-			nowTime += Time.deltaTime;
+			//nowTime += Time.deltaTime;
 
-			if (nowTime > nextButtonDownTime)
+			//if (nowTime > nextButtonDownTime)
+			if (Time.time - nowTime > nextButtonDownTime)
 			{
 				push = false;
 			}

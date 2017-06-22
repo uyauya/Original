@@ -5252,7 +5252,7 @@ MonoBehaviour:
   muzzle: {fileID: 4642337937397932}
   diffence: 0
   push: 0
-  nextButtonDownTime: 0.5
+  nextButtonDownTime: 10
   limitAngle: 15
 --- !u!114 &114690257930005578
 MonoBehaviour:

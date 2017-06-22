@@ -42,7 +42,8 @@ public class Diffence : MonoBehaviour {
 						push = true;
 						//　最初に移動キーを押した時にその方向ベクトルを取得
 						direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-						nowTime = 0f;
+						//nowTime = 0f;
+						nowTime = Time.time;
 						//　2回目のボタンだったら1→２までの制限時間内だったらガード
 					}
 					else
@@ -52,7 +53,8 @@ public class Diffence : MonoBehaviour {
 
 						//　押した方向がリミットの角度を越えていない　かつ　制限時間内に移動キーが押されていればガード
 						if (Vector2.Angle(nowDirection, direction) < limitAngle
-							&& nowTime <= nextButtonDownTime)
+							//&& nowTime <= nextButtonDownTime)
+							&& Time.time - nowTime < nextButtonDownTime)
 						{
 							diffence = true;
 							audioSource.PlayOneShot(audioSource.clip);
@@ -73,18 +75,18 @@ public class Diffence : MonoBehaviour {
 			}
 			
 			//　最初の移動キーを押していれば時間計測
-			if (push)
+		//　最初の移動キーを押していれば時間計測
+		if (push)
+		{
+			//　時間計測
+			//nowTime += Time.deltaTime;
+
+			//if (nowTime > nextButtonDownTime)
+			if (Time.time - nowTime > nextButtonDownTime)
 			{
-				//　時間計測
-				//nowTime += Time.deltaTime;
-				//if (nowTime > nextButtonDownTime)
-				
-				nowTime += Time.time;
-				if (nowTime - nextButtonDownTime > 2.0)
-				{
-					push = false;
-				}
+				push = false;
 			}
+		}
 
 			input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		}
