@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEditor; 
 using UnityEngine.UI;
 
 public class PlayerAp : MonoBehaviour {
@@ -19,6 +19,20 @@ public class PlayerAp : MonoBehaviour {
 	public float InvincibleTime;		// 無敵時間
 	private Animator animator;
 	public float KnockBackRange;		// ノックバック距離（ダメージ受けた際に使用）
+
+	[CustomEditor(typeof(PlayerAp))]
+	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+		PlayerAp PL = target as PlayerAp;
+			PL.armorPointMax = EditorGUILayout.IntField( "最大HP", PL.armorPointMax);
+			PL.InvincibleTime = EditorGUILayout.FloatField( "無敵時間", PL.InvincibleTime);
+			PL.KnockBackRange = EditorGUILayout.FloatField( "ノックバック距離", PL.KnockBackRange);
+		}
+	}
 
 	void Start () {	
 		armorPoint = armorPointMax;

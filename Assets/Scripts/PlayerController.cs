@@ -41,10 +41,12 @@ public class PlayerController : MonoBehaviour {
 			{
 			PlayerController PL= target as PlayerController;
 				PL.boostPointMax = EditorGUILayout.IntField( "最大ブーストポイント", PL.boostPointMax);
-				PL.boostPoint = EditorGUILayout.IntField( "ブーストポイント", PL.boostPoint);
+				PL.BpDown = EditorGUILayout.IntField( "ブーストポイント消費量", PL.BpDown);
+				PL.RecoverPoint = EditorGUILayout.IntField( "ブーストポイント回復量", PL.RecoverPoint);
 				PL.MaxForce = EditorGUILayout.FloatField( "移動力", PL.MaxForce);
 				PL.MaxBoostForce = EditorGUILayout.FloatField( "ブースト時移動力", PL.MaxBoostForce);
 				PL.jumpSpeed = EditorGUILayout.FloatField( "ジャンプ力", PL.jumpSpeed);	
+				PL.HighPoint = EditorGUILayout.FloatField( "ジャンプ高さ上限", PL.HighPoint);	
 				PL.gravity = EditorGUILayout.FloatField( "重力", PL.gravity);
 			}
 	}
