@@ -42,34 +42,41 @@ public class Diffence : MonoBehaviour {
 						push = true;
 						//　最初に移動キーを押した時にその方向ベクトルを取得
 						direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-						//nowTime = 0f;
-						nowTime = Time.time;
+						nowTime = 0f;
+						//nowTime = Time.time;
 						//　2回目のボタンだったら1→２までの制限時間内だったらガード
 					}
 					else
 					{
 						//　2回目に移動キーを押した時の方向ベクトルを取得
-						var nowDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+						var nowDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+						//Debug.LogFormat("Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}",Vector2.Angle(nowDirection, direction),limitAngle,Time.time,nowTime,nextButtonDownTime);
 						//　押した方向がリミットの角度を越えていない　かつ　制限時間内に移動キーが押されていればガード
-						if (Vector2.Angle(nowDirection, direction) < limitAngle
-							//&& nowTime <= nextButtonDownTime)
-							&& Time.time - nowTime < nextButtonDownTime)
-						{
-							diffence = true;
-							audioSource.PlayOneShot(audioSource.clip);
-							Diffencer();
+					if (Vector2.Angle (nowDirection, direction) < limitAngle
+					     && nowTime <= nextButtonDownTime)
+ {							//&& Time.time - nowTime < nextButtonDownTime)
+						Debug.LogFormat ("出る時：Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}", Vector2.Angle (nowDirection, direction), limitAngle, Time.time, nowTime, nextButtonDownTime);
+						diffence = true;
+						audioSource.PlayOneShot (audioSource.clip);
+						Diffencer ();
+						diffence = false;
+						push = false;
+					} else if (nowTime > nextButtonDownTime) {
 						diffence = false;
 						push = false;
 						}
 					}
 					}else
 					{
+							
 						//if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical"))
-					{
+					/*{
+						var nowDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+						//Debug.LogFormat("出ない時：Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}",Vector2.Angle(nowDirection, direction),limitAngle,Time.time,nowTime,nextButtonDownTime);
 						diffence = false;
 						push = false;
-					}
+					}*/
 				}
 
 			}
@@ -79,10 +86,10 @@ public class Diffence : MonoBehaviour {
 		if (push)
 		{
 			//　時間計測
-			//nowTime += Time.deltaTime;
+			nowTime += Time.deltaTime;
 
-			//if (nowTime > nextButtonDownTime)
-			if (Time.time - nowTime > nextButtonDownTime)
+			if (nowTime > nextButtonDownTime)
+			//if (Time.time - nowTime > nextButtonDownTime)
 			{
 				push = false;
 			}

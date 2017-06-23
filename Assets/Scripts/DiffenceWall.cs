@@ -37,7 +37,7 @@ public class DiffenceWall : MonoBehaviour {
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
 	IEnumerator DiffenceCoroutine ()
 	{
-		gameObject.layer = LayerMask.NameToLayer("Diffence");
+		//gameObject.layer = LayerMask.NameToLayer("Diffence");
 		//while文を10回ループ
 		int count = 1;
 		iTween.MoveTo(gameObject, iTween.Hash(
