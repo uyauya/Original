@@ -128,9 +128,9 @@ public class PlayerShoot : MonoBehaviour {
 			//shotInterval = Time.time;
 			// Bullet01のゲームオブジェクトを生成してbulletObjectとする
 			GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
-			Debug.Log("バレット");
+			//Debug.Log("バレット");
 			bulletObject.transform.localScale *= chargeTime;
-			Debug.Log("弾ビッグ");
+			//Debug.Log("弾ビッグ");
 			//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 			bulletObject.transform.position = muzzle.position;
 
