@@ -64,7 +64,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 						push = false;
 					}
 
-					if (Vector2.Angle (nowDirection, direction) < limitAngle && (Input.GetButton ("Fire1")) && (Input.GetButton ("Fire2"))
+					if (Vector2.Angle (nowDirection, direction) < limitAngle && (Input.GetButton ("Fire2"))
 						&& nowTime <= nextButtonDownTime) {
 						diffence = true;
 						audioSource.PlayOneShot (audioSource.clip);

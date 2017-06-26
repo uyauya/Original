@@ -36,20 +36,22 @@ public class PlayerShoot02 : MonoBehaviour {
 
 	void Update () {
 		int boostpoint = GetComponent<PlayerController> ().boostPoint;
-		if (Input.GetButton("Fire2")) {
+		if (Input.GetButtonDown("Fire2")) {
 			triggerDownTimeStart = Time.time;
 			//Debug.Log (time);
 		} else if (Input.GetButtonUp ("Fire2")) {
 			triggerDownTimeEnd = Time.time;
 			float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
-			damage = Attack + Attack * 0.0f * chargeTime;
-			//Debug.Log (damage);
-			animator.SetTrigger ("Shots");
-			if (time >= interval) {	
-				time = 0f;
+			if (chargeTime >= 0.5f) {
+				damage = Attack + Attack * 0.0f * chargeTime;
+				//Debug.Log (damage);
+				animator.SetTrigger ("Shots");
+				if (time >= interval) {	
+					time = 0f;
+				}
+				GetComponent<PlayerController> ().boostPoint -= 10;
+				Bullets ();
 			}
-			GetComponent<PlayerController> ().boostPoint -= 10;
-			Bullets();
 		//マズルフラッシュを表示する
 		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 		}

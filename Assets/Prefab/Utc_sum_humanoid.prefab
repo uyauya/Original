@@ -1446,6 +1446,7 @@ GameObject:
   - component: {fileID: 114241188447119344}
   - component: {fileID: 114686086940088714}
   - component: {fileID: 114079346594583718}
+  - component: {fileID: 114796555594523450}
   m_Layer: 8
   m_Name: Utc_sum_humanoid
   m_TagString: Player
@@ -5304,6 +5305,25 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114796555594523450
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697289305068994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38b37cc4e20fb7047a2b6417b72acf60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DiffenceWall: {fileID: 1895374023008884, guid: 84dd1b6a3c08ecc44b12ba21696431c1,
+    type: 2}
+  AbsorbWall: {fileID: 1034348044703858, guid: 9b4ee240f7d70ff44b299b03ef65c9cc, type: 2}
+  muzzle: {fileID: 4642337937397932}
+  diffence: 0
+  push: 0
+  nextButtonDownTime: 0.3
+  limitAngle: 15
 --- !u!114 &114816739552639698
 MonoBehaviour:
   m_ObjectHideFlags: 1

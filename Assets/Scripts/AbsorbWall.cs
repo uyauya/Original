@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class AbsorbWall : MonoBehaviour {
 
-	/*Enemy enemy;
-	Absorb Abs ;
+	Enemy enemy;
+
+	//Absorb Abs ;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
 	public float Destroytime;
 	public float Speed;
 
 	void Start () {
-		Abs = GameObject.FindWithTag("Player").GetComponent<Absorb> ();
-		transform.rotation = Abs.transform.rotation;
+		//Abs = GameObject.FindWithTag("Player").GetComponent<Absorb> ();
+		//transform.rotation = Abs.transform.rotation;
 		Destroy (gameObject, Destroytime);	
 	}	
 	void Update () {
@@ -55,5 +56,5 @@ public class AbsorbWall : MonoBehaviour {
 		}
 		isInvincible = false;
 		gameObject.layer = LayerMask.NameToLayer("AbsorbWall");
-	}*/
+	}
 }
