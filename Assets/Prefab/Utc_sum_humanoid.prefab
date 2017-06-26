@@ -1446,7 +1446,6 @@ GameObject:
   - component: {fileID: 114241188447119344}
   - component: {fileID: 114686086940088714}
   - component: {fileID: 114079346594583718}
-  - component: {fileID: 114612503401423742}
   m_Layer: 8
   m_Name: Utc_sum_humanoid
   m_TagString: Player
@@ -4478,7 +4477,7 @@ MonoBehaviour:
   Attack: 0
   damage: 0
   BigSize: 2
-  BiggerTime: 1.005
+  BiggerTime: 1.0005
   gaugeImage: {fileID: 0}
   boostPoint: 0
   effectPrefab: {fileID: 100004, guid: b49e37c2e747d4ed4bd2369d30fa0d68, type: 2}
@@ -5010,26 +5009,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.07
---- !u!114 &114612503401423742
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697289305068994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 897d8663c55da2944af1c246ccea38b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DiffenceWall: {fileID: 1895374023008884, guid: 84dd1b6a3c08ecc44b12ba21696431c1,
-    type: 2}
-  CounterWall: {fileID: 1151634675178256, guid: 7acd57409d8602e4c8ca60503ffb8d3a,
-    type: 2}
-  muzzle: {fileID: 4642337937397932}
-  diffence: 0
-  push: 0
-  nextButtonDownTime: 0.3
-  limitAngle: 15
 --- !u!114 &114618926520727704
 MonoBehaviour:
   m_ObjectHideFlags: 1

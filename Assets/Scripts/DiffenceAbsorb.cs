@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Counter : MonoBehaviour {
+public class DiffenceAbsorb : MonoBehaviour {
 
 	public GameObject DiffenceWall;
-	public GameObject CounterWall;
+	public GameObject AbsorbWall;
 	public Transform muzzle;
 	private Animator animator;
 	private AudioSource audioSource;
@@ -50,13 +50,13 @@ public class Counter : MonoBehaviour {
 					//Debug.LogFormat("Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}",Vector2.Angle(nowDirection, direction),limitAngle,Time.time,nowTime,nextButtonDownTime);
 					//　押した方向がリミットの角度を越えていない　かつ　制限時間内に移動キーが押されていればガード
 					if (Vector2.Angle (nowDirection, direction) < limitAngle
-					    && nowTime <= nextButtonDownTime) {							
+						&& nowTime <= nextButtonDownTime) {							
 						//&& Time.time - nowTime < nextButtonDownTime)
 						//Debug.LogFormat ("出る時：Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}", Vector2.Angle (nowDirection, direction), limitAngle, Time.time, nowTime, nextButtonDownTime);
 						diffence = true;
 						audioSource.PlayOneShot (audioSource.clip);
 						Diffencer ();
-						Debug.Log ("diffence");
+						Debug.Log ("Diffence");
 						diffence = false;
 						push = false;
 					} else if (nowTime > nextButtonDownTime) {
@@ -65,11 +65,11 @@ public class Counter : MonoBehaviour {
 					}
 
 					if (Vector2.Angle (nowDirection, direction) < limitAngle && (Input.GetButton ("Fire1")) && (Input.GetButton ("Fire2"))
-					    && nowTime <= nextButtonDownTime) {
+						&& nowTime <= nextButtonDownTime) {
 						diffence = true;
 						audioSource.PlayOneShot (audioSource.clip);
-						counter ();
-						Debug.Log ("Counter");
+						Absorb ();
+						Debug.Log ("Absorb");
 						diffence = false;
 						push = false;
 					} else if (nowTime > nextButtonDownTime) {
@@ -105,10 +105,10 @@ public class Counter : MonoBehaviour {
 		//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 		diffenceObject.transform.position = muzzle.position;
 	}
-	void counter() {
+	void Absorb() {
 		// Bullet01のゲームオブジェクトを生成してbulletObjectとする
-		GameObject diffenceObject = GameObject.Instantiate (CounterWall)as GameObject;
+		GameObject absorbObject = GameObject.Instantiate (AbsorbWall)as GameObject;
 		//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
-		diffenceObject.transform.position = muzzle.position;
+		absorbObject.transform.position = muzzle.position;
 	}
 }
