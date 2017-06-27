@@ -5089,7 +5089,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 0}
   ItemCount: 0
   BpDown: 10
-  BpHealEffect: {fileID: 1267675898740494, guid: 5a65e8a1fd348a247a0c4aa9c6d704b2,
+  BpHealEffect: {fileID: 1574779937369632, guid: 161d1d18e9616ba40ae70b20dc87ca42,
     type: 2}
 --- !u!114 &114259483187215430
 MonoBehaviour:
