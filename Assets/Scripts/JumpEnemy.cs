@@ -28,7 +28,10 @@ public class JumpEnemy : MonoBehaviour {
 	public float EnemySpeed = 1;
 	public float EnemyRotate = 5;
 	public float Search = 1;
-	public GameObject DamageEffect;
+	public GameObject ShotEffect;
+	public GameObject Shot2Effect;
+	public GameObject Shot3Effect;
+	public GameObject Shot5Effect;
 	public GameObject DestroyEffect;
 
 
@@ -82,7 +85,7 @@ public class JumpEnemy : MonoBehaviour {
 			Debug.Log (collider.gameObject.name);
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
 			StartCoroutine ("DamageCoroutine");
-			//Instantiate(DestroyEffect, transform.position, transform.rotation);
+			Instantiate(ShotEffect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			//animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
 			armorPoint -= damage;
@@ -90,21 +93,21 @@ public class JumpEnemy : MonoBehaviour {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			StartCoroutine ("DamageCoroutine");
 			//animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
-			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			Instantiate(Shot2Effect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			StartCoroutine ("DamageCoroutine");
 			//animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
-			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			Instantiate(Shot3Effect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			StartCoroutine ("DamageCoroutine");
 			//animator.SetBool ("damaged", true);		// 《Animator》の変数deadを true に変更.
-			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			Instantiate(Shot5Effect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			armorPoint -= damage;
 		}

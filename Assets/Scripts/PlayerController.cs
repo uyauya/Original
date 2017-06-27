@@ -31,8 +31,9 @@ public class PlayerController : MonoBehaviour {
 	public int BpDown = 10;			// ブーストゲージ消費値
 	Vector3 targetSpeed = Vector3.zero;      //目標速度
 	Vector3 addSpeed = Vector3.zero;        //加算速度
+	public GameObject BpHealEffect;
 
-	[CustomEditor(typeof(PlayerController))]
+	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 				PL.HighPoint = EditorGUILayout.FloatField( "ジャンプ高さ上限", PL.HighPoint);	
 				PL.gravity = EditorGUILayout.FloatField( "重力", PL.gravity);
 			}
-	}
+	}*/
 
 	void Start()
 	{
@@ -202,6 +203,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		// アイテム２タグの物に接触したらブーストポイント回復
 		if (collider.gameObject.tag == "Item2") {
+			Instantiate(BpHealEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("ItemGet");
 			boostPoint += 500;
 			// ブーストポイントが最大以上にはならない

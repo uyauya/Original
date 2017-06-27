@@ -20,7 +20,7 @@ public class BattleManager : MonoBehaviour {
 	//public int PlayerNo;				//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	private int ItemCount;				//アイテム取得数をカウント
 	PlayerController playerController;
-
+	public GameObject WarpEffect;
 	int clearScore;						//クリア条件となるスコア  
 
 	void Start () {	
@@ -62,6 +62,7 @@ public class BattleManager : MonoBehaviour {
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が1以上ならボス面に移行
 			if (playerController.ItemCount >= 1) {
+				Instantiate(WarpEffect, transform.position, transform.rotation);
 				SceneManager.LoadScene ("STAGE02BOSS");
 			}	
 			break;

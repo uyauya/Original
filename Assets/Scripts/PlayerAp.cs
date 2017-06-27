@@ -19,8 +19,10 @@ public class PlayerAp : MonoBehaviour {
 	public float InvincibleTime;		// 無敵時間
 	private Animator animator;
 	public float KnockBackRange;		// ノックバック距離（ダメージ受けた際に使用）
+	public GameObject HpHealEffect;
+	public GameObject DamageEffect;
 
-	[CustomEditor(typeof(PlayerAp))]
+	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
@@ -32,7 +34,7 @@ public class PlayerAp : MonoBehaviour {
 			PL.InvincibleTime = EditorGUILayout.FloatField( "無敵時間", PL.InvincibleTime);
 			PL.KnockBackRange = EditorGUILayout.FloatField( "ノックバック距離", PL.KnockBackRange);
 		}
-	}
+	}*/
 
 	void Start () {	
 		armorPoint = armorPointMax;
@@ -80,23 +82,28 @@ public class PlayerAp : MonoBehaviour {
 		if (collider.gameObject.tag == "ShotEnemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
+			Instantiate(DamageEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("Damage");
 			//Enemyと接触したらダメージ
 		} else if (collider.gameObject.tag == "Enemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
+			Instantiate(DamageEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("Damage");
 		}
 		//Enemyとぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		if (collider.gameObject.tag == "Enemy") {
+			Instantiate(DamageEffect, transform.position, transform.rotation);
 			StartCoroutine ("DamageCoroutine");
 		}
 		//ShotEnemyとぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		else if (collider.gameObject.tag == "ShotEnemy") {
+			Instantiate(DamageEffect, transform.position, transform.rotation);
 			StartCoroutine ("DamageCoroutine");
 		}
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
 		else if (collider.gameObject.tag == "Item") {
+			Instantiate(HpHealEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("ItemGet");
 			armorPoint += 1000;
 			// 体力上限以上には回復しない。
