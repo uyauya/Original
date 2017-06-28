@@ -36,7 +36,7 @@ public class Bullet05 : MonoBehaviour {
 			Destroy (gameObject);
 		}
 		//衝突時に爆発エフェクトを表示する
-		//Instantiate(explosion, transform.position, transform.rotation);
+		Instantiate(explosion, transform.position, transform.rotation);
 	}
 }
 

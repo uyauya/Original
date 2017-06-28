@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e851fea36ace824418d4ced9e8c4da19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 100000, guid: 2cccb0aff0bec41229698d0012efce5b, type: 2}
+  explosion: {fileID: 1088429497774590, guid: 2935b199a09ad174f93427345723ed16, type: 2}
   damage: 10
   BulletSpeed: 5
   DestroyTime: 3

@@ -69,7 +69,7 @@ public class Bullet02 : MonoBehaviour {
 			//	Debug.Log ("当たらない");
 		}
 		//衝突時に爆発エフェクトを表示する
-		//Instantiate(explosion, transform.position, transform.rotation);
+		Instantiate(explosion, transform.position, transform.rotation);
 	}
 }
 
