@@ -28,11 +28,11 @@ public class Bullet05 : MonoBehaviour {
 		if (collider.gameObject.tag == "Floor") {			
 			Destroy (gameObject);
 			// ぶつかった場所に爆発を設定
-			//Instantiate (explosion, transform.position, transform.rotation);
+			Instantiate (explosion, transform.position, transform.rotation);
 		}	
 		//敵と衝突したら消滅させる
 		if (collider.gameObject.tag == "Enemy"||collider.gameObject.tag == "Wall") {
-			//collider.gameObject.SendMessage ("damage");
+			Instantiate (explosion, transform.position, transform.rotation);
 			Destroy (gameObject);
 		}
 		//衝突時に爆発エフェクトを表示する

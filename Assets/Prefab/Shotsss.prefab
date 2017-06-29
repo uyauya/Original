@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2372176}
   - component: {fileID: 11439254}
   - component: {fileID: 5448090}
-  - component: {fileID: 114758701100972300}
+  - component: {fileID: 114636383441517910}
   m_Layer: 0
   m_Name: Shotsss
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 181316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4363547094052870}
   m_Father: {fileID: 0}
@@ -84,7 +84,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -96,7 +96,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181316}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -264,7 +264,7 @@ Transform:
   m_Father: {fileID: 488476}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114758701100972300
+--- !u!114 &114636383441517910
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -275,9 +275,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f03135beb894349bcb0a5372f926c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XPower: 5
-  YPower: 5
-  ZPower: 5
+  XPower: 10
+  YPower: 10
+  ZPower: 10
 --- !u!198 &198417016174923668
 ParticleSystem:
   m_ObjectHideFlags: 1

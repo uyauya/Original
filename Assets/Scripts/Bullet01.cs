@@ -19,7 +19,7 @@ public class Bullet01 : MonoBehaviour {
 		//（発射して）三秒後に消滅
 		// チャージ中は生成3秒後に消滅させない
 		//if( Plshoot.isCharging == false ) {
-		//	Destroy (gameObject, DestroyTime);
+		Destroy (gameObject, DestroyTime);
 		//}
 		// 以下ビームっぽい演出の作り方
 		// ShotオブジェクトにAddComponentでTrailRenderer追加
@@ -47,23 +47,17 @@ public class Bullet01 : MonoBehaviour {
 	private void OnCollisionEnter(Collision collider) {
 
 		// チャージ中は当たり判定をしないで処理を抜ける
-		if( Plshoot == null && Plshoot.isCharging == true ) {
-			return;
-		}
-
-		//地形とぶつかったら消滅させる
-		if (collider.gameObject.tag == "Floor") {	
-			Destroy (gameObject);
-			// ぶつかった場所に爆発を設定
-			Instantiate (explosion, transform.position, transform.rotation);
-		}	
+		//if( Plshoot == null && Plshoot.isCharging == true ) {
+		//	return;
+		//}
+			
 		//敵と衝突したら消滅させる
-		if (collider.gameObject.tag == "Enemy"||collider.gameObject.tag == "Wall") {
-			//collider.gameObject.SendMessage ("damage");
-			Destroy (gameObject);
-		}
+		//if (collider.gameObject.tag == "Enemy"||collider.gameObject.tag == "Wall"|| collider.gameObject.tag == "Floor") {
+		//	Destroy (gameObject);
+		//}
 		//衝突時に爆発エフェクトを表示する
 		Instantiate(explosion, transform.position, transform.rotation);
+		Destroy (gameObject);
 	}
 }
 
