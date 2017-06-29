@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2372176}
   - component: {fileID: 11439254}
   - component: {fileID: 5448090}
-  - component: {fileID: 114636383441517910}
+  - component: {fileID: 114065975006730860}
   m_Layer: 0
   m_Name: Shotsss
   m_TagString: Untagged
@@ -264,7 +264,7 @@ Transform:
   m_Father: {fileID: 488476}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114636383441517910
+--- !u!114 &114065975006730860
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
