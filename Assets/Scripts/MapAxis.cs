@@ -5,13 +5,13 @@ using System.Collections;
 public class MapAxis{
 	public struct Axis_XZ{ public int x,z; }	// int型の構造体を宣言
 	
-	private Axis_XZ		beforeAxis;		// 移動前の位置座標
-	private Axis_XZ		nowAxis;		// 現在(移動後)の位置座標
-	private Axis_XZ		differenceAxis;	// 差分『現在位置－移動前位置』の格納要
+	private Axis_XZ		beforeAxis;				// 移動前の位置座標
+	private Axis_XZ		nowAxis;				// 現在(移動後)の位置座標
+	private Axis_XZ		differenceAxis;			// 差分『現在位置－移動前位置』の格納要
 	
-	private GameObject	player;			// プレイヤーオブジェクトへの参照用変数
-	private MapSize	size;			// マップサイズへの参照用変数
-	private Vector3		scale;			// 床ブロックのサイズ用
+	private GameObject	player;					// プレイヤーオブジェクトへの参照用変数
+	private MapSize	size;						// マップサイズへの参照用変数
+	private Vector3	scale;						// 床ブロックのサイズ用
 
 	// ■■■床ブロックのサイズを返す■■■
 	public Vector3 getScale(){ return scale; }
@@ -25,16 +25,17 @@ public class MapAxis{
 		this.differenceAxis.x = 0;
 		this.differenceAxis.z = 0;
 		
-		this.player	= player;		// 引数で受け渡された変数を参照する様に設定。
-		this.size	= size;			// 引数で受け渡された変数を参照する様に設定。
-		this.scale	= scale;		// Vector3型は値そのものがコピーされる。
+		this.player	= player;					// 引数で受け渡された変数を参照する様に設定。
+		this.size	= size;						// 引数で受け渡された変数を参照する様に設定。
+		this.scale	= scale;					// Vector3型は値そのものがコピーされる。
 	}
 	
 	// ■■■プレイヤーの初期座標を設定 (マップ中央座標)■■■
 	public void initialize(){
-		nowAxis.x = size.getHx();		// 初期位置(移動後の座標)は、半マップサイズ
-		nowAxis.z = size.getHz();		// 初期位置(移動後の座標)は、半マップサイズ
-		player.transform.position = new Vector3(nowAxis.x*scale.x , player.transform.position.y , nowAxis.z*scale.z);	// プレイヤーの位置を移動
+		nowAxis.x = size.getHx();				// 初期位置(移動後の座標)は、半マップサイズ
+		nowAxis.z = size.getHz();				// 初期位置(移動後の座標)は、半マップサイズ
+												// プレイヤーの位置を移動
+		player.transform.position = new Vector3(nowAxis.x*scale.x , player.transform.position.y , nowAxis.z*scale.z);	
 	}
 	
 	// ■■■プレイヤーの現在座標を取得■■■
@@ -68,9 +69,9 @@ public class MapAxis{
 	
 	// ■■■プレイヤー位置座標をの更新■■■
 	public void updateAxis(){
-		beforeAxis	= nowAxis;			// 移動前の位置座標を取得
-		setNowAxisZ();					// 現在の位置座標Zを取得
-		setDifferenceAxis_Z_FrontOnly();	// 『現在位置－移動前位置』の更新　(正面方向の更新のみ)
+		beforeAxis	= nowAxis;							// 移動前の位置座標を取得
+		setNowAxisZ();									// 現在の位置座標Zを取得
+		setDifferenceAxis_Z_FrontOnly();				// 『現在位置－移動前位置』の更新　(正面方向の更新のみ)
 	}
 	
 	// ■■■差分『現在位置－移動前位置』を返す■■■

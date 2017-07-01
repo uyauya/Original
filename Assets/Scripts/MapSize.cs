@@ -3,11 +3,11 @@ using System.Collections;
 
 // ★★★マップサイズを扱うクラス★★★
 public class MapSize{
-	private const int DEFAULT_SIZE = 11;			// デフォルト値
-	private int x;		// X方向のマップサイズ
-	private int z;		// Z方向のマップサイズ
-	private int hx;		// X方向の半マップサイズ
-	private int hz;		// Z方向の半マップサイズ
+	private const int DEFAULT_SIZE = 11;		// デフォルト値
+	private int x;								// X方向のマップサイズ
+	private int z;								// Z方向のマップサイズ
+	private int hx;								// X方向の半マップサイズ
+	private int hz;								// Z方向の半マップサイズ
 	
 	// ■■■コンストラクタ■■■
 	public MapSize(int x , int z){
@@ -21,8 +21,8 @@ public class MapSize{
 	}
 	
 	// ■■■各変数を返すゲッター関数■■■
-	public int getX() { return x;  }		// X方向のマップサイズを返す
-	public int getZ() { return z;  }		// Z方向のマップサイズを返す
-	public int getHx(){ return hx; }		// X方向の半マップサイズを返す
-	public int getHz(){ return hz; }		// Z方向の半マップサイズを返す
+	public int getX() { return x;  }			// X方向のマップサイズを返す
+	public int getZ() { return z;  }			// Z方向のマップサイズを返す
+	public int getHx(){ return hx; }			// X方向の半マップサイズを返す
+	public int getHz(){ return hz; }			// Z方向の半マップサイズを返す
 }
