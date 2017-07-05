@@ -22,6 +22,8 @@ public class BattleManager : MonoBehaviour {
 	PlayerController playerController;
 	public GameObject WarpEffect;
 	int clearScore;						//クリア条件となるスコア  
+	public GameObject Player;
+
 
 	void Start () {	
 		//DontDestroyOnLoad(this.gameObject);
@@ -38,6 +40,7 @@ public class BattleManager : MonoBehaviour {
 		//EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
 		clearScore = EnemyInstantiate.instantiateValue;
 		Score = 0;
+		Player = GameObject.FindWithTag("Player");
 	}
 
 	void Update () {
@@ -62,8 +65,10 @@ public class BattleManager : MonoBehaviour {
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が1以上ならボス面に移行
 			if (playerController.ItemCount >= 1) {
-				Instantiate(WarpEffect, transform.position, transform.rotation);
-				SceneManager.LoadScene ("STAGE02BOSS");
+				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);
+				Debug.Log ("ピカ");
+				Invoke("NextScene", 2);
+			//SceneManager.LoadScene ("STAGE02BOSS");
 			}	
 			break;
 			
@@ -82,7 +87,8 @@ public class BattleManager : MonoBehaviour {
 				// Fire1ボタンを押してタイトルに戻すようにする
 				if (Input.GetButtonDown ("Fire1"))
 				{
-					Application.LoadLevel("Start");					
+					//Application.LoadLevel("Start");
+					SceneManager.LoadScene ("Start");
 					Time.timeScale = 1;
 				}
 			}
@@ -92,5 +98,9 @@ public class BattleManager : MonoBehaviour {
 		default:
 			break;
 		}
+	}
+
+	private void NextScene(){
+		SceneManager.LoadScene ("STAGE02BOSS");
 	}
 }
