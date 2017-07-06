@@ -25,7 +25,6 @@ public class PlayerShoot : MonoBehaviour {
 	public float BigSize;
 	public float BiggerTime;
 	private Animator animator;
-	private AudioSource audioSource;
 	private Rigidbody rb;
 	public Image gaugeImage;
 	public int boostPoint;
@@ -34,10 +33,13 @@ public class PlayerShoot : MonoBehaviour {
 	public GameObject effectObject;
 	public int BpDown;
 	public bool isCharging = false;
+	private AudioSource audioSource;
+	//private AudioSource[] audioSources;
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
+		//audioSources = gameObject.GetComponents<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.red;
@@ -119,6 +121,8 @@ public class PlayerShoot : MonoBehaviour {
 
 		//音を重ねて再生する
 		audioSource.PlayOneShot(audioSource.clip);
+		//audioSources [0].Play ();
+		//audioSources [1].Play ();
 	}
 
 	// Bullet(弾丸)スクリプトに受け渡す為の処理

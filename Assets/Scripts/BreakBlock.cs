@@ -26,7 +26,7 @@ public class BreakBlock : MonoBehaviour {
 		if (collider.gameObject.tag == "Shot") {
 
 			//プレイヤーの弾と衝突したら爆発処理
-			Instantiate(exprosion, transform.position, transform.rotation);
+			//Instantiate(exprosion, transform.position, transform.rotation);
 
 			//プレイヤーの弾と衝突したらダメージ
 			armorPoint -= collider.gameObject.GetComponent<Bullet01>().damage;
