@@ -33,16 +33,19 @@ public class PlayerShoot : MonoBehaviour {
 	public GameObject effectObject;
 	public int BpDown;
 	public bool isCharging = false;
-	private AudioSource audioSource;
-	//private AudioSource[] audioSources;
+	//private AudioSource audioSource;
+	private AudioSource[] audioSources;
+	public float audioTimer = 0.2f;
+	private bool audioAction;
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
-		audioSource = gameObject.GetComponent<AudioSource>();
-		//audioSources = gameObject.GetComponents<AudioSource>();
+		//audioSource = gameObject.GetComponent<AudioSource>();
+		audioSources = gameObject.GetComponents<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.red;
+		audioAction = false;
 	}
 
 	void Update () {
@@ -120,9 +123,18 @@ public class PlayerShoot : MonoBehaviour {
 		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 
 		//音を重ねて再生する
-		audioSource.PlayOneShot(audioSource.clip);
-		//audioSources [0].Play ();
-		//audioSources [1].Play ();
+		//audioSource.PlayOneShot(audioSource.clip);
+		if(audioSources[0].isPlaying==true){
+			audioAction = true;
+		}
+		if( audioAction == true){
+			audioTimer-=Time.deltaTime;
+		}
+		if(audioTimer <= 0.0f){
+			audioSources[1].PlayOneShot(audioSources[1].clip);
+		}
+		//audioSources[0].PlayOneShot(audioSources[0].clip);
+		//udioSources[1].PlayOneShot(audioSources[0].clip);
 	}
 
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
