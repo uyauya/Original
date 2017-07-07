@@ -23,7 +23,8 @@ public class BattleManager : MonoBehaviour {
 	public GameObject WarpEffect;
 	int clearScore;						//クリア条件となるスコア  
 	public GameObject Player;
-
+	public float ChangeTime;			//シーン変更までの時間
+	public int Count;					//ステージ移行する為のアイテム取得個
 
 	void Start () {	
 		//DontDestroyOnLoad(this.gameObject);
@@ -63,11 +64,10 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 			}
-			// プレイヤーのアイテム（グリーンスフィア）取得数が1以上ならボス面に移行
-			if (playerController.ItemCount >= 1) {
-				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);
-				Debug.Log ("ピカ");
-				Invoke("NextScene", 2);
+			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
+			if (playerController.ItemCount >= Count) {	// countで取得数設定
+				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
+				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			//SceneManager.LoadScene ("STAGE02BOSS");
 			}	
 			break;
