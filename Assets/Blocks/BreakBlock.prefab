@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 258f2793b6b492d438d9d6954e537f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exprosion: {fileID: 100000, guid: 2cccb0aff0bec41229698d0012efce5b, type: 2}
+  exprosion: {fileID: 100000, guid: e245491c3f96d49ff99b96bcdd7da7a3, type: 2}
   armorPoint: 0
   armorPointMax: 100
   RedSphere: {fileID: 100576, guid: 8bcadb38d3e27b749ab7fef5f7d48339, type: 2}
