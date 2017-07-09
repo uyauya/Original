@@ -1072,7 +1072,6 @@ GameObject:
   - component: {fileID: 114677316752205116}
   - component: {fileID: 114181865683268450}
   - component: {fileID: 136113982945616620}
-  - component: {fileID: 82826978349445808}
   - component: {fileID: 114625540466778224}
   - component: {fileID: 114177824763895576}
   - component: {fileID: 114198318310690552}
@@ -1086,6 +1085,7 @@ GameObject:
   - component: {fileID: 114961314550753990}
   - component: {fileID: 54416605156796806}
   - component: {fileID: 114583845871056498}
+  - component: {fileID: 82003227891147888}
   m_Layer: 8
   m_Name: Misaki_sum_humanoid
   m_TagString: Player
@@ -5095,7 +5095,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!82 &82826978349445808
+--- !u!82 &82003227891147888
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -5105,7 +5105,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -5150,7 +5150,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -5162,7 +5162,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -5174,7 +5174,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
 --- !u!95 &95389060215562774
 Animator:
   serializedVersion: 3
@@ -5657,6 +5657,7 @@ MonoBehaviour:
   effectObject: {fileID: 0}
   BpDown: 0
   isCharging: 0
+  audioTimer: 0.2
 --- !u!114 &114181865683268450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5695,6 +5696,8 @@ MonoBehaviour:
   gaugeImage: {fileID: 0}
   InvincibleTime: 0
   KnockBackRange: 0
+  HpHealEffect: {fileID: 0}
+  DamageEffect: {fileID: 0}
 --- !u!114 &114198318310690552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6788,6 +6791,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 0}
   ItemCount: 0
   BpDown: 0
+  BpHealEffect: {fileID: 0}
 --- !u!114 &114970597215717264
 MonoBehaviour:
   m_ObjectHideFlags: 1

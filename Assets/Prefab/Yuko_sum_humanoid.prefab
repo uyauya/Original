@@ -1180,7 +1180,6 @@ GameObject:
   - component: {fileID: 114145466570783190}
   - component: {fileID: 114002429144468024}
   - component: {fileID: 136298196076486722}
-  - component: {fileID: 82829018140683074}
   - component: {fileID: 114955341330487680}
   - component: {fileID: 114678889172960718}
   - component: {fileID: 114976297313678320}
@@ -1194,6 +1193,7 @@ GameObject:
   - component: {fileID: 114743721851640990}
   - component: {fileID: 54316119923381936}
   - component: {fileID: 114274271927115456}
+  - component: {fileID: 82371577017388810}
   m_Layer: 0
   m_Name: Yuko_sum_humanoid
   m_TagString: Player
@@ -3490,7 +3490,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!82 &82829018140683074
+--- !u!82 &82371577017388810
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3500,7 +3500,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3545,7 +3545,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -3557,7 +3557,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -3569,7 +3569,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
 --- !u!95 &95499786026061896
 Animator:
   serializedVersion: 3
@@ -3957,6 +3957,8 @@ MonoBehaviour:
   gaugeImage: {fileID: 0}
   InvincibleTime: 0
   KnockBackRange: 0
+  HpHealEffect: {fileID: 0}
+  DamageEffect: {fileID: 0}
 --- !u!114 &114370861064983024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4292,6 +4294,7 @@ MonoBehaviour:
   effectObject: {fileID: 0}
   BpDown: 0
   isCharging: 0
+  audioTimer: 0.2
 --- !u!114 &114687445487335210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4372,6 +4375,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 0}
   ItemCount: 0
   BpDown: 0
+  BpHealEffect: {fileID: 0}
 --- !u!114 &114787892343617224
 MonoBehaviour:
   m_ObjectHideFlags: 1

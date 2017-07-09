@@ -35,8 +35,10 @@ public class PlayerShoot : MonoBehaviour {
 	public bool isCharging = false;
 	//private AudioSource audioSource;
 	private AudioSource[] audioSources;
-	public float audioTimer = 0.2f;
-	private bool audioAction;
+	//public float audioTimer = 0.2f;
+	//private bool audioAction;
+	public AudioClip audioClip01;
+	public AudioClip audioClip02;
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
@@ -45,7 +47,7 @@ public class PlayerShoot : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.red;　// チャージエフェクト用
-		audioAction = false;
+		//audioAction = false;
 	}
 
 	void Update () {
@@ -99,11 +101,15 @@ public class PlayerShoot : MonoBehaviour {
 			bullet01.transform.localScale *= chargeTime;
 			Bullet();
 			animator.SetTrigger ("Shot");　	// ショットのように作動したら自動的にニュートラルに戻る場合はTriggerの方がよい
+			audioSources[0].PlayOneShot(audioClip01);
+			audioSources[1].clip = audioClip02;
+			audioSources[1].PlayDelayed(0.2f);
 			//animator.SetBool("Shot",true);
 			// 一定以上間が空いたらチャージタイムのリセット
 			if (time >= interval) {    
 				time = 0f;
 				//animator.SetBool("Shot",false);
+
 			}
 
 			// Bulletnを設定（下記参照）
@@ -111,10 +117,9 @@ public class PlayerShoot : MonoBehaviour {
 		}
 		//マズルフラッシュを表示する
 		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
-
 		// audioSources[0]の一定時間後にaudioSources[1]を鳴らす。
 		// STARTにaudioAction = false;を入れておく。
-		if(audioSources[0].isPlaying==true){	// audioSources[0]が鳴れば
+		/*if(audioSources[0].isPlaying==true){	// audioSources[0]が鳴れば
 			audioAction = true;
 		}
 		if( audioAction == true){
@@ -122,9 +127,8 @@ public class PlayerShoot : MonoBehaviour {
 		}
 		if(audioTimer <= 0.0f){					// 時間差があれば（一定以上経過したら）audioSources[1]を鳴らす
 			audioSources[1].PlayOneShot(audioSources[1].clip);	// PlayOneShotで連射時音を重ねて発生可能にする
-		}
-		//audioSources[0].PlayOneShot(audioSources[0].clip);
-		//udioSources[1].PlayOneShot(audioSources[0].clip);
+		}*/
+
 	}
 
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
