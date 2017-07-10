@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -595,46 +595,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 119316, guid: 1b116d1d98225c449952c7fe4df59bcc, type: 2}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 82028759794890714, guid: 1b116d1d98225c449952c7fe4df59bcc,
+    - target: {fileID: 82160955634151896, guid: 1b116d1d98225c449952c7fe4df59bcc,
         type: 2}
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 82028759794890714, guid: 1b116d1d98225c449952c7fe4df59bcc,
-        type: 2}
-      propertyPath: spreadCustomCurve.m_RotationOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 82028759794890714, guid: 1b116d1d98225c449952c7fe4df59bcc,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 82028759794890714, guid: 1b116d1d98225c449952c7fe4df59bcc, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b116d1d98225c449952c7fe4df59bcc, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &845546819 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 119316, guid: 1b116d1d98225c449952c7fe4df59bcc, type: 2}
-  m_PrefabInternal: {fileID: 845546818}
---- !u!114 &845546820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 845546819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 424de2b17b3f2c347a49e9551e18ea37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotationL: {x: 0, y: 0, z: 0}
-  RotationR: {x: 0, y: 0, z: 0}
 --- !u!1 &910127560
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,36 +738,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 193738, guid: 441d3767f050bfc42987d96a4520af07, type: 2}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 82738344153519038, guid: 441d3767f050bfc42987d96a4520af07,
-        type: 2}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 82738344153519038, guid: 441d3767f050bfc42987d96a4520af07, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 441d3767f050bfc42987d96a4520af07, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1038168279 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 193738, guid: 441d3767f050bfc42987d96a4520af07, type: 2}
-  m_PrefabInternal: {fileID: 1038168278}
---- !u!114 &1038168280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1038168279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 424de2b17b3f2c347a49e9551e18ea37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotationL: {x: 0, y: 0, z: 0}
-  RotationR: {x: 0, y: 0, z: 0}
 --- !u!1 &1041458434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,36 +1197,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 196878, guid: 3886001691da2124688a8816d352423a, type: 2}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 82821488160278292, guid: 3886001691da2124688a8816d352423a,
+    - target: {fileID: 82921599728331606, guid: 3886001691da2124688a8816d352423a,
         type: 2}
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 82821488160278292, guid: 3886001691da2124688a8816d352423a, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3886001691da2124688a8816d352423a, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1543522057 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 196878, guid: 3886001691da2124688a8816d352423a, type: 2}
-  m_PrefabInternal: {fileID: 1543522056}
---- !u!114 &1543522058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1543522057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 424de2b17b3f2c347a49e9551e18ea37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotationL: {x: 0, y: 0, z: 0}
-  RotationR: {x: 0, y: 0, z: 0}
 --- !u!1 &1701110687
 GameObject:
   m_ObjectHideFlags: 0
