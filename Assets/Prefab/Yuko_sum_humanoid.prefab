@@ -4294,7 +4294,8 @@ MonoBehaviour:
   effectObject: {fileID: 0}
   BpDown: 0
   isCharging: 0
-  audioTimer: 0.2
+  audioClip01: {fileID: 8300000, guid: 04cb2bf5cc13e424cb79df457a2616c4, type: 3}
+  audioClip02: {fileID: 8300000, guid: 3c328a286a94237439b3b8d29d0b8fe5, type: 3}
 --- !u!114 &114687445487335210
 MonoBehaviour:
   m_ObjectHideFlags: 1
