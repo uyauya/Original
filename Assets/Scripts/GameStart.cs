@@ -11,7 +11,8 @@ public class GameStart : MonoBehaviour {
 
 	{
 		// ボタンを押してセレクト画面に移行
-		audioSources [1].PlayDelayed(5.0f);
+		//audioSources [1].PlayDelayed(5.0f);
+		SoundManager.Instance.Play(1);	//(1)はElmentの数
 		SceneManager.LoadScene("Select");
 		// テキスト点滅
 		blinkText.color = new Color(0, 0, 0, Mathf.PingPong(Time.time, 1));
@@ -20,5 +21,6 @@ public class GameStart : MonoBehaviour {
 
 	void Start () {
 		audioSources = gameObject.GetComponents<AudioSource> ();
+		SoundManager.Instance.Play(0);
 	}
 }
