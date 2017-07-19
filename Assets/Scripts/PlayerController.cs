@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 	bool onFloor = true;
 	private float interval = 2.0f;
 	public int ItemCount;
-	public int BpDown = 10;			// ブーストゲージ消費値
+	public int BpDown = 20;			// ブーストゲージ消費値
 	Vector3 targetSpeed = Vector3.zero;      //目標速度
 	Vector3 addSpeed = Vector3.zero;        //加算速度
 	public GameObject BpHealEffect;
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour {
 		//ブーストボタンが押されてブーストポイント残が10以上あればフラグを立てブーストポイントを消費
 		if (Input.GetButton("Boost") && boostPoint > 10)
 		{
-			boostPoint -= BpDown;				//ブーストポイント10消費
+			boostPoint -= BpDown;			//ブーストポイント10消費
 			isBoost = true;					//ブースト状態
 		}
 		else
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour {
 		if (isBoost)						//ブーストなら
 		{
 			// ブースト時
-			if (force < MaxBoostForce) {		//速度19まで
+			if (force < MaxBoostForce) {			//MAX速度まで
 				force += Time.deltaTime * AddTime;	//通常速度（下の設定速度）に加速		
 			}
 			//ブーストキーが押されたらにパラメータを切り替える
