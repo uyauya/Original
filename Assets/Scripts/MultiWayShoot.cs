@@ -45,7 +45,7 @@ public class MultiWayShoot : MonoBehaviour {
 
 		// Fire1（標準ではCtrlキー)を押された瞬間.
 		if (Input.GetButtonDown ("Fire5")) {
-			
+			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
 			// Fire1を押してチャージ開始.
 			triggerDownTimeStart = Time.time;
 			//エフェクトをInstantiate
@@ -54,6 +54,7 @@ public class MultiWayShoot : MonoBehaviour {
 			//bullet05 = GameObject.Instantiate (Bullet05, muzzle.position, Quaternion.identity)as GameObject;
 			Bullet ();
 		} else if (Input.GetButton ("Fire5")) {
+			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
 			// Fire1を押してチャージ開始.
 			// 2秒たったら.
 			if (Time.time - triggerDownTimeStart >= 1.0f) {
@@ -64,6 +65,7 @@ public class MultiWayShoot : MonoBehaviour {
 			// キーを離すことによりチャージ終了
 		} else if (Input.GetButtonUp ("Fire5")) {
 			triggerDownTimeEnd = Time.time;
+			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
 			Bullet ();
 			// 弾発射間隔設定
 			//shotInterval += Time.deltaTime;
@@ -82,6 +84,7 @@ public class MultiWayShoot : MonoBehaviour {
 				time = 0f;
 			}
 			GetComponent<PlayerController> ().boostPoint -= BpDown;
+			//boostPoint -= BpDown;
 			//if (shotInterval > shotIntervalMax) {
 				// Bulletnoを設定（下記参照）
 				

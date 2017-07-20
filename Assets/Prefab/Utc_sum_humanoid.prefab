@@ -5095,8 +5095,8 @@ MonoBehaviour:
   HighPoint: 120
   gravity: 9.8
   boostPoint: 0
-  boostPointMax: 1000
-  RecoverPoint: 1
+  boostPointMax: 3000
+  RecoverPoint: 3
   gaugeImage: {fileID: 0}
   ItemCount: 0
   BpDown: 10
@@ -5608,7 +5608,7 @@ MonoBehaviour:
   BulletRad: 5
   BulletNumber: 5
   FirstBullet: -2
-  BpDown: 100
+  BpDown: 1000
 --- !u!114 &114632175688763656
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 	{
 
 		//ブーストボタンが押されてブーストポイント残が10以上あればフラグを立てブーストポイントを消費
-		if (Input.GetButton("Boost") && boostPoint > 10)
+		if (Input.GetButton("Boost") && boostPoint > 0)
 		{
 			boostPoint -= BpDown;			//ブーストポイント10消費
 			isBoost = true;					//ブースト状態
@@ -85,12 +85,13 @@ public class PlayerController : MonoBehaviour {
 				force += Time.deltaTime * AddTime;	//通常速度（下の設定速度）に加速		
 			}
 			//ブーストキーが押されたらにパラメータを切り替える
-			animator.SetBool("Boost", Input.GetButton("Boost"));
+
+			animator.SetBool("Boost", Input.GetButton("Boost")&& boostPoint > 0);
 		}
 		else
 		{
 			force = MaxForce;							//通常速度
-			animator.SetBool("Boost", Input.GetButton("Boost"));
+			animator.SetBool("Boost", Input.GetButton("Boost")&& boostPoint > 0);
 		}
 			
 
@@ -193,7 +194,7 @@ public class PlayerController : MonoBehaviour {
 		//gaugeImage.transform.localScale = new Vector3(0.5f,1,1);
 
 		//ブーストキーが押されたらにパラメータを切り替える
-		animator.SetBool("Boost",Input.GetButton ("Boost"));
+		//animator.SetBool("Boost",Input.GetButton ("Boost"));
 	}
 
 
