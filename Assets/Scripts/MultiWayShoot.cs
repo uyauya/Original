@@ -65,7 +65,7 @@ public class MultiWayShoot : MonoBehaviour {
 			// キーを離すことによりチャージ終了
 		} else if (Input.GetButtonUp ("Fire5")) {
 			triggerDownTimeEnd = Time.time;
-			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
+
 			Bullet ();
 			// 弾発射間隔設定
 			//shotInterval += Time.deltaTime;
@@ -83,7 +83,7 @@ public class MultiWayShoot : MonoBehaviour {
 			if (time >= interval) {    
 				time = 0f;
 			}
-			GetComponent<PlayerController> ().boostPoint -= BpDown;
+
 			//boostPoint -= BpDown;
 			//if (shotInterval > shotIntervalMax) {
 				// Bulletnoを設定（下記参照）
@@ -94,7 +94,7 @@ public class MultiWayShoot : MonoBehaviour {
 				//shotInterval = 0;
 			}
 			//音を重ねて再生する
-			audioSource.PlayOneShot (audioSource.clip);
+			//audioSource.PlayOneShot (audioSource.clip);
 	}
 
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
@@ -103,7 +103,8 @@ public class MultiWayShoot : MonoBehaviour {
 		// ショットの時間間隔
 		if(Time.time - shotInterval > shotIntervalMax) {
 			shotInterval = Time.time;
-		// 15度間隔の散弾
+			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
+			// 15度間隔の散弾
 		// -2,-1,0,1,2といった具合に5発を設定
 			for (int i = FirstBullet; i < BulletNumber; i++) {
 				//初期配置の半径(弾の生成元からの半径)
@@ -124,7 +125,8 @@ public class MultiWayShoot : MonoBehaviour {
 			// 回転計算をした後に弾の座標を上に上げる
 			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
 			// bulletObjectのオブジェクトにダメージ計算を渡す
-			bulletObject.GetComponent<Bullet05> ().damage = this.damage;
+				GetComponent<PlayerController> ().boostPoint -= BpDown;
+				bulletObject.GetComponent<Bullet05> ().damage = this.damage;
 			}
 		}
 

@@ -97,13 +97,17 @@ public class PlayerShoot : MonoBehaviour {
 			// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
 			damage = Attack + Attack * 2.5f * chargeTime;
 			// Shotのアニメーションに切り替え
-			bullet01 = GameObject.Instantiate (Bullet01, muzzle.position, Quaternion.identity)as GameObject;
-			bullet01.transform.localScale *= chargeTime;
-			Bullet();
+			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
+				bullet01 = GameObject.Instantiate (Bullet01, muzzle.position, Quaternion.identity)as GameObject;
+			
+				//bullet01.transform.localScale *= chargeTime;
+				Bullet ();
+				GetComponent<PlayerController> ().boostPoint -= BpDown;
+			}
 			animator.SetTrigger ("Shot");　	// ショットのように作動したら自動的にニュートラルに戻る場合はTriggerの方がよい
-			audioSources[0].PlayOneShot(audioClip01);
-			audioSources[1].clip = audioClip02;
-			audioSources[1].PlayDelayed(0.2f);
+			//audioSources[0].PlayOneShot(audioClip01);
+			//audioSources[1].clip = audioClip02;
+			//audioSources[1].PlayDelayed(0.2f);
 			//animator.SetBool("Shot",true);
 			// 一定以上間が空いたらチャージタイムのリセット
 			if (time >= interval) {    
@@ -137,14 +141,16 @@ public class PlayerShoot : MonoBehaviour {
 		//if (Time.time - shotInterval > shotIntervalMax) {
 			//shotInterval = Time.time;
 			// Bullet01のゲームオブジェクトを生成してbulletObjectとする
+		//if(GetComponent<PlayerController> ().boostPoint >= BpDown){
 			GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
 			//Debug.Log("バレット");
 			bulletObject.transform.localScale *= chargeTime;
 			//Debug.Log("弾ビッグ");
 			//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 			bulletObject.transform.position = muzzle.position;
-
-
+			SoundManager.Instance.Play(0,gameObject);
+			SoundManager.Instance.PlayDelayed (1, 0.2f, gameObject);
+			//GetComponent<PlayerController> ().boostPoint -= BpDown;
 			// bulletObjectのオブジェクトにダメージ計算を渡す
 			bulletObject.GetComponent<Bullet01> ().damage = this.damage;
 		//}

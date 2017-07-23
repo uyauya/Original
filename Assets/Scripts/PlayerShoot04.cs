@@ -54,7 +54,8 @@ public class PlayerShoot04 : MonoBehaviour {
 		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 		
 		//音を重ねて再生する
-		audioSource.PlayOneShot(audioSource.clip);
+		//audioSource.PlayOneShot(audioSource.clip);
+
 	}
 	
 	void Bullet() {
@@ -64,6 +65,8 @@ public class PlayerShoot04 : MonoBehaviour {
 			GameObject bulletObject = GameObject.Instantiate (Bullet04)as GameObject;
 			bulletObject.transform.position = muzzle.position + transform.TransformDirection(Vector3.forward * 2) + new Vector3(0, -0.3f, 0);
 			//bulletObject.GetComponent<Bullet01> ().damage = this.damage;
+			SoundManager.Instance.Play(0,gameObject);
+			SoundManager.Instance.PlayDelayed (1, 0.2f, gameObject);
 		}
 	}
 

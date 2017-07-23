@@ -52,7 +52,7 @@ public class PlayerShoot03 : MonoBehaviour {
 			//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 		}
 		//音を重ねて再生する
-		audioSource.PlayOneShot(audioSource.clip);
+		//audioSource.PlayOneShot(audioSource.clip);
 	}
 	
 
