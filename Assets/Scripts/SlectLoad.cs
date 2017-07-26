@@ -10,7 +10,7 @@ public class SlectLoad : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		audioSources = gameObject.GetComponents<AudioSource> ();
-		SoundManager.Instance.Play(0);
+		SoundManager3.Instance.Play(0);
 		StartCoroutine ("LoadTime");
 	}
 	

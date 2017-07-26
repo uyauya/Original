@@ -26,7 +26,9 @@ public class GameStart : MonoBehaviour {
 
 	void Update () {
 		// テキスト点滅
-		blinkText.color = new Color(0, 0, 0, Mathf.PingPong(Time.time, 1f));
+		if (Input.GetMouseButton(0)){
+			blinkText.color = new Color(0, 0, 0, Mathf.PingPong(Time.time * 10, 1f));
+		}
 	}
 
 	void LoadScene() {

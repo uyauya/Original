@@ -148,8 +148,8 @@ public class PlayerShoot : MonoBehaviour {
 			//Debug.Log("弾ビッグ");
 			//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 			bulletObject.transform.position = muzzle.position;
-			SoundManager.Instance.Play(0,gameObject);
-			SoundManager.Instance.PlayDelayed (1, 0.2f, gameObject);
+			SoundManager4.Instance.Play(0,gameObject);
+			SoundManager4.Instance.PlayDelayed (1, 0.2f, gameObject);
 			//GetComponent<PlayerController> ().boostPoint -= BpDown;
 			// bulletObjectのオブジェクトにダメージ計算を渡す
 			bulletObject.GetComponent<Bullet01> ().damage = this.damage;

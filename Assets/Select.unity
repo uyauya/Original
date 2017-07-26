@@ -1236,9 +1236,9 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1469588407}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59c9eadac615e0f40b7bfb28a3557c45, type: 3}
+  m_Script: {fileID: 11500000, guid: ea56606df5655d040a459438e9eb226e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClipList:
