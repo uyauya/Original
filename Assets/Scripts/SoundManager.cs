@@ -6,12 +6,13 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
 	[SerializeField]
 	private List<AudioClip> audioClipList = new List<AudioClip>(); 
-
+	[SerializeField]
+	private float volume = 10;
 
 	// 音を再生する
 	public void Play(int number, GameObject go = null)
 	{
-		Debug.Log("要素数" + audioClipList.Count);
+		//Debug.Log("要素数" + audioClipList.Count);
 		AudioClip clip = audioClipList[number];
 
 		if (go != null)
@@ -44,6 +45,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 	private IEnumerator PlayCoroutine(AudioClip clip, GameObject go)
 	{
 		AudioSource audioSource = go.AddComponent<AudioSource>();
+		audioSource.volume = volume;
 		audioSource.PlayOneShot(clip);
 		yield return new WaitWhile(() => audioSource.isPlaying);
 		Destroy(audioSource);
@@ -54,6 +56,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 	{
 		AudioSource audioSource = go.AddComponent<AudioSource>();
 		audioSource.clip = clip;
+		audioSource.volume = volume;
 		audioSource.PlayDelayed(delay);
 		yield return new WaitWhile(() => audioSource.isPlaying);
 		Destroy(audioSource);

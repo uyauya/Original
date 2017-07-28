@@ -6193,6 +6193,7 @@ MonoBehaviour:
   isCharging: 0
   audioClip01: {fileID: 0}
   audioClip02: {fileID: 0}
+  PlayerNo: 2
 --- !u!114 &114181865683268450
 MonoBehaviour:
   m_ObjectHideFlags: 1

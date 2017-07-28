@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour {
+	[System.NonSerialized]
 	public static int PlayerNo;
 
 	// Use this for initialization

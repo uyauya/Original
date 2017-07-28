@@ -1573,7 +1573,6 @@ GameObject:
   - component: {fileID: 114686086940088714}
   - component: {fileID: 114079346594583718}
   - component: {fileID: 114796555594523450}
-  - component: {fileID: 114918603523489242}
   m_Layer: 8
   m_Name: Utc_sum_humanoid
   m_TagString: Player
@@ -4860,6 +4859,7 @@ MonoBehaviour:
   isCharging: 0
   audioClip01: {fileID: 0}
   audioClip02: {fileID: 0}
+  PlayerNo: 0
 --- !u!114 &114173875118660754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5830,22 +5830,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.06
---- !u!114 &114918603523489242
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697289305068994}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b145e3c3fb0425a408513b52b363780f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSources01: {fileID: 0}
-  audioSources02: {fileID: 0}
-  audioClip01: {fileID: 8300000, guid: 49ab0f6d5708d394da2a1e1a570eb650, type: 3}
-  audioClip02: {fileID: 8300000, guid: 858c746458bc7ab4eaaf62e81f8e6a5f, type: 3}
-  audioClip03: {fileID: 8300000, guid: 80afc827c3c3ebd48a453147b1f55457, type: 3}
 --- !u!114 &114920329314263658
 MonoBehaviour:
   m_ObjectHideFlags: 1

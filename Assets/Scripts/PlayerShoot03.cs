@@ -43,13 +43,16 @@ public class PlayerShoot03 : MonoBehaviour {
 			float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
 			damage = Attack + Attack * 0.0f * chargeTime;
 			//Debug.Log (damage);
+			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 			animator.SetTrigger ("Shotss");
 			if (time >= interval) {	
 				time = 0f;
 			}
+			GetComponent<PlayerController> ().boostPoint -= BpDown;
 			Bulletss();
 			//マズルフラッシュを表示する
 			//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
+			}
 		}
 		//音を重ねて再生する
 		//audioSource.PlayOneShot(audioSource.clip);

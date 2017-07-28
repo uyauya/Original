@@ -1898,6 +1898,10 @@ MonoBehaviour:
   audioClipList:
   - {fileID: 8300000, guid: 49ab0f6d5708d394da2a1e1a570eb650, type: 3}
   - {fileID: 8300000, guid: 1785cedc62a616f4288296b11f6b4ee4, type: 3}
+  - {fileID: 8300000, guid: 3ad00902003eca94fbfba70761206821, type: 3}
+  - {fileID: 8300000, guid: 858c746458bc7ab4eaaf62e81f8e6a5f, type: 3}
+  - {fileID: 8300000, guid: 1b8da664705e9b04dae767401ed3dfb7, type: 3}
+  - {fileID: 8300000, guid: 66cb29617603084439170fbb26d2408a, type: 3}
 --- !u!4 &1593420681
 Transform:
   m_ObjectHideFlags: 0

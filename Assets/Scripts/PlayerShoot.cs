@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 // 銃としてPlayerShootスクリプト、弾をBullet01スクリプトとして作る
 public class PlayerShoot : MonoBehaviour {
@@ -39,6 +41,7 @@ public class PlayerShoot : MonoBehaviour {
 	//private bool audioAction;
 	public AudioClip audioClip01;
 	public AudioClip audioClip02;
+	public int PlayerNo;
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
@@ -48,6 +51,8 @@ public class PlayerShoot : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.red;　// チャージエフェクト用
 		//audioAction = false;
+		//Debug.Log(DataManager.PlayerNo + "プレイヤシュート");
+		//PlayerNo = DataManager.PlayerNo;
 	}
 
 	void Update () {
@@ -148,8 +153,19 @@ public class PlayerShoot : MonoBehaviour {
 			//Debug.Log("弾ビッグ");
 			//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 			bulletObject.transform.position = muzzle.position;
+			Debug.Log (PlayerNo);
+			if (PlayerNo == 0) {
 			SoundManager4.Instance.Play(0,gameObject);
 			SoundManager4.Instance.PlayDelayed (1, 0.2f, gameObject);
+			}
+			if (PlayerNo == 1) {
+			SoundManager4.Instance.Play(2,gameObject);
+			SoundManager4.Instance.PlayDelayed (3, 0.2f, gameObject);
+			}
+			if (PlayerNo == 2) {
+			SoundManager4.Instance.Play(4,gameObject);
+			SoundManager4.Instance.PlayDelayed (5, 0.2f, gameObject);
+			}
 			//GetComponent<PlayerController> ().boostPoint -= BpDown;
 			// bulletObjectのオブジェクトにダメージ計算を渡す
 			bulletObject.GetComponent<Bullet01> ().damage = this.damage;

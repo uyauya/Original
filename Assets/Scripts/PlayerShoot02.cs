@@ -42,14 +42,15 @@ public class PlayerShoot02 : MonoBehaviour {
 		} else if (Input.GetButtonUp ("Fire2")) {
 			triggerDownTimeEnd = Time.time;
 			float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
-			if (chargeTime >= 0.5f) {
-				damage = Attack + Attack * 0.0f * chargeTime;
+			//if (chargeTime >= 0.5f) {
+			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
+			damage = Attack + Attack * 0.0f * chargeTime;
 				//Debug.Log (damage);
 				animator.SetTrigger ("Shots");
 				if (time >= interval) {	
 					time = 0f;
 				}
-				GetComponent<PlayerController> ().boostPoint -= 10;
+				GetComponent<PlayerController> ().boostPoint -= BpDown;
 				Bullets ();
 			}
 		//マズルフラッシュを表示する
