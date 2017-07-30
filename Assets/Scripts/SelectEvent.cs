@@ -11,7 +11,8 @@ public class SelectEvent : MonoBehaviour {
 	{
 		//GameObject.Find ("BattleManager").GetComponent<BattleManager> ().PlayerNo = 0;
 		DataManager.PlayerNo = 0;
-		SoundManager2.Instance.Play(3);
+		SoundManager.Instance.Play(3);
+		//SoundManager2.Instance.Play(3);
 		Invoke("LoadScene1",1.3f);
 		//SceneManager.LoadScene("Kohaku");
 	}
@@ -19,7 +20,8 @@ public class SelectEvent : MonoBehaviour {
 	{
 		//GameObject.Find ("BattleManager").GetComponent<BattleManager> ().PlayerNo = 1;
 		DataManager.PlayerNo = 1;
-		SoundManager2.Instance.Play(4);
+		SoundManager.Instance.Play(4);
+		//SoundManager2.Instance.Play(4);
 		Invoke("LoadScene2",1.3f);
 		//SceneManager.LoadScene("Yuko");
 	}
@@ -27,16 +29,20 @@ public class SelectEvent : MonoBehaviour {
 	{
 	    //GameObject.Find ("BattleManager").GetComponent<BattleManager> ().PlayerNo = 2;
 		DataManager.PlayerNo = 2;
-		SoundManager2.Instance.Play(5);
+		SoundManager.Instance.Play(5);
+		//SoundManager2.Instance.Play(5);
 		Invoke("LoadScene3",1.3f);
 		//SceneManager.LoadScene("Misaki");
 	}
 
 	void Start () {
-		audioSources = gameObject.GetComponents<AudioSource> ();
-		SoundManager2.Instance.Play(0);
-		SoundManager2.Instance.Play(1);
-		SoundManager2.Instance.Play(2);
+		//audioSources = gameObject.GetComponents<AudioSource> ();
+		SoundManager.Instance.Play(0);
+		SoundManager.Instance.Play(1);
+		SoundManager.Instance.Play(2);
+		//SoundManager2.Instance.Play(0);
+		//SoundManager2.Instance.Play(1);
+		//SoundManager2.Instance.Play(2);
 	}
 
 	void LoadScene1() {
