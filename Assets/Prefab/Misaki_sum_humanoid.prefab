@@ -6140,7 +6140,8 @@ MonoBehaviour:
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
-  BpDown: 0
+  BpDown: 500
+  PlayerNo: 2
 --- !u!114 &114168413891335844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6162,7 +6163,8 @@ MonoBehaviour:
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
-  BpDown: 0
+  BpDown: 500
+  PlayerNo: 2
 --- !u!114 &114177824763895576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6189,10 +6191,8 @@ MonoBehaviour:
   boostPoint: 0
   effectPrefab: {fileID: 100004, guid: b49e37c2e747d4ed4bd2369d30fa0d68, type: 2}
   effectObject: {fileID: 0}
-  BpDown: 0
+  BpDown: 500
   isCharging: 0
-  audioClip01: {fileID: 0}
-  audioClip02: {fileID: 0}
   PlayerNo: 2
 --- !u!114 &114181865683268450
 MonoBehaviour:
@@ -6234,6 +6234,7 @@ MonoBehaviour:
   KnockBackRange: 0
   HpHealEffect: {fileID: 0}
   DamageEffect: {fileID: 0}
+  PlayerNo: 2
 --- !u!114 &114198318310690552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6267,7 +6268,8 @@ MonoBehaviour:
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
-  BpDown: 0
+  BpDown: 500
+  PlayerNo: 2
 --- !u!114 &114212521148643876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6393,7 +6395,8 @@ MonoBehaviour:
   BulletRad: 5
   BulletNumber: 5
   FirstBullet: -2
-  BpDown: 0
+  BpDown: 500
+  PlayerNo: 2
 --- !u!114 &114335470766517410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7323,11 +7326,12 @@ MonoBehaviour:
   gravity: 9.8
   boostPoint: 0
   boostPointMax: 1500
-  RecoverPoint: 0
+  RecoverPoint: 3
   gaugeImage: {fileID: 0}
   ItemCount: 0
   BpDown: 0
   BpHealEffect: {fileID: 0}
+  PlayerNo: 0
 --- !u!114 &114970597215717264
 MonoBehaviour:
   m_ObjectHideFlags: 1

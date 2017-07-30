@@ -33,6 +33,7 @@ public class MultiWayShoot : MonoBehaviour {
 	public int BulletNumber = 5;
 	public int FirstBullet = -2;
 	public int BpDown;
+	public int PlayerNo;
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
@@ -125,6 +126,18 @@ public class MultiWayShoot : MonoBehaviour {
 			// 回転計算をした後に弾の座標を上に上げる
 			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
 			// bulletObjectのオブジェクトにダメージ計算を渡す
+					if (PlayerNo == 0) {
+						SoundManager4.Instance.Play(24,gameObject);
+						SoundManager4.Instance.PlayDelayed (25, 0.2f, gameObject);
+					}
+					if (PlayerNo == 1) {
+						SoundManager4.Instance.Play(26,gameObject);
+						SoundManager4.Instance.PlayDelayed (27, 0.2f, gameObject);
+					}
+					if (PlayerNo == 2) {
+						SoundManager4.Instance.Play(28,gameObject);
+						SoundManager4.Instance.PlayDelayed (29, 0.2f, gameObject);
+					}
 				GetComponent<PlayerController> ().boostPoint -= BpDown;
 				bulletObject.GetComponent<Bullet05> ().damage = this.damage;
 			}

@@ -26,6 +26,7 @@ public class PlayerShoot03 : MonoBehaviour {
 	private Rigidbody rb;
 	Bullet03 bullet03_script;
 	public int BpDown;
+	public int PlayerNo;
 	
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
@@ -65,6 +66,18 @@ public class PlayerShoot03 : MonoBehaviour {
 			shotInterval = Time.time;
 			GameObject bulletObject = GameObject.Instantiate (Bullet03)as GameObject;
 			bulletObject.transform.position = muzzle.position;
+			if (PlayerNo == 0) {
+				SoundManager4.Instance.Play(12,gameObject);
+				SoundManager4.Instance.PlayDelayed (13, 0.2f, gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager4.Instance.Play(14,gameObject);
+				SoundManager4.Instance.PlayDelayed (15, 0.2f, gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager4.Instance.Play(16,gameObject);
+				SoundManager4.Instance.PlayDelayed (17, 0.2f, gameObject);
+			}
 			bulletObject.GetComponent<Bullet03> ().damage = this.damage;
 		}
 	}

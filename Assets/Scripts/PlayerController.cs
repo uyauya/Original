@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
 	Vector3 targetSpeed = Vector3.zero;      //目標速度
 	Vector3 addSpeed = Vector3.zero;        //加算速度
 	public GameObject BpHealEffect;
+	public int PlayerNo;
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -148,9 +149,27 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<Rigidbody>().velocity = new Vector3( v.x, 4, v.z );
 			//ジャンプモーションに切り替える
 			animator.SetBool("Jump", true);
+			if (PlayerNo == 0) {
+				SoundManager4.Instance.Play(30,gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager4.Instance.Play(31,gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager4.Instance.Play(32,gameObject);
+			}
 			// ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
 		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 10)) {
 			animator.SetBool("BoostUp", Input.GetButton ("Jump"));
+			if (PlayerNo == 0) {
+				SoundManager4.Instance.Play(30,gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager4.Instance.Play(31,gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager4.Instance.Play(32,gameObject);
+			}
 			// ジャンプの最大値までは上昇（ボタン押し続けている間は上昇し、最大値まで行ったら上昇値を0にする）
 			if (transform.position.y > HighPoint)
 				moveDirection.y = 0;

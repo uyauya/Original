@@ -39,8 +39,8 @@ public class PlayerShoot : MonoBehaviour {
 	private AudioSource[] audioSources;
 	//public float audioTimer = 0.2f;
 	//private bool audioAction;
-	public AudioClip audioClip01;
-	public AudioClip audioClip02;
+	//public AudioClip audioClip01;
+	//public AudioClip audioClip02;
 	public int PlayerNo;
 
 	void Start () {

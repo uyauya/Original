@@ -21,6 +21,7 @@ public class PlayerAp : MonoBehaviour {
 	public float KnockBackRange;		// ノックバック距離（ダメージ受けた際に使用）
 	public GameObject HpHealEffect;
 	public GameObject DamageEffect;
+	public int PlayerNo;
 
 	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
@@ -79,32 +80,66 @@ public class PlayerAp : MonoBehaviour {
 	private void OnCollisionEnter(Collision collider) {
 
 		//ShotEnemyの弾と衝突したらダメージ
+		//Enemyとぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		if (collider.gameObject.tag == "ShotEnemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("Damage");
-			//Enemyと接触したらダメージ
+			if (PlayerNo == 0) {
+				SoundManager4.Instance.Play(33,gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager4.Instance.Play(34,gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager4.Instance.Play(35,gameObject);
+			}
+			Instantiate(DamageEffect, transform.position, transform.rotation);
+			StartCoroutine ("DamageCoroutine");
+		//Enemyと接触したらダメージ
 		} else if (collider.gameObject.tag == "Enemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("Damage");
-		}
-		//Enemyとぶつかった時にコルーチンを実行（下記IEnumerator参照）
-		if (collider.gameObject.tag == "Enemy") {
+			if (PlayerNo == 0) {
+				SoundManager4.Instance.Play(33,gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager4.Instance.Play(34,gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager4.Instance.Play(35,gameObject);
+			}
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			StartCoroutine ("DamageCoroutine");
+		}
+		//Enemyとぶつかった時にコルーチンを実行（下記IEnumerator参照）
+		/*if (collider.gameObject.tag == "Enemy") {
+			Instantiate(DamageEffect, transform.position, transform.rotation);
+			StartCoroutine ("DamageCoroutine");
+
 		}
 		//ShotEnemyとぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		else if (collider.gameObject.tag == "ShotEnemy") {
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			StartCoroutine ("DamageCoroutine");
-		}
+
+		}*/
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
 		else if (collider.gameObject.tag == "Item") {
 			Instantiate(HpHealEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("ItemGet");
+			if (PlayerNo == 0) {
+				SoundManager4.Instance.Play(36,gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager4.Instance.Play(37,gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager4.Instance.Play(38,gameObject);
+			}
 			armorPoint += 1000;
 			// 体力上限以上には回復しない。
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
