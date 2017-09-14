@@ -335,11 +335,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1507762087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c8962130d8b8bb4f920abe06353be12, type: 3}
+  m_Script: {fileID: 11500000, guid: 59c9eadac615e0f40b7bfb28a3557c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClipList:
   - {fileID: 8300000, guid: 72e1568913ba4e8408a4f2ed8a41c131, type: 3}
+  volume: 10
 --- !u!4 &1507762089
 Transform:
   m_ObjectHideFlags: 0

@@ -165,10 +165,10 @@ public class PlayerController : MonoBehaviour {
 				SoundManager4.Instance.Play(30,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager4.Instance.Play(31,gameObject);
+				SoundManager.Instance.Play(31,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager4.Instance.Play(32,gameObject);
+				SoundManager.Instance.Play(32,gameObject);
 			}
 			// ジャンプの最大値までは上昇（ボタン押し続けている間は上昇し、最大値まで行ったら上昇値を0にする）
 			if (transform.position.y > HighPoint)
@@ -203,20 +203,11 @@ public class PlayerController : MonoBehaviour {
 		//motionBlurValue = Mathf.Clamp (motionBlurValue, 0, 5);
 		//Camera.main.GetComponent<CameraMotionBlur> ().velocityScale = motionBlurValue;
 
-		// 座標を移動させる
-		//Debug.LogFormat("MoveDir: {0}", moveDirection );
-		//this.transform.position = this.transform.position + moveDirection;
-		//Debug.Log((float)boostPoint / boostPointMax);
 		//ブーストゲージの伸縮
 		// ゲージの最大以上には上がらない
 		gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / boostPointMax, 1, 1);
 		//gaugeImage.transform.localScale = new Vector3(0.5f,1,1);
-
-		//ブーストキーが押されたらにパラメータを切り替える
-		//animator.SetBool("Boost",Input.GetButton ("Boost"));
 	}
-
-
 
 
 	private void OnCollisionEnter (Collision collider)

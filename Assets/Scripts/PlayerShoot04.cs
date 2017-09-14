@@ -4,27 +4,27 @@ using UnityEngine.UI;
 
 public class PlayerShoot04 : MonoBehaviour {
 
-	public GameObject Bullet04;
+	/*public GameObject Bullet04;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
-	//public float speed = 1000F;
-	public float interval = 0.5F;
+	public float speed = 1000F;
+	//public float interval = 0.5F;
 	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
-	private float time = 0F;
-	private float triggerDownTime = 0F;
-	private float triggerDownTimeStart = 0F;
-	private float triggerDownTimeEnd = 0F;
-	public float Attack = 100;
-	private float power = 0;
-	public float damage;
+	//private float time = 0F;
+	//private float triggerDownTime = 0F;
+	//private float triggerDownTimeStart = 0F;
+	//private float triggerDownTimeEnd = 0F;
+	public float Attack;
+	//private float power = 0;
+	public float damage = 100;
 	private float chargeTime;
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
 	public Image gaugeImage;
 	public int boostPoint;
-	Bullet01 bullet01_script;
+	Bullet01 bullet04_script;
 	public int BpDown;
 	public int PlayerNo;
 	
@@ -36,21 +36,23 @@ public class PlayerShoot04 : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetButton("Fire4")) {
-			triggerDownTimeStart = Time.time;
+		//if (Input.GetButton("Fire4")) {
+			//triggerDownTimeStart = Time.time;
 			//Debug.Log (time);
-		} else if (Input.GetButtonUp ("Fire4")) {
-			triggerDownTimeEnd = Time.time;
-			float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
-			damage = Attack + Attack * 0f * chargeTime;
+		//} else if (Input.GetButtonUp ("Fire4")) {
+			if (Input.GetButtonUp ("Fire4")) 
+			//triggerDownTimeEnd = Time.time;
+			//float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
+			//damage = Attack + Attack * 0f * chargeTime;
+			damage = Attack;
 			//Debug.Log (damage);
 			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 				animator.SetTrigger ("Shot");
-				if (time >= interval) {	
-					time = 0f;
-				}
+				//if (time >= interval) {	
+				//	time = 0f;
+				//}
 				GetComponent<PlayerController> ().boostPoint -= BpDown;
-				Bullet ();
+				Bullet();
 			}
 		}
 		//マズルフラッシュを表示する
@@ -71,21 +73,21 @@ public class PlayerShoot04 : MonoBehaviour {
 			//SoundManager.Instance.Play(0,gameObject);
 			//SoundManager.Instance.PlayDelayed (1, 0.2f, gameObject);
 			if (PlayerNo == 0) {
-				SoundManager4.Instance.Play(18,gameObject);
-				SoundManager4.Instance.PlayDelayed (19, 0.2f, gameObject);
+				SoundManager.Instance.Play(18,gameObject);
+				SoundManager.Instance.PlayDelayed (19, 0.2f, gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager4.Instance.Play(20,gameObject);
-				SoundManager4.Instance.PlayDelayed (21, 0.2f, gameObject);
+				SoundManager.Instance.Play(20,gameObject);
+				SoundManager.Instance.PlayDelayed (21, 0.2f, gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager4.Instance.Play(22,gameObject);
-				SoundManager4.Instance.PlayDelayed (23, 0.2f, gameObject);
+				SoundManager.Instance.Play(22,gameObject);
+				SoundManager.Instance.PlayDelayed (23, 0.2f, gameObject);
 			}
 		}
 	}
 
 	public void KickEvent (){
 		Debug.Log("kick");
-	}
+	}*/
 }

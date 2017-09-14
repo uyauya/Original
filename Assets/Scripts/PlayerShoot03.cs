@@ -7,18 +7,17 @@ public class PlayerShoot03 : MonoBehaviour {
 	public GameObject Bullet03;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
-	//public float speed = 10F;
-	public float interval = 0.5F;
+	//public float interval = 0.5F;
 	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
 	private float time = 0F;
-	private float triggerDownTime = 0F;
-	private float triggerDownTimeStart = 0F;
-	private float triggerDownTimeEnd = 0F;
-	public float Attack = 500;
-	private float power = 0;
-	public float damage;
-	private float chargeTime;
+	//private float triggerDownTime = 0F;
+	//private float triggerDownTimeStart = 0F;
+	//private float triggerDownTimeEnd = 0F;
+	private float Attack;
+	//private float power = 0;
+	public float damage = 500;
+	//private float chargeTime;
 	public Image gaugeImage;
 	public int boostPoint;
 	private Animator animator;
@@ -36,27 +35,27 @@ public class PlayerShoot03 : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetButton("Fire3")) {
-			triggerDownTimeStart = Time.time;
-			//Debug.Log (time);
-		} else if (Input.GetButtonUp ("Fire3")) {
-			triggerDownTimeEnd = Time.time;
-			float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
-			damage = Attack + Attack * 0.0f * chargeTime;
+		//if (Input.GetButton("Fire3")) {
+		//	triggerDownTimeStart = Time.time;
+		//	//Debug.Log (time);
+		//} else if (Input.GetButtonUp ("Fire3")) {
+		if (Input.GetButtonUp ("Fire3")) {	
+			//triggerDownTimeEnd = Time.time;
+			//float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
+			//damage = Attack + Attack * 0.0f * chargeTime;
+			damage = Attack;
 			//Debug.Log (damage);
 			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 			animator.SetTrigger ("Shotss");
-			if (time >= interval) {	
-				time = 0f;
-			}
+			//if (time >= interval) {	
+			//	time = 0f;
+			//}
 			GetComponent<PlayerController> ().boostPoint -= BpDown;
 			Bulletss();
 			//マズルフラッシュを表示する
 			//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 			}
 		}
-		//音を重ねて再生する
-		//audioSource.PlayOneShot(audioSource.clip);
 	}
 	
 
@@ -67,16 +66,16 @@ public class PlayerShoot03 : MonoBehaviour {
 			GameObject bulletObject = GameObject.Instantiate (Bullet03)as GameObject;
 			bulletObject.transform.position = muzzle.position;
 			if (PlayerNo == 0) {
-				SoundManager4.Instance.Play(12,gameObject);
-				SoundManager4.Instance.PlayDelayed (13, 0.2f, gameObject);
+				SoundManager.Instance.Play(12,gameObject);
+				SoundManager.Instance.PlayDelayed (13, 0.2f, gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager4.Instance.Play(14,gameObject);
-				SoundManager4.Instance.PlayDelayed (15, 0.2f, gameObject);
+				SoundManager.Instance.Play(14,gameObject);
+				SoundManager.Instance.PlayDelayed (15, 0.2f, gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager4.Instance.Play(16,gameObject);
-				SoundManager4.Instance.PlayDelayed (17, 0.2f, gameObject);
+				SoundManager.Instance.Play(16,gameObject);
+				SoundManager.Instance.PlayDelayed (17, 0.2f, gameObject);
 			}
 			bulletObject.GetComponent<Bullet03> ().damage = this.damage;
 		}

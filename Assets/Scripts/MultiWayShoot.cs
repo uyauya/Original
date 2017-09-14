@@ -12,14 +12,14 @@ public class MultiWayShoot : MonoBehaviour {
 	public float interval = 0.5F;
 	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
-	private float time = 0F;
-	private float triggerDownTime = 0F;
-	private float triggerDownTimeStart = 0F;
-	private float triggerDownTimeEnd = 0F;
-	public float Attack = 2000;
-	private float power = 0;
-	public float damage;
-	private float chargeTime;
+	//private float time = 0F;
+	//private float triggerDownTime = 0F;
+	//private float triggerDownTimeStart = 0F;
+	///private float triggerDownTimeEnd = 0F;
+	private float Attack;
+	//private float power = 0;
+	public float damage = 2000;
+	//private float chargeTime;
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
@@ -48,42 +48,43 @@ public class MultiWayShoot : MonoBehaviour {
 		if (Input.GetButtonDown ("Fire5")) {
 			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
 			// Fire1を押してチャージ開始.
-			triggerDownTimeStart = Time.time;
+			//triggerDownTimeStart = Time.time;
 			//エフェクトをInstantiate
 			effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
 			// bullet01生成、Bullet01のゲームオブジェクトを生成.
 			//bullet05 = GameObject.Instantiate (Bullet05, muzzle.position, Quaternion.identity)as GameObject;
 			Bullet ();
-		} else if (Input.GetButton ("Fire5")) {
-			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
+		//} else if (Input.GetButton ("Fire5")) {
+			//if(GetComponent<PlayerController> ().boostPoint >= BpDown)
 			// Fire1を押してチャージ開始.
 			// 2秒たったら.
-			if (Time.time - triggerDownTimeStart >= 1.0f) {
+			//if (Time.time - triggerDownTimeStart >= 1.0f) {
 				// スケールを大きくする.
 				//bullet05.transform.localScale *= 1.00f;
 				//Bullet ();
-			}
+			//}
 			// キーを離すことによりチャージ終了
-		} else if (Input.GetButtonUp ("Fire5")) {
-			triggerDownTimeEnd = Time.time;
+		//} else if (Input.GetButtonUp ("Fire5")) {
+			//triggerDownTimeEnd = Time.time;
 
 			Bullet ();
 			// 弾発射間隔設定
 			//shotInterval += Time.deltaTime;
 
 			//エフェクトを削除
-			Destroy (effectObject);
+			//Destroy (effectObject);
 			// キーを離した状態から押し始めたじかんの差分を計測して
-			float chargeTime = triggerDownTimeEnd - triggerDownTimeStart;
+			//float chargeTime = triggerDownTimeEnd - triggerDownTimeStart;
 			// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
-			damage = Attack + Attack * 2.5f * chargeTime;
+			//damage = Attack + Attack * 2.5f * chargeTime;
+			damage = Attack;
 			//Debug.Log (damage);
 			// Shotのアニメーションに切り替え
 			animator.SetTrigger ("Shot");
 			// 一定以上間が空いたらチャージタイムのリセット
-			if (time >= interval) {    
-				time = 0f;
-			}
+			//if (time >= interval) {    
+			//	time = 0f;
+			//}
 
 			//boostPoint -= BpDown;
 			//if (shotInterval > shotIntervalMax) {
@@ -127,16 +128,16 @@ public class MultiWayShoot : MonoBehaviour {
 			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
 			// bulletObjectのオブジェクトにダメージ計算を渡す
 					if (PlayerNo == 0) {
-						SoundManager4.Instance.Play(24,gameObject);
-						SoundManager4.Instance.PlayDelayed (25, 0.2f, gameObject);
+						SoundManager.Instance.Play(24,gameObject);
+						SoundManager.Instance.PlayDelayed (25, 0.2f, gameObject);
 					}
 					if (PlayerNo == 1) {
-						SoundManager4.Instance.Play(26,gameObject);
-						SoundManager4.Instance.PlayDelayed (27, 0.2f, gameObject);
+						SoundManager.Instance.Play(26,gameObject);
+						SoundManager.Instance.PlayDelayed (27, 0.2f, gameObject);
 					}
 					if (PlayerNo == 2) {
-						SoundManager4.Instance.Play(28,gameObject);
-						SoundManager4.Instance.PlayDelayed (29, 0.2f, gameObject);
+						SoundManager.Instance.Play(28,gameObject);
+						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
 					}
 				GetComponent<PlayerController> ().boostPoint -= BpDown;
 				bulletObject.GetComponent<Bullet05> ().damage = this.damage;

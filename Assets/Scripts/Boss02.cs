@@ -31,7 +31,6 @@ public class Boss02 : MonoBehaviour {
 		target = GameObject.Find("PlayerTarget");	//ターゲットを取得
 		armorPoint = armorPointMax;
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
-		//Boss02muzzle=GameObject.Find("face");
 		if (Vector3.Distance (target.transform.position, transform.position) > TargetPosition) {
 			return;
 		}
@@ -56,19 +55,14 @@ public class Boss02 : MonoBehaviour {
 		shotInterval += Time.deltaTime;
 
 		if (shotInterval > shotIntervalMax) {
-			//Instantiate (Boss02shot, transform.position, transform.rotation);
-			//Boss02shot = Instantiate (Boss02shot, Boss02muzzle,.identity);
-			//Boss02shot.transform.localPosition= new Vector3(0, 0, 1);
 
 			GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
-			//Debug.Log(bossshot.transform.position); //生成したオブジェクトの座標をコンソールに表示する
 			shotInterval = ShotInterval;
 		}
 	}
 	
 	
 	void OnCollisionEnter(Collision collider) {
-		//Debug.Log (collider);
 		
 		if (collider.gameObject.tag == "Shot") {
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
@@ -83,8 +77,6 @@ public class Boss02 : MonoBehaviour {
 		armorPoint -= damage;
 		animator.SetTrigger ("Damage");
 		StartCoroutine ("DamageCoroutine");
-
-		//Debug.Log ("受け取った");
 		
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0){
@@ -112,7 +104,6 @@ public class Boss02 : MonoBehaviour {
 			//Debug.Log ("色変える");
 			modelColorChange.ColorChange(new Color (1,0,0,1));
 			//0.05秒待つ
-			//Debug.Log ("戻す");
 			yield return new WaitForSeconds(0.1f);
 			//元に戻す
 			modelColorChange.ColorChange(new Color (1,1,1,1));

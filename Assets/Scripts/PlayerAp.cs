@@ -80,7 +80,7 @@ public class PlayerAp : MonoBehaviour {
 	private void OnCollisionEnter(Collision collider) {
 
 		//ShotEnemyの弾と衝突したらダメージ
-		//Enemyとぶつかった時にコルーチンを実行（下記IEnumerator参照）
+		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		if (collider.gameObject.tag == "ShotEnemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
@@ -98,6 +98,7 @@ public class PlayerAp : MonoBehaviour {
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			StartCoroutine ("DamageCoroutine");
 		//Enemyと接触したらダメージ
+		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		} else if (collider.gameObject.tag == "Enemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
@@ -115,18 +116,7 @@ public class PlayerAp : MonoBehaviour {
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			StartCoroutine ("DamageCoroutine");
 		}
-		//Enemyとぶつかった時にコルーチンを実行（下記IEnumerator参照）
-		/*if (collider.gameObject.tag == "Enemy") {
-			Instantiate(DamageEffect, transform.position, transform.rotation);
-			StartCoroutine ("DamageCoroutine");
 
-		}
-		//ShotEnemyとぶつかった時にコルーチンを実行（下記IEnumerator参照）
-		else if (collider.gameObject.tag == "ShotEnemy") {
-			Instantiate(DamageEffect, transform.position, transform.rotation);
-			StartCoroutine ("DamageCoroutine");
-
-		}*/
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
 		else if (collider.gameObject.tag == "Item") {
 			Instantiate(HpHealEffect, transform.position, transform.rotation);
