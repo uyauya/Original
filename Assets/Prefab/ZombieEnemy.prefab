@@ -1533,7 +1533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle: {fileID: 1035929777161508, guid: d2b5620878cde1144b82728e7d76b517, type: 2}
   armorPoint: 0
-  armorPointMax: 100000
+  armorPointMax: 10
   InvincibleTime: 0
   KnockBackRange: 0
   DestroyTime: 2
@@ -1542,13 +1542,6 @@ MonoBehaviour:
   EnemySpeed: 1
   EnemyRotate: 3
   Search: 1
-  ShotEffect: {fileID: 1088429497774590, guid: 2935b199a09ad174f93427345723ed16, type: 2}
-  Shot2Effect: {fileID: 1022352431443244, guid: 01a3cdaf57e83cd4cb32785f71726a1d,
-    type: 2}
-  Shot3Effect: {fileID: 1110732859462498, guid: 7e7043fec5ffd7249b7f93e4828a021f,
-    type: 2}
-  Shot5Effect: {fileID: 1486354955488562, guid: 67015d7abf23832409dfd3a4149fabf6,
-    type: 2}
   DestroyEffect: {fileID: 1150561294453336, guid: 6bd8571835e7baa4a9fcd1555c58df06,
     type: 2}
 --- !u!136 &13646494

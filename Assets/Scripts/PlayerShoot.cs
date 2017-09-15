@@ -42,7 +42,7 @@ public class PlayerShoot : MonoBehaviour {
 		audioSources = gameObject.GetComponents<AudioSource>(); // 音源が複数の場合はGetComponents（複数形）になる
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
-		effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.red;　// チャージエフェクト用
+
 	}
 
 	void Update () {
@@ -55,6 +55,7 @@ public class PlayerShoot : MonoBehaviour {
 			isCharging = true;
 			//エフェクトを生成
 			effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
+			effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.red;　// チャージエフェクト用
 			// muzzleはプレイヤーの子で付いているのでSetParent (muzzle)で設定（オブジェクト生成の場合は必要なし）
 			effectObject.transform.SetParent (muzzle);
 		} 

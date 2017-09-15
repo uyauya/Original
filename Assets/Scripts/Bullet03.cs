@@ -29,6 +29,7 @@ public class Bullet03 : MonoBehaviour {
 
 	// ボム攻撃範囲設定
 	private void BomAttack(){
+		Debug.Log ("BOM");
 		// 自分自身を中心に、半径50.0以内にいるColliderを探し、配列に格納
 		Collider[] targets = Physics.OverlapSphere (transform.position, 50.0f);
 		foreach (Collider col in targets) {		// targets配列を順番に処理 (その時に仮名をobjとする)

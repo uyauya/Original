@@ -62,6 +62,23 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 		Destroy(audioSource);
 	}
 
+	// 音を停止する
+	public void Stop(int number, GameObject go = null)
+	{
+		//Debug.Log("要素数" + audioClipList.Count);
+		AudioClip clip = audioClipList[number];
+
+		if (go != null)
+		{
+			//StartCoroutine(PlayCoroutine(clip, go));
+			go.GetComponent<AudioSource>().Stop();
+		}
+		else
+		{
+			//StartCoroutine(PlayCoroutine(clip, gameObject));
+			gameObject.GetComponent<AudioSource>().Stop();
+		}
+	}
 
 	private void Start()
 	{

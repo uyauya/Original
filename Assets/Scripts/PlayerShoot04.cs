@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerShoot04 : MonoBehaviour {
 
-	/*public GameObject Bullet04;
+	public GameObject Bullet04;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
 	public float speed = 1000F;
@@ -37,10 +37,10 @@ public class PlayerShoot04 : MonoBehaviour {
 	
 	void Update () {
 		//if (Input.GetButton("Fire4")) {
-			//triggerDownTimeStart = Time.time;
-			//Debug.Log (time);
+		//triggerDownTimeStart = Time.time;
+		//Debug.Log (time);
 		//} else if (Input.GetButtonUp ("Fire4")) {
-			if (Input.GetButtonUp ("Fire4")) 
+		if (Input.GetButtonUp ("Fire4")) {
 			//triggerDownTimeEnd = Time.time;
 			//float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
 			//damage = Attack + Attack * 0f * chargeTime;
@@ -52,16 +52,17 @@ public class PlayerShoot04 : MonoBehaviour {
 				//	time = 0f;
 				//}
 				GetComponent<PlayerController> ().boostPoint -= BpDown;
-				Bullet();
+				Bullet ();
 			}
 		}
+	}
 		//マズルフラッシュを表示する
 		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 		
 		//音を重ねて再生する
 		//audioSource.PlayOneShot(audioSource.clip);
 
-	}
+	//}
 	
 	void Bullet() {
 		// ショットの時間間隔
@@ -89,5 +90,5 @@ public class PlayerShoot04 : MonoBehaviour {
 
 	public void KickEvent (){
 		Debug.Log("kick");
-	}*/
+	}
 }
