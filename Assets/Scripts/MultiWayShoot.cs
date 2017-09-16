@@ -8,18 +8,11 @@ public class MultiWayShoot : MonoBehaviour {
 	private GameObject bullet05;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
-	//public float speed = 1000F;
 	public float interval = 0.5F;
 	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
-	//private float time = 0F;
-	//private float triggerDownTime = 0F;
-	//private float triggerDownTimeStart = 0F;
-	///private float triggerDownTimeEnd = 0F;
 	private float Attack;
-	//private float power = 0;
 	public float damage = 2000;
-	//private float chargeTime;
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
@@ -47,53 +40,12 @@ public class MultiWayShoot : MonoBehaviour {
 		// Fire1（標準ではCtrlキー)を押された瞬間.
 		if (Input.GetButtonDown ("Fire5")) {
 			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
-			// Fire1を押してチャージ開始.
-			//triggerDownTimeStart = Time.time;
-			//エフェクトをInstantiate
 			effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
-			// bullet01生成、Bullet01のゲームオブジェクトを生成.
-			//bullet05 = GameObject.Instantiate (Bullet05, muzzle.position, Quaternion.identity)as GameObject;
 			Bullet ();
-		//} else if (Input.GetButton ("Fire5")) {
-			//if(GetComponent<PlayerController> ().boostPoint >= BpDown)
-			// Fire1を押してチャージ開始.
-			// 2秒たったら.
-			//if (Time.time - triggerDownTimeStart >= 1.0f) {
-				// スケールを大きくする.
-				//bullet05.transform.localScale *= 1.00f;
-				//Bullet ();
-			//}
-			// キーを離すことによりチャージ終了
-		//} else if (Input.GetButtonUp ("Fire5")) {
-			//triggerDownTimeEnd = Time.time;
-
-			Bullet ();
-			// 弾発射間隔設定
-			//shotInterval += Time.deltaTime;
-
-			//エフェクトを削除
-			//Destroy (effectObject);
-			// キーを離した状態から押し始めたじかんの差分を計測して
-			//float chargeTime = triggerDownTimeEnd - triggerDownTimeStart;
-			// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
-			//damage = Attack + Attack * 2.5f * chargeTime;
 			damage = Attack;
-			//Debug.Log (damage);
-			// Shotのアニメーションに切り替え
-			animator.SetTrigger ("Shot");
-			// 一定以上間が空いたらチャージタイムのリセット
-			//if (time >= interval) {    
-			//	time = 0f;
-			//}
-
-			//boostPoint -= BpDown;
-			//if (shotInterval > shotIntervalMax) {
-				// Bulletnoを設定（下記参照）
-				
-				//マズルフラッシュを表示する
-				//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
-				//弾発射間隔リセット
-				//shotInterval = 0;
+			animator.SetTrigger ("Shot");				
+			//マズルフラッシュを表示する
+			//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 			}
 			//音を重ねて再生する
 			//audioSource.PlayOneShot (audioSource.clip);

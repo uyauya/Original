@@ -7,17 +7,11 @@ public class PlayerShoot03 : MonoBehaviour {
 	public GameObject Bullet03;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
-	//public float interval = 0.5F;
 	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
 	private float time = 0F;
-	//private float triggerDownTime = 0F;
-	//private float triggerDownTimeStart = 0F;
-	//private float triggerDownTimeEnd = 0F;
 	private float Attack;
-	//private float power = 0;
 	public float damage = 500;
-	//private float chargeTime;
 	public Image gaugeImage;
 	public int boostPoint;
 	private Animator animator;
@@ -35,21 +29,10 @@ public class PlayerShoot03 : MonoBehaviour {
 	}
 	
 	void Update () {
-		//if (Input.GetButton("Fire3")) {
-		//	triggerDownTimeStart = Time.time;
-		//	//Debug.Log (time);
-		//} else if (Input.GetButtonUp ("Fire3")) {
 		if (Input.GetButtonUp ("Fire3")) {	
-			//triggerDownTimeEnd = Time.time;
-			//float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
-			//damage = Attack + Attack * 0.0f * chargeTime;
 			damage = Attack;
-			//Debug.Log (damage);
 			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 			animator.SetTrigger ("Shotss");
-			//if (time >= interval) {	
-			//	time = 0f;
-			//}
 			GetComponent<PlayerController> ().boostPoint -= BpDown;
 			Bulletss();
 			//マズルフラッシュを表示する

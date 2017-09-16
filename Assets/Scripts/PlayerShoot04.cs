@@ -8,15 +8,9 @@ public class PlayerShoot04 : MonoBehaviour {
 	public Transform muzzle;
 	public GameObject muzzleFlash;
 	public float speed = 1000F;
-	//public float interval = 0.5F;
 	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
-	//private float time = 0F;
-	//private float triggerDownTime = 0F;
-	//private float triggerDownTimeStart = 0F;
-	//private float triggerDownTimeEnd = 0F;
 	public float Attack;
-	//private float power = 0;
 	public float damage = 100;
 	private float chargeTime;
 	private Animator animator;
@@ -36,21 +30,10 @@ public class PlayerShoot04 : MonoBehaviour {
 	}
 	
 	void Update () {
-		//if (Input.GetButton("Fire4")) {
-		//triggerDownTimeStart = Time.time;
-		//Debug.Log (time);
-		//} else if (Input.GetButtonUp ("Fire4")) {
 		if (Input.GetButtonUp ("Fire4")) {
-			//triggerDownTimeEnd = Time.time;
-			//float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
-			//damage = Attack + Attack * 0f * chargeTime;
 			damage = Attack;
-			//Debug.Log (damage);
 			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 				animator.SetTrigger ("Shot");
-				//if (time >= interval) {	
-				//	time = 0f;
-				//}
 				GetComponent<PlayerController> ().boostPoint -= BpDown;
 				Bullet ();
 			}
@@ -70,9 +53,6 @@ public class PlayerShoot04 : MonoBehaviour {
 			shotInterval = Time.time;
 			GameObject bulletObject = GameObject.Instantiate (Bullet04)as GameObject;
 			bulletObject.transform.position = muzzle.position + transform.TransformDirection(Vector3.forward * 2) + new Vector3(0, -0.3f, 0);
-			//bulletObject.GetComponent<Bullet01> ().damage = this.damage;
-			//SoundManager.Instance.Play(0,gameObject);
-			//SoundManager.Instance.PlayDelayed (1, 0.2f, gameObject);
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(18,gameObject);
 				SoundManager.Instance.PlayDelayed (19, 0.2f, gameObject);
