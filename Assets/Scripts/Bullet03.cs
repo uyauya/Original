@@ -35,11 +35,11 @@ public class Bullet03 : MonoBehaviour {
 		foreach (Collider col in targets) {		// targets配列を順番に処理 (その時に仮名をobjとする)
 			if (col.gameObject.tag == "Enemy") {			// タグ名がEnemyなら
 			Enemy enemyinsta = col.gameObject.GetComponent<Enemy>();
-			Zombie zombieinsta = col.gameObject.GetComponent<Zombie>();
+			//Zombie zombieinsta = col.gameObject.GetComponent<Zombie>();
 				if (!enemyinsta == null) {
 				enemyinsta.Damaged(bombDamage);	// ダメージを与える
-				} else if (enemyinsta == null && !zombieinsta == null ) {
-				zombieinsta.Damaged(bombDamage);	// ダメージを与える
+				//} else if (enemyinsta == null && !zombieinsta == null ) {
+				//zombieinsta.Damaged(bombDamage);	// ダメージを与える
 				}
 			}
 			// プレイヤーからの距離を計測

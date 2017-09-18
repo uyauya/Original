@@ -401,9 +401,9 @@ GameObject:
   - component: {fileID: 9514400}
   - component: {fileID: 5449254}
   - component: {fileID: 13646494}
-  - component: {fileID: 11420228}
   - component: {fileID: 82836539100942584}
   - component: {fileID: 114446249072444412}
+  - component: {fileID: 114223077092183932}
   m_Layer: 11
   m_Name: ZombieEnemy
   m_TagString: Enemy
@@ -1520,30 +1520,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11420228
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 161242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1e95c07dfe5d5645af05e5a805b2447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particle: {fileID: 1035929777161508, guid: d2b5620878cde1144b82728e7d76b517, type: 2}
-  armorPoint: 0
-  armorPointMax: 10
-  InvincibleTime: 0
-  KnockBackRange: 0
-  DestroyTime: 2
-  DamageTime: 0.3
-  TargetRange: 30
-  EnemySpeed: 1
-  EnemyRotate: 3
-  Search: 1
-  DestroyEffect: {fileID: 1150561294453336, guid: 6bd8571835e7baa4a9fcd1555c58df06,
-    type: 2}
 --- !u!136 &13646494
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1830,6 +1806,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114223077092183932
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154e4d797667a544d90fe33c5e556c88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle: {fileID: 0}
+  armorPoint: 0
+  armorPointMax: 100
+  InvincibleTime: 0
+  KnockBackRange: 0
+  DestroyTime: 0.1
+  DamageTime: 0.1
+  TargetRange: 5
+  EnemySpeed: 10
+  EnemyRotate: 2
+  Search: 3
+  DestroyEffect: {fileID: 1574779937369632, guid: 161d1d18e9616ba40ae70b20dc87ca42,
+    type: 2}
 --- !u!114 &114446249072444412
 MonoBehaviour:
   m_ObjectHideFlags: 1

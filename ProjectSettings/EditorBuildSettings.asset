@@ -7,15 +7,28 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Start.unity
+    guid: a5023118801af0f4fb740ba0048195d2
   - enabled: 1
     path: Assets/STAGE02.unity
+    guid: 968305ef2839cef47a0fcd69c844b7e1
   - enabled: 1
     path: Assets/STAGE02BOSS.unity
+    guid: 32d2102178c54294ba5cafcbe2635be7
   - enabled: 1
     path: Assets/Yuko.unity
+    guid: c72fbbd6237a3354288a6d76d22c7d49
   - enabled: 1
     path: Assets/Misaki.unity
+    guid: 170015b48362bda43b36dfea9ffafd0e
   - enabled: 1
     path: Assets/Kohaku.unity
+    guid: cc1b58e1e846d1541a0c5e86760ed79d
   - enabled: 1
     path: Assets/Select.unity
+    guid: 7f5d8afb4538bea48ba97e15823e3ce9
+  - enabled: 1
+    path: Assets/Save.unity
+    guid: 83d823cef6e9a5341a91835739a7a897
+  - enabled: 1
+    path: Assets/Config.unity
+    guid: 00000000000000000000000000000000

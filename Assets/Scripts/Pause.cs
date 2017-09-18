@@ -26,10 +26,8 @@ public class Pause : MonoBehaviour
 				Tutorial.SetActive(true);
 				Time.timeScale = 0;
 				//SoundManager.Instance.Stop ();
-				audioSource.Stop();
+				audioSource.Pause();		//一時停止（完全停止する場合はaudioSource.Stop();
 			}
-
-			//Camera.main.GetComponent<Animator>().SetBool("isPause", isPause);
 		}
 	}
 }

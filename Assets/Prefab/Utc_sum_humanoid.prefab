@@ -4857,8 +4857,6 @@ MonoBehaviour:
   effectObject: {fileID: 0}
   BpDown: 500
   isCharging: 0
-  audioClip01: {fileID: 0}
-  audioClip02: {fileID: 0}
   PlayerNo: 0
 --- !u!114 &114173875118660754
 MonoBehaviour:
@@ -5270,14 +5268,12 @@ MonoBehaviour:
   Bullet03: {fileID: 142680, guid: 3b22c6a562677ac4fa14fc10650eb2fb, type: 2}
   muzzle: {fileID: 4642337937397932}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  interval: 0.5
   shotInterval: 0
   shotIntervalMax: 0.5
-  Attack: 500
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
-  BpDown: 500
+  BpDown: 100
   PlayerNo: 0
 --- !u!114 &114489428993432032
 MonoBehaviour:
@@ -5430,7 +5426,6 @@ MonoBehaviour:
   interval: 0
   shotInterval: 0
   shotIntervalMax: 0.5
-  Attack: 2000
   damage: 1000
   gaugeImage: {fileID: 0}
   boostPoint: 0
@@ -5525,7 +5520,7 @@ MonoBehaviour:
   Bullet04: {fileID: 181316, guid: 0f046369970b721458fc972118ac5e17, type: 2}
   muzzle: {fileID: 4642337937397932}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  interval: 0.5
+  speed: 1000
   shotInterval: 0
   shotIntervalMax: 0.5
   Attack: 100
@@ -5814,10 +5809,8 @@ MonoBehaviour:
   Bullet02: {fileID: 115984, guid: 3fa959cafea1b534b9aed554273be7b4, type: 2}
   muzzle: {fileID: 4642337937397932}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  interval: 0.3
   shotInterval: 0
   shotIntervalMax: 0.25
-  Attack: 0
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
