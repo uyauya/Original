@@ -23,6 +23,7 @@ TagManager:
   - Item4
   - BossShot
   - AbsorbWall
+  - Pause
   layers:
   - Default
   - TransparentFX

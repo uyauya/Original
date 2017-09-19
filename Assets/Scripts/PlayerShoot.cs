@@ -36,13 +36,14 @@ public class PlayerShoot : MonoBehaviour {
 	public bool isCharging = false;
 	private AudioSource[] audioSources;
 	public int PlayerNo;
+	//Pause pause;
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSources = gameObject.GetComponents<AudioSource>(); // 音源が複数の場合はGetComponents（複数形）になる
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
-
+		//pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 	}
 
 	void Update () {

@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 
 		//ブーストボタンが押されてブーストポイント残が10以上あればフラグを立てブーストポイントを消費
