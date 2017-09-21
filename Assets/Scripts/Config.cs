@@ -29,6 +29,20 @@ public class Config : MonoBehaviour {
 		SceneManager.LoadScene("Start");
 	}
 
+	public void Onclick_Save ()
+	{
+		// ボタンを押してセーブ画面に移行
+		SoundManager.Instance.Play(1);	//(1)はElmentの数
+		SceneManager.LoadScene("Start");
+	}
+
+	public void Onclick_Load ()
+	{
+		// ボタンを押してロード画面に移行
+		SoundManager.Instance.Play(1);	//(1)はElmentの数
+		SceneManager.LoadScene("Start");
+	}
+
 	void Start () {
 		audioSources = gameObject.GetComponents<AudioSource> ();
 		SoundManager.Instance.Play(0);
