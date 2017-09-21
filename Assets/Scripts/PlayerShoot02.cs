@@ -20,28 +20,31 @@ public class PlayerShoot02 : MonoBehaviour {
 	Bullet02 bullet02_script;
 	public int BpDown;
 	public int PlayerNo;
+	private Pause pause;
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
+		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 	}
 
 	void Update () {
 		int boostpoint = GetComponent<PlayerController> ().boostPoint;
-		if (Input.GetButtonUp ("Fire2")) {
-			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
-				damage = Attack;
-				animator.SetTrigger ("Shots");
-				GetComponent<PlayerController> ().boostPoint -= BpDown;
-				Bullets ();
+		if (pause.isPause == false) {
+			if (Input.GetButtonUp ("Fire2")) {
+				if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
+					damage = Attack;
+					animator.SetTrigger ("Shots");
+					GetComponent<PlayerController> ().boostPoint -= BpDown;
+					Bullets ();
+				}
+				//マズルフラッシュを表示する
+				//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 			}
-		//マズルフラッシュを表示する
-		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 		}
 	}
-
 	void Bullets() {
 		// ショットの時間間隔
 		if (Time.time - shotInterval > shotIntervalMax) {

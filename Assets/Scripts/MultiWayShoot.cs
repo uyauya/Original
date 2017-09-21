@@ -27,30 +27,32 @@ public class MultiWayShoot : MonoBehaviour {
 	public int FirstBullet = -2;
 	public int BpDown;
 	public int PlayerNo;
+	private Pause pause;
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
+		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 	}
 
 	void Update () {
-
-		// Fire1（標準ではCtrlキー)を押された瞬間.
-		if (Input.GetButtonDown ("Fire5")) {
-			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
-			effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
-			Bullet ();
-			damage = Attack;
-			animator.SetTrigger ("Shot");				
-			//マズルフラッシュを表示する
-			//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
+		if (pause.isPause == false) {
+			// Fire1（標準ではCtrlキー)を押された瞬間.
+			if (Input.GetButtonDown ("Fire5")) {
+				if (GetComponent<PlayerController> ().boostPoint >= BpDown)
+					effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
+				Bullet ();
+				damage = Attack;
+				animator.SetTrigger ("Shot");				
+				//マズルフラッシュを表示する
+				//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 			}
 			//音を重ねて再生する
 			//audioSource.PlayOneShot (audioSource.clip);
+		}
 	}
-
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
 	void Bullet ()
 	{

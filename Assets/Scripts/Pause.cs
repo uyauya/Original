@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
-	bool isPause;
+	public bool isPause;
 	public GameObject Tutorial;
 	public AudioSource audioSource;
 

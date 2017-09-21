@@ -21,21 +21,25 @@ public class PlayerShoot04 : MonoBehaviour {
 	Bullet01 bullet04_script;
 	public int BpDown;
 	public int PlayerNo;
+	private Pause pause;
 	
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
+		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 	}
 	
 	void Update () {
-		if (Input.GetButtonUp ("Fire4")) {
-			damage = Attack;
-			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
-				animator.SetTrigger ("Shot");
-				GetComponent<PlayerController> ().boostPoint -= BpDown;
-				Bullet ();
+		if (pause.isPause == false) {
+			if (Input.GetButtonUp ("Fire4")) {
+				damage = Attack;
+				if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
+					animator.SetTrigger ("Shot");
+					GetComponent<PlayerController> ().boostPoint -= BpDown;
+					Bullet ();
+				}
 			}
 		}
 	}

@@ -36,18 +36,19 @@ public class PlayerShoot : MonoBehaviour {
 	public bool isCharging = false;
 	private AudioSource[] audioSources;
 	public int PlayerNo;
-	//Pause pause;
+	private Pause pause;
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSources = gameObject.GetComponents<AudioSource>(); // 音源が複数の場合はGetComponents（複数形）になる
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
-		//pause = GameObject.Find ("Pause").GetComponent<Pause> ();
+		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 	}
 
 	void Update () {
-		
+
+	if(pause.isPause == false) {
 		// Fire1（標準ではCtrlキー)を押された瞬間.
 		if (Input.GetButtonDown ("Fire1")) {
 			// Fire1を押してチャージ開始.
@@ -98,8 +99,8 @@ public class PlayerShoot : MonoBehaviour {
 		}
 		//マズルフラッシュを表示する
 		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
+		}
 	}
-
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
 	void Bullet() {
 		// ショットの時間間隔

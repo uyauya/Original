@@ -16,6 +16,7 @@ public class Diffence : MonoBehaviour {
 		private float nowTime = 0f;         //　最初に移動ボタンが押されてからの経過時間
 		public float limitAngle;            //　最初に押した方向との違いの限度角度
 		private Vector2 direction = Vector2.zero;           //　移動キーの押した方向
+		private Pause pause;
 
 
 		void Start()
@@ -23,13 +24,14 @@ public class Diffence : MonoBehaviour {
 			audioSource = gameObject.GetComponent<AudioSource>();
 			animator = GetComponent<Animator> ();
 			rb = GetComponent<Rigidbody>();
+			pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 		}
 
 
 		void Update()
 		{
 			velocity = Vector3.zero;
-
+		if (pause.isPause == false) {
 			//　ガードしていないとき
 			if (!diffence)
 			{
@@ -52,8 +54,7 @@ public class Diffence : MonoBehaviour {
 						//Debug.LogFormat("Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}",Vector2.Angle(nowDirection, direction),limitAngle,Time.time,nowTime,nextButtonDownTime);
 						//　押した方向がリミットの角度を越えていない　かつ　制限時間内に移動キーが押されていればガード
 					if (Vector2.Angle (nowDirection, direction) < limitAngle
-					     && nowTime <= nextButtonDownTime)
- {							//&& Time.time - nowTime < nextButtonDownTime)
+					     && nowTime <= nextButtonDownTime){							//&& Time.time - nowTime < nextButtonDownTime)
 						//Debug.LogFormat ("出る時：Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}", Vector2.Angle (nowDirection, direction), limitAngle, Time.time, nowTime, nextButtonDownTime);
 						diffence = true;
 						audioSource.PlayOneShot (audioSource.clip);
@@ -86,7 +87,7 @@ public class Diffence : MonoBehaviour {
 
 			input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		}
-
+	}
 		void Diffencer() {
 			// Bullet01のゲームオブジェクトを生成してbulletObjectとする
 			GameObject diffenceObject = GameObject.Instantiate (DiffenceWall)as GameObject;
