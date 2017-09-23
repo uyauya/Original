@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 82836539100942584}
   - component: {fileID: 114446249072444412}
   - component: {fileID: 114223077092183932}
+  - component: {fileID: 114526772150620914}
   m_Layer: 11
   m_Name: ZombieEnemy
   m_TagString: Enemy
@@ -1817,19 +1818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154e4d797667a544d90fe33c5e556c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particle: {fileID: 0}
-  armorPoint: 0
-  armorPointMax: 100
-  InvincibleTime: 0
-  KnockBackRange: 0
-  DestroyTime: 0.1
-  DamageTime: 0.1
-  TargetRange: 5
-  EnemySpeed: 10
-  EnemyRotate: 2
-  Search: 3
-  DestroyEffect: {fileID: 1574779937369632, guid: 161d1d18e9616ba40ae70b20dc87ca42,
-    type: 2}
 --- !u!114 &114446249072444412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1841,3 +1829,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8b7dd34ea68b54eaafd841433f0d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114526772150620914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea68b7b6b288e26409d1a89aed8a2449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  target: {fileID: 0}
+  particle: {fileID: 0}
+  armorPoint: 0
+  armorPointMax: 100
+  timer: 0
+  InvincibleTime: 0
+  KnockBackRange: 0
+  DestroyTime: 0
+  DamageTime: 10
+  TargetRange: 5
+  EnemySpeed: 10
+  EnemyRotate: 2
+  Search: 0
+  DestroyEffect: {fileID: 1574779937369632, guid: 161d1d18e9616ba40ae70b20dc87ca42,
+    type: 2}

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBasic : MonoBehaviour {
-	protected Animator animator;		// 《Animator》コンポーネント用の変数
-	protected GameObject target;
+	public Animator animator;		// 《Animator》コンポーネント用の変数
+	public GameObject target;
 	public GameObject particle;
 	public float armorPoint;
 	public float armorPointMax; 
-	protected float timer;
+	public float timer;
 	protected float damage;							// playerに与えるダメージ
 	protected bool isInvincible;			// 無敵処理（ダメージ受けた際に使用）
 	public float InvincibleTime;		// 無敵時間
@@ -43,10 +43,11 @@ public class EnemyBasic : MonoBehaviour {
 		}
 	}*/
 
-	protected void Initialize () {
+	public void Initialize () {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
-		target = GameObject.Find("PlayerTarget");	//ターゲットを取得
+		//target = GameObject.Find("PlayerTarget");	//ターゲットを取得
+		target = GameObject.FindWithTag("Player");
 		armorPoint = armorPointMax;
 	}
 
