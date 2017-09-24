@@ -111,7 +111,7 @@ public class PlayerShoot : MonoBehaviour {
 			bulletObject.transform.localScale *= chargeTime;
 			//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 			bulletObject.transform.position = muzzle.position;
-			Debug.Log (PlayerNo);
+			//Debug.Log (PlayerNo);
 			if (PlayerNo == 0) {
 			SoundManager.Instance.Play(0,gameObject);
 			SoundManager.Instance.PlayDelayed (1, 0.2f, gameObject);

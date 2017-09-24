@@ -4916,15 +4916,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf05438f1197fd43b7f9c7abb9893aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxForce: 15
-  MaxBoostForce: 18
+  MaxForce: 10
+  MaxBoostForce: 15
   AddTime: 1
   jumpSpeed: 10
   HighPoint: 120
   gravity: 9.8
   boostPoint: 0
   boostPointMax: 3000
-  RecoverPoint: 3
+  RecoverPoint: 5
   gaugeImage: {fileID: 0}
   ItemCount: 0
   BpDown: 10
@@ -5265,7 +5265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe001c07da69474c8adb32f94d658f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet03: {fileID: 142680, guid: 3b22c6a562677ac4fa14fc10650eb2fb, type: 2}
+  Bullet03: {fileID: 1326127817637182, guid: 1aa585410e92d9f4aa919edbc2e9797a, type: 2}
   muzzle: {fileID: 4642337937397932}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   shotInterval: 0

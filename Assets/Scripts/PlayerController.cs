@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour {
 	void Start()
 	{
 		animator = GetComponent<Animator>();
-
 		boostPoint = boostPointMax;
 		moveSpeed = Vector3.zero;
 		isBoost = false;
@@ -150,19 +149,19 @@ public class PlayerController : MonoBehaviour {
 			//ジャンプモーションに切り替える
 			animator.SetBool("Jump", true);
 			if (PlayerNo == 0) {
-				SoundManager4.Instance.Play(30,gameObject);
+				SoundManager.Instance.Play(30,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager4.Instance.Play(31,gameObject);
+				SoundManager.Instance.Play(31,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager4.Instance.Play(32,gameObject);
+				SoundManager.Instance.Play(32,gameObject);
 			}
 			// ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
 		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 10)) {
 			animator.SetBool("BoostUp", Input.GetButton ("Jump"));
 			if (PlayerNo == 0) {
-				SoundManager4.Instance.Play(30,gameObject);
+				SoundManager.Instance.Play(30,gameObject);
 			}
 			if (PlayerNo == 1) {
 				SoundManager.Instance.Play(31,gameObject);
@@ -216,6 +215,15 @@ public class PlayerController : MonoBehaviour {
 		if (collider.gameObject.tag == "Item2") {
 			Instantiate(BpHealEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("ItemGet");
+			if (PlayerNo == 0) {
+				SoundManager.Instance.Play(33,gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager.Instance.Play(34,gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager.Instance.Play(35,gameObject);
+			}
 			boostPoint += 500;
 			// ブーストポイントが最大以上にはならない
 			boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);

@@ -41,7 +41,8 @@ GameObject:
   - component: {fileID: 65480170652546256}
   - component: {fileID: 23987847474033932}
   - component: {fileID: 54046696423607830}
-  - component: {fileID: 114862325339673960}
+  - component: {fileID: 114247498318446254}
+  - component: {fileID: 114764055461297628}
   m_Layer: 11
   m_Name: PunmkinEnemy
   m_TagString: Enemy
@@ -198,7 +199,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114862325339673960
+--- !u!114 &114247498318446254
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -206,27 +207,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 1805232816971456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc88bdc6489b37b48b370c3a7e432c7a, type: 3}
+  m_Script: {fileID: 11500000, guid: 308509c2acd8e214c929d94d0b0156b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114764055461297628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1805232816971456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea68b7b6b288e26409d1a89aed8a2449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  target: {fileID: 0}
+  particle: {fileID: 0}
   armorPoint: 0
-  armorPointMax: 1
+  armorPointMax: 100
+  timer: 0
   InvincibleTime: 0
+  KnockBackRange: 1
+  DestroyTime: 0
+  DamageTime: 0
+  TargetRange: 2
+  EnemySpeed: 3
+  EnemyRotate: 2
+  Search: 5
+  DestroyEffect: {fileID: 0}
+  timeElapsed: 0
   timeOut: 0
-  KnockBackRange: 0
-  DestroyTime: 2
-  DamageTime: 0.3
-  JumpForce: 1
-  TargetRange: 30
-  EnemySpeed: 1
-  EnemyRotate: 3
-  Search: 2
-  ShotEffect: {fileID: 1088429497774590, guid: 2935b199a09ad174f93427345723ed16, type: 2}
-  Shot2Effect: {fileID: 1022352431443244, guid: 01a3cdaf57e83cd4cb32785f71726a1d,
-    type: 2}
-  Shot3Effect: {fileID: 1110732859462498, guid: 7e7043fec5ffd7249b7f93e4828a021f,
-    type: 2}
-  Shot5Effect: {fileID: 1486354955488562, guid: 67015d7abf23832409dfd3a4149fabf6,
-    type: 2}
-  DestroyEffect: {fileID: 1150561294453336, guid: 6bd8571835e7baa4a9fcd1555c58df06,
-    type: 2}
+  JumpForce: 2.5

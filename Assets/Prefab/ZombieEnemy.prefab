@@ -1849,10 +1849,13 @@ MonoBehaviour:
   InvincibleTime: 0
   KnockBackRange: 0
   DestroyTime: 0
-  DamageTime: 10
+  DamageTime: 1
   TargetRange: 5
-  EnemySpeed: 10
-  EnemyRotate: 2
+  EnemySpeed: 3
+  EnemyRotate: 1
   Search: 0
   DestroyEffect: {fileID: 1574779937369632, guid: 161d1d18e9616ba40ae70b20dc87ca42,
     type: 2}
+  timeElapsed: 0
+  timeOut: 0
+  JumpForce: 0

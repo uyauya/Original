@@ -87,13 +87,13 @@ public class PlayerAp : MonoBehaviour {
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("Damage");
 			if (PlayerNo == 0) {
-				SoundManager4.Instance.Play(33,gameObject);
+				SoundManager4.Instance.Play(36,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager4.Instance.Play(34,gameObject);
+				SoundManager4.Instance.Play(37,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager4.Instance.Play(35,gameObject);
+				SoundManager4.Instance.Play(38,gameObject);
 			}
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			StartCoroutine ("DamageCoroutine");
@@ -105,13 +105,13 @@ public class PlayerAp : MonoBehaviour {
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("Damage");
 			if (PlayerNo == 0) {
-				SoundManager4.Instance.Play(33,gameObject);
+				SoundManager4.Instance.Play(36,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager4.Instance.Play(34,gameObject);
+				SoundManager4.Instance.Play(37,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager4.Instance.Play(35,gameObject);
+				SoundManager4.Instance.Play(38,gameObject);
 			}
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			StartCoroutine ("DamageCoroutine");
@@ -122,13 +122,13 @@ public class PlayerAp : MonoBehaviour {
 			Instantiate(HpHealEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("ItemGet");
 			if (PlayerNo == 0) {
-				SoundManager4.Instance.Play(36,gameObject);
+				SoundManager4.Instance.Play(33,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager4.Instance.Play(37,gameObject);
+				SoundManager4.Instance.Play(34,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager4.Instance.Play(38,gameObject);
+				SoundManager4.Instance.Play(35,gameObject);
 			}
 			armorPoint += 1000;
 			// 体力上限以上には回復しない。

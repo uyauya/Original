@@ -24,6 +24,9 @@ public class EnemyBasic : MonoBehaviour {
 	public float EnemyRotate;
 	public float Search;
 	public GameObject DestroyEffect;
+	public float timeElapsed;
+	public float timeOut;
+	public float JumpForce;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく

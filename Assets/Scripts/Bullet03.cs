@@ -31,20 +31,13 @@ public class Bullet03 : MonoBehaviour {
 
 	// ボム攻撃範囲設定
 	private void BomAttack(){
-		Debug.Log ("BOM");
 		// 自分自身を中心に、半径50.0以内にいるColliderを探し、配列に格納
 		Collider[] targets = Physics.OverlapSphere (transform.position, 50.0f);
 		foreach (Collider col in targets) {		// targets配列を順番に処理 (その時に仮名をobjとする)
 			if (col.gameObject.tag == "Enemy") {			// タグ名がEnemyなら
 				EnemyBasic enemyinsta = col.gameObject.GetComponent<EnemyBasic>();
-				Debug.Log ("Damage");
-			//Zombie zombieinsta = col.gameObject.GetComponent<Zombie>();
 				if (enemyinsta != null) {
 				enemyinsta.Damaged(bombDamage);	// ダメージを与える
-					Debug.Log ("Attack");
-				//} else if (enemyinsta == null && !zombieinsta == null ) {
-				//zombieinsta.Damaged(bombDamage);	// ダメージを与える
-
 				}
 			}
 
@@ -63,6 +56,6 @@ public class Bullet03 : MonoBehaviour {
 		//ScreenOverlayManager.intensity += Mathf.Clamp (9 - (distance / 200), 0, 1);
 		// 振動を加える（MainCameraにCameraVibrationManagerを追加）
 		//CamVibrationManager.vibration += Mathf.Clamp (0.5F - (distance / 200), 0, 0.5F);
-		iTween.ScaleTo(gameObject, iTween.Hash("x",6, "y",6, "z",6, "time",10));
+		iTween.ScaleTo(gameObject, iTween.Hash("x",7, "y",7, "z",7, "time",5));
 	}
 }
