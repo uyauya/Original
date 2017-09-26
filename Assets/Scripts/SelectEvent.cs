@@ -38,29 +38,30 @@ public class SelectEvent : MonoBehaviour {
 	public void Onclick_Exit ()
 	{
 		// ボタンを押してポーズ画面に移行
-		SoundManager.Instance.Play(1);	//(1)はElmentの数
+		//SoundManager.Instance.Play(1);	//(1)はElmentの数
 		SceneManager.LoadScene("Start");
 	}
 
 	public void Onclick_End ()
 	{
 		// ボタンを押してスタート画面に移行
-		SoundManager.Instance.Play(1);	//(1)はElmentの数
+		//SoundManager.Instance.Play(1);	//(1)はElmentの数
 		SceneManager.LoadScene("Start");
 	}
 
 	public void Onclick_Save ()
 	{
 		// ボタンを押してセーブ画面に移行
-		SoundManager.Instance.Play(1);	//(1)はElmentの数
-		SceneManager.LoadScene("Start");
+		//SoundManager.Instance.Play(1);	//(1)はElmentの数
+		SceneManager.LoadScene("Save");
+		Debug.Log ("セーブ");
 	}
 
 	public void Onclick_Load ()
 	{
 		// ボタンを押してロード画面に移行
-		SoundManager.Instance.Play(1);	//(1)はElmentの数
-		SceneManager.LoadScene("Start");
+		//SoundManager.Instance.Play(1);	//(1)はElmentの数
+		SceneManager.LoadScene("Save");
 	}
 
 	void Start () {
