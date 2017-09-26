@@ -237,7 +237,7 @@ MonoBehaviour:
   prefab_HitEffect2: {fileID: 1110732859462498, guid: 7e7043fec5ffd7249b7f93e4828a021f,
     type: 2}
   bombDamage: 5000
-  DestroyTime: 20
+  DestroyTime: 1
 --- !u!135 &135815893823701834
 SphereCollider:
   m_ObjectHideFlags: 1

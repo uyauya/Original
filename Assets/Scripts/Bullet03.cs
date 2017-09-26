@@ -1,5 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;	
 
 public class Bullet03 : MonoBehaviour {
 
@@ -14,7 +17,7 @@ public class Bullet03 : MonoBehaviour {
 	void Start () {
 		Plshoot03 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();
 		transform.rotation = Plshoot03.transform.rotation;
-		StartCoroutine("bom");	
+		StartCoroutine ("bom");
 		//Enemy = GetComponent<Enemy>();
 	}	
 
@@ -56,6 +59,8 @@ public class Bullet03 : MonoBehaviour {
 		//ScreenOverlayManager.intensity += Mathf.Clamp (9 - (distance / 200), 0, 1);
 		// 振動を加える（MainCameraにCameraVibrationManagerを追加）
 		//CamVibrationManager.vibration += Mathf.Clamp (0.5F - (distance / 200), 0, 0.5F);
+		//弾のShaderをCustom/clearScreenにすれば透明に。
+		//iTwwenでx,y,zの大きさをtime内に徐々に大きくする
 		iTween.ScaleTo(gameObject, iTween.Hash("x",7, "y",7, "z",7, "time",5));
 	}
 }

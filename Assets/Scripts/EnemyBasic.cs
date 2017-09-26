@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBasic : MonoBehaviour {
-	public Animator animator;		// 《Animator》コンポーネント用の変数
+	public Animator animator;					// 《Animator》コンポーネント用の変数
 	public GameObject target;
 	public GameObject particle;
 	public float armorPoint;
 	public float armorPointMax; 
 	public float timer;
-	protected float damage;							// playerに与えるダメージ
-	protected bool isInvincible;			// 無敵処理（ダメージ受けた際に使用）
-	public float InvincibleTime;		// 無敵時間
+	protected float damage;						// playerに与えるダメージ
+	protected bool isInvincible;				// 無敵処理（ダメージ受けた際に使用）
+	public float InvincibleTime;				// 無敵時間
 	protected ModelColorChange modelColorChange;
 	public float KnockBackRange;
 	public void Damaged(float damagedPoint){
-		this.armorPoint -= damagedPoint;	// Playerから受けたダメージの設定
+		this.armorPoint -= damagedPoint;		// Playerから受けたダメージの設定
 	}
 	public float DestroyTime;
-	public float DamageTime;
+	//public float DamageTime;
 	public int TargetRange;
 	public float EnemySpeed;
 	public float EnemyRotate;

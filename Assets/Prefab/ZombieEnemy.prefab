@@ -1854,7 +1854,7 @@ MonoBehaviour:
   EnemySpeed: 3
   EnemyRotate: 1
   Search: 0
-  DestroyEffect: {fileID: 1574779937369632, guid: 161d1d18e9616ba40ae70b20dc87ca42,
+  DestroyEffect: {fileID: 1125771622238690, guid: 56f27e4cde7aa1f4a9e26dbd2988b8ce,
     type: 2}
   timeElapsed: 0
   timeOut: 0
