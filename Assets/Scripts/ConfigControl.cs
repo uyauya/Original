@@ -5,28 +5,25 @@ using UnityEngine;
 public class ConfigControl : MonoBehaviour 
 {
 	public bool isConfig;
-	public GameObject Config;
+	public GameObject Setting;
 	public AudioSource audioSource;
 
 	void Start()
 	{
 		isConfig = false;
-		Config.SetActive(false);
+		Setting.SetActive(false);
 	}
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.Escape)) {
+		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 			if (isConfig) {
 				isConfig = false;
-				Config.SetActive(false);
+				Setting.SetActive(false);
 				Time.timeScale = 1f;
-				//audioSource.Play();
 			} else {
 				isConfig = true;
-				Config.SetActive(true);
+				Setting.SetActive(true);
 				Time.timeScale = 0;
-				//SoundManager.Instance.Stop ();
-				//audioSource.Pause();		//一時停止（完全停止する場合はaudioSource.Stop();
 			}
 		}
 	}
