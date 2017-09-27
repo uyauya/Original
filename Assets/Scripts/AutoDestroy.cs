@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AutoDestroy : MonoBehaviour {
+/*public class AutoDestroy : MonoBehaviour {
 
 	public float destroyTime = 0.1F;
 	
@@ -16,4 +16,4 @@ public class AutoDestroy : MonoBehaviour {
 	void Update () {
 	
 	}
-}
+}*/
