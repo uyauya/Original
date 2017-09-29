@@ -1,59 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;						
+using UnityEngine;					
 
-public class Config : MonoBehaviour {
-	private AudioSource[] audioSources;	
-	public void Onclick_Config ()
+public class Config : MonoBehaviour 
 	{
-		// ボタンを押してコンフィグ画面に移行
-		SoundManager.Instance.Play(1);	//(1)はElmentの数
-		//Invoke("LoadScene",0.3f);
-		SceneManager.LoadScene("Config");
-		//Debug.Log("コンフィグ");
+		/*[SerializeField] UnityEngine.UI.Slider SoundVolume;
+
+		private void Start()
+		{
+			SoundVolume = PlayerPrefs.GetFloat("TimeScale");
+		}
+
+		public void ChangeSoundVolume()
+		{
+			PlayerPrefs.SetFloat("TimeScale", SoundVolume);
+		}
+
+		public void ResetGameSpeed()
+		{
+			SoundVolume = 1f;
+		}*/
 	}
-
-	public void Onclick_Exit ()
-	{
-		// ボタンを押してポーズ画面に移行
-		SoundManager.Instance.Play(1);	//(1)はElmentの数
-		SceneManager.LoadScene("Pause");
-	}
-
-	public void Onclick_End ()
-	{
-		// ボタンを押してスタート画面に移行
-		SoundManager.Instance.Play(1);	//(1)はElmentの数
-		SceneManager.LoadScene("Start");
-	}
-
-	public void Onclick_Save ()
-	{
-		// ボタンを押してセーブ画面に移行
-		SoundManager.Instance.Play(1);	//(1)はElmentの数
-		SceneManager.LoadScene("Start");
-	}
-
-	public void Onclick_Load ()
-	{
-		// ボタンを押してロード画面に移行
-		SoundManager.Instance.Play(1);	//(1)はElmentの数
-		SceneManager.LoadScene("Start");
-	}
-
-	void Start () {
-		audioSources = gameObject.GetComponents<AudioSource> ();
-		SoundManager.Instance.Play(0);
-	}
-
-	void Update () {
-
-	}
-
-	//void LoadScene() {
-	//	SceneManager.LoadScene("Config");
-	//}
-
-}
