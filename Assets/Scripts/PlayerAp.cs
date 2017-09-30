@@ -105,13 +105,13 @@ public class PlayerAp : MonoBehaviour {
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("Damage");
 			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(36,gameObject);
+				SoundManager.Instance.Play(21,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(37,gameObject);
+				SoundManager.Instance.Play(22,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(38,gameObject);
+				SoundManager.Instance.Play(23,gameObject);
 			}
 			Instantiate(DamageEffect, transform.position, transform.rotation);
 			StartCoroutine ("DamageCoroutine");
@@ -122,13 +122,13 @@ public class PlayerAp : MonoBehaviour {
 			Instantiate(HpHealEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("ItemGet");
 			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(33,gameObject);
+				SoundManager.Instance.Play(18,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(34,gameObject);
+				SoundManager.Instance.Play(19,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(35,gameObject);
+				SoundManager.Instance.Play(20,gameObject);
 			}
 			armorPoint += 1000;
 			// 体力上限以上には回復しない。

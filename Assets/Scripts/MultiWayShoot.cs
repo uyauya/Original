@@ -83,15 +83,15 @@ public class MultiWayShoot : MonoBehaviour {
 			// bulletObjectのオブジェクトにダメージ計算を渡す
 					if (PlayerNo == 0) {
 						SoundManager.Instance.Play(24,gameObject);
-						SoundManager.Instance.PlayDelayed (25, 0.2f, gameObject);
+						SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
 					}
 					if (PlayerNo == 1) {
 						SoundManager.Instance.Play(26,gameObject);
-						SoundManager.Instance.PlayDelayed (27, 0.2f, gameObject);
+						SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
 					}
 					if (PlayerNo == 2) {
 						SoundManager.Instance.Play(28,gameObject);
-						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
+						SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
 					}
 				GetComponent<PlayerController> ().boostPoint -= BpDown;
 				bulletObject.GetComponent<Bullet05> ().damage = this.damage;

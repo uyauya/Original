@@ -1148,13 +1148,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 329212689}
+  - component: {fileID: 329212690}
   m_Layer: 0
   m_Name: SoundManager2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &329212689
 Transform:
   m_ObjectHideFlags: 0
@@ -1168,6 +1169,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &329212690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 329212688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea56606df5655d040a459438e9eb226e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipList:
+  - {fileID: 8300000, guid: 02796c1f74b6184408369bfd7adcd014, type: 3}
+  - {fileID: 8300000, guid: 1d23f44376843614aac7ece952647fbe, type: 3}
+  - {fileID: 8300000, guid: aaad3a90bcd4b3243abf400f2c8fc0a8, type: 3}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: f62479edd7d4fe945b1b41e04d966bcb, type: 3}
+  volume: 5
 --- !u!1 &354769303
 GameObject:
   m_ObjectHideFlags: 0
@@ -4123,35 +4142,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClipList:
   - {fileID: 8300000, guid: 1b8da664705e9b04dae767401ed3dfb7, type: 3}
-  - {fileID: 8300000, guid: 02796c1f74b6184408369bfd7adcd014, type: 3}
   - {fileID: 8300000, guid: 2f353e7286e8bc4459dcdfe6f9875d08, type: 3}
-  - {fileID: 8300000, guid: 02796c1f74b6184408369bfd7adcd014, type: 3}
   - {fileID: 8300000, guid: 1af07af1595e2d74da1df3b5114823c0, type: 3}
-  - {fileID: 8300000, guid: 02796c1f74b6184408369bfd7adcd014, type: 3}
   - {fileID: 8300000, guid: 1785cedc62a616f4288296b11f6b4ee4, type: 3}
-  - {fileID: 8300000, guid: 1d23f44376843614aac7ece952647fbe, type: 3}
   - {fileID: 8300000, guid: 0e3476c0c73c3d04ea2009e5a00d1ac6, type: 3}
-  - {fileID: 8300000, guid: 1d23f44376843614aac7ece952647fbe, type: 3}
   - {fileID: 8300000, guid: ebb47280114562c44ac713cb4868246f, type: 3}
-  - {fileID: 8300000, guid: 1d23f44376843614aac7ece952647fbe, type: 3}
   - {fileID: 8300000, guid: dd9b07a3065107d4cbc96cd357c9094a, type: 3}
-  - {fileID: 8300000, guid: aaad3a90bcd4b3243abf400f2c8fc0a8, type: 3}
   - {fileID: 8300000, guid: 9ceab1f95da591d459812ef1fe51d27f, type: 3}
-  - {fileID: 8300000, guid: aaad3a90bcd4b3243abf400f2c8fc0a8, type: 3}
   - {fileID: 8300000, guid: 776e6860f960e9748ad6a26309d247b9, type: 3}
-  - {fileID: 8300000, guid: aaad3a90bcd4b3243abf400f2c8fc0a8, type: 3}
   - {fileID: 8300000, guid: 1b8da664705e9b04dae767401ed3dfb7, type: 3}
-  - {fileID: 0}
   - {fileID: 8300000, guid: 2f353e7286e8bc4459dcdfe6f9875d08, type: 3}
-  - {fileID: 0}
   - {fileID: 8300000, guid: 1af07af1595e2d74da1df3b5114823c0, type: 3}
-  - {fileID: 0}
   - {fileID: 8300000, guid: 66cb29617603084439170fbb26d2408a, type: 3}
-  - {fileID: 8300000, guid: f62479edd7d4fe945b1b41e04d966bcb, type: 3}
   - {fileID: 8300000, guid: 3c328a286a94237439b3b8d29d0b8fe5, type: 3}
-  - {fileID: 8300000, guid: f62479edd7d4fe945b1b41e04d966bcb, type: 3}
-  - {fileID: 8300000, guid: 028fe851692f9cc438bf984e03d6aaab, type: 3}
-  - {fileID: 8300000, guid: f62479edd7d4fe945b1b41e04d966bcb, type: 3}
+  - {fileID: 8300000, guid: 34daad80a0ec1da4fa1a737de8af666c, type: 3}
   - {fileID: 8300000, guid: 1b8da664705e9b04dae767401ed3dfb7, type: 3}
   - {fileID: 8300000, guid: 2f353e7286e8bc4459dcdfe6f9875d08, type: 3}
   - {fileID: 8300000, guid: 1af07af1595e2d74da1df3b5114823c0, type: 3}
@@ -4658,11 +4662,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1748061921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72c8c9ae2729c1648825f2cf8dbfccd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 23dc709e9f4cde247bc7a165af1179c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isPause: 0
+  isConfig: 0
   Tutorial: {fileID: 238109155}
+  Setting: {fileID: 893969387}
   audioSource: {fileID: 974667649}
 --- !u!1001 &1773775228
 Prefab:
@@ -5745,7 +5751,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2071102935}
-  - component: {fileID: 2071102934}
   m_Layer: 0
   m_Name: Config
   m_TagString: Untagged
@@ -5753,20 +5758,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2071102934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2071102933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e6f46699ba37674d8a04f65a95b7bb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isConfig: 0
-  Setting: {fileID: 893969387}
-  audioSource: {fileID: 0}
 --- !u!4 &2071102935
 Transform:
   m_ObjectHideFlags: 0
@@ -5914,3 +5905,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aee7975ed951de45b01f4f7aab5100e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2129969304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2129969306}
+  - component: {fileID: 2129969305}
+  m_Layer: 0
+  m_Name: SoundManager3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2129969305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2129969304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 873e91620e2e78f44bae57ff44c0393d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipList:
+  - {fileID: 8300000, guid: 5c7f6ca5c33955b4caffb3978342b7c1, type: 3}
+  volume: 10
+--- !u!4 &2129969306
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2129969304}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 1.49, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

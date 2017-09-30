@@ -114,15 +114,15 @@ public class PlayerShoot : MonoBehaviour {
 			//Debug.Log (PlayerNo);
 			if (PlayerNo == 0) {
 			SoundManager.Instance.Play(0,gameObject);
-			SoundManager.Instance.PlayDelayed (1, 0.2f, gameObject);
+			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 			}
 			if (PlayerNo == 1) {
-			SoundManager.Instance.Play(2,gameObject);
-			SoundManager.Instance.PlayDelayed (3, 0.2f, gameObject);
+			SoundManager.Instance.Play(1,gameObject);
+			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 			}
 			if (PlayerNo == 2) {
-			SoundManager.Instance.Play(4,gameObject);
-			SoundManager.Instance.PlayDelayed (5, 0.2f, gameObject);
+			SoundManager.Instance.Play(2,gameObject);
+			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 			}
 			// bulletObjectのオブジェクトにダメージ計算を渡す
 			bulletObject.GetComponent<Bullet01> ().damage = this.damage;

@@ -52,16 +52,16 @@ public class PlayerShoot02 : MonoBehaviour {
 			GameObject bulletObject = GameObject.Instantiate (Bullet02)as GameObject;
 			bulletObject.transform.position = muzzle.position;
 			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(6,gameObject);
-				SoundManager.Instance.PlayDelayed (7, 0.2f, gameObject);
+				SoundManager.Instance.Play(3,gameObject);
+				SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(8,gameObject);
-				SoundManager.Instance.PlayDelayed (9, 0.2f, gameObject);
+				SoundManager.Instance.Play(4,gameObject);
+				SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(10,gameObject);
-				SoundManager.Instance.PlayDelayed (11, 0.2f, gameObject);
+				SoundManager.Instance.Play(5,gameObject);
+				SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
 			}
 			bulletObject.GetComponent<Bullet02> ().damage = this.damage;
 		}

@@ -58,16 +58,16 @@ public class PlayerShoot04 : MonoBehaviour {
 			GameObject bulletObject = GameObject.Instantiate (Bullet04)as GameObject;
 			bulletObject.transform.position = muzzle.position + transform.TransformDirection(Vector3.forward * 2) + new Vector3(0, -0.3f, 0);
 			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(18,gameObject);
-				SoundManager.Instance.PlayDelayed (19, 0.2f, gameObject);
+				SoundManager.Instance.Play(9,gameObject);
+				SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(20,gameObject);
-				SoundManager.Instance.PlayDelayed (21, 0.2f, gameObject);
+				SoundManager.Instance.Play(10,gameObject);
+				SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(22,gameObject);
-				SoundManager.Instance.PlayDelayed (23, 0.2f, gameObject);
+				SoundManager.Instance.Play(11,gameObject);
+				SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
 			}
 		}
 	}

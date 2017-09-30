@@ -1,0 +1,31 @@
+PlayerShoot1
+SoundManager1　V005(Element0～2)
+SoundManager2　キャンセル音2
+
+PlayerShoot2
+SoundManager1　V002(Element3～5)
+SoundManager2　宇宙人などによるビーム攻撃
+
+PlayerShoot3
+SoundManager1　V015(Element6～8)
+SoundManager2　数値や位置などが上がる
+
+PlayerShoot4
+SoundManager1　V005(Element9～11)
+SoundManager2　（未設定）
+
+MultyWayShoot4
+SoundManager1　V006(Element12～14)
+SoundManager2　ショット音
+
+PlayerController（ジャンプ）
+SoundManager1　V005(Element15～17)
+
+PlayerController（ブースト回復）
+SoundManager1　V007(Element18～20)
+
+PlayerAp（敵からの攻撃）
+SoundManager1　V004(Element21～23)
+
+PlayerAp（ブースト回復）
+SoundManager1　V007(Element18～20)

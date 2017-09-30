@@ -149,25 +149,25 @@ public class PlayerController : MonoBehaviour {
 			//ジャンプモーションに切り替える
 			animator.SetBool("Jump", true);
 			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(30,gameObject);
+				SoundManager.Instance.Play(15,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(31,gameObject);
+				SoundManager.Instance.Play(16,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(32,gameObject);
+				SoundManager.Instance.Play(17,gameObject);
 			}
 			// ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
 		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 10)) {
 			animator.SetBool("BoostUp", Input.GetButton ("Jump"));
 			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(30,gameObject);
+				SoundManager.Instance.Play(15,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(31,gameObject);
+				SoundManager.Instance.Play(16,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(32,gameObject);
+				SoundManager.Instance.Play(17,gameObject);
 			}
 			// ジャンプの最大値までは上昇（ボタン押し続けている間は上昇し、最大値まで行ったら上昇値を0にする）
 			if (transform.position.y > HighPoint)
@@ -216,13 +216,13 @@ public class PlayerController : MonoBehaviour {
 			Instantiate(BpHealEffect, transform.position, transform.rotation);
 			animator.SetTrigger ("ItemGet");
 			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(33,gameObject);
+				SoundManager.Instance.Play(18,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(34,gameObject);
+				SoundManager.Instance.Play(19,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(35,gameObject);
+				SoundManager.Instance.Play(20,gameObject);
 			}
 			boostPoint += 500;
 			// ブーストポイントが最大以上にはならない

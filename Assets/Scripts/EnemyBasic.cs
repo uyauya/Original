@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBasic : MonoBehaviour {
+	public int enemyLevel = 0;
 	public Animator animator;					// 《Animator》コンポーネント用の変数
 	public GameObject target;
+	public GameObject shot;
+	public float shotInterval = 0;						// 攻撃間隔計測開始
+	public float shotIntervalMax = 1.0F;				// 攻撃間隔（～秒ごとに攻撃）
+	public GameObject exprosion;				// 爆発処理
 	public GameObject particle;
 	public float armorPoint;
 	public float armorPointMax; 
