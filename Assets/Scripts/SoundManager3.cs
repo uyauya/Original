@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Slider))]
 public class SoundManager3 : MonoBehaviour {
 
 	[SerializeField]
 	private List<AudioClip> audioClipList = new List<AudioClip>(); 
 	[SerializeField]
 	private float volume = 10;
+	[SerializeField]
+	private List<AudioSource> _bgmAudioSource;
+
+
 
 	// 音を再生する
 	public void Play(int number, GameObject go = null)
@@ -80,11 +86,16 @@ public class SoundManager3 : MonoBehaviour {
 		}
 	}
 
-	private void Start()
+	void Start()
 	{
-
+	this.GetComponent<Slider>().onValueChanged.AddListener(value =>
+	{
+	foreach(var SoundSource in _bgmAudioSource)
+	{
+	SoundSource.volume = value;
 	}
-
+	});
+	}
 	private void Update()
 	{
 
