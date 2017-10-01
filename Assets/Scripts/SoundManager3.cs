@@ -10,9 +10,10 @@ public class SoundManager3 : MonoBehaviour {
 	private List<AudioClip> audioClipList = new List<AudioClip>(); 
 	[SerializeField]
 	private float volume = 10;
-	[SerializeField]
+	//[SerializeField]
 	private List<AudioSource> _bgmAudioSource;
-
+	[SerializeField]
+	GameObject bgm;
 
 
 	// 音を再生する
@@ -53,7 +54,9 @@ public class SoundManager3 : MonoBehaviour {
 		AudioSource audioSource = go.AddComponent<AudioSource>();
 		audioSource.volume = volume;
 		audioSource.PlayOneShot(clip);
+		_bgmAudioSource.Add (audioSource);
 		yield return new WaitWhile(() => audioSource.isPlaying);
+		_bgmAudioSource.RemoveAt (_bgmAudioSource.Count -1);
 		Destroy(audioSource);
 	}
 
@@ -88,7 +91,8 @@ public class SoundManager3 : MonoBehaviour {
 
 	void Start()
 	{
-	this.GetComponent<Slider>().onValueChanged.AddListener(value =>
+
+		bgm.GetComponent<Slider>().onValueChanged.AddListener((value) =>
 	{
 	foreach(var SoundSource in _bgmAudioSource)
 	{
@@ -100,5 +104,8 @@ public class SoundManager3 : MonoBehaviour {
 	{
 
 	}
+
+
+		
 
 }
