@@ -9,6 +9,7 @@ public class Pause : MonoBehaviour
 	public GameObject Tutorial;
 	public GameObject Setting;
 	public AudioSource audioSource;
+	public BGMManager bgmManager;
 
 	void Start()
 	{
@@ -16,6 +17,7 @@ public class Pause : MonoBehaviour
 		isConfig = false;
 		Tutorial.SetActive(false);
 		Setting.SetActive(false);
+		bgmManager = GameObject.Find ("BGMManager").GetComponent<BGMManager> ();
 	}
 	void Update ()
 	{
@@ -24,13 +26,13 @@ public class Pause : MonoBehaviour
 				isPause = false;
 				Tutorial.SetActive (false);
 				Time.timeScale = 1f;
-				audioSource.Play ();
+				bgmManager.Play ();
 			} else {
 				isPause = true;
 				Tutorial.SetActive (true);
 				Time.timeScale = 0;
 				//SoundManager.Instance.Stop ();
-				audioSource.Pause ();		//一時停止（完全停止する場合はaudioSource.Stop();
+				bgmManager.Pause ();		//一時停止（完全停止する場合はaudioSource.Stop();
 			}
 		}
 				if (Input.GetKeyDown (KeyCode.LeftShift) && isPause ) {

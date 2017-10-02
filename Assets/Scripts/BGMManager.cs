@@ -13,7 +13,7 @@ public class BGMManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-
+		bgm.GetComponent<Slider> ().value = Volume ();
 		bgm.GetComponent<Slider>().onValueChanged.AddListener((value) =>
 			{
 				//foreach(var SoundSource in _bgmAudioSource)
@@ -27,5 +27,29 @@ public class BGMManager : MonoBehaviour {
 	void Update () 
 	{
 		
+	}
+
+	public void Play()
+	{
+		AudioSource BGMplay = gameObject.GetComponent<AudioSource> ();
+		BGMplay.Play ();
+	}
+
+	public void Stop()
+	{
+		AudioSource BGMstop = gameObject.GetComponent<AudioSource> ();
+		BGMstop.Stop ();
+	}
+
+	public void Pause()
+	{
+		AudioSource BGMpause = gameObject.GetComponent<AudioSource> ();
+		BGMpause.Pause ();
+	}
+
+	public float Volume()
+	{
+		AudioSource BGMvolume = gameObject.GetComponent<AudioSource> ();
+		return BGMvolume.volume;
 	}
 }
