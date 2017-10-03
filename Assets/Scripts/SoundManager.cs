@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Slider))]
 public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
 	[SerializeField]
+	private List<AudioSource> _voiceAudioSource;
+	[SerializeField]
 	private List<AudioClip> audioClipList = new List<AudioClip>(); 
 	[SerializeField]
-	private float volume = 10;
+	GameObject voice;
 
 	// 音を再生する
 	public void Play(int number, GameObject go = null)
@@ -45,7 +49,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 	private IEnumerator PlayCoroutine(AudioClip clip, GameObject go)
 	{
 		AudioSource audioSource = go.AddComponent<AudioSource>();
-		audioSource.volume = volume;
+		audioSource.volume = Volume;
 		audioSource.PlayOneShot(clip);
 		yield return new WaitWhile(() => audioSource.isPlaying);
 		Destroy(audioSource);
@@ -56,7 +60,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 	{
 		AudioSource audioSource = go.AddComponent<AudioSource>();
 		audioSource.clip = clip;
-		audioSource.volume = volume;
+		audioSource.volume = Volume;
 		audioSource.PlayDelayed(delay);
 		yield return new WaitWhile(() => audioSource.isPlaying);
 		Destroy(audioSource);
@@ -82,7 +86,14 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
 	private void Start()
 	{
-
+		voice.GetComponent<Slider> ().value = Volume ();
+		voice.GetComponent<Slider>().onValueChanged.AddListener((value) =>
+			{
+				foreach(var SoundSource in _voiceAudioSource)
+				{
+				SoundSource.volume = value;
+				}
+			});
 	}
 
 	private void Update()

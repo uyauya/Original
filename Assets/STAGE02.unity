@@ -4110,7 +4110,7 @@ GameObject:
   - component: {fileID: 1283915186}
   - component: {fileID: 1283915185}
   m_Layer: 0
-  m_Name: Effect
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4998,7 +4998,7 @@ GameObject:
   - component: {fileID: 1747451471}
   - component: {fileID: 1747451470}
   m_Layer: 0
-  m_Name: Voice
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
