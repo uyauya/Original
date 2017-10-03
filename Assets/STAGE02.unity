@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1195,7 +1195,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 299761576}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 329212690}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &299761576
@@ -1367,13 +1378,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea56606df5655d040a459438e9eb226e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _voiceAudioSource: []
   audioClipList:
   - {fileID: 8300000, guid: 02796c1f74b6184408369bfd7adcd014, type: 3}
   - {fileID: 8300000, guid: 1d23f44376843614aac7ece952647fbe, type: 3}
   - {fileID: 8300000, guid: aaad3a90bcd4b3243abf400f2c8fc0a8, type: 3}
   - {fileID: 0}
   - {fileID: 8300000, guid: f62479edd7d4fe945b1b41e04d966bcb, type: 3}
-  volume: 5
+  voice: {fileID: 0}
 --- !u!1 &354769303
 GameObject:
   m_ObjectHideFlags: 0
@@ -3780,7 +3792,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1172200201}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1593420680}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1172200201
@@ -4576,6 +4599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c9eadac615e0f40b7bfb28a3557c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _voiceAudioSource:
+  - {fileID: 0}
   audioClipList:
   - {fileID: 8300000, guid: 1b8da664705e9b04dae767401ed3dfb7, type: 3}
   - {fileID: 8300000, guid: 2f353e7286e8bc4459dcdfe6f9875d08, type: 3}
@@ -4601,7 +4626,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 858c746458bc7ab4eaaf62e81f8e6a5f, type: 3}
   - {fileID: 8300000, guid: 567854ca78a38b642b02a00860529cf0, type: 3}
   - {fileID: 8300000, guid: e389883d4eec966478d79466376d22d0, type: 3}
-  volume: 10
+  voice: {fileID: 0}
 --- !u!4 &1593420681
 Transform:
   m_ObjectHideFlags: 0
