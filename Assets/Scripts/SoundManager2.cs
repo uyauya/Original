@@ -90,4 +90,27 @@ public class SoundManager2 : SingletonMonoBehaviour<SoundManager2> {
 
 	}
 
+	public void Play()
+	{
+		AudioSource Effectplay = gameObject.GetComponent<AudioSource> ();
+		Effectplay.Play ();
+	}
+
+	public void Stop()
+	{
+		AudioSource Effectstop = gameObject.GetComponent<AudioSource> ();
+		Effectstop.Stop ();
+	}
+
+	public void Pause()
+	{
+		AudioSource Effectpause = gameObject.GetComponent<AudioSource> ();
+		Effectpause.Pause ();
+	}
+
+	public float Volume()
+	{
+		AudioSource Effectvolume = gameObject.GetComponent<AudioSource> ();
+		return Effectvolume.volume;
+	}
 }
