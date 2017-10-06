@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeWeapon : MonoBehaviour {
-
+	/*
 
 	private int type = 0;		//武器識別用No.
 	private int num = 5;		//武器の種類数
@@ -38,24 +38,20 @@ public class ChangeWeapon : MonoBehaviour {
 		
 	private void useWeapon ()
 	{
-		if (type == 0)
-		{
+		if (type == 0) {
 			return pshoot1;
 		}
-		if (type == 1)
-		{
+		if (type == 1) {
 			return pshoot2;
 		}
-		if (type == 2)
-		{
+		if (type == 2) {
 			return pshoot3;
 		}
-		if (type == 3)
-		{
+		if (type == 3) {
 			return pshoot4;
 		}
-		if (type == 4)
-		{
+		if (type == 4) {
 			return mshoot;
 		}
+	}*/
 }
