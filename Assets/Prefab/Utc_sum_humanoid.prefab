@@ -4924,6 +4924,7 @@ MonoBehaviour:
   gravity: 9.8
   boostPoint: 0
   boostPointMax: 3000
+  AttackPoint: 100
   RecoverPoint: 5
   gaugeImage: {fileID: 0}
   ItemCount: 0
@@ -5814,6 +5815,7 @@ MonoBehaviour:
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
+  AttackPoint: 0
   BpDown: 500
   PlayerNo: 0
 --- !u!114 &114905705873582806

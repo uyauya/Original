@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 moveDirection = Vector3.zero;
 	public int boostPoint;
 	public int boostPointMax;
+	public int AttackPoint;			//攻撃力
 	public int RecoverPoint = 1;	//　ブーストポイント回復値
 	public Image gaugeImage;
 	Vector3 moveSpeed;
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour {
 	Vector3 addSpeed = Vector3.zero;        //加算速度
 	public GameObject BpHealEffect;
 	public int PlayerNo;
+
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく

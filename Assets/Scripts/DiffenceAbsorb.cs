@@ -105,7 +105,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 	void Absorb() {
 		// Bullet01のゲームオブジェクトを生成してbulletObjectとする
 		GameObject absorbObject = GameObject.Instantiate (AbsorbWall)as GameObject;
-		//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
-		absorbObject.transform.position = muzzle.position;
+		// Diffencerと重ならないようAbsorbを少し前に置く
+		absorbObject.transform.position = muzzle.position + new Vector3 (0, 0, 0.2f);
 	}
-}
+} 
