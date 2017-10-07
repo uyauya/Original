@@ -33,7 +33,7 @@ public class PlayerShoot04 : MonoBehaviour {
 	
 	void Update () {
 		if (pause.isPause == false) {
-			if (Input.GetButtonUp ("Fire4")) {
+			if (Input.GetButtonUp ("Fire1")) {
 				damage = Attack;
 				if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 					animator.SetTrigger ("Shot");

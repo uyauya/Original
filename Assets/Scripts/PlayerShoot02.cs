@@ -35,7 +35,7 @@ public class PlayerShoot02 : MonoBehaviour {
 		int boostpoint = GetComponent<PlayerController> ().boostPoint;
 		int Attackpoint = GetComponent<PlayerController> ().AttackPoint;
 		if (pause.isPause == false) {
-			if (Input.GetButtonUp ("Fire2")) {
+			if (Input.GetButtonUp ("Fire1")) {
 				if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 					damage = Attack += AttackPoint;
 					animator.SetTrigger ("Shots");
