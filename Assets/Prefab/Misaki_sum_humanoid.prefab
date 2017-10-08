@@ -1103,6 +1103,7 @@ GameObject:
   - component: {fileID: 54416605156796806}
   - component: {fileID: 114583845871056498}
   - component: {fileID: 82003227891147888}
+  - component: {fileID: 114821327649930234}
   m_Layer: 8
   m_Name: Misaki_sum_humanoid
   m_TagString: Player
@@ -6133,13 +6134,12 @@ MonoBehaviour:
   Bullet02: {fileID: 115984, guid: 3fa959cafea1b534b9aed554273be7b4, type: 2}
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  interval: 0.5
   shotInterval: 0
   shotIntervalMax: 0.25
-  Attack: 0
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
+  AttackPoint: 0
   BpDown: 500
   PlayerNo: 2
 --- !u!114 &114168413891335844
@@ -6156,7 +6156,7 @@ MonoBehaviour:
   Bullet04: {fileID: 181316, guid: 0f046369970b721458fc972118ac5e17, type: 2}
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  interval: 0.5
+  speed: 1000
   shotInterval: 0
   shotIntervalMax: 0.25
   Attack: 100
@@ -6261,10 +6261,8 @@ MonoBehaviour:
   Bullet03: {fileID: 142680, guid: 3b22c6a562677ac4fa14fc10650eb2fb, type: 2}
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  interval: 0.5
   shotInterval: 0
   shotIntervalMax: 0.25
-  Attack: 500
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
@@ -6385,7 +6383,6 @@ MonoBehaviour:
   interval: 0.5
   shotInterval: 0
   shotIntervalMax: 0.25
-  Attack: 2000
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
@@ -7092,6 +7089,27 @@ MonoBehaviour:
   - {fileID: 114681797306361026}
   debug: 1
   threshold: 0.01
+--- !u!114 &114821327649930234
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1375426664305316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c56c5891066632f4e9772312a0ee2c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weponImage1: {fileID: 0}
+  weponImage2: {fileID: 0}
+  weponImage3: {fileID: 0}
+  weponImage4: {fileID: 0}
+  weponImage5: {fileID: 0}
+  pshoot1Color: {r: 0, g: 0, b: 0, a: 0}
+  pshoot2Color: {r: 0, g: 0, b: 0, a: 0}
+  pshoot3Color: {r: 0, g: 0, b: 0, a: 0}
+  pshoot4Color: {r: 0, g: 0, b: 0, a: 0}
+  pshoot5Color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114836769958636946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7326,6 +7344,7 @@ MonoBehaviour:
   gravity: 9.8
   boostPoint: 0
   boostPointMax: 1500
+  AttackPoint: 0
   RecoverPoint: 3
   gaugeImage: {fileID: 0}
   ItemCount: 0

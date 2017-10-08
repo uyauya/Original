@@ -4691,6 +4691,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c56c5891066632f4e9772312a0ee2c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weponImage1: {fileID: 0}
+  weponImage2: {fileID: 0}
+  weponImage3: {fileID: 0}
+  weponImage4: {fileID: 0}
+  weponImage5: {fileID: 0}
+  mywhite: {r: 1, g: 1, b: 1, a: 1}
+  myBlue: {r: 0.10304249, g: 0.029411793, b: 1, a: 1}
+  myYellow: {r: 0.81334645, g: 0.99264705, b: 0, a: 1}
+  myGreen: {r: 0.48234105, g: 0.9705882, b: 0.08564016, a: 1}
+  myRed: {r: 1, g: 0.16176468, b: 0.16176468, a: 1}
 --- !u!114 &114107822095325382
 MonoBehaviour:
   m_ObjectHideFlags: 1

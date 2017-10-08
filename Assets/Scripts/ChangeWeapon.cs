@@ -18,14 +18,19 @@ public class ChangeWeapon : MonoBehaviour {
 	public RawImage weponImage3;
 	public RawImage weponImage4;
 	public RawImage weponImage5;
+	public Color mywhite;
+	public Color myBlue;
+	public Color myYellow;
+	public Color myGreen;
+	public Color myRed;
 
 	// Use this for initialization
 	void Start () {
 		weponImage1 = GameObject.Find ("Weapon1").GetComponent<RawImage> ();
-		weponImage1 = GameObject.Find ("Weapon2").GetComponent<RawImage> ();
-		weponImage1 = GameObject.Find ("Weapon3").GetComponent<RawImage> ();
-		weponImage1 = GameObject.Find ("Weapon4").GetComponent<RawImage> ();
-		weponImage1 = GameObject.Find ("Weapon5").GetComponent<RawImage> ();
+		weponImage2 = GameObject.Find ("Weapon2").GetComponent<RawImage> ();
+		weponImage3 = GameObject.Find ("Weapon3").GetComponent<RawImage> ();
+		weponImage4 = GameObject.Find ("Weapon4").GetComponent<RawImage> ();
+		weponImage5 = GameObject.Find ("Weapon5").GetComponent<RawImage> ();
 		pshoot1 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot> ();
 		pshoot2 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot02> ();
 		pshoot3 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();
@@ -49,9 +54,11 @@ public class ChangeWeapon : MonoBehaviour {
 	{
 		type = (type + 1) % num;
 		if (type == 0) {
-			//weponImage1.enabled = true;
-			//weponImage1.color = new Color(0.25F, 0.7F, 0.6F);
-			//Debug.Log ("Color");
+			weponImage1.color = mywhite;
+			weponImage2.color = Color.white;
+			weponImage3.color = Color.white;
+			weponImage4.color = Color.white;
+			weponImage5.color = Color.white;
 			pshoot1.enabled = true;
 			pshoot2.enabled = false;
 			pshoot3.enabled = false;
@@ -59,8 +66,11 @@ public class ChangeWeapon : MonoBehaviour {
 			mshoot.enabled = false;
 		}
 		if (type == 1) {
-			//weponImage2.enabled = true;
-			//weponImage1.color = new Color(0.25F, 0.7F, 0.6F);
+			weponImage1.color = Color.white;
+			weponImage2.color = myBlue;
+			weponImage3.color = Color.white;
+			weponImage4.color = Color.white;
+			weponImage5.color = Color.white;
 			pshoot1.enabled = false;
 			pshoot2.enabled = true;
 			pshoot3.enabled = false;
@@ -68,7 +78,11 @@ public class ChangeWeapon : MonoBehaviour {
 			mshoot.enabled = false;
 		}
 		if (type == 2) {
-			//weponImage3.enabled = true;
+			weponImage1.color = Color.white;
+			weponImage2.color = Color.white;
+			weponImage3.color = myYellow;
+			weponImage4.color = Color.white;
+			weponImage5.color = Color.white;
 			pshoot1.enabled = false;
 			pshoot2.enabled = false;
 			pshoot3.enabled = true;
@@ -76,7 +90,11 @@ public class ChangeWeapon : MonoBehaviour {
 			mshoot.enabled = false;
 		}
 		if (type == 3) {
-			//weponImage4.enabled = true;
+			weponImage1.color = Color.white;
+			weponImage2.color = Color.white;
+			weponImage3.color = Color.white;
+			weponImage4.color = myGreen;
+			weponImage5.color = Color.white;
 			pshoot1.enabled = false;
 			pshoot2.enabled = false;
 			pshoot3.enabled = false;
@@ -84,7 +102,11 @@ public class ChangeWeapon : MonoBehaviour {
 			mshoot.enabled = false;
 		}
 		if (type == 4) {
-			//weponImage5.enabled = true;
+			weponImage1.color = Color.white;
+			weponImage2.color = Color.white;
+			weponImage3.color = Color.white;
+			weponImage4.color = Color.white;
+			weponImage5.color = myRed;
 			pshoot1.enabled = false;
 			pshoot2.enabled = false;
 			pshoot3.enabled = false;

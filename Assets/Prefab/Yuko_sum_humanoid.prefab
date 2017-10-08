@@ -1325,6 +1325,7 @@ GameObject:
   - component: {fileID: 54316119923381936}
   - component: {fileID: 114274271927115456}
   - component: {fileID: 82371577017388810}
+  - component: {fileID: 114891178713599580}
   m_Layer: 0
   m_Name: Yuko_sum_humanoid
   m_TagString: Player
@@ -4064,7 +4065,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -4076,7 +4077,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -4088,7 +4089,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!95 &95499786026061896
 Animator:
   serializedVersion: 3
@@ -4248,10 +4249,8 @@ MonoBehaviour:
   Bullet03: {fileID: 142680, guid: 3b22c6a562677ac4fa14fc10650eb2fb, type: 2}
   muzzle: {fileID: 4064662441726532}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  interval: 0.5
   shotInterval: 0
   shotIntervalMax: 0.25
-  Attack: 500
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
@@ -4395,13 +4394,12 @@ MonoBehaviour:
   Bullet02: {fileID: 115984, guid: 3fa959cafea1b534b9aed554273be7b4, type: 2}
   muzzle: {fileID: 4064662441726532}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  interval: 0.5
   shotInterval: 0
   shotIntervalMax: 0.25
-  Attack: 0
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
+  AttackPoint: 0
   BpDown: 500
   PlayerNo: 1
 --- !u!114 &114266126526323262
@@ -4831,8 +4829,6 @@ MonoBehaviour:
   effectObject: {fileID: 0}
   BpDown: 500
   isCharging: 0
-  audioClip01: {fileID: 8300000, guid: 04cb2bf5cc13e424cb79df457a2616c4, type: 3}
-  audioClip02: {fileID: 8300000, guid: 3c328a286a94237439b3b8d29d0b8fe5, type: 3}
   PlayerNo: 1
 --- !u!114 &114687445487335210
 MonoBehaviour:
@@ -4910,6 +4906,7 @@ MonoBehaviour:
   gravity: 9.8
   boostPoint: 0
   boostPointMax: 1000
+  AttackPoint: 0
   RecoverPoint: 3
   gaugeImage: {fileID: 0}
   ItemCount: 0
@@ -4969,7 +4966,6 @@ MonoBehaviour:
   interval: 0.5
   shotInterval: 0
   shotIntervalMax: 0.25
-  Attack: 2000
   damage: 0
   gaugeImage: {fileID: 0}
   boostPoint: 0
@@ -5066,7 +5062,7 @@ MonoBehaviour:
   Bullet04: {fileID: 181316, guid: 0f046369970b721458fc972118ac5e17, type: 2}
   muzzle: {fileID: 4064662441726532}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  interval: 0.5
+  speed: 1000
   shotInterval: 0
   shotIntervalMax: 0.25
   Attack: 100
@@ -5075,6 +5071,27 @@ MonoBehaviour:
   boostPoint: 0
   BpDown: 500
   PlayerNo: 1
+--- !u!114 &114891178713599580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1647243158286332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c56c5891066632f4e9772312a0ee2c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weponImage1: {fileID: 0}
+  weponImage2: {fileID: 0}
+  weponImage3: {fileID: 0}
+  weponImage4: {fileID: 0}
+  weponImage5: {fileID: 0}
+  pshoot1Color: {r: 0, g: 0, b: 0, a: 0}
+  pshoot2Color: {r: 0, g: 0, b: 0, a: 0}
+  pshoot3Color: {r: 0, g: 0, b: 0, a: 0}
+  pshoot4Color: {r: 0, g: 0, b: 0, a: 0}
+  pshoot5Color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114932565376361466
 MonoBehaviour:
   m_ObjectHideFlags: 1
