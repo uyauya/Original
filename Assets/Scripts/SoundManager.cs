@@ -52,7 +52,9 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 		AudioSource audioSource = go.AddComponent<AudioSource>();
 		audioSource.volume = Value;
 		audioSource.PlayOneShot(clip);
+		_voiceAudioSource.Add (audioSource);
 		yield return new WaitWhile(() => audioSource.isPlaying);
+		_voiceAudioSource.Remove (audioSource);
 		Destroy(audioSource);
 	}
 
@@ -63,7 +65,9 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 		audioSource.clip = clip;
 		audioSource.volume = Value;
 		audioSource.PlayDelayed(delay);
+		_voiceAudioSource.Add (audioSource);
 		yield return new WaitWhile(() => audioSource.isPlaying);
+		_voiceAudioSource.Remove (audioSource);
 		Destroy(audioSource);
 	}
 
@@ -93,7 +97,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 				Value = value;
 				foreach(var SoundSource in _voiceAudioSource)
 				{
-				SoundSource.volume = value;
+					SoundSource.volume = value;
 				}
 			});
 	}
@@ -105,8 +109,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
 	public void Play()
 	{
-		AudioSource Voiceplay = gameObject.GetComponent<AudioSource> ();
-		Voiceplay.Play ();
+		AudioSource Effectplay = gameObject.GetComponent<AudioSource> ();
+		Effectplay.Play ();
 	}
 
 	public void Stop()
@@ -125,5 +129,19 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 	{
 		AudioSource Voicevolume = gameObject.GetComponent<AudioSource> ();
 		return Voicevolume.volume;
+	}
+
+	public void ChangeVolume()
+	{
+		Value = voice.GetComponent<Slider>().value;
+		foreach(var SoundSource in _voiceAudioSource)
+		{
+			SoundSource.volume = Value;
+		}
+	}
+
+	public void SampleVoice()
+	{
+		Play (0);
 	}
 }

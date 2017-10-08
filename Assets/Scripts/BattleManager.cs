@@ -16,7 +16,7 @@ public class BattleManager : MonoBehaviour {
 	public Image messageLose;
 	public static int score;			//敵を倒した数。Enemyスクリプトでカウントアップ  
 	public Text ScoreText;
-	private int Score = 0;
+	public int Score = 0;
 	private int ItemCount;				//アイテム取得数をカウント
 	PlayerController playerController;
 	public GameObject WarpEffect;

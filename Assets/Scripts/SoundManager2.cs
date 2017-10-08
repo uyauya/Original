@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class SoundManager2 : SingletonMonoBehaviour<SoundManager2> {
 
 	[SerializeField]
-	private List<AudioSource> _voiceAudioSource;
+	private List<AudioSource> _effectAudioSource;
 	[SerializeField]
 	private List<AudioClip> audioClipList = new List<AudioClip>(); 
 	[SerializeField]
-	GameObject voice;
+	GameObject effect;
 	private float Value;
 
 	// 音を再生する
@@ -52,7 +52,9 @@ public class SoundManager2 : SingletonMonoBehaviour<SoundManager2> {
 		AudioSource audioSource = go.AddComponent<AudioSource>();
 		audioSource.volume = Value;
 		audioSource.PlayOneShot(clip);
+		_effectAudioSource.Add (audioSource);
 		yield return new WaitWhile(() => audioSource.isPlaying);
+		_effectAudioSource.Remove (audioSource);
 		Destroy(audioSource);
 	}
 
@@ -63,7 +65,9 @@ public class SoundManager2 : SingletonMonoBehaviour<SoundManager2> {
 		audioSource.clip = clip;
 		audioSource.volume = Value;
 		audioSource.PlayDelayed(delay);
+		_effectAudioSource.Add (audioSource);
 		yield return new WaitWhile(() => audioSource.isPlaying);
+		_effectAudioSource.Remove (audioSource);
 		Destroy(audioSource);
 	}
 
@@ -87,11 +91,11 @@ public class SoundManager2 : SingletonMonoBehaviour<SoundManager2> {
 
 	private void Start()
 	{
-		voice.GetComponent<Slider> ().value = Volume ();
-		voice.GetComponent<Slider>().onValueChanged.AddListener((value) =>
+		effect.GetComponent<Slider> ().value = Volume ();
+		effect.GetComponent<Slider>().onValueChanged.AddListener((value) =>
 			{
 				Value = value;
-				foreach(var SoundSource in _voiceAudioSource)
+				foreach(var SoundSource in _effectAudioSource)
 				{
 					SoundSource.volume = value;
 				}
@@ -105,25 +109,39 @@ public class SoundManager2 : SingletonMonoBehaviour<SoundManager2> {
 
 	public void Play()
 	{
-		AudioSource Voiceplay = gameObject.GetComponent<AudioSource> ();
-		Voiceplay.Play ();
+		AudioSource Effectplay = gameObject.GetComponent<AudioSource> ();
+		Effectplay.Play ();
 	}
 
 	public void Stop()
 	{
-		AudioSource Voicestop = gameObject.GetComponent<AudioSource> ();
-		Voicestop.Stop ();
+		AudioSource Effectstop = gameObject.GetComponent<AudioSource> ();
+		Effectstop.Stop ();
 	}
 
 	public void Pause()
 	{
-		AudioSource Voicepause = gameObject.GetComponent<AudioSource> ();
-		Voicepause.Pause ();
+		AudioSource Effectpause = gameObject.GetComponent<AudioSource> ();
+		Effectpause.Pause ();
 	}
 
 	public float Volume()
 	{
-		AudioSource Voicevolume = gameObject.GetComponent<AudioSource> ();
-		return Voicevolume.volume;
+		AudioSource Effectvolume = gameObject.GetComponent<AudioSource> ();
+		return Effectvolume.volume;
+	}
+
+	public void ChangeVolume()
+	{
+		Value = effect.GetComponent<Slider>().value;
+		foreach(var SoundSource in _effectAudioSource)
+		{
+			SoundSource.volume = Value;
+		}
+	}
+
+	public void SampleEffect()
+	{
+		Play (0);
 	}
 }
