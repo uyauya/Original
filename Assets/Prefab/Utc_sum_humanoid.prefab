@@ -1575,6 +1575,7 @@ GameObject:
   - component: {fileID: 114796555594523450}
   - component: {fileID: 114292026720360334}
   - component: {fileID: 114098623500226768}
+  - component: {fileID: 114728882960573464}
   m_Layer: 8
   m_Name: Utc_sum_humanoid
   m_TagString: Player
@@ -5695,6 +5696,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostLight: {fileID: 1193998817713338}
+--- !u!114 &114728882960573464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697289305068994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c62e9208d468d49a1cd0206483d99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114786148620392010
 MonoBehaviour:
   m_ObjectHideFlags: 1

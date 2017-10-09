@@ -109,8 +109,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
 	public void Play()
 	{
-		AudioSource Effectplay = gameObject.GetComponent<AudioSource> ();
-		Effectplay.Play ();
+		AudioSource Voiceplay = gameObject.GetComponent<AudioSource> ();
+		Voiceplay.Play ();
 	}
 
 	public void Stop()

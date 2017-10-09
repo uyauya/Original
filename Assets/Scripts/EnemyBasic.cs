@@ -32,6 +32,7 @@ public class EnemyBasic : MonoBehaviour {
 	public float timeElapsed;
 	public float timeOut;
 	public float JumpForce;
+	PlayerLevel playerLevel;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -57,6 +58,8 @@ public class EnemyBasic : MonoBehaviour {
 		//target = GameObject.Find("PlayerTarget");	//ターゲットを取得
 		target = GameObject.FindWithTag("Player");
 		armorPoint = armorPointMax;
+		//上で宣言したplayerLevelとはPlayerタグが付いているオブジェクトに付いているPlayerLevelスクリプトのことを言っている。
+		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 	}
 
 	void Update () {
@@ -99,7 +102,9 @@ public class EnemyBasic : MonoBehaviour {
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			//リザルト用のスコアを加算する
-			BattleManager.score ++;
+			BattleManager.score += 10000;
+			playerLevel.LevelUp ();
+			Debug.Log ("レベルアップ");
 		}
 
 	}

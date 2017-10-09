@@ -14,11 +14,14 @@ public class Enemy : MonoBehaviour {
 	float timer = 0;	
 	int enemyLevel = 0;
 	Bullet01 b1;
+	PlayerLevel playerLevel;
 	public void Damaged(float damagedPoint){
 		this.armorPoint -= damagedPoint;	// Playerから受けたダメージの設定
 	}
 	
 	void Start () {	
+		//上で宣言したplayerLevelとはPlayerタグが付いているオブジェクトに付いているPlayerLevelスクリプトのことを言っている。
+		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 		//ターゲットを取得
 		target = GameObject.Find("PlayerTarget");
 		// 敵のHPを最大にする
@@ -120,6 +123,7 @@ public class Enemy : MonoBehaviour {
 
 				//リザルト用のスコアを加算する
 				BattleManager.score += 10;
+				playerLevel.LevelUp ();
 			}
 	
 	}

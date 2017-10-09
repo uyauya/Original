@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Zombie1 : MonoBehaviour {
-
+	//PlayerLevel playerLevel;
 	protected EnemyBasic enemyBasic;
 	// Use this for initialization
 	void Start () {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
+		//上で宣言したplayerLevelとはPlayerタグが付いているオブジェクトに付いているPlayerLevelスクリプトのことを言っている。
+		//playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 	}
 
 	// Update is called once per frame
@@ -40,5 +42,8 @@ public class Zombie1 : MonoBehaviour {
 		}
 		// Animator の dead が true なら Update 処理を抜ける
 		if( enemyBasic.animator.GetBool("dead") == true ) return;
+		//リザルト用のスコアを加算する
+
 	}
+
 }

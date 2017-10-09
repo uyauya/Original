@@ -46,7 +46,8 @@ public class ChangeWeapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetButtonUp ("Fire2")) { changeWeapon (); }	//武器交換
+		if (Input.GetButtonUp ("Fire2")) { changeWeapon (); 	//武器交換
+			SoundManager2.Instance.Play(5,gameObject);}
 	}
 
 	//「値+1」を武器個数で割り、余りをtypeに入れて選択武器とする
