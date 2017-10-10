@@ -33,6 +33,7 @@ public class EnemyBasic : MonoBehaviour {
 	public float timeOut;
 	public float JumpForce;
 	PlayerLevel playerLevel;
+	public int EnemyScore = 1000;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -102,9 +103,8 @@ public class EnemyBasic : MonoBehaviour {
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			//リザルト用のスコアを加算する
-			BattleManager.score += 10000;
+			BattleManager.score += EnemyScore;
 			playerLevel.LevelUp ();
-			Debug.Log ("レベルアップ");
 		}
 
 	}
@@ -139,6 +139,5 @@ public class EnemyBasic : MonoBehaviour {
 		//レイヤーをPlayerに戻す
 		gameObject.layer = LayerMask.NameToLayer("Enemy");
 		//iTweenのアニメーション
-
 	}	
 }

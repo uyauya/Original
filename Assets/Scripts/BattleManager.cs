@@ -24,6 +24,7 @@ public class BattleManager : MonoBehaviour {
 	public GameObject Player;
 	public float ChangeTime;			//シーン変更までの時間
 	public int Count;					//ステージ移行する為のアイテム取得個
+	int enemyScore;
 
 	void Start () {	
 		ScoreText.text = "Score:0";
@@ -40,6 +41,7 @@ public class BattleManager : MonoBehaviour {
 		clearScore = EnemyInstantiate.instantiateValue;
 		Score = 0;
 		Player = GameObject.FindWithTag("Player");
+		enemyScore = GameObject.FindWithTag ("Enemy").GetComponent<EnemyBasic> ().EnemyScore;
 	}
 
 	void Update () {
@@ -57,6 +59,8 @@ public class BattleManager : MonoBehaviour {
 			break;
 			
 		case BATTLE_PLAY:
+			Score += enemyScore;
+			Debug.Log ("受け取った");
 			//プレイヤーの体力が0以下になったら敗北
 			if (PlayerAp.armorPoint <= 0) {
 				battleStatus = BATTLE_END;

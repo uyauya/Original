@@ -53,12 +53,10 @@ public class PlayerLevel : MonoBehaviour
 		foreach(var Param in userParamList)
 		{
 			if (Param.Score <= Score) {
-				Debug.Log ("LevelUupp");
 				if (Param.PlayerNo == 0) {
 					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint = Param.AttackPoint;
 					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax = Param.boostPointMax;
 					GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().armorPointMax = Param.armorPointMax;
-					Debug.Log ("LevelUp");
 				}
 				if (Param.PlayerNo == 1) {
 					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint = Param.AttackPoint;
