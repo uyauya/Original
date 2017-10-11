@@ -44,7 +44,7 @@ public class BreakBlock : MonoBehaviour {
 					Instantiate (GreenSphere, transform.position, transform.rotation);
 				}
 				//リザルト用のスコアを加算する
-				BattleManager.score ++;
+				//BattleManager.score ++;
 			}
 		}
 	}

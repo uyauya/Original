@@ -118,7 +118,7 @@ public class Zombie : MonoBehaviour {
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
 			Destroy (gameObject, DestroyTime);	
 			//リザルト用のスコアを加算する
-			BattleManager.score ++;
+			//BattleManager.score ++;
 		}
 		
 	}

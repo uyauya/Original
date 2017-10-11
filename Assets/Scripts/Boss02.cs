@@ -84,7 +84,7 @@ public class Boss02 : MonoBehaviour {
 			Destroy (gameObject);
 			
 			//リザルト用のスコアを加算する
-			BattleManager.score ++;
+			//BattleManager.score ++;
 		}		
 	}
 

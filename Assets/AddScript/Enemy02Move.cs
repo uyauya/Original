@@ -41,7 +41,7 @@ public class Enemy02Move : MonoBehaviour {
 				Instantiate(exprosion, transform.position, transform.rotation);
 
 				//リザルト用のスコアを加算する
-				BattleManager.score ++;
+				//BattleManager.score ++;
 			}
 
 		}

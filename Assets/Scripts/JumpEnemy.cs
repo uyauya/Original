@@ -114,7 +114,7 @@ public class JumpEnemy : MonoBehaviour {
 			Destroy (gameObject, DestroyTime);	
 			//Debug.Log("消滅");	
 			//リザルト用のスコアを加算する
-			BattleManager.score++;
+			//BattleManager.score++;
 		}
 
 	}

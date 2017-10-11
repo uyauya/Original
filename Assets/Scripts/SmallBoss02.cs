@@ -77,7 +77,7 @@ public class SmallBoss02 : MonoBehaviour {
 			Destroy (gameObject, 3.0f);
 			Debug.Log("消滅");	
 			//リザルト用のスコアを加算する
-			BattleManager.score ++;
+			//BattleManager.score ++;
 		}
 
 	}
