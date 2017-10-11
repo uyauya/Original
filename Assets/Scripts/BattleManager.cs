@@ -16,7 +16,7 @@ public class BattleManager : MonoBehaviour {
 	public Image messageLose;
 	public static int score;			//敵を倒した数。Enemyスクリプトでカウントアップ  
 	public Text ScoreText;
-	public int Score = 0;
+	public int Score;				//得点兼プレイヤ経験値
 	private int ItemCount;				//アイテム取得数をカウント
 	PlayerController playerController;
 	public GameObject WarpEffect;
@@ -28,6 +28,7 @@ public class BattleManager : MonoBehaviour {
 
 	void Start () {	
 		ScoreText.text = "Score:0";
+		ScoreText = GameObject.Find ("Score").GetComponent<Text> ();
 		battleStatus = BATTLE_START;	//時間0秒、最初にスタートを表示させる
 		timer = 0;
 		//スタート時はStartは表示、WinとLoseは非表示
@@ -42,10 +43,11 @@ public class BattleManager : MonoBehaviour {
 		Score = 0;
 		Player = GameObject.FindWithTag("Player");
 		enemyScore = GameObject.FindWithTag ("Enemy").GetComponent<EnemyBasic> ().EnemyScore;
+		ScoreText.text = Score.ToString();
 	}
 
 	void Update () {
-	
+		ScoreText.text = Score.ToString();
 		switch (battleStatus) {
 		
 		case BATTLE_START:
@@ -59,8 +61,8 @@ public class BattleManager : MonoBehaviour {
 			break;
 			
 		case BATTLE_PLAY:
-			Score += enemyScore;
-			Debug.Log ("受け取った");
+			ScoreText.text = Score.ToString();
+			//Score += enemyScore;
 			//プレイヤーの体力が0以下になったら敗北
 			if (PlayerAp.armorPoint <= 0) {
 				battleStatus = BATTLE_END;
@@ -70,7 +72,7 @@ public class BattleManager : MonoBehaviour {
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
-			//SceneManager.LoadScene ("STAGE02BOSS");
+			SceneManager.LoadScene ("STAGE02BOSS");
 			}	
 			break;
 			

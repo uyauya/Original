@@ -10,9 +10,10 @@ public class PlayerAp : MonoBehaviour {
 	int damage = 100;					// 敵から受けるダメージ
 	public Text armorText;
 	int displayArmorPoint;
-	public Color myWhite;
-	public Color myYellow;
-	public Color myRed;
+	public Color myGreen;				//RGBA(000,240,000,255) ※Aは透明度
+	public Color myWhite;				//RGBA(255,255,255,255)
+	public Color myYellow;				//RGBA(255,206,000,255)
+	public Color myRed;					//RGBA(219,000,000,255)
 	public Image gaugeImage;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;			// 無敵処理（ダメージ受けた際に使用）
@@ -21,6 +22,7 @@ public class PlayerAp : MonoBehaviour {
 	public float KnockBackRange;		// ノックバック距離（ダメージ受けた際に使用）
 	public GameObject HpHealEffect;
 	public GameObject DamageEffect;
+	public GameObject LevelUpEffect;
 	public int PlayerNo;
 
 	/*[CustomEditor(typeof(PlayerAp))]
@@ -44,6 +46,7 @@ public class PlayerAp : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		gaugeImage = GameObject.Find ("ApGauge").GetComponent<Image> ();
 		armorText = GameObject.Find ("TextAp").GetComponent<Text> ();
+
 	}
 	
 
@@ -55,17 +58,22 @@ public class PlayerAp : MonoBehaviour {
 		
 		//現在の体力と最大体力をUI Textに表示する
 		armorText.text = string.Format("{0:0000} / {1:0000}", displayArmorPoint, armorPointMax);
-		
 		//残り体力の割合により文字の色を変える
 		float percentageArmorpoint = (float)displayArmorPoint / armorPointMax;
 		// myWhiteなどにして色を任意で指定できるようにする
 		// armorTesが数値、gougeImageがゲージの色
 		// ユーザーインターフェース（UI)の色を変える場合、画像の色は白一色にする
 		//　白以外の場合、指定した色と混ざる為、指定した色にならなくなる
-		if( percentageArmorpoint > 0.5F){
+		//if( percentageArmorpoint > 0.5F){
+		if( armorPoint > 4000){
+			armorText.color = myGreen;
+			gaugeImage.color = myGreen;
+			//gaugeImage.color = new Color(0.25F, 0.7F, 0.6F);
+		//}else if( percentageArmorpoint > 0.3F){
+		}else if( armorPoint > 2900){
 			armorText.color = myWhite;
-			gaugeImage.color = new Color(0.25F, 0.7F, 0.6F);
-		}else if( percentageArmorpoint > 0.3F){
+			gaugeImage.color = myWhite;
+		}else if( armorPoint > 2000){
 			armorText.color = myYellow;
 			gaugeImage.color = myYellow;
 		}else{

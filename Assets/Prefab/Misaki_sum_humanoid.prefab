@@ -6226,6 +6226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armorPointMax: 5000
   armorText: {fileID: 0}
+  myGreen: {r: 0, g: 0.941, b: 0, a: 1}
   myWhite: {r: 1, g: 1, b: 1, a: 1}
   myYellow: {r: 1, g: 0.80784315, b: 0, a: 1}
   myRed: {r: 0.85882354, g: 0, b: 0, a: 1}
@@ -7105,11 +7106,11 @@ MonoBehaviour:
   weponImage3: {fileID: 0}
   weponImage4: {fileID: 0}
   weponImage5: {fileID: 0}
-  pshoot1Color: {r: 0, g: 0, b: 0, a: 0}
-  pshoot2Color: {r: 0, g: 0, b: 0, a: 0}
-  pshoot3Color: {r: 0, g: 0, b: 0, a: 0}
-  pshoot4Color: {r: 0, g: 0, b: 0, a: 0}
-  pshoot5Color: {r: 0, g: 0, b: 0, a: 0}
+  myWhite: {r: 1, g: 1, b: 1, a: 1}
+  myBlue: {r: 0.101960786, g: 0.03137255, b: 1, a: 1}
+  myYellow: {r: 0.8117647, g: 0.99215686, b: 0, a: 1}
+  myGreen: {r: 0.48235294, g: 0.972549, b: 0.08627451, a: 1}
+  myRed: {r: 1, g: 0.16078432, b: 0.16078432, a: 1}
 --- !u!114 &114836769958636946
 MonoBehaviour:
   m_ObjectHideFlags: 1

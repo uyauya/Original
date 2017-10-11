@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ChangeWeapon : MonoBehaviour {
 	
 
-	private int type = 0;		//武器識別用No.
-	private int num = 5;		//武器の種類数
+	private int type = 0;			//武器識別用No.
+	private int num = 5;			//武器の種類数
 	PlayerShoot   pshoot1;
 	PlayerShoot02　pshoot2;
 	PlayerShoot03  pshoot3;
@@ -18,11 +18,11 @@ public class ChangeWeapon : MonoBehaviour {
 	public RawImage weponImage3;
 	public RawImage weponImage4;
 	public RawImage weponImage5;
-	public Color mywhite;
-	public Color myBlue;
-	public Color myYellow;
-	public Color myGreen;
-	public Color myRed;
+	public Color myWhite;			//RGBA(255,255,255,255)
+	public Color myBlue;			//RGBA(026,008,255,255)
+	public Color myYellow;			//RGBA(207,253,000,255)
+	public Color myGreen;			//RGBA(123,248,022,255)
+	public Color myRed;				//RGBA(255,041,041,255)
 
 	// Use this for initialization
 	void Start () {
@@ -55,7 +55,7 @@ public class ChangeWeapon : MonoBehaviour {
 	{
 		type = (type + 1) % num;
 		if (type == 0) {
-			weponImage1.color = mywhite;
+			weponImage1.color = myWhite;
 			weponImage2.color = Color.white;
 			weponImage3.color = Color.white;
 			weponImage4.color = Color.white;

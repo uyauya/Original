@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour {
 	Vector3 addSpeed = Vector3.zero;        //加算速度
 	public GameObject BpHealEffect;
 	public int PlayerNo;
-
+	public Text boostText;
+	int displayBoostPoint;
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -63,6 +64,14 @@ public class PlayerController : MonoBehaviour {
 		isBoost = false;
 		// Canvas上のゲージイメージを取得（オブジェクトに直接付いていない場合はゲットコンポーネントで取得する）
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
+		boostText = GameObject.Find ("TextBg").GetComponent<Text> ();
+		displayBoostPoint = boostPoint;
+	}
+
+	void Update()
+	{
+		//現在のブーストゲージと最大ブーストゲージをUI Textに表示する
+		boostText.text = string.Format("{0:0000} / {1:0000}", displayBoostPoint, boostPointMax);
 	}
 
 	void FixedUpdate()
