@@ -826,6 +826,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1437536741885342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4006486625419806}
+  m_Layer: 0
+  m_Name: EffectPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1438343188091406
 GameObject:
   m_ObjectHideFlags: 1
@@ -1326,6 +1341,7 @@ GameObject:
   - component: {fileID: 114274271927115456}
   - component: {fileID: 82371577017388810}
   - component: {fileID: 114891178713599580}
+  - component: {fileID: 114285533963157022}
   m_Layer: 0
   m_Name: Yuko_sum_humanoid
   m_TagString: Player
@@ -2066,6 +2082,19 @@ Transform:
   m_Father: {fileID: 4557921908707918}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4006486625419806
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1437536741885342}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.58, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 4032478712022122}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4016342034369982
 Transform:
   m_ObjectHideFlags: 1
@@ -2109,6 +2138,7 @@ Transform:
   - {fileID: 4215993500051396}
   - {fileID: 4710192244687392}
   - {fileID: 4064662441726532}
+  - {fileID: 4006486625419806}
   - {fileID: 224804143048160462}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -4246,7 +4276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe001c07da69474c8adb32f94d658f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet03: {fileID: 142680, guid: 3b22c6a562677ac4fa14fc10650eb2fb, type: 2}
+  Bullet03: {fileID: 0}
   muzzle: {fileID: 4064662441726532}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   shotInterval: 0
@@ -4460,6 +4490,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotationL: {x: 0, y: 0, z: 0}
   RotationR: {x: 0, y: 0, z: 0}
+--- !u!114 &114285533963157022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1647243158286332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c62e9208d468d49a1cd0206483d99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzle: {fileID: 4064662441726532}
+  LevelUpPrefab: {fileID: 1945138117102130, guid: ce4eacb45ee71844a9d4c091a5e6dbdb,
+    type: 2}
+  LevelUpObject: {fileID: 0}
 --- !u!114 &114287126509833436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4492,9 +4537,15 @@ MonoBehaviour:
   gaugeImage: {fileID: 0}
   InvincibleTime: 0
   KnockBackRange: 0
-  HpHealEffect: {fileID: 0}
-  DamageEffect: {fileID: 0}
   PlayerNo: 1
+  muzzle: {fileID: 4064662441726532}
+  EffectPoint: {fileID: 4006486625419806}
+  DamagePrefab: {fileID: 1946341669227436, guid: 2d3253fb596387b408034c50cddf87c9,
+    type: 2}
+  DamageObject: {fileID: 0}
+  HpHealPrefab: {fileID: 1784594621816964, guid: 274bd2e034fd5f7408452fc4c07ca183,
+    type: 2}
+  HpHealObject: {fileID: 0}
 --- !u!114 &114370861064983024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4908,10 +4959,11 @@ MonoBehaviour:
   boostPoint: 0
   boostPointMax: 1000
   AttackPoint: 0
+  BpDown: 10
   RecoverPoint: 3
   gaugeImage: {fileID: 0}
+  boostText: {fileID: 0}
   ItemCount: 0
-  BpDown: 10
   BpHealEffect: {fileID: 0}
   PlayerNo: 1
 --- !u!114 &114787892343617224
@@ -14479,7 +14531,7 @@ RectTransform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4032478712022122}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

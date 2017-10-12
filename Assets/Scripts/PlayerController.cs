@@ -8,34 +8,34 @@ public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
 	// 移動時に加える力
-	private float force;			// 移動速度
-	public float MaxForce;			// 移動速度最大値
-	public float MaxBoostForce;		// ブースト時の移動速度最大値
-	public float AddTime;			// 移動速度加算時間
-	public float jumpSpeed;			// ジャンプ力
-	public float HighPoint;			// ジャンプの高さ最大値
-	public float gravity;			// 重力（ジャンプ時などに影響）
-	private Vector3 moveDirection = Vector3.zero;
-	public int boostPoint;
-	public int boostPointMax;
-	public int AttackPoint;			//攻撃力
-	public int RecoverPoint = 1;	//　ブーストポイント回復値
-	public Image gaugeImage;
-	Vector3 moveSpeed;
-	//ブースト時の最大速度
-	private int JumpCount;			// ジャンプカウント（二段ジャンプ処理に使用）
-	bool isBoost;
-	private float timer = 0.0f;		
-	bool onFloor = true;
+	private float force;				// 移動速度
+	public float MaxForce;				// 移動速度最大値
+	public float MaxBoostForce;			// ブースト時の移動速度最大値
+	public float AddTime;				// 移動速度加算時間
+	public float jumpSpeed;				// ジャンプ力
+	public float HighPoint;				// ジャンプの高さ最大値
+	public float gravity;				// 重力（ジャンプ時などに影響）
+	private Vector3 moveDirection = Vector3.zero; //プレイヤ位置方向ニュートラル設定
+	public int boostPoint;				// ブーストポイント
+	public int boostPointMax;			// ブーストポイント最大値
+	public int AttackPoint;				// 攻撃力
+	public int BpDown = 20;				// ブーストゲージ消費値
+	public int RecoverPoint = 1;		// ブーストポイント回復値
+	public Image gaugeImage;			// ブーストゲージ（画面表示用）
+	int displayBoostPoint;				// ブーストポイント（画面表示用）
+	public Text boostText;				// ブースト最大・現在数値（画面表示用）
+	Vector3 moveSpeed;					// プレイヤの速さ
+	private int JumpCount;				// ジャンプ回数計算用（二段ジャンプ処理に使用）
 	private float interval = 2.0f;
-	public int ItemCount;
-	public int BpDown = 20;			// ブーストゲージ消費値
-	Vector3 targetSpeed = Vector3.zero;      //目標速度
-	Vector3 addSpeed = Vector3.zero;        //加算速度
-	public GameObject BpHealEffect;
-	public int PlayerNo;
-	public Text boostText;
-	int displayBoostPoint;
+	bool isBoost;						// ブーストボタンをオン・オフ設定
+	private float timer = 0.0f;			//
+	bool onFloor = true;				// 床に設置しているかどうか
+	public int ItemCount;				// スフィア取得個数計算用
+	Vector3 targetSpeed = Vector3.zero; // 目標速度
+	Vector3 addSpeed = Vector3.zero;    // 加算速度
+	public GameObject BpHealEffect;		// ブーストポイント回復アイテム取得時のエフェクト
+	public int PlayerNo;				//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
+
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -56,15 +56,17 @@ public class PlayerController : MonoBehaviour {
 			}
 	}*/
 
-	void Start()
+	void Start()	//　ゲーム開始時の設定
 	{
 		animator = GetComponent<Animator>();
-		boostPoint = boostPointMax;
-		moveSpeed = Vector3.zero;
-		isBoost = false;
+		boostPoint = boostPointMax;				// ブーストポイントを最大値に設定
+		moveSpeed = Vector3.zero;				// 開始時は移動していないので速さはゼロに
+		isBoost = false;						// ブーストはオフに
 		// Canvas上のゲージイメージを取得（オブジェクトに直接付いていない場合はゲットコンポーネントで取得する）
+		// 
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		boostText = GameObject.Find ("TextBg").GetComponent<Text> ();
+		// 画面上(Canvas)のブーストポイントと実際(Inspector)の数値(Inspector)を同じに設定
 		displayBoostPoint = boostPoint;
 	}
 
@@ -80,7 +82,7 @@ public class PlayerController : MonoBehaviour {
 		//ブーストボタンが押されてブーストポイント残が10以上あればフラグを立てブーストポイントを消費
 		if (Input.GetButton("Boost") && boostPoint > 0)
 		{
-			boostPoint -= BpDown;			//ブーストポイント10消費
+			boostPoint -= BpDown;			//ブーストポイントをBpDown設定値分消費
 			isBoost = true;					//ブースト状態
 		}
 		else

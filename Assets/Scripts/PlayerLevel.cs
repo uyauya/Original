@@ -26,19 +26,26 @@ public class UserParam
 	
 public class PlayerLevel : MonoBehaviour 
 {
+	// UserParamをuserParamListとしてリスト化する
+	// 順番（pno, level, attackPoint, boostMax, armorMax, scoreの順）にレベルアップ時の数値を設定
 	public List <UserParam> userParamList = new List<UserParam>() 
 	{
-		//new UserParam(0,01,100,3000,5000,0000),		//Level01
-		//new UserParam(1,01,080,3500,4000,0000),		//Level01
-		//new UserParam(2,01,150,3000,6000,0000),		//Level01
-
 		new UserParam(0,02,150,3300,5000,1100),		//Level02
 		new UserParam(1,02,110,4000,4000,1100),		//Level02
 		new UserParam(2,02,200,3300,6000,1100),		//Level02
+
+		new UserParam(0,02,150,3300,7000,9000),		//Level03
+		new UserParam(1,02,110,4000,4000,9000),		//Level03
+		new UserParam(2,02,200,3300,6000,9000),		//Level03
 	};
+
+	public Transform muzzle;
+	public GameObject LevelUpPrefab;
+	public GameObject LevelUpObject;
 
 	// Use this for initialization
 	void Start () {
+		// BattleManagerのオブジェクトを見つけてBattleManagerスクリプトのScoreを０にする
 		GameObject.Find ("BattleManager").GetComponent<BattleManager> ().Score = 0;
 		//boostPointMax = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ();
 	}
@@ -49,11 +56,14 @@ public class PlayerLevel : MonoBehaviour
 	}
 
 	public void LevelUp() {
+		LevelUpObject = Instantiate (LevelUpPrefab, muzzle.position, Quaternion.identity);
 		int Score = GameObject.Find ("BattleManager").GetComponent<BattleManager> ().Score;
 		foreach(var Param in userParamList)
 		{
 			if (Param.Score <= Score) {
 				if (Param.PlayerNo == 0) {
+					//Playerのタグがついているオブジェクトを見つけPlayerControllerスクリプトのAttackPointに
+					//userParamListのAttackPoint数値を代入する
 					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint = Param.AttackPoint;
 					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax = Param.boostPointMax;
 					GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().armorPointMax = Param.armorPointMax;

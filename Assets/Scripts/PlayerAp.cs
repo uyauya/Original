@@ -20,10 +20,13 @@ public class PlayerAp : MonoBehaviour {
 	public float InvincibleTime;		// 無敵時間
 	private Animator animator;
 	public float KnockBackRange;		// ノックバック距離（ダメージ受けた際に使用）
-	public GameObject HpHealEffect;
-	public GameObject DamageEffect;
-	public GameObject LevelUpEffect;
 	public int PlayerNo;
+	public Transform muzzle;
+	public Transform EffectPoint;
+	public GameObject DamagePrefab;
+	public GameObject DamageObject;
+	public GameObject HpHealPrefab;
+	public GameObject HpHealObject;
 
 	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
@@ -92,7 +95,8 @@ public class PlayerAp : MonoBehaviour {
 		if (collider.gameObject.tag == "ShotEnemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
-			Instantiate(DamageEffect, transform.position, transform.rotation);
+			DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
+			DamageObject.transform.SetParent (muzzle);
 			animator.SetTrigger ("Damage");
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(36,gameObject);
@@ -103,14 +107,14 @@ public class PlayerAp : MonoBehaviour {
 			if (PlayerNo == 2) {
 				SoundManager.Instance.Play(38,gameObject);
 			}
-			Instantiate(DamageEffect, transform.position, transform.rotation);
 			StartCoroutine ("DamageCoroutine");
 		//Enemyと接触したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		} else if (collider.gameObject.tag == "Enemy") {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
-			Instantiate(DamageEffect, transform.position, transform.rotation);
+			DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
+			DamageObject.transform.SetParent (muzzle);
 			animator.SetTrigger ("Damage");
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(21,gameObject);
@@ -121,13 +125,13 @@ public class PlayerAp : MonoBehaviour {
 			if (PlayerNo == 2) {
 				SoundManager.Instance.Play(23,gameObject);
 			}
-			Instantiate(DamageEffect, transform.position, transform.rotation);
 			StartCoroutine ("DamageCoroutine");
 		}
 
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
 		else if (collider.gameObject.tag == "Item") {
-			Instantiate(HpHealEffect, transform.position, transform.rotation);
+			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
+			HpHealObject.transform.SetParent (muzzle);
 			animator.SetTrigger ("ItemGet");
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(18,gameObject);

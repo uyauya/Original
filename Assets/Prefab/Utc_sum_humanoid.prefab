@@ -909,6 +909,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1366572220600678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4546588814688130}
+  m_Layer: 0
+  m_Name: EffectPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1401623202552682
 GameObject:
   m_ObjectHideFlags: 1
@@ -1573,7 +1588,6 @@ GameObject:
   - component: {fileID: 114686086940088714}
   - component: {fileID: 114079346594583718}
   - component: {fileID: 114796555594523450}
-  - component: {fileID: 114292026720360334}
   - component: {fileID: 114098623500226768}
   - component: {fileID: 114728882960573464}
   m_Layer: 8
@@ -3339,6 +3353,7 @@ Transform:
   - {fileID: 4524049752725668}
   - {fileID: 4525251137832030}
   - {fileID: 4642337937397932}
+  - {fileID: 4546588814688130}
   - {fileID: 224744114580920858}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -3437,6 +3452,19 @@ Transform:
   - {fileID: 4153831264038670}
   m_Father: {fileID: 4358763052382306}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4546588814688130
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1366572220600678}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.58, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 4521056928926800}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4547309321198614
 Transform:
@@ -4949,10 +4977,11 @@ MonoBehaviour:
   boostPoint: 0
   boostPointMax: 3000
   AttackPoint: 100
+  BpDown: 10
   RecoverPoint: 5
   gaugeImage: {fileID: 0}
+  boostText: {fileID: 0}
   ItemCount: 0
-  BpDown: 10
   BpHealEffect: {fileID: 1574779937369632, guid: 161d1d18e9616ba40ae70b20dc87ca42,
     type: 2}
   PlayerNo: 0
@@ -5046,35 +5075,6 @@ MonoBehaviour:
   - {fileID: 114786148620392010}
   debug: 1
   threshold: 0.01
---- !u!114 &114292026720360334
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697289305068994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa5a9c2b63ec724488791a53f0027d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bullet01: {fileID: 0}
-  muzzle: {fileID: 0}
-  muzzleFlash: {fileID: 0}
-  ErekiSmoke: {fileID: 0}
-  interval: 0
-  shotInterval: 0
-  shotIntervalMax: 0.25
-  Attack: 0
-  damage: 0
-  BigSize: 0
-  BiggerTime: 0
-  gaugeImage: {fileID: 0}
-  boostPoint: 0
-  effectPrefab: {fileID: 0}
-  effectObject: {fileID: 0}
-  BpDown: 0
-  isCharging: 0
-  PlayerNo: 0
 --- !u!114 &114303814207039116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5707,6 +5707,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c62e9208d468d49a1cd0206483d99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muzzle: {fileID: 4642337937397932}
+  LevelUpPrefab: {fileID: 1945138117102130, guid: ce4eacb45ee71844a9d4c091a5e6dbdb,
+    type: 2}
+  LevelUpObject: {fileID: 0}
 --- !u!114 &114786148620392010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5914,11 +5918,15 @@ MonoBehaviour:
   gaugeImage: {fileID: 0}
   InvincibleTime: 1
   KnockBackRange: 2
-  HpHealEffect: {fileID: 1946341669227436, guid: 2d3253fb596387b408034c50cddf87c9,
-    type: 2}
-  DamageEffect: {fileID: 1784594621816964, guid: 274bd2e034fd5f7408452fc4c07ca183,
-    type: 2}
   PlayerNo: 0
+  muzzle: {fileID: 4642337937397932}
+  EffectPoint: {fileID: 4546588814688130}
+  DamagePrefab: {fileID: 1784594621816964, guid: 274bd2e034fd5f7408452fc4c07ca183,
+    type: 2}
+  DamageObject: {fileID: 0}
+  HpHealPrefab: {fileID: 1946341669227436, guid: 2d3253fb596387b408034c50cddf87c9,
+    type: 2}
+  HpHealObject: {fileID: 0}
 --- !u!114 &114925817173165376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15338,7 +15346,7 @@ RectTransform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4521056928926800}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
