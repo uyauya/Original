@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+// ホーミングショット
 public class PlayerShoot02 : MonoBehaviour {
 
 	public GameObject Bullet02;

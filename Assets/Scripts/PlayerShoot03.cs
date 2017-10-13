@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+// ボム（シューティングなどの広範囲攻撃）
 public class PlayerShoot03 : MonoBehaviour {
 	
 	public GameObject Bullet03;

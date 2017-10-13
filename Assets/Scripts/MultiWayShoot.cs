@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+// 多段同時ショット
 public class MultiWayShoot : MonoBehaviour {
 
 	public GameObject Bullet05;
