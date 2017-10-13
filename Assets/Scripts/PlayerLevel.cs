@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// プレイヤーパラメータ項目設定
 public class UserParam
 {
 	public int Level;
@@ -23,7 +24,7 @@ public class UserParam
 }
 
 
-	
+// プレイヤーレベル管理	
 public class PlayerLevel : MonoBehaviour 
 {
 	// UserParamをuserParamListとしてリスト化する

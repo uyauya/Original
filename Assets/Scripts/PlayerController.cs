@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor; 
 
+// プレイヤーの移動、ジャンプ、アイテムゲット（ブースト回復、ステージクリア用）
 public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
@@ -35,7 +36,9 @@ public class PlayerController : MonoBehaviour {
 	Vector3 addSpeed = Vector3.zero;    // 加算速度
 	public GameObject BpHealEffect;		// ブーストポイント回復アイテム取得時のエフェクト
 	public int PlayerNo;				//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
-
+	public Transform EffectPoint;		// 回復等エフェクト発生元の位置取り
+	public GameObject BpHealPrefab;		// ブーストポイント回復エフェクト格納場所
+	public GameObject BpHealObject;
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -226,7 +229,8 @@ public class PlayerController : MonoBehaviour {
 	{
 		// アイテム２タグの物に接触したらブーストポイント回復
 		if (collider.gameObject.tag == "Item2") {
-			Instantiate(BpHealEffect, transform.position, transform.rotation);
+			BpHealObject = Instantiate (BpHealPrefab, EffectPoint.position, Quaternion.identity);
+			BpHealObject.transform.SetParent (EffectPoint);
 			animator.SetTrigger ("ItemGet");
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(18,gameObject);

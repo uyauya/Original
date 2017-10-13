@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// 時間経過と共にライトを消していき、朝から夜の時間推移を表現
 public class LightChange : MonoBehaviour {
 	public float count;
 	public Text timeLabel;

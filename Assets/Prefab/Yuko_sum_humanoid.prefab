@@ -4966,6 +4966,10 @@ MonoBehaviour:
   ItemCount: 0
   BpHealEffect: {fileID: 0}
   PlayerNo: 1
+  EffectPoint: {fileID: 4006486625419806}
+  BpHealPrefab: {fileID: 1946341669227436, guid: 2d3253fb596387b408034c50cddf87c9,
+    type: 2}
+  BpHealObject: {fileID: 0}
 --- !u!114 &114787892343617224
 MonoBehaviour:
   m_ObjectHideFlags: 1

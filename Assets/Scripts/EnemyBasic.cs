@@ -2,38 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 敵キャラクタ管理用
+// ステータス欄等の共通項目を保持。キャラクタ独自の項目のみ別スクリプトに書き足す。
 public class EnemyBasic : MonoBehaviour {
 	public int enemyLevel = 0;
-	public Animator animator;					// 《Animator》コンポーネント用の変数
+	public Animator animator;						// 《Animator》コンポーネント用の変数
 	public GameObject target;
 	public GameObject shot;
-	public float shotInterval = 0;						// 攻撃間隔計測開始
-	public float shotIntervalMax = 1.0F;				// 攻撃間隔（～秒ごとに攻撃）
-	public GameObject exprosion;				// 爆発処理
+	public float shotInterval = 0;					// 攻撃間隔計測開始
+	public float shotIntervalMax = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
+	public GameObject exprosion;					// 爆発処理
 	public GameObject particle;
-	public float armorPoint;
-	public float armorPointMax; 
+	public float armorPoint;						// HP現在値
+	public float armorPointMax;						// 最大HP 
+	public int TargetRange;							// プレイヤをターゲット認識する距離
+	public float EnemySpeed;						// 移動スピード
+	public float JumpForce;							// ジャンプ力
+	public float EnemyRotate;						// 振り向き速度
+	public float Search;							// プレイヤを探すサーチレンジ
 	public float timer;
-	protected float damage;						// playerに与えるダメージ
-	protected bool isInvincible;				// 無敵処理（ダメージ受けた際に使用）
-	public float InvincibleTime;				// 無敵時間
-	protected ModelColorChange modelColorChange;
-	public float KnockBackRange;
+	protected float damage;							// playerに与えるダメージ
+	protected bool isInvincible;					// 無敵処理（ダメージ受けた際に使用）
+	public float InvincibleTime;					// 無敵時間
+	protected ModelColorChange modelColorChange;	// 点滅処理
+	public float KnockBackRange;					// 攻撃を受けた際のノックバックの距離
 	public void Damaged(float damagedPoint){
-		this.armorPoint -= damagedPoint;		// Playerから受けたダメージの設定
+		this.armorPoint -= damagedPoint;			// Playerから受けたダメージの設定
 	}
-	public float DestroyTime;
+	public float DestroyTime;						// （HP0になった際の）消滅するまでの時間
 	//public float DamageTime;
-	public int TargetRange;
-	public float EnemySpeed;
-	public float EnemyRotate;
-	public float Search;
 	public GameObject DestroyEffect;
 	public float timeElapsed;
 	public float timeOut;
-	public float JumpForce;
+
 	PlayerLevel playerLevel;
-	public int EnemyScore = 1000;
+	public int EnemyScore = 1000;					// 敵を倒した時の得点
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -55,10 +58,10 @@ public class EnemyBasic : MonoBehaviour {
 
 	public void Initialize () {
 		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
-		modelColorChange = gameObject.GetComponent<ModelColorChange>();
-		//target = GameObject.Find("PlayerTarget");	//ターゲットを取得
-		target = GameObject.FindWithTag("Player");
-		armorPoint = armorPointMax;
+		modelColorChange = gameObject.GetComponent<ModelColorChange>();　// 被ダメージ時の点滅処理
+		//target = GameObject.Find("PlayerTarget");	// ターゲットを取得
+		target = GameObject.FindWithTag("Player");	// Playerタグが付いているオブジェクトをターゲットにする
+		armorPoint = armorPointMax;					// ゲーム開始時、アーマーポイントを最大にする
 		//上で宣言したplayerLevelとはPlayerタグが付いているオブジェクトに付いているPlayerLevelスクリプトのことを言っている。
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 	}

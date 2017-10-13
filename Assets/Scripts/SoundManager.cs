@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// スライダーと連動させるための処理
 [RequireComponent(typeof(Slider))]
+
+//効果音管理用
 public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
 	[SerializeField]

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEditor; 
 using UnityEngine.UI;
 
+// 
 public class PlayerAp : MonoBehaviour {
 
 	public static int armorPoint;		// プレイヤー体力
@@ -10,22 +11,22 @@ public class PlayerAp : MonoBehaviour {
 	int damage = 100;					// 敵から受けるダメージ
 	public Text armorText;
 	int displayArmorPoint;
-	public Color myGreen;				//RGBA(000,240,000,255) ※Aは透明度
-	public Color myWhite;				//RGBA(255,255,255,255)
-	public Color myYellow;				//RGBA(255,206,000,255)
-	public Color myRed;					//RGBA(219,000,000,255)
+	public Color myGreen;				// RGBA(000,240,000,255) ※Aは透明度
+	public Color myWhite;				// RGBA(255,255,255,255)
+	public Color myYellow;				// RGBA(255,206,000,255)
+	public Color myRed;					// RGBA(219,000,000,255)
 	public Image gaugeImage;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;			// 無敵処理（ダメージ受けた際に使用）
 	public float InvincibleTime;		// 無敵時間
 	private Animator animator;
 	public float KnockBackRange;		// ノックバック距離（ダメージ受けた際に使用）
-	public int PlayerNo;
-	public Transform muzzle;
-	public Transform EffectPoint;
-	public GameObject DamagePrefab;
+	public int PlayerNo;				// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
+	public Transform muzzle;			// ショット発射口位置をTransformで位置取り
+	public Transform EffectPoint;		// 回復等エフェクト発生元の位置取り
+	public GameObject DamagePrefab;		// ダメージエフェクト格納場所
 	public GameObject DamageObject;
-	public GameObject HpHealPrefab;
+	public GameObject HpHealPrefab;		// アーマーポイント回復エフェクト格納場所
 	public GameObject HpHealObject;
 
 	/*[CustomEditor(typeof(PlayerAp))]
@@ -96,7 +97,7 @@ public class PlayerAp : MonoBehaviour {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 			DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
-			DamageObject.transform.SetParent (muzzle);
+			DamageObject.transform.SetParent (EffectPoint);
 			animator.SetTrigger ("Damage");
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(36,gameObject);
@@ -114,7 +115,7 @@ public class PlayerAp : MonoBehaviour {
 			armorPoint -= damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 			DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
-			DamageObject.transform.SetParent (muzzle);
+			DamageObject.transform.SetParent (EffectPoint);
 			animator.SetTrigger ("Damage");
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(21,gameObject);
@@ -131,7 +132,7 @@ public class PlayerAp : MonoBehaviour {
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
 		else if (collider.gameObject.tag == "Item") {
 			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
-			HpHealObject.transform.SetParent (muzzle);
+			HpHealObject.transform.SetParent (EffectPoint);
 			animator.SetTrigger ("ItemGet");
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(18,gameObject);
@@ -165,12 +166,12 @@ public class PlayerAp : MonoBehaviour {
 			//透明にする
 			//Debug.Log ("色変える");
 			modelColorChange.ColorChange(new Color (1,0,0,1));
-			//0.05秒待つ
+			//0.1秒待つ
 			//Debug.Log ("戻す");
 			yield return new WaitForSeconds(0.1f);
 			//元に戻す
 			modelColorChange.ColorChange(new Color (1,1,1,1));
-			//0.05秒待つ
+			//0.1秒待つ
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}

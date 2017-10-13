@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ParticleAutoDestroy : MonoBehaviour {
 
-	public float PDestroyTime;
+	public float PDestroyTime;	// 消滅するまでの時間設定
 
 	// Use this for initialization
 	void Start () {

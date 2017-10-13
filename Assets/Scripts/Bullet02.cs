@@ -1,56 +1,46 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// PlayerShoot02の弾
 public class Bullet02 : MonoBehaviour {
 	
 	public GameObject explosion;
-	public float damage;
-	public float BulletSpeed;
-	PlayerShoot02 Plshoot02;
+	public float damage;				// 弾の威力
+	public float BulletSpeed;			// 弾のスピード
+	PlayerShoot02 Plshoot02;			// 発射元
 	private  GameObject Enemy;
-	public float DestroyTime = 1;
+	public float DestroyTime = 1;		// 発射されてから消滅するまでの時間
 
-	void Start () {
+	void Start () 
+	{
+		// Playerタグが付いているオブジェクトに付いているPlayerShoot02をPlshoot02と呼ぶことにする
 		Plshoot02 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot02> ();
+		// 発射される向きをPlshoot02（のmuzzle）の向きと連動させる
 		transform.rotation = Plshoot02.transform.rotation;
-		//現後一定時間で自動的に消滅させる
+		// 現後一定時間(DestroyTime)で自動的に消滅させる
 		Destroy (gameObject, DestroyTime);
 	}	
 
 	void Update ()
-
 	{
-
-		//ホーミング対象がnull(何もない)であれば
-
+		// Enemy変数がnull(何もない)であれば
 		if (Enemy == null) {
-
-			//Enemyというタグがつけられたゲームオブジェクトを配列で取得
-
+			//Enemyというタグがつけられたゲームオブジェクトを(Enemyが複数いるため)配列で取得
 			GameObject[] allEnemies = GameObject.FindGameObjectsWithTag ("Enemy");
-
-			//allEnemiesがnullじゃない かつ 要素数が0でなければ
-
+			//allEnemiesがnullじゃない かつ 要素数が0でなければ(Enemyが一つでもいれば)
 			if (allEnemies != null && allEnemies.Length != 0) {
-
-
-
+				// その中からランダムでターゲットを決める
 				Enemy = allEnemies [UnityEngine.Random.Range (0, allEnemies.Length)];
-
+			// そもそもEnemyのタグ付いたものがなければ
 			} else {
-
 				//何もしない
-
 				return;
-
 			}
-
 		}
-
+		// 弾のスピード
 		float speed = BulletSpeed;
-
+		// 今の位置から敵の距離を測って敵に向かって移動
 		float step = Time.deltaTime * speed;
-
 		transform.position = Vector3.MoveTowards (transform.position, Enemy.transform.position, step);
 
 	}

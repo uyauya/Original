@@ -2,6 +2,7 @@
 using UnityEngine.UI; 
 using System.Collections; 
 
+// 時間経過表示用
 public class LimitedTimer : MonoBehaviour { 
 	private float time = 0.0f; 
 	
@@ -17,9 +18,7 @@ public class LimitedTimer : MonoBehaviour {
 	void Update (){ 
 		int minute = (int)time / 60;
 		int second = (int)time % 60;
-		//1秒に1ずつ減らしていく 
-		//time -= Time.deltaTime;
-		//1秒に1ずつ増やしていく
+		//1秒に1ずつ増やしていく場合（減らす場合はtime -= Time.deltaTime;）
 		time += Time.deltaTime;
 		//マイナスは表示しない 
 		if (time < 0) time = 0; 

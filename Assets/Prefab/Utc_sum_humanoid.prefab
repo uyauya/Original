@@ -4982,9 +4982,12 @@ MonoBehaviour:
   gaugeImage: {fileID: 0}
   boostText: {fileID: 0}
   ItemCount: 0
-  BpHealEffect: {fileID: 1574779937369632, guid: 161d1d18e9616ba40ae70b20dc87ca42,
-    type: 2}
+  BpHealEffect: {fileID: 0}
   PlayerNo: 0
+  EffectPoint: {fileID: 4546588814688130}
+  BpHealPrefab: {fileID: 1946341669227436, guid: 2d3253fb596387b408034c50cddf87c9,
+    type: 2}
+  BpHealObject: {fileID: 0}
 --- !u!114 &114259483187215430
 MonoBehaviour:
   m_ObjectHideFlags: 1
