@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// スライダーと連動させるための処理
-[RequireComponent(typeof(Slider))]
-
 //効果音管理用
-public class SoundManager : SingletonMonoBehaviour<SoundManager> {
+public class SoundManager0 : SingletonMonoBehaviour<SoundManager0> {
 
 	[SerializeField]
 	private List<AudioSource> _voiceAudioSource;
@@ -94,13 +91,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
 	private void Start()
 	{
-			voice.GetComponent<Slider> ().value = Volume ();
-			voice.GetComponent<Slider> ().onValueChanged.AddListener ((value) => {
-				Value = value;
-				foreach (var SoundSource in _voiceAudioSource) {
-					SoundSource.volume = value;
-				}
-			});
+					//SoundSource.volume = 0.5;
 	}
 
 	private void Update()
@@ -146,3 +137,4 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 		Play (0);
 	}
 }
+

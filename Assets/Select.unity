@@ -1228,6 +1228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1469588409}
   - component: {fileID: 1469588410}
+  - component: {fileID: 1469588408}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -1235,6 +1236,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1469588408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1469588407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d4607dcd720b24459ef89a0e4143878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voiceAudioSource: []
+  audioClipList:
+  - {fileID: 8300000, guid: 22b3bc8901f036543a87c7282e694aa9, type: 3}
+  - {fileID: 8300000, guid: 04640b66dc67a694fb587e0b6c7449f5, type: 3}
+  - {fileID: 8300000, guid: ebcd7e6829cb4bd4f890970570150522, type: 3}
+  - {fileID: 8300000, guid: 3b88f209f9dcdc2428559f6ab6aba764, type: 3}
+  - {fileID: 8300000, guid: 28ce87522ba702f4488f905f43f870c5, type: 3}
+  - {fileID: 8300000, guid: 1b3630dfb68b7d94881c7cff611dc569, type: 3}
+  voice: {fileID: 0}
 --- !u!4 &1469588409
 Transform:
   m_ObjectHideFlags: 0
@@ -1254,11 +1275,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1469588407}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59c9eadac615e0f40b7bfb28a3557c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _voiceAudioSource: []
   audioClipList:
   - {fileID: 8300000, guid: 22b3bc8901f036543a87c7282e694aa9, type: 3}
   - {fileID: 8300000, guid: 04640b66dc67a694fb587e0b6c7449f5, type: 3}
@@ -1266,7 +1288,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3b88f209f9dcdc2428559f6ab6aba764, type: 3}
   - {fileID: 8300000, guid: 28ce87522ba702f4488f905f43f870c5, type: 3}
   - {fileID: 8300000, guid: 1b3630dfb68b7d94881c7cff611dc569, type: 3}
-  volume: 1
+  voice: {fileID: 0}
 --- !u!1001 &1543522056
 Prefab:
   m_ObjectHideFlags: 0
@@ -1356,6 +1378,7 @@ MonoBehaviour:
   messageLose: {fileID: 114198165481013108, guid: b620f3e7527c0af46b8156eec2767cca,
     type: 2}
   ScoreText: {fileID: 1458709287}
+  Score: 0
   WarpEffect: {fileID: 0}
   Player: {fileID: 0}
   ChangeTime: 0

@@ -37,6 +37,7 @@ public class EnemyBasic : MonoBehaviour {
 
 	PlayerLevel playerLevel;
 	public int EnemyScore = 1000;					// 敵を倒した時の得点
+	public BattleManager battleManager;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -64,6 +65,7 @@ public class EnemyBasic : MonoBehaviour {
 		armorPoint = armorPointMax;					// ゲーム開始時、アーマーポイントを最大にする
 		//上で宣言したplayerLevelとはPlayerタグが付いているオブジェクトに付いているPlayerLevelスクリプトのことを言っている。
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
+		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 	}
 
 	void Update () {
@@ -104,10 +106,12 @@ public class EnemyBasic : MonoBehaviour {
 		if (armorPoint <= 0){
 			//animator.SetBool("dead" , true);		// 《Animator》の変数deadを true に変更.
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
-			Destroy (gameObject, DestroyTime);	
 			//リザルト用のスコアを加算する
-			BattleManager.score += EnemyScore;
+			battleManager.Score += EnemyScore;
 			playerLevel.LevelUp ();
+			Destroy (gameObject, DestroyTime);	
+
+
 		}
 
 	}

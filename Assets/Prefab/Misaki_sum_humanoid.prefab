@@ -6295,7 +6295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe001c07da69474c8adb32f94d658f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet03: {fileID: 0}
+  Bullet03: {fileID: 1326127817637182, guid: 1aa585410e92d9f4aa919edbc2e9797a, type: 2}
   muzzle: {fileID: 4202809436857222}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   shotInterval: 0

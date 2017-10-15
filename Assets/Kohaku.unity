@@ -117,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 234797871}
   - component: {fileID: 234797870}
+  - component: {fileID: 234797872}
   m_Layer: 0
   m_Name: SuoundManager
   m_TagString: Untagged
@@ -130,14 +131,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 234797869}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59c9eadac615e0f40b7bfb28a3557c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _voiceAudioSource: []
   audioClipList:
   - {fileID: 8300000, guid: 78512d6216be2d2478c4d8151e2df011, type: 3}
-  volume: 10
+  voice: {fileID: 0}
 --- !u!4 &234797871
 Transform:
   m_ObjectHideFlags: 0
@@ -151,6 +153,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &234797872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 234797869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d4607dcd720b24459ef89a0e4143878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voiceAudioSource: []
+  audioClipList:
+  - {fileID: 8300000, guid: 78512d6216be2d2478c4d8151e2df011, type: 3}
+  voice: {fileID: 0}
 --- !u!1 &821588294
 GameObject:
   m_ObjectHideFlags: 0
