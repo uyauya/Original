@@ -13,14 +13,14 @@ public class GameStart : MonoBehaviour {
 
 	{
 		// ボタンを押してセレクト画面に移行
-		SoundManager.Instance.Play(1);	//(1)はElmentの数
+		SoundManager00.Instance.Play(1);	//(1)はElmentの数
 		Invoke("LoadScene",1.3f);
 	}
 		
 	void Start () {
 		audioSources = gameObject.GetComponents<AudioSource> ();
 		animator = GetComponent<Animator> ();
-		SoundManager.Instance.Play(0);
+		SoundManager00.Instance.Play(0);
 	}
 
 	void Update () {

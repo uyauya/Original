@@ -14,7 +14,7 @@ public class UserParam
 
 	public UserParam(int Pno, int level, int attackPoint, int boostMax, int armorMax, int score)
 	{
-		PlayerNo = Pno;				// 
+		PlayerNo = Pno;				 
 		Level = level;
 		AttackPoint = attackPoint;
 		boostPointMax = boostMax;

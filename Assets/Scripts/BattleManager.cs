@@ -24,7 +24,7 @@ public class BattleManager : MonoBehaviour {
 	public GameObject Player;			
 	public float ChangeTime;			// シーン変更までの時間
 	public int Count;					// ステージ移行する為のアイテム取得個
-	int enemyScore;
+	//int enemyScore;
 
 	void Start () {	
 		ScoreText.text = "Score:0";
@@ -42,7 +42,7 @@ public class BattleManager : MonoBehaviour {
 		clearScore = EnemyInstantiate.instantiateValue;
 		Score = 0;
 		Player = GameObject.FindWithTag("Player");
-		enemyScore = GameObject.FindWithTag ("Enemy").GetComponent<EnemyBasic> ().EnemyScore;
+		//enemyScore = GameObject.FindWithTag ("Enemy").GetComponent<EnemyBasic> ().EnemyScore;
 		ScoreText.text = Score.ToString();
 	}
 

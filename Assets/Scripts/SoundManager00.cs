@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager00 : SingletonMonoBehaviour<SoundManager> {
+public class SoundManager00 : SingletonMonoBehaviour<SoundManager00> {
 
 	[SerializeField]
 	private List<AudioClip> audioClipList = new List<AudioClip>(); 

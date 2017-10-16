@@ -10,19 +10,19 @@ public class SelectEvent : MonoBehaviour {
 	public void Onclick_Kohaku() 
 	{
 		DataManager.PlayerNo = 0;
-		SoundManager.Instance.Play(3);
+		SoundManager00.Instance.Play(3);
 		Invoke("LoadScene1",1.3f);
 	}
 	public void Onclick_Yuko() 
 	{
 		DataManager.PlayerNo = 1;
-		SoundManager.Instance.Play(4);
+		SoundManager00.Instance.Play(4);
 		Invoke("LoadScene2",1.3f);
 	}
 	public void Onclick_Misaki() 
 	{
 		DataManager.PlayerNo = 2;
-		SoundManager.Instance.Play(5);
+		SoundManager00.Instance.Play(5);
 		Invoke("LoadScene3",1.3f);
 	}
 
@@ -67,9 +67,9 @@ public class SelectEvent : MonoBehaviour {
 	}
 
 	void Start () {
-		SoundManager.Instance.Play(0);
-		SoundManager.Instance.Play(1);
-		SoundManager.Instance.Play(2);
+		SoundManager00.Instance.Play(0);
+		SoundManager00.Instance.Play(1);
+		SoundManager00.Instance.Play(2);
 	}
 
 	void LoadScene1() {
