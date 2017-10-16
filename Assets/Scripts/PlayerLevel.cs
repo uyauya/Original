@@ -5,16 +5,16 @@ using UnityEngine;
 // プレイヤーパラメータ項目設定
 public class UserParam
 {
-	public int Level;
-	public int AttackPoint;
-	public int boostPointMax;
-	public int armorPointMax;
-	public int Score;
-	public int PlayerNo;
+	public int Level;			// プレイヤーレベル
+	public int AttackPoint;		// 攻撃力（PlayerController参照）
+	public int boostPointMax;	// ブーストポイント最大値（PlayerController参照）
+	public int armorPointMax;	// プレイヤー体力最大値（PlayerAp参照）
+	public int Score;			// 点数兼経験値（BattleManager参照）
+	public int PlayerNo;		// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 
 	public UserParam(int Pno, int level, int attackPoint, int boostMax, int armorMax, int score)
 	{
-		PlayerNo = Pno;
+		PlayerNo = Pno;				// 
 		Level = level;
 		AttackPoint = attackPoint;
 		boostPointMax = boostMax;
@@ -31,13 +31,13 @@ public class PlayerLevel : MonoBehaviour
 	// 順番（pno, level, attackPoint, boostMax, armorMax, scoreの順）にレベルアップ時の数値を設定
 	public List <UserParam> userParamList = new List<UserParam>() 
 	{
-		new UserParam(0,02,150,3300,6000,1100),		//Level02
-		new UserParam(1,02,110,4000,4000,1100),		//Level02
-		new UserParam(2,02,200,3300,5500,1100),		//Level02
+		new UserParam(0,02,130,3300,4000,1000),		//Level02
+		new UserParam(1,02,110,4000,3800,1000),		//Level02
+		new UserParam(2,02,150,3000,4500,1000),		//Level02
 
-		//new UserParam(0,02,150,3300,7000,9000),		//Level03
-		//new UserParam(1,02,110,4000,4000,9000),		//Level03
-		//new UserParam(2,02,200,3300,6000,9000),		//Level03
+		new UserParam(0,02,150,3400,4500,2200),		//Level03
+		new UserParam(1,02,130,4300,4200,2200),		//Level03
+		new UserParam(2,02,200,3100,4800,2200),		//Level03
 	};
 
 	public Transform muzzle;
@@ -57,7 +57,7 @@ public class PlayerLevel : MonoBehaviour
 	}
 
 	public void LevelUp() {
-		//LevelUpObject = Instantiate (LevelUpPrefab, muzzle.position, Quaternion.identity);
+		LevelUpObject = Instantiate (LevelUpPrefab, muzzle.position, Quaternion.identity);
 		int Score = GameObject.Find ("BattleManager").GetComponent<BattleManager> ().Score;
 		foreach(var Param in userParamList)
 		{

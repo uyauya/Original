@@ -1342,6 +1342,7 @@ GameObject:
   - component: {fileID: 82371577017388810}
   - component: {fileID: 114891178713599580}
   - component: {fileID: 114285533963157022}
+  - component: {fileID: 114081342659877784}
   m_Layer: 0
   m_Name: Yuko_sum_humanoid
   m_TagString: Player
@@ -4276,7 +4277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe001c07da69474c8adb32f94d658f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet03: {fileID: 0}
+  Bullet03: {fileID: 1326127817637182, guid: 1aa585410e92d9f4aa919edbc2e9797a, type: 2}
   muzzle: {fileID: 4064662441726532}
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   shotInterval: 0
@@ -4297,6 +4298,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8b7dd34ea68b54eaafd841433f0d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114081342659877784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1647243158286332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38b37cc4e20fb7047a2b6417b72acf60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DiffenceWall: {fileID: 1895374023008884, guid: 84dd1b6a3c08ecc44b12ba21696431c1,
+    type: 2}
+  AbsorbWall: {fileID: 1034348044703858, guid: 9b4ee240f7d70ff44b299b03ef65c9cc, type: 2}
+  muzzle: {fileID: 4064662441726532}
+  diffence: 0
+  push: 0
+  nextButtonDownTime: 0.3
+  limitAngle: 15
+  PlayerNo: 0
+  boostPoint: 100
+  EffectPoint: {fileID: 4006486625419806}
+  BpHealPrefab: {fileID: 1946341669227436, guid: 2d3253fb596387b408034c50cddf87c9,
+    type: 2}
+  BpHealObject: {fileID: 0}
 --- !u!114 &114139674052448430
 MonoBehaviour:
   m_ObjectHideFlags: 1

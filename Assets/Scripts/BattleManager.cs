@@ -10,20 +10,20 @@ public class BattleManager : MonoBehaviour {
 	const int BATTLE_START = 0;
 	const int BATTLE_PLAY  = 1;
 	const int BATTLE_END   = 2;
-	float timer;						//時間計測洋
+	float timer;						// 時間計測洋
 	public Image messageStart;
 	public Image messageWin;
 	public Image messageLose;
-	public static int score;			//敵を倒した数。Enemyスクリプトでカウントアップ  
+	public static int score;			// 敵を倒した数。Enemyスクリプトでカウントアップ  
 	public Text ScoreText;
-	public int Score;				//得点兼プレイヤ経験値
-	private int ItemCount;				//アイテム取得数をカウント
+	public int Score;					// 得点兼プレイヤ経験値
+	private int ItemCount;				// アイテム取得数をカウント
 	PlayerController playerController;
-	public GameObject WarpEffect;
-	int clearScore;						//クリア条件となるスコア  
-	public GameObject Player;
-	public float ChangeTime;			//シーン変更までの時間
-	public int Count;					//ステージ移行する為のアイテム取得個
+	public GameObject WarpEffect;		// ボス面移行用ワープ
+	int clearScore;						// クリア条件となるスコア  
+	public GameObject Player;			
+	public float ChangeTime;			// シーン変更までの時間
+	public int Count;					// ステージ移行する為のアイテム取得個
 	int enemyScore;
 
 	void Start () {	

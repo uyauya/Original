@@ -1840,22 +1840,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea68b7b6b288e26409d1a89aed8a2449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyLevel: 0
   animator: {fileID: 0}
   target: {fileID: 0}
+  shot: {fileID: 0}
+  shotInterval: 0
+  shotIntervalMax: 1
+  exprosion: {fileID: 0}
   particle: {fileID: 0}
   armorPoint: 0
   armorPointMax: 100
+  TargetRange: 5
+  EnemySpeed: 3
+  JumpForce: 0
+  EnemyRotate: 1
+  Search: 0
   timer: 0
   InvincibleTime: 0
   KnockBackRange: 0
   DestroyTime: 0
-  DamageTime: 1
-  TargetRange: 5
-  EnemySpeed: 3
-  EnemyRotate: 1
-  Search: 0
   DestroyEffect: {fileID: 1125771622238690, guid: 56f27e4cde7aa1f4a9e26dbd2988b8ce,
     type: 2}
   timeElapsed: 0
   timeOut: 0
-  JumpForce: 0
+  EnemyScore: 100
+  battleManager: {fileID: 0}

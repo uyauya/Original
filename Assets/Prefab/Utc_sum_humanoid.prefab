@@ -5772,6 +5772,12 @@ MonoBehaviour:
   push: 0
   nextButtonDownTime: 0.3
   limitAngle: 15
+  PlayerNo: 0
+  boostPoint: 100
+  EffectPoint: {fileID: 4546588814688130}
+  BpHealPrefab: {fileID: 1946341669227436, guid: 2d3253fb596387b408034c50cddf87c9,
+    type: 2}
+  BpHealObject: {fileID: 0}
 --- !u!114 &114816739552639698
 MonoBehaviour:
   m_ObjectHideFlags: 1

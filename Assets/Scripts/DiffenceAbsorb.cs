@@ -2,23 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// プレイヤー用ガード（レバー進行方向2回押しでガード壁出し）
+// レバー進行方向2回押し＋Fire3でエネルギー吸収（回復）壁出し
 public class DiffenceAbsorb : MonoBehaviour {
 
-	public GameObject DiffenceWall;
-	public GameObject AbsorbWall;
-	public Transform muzzle;
+	public GameObject DiffenceWall;				// ガード用壁
+	public GameObject AbsorbWall;				// エネルギー吸収用壁
+	public Transform muzzle;					// 壁発射元
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
 	private Vector3 velocity = Vector3.zero;
 	private Vector3 input = Vector3.zero;
-	public bool diffence = false;        //　ガードしているか
-	public bool push = false;           //　最初に移動ボタンを押したかどうか
-	public float nextButtonDownTime;    //　次に移動ボタンが押されるまでの時間
-	private float nowTime = 0f;         //　最初に移動ボタンが押されてからの経過時間
-	public float limitAngle;            //　最初に押した方向との違いの限度角度
-	private Vector2 direction = Vector2.zero;           //　移動キーの押した方向
+	public bool diffence = false;        	  	//　ガードしているか
+	public bool push = false;          		  	//　最初に移動ボタンを押したかどうか
+	public float nextButtonDownTime;    	  	//　次に移動ボタンが押されるまでの時間
+	private float nowTime = 0f;         	  	//　最初に移動ボタンが押されてからの経過時間
+	public float limitAngle;            	  	//　最初に押した方向との違いの限度角度
+	private Vector2 direction = Vector2.zero;   //　移動キーの押した方向
 	private Pause pause;
+	public int PlayerNo;
+	public int boostPoint;						// ブーストポイント
+	public Transform EffectPoint;				// 回復等エフェクト発生元の位置取り
+	public GameObject BpHealPrefab;				// ブーストポイント回復エフェクト格納場所
+	public GameObject BpHealObject;
 
 	void Start()
 	{
@@ -54,7 +61,15 @@ public class DiffenceAbsorb : MonoBehaviour {
 							//&& Time.time - nowTime < nextButtonDownTime)
 							//Debug.LogFormat ("出る時：Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}", Vector2.Angle (nowDirection, direction), limitAngle, Time.time, nowTime, nextButtonDownTime);
 							diffence = true;
-							audioSource.PlayOneShot (audioSource.clip);
+							if (PlayerNo == 0) {
+								SoundManager.Instance.Play(0,gameObject);
+							}
+							if (PlayerNo == 1) {
+								SoundManager.Instance.Play(1,gameObject);
+							}
+							if (PlayerNo == 2) {
+								SoundManager.Instance.Play(2,gameObject);
+							}
 							Diffencer ();
 							Debug.Log ("Diffence");
 							diffence = false;
@@ -64,10 +79,18 @@ public class DiffenceAbsorb : MonoBehaviour {
 							push = false;
 						}
 
-						if (Vector2.Angle (nowDirection, direction) < limitAngle && (Input.GetButton ("Fire2"))
+						if (Vector2.Angle (nowDirection, direction) < limitAngle && (Input.GetButton ("Fire3"))
 						   && nowTime <= nextButtonDownTime) {
 							diffence = true;
-							audioSource.PlayOneShot (audioSource.clip);
+							if (PlayerNo == 0) {
+								SoundManager.Instance.Play(0,gameObject);
+							}
+							if (PlayerNo == 1) {
+								SoundManager.Instance.Play(1,gameObject);
+							}
+							if (PlayerNo == 2) {
+								SoundManager.Instance.Play(2,gameObject);
+							}
 							Absorb ();
 							Debug.Log ("Absorb");
 							diffence = false;
@@ -107,5 +130,25 @@ public class DiffenceAbsorb : MonoBehaviour {
 		GameObject absorbObject = GameObject.Instantiate (AbsorbWall)as GameObject;
 		// Diffencerと重ならないようAbsorbを少し前に置く
 		absorbObject.transform.position = muzzle.position + new Vector3 (0, 0, 0.2f);
+	}
+
+	private void OnCollisionEnter (Collision collider)
+	{
+		// アイテム２タグの物に接触したらブーストポイント回復
+		if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "ShotEnemy") {
+			BpHealObject = Instantiate (BpHealPrefab, EffectPoint.position, Quaternion.identity);
+			BpHealObject.transform.SetParent (EffectPoint);
+			animator.SetTrigger ("Absorb");
+			if (PlayerNo == 0) {
+				SoundManager.Instance.Play (18, gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager.Instance.Play (19, gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager.Instance.Play (20, gameObject);
+			}
+			boostPoint += 100;
+		}
 	}
 } 
