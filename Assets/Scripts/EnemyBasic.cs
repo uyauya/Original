@@ -58,17 +58,21 @@ public class EnemyBasic : MonoBehaviour {
 	}*/
 
 	public void Initialize () {
-		animator = GetComponent< Animator >();		// 《Animator》コンポーネントの取得
-		modelColorChange = gameObject.GetComponent<ModelColorChange>();　// 被ダメージ時の点滅処理
-		//target = GameObject.Find("PlayerTarget");	// ターゲットを取得
-		target = GameObject.FindWithTag("Player");	// Playerタグが付いているオブジェクトをターゲットにする
-		armorPoint = armorPointMax;					// ゲーム開始時、アーマーポイントを最大にする
+		// 《Animator》コンポーネントの取得
+		animator = GetComponent< Animator >();		
+		// 被ダメージ時の点滅処理
+		modelColorChange = gameObject.GetComponent<ModelColorChange>();　
+		// Playerタグが付いているオブジェクトをターゲットにする
+		target = GameObject.FindWithTag("Player");	
+		// ゲーム開始時、アーマーポイントを最大にする
+		armorPoint = armorPointMax;					
 		//上で宣言したplayerLevelとはPlayerタグが付いているオブジェクトに付いているPlayerLevelスクリプトのことを言っている。
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 
 	}
 
 	void Start () {
+		// BattleManagerオブジェクトのBattleManagerスクリプトをbattleManagerと呼ぶことにする
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 	}
 
@@ -79,31 +83,30 @@ public class EnemyBasic : MonoBehaviour {
 
 
 	void OnCollisionEnter(Collision collider) {
-		//Debug.Log (collider);
-
+		// Shotタグが付いているオブジェクトに当たったら
 		if (collider.gameObject.tag == "Shot") {
+			// Bullet01スクリプトのdamageを受け取る
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
+			// ダメージコルーチン（下記参照）
 			StartCoroutine ("DamageCoroutine");
+			// 敵Animatorダメージ判定時に"damaged"をtrueへ
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-			//Destroy (gameObject, DamageTime);	
+			// 敵アーマーポイントからBullet01スクリプトのdamage値を差し引く
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			StartCoroutine ("DamageCoroutine");
-			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-			//Destroy (gameObject, DamageTime);	
+			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.;	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			StartCoroutine ("DamageCoroutine");
-			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-			//Destroy (gameObject, DamageTime);	
+			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.	
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			StartCoroutine ("DamageCoroutine");
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
-			//Destroy (gameObject, DestroyTime);	
 			armorPoint -= damage;
 		}
 
@@ -113,7 +116,9 @@ public class EnemyBasic : MonoBehaviour {
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
 			//リザルト用のスコアを加算する
 			battleManager.Score += EnemyScore;
+			// プレイヤのレベルアップ判定(PlayerLevel参照)
 			playerLevel.LevelUp ();
+			// 敵消滅
 			Destroy (gameObject, DestroyTime);	
 
 
@@ -129,17 +134,18 @@ public class EnemyBasic : MonoBehaviour {
 		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
+			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
 			"position", transform.position - (transform.forward * KnockBackRange),
-			"time", InvincibleTime, // 好きな時間（秒）
+			// 無敵(ダメージ判定なし)時間設定（秒）
+			"time", InvincibleTime, 
 			"easetype", iTween.EaseType.linear
 		));
+		// 無敵(ダメージ判定なし)にして
 		isInvincible = true;
 		while (count > 0){
-			//透明にする
-			//Debug.Log ("色変える");
+			//透明にする(ModelColorChange参照)
 			modelColorChange.ColorChange(new Color (1,0,0,1));
 			//0.05秒待つ
-			//Debug.Log ("戻す");
 			yield return new WaitForSeconds(0.1f);
 			//元に戻す
 			modelColorChange.ColorChange(new Color (1,1,1,1));
@@ -147,6 +153,7 @@ public class EnemyBasic : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
+		// 無敵解除
 		isInvincible = false;
 		//レイヤーをPlayerに戻す
 		gameObject.layer = LayerMask.NameToLayer("Enemy");

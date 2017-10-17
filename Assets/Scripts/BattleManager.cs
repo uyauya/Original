@@ -4,18 +4,19 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour {
+	// Edit→ProjectSettings→ScriptExecutionOrder→＋でBattleManagerを出して一番上に
+	// BattleManagerスクリプトを一番最初に読み取るようにする
 
 	int battleStatus;
-
 	const int BATTLE_START = 0;
 	const int BATTLE_PLAY  = 1;
 	const int BATTLE_END   = 2;
-	float timer;						// 時間計測洋
+	float timer;						// 時間計測洋(LimitedTimer参照）
 	public Image messageStart;
 	public Image messageWin;
 	public Image messageLose;
 	public static int score;			// 敵を倒した数。Enemyスクリプトでカウントアップ  
-	public Text ScoreText;
+	public Text ScoreText;				// スコア表示用
 	public int Score;					// 得点兼プレイヤ経験値
 	private int ItemCount;				// アイテム取得数をカウント
 	PlayerController playerController;

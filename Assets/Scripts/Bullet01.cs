@@ -51,10 +51,6 @@ public class Bullet01 : MonoBehaviour {
 		//	return;
 		//}
 			
-		//敵と衝突したら消滅させる
-		//if (collider.gameObject.tag == "Enemy"||collider.gameObject.tag == "Wall"|| collider.gameObject.tag == "Floor") {
-		//	Destroy (gameObject);
-		//}
 		//衝突時に爆発エフェクトを表示する
 		Instantiate(explosion, transform.position, transform.rotation);
 		Destroy (gameObject);

@@ -164,10 +164,8 @@ public class PlayerAp : MonoBehaviour {
 		isInvincible = true;
 		while (count > 0){
 			//透明にする
-			//Debug.Log ("色変える");
 			modelColorChange.ColorChange(new Color (1,0,0,1));
 			//0.1秒待つ
-			//Debug.Log ("戻す");
 			yield return new WaitForSeconds(0.1f);
 			//元に戻す
 			modelColorChange.ColorChange(new Color (1,1,1,1));

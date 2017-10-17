@@ -8,7 +8,6 @@ using UnityEditor;
 public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
-	// 移動時に加える力
 	private float force;				// 移動速度
 	public float MaxForce;				// 移動速度最大値
 	public float MaxBoostForce;			// ブースト時の移動速度最大値
@@ -66,7 +65,7 @@ public class PlayerController : MonoBehaviour {
 		moveSpeed = Vector3.zero;				// 開始時は移動していないので速さはゼロに
 		isBoost = false;						// ブーストはオフに
 		// Canvas上のゲージイメージを取得（オブジェクトに直接付いていない場合はゲットコンポーネントで取得する）
-		// 
+		// BoostGaugeオブジェクトに付いているImageを取得
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		boostText = GameObject.Find ("TextBg").GetComponent<Text> ();
 		// 画面上(Canvas)のブーストポイントと実際(Inspector)の数値(Inspector)を同じに設定
@@ -101,7 +100,6 @@ public class PlayerController : MonoBehaviour {
 				force += Time.deltaTime * AddTime;	//通常速度（下の設定速度）に加速		
 			}
 			//ブーストキーが押されたらにパラメータを切り替える
-
 			animator.SetBool("Boost", Input.GetButton("Boost")&& boostPoint > 0);
 		}
 		else
@@ -245,12 +243,15 @@ public class PlayerController : MonoBehaviour {
 			// ブーストポイントが最大以上にはならない
 			boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);
 		}
-
+		// 床(Floor)に着いたら全てニュートラル状態に
 		if( collider.gameObject.tag == "Floor" ) {
+			// 二段ジャンプ用ジャンプカウントをリセット
 			JumpCount = 0;
+			// 上方向移動値をリセット
 			moveDirection.y = 0;
 			Vector3 v = GetComponent<Rigidbody>().velocity;
 			GetComponent<Rigidbody>().velocity = new Vector3( v.x, 0, v.z );
+			// 床(Floor)設置判定してジャンプアニメーション解除
 			onFloor = true;
 			animator.SetBool("Jump", false);
 		}

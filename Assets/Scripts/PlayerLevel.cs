@@ -48,12 +48,10 @@ public class PlayerLevel : MonoBehaviour
 	void Start () {
 		// BattleManagerのオブジェクトを見つけてBattleManagerスクリプトのScoreを０にする
 		GameObject.Find ("BattleManager").GetComponent<BattleManager> ().Score = 0;
-		//boostPointMax = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//LevelUp ();
 	}
 
 	public void LevelUp() {
@@ -72,16 +70,6 @@ public class PlayerLevel : MonoBehaviour
 					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax = Param.boostPointMax;
 					GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().armorPointMax = Param.armorPointMax;
 				}
-				/*if (Param.PlayerNo == DataManager.PlayerNo) {
-					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint = Param.AttackPoint;
-					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax = Param.boostPointMax;
-					GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().armorPointMax = Param.armorPointMax;
-				}
-				if (Param.PlayerNo == DataManager.PlayerNo) {
-					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint = Param.AttackPoint;
-					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax = Param.boostPointMax;
-					GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().armorPointMax = Param.armorPointMax;
-				}*/
 			}
 
 		}
