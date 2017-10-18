@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// プレイヤを自動追尾するメインカメラ（正面視点）
 public class CameraFollow : MonoBehaviour 
 {
 	public Transform target;
@@ -10,6 +11,7 @@ public class CameraFollow : MonoBehaviour
 
 	void Start ()
 	{
+		// Playerタグの付いたオブジェクトの位置をtargetとして取得
 		target = GameObject.FindGameObjectWithTag ("Player").transform;
 		// カメラとターゲット（プレイヤー)の距離を設定
 		offset = transform.position - target.position;

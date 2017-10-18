@@ -6,19 +6,19 @@ using UnityEngine.SceneManagement;
 
 // 銃としてPlayerShootスクリプト、弾をBullet01スクリプトとして作る
 public class PlayerShoot : MonoBehaviour {
-	public GameObject Bullet01;
+	public GameObject Bullet01;					// 弾（Shotオブジェクトのスクリプト）
 	private GameObject bullet01;
-	public Transform muzzle;
-	public GameObject muzzleFlash;
-	public GameObject ErekiSmoke;
+	public Transform muzzle;					// 弾発射元（銃口）
+	public GameObject muzzleFlash;				// 発射する時のフラッシュ（現在未使用）
+	public GameObject ErekiSmoke;				// チャージ用エフェクトのパーティクル
 	public float interval;
-	public float shotInterval;			// ショットの時間間隔
+	public float shotInterval;					// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
 	private float time = 0F;
-	private float triggerDownTime = 0F;
-	private float triggerDownTimeStart = 0F;
-	private float triggerDownTimeEnd = 0F;
-	public float Attack;
+	private float triggerDownTime = 0F;			// チャージ時間
+	private float triggerDownTimeStart = 0F;	// チャージ開始時間
+	private float triggerDownTimeEnd = 0F;		// チャージ終了時間
+	public float Attack;						// プレイヤの攻撃値（ショットする際に付け足す）
 	private float power = 0;
 	public float damage;
 	private float chargeTime;
@@ -30,13 +30,13 @@ public class PlayerShoot : MonoBehaviour {
 	public Image gaugeImage;
 	public int boostPoint;
 	Bullet01 bullet01_script;
-	public GameObject effectPrefab;
+	public GameObject effectPrefab;				// チャージ用エフェクトの格納場所
 	public GameObject effectObject;
-	public int BpDown;
-	public bool isCharging = false;
+	public int BpDown;							// 発射時の消費ブーストポイント
+	public bool isCharging = false;				
 	private AudioSource[] audioSources;
-	public int PlayerNo;
-	private Pause pause;
+	public int PlayerNo;						//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
+	private Pause pause;						// ポーズ中かどうか（Pause参照）
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();

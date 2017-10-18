@@ -5,8 +5,6 @@ using UnityEngine;
 public class AbsorbWall : MonoBehaviour {
 
 	Enemy enemy;
-
-	//Absorb Abs ;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
 	public float Destroytime;
