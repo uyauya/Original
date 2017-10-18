@@ -22,22 +22,26 @@ public class EnemyBasic : MonoBehaviour {
 	public float Search;							// プレイヤを探すサーチレンジ
 	public float timer;
 	protected float damage;							// playerに与えるダメージ
+	public void Damaged(float damagedPoint){
+		this.armorPoint -= damagedPoint;			// Playerから受けたダメージの設定
+	}
 	protected bool isInvincible;					// 無敵処理（ダメージ受けた際に使用）
 	public float InvincibleTime;					// 無敵時間
 	protected ModelColorChange modelColorChange;	// 点滅処理
 	public float KnockBackRange;					// 攻撃を受けた際のノックバックの距離
-	public void Damaged(float damagedPoint){
-		this.armorPoint -= damagedPoint;			// Playerから受けたダメージの設定
-	}
 	public float DestroyTime;						// （HP0になった際の）消滅するまでの時間
-	//public float DamageTime;
 	public GameObject DestroyEffect;
 	public float timeElapsed;
 	public float timeOut;
-
 	PlayerLevel playerLevel;
 	public int EnemyScore = 1000;					// 敵を倒した時の得点
 	public BattleManager battleManager;
+	public GameObject RedSphere;					// アーマーポイント回復用玉（アイテムタグ3）
+	public GameObject BlueSphere;					// ブーストポイント回復用玉（アイテムタグ2）
+	public GameObject GreenSphere;					// ボス面移行用玉（アイテムタグ3）
+	public int RedEncount = 16;						// RedSphere生成率の分母
+	public int BlueEncount = 8;
+	public int GreenEncount= 32;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -120,8 +124,15 @@ public class EnemyBasic : MonoBehaviour {
 			playerLevel.LevelUp ();
 			// 敵消滅
 			Destroy (gameObject, DestroyTime);	
-
-
+			Instantiate(exprosion, transform.position, transform.rotation);
+			// ブロック消滅時、一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
+			if (Random.Range (0, RedEncount) == 0) {
+				Instantiate (RedSphere, transform.position, transform.rotation);
+			} else if (Random.Range (0, BlueEncount) == 0) {
+				Instantiate (BlueSphere, transform.position, transform.rotation);
+			} else if (Random.Range (0, GreenEncount) == 0) {
+				Instantiate (GreenSphere, transform.position, transform.rotation);
+			}
 		}
 
 	}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// スフィア用
 public class Sphere : MonoBehaviour {
 
 	// 衝突判定

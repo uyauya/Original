@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour {
 	public Transform EffectPoint;		// 回復等エフェクト発生元の位置取り
 	public GameObject BpHealPrefab;		// ブーストポイント回復エフェクト格納場所
 	public GameObject BpHealObject;
+	public int BpHealPoint = 500;
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -225,10 +226,12 @@ public class PlayerController : MonoBehaviour {
 
 	private void OnCollisionEnter (Collision collider)
 	{
-		// アイテム２タグの物に接触したらブーストポイント回復
+		// アイテム２タグの物に接触したら
 		if (collider.gameObject.tag == "Item2") {
+			// BpHealObjectを発生
 			BpHealObject = Instantiate (BpHealPrefab, EffectPoint.position, Quaternion.identity);
 			BpHealObject.transform.SetParent (EffectPoint);
+			// アニメーターをItemGetに変更（SetTriggerなので自動的に元に戻る）
 			animator.SetTrigger ("ItemGet");
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(18,gameObject);
@@ -239,8 +242,10 @@ public class PlayerController : MonoBehaviour {
 			if (PlayerNo == 2) {
 				SoundManager.Instance.Play(20,gameObject);
 			}
-			boostPoint += 500;
+			// ブーストポイント回復
+			boostPoint += BpHealPoint;
 			// ブーストポイントが最大以上にはならない
+			// 
 			boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);
 		}
 		// 床(Floor)に着いたら全てニュートラル状態に

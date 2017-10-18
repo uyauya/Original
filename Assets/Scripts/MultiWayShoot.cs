@@ -43,7 +43,7 @@ public class MultiWayShoot : MonoBehaviour {
 			// Fire1（標準ではCtrlキー)を押された瞬間.
 			if (Input.GetButtonDown ("Fire1")) {
 				if (GetComponent<PlayerController> ().boostPoint >= BpDown)
-					effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
+					//effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
 				Bullet ();
 				damage = Attack;
 				animator.SetTrigger ("Shot");				

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65159083769555760}
   - component: {fileID: 23868336848308040}
   - component: {fileID: 114161286626745962}
+  - component: {fileID: 114708539712772694}
   m_Layer: 0
   m_Name: BreakBlock
   m_TagString: Enemy
@@ -105,10 +106,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 258f2793b6b492d438d9d6954e537f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exprosion: {fileID: 100000, guid: e245491c3f96d49ff99b96bcdd7da7a3, type: 2}
+--- !u!114 &114708539712772694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1509994010933452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea68b7b6b288e26409d1a89aed8a2449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLevel: 0
+  animator: {fileID: 0}
+  target: {fileID: 0}
+  shot: {fileID: 0}
+  shotInterval: 0
+  shotIntervalMax: 1
+  exprosion: {fileID: 0}
+  particle: {fileID: 0}
   armorPoint: 0
-  armorPointMax: 100
-  RedSphere: {fileID: 100576, guid: 8bcadb38d3e27b749ab7fef5f7d48339, type: 2}
-  BlueSphere: {fileID: 133498, guid: 0b12e93063b3af54faf20b6954e8651d, type: 2}
-  GreenSphere: {fileID: 1282887652771124, guid: f0831b4ebf8a10844994fc4ee83d5db6,
-    type: 2}
+  armorPointMax: 0
+  TargetRange: 0
+  EnemySpeed: 0
+  JumpForce: 0
+  EnemyRotate: 0
+  Search: 0
+  timer: 0
+  InvincibleTime: 0
+  KnockBackRange: 0
+  DestroyTime: 0
+  DestroyEffect: {fileID: 0}
+  timeElapsed: 0
+  timeOut: 0
+  EnemyScore: 1000
+  battleManager: {fileID: 0}
+  RedSphere: {fileID: 0}
+  BlueSphere: {fileID: 0}
+  GreenSphere: {fileID: 0}
+  RedEncount: 16
+  BlueEncount: 8
+  GreenEncount: 32

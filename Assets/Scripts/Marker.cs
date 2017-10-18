@@ -40,7 +40,6 @@ public class Marker : MonoBehaviour {
 	
 	//敵が消滅したらマーカーも消滅させる
 	void OnDestroy() {
-		
 		Destroy(marker);
 	}
 }

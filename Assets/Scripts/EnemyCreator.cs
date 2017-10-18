@@ -13,7 +13,7 @@ public partial class MapArrayFloor{
 	public void enemyArrival(){
 		if(en_folder.transform.childCount >= max_enemy){ return; }	// フォルダー内に敵の数が最大数以上なら、以降は処理しない。
 		
-		MapAxis.Axis_XZ posAxis;			// 位置座標の始点用
+		MapAxis.Axis_XZ posAxis;				// 位置座標の始点用
 		posAxis.x = axis.getAxis_MapStartX();	// 始点Xはマップ始端　（現在位置－半マップサイズ）
 		posAxis.z = axis.getAxis_MapEndZ();		// Zはマップ終端　（現在位置＋半マップサイズ）
 		
