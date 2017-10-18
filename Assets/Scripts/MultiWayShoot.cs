@@ -29,6 +29,7 @@ public class MultiWayShoot : MonoBehaviour {
 	public int BpDown;
 	public int PlayerNo;
 	private Pause pause;
+	private int timeCount;
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
@@ -40,13 +41,18 @@ public class MultiWayShoot : MonoBehaviour {
 
 	void Update () {
 		if (pause.isPause == false) {
+			//timeCount += 1;
 			// Fire1（標準ではCtrlキー)を押された瞬間.
-			if (Input.GetButtonDown ("Fire1")) {
+			shotInterval += Time.deltaTime;
+			if (Input.GetButton ("Fire1")) {
 				if (GetComponent<PlayerController> ().boostPoint >= BpDown)
 					//effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
-				Bullet ();
+				if (timeCount % 5 == 0) {
+					Bullet ();
+				}
 				damage = Attack;
-				animator.SetTrigger ("Shot");				
+				animator.SetTrigger ("Shot");
+
 				//マズルフラッシュを表示する
 				//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 			}
@@ -58,11 +64,11 @@ public class MultiWayShoot : MonoBehaviour {
 	void Bullet ()
 	{
 		// ショットの時間間隔
-		if(Time.time - shotInterval > shotIntervalMax) {
-			shotInterval = Time.time;
+			//if(Time.time - shotInterval > shotIntervalMax) {
+			//shotInterval = Time.time;
 			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
 			// 15度間隔の散弾
-		// -2,-1,0,1,2といった具合に5発を設定
+			// -2,-1,0,1,2といった具合に5発を設定
 			for (int i = FirstBullet; i < BulletNumber; i++) {
 				//初期配置の半径(弾の生成元からの半径)
 				float rad = BulletRad;
@@ -97,7 +103,7 @@ public class MultiWayShoot : MonoBehaviour {
 				GetComponent<PlayerController> ().boostPoint -= BpDown;
 				bulletObject.GetComponent<Bullet05> ().damage = this.damage;
 			}
-		}
+		//}
 
 	}
 
