@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Bullet05 : MonoBehaviour {
 
-	public GameObject explosion;
-	public float damage;
-	public float BulletSpeed;
+	public GameObject explosion;		// 着弾時のエフェクト
+	public float damage;				// 弾の威力
+	public float BulletSpeed;			// 弾のスピード
 	Enemy enemy;
-	MultiWayShoot multiwayshoot;
+	MultiWayShoot multiwayshoot;		// 発射元
 	private Rigidbody rb;
 	private Vector3 forward;
-	public float DestroyTime = 3;
+	public float DestroyTime = 3;		// 発射されてから消滅するまでの時間
 
 	void Start () {
 		rb = this.GetComponent<Rigidbody>();

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// 破壊可能なブロック
 public class BreakBlock : MonoBehaviour {
 
 	GameObject target;

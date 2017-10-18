@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class Bullet03 : MonoBehaviour {
 
-	public GameObject explosion;
-	public float damage;
-	public float BulletSpeed;
-	PlayerShoot03 Plshoot03;
+	public GameObject explosion;		// 着弾時のエフェクト
+	public float damage;				// 弾の威力
+	public float BulletSpeed;			// 弾のスピード
+	PlayerShoot03 Plshoot03;			// 発射元
 	public GameObject prefab_HitEffect2;
 	public int bombDamage = 2000;		// ボムの攻撃値
-	public float DestroyTime = 1;
+	public float DestroyTime = 1;		// 発射されてから消滅するまでの時間
 
 	void Start () {
 		Plshoot03 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();

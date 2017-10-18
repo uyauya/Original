@@ -3,12 +3,12 @@ using System.Collections;
 
 public class Bullet04 : MonoBehaviour {
 
-	public GameObject explosion;
-	public float damage;
-	public float BulletSpeed;
+	public GameObject explosion;		// 着弾時のエフェクト
+	public float damage;				// 弾の威力
+	public float BulletSpeed;			// 弾のスピード
 	Enemy enemy;
-	PlayerShoot04 Plshoot04;
-	public float DestroyTime = 9;
+	PlayerShoot04 Plshoot04;			// 発射元
+	public float DestroyTime = 9;		// 発射されてから消滅するまでの時間
 
 	void Start () {
 		Plshoot04 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot04> ();

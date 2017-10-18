@@ -2,13 +2,14 @@
 using System.Collections;
 
 // 銃としてPlayerShootスクリプト、弾をBullet01スクリプトとして作る
+// Shotオブジェクト用
 public class Bullet01 : MonoBehaviour {
 
 	public GameObject explosion;	// 着弾時のエフェクト
-	public float damage;
-	public float BulletSpeed;		// 弾移動速度
+	public float damage;			// 弾の威力
+	public float BulletSpeed;		// 弾のスピード
 	Enemy enemy;
-	PlayerShoot Plshoot;
+	PlayerShoot Plshoot;			// 発射元
 	public float DestroyTime = 3;	// 弾が（生成されてから）消滅するまでの時間
 
 	void Start () {
@@ -26,7 +27,7 @@ public class Bullet01 : MonoBehaviour {
 	}	
 
 	void Update () {
-		// 弾を前進させる
+		// 弾を前進させる（前に時間場×弾の速度）
 		transform.position += transform.forward * Time.deltaTime * BulletSpeed;
 		// 弾を発射した瞬間、プレイヤーと弾が衝突してしまうので、メインメニューからEdit→ProjectSettings
 		// →Tags and Layers →PlayerとShotを追加。プレイヤーのレイヤーをPlayer,Bullet01のレイヤーをShotにし、

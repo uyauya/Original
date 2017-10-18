@@ -15,35 +15,35 @@ public class PlayerShoot : MonoBehaviour {
 	public float shotInterval;					// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
 	private float time = 0F;
-	private float triggerDownTime = 0F;			// チャージ時間
-	private float triggerDownTimeStart = 0F;	// チャージ開始時間
-	private float triggerDownTimeEnd = 0F;		// チャージ終了時間
-	public float Attack;						// プレイヤの攻撃値（ショットする際に付け足す）
+	private float triggerDownTime = 0F;			// キー押してから離すまでの（チャージ）時間
+	private float triggerDownTimeStart = 0F;	// キー押した時間
+	private float triggerDownTimeEnd = 0F;		// キー離した時間
+	public float Attack;						// プレイヤの攻撃値（ショットする際に付け足す。PlayerController参照）
 	private float power = 0;
-	public float damage;
-	private float chargeTime;
+	public float damage;						// Bullet1に受け渡す弾自体の攻撃力
+	private float chargeTime;					// チャージ時間
 	private float NormalSize = 1.0F;
 	public float BigSize;
 	public float BiggerTime;
 	private Animator animator;
 	private Rigidbody rb;
 	public Image gaugeImage;
-	public int boostPoint;
-	Bullet01 bullet01_script;
+	public int boostPoint;						// ブーストポイント（PlayerController参照）
+	Bullet01 bullet01_script;					// 弾Shot
 	public GameObject effectPrefab;				// チャージ用エフェクトの格納場所
 	public GameObject effectObject;
 	public int BpDown;							// 発射時の消費ブーストポイント
-	public bool isCharging = false;				
+	public bool isCharging = false;				// チャージ中かどうかの判定（開始時はチャージしていないのでfalse）		
 	private AudioSource[] audioSources;
 	public int PlayerNo;						//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	private Pause pause;						// ポーズ中かどうか（Pause参照）
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
-		audioSources = gameObject.GetComponents<AudioSource>(); // 音源が複数の場合はGetComponents（複数形）になる
+		audioSources = gameObject.GetComponents<AudioSource>(); 			// 音源が複数の場合はGetComponents（複数形）になる
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
-		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
+		pause = GameObject.Find ("Pause").GetComponent<Pause> ();			// ポーズ中かどうか判定用
 	}
 
 	void Update () {
@@ -72,8 +72,8 @@ public class PlayerShoot : MonoBehaviour {
 				// スケールを大きくする.
 				effectObject.transform.localScale *= BiggerTime;
 				effectObject.GetComponent<ParticleSystem>().startSize = 1.0f;
-			// キーを離すことによりチャージ終了
 		}
+		// キーを離すことによりチャージ終了
 		if (Input.GetButtonUp ("Fire1")) {
 			triggerDownTimeEnd = Time.time;
 			// チャージ開始のフラグを消す
@@ -84,14 +84,18 @@ public class PlayerShoot : MonoBehaviour {
 			float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
 			// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
 			damage = Attack + Attack * 2.5f * chargeTime;
-			// Shotのアニメーションに切り替え
+			// もしboostPoint 数値がBpDown以上なら
 			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
+				// Bullet01をmuzzleの位置、方向に合わせて生成
 				bullet01 = GameObject.Instantiate (Bullet01, muzzle.position, Quaternion.identity)as GameObject;
 				// Bulletnを設定（下記参照）
 				Bullet ();
+				// BpDown数値消費
 				GetComponent<PlayerController> ().boostPoint -= BpDown;
 			}
-			animator.SetTrigger ("Shot");　	// ショットのように作動したら自動的にニュートラルに戻る場合はTriggerの方がよい
+			// Shotのアニメーションに切り替え
+			// ショットのように作動したら自動的にニュートラルに戻る場合はTriggerの方がよい
+			animator.SetTrigger ("Shot");　	
 			// 一定以上間が空いたらチャージタイムのリセット
 			if (time >= interval) {    
 				time = 0f;
@@ -111,20 +115,20 @@ public class PlayerShoot : MonoBehaviour {
 			bulletObject.transform.localScale *= chargeTime;
 			//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 			bulletObject.transform.position = muzzle.position;
-			//Debug.Log (PlayerNo);
-			if (PlayerNo == 0) {
-			SoundManager.Instance.Play(0,gameObject);
+			//キャラクタ別にSoundManager（声担当）とSoundManager2（効果音担当）から音を鳴らす
+			if (PlayerNo == 0) {	// こはく
+			SoundManager.Instance.Play(0,gameObject);	
 			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 			}
-			if (PlayerNo == 1) {
-			SoundManager.Instance.Play(1,gameObject);
+			if (PlayerNo == 1) {	// ゆうこ
+			SoundManager.Instance.Play(1,gameObject);	
 			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 			}
-			if (PlayerNo == 2) {
-			SoundManager.Instance.Play(2,gameObject);
+			if (PlayerNo == 2) {	// みさき
+			SoundManager.Instance.Play(2,gameObject);	
 			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 			}
-			// bulletObjectのオブジェクトにダメージ計算を渡す
+			// Bullet01オブジェクトにダメージ計算を渡す
 			bulletObject.GetComponent<Bullet01> ().damage = this.damage;
 	}
 

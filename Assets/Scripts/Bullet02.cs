@@ -4,7 +4,7 @@ using System.Collections;
 // PlayerShoot02の弾
 public class Bullet02 : MonoBehaviour {
 	
-	public GameObject explosion;
+	public GameObject explosion;		// 着弾時のエフェクト
 	public float damage;				// 弾の威力
 	public float BulletSpeed;			// 弾のスピード
 	PlayerShoot02 Plshoot02;			// 発射元
