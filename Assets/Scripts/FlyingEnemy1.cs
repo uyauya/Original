@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 飛行キャラ
 public class FlyingEnemy1 : MonoBehaviour {
 
 	protected EnemyBasic enemyBasic;

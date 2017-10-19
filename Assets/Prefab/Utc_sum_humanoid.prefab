@@ -1585,7 +1585,6 @@ GameObject:
   - component: {fileID: 114625657734026384}
   - component: {fileID: 114899750684029078}
   - component: {fileID: 114241188447119344}
-  - component: {fileID: 114686086940088714}
   - component: {fileID: 114079346594583718}
   - component: {fileID: 114796555594523450}
   - component: {fileID: 114098623500226768}
@@ -4988,6 +4987,7 @@ MonoBehaviour:
   BpHealPrefab: {fileID: 1946341669227436, guid: 2d3253fb596387b408034c50cddf87c9,
     type: 2}
   BpHealObject: {fileID: 0}
+  BpHealPoint: 500
 --- !u!114 &114259483187215430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5669,24 +5669,6 @@ MonoBehaviour:
   - {fileID: 114371781802699986}
   - {fileID: 114618926520727704}
   - {fileID: 114283302731615844}
---- !u!114 &114686086940088714
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697289305068994}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2982e0818069ddd4f9d82abf16c69c4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DiffenceWall: {fileID: 1895374023008884, guid: 84dd1b6a3c08ecc44b12ba21696431c1,
-    type: 2}
-  muzzle: {fileID: 4642337937397932}
-  diffence: 0
-  push: 0
-  nextButtonDownTime: 0.3
-  limitAngle: 15
 --- !u!114 &114690257930005578
 MonoBehaviour:
   m_ObjectHideFlags: 1

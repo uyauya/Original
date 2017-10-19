@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加する
 
+// シーン移行用
 public class SelectEvent : MonoBehaviour {
 	private AudioSource[] audioSources;
 
-	//DataManagerスクリプト参照
 	public void Onclick_Kohaku() 
 	{
-		DataManager.PlayerNo = 0;
-		SoundManager00.Instance.Play(3);
-		Invoke("LoadScene1",1.3f);
+		DataManager.PlayerNo = 0;			// DataManagerからPlayerNoを取得
+		SoundManager00.Instance.Play(3);	// SoundManager00から3の音を鳴らして
+		Invoke("LoadScene1",1.3f);			// 1.3秒後にLoadScene1（kohakuシーンに移行）※下記参照
 	}
 	public void Onclick_Yuko() 
 	{

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// ゾンビ（うろうろ歩くザコキャラ）
 public class Zombie1 : MonoBehaviour {
 
 	protected EnemyBasic enemyBasic;

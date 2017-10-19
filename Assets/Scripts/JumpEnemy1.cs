@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 定期的にジャンプする
 public class JumpEnemy1 : MonoBehaviour {
 
 	protected EnemyBasic enemyBasic;
