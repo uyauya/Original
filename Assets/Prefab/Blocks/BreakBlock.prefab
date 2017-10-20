@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23868336848308040}
   - component: {fileID: 114161286626745962}
   - component: {fileID: 114708539712772694}
+  - component: {fileID: 114695731572527116}
   m_Layer: 0
   m_Name: BreakBlock
   m_TagString: Enemy
@@ -106,6 +107,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 258f2793b6b492d438d9d6954e537f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114695731572527116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1509994010933452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8b7dd34ea68b54eaafd841433f0d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114708539712772694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,7 +138,7 @@ MonoBehaviour:
   exprosion: {fileID: 0}
   particle: {fileID: 0}
   armorPoint: 0
-  armorPointMax: 0
+  armorPointMax: 10
   TargetRange: 0
   EnemySpeed: 0
   JumpForce: 0
@@ -135,7 +147,7 @@ MonoBehaviour:
   timer: 0
   InvincibleTime: 0
   KnockBackRange: 0
-  DestroyTime: 0
+  DestroyTime: 1
   DestroyEffect: {fileID: 0}
   timeElapsed: 0
   timeOut: 0
@@ -144,6 +156,6 @@ MonoBehaviour:
   RedSphere: {fileID: 0}
   BlueSphere: {fileID: 0}
   GreenSphere: {fileID: 0}
-  RedEncount: 16
-  BlueEncount: 8
-  GreenEncount: 32
+  RedEncount: 1
+  BlueEncount: 1
+  GreenEncount: 1

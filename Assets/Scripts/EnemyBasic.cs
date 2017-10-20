@@ -124,7 +124,7 @@ public class EnemyBasic : MonoBehaviour {
 			playerLevel.LevelUp ();
 			// 敵消滅
 			Destroy (gameObject, DestroyTime);	
-			Instantiate(exprosion, transform.position, transform.rotation);
+			//Instantiate(exprosion, transform.position, transform.rotation);
 			// ブロック消滅時、一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
 			if (Random.Range (0, RedEncount) == 0) {
 				Instantiate (RedSphere, transform.position, transform.rotation);

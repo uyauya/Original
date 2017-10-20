@@ -9,14 +9,7 @@ public class Save : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		//UserParamインスタンスを文字列に変換
-		UserParamSaveJson = JsonUtility.ToJson(UserParam);
-		//セーブ
-		PlayerPrefs.SetString("UserParam",UserParamSaveJson);
-		//ロード
-		string userParamLoadJson = PlayerPrefs.GetString("UserParam");
-		//データを変数に設定
-		UserParam = JsonUtility.FromJson<UserParam>(UserParamLoadJson);
+		
 	}
 
 	// Update is called once per frame
@@ -24,7 +17,22 @@ public class Save : MonoBehaviour {
 
 	}
 
-	void UserParamSaveJson()
+	public void SaveData (UserParam userParam) 
 	{
-		
+		//UserParam userParam = GetComponent<UserParam> ();
+		//UserParamインスタンスを文字列に変換
+		string UserParamSaveJson = JsonUtility.ToJson(userParam);
+		//セーブ
+		PlayerPrefs.SetString("UserParam",UserParamSaveJson);
+		Debug.Log (UserParamSaveJson);
+	}
+
+	public void LoadData()
+	{
+		UserParam userParam = GetComponent<UserParam> ();
+		//ロード
+		string UserParamLoadJson = PlayerPrefs.GetString ("UserParam");
+		//データを変数に設定
+		userParam = JsonUtility.FromJson<UserParam> (UserParamLoadJson);
+	}
 }

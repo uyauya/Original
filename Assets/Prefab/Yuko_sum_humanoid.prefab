@@ -1343,6 +1343,7 @@ GameObject:
   - component: {fileID: 114891178713599580}
   - component: {fileID: 114285533963157022}
   - component: {fileID: 114081342659877784}
+  - component: {fileID: 114080373900747386}
   m_Layer: 0
   m_Name: Yuko_sum_humanoid
   m_TagString: Player
@@ -4298,6 +4299,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8b7dd34ea68b54eaafd841433f0d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114080373900747386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1647243158286332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792bf0dcccc21aa4e954ad7e02d03987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114081342659877784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4996,6 +5008,7 @@ MonoBehaviour:
   BpHealPrefab: {fileID: 1946341669227436, guid: 2d3253fb596387b408034c50cddf87c9,
     type: 2}
   BpHealObject: {fileID: 0}
+  BpHealPoint: 500
 --- !u!114 &114787892343617224
 MonoBehaviour:
   m_ObjectHideFlags: 1

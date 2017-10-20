@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject BpHealPrefab;		// ブーストポイント回復エフェクト格納場所
 	public GameObject BpHealObject;
 	public int BpHealPoint = 500;
+	public int Level;
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく

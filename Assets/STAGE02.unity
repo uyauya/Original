@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3535,12 +3535,12 @@ MonoBehaviour:
   - {fileID: 160858, guid: be400dba39119e0448163986d2426402, type: 2}
   prefab_enemy:
   - {fileID: 161242, guid: a51ae6c75d01e084db1d7ab7b771d6d8, type: 2}
-  - {fileID: 1805232816971456, guid: 7d98e62f75bdac449a34bc9fdc7877c7, type: 2}
+  - {fileID: 1282887652771124, guid: f0831b4ebf8a10844994fc4ee83d5db6, type: 2}
   EmitterTime: 1
   prefab_enemy2: []
   EmitterTime2: 1
   prefab_BreakBlock:
-  - {fileID: 1509994010933452, guid: 730c39bbd564f11459510769a101bb40, type: 2}
+  - {fileID: 0}
   prefab_BombPoint: []
   Prefab_Player:
   - {fileID: 1697289305068994, guid: 405690101a2aadd4699abecaa1ab9fa9, type: 2}

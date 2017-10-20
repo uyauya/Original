@@ -1121,6 +1121,7 @@ GameObject:
   - component: {fileID: 114821327649930234}
   - component: {fileID: 114655264183461344}
   - component: {fileID: 114202172818674620}
+  - component: {fileID: 114757673817723642}
   m_Layer: 8
   m_Name: Misaki_sum_humanoid
   m_TagString: Player
@@ -5713,7 +5714,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -7142,6 +7143,17 @@ MonoBehaviour:
   - {fileID: 114433363158469714}
   debug: 1
   threshold: 0.01
+--- !u!114 &114757673817723642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1375426664305316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792bf0dcccc21aa4e954ad7e02d03987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114790702223787600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7434,6 +7446,7 @@ MonoBehaviour:
   BpHealPrefab: {fileID: 1946341669227436, guid: 2d3253fb596387b408034c50cddf87c9,
     type: 2}
   BpHealObject: {fileID: 0}
+  BpHealPoint: 500
 --- !u!114 &114970597215717264
 MonoBehaviour:
   m_ObjectHideFlags: 1

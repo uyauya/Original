@@ -35,9 +35,9 @@ public class PlayerLevel : MonoBehaviour
 		new UserParam(1,02,110,4000,3800,1000),		//Level02
 		new UserParam(2,02,150,3000,4500,1000),		//Level02
 
-		new UserParam(0,02,150,3400,4500,2200),		//Level03
-		new UserParam(1,02,130,4300,4200,2200),		//Level03
-		new UserParam(2,02,200,3100,4800,2200),		//Level03
+		new UserParam(0,03,150,3400,4500,2200),		//Level03
+		new UserParam(1,03,130,4300,4200,2200),		//Level03
+		new UserParam(2,03,200,3100,4800,2200),		//Level03
 	};
 
 	public Transform muzzle;
@@ -63,6 +63,7 @@ public class PlayerLevel : MonoBehaviour
 			Debug.Log("Score"+Score);
 			if (Param.Score <= Score) {
 				if (Param.PlayerNo == DataManager.PlayerNo) {
+					GetComponent<PlayerController> ().Level = Param.Level;
 					//Playerのタグがついているオブジェクトを見つけPlayerControllerスクリプトのAttackPointに
 					//userParamListのAttackPoint数値を代入する
 					Debug.Log("レベルアップ");
