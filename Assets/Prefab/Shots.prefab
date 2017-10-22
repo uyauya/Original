@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1022352431443244, guid: 01a3cdaf57e83cd4cb32785f71726a1d, type: 2}
-  damage: 0
+  damage: 100
   BulletSpeed: 3
   DestroyTime: 3
 --- !u!135 &13561356

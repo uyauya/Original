@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54747604126818342}
   - component: {fileID: 114907810834155708}
   - component: {fileID: 114032199789745772}
+  - component: {fileID: 114111605827671830}
   m_Layer: 0
   m_Name: GreenSphere
   m_TagString: Item3
@@ -207,6 +208,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5862c0aeac705e48852df00aedc2dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114111605827671830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1282887652771124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d149abae9bde22349919209aeeeedea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 5
 --- !u!114 &114907810834155708
 MonoBehaviour:
   m_ObjectHideFlags: 1

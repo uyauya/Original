@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5450176}
   - component: {fileID: 11410752}
   - component: {fileID: 114901574568801362}
+  - component: {fileID: 114033793649188292}
   m_Layer: 0
   m_Name: RedSphere
   m_TagString: Item
@@ -3274,6 +3275,18 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100576}
   m_IsPrefabParent: 1
+--- !u!114 &114033793649188292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d149abae9bde22349919209aeeeedea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 5
 --- !u!114 &114901574568801362
 MonoBehaviour:
   m_ObjectHideFlags: 1

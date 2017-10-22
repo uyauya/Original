@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23945618184271806}
   - component: {fileID: 114037630187982608}
   - component: {fileID: 54721367850023628}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shotss
   m_TagString: Shot3
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4657330312479994}
   - component: {fileID: 198135470382928954}
   - component: {fileID: 199044546486996862}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4895021369155892}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Aura1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4092856979113290}
   - component: {fileID: 198666424841237342}
   - component: {fileID: 199119306223595204}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: par3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4396280173602646}
   - component: {fileID: 198862793213733070}
   - component: {fileID: 199474687638025986}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: par1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -5340,7 +5340,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   shotInterval: 0
   shotIntervalMax: 0.5
-  damage: 0
+  damage: 1000
   gaugeImage: {fileID: 0}
   boostPoint: 0
   BpDown: 100
@@ -5884,10 +5884,10 @@ MonoBehaviour:
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   shotInterval: 0
   shotIntervalMax: 0.25
-  damage: 0
+  damage: 1000
   gaugeImage: {fileID: 0}
   boostPoint: 0
-  AttackPoint: 0
+  AttackPoint: 1000
   BpDown: 500
   PlayerNo: 0
 --- !u!114 &114905705873582806

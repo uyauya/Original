@@ -18,7 +18,8 @@ public class PlayerShoot : MonoBehaviour {
 	private float triggerDownTime = 0F;			// キー押してから離すまでの（チャージ）時間
 	private float triggerDownTimeStart = 0F;	// キー押した時間
 	private float triggerDownTimeEnd = 0F;		// キー離した時間
-	public float Attack;						// プレイヤの攻撃値（ショットする際に付け足す。PlayerController参照）
+	public float Attack = 200;
+	public float attackPoint;					// プレイヤの攻撃値（ショットする際に付け足す。PlayerController参照）
 	private float power = 0;
 	public float damage;						// Bullet1に受け渡す弾自体の攻撃力
 	private float chargeTime;					// チャージ時間
@@ -44,6 +45,7 @@ public class PlayerShoot : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();			// ポーズ中かどうか判定用
+		attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
 	}
 
 	void Update () {
@@ -83,7 +85,7 @@ public class PlayerShoot : MonoBehaviour {
 			// キーを離した状態から押し始めたじかんの差分を計測して
 			float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
 			// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
-			damage = Attack + Attack * 2.5f * chargeTime;
+			damage = Attack + attackPoint * 2.5f * chargeTime;
 			// もしboostPoint 数値がBpDown以上なら
 			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 				// Bullet01をmuzzleの位置、方向に合わせて生成

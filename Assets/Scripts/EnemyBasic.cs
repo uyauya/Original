@@ -97,6 +97,7 @@ public class EnemyBasic : MonoBehaviour {
 			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
 			// 敵アーマーポイントからBullet01スクリプトのdamage値を差し引く
 			armorPoint -= damage;
+			Debug.Log (damage);
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			StartCoroutine ("DamageCoroutine");

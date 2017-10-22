@@ -1865,3 +1865,10 @@ MonoBehaviour:
   timeOut: 0
   EnemyScore: 100
   battleManager: {fileID: 0}
+  RedSphere: {fileID: 100576, guid: 8bcadb38d3e27b749ab7fef5f7d48339, type: 2}
+  BlueSphere: {fileID: 133498, guid: 0b12e93063b3af54faf20b6954e8651d, type: 2}
+  GreenSphere: {fileID: 1282887652771124, guid: f0831b4ebf8a10844994fc4ee83d5db6,
+    type: 2}
+  RedEncount: 16
+  BlueEncount: 8
+  GreenEncount: 32
