@@ -15,7 +15,7 @@ public class PlayerShoot02 : MonoBehaviour {
 	public float damage = 500;
 	public Image gaugeImage;
 	public int boostPoint;
-	public int AttackPoint;
+	public int attackPoint;
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
@@ -30,6 +30,7 @@ public class PlayerShoot02 : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
+		attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
 	}
 
 	void Update () {
@@ -38,7 +39,7 @@ public class PlayerShoot02 : MonoBehaviour {
 		if (pause.isPause == false) {
 			if (Input.GetButtonUp ("Fire1")) {
 				if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
-					damage = Attack += AttackPoint;
+					damage = Attack += attackPoint;
 					animator.SetTrigger ("Shots");
 					GetComponent<PlayerController> ().boostPoint -= BpDown;
 					Bullets ();

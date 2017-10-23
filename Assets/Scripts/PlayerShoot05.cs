@@ -12,6 +12,7 @@ public class PlayerShoot05 : MonoBehaviour {
 	public float interval = 0.5F;
 	public float shotInterval = 0.1F;			// ショットの時間間隔
 	private float Attack;
+	public float attackPoint;					// プレイヤの攻撃値（ショットする際に付け足す。PlayerController参照）
 	public float damage = 2000;
 	private Animator animator;
 	private AudioSource audioSource;
@@ -37,6 +38,7 @@ public class PlayerShoot05 : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
+		attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
 	}
 
 	void Update () {
@@ -44,7 +46,7 @@ public class PlayerShoot05 : MonoBehaviour {
 			if (Input.GetButton ("Fire1")) {
 				if (GetComponent<PlayerController> ().boostPoint >= BpDown)
 					StartCoroutine (AutoShoot (shootCount));
-				damage = Attack;
+				damage = Attack + attackPoint;
 				animator.SetTrigger ("Shot");
 				//マズルフラッシュを表示する
 				//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);

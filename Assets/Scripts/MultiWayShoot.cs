@@ -13,6 +13,7 @@ public class MultiWayShoot : MonoBehaviour {
 	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
 	private float Attack;
+	public float attackPoint;					// プレイヤの攻撃値（ショットする際に付け足す。PlayerController参照）
 	public float damage = 2000;
 	private Animator animator;
 	private AudioSource audioSource;
@@ -37,6 +38,7 @@ public class MultiWayShoot : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
+		attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
 	}
 
 	void Update () {
@@ -50,7 +52,7 @@ public class MultiWayShoot : MonoBehaviour {
 				if (timeCount % 5 == 0) {
 					Bullet ();
 				}
-				damage = Attack;
+				damage = Attack + attackPoint;
 				animator.SetTrigger ("Shot");
 
 				//マズルフラッシュを表示する

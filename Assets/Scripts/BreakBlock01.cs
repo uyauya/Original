@@ -29,9 +29,6 @@ public class BreakBlock01 : MonoBehaviour {
 		} else if (collider.gameObject.tag == "Shot2") {
 			//Instantiate(exprosion, transform.position, transform.rotation);
 			armorPoint -= collider.gameObject.GetComponent<Bullet02> ().damage;
-		} else if (collider.gameObject.tag == "Shot3") {
-			//Instantiate(exprosion, transform.position, transform.rotation);
-			armorPoint -= collider.gameObject.GetComponent<Bullet03> ().damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			//Instantiate(exprosion, transform.position, transform.rotation);
 			armorPoint -= collider.gameObject.GetComponent<Bullet05> ().damage;
