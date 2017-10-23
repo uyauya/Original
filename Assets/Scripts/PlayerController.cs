@@ -72,6 +72,15 @@ public class PlayerController : MonoBehaviour {
 		boostText = GameObject.Find ("TextBg").GetComponent<Text> ();
 		// 画面上(Canvas)のブーストポイントと実際(Inspector)の数値(Inspector)を同じに設定
 		displayBoostPoint = boostPoint;
+		if (!DataManager.FarstLevel) {
+			UserParam userParam = GameObject.Find ("DataManager").GetComponent<Save> ().LoadData ();
+			Debug.Log (userParam);
+			GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Level = userParam.Level;
+			GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint = userParam.AttackPoint;
+			GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax = userParam.boostPointMax;
+			GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().armorPointMax = userParam.armorPointMax;
+			Debug.Log (userParam.armorPointMax);
+		}
 	}
 
 	void Update()

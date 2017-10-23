@@ -4,37 +4,37 @@ using UnityEngine;
 using UnityEngine.SceneManagement;			//シーン遷移する時は追加
 using UnityEngine.UI;						// UIを使う時は追加する
 
-public class GameStart : MonoBehaviour {
+public class Continue : MonoBehaviour {
+
 	private AudioSource[] audioSources;
 	private Animator animator;
 	public Text blinkText;					//点滅させる
-	public void Onclick_Select ()
+	public void Onclick_Continue ()
 
 
 	{
-		DataManager.FarstLevel = true;
+		DataManager.FarstLevel = false;
 		// ボタンを押してセレクト画面に移行
 		SoundManager00.Instance.Play(1);	//(1)はElmentの数
 		Invoke("LoadScene",1.3f);
 	}
-		
+
 	void Start () {
 		audioSources = gameObject.GetComponents<AudioSource> ();
 		animator = GetComponent<Animator> ();
 		SoundManager00.Instance.Play(0);
 	}
 
-	void Update () {
+	/*void Update () {
 		// テキスト点滅
 		if (Input.GetMouseButtonDown(0)){
-			animator.SetBool ("START", true);
+			animator.SetBool ("Continue", true);
 		} else {
-			animator.SetBool ("START", false);
+			animator.SetBool ("Continue", false);
 		}
-	}
+	}*/
 
 	void LoadScene() {
-		SceneManager.LoadScene("Select");
+		SceneManager.LoadScene("STAGE02BOSS");
 	}
-
 }

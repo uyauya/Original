@@ -9,7 +9,8 @@ public class Save : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		
+		// シーン移動してもPlayerLevelを残しておく
+		DontDestroyOnLoad(this.gameObject);
 	}
 
 	// Update is called once per frame
@@ -27,12 +28,13 @@ public class Save : MonoBehaviour {
 		Debug.Log (UserParamSaveJson);
 	}
 
-	public void LoadData()
+	public UserParam LoadData()
 	{
-		UserParam userParam = GetComponent<UserParam> ();
+		//UserParam userParam = GetComponent<UserParam> ();
 		//ロード
 		string UserParamLoadJson = PlayerPrefs.GetString ("UserParam");
 		//データを変数に設定
-		userParam = JsonUtility.FromJson<UserParam> (UserParamLoadJson);
+		UserParam userParam = JsonUtility.FromJson<UserParam> (UserParamLoadJson);
+		return userParam;
 	}
 }

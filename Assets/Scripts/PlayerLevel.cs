@@ -31,6 +31,10 @@ public class PlayerLevel : MonoBehaviour
 	// 順番（pno, level, attackPoint, boostMax, armorMax, scoreの順）にレベルアップ時の数値を設定
 	public List <UserParam> userParamList = new List<UserParam>() 
 	{
+		new UserParam(0,01,130,3000,3000,1000),		//Level01
+		new UserParam(1,01,110,4000,3800,1000),		//Level01
+		new UserParam(2,01,150,3000,4500,1000),		//Level01
+
 		new UserParam(0,02,130,3300,4000,1000),		//Level02
 		new UserParam(1,02,110,4000,3800,1000),		//Level02
 		new UserParam(2,02,150,3000,4500,1000),		//Level02

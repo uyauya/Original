@@ -1589,7 +1589,6 @@ GameObject:
   - component: {fileID: 114796555594523450}
   - component: {fileID: 114098623500226768}
   - component: {fileID: 114728882960573464}
-  - component: {fileID: 114450977811425468}
   m_Layer: 8
   m_Name: Utc_sum_humanoid
   m_TagString: Player
@@ -4900,6 +4899,7 @@ MonoBehaviour:
   shotInterval: 0
   shotIntervalMax: 300
   Attack: 10000
+  attackPoint: 0
   damage: 0
   BigSize: 2
   BiggerTime: 1.0005
@@ -5270,17 +5270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.05
---- !u!114 &114450977811425468
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697289305068994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 792bf0dcccc21aa4e954ad7e02d03987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114451899168776720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5496,6 +5485,7 @@ MonoBehaviour:
   interval: 0
   shotInterval: 0
   shotIntervalMax: 0.5
+  attackPoint: 0
   damage: 1000
   gaugeImage: {fileID: 0}
   boostPoint: 0
@@ -5887,7 +5877,7 @@ MonoBehaviour:
   damage: 1000
   gaugeImage: {fileID: 0}
   boostPoint: 0
-  AttackPoint: 1000
+  attackPoint: 0
   BpDown: 500
   PlayerNo: 0
 --- !u!114 &114905705873582806

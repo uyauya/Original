@@ -78,7 +78,7 @@ public class BattleManager : MonoBehaviour {
 				int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
 				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
 				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score);
-				GameObject.FindWithTag("Player").GetComponent<Save> ().SaveData (userParam);
+				GameObject.Find("DataManager").GetComponent<Save> ().SaveData (userParam);
 				Debug.Log ("ワープ");
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			}	
