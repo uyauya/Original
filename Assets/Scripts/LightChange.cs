@@ -6,33 +6,57 @@ using UnityEngine.UI;
 // 時間経過と共にライトを消していき、朝から夜の時間推移を表現
 public class LightChange : MonoBehaviour {
 	public float count;
-	public Text timeLabel;
-	private GameObject lightMorning;
+	private GameObject lightAfternoon;
 	private GameObject lightEvening;
 	private GameObject lightNight;
+	private GameObject lightMorning;
+	public bool isLightAfternoon = true;
+	public bool isLightEvening = true;
+	public bool isLightNight = true;
+	public bool isLightMorning = true;
+	public int CountAfternoon = 5;
+	public int CountEvening = 10;
+	public int CountNight = 15;
+	public int CountMorning = 20;
+	public int CountNoon = 25;
 
-	// Use this for initialization
 	void Start () {
 		// 最初に以下3種類のLightを付けておく
-		lightMorning = GameObject.Find ("LightMorning");
+		lightAfternoon = GameObject.Find ("LightAfternoon");
+		Debug.Log (lightAfternoon);
 		lightEvening = GameObject.Find ("LightEvening");
-		lightNight 	 = GameObject.Find ("Night");
+		Debug.Log (lightEvening);
+		lightNight 	 = GameObject.Find ("LightNight");
+		Debug.Log (lightNight);
+		lightMorning = GameObject.Find ("LightMorning");
+		Debug.Log (lightMorning);
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
+		Debug.Log (lightMorning);
 		// 時間経過と共にライトを消していく
 		count += Time.deltaTime;
-		timeLabel.text = "" + count.ToString ("0");
-
-		if (count > 10) {
-			lightMorning.SetActive (false);
+		//Debug.Log (lightMorning);
+		//Debug.Log (count);
+		if (count > CountAfternoon) {
+			//Debug.Log (count);
+			lightMorning.SetActive(isLightMorning == false);
+			// Debug.Log (lightMorning);
+			lightAfternoon.SetActive(isLightAfternoon == false);
 		}
-		if (count > 20) {
-			lightEvening.SetActive (false);
+		if (count > CountEvening) {
+			lightEvening.SetActive(isLightEvening == false);
 		}
-		if (count > 30) {
-			lightNight.SetActive (false);
+		if (count > CountNight) {
+			lightNight.SetActive (isLightNight == false);
+		}
+		if (count > CountMorning) {
+			lightMorning.SetActive (isLightMorning == true);
+		}
+		if (count > CountNoon) {
+			lightAfternoon.SetActive (isLightAfternoon == true);
+		// カウントをリセット
+			count = 0;
 		}
 	}
 }
