@@ -24,6 +24,7 @@ TagManager:
   - BossShot
   - AbsorbWall
   - Pause
+  - ' Boss'
   layers:
   - Default
   - TransparentFX
