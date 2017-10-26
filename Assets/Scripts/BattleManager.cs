@@ -25,7 +25,6 @@ public class BattleManager : MonoBehaviour {
 	public GameObject Player;			
 	public float ChangeTime;			// シーン変更までの時間
 	public int Count;					// ステージ移行する為のアイテム取得個
-	//int enemyScore;
 
 	void Start () {	
 		ScoreText.text = "Score:0";
@@ -40,14 +39,15 @@ public class BattleManager : MonoBehaviour {
 		//敵の最大生成数をクリア数にする
 		//instantiateValueに値を代入するのをBattleManagerより早くするため
 		//EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
-		clearScore = EnemyInstantiate.instantiateValue;
-		Score = 0;
+		//clearScore = EnemyInstantiate.instantiateValue;
+		//Score = 0;
 		Player = GameObject.FindWithTag("Player");
-		//enemyScore = GameObject.FindWithTag ("Enemy").GetComponent<EnemyBasic> ().EnemyScore;
+		// 得点をテキスト形式で画面に表示
 		ScoreText.text = Score.ToString();
 	}
 
 	void Update () {
+		// 得点をテキスト形式で画面に表示
 		ScoreText.text = Score.ToString();
 		switch (battleStatus) {
 		
@@ -72,14 +72,15 @@ public class BattleManager : MonoBehaviour {
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
-
+				// Scene移行時プレイヤーのパラメータの中身を取得
 				int level = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Level;
 				int attackPoint = GameObject.FindWithTag("Player").GetComponent<PlayerController>().AttackPoint;
 				int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
 				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
 				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score);
+				// DataManagerオブジェクトからSaveスクリプトのSaveDataを取得
 				GameObject.Find("DataManager").GetComponent<Save> ().SaveData (userParam);
-				Debug.Log ("ワープ");
+				//Debug.Log ("ワープ");
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			}	
 			break;

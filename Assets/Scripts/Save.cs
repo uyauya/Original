@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Save : MonoBehaviour {
 
-
-
 	// Use this for initialization
 	void Start()
 	{
@@ -25,13 +23,14 @@ public class Save : MonoBehaviour {
 		string UserParamSaveJson = JsonUtility.ToJson(userParam);
 		//セーブ
 		PlayerPrefs.SetString("UserParam",UserParamSaveJson);
-		Debug.Log (UserParamSaveJson);
+		//Debug.Log (UserParamSaveJson);
 	}
 
 	public UserParam LoadData()
 	{
 		//UserParam userParam = GetComponent<UserParam> ();
 		//ロード
+		// Jsonの文字列データをUserParamインスタンスに変換
 		string UserParamLoadJson = PlayerPrefs.GetString ("UserParam");
 		//データを変数に設定
 		UserParam userParam = JsonUtility.FromJson<UserParam> (UserParamLoadJson);

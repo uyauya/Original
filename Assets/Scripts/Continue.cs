@@ -11,11 +11,11 @@ public class Continue : MonoBehaviour {
 	public Text blinkText;					//点滅させる
 	public void Onclick_Continue ()
 
-
 	{
 		DataManager.FarstLevel = false;
 		// ボタンを押してセレクト画面に移行
 		SoundManager00.Instance.Play(1);	//(1)はElmentの数
+		// 1.3秒後にLoadScene起動
 		Invoke("LoadScene",1.3f);
 	}
 
