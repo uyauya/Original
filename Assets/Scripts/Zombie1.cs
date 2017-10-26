@@ -6,6 +6,7 @@ using UnityEngine;
 public class Zombie1 : MonoBehaviour {
 
 	protected EnemyBasic enemyBasic;
+	bool dead = false;
 
 	// Use this for initialization
 	void Start () {

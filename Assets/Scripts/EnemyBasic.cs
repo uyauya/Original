@@ -94,32 +94,31 @@ public class EnemyBasic : MonoBehaviour {
 			// ダメージコルーチン（下記参照）
 			StartCoroutine ("DamageCoroutine");
 			// 敵Animatorダメージ判定時に"damaged"をtrueへ
-			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			animator.SetBool("damaged" , true);
 			// 敵アーマーポイントからBullet01スクリプトのdamage値を差し引く
 			armorPoint -= damage;
-			Debug.Log (damage);
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			StartCoroutine ("DamageCoroutine");
-			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.;	
+			animator.SetBool("damaged" , true);
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			StartCoroutine ("DamageCoroutine");
-			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.	
+			animator.SetBool("damaged" , true);
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			StartCoroutine ("DamageCoroutine");
-			animator.SetBool("damaged" , true);		// 《Animator》の変数deadを true に変更.
+			animator.SetBool("damaged" , true);
 			armorPoint -= damage;
 		}
 
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0){
-			//animator.SetBool("dead" , true);		// 《Animator》の変数deadを true に変更.
+			// 敵消滅用エフェクト発生
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
-			//リザルト用のスコアを加算する
+			// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
 			battleManager.Score += EnemyScore;
 			// プレイヤのレベルアップ判定(PlayerLevel参照)
 			playerLevel.LevelUp ();

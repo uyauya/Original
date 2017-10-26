@@ -1008,7 +1008,7 @@ MonoBehaviour:
   shot: {fileID: 0}
   shotInterval: 0
   shotIntervalMax: 1
-  exprosion: {fileID: 0}
+  exprosion: {fileID: 1125771622238690, guid: 56f27e4cde7aa1f4a9e26dbd2988b8ce, type: 2}
   particle: {fileID: 0}
   armorPoint: 0
   armorPointMax: 100
@@ -1021,7 +1021,8 @@ MonoBehaviour:
   InvincibleTime: 0
   KnockBackRange: 1
   DestroyTime: 1
-  DestroyEffect: {fileID: 0}
+  DestroyEffect: {fileID: 1125771622238690, guid: 56f27e4cde7aa1f4a9e26dbd2988b8ce,
+    type: 2}
   timeElapsed: 0
   timeOut: 0
   EnemyScore: 1000
@@ -1425,6 +1426,16 @@ Prefab:
         type: 2}
       propertyPath: m_Constraints
       value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 114796616421411694, guid: 6460980c6b7d7c64185db2c19c22b1e4,
+        type: 2}
+      propertyPath: MoveSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54520169254617058, guid: 6460980c6b7d7c64185db2c19c22b1e4,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6460980c6b7d7c64185db2c19c22b1e4, type: 2}

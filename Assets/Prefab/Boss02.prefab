@@ -889,15 +889,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Boss02shot: {fileID: 1325986715204676, guid: 12879577cfee489449edc8127222d2d4, type: 2}
-  shotIntervalMax: 0.5
+  ShotInterval: 0
   exprosion: {fileID: 100000, guid: 07725ad1d903f4ea891afbc5b4a253f8, type: 2}
-  armorPoint: 0
-  armorPointMax: 100
   Boss02muzzle: {fileID: 1082512625802510}
   TargetPosition: 20
   TargetSpeed: 5
   MoveSpeed: 5
-  ShotInterval: 0
 --- !u!136 &136310787882408204
 CapsuleCollider:
   m_ObjectHideFlags: 1

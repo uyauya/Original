@@ -72,8 +72,8 @@ public class PlayerShoot : MonoBehaviour {
 				effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.white;
 			}
 				// スケールを大きくする.
-				effectObject.transform.localScale *= BiggerTime;
-				effectObject.GetComponent<ParticleSystem>().startSize = 1.0f;
+				//effectObject.transform.localScale *= BiggerTime;
+				//effectObject.GetComponent<ParticleSystem>().startSize = 1.0f;
 		}
 		// キーを離すことによりチャージ終了
 		if (Input.GetButtonUp ("Fire1")) {

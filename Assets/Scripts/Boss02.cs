@@ -7,7 +7,6 @@ public class Boss02 : MonoBehaviour {
 	public GameObject Boss02shot;				// 弾
 	public float ShotInterval;					// ショット間隔
 	public GameObject exprosion;	
-	float timer = 0;	
 	int enemyLevel = 0;
 	Bullet01 b1;
 	public GameObject Boss02muzzle;				// ショットの発射口
@@ -15,8 +14,10 @@ public class Boss02 : MonoBehaviour {
 	public float TargetSpeed;
 	public float MoveSpeed;						
 	protected EnemyBasic enemyBasic;
+	bool dead = false;
 	
 	void Start () {
+		// EnemyBasic接続用
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) > TargetPosition) {
@@ -27,10 +28,10 @@ public class Boss02 : MonoBehaviour {
 
 	void Update () {
 		Vector3 Pog = this.gameObject.transform.position;
-		gameObject.transform.position = new Vector3(Pog.x , 0.01f, Pog.z);
+		gameObject.transform.position = new Vector3(Pog.x , 1.0f, Pog.z);
 		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
 		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
-		timer += Time.deltaTime;
+		enemyBasic.timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= TargetPosition) {
 			
