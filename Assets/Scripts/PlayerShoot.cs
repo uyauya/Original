@@ -22,7 +22,9 @@ public class PlayerShoot : MonoBehaviour {
 	public float attackPoint;					// プレイヤの攻撃値（ショットする際に付け足す。PlayerController参照）
 	private float power = 0;
 	public float damage;						// Bullet1に受け渡す弾自体の攻撃力
-	private float chargeTime;					// チャージ時間
+	public float chargeTime;					// チャージ時間
+	public float chargeTime1 = 1.0f;					// チャージ時間
+	public float chargeTime2 = 3.0f;					// チャージ時間
 	private float NormalSize = 1.0F;
 	public float BigSize;
 	public float BiggerTime;
@@ -64,10 +66,10 @@ public class PlayerShoot : MonoBehaviour {
 			effectObject.transform.SetParent (muzzle);
 		} 
 		if (Input.GetButton ("Fire1")) {
-			if (Time.time - triggerDownTimeStart >= 1.0f && Time.time - triggerDownTimeStart<= 3.0f) {
+				if (Time.time - triggerDownTimeStart >= chargeTime1 && Time.time - triggerDownTimeStart<= chargeTime2) {
 				effectObject.GetComponent<ParticleSystem> ().startColor = Color.red;
 				effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.yellow;
-			} else if (Time.time - triggerDownTimeStart > 3.0f) {
+		} else if (Time.time - triggerDownTimeStart > chargeTime2) {
 				effectObject.GetComponent<ParticleSystem> ().startColor = Color.blue;
 				effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.white;
 			}
@@ -86,6 +88,7 @@ public class PlayerShoot : MonoBehaviour {
 			float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
 			// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
 			damage = Attack + attackPoint * 2.5f * chargeTime;
+				Debug.Log (damage);
 			// もしboostPoint 数値がBpDown以上なら
 			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 				// Bullet01をmuzzleの位置、方向に合わせて生成
@@ -114,7 +117,7 @@ public class PlayerShoot : MonoBehaviour {
 			//shotInterval = Time.time;
 			// Bulletのゲームオブジェクトを生成してbulletObjectとする
 			GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
-			bulletObject.transform.localScale *= chargeTime;
+			//bulletObject.transform.localScale *= chargeTime;
 			//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 			bulletObject.transform.position = muzzle.position;
 			//キャラクタ別にSoundManager（声担当）とSoundManager2（効果音担当）から音を鳴らす

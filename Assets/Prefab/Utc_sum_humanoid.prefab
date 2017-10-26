@@ -4899,8 +4899,11 @@ MonoBehaviour:
   shotInterval: 0
   shotIntervalMax: 300
   Attack: 10000
-  attackPoint: 0
+  attackPoint: 10
   damage: 0
+  chargeTime: 0
+  chargeTime1: 1
+  chargeTime2: 3
   BigSize: 2
   BiggerTime: 1.0005
   gaugeImage: {fileID: 0}
