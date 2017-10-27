@@ -12,7 +12,7 @@ public class Bullet01 : MonoBehaviour {
 	PlayerShoot Plshoot;			// 発射元
 	public float DestroyTime = 3;	// 弾が（生成されてから）消滅するまでの時間
 
-	void Start () {
+	public void Initialize () {
 		// Playerタグの付いているオブジェクトのlayerShootのスクリプトをPlshootとする
 		Plshoot = GameObject.FindWithTag("Player").GetComponent<PlayerShoot> ();
 		// 弾発射の向きはPlshootの向きとする

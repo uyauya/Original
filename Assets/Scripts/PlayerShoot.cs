@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 // 銃としてPlayerShootスクリプト、弾をBullet01スクリプトとして作る
 public class PlayerShoot : MonoBehaviour {
 	public GameObject Bullet01;					// 弾（Shotオブジェクトのスクリプト）
+	public GameObject Bullet01B;				// 弾（Shotオブジェクトのスクリプト）
+	public GameObject Bullet01C;				// 弾（Shotオブジェクトのスクリプト）
 	private GameObject bullet01;
 	public Transform muzzle;					// 弾発射元（銃口）
 	public GameObject muzzleFlash;				// 発射する時のフラッシュ（現在未使用）
@@ -116,10 +118,23 @@ public class PlayerShoot : MonoBehaviour {
 		//if (Time.time - shotInterval > shotIntervalMax) {
 			//shotInterval = Time.time;
 			// Bulletのゲームオブジェクトを生成してbulletObjectとする
+		if (chargeTime <= chargeTime1) {
 			GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
-			//bulletObject.transform.localScale *= chargeTime;
 			//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 			bulletObject.transform.position = muzzle.position;
+			// Bullet01オブジェクトにダメージ計算を渡す
+			bulletObject.GetComponent<Bullet01> ().damage = this.damage;
+		} else if (chargeTime1 < chargeTime && chargeTime  <= chargeTime2) {
+			GameObject bulletObject = GameObject.Instantiate (Bullet01B)as GameObject;
+			bulletObject.transform.position = muzzle.position;
+			// Bullet01オブジェクトにダメージ計算を渡す
+			bulletObject.GetComponent<Bullet01B> ().damage = this.damage;
+		} else {
+			GameObject bulletObject = GameObject.Instantiate (Bullet01C)as GameObject;
+			bulletObject.transform.position = muzzle.position;
+			// Bullet01オブジェクトにダメージ計算を渡す
+			bulletObject.GetComponent<Bullet01C> ().damage = this.damage;
+		}
 			//キャラクタ別にSoundManager（声担当）とSoundManager2（効果音担当）から音を鳴らす
 			if (PlayerNo == 0) {	// こはく
 			SoundManager.Instance.Play(0,gameObject);	
@@ -133,8 +148,6 @@ public class PlayerShoot : MonoBehaviour {
 			SoundManager.Instance.Play(2,gameObject);	
 			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 			}
-			// Bullet01オブジェクトにダメージ計算を渡す
-			bulletObject.GetComponent<Bullet01> ().damage = this.damage;
 	}
 
 	public void KickEvent (){	//ショット時のアニメーション

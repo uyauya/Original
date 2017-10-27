@@ -1105,7 +1105,6 @@ GameObject:
   - component: {fileID: 114181865683268450}
   - component: {fileID: 136113982945616620}
   - component: {fileID: 114625540466778224}
-  - component: {fileID: 114177824763895576}
   - component: {fileID: 114198318310690552}
   - component: {fileID: 114189844802395784}
   - component: {fileID: 114009724249476268}
@@ -1121,6 +1120,7 @@ GameObject:
   - component: {fileID: 114821327649930234}
   - component: {fileID: 114655264183461344}
   - component: {fileID: 114202172818674620}
+  - component: {fileID: 114721456075801692}
   m_Layer: 8
   m_Name: Misaki_sum_humanoid
   m_TagString: Player
@@ -6196,36 +6196,6 @@ MonoBehaviour:
   boostPoint: 0
   BpDown: 500
   PlayerNo: 2
---- !u!114 &114177824763895576
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1375426664305316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa5a9c2b63ec724488791a53f0027d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bullet01: {fileID: 157144, guid: 3200dee3a95bda945a11c6b7ad753785, type: 2}
-  muzzle: {fileID: 4202809436857222}
-  muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
-  ErekiSmoke: {fileID: 0}
-  interval: 0.5
-  shotInterval: 0
-  shotIntervalMax: 0.25
-  Attack: 0
-  attackPoint: 0
-  damage: 0
-  BigSize: 0
-  BiggerTime: 0
-  gaugeImage: {fileID: 0}
-  boostPoint: 0
-  effectPrefab: {fileID: 100004, guid: b49e37c2e747d4ed4bd2369d30fa0d68, type: 2}
-  effectObject: {fileID: 0}
-  BpDown: 500
-  isCharging: 0
-  PlayerNo: 2
 --- !u!114 &114181865683268450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7097,6 +7067,41 @@ MonoBehaviour:
   - {fileID: 114549772862376218}
   debug: 1
   threshold: 0.01
+--- !u!114 &114721456075801692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1375426664305316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64758abae9cad464c9a6516fbbf8c593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet01: {fileID: 157144, guid: 3200dee3a95bda945a11c6b7ad753785, type: 2}
+  Bullet01B: {fileID: 1560031838935646, guid: 509f2475a25547645a7abb2ca148c2b5, type: 2}
+  Bullet01C: {fileID: 1007495186388244, guid: 92bd1a281832f744fbe398593f6bcfef, type: 2}
+  muzzle: {fileID: 4202809436857222}
+  muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
+  ErekiSmoke: {fileID: 0}
+  interval: 0
+  shotInterval: 0
+  shotIntervalMax: 0.25
+  Attack: 200
+  attackPoint: 0
+  damage: 0
+  chargeTime: 0
+  chargeTime1: 1
+  chargeTime2: 3
+  BigSize: 0
+  BiggerTime: 0
+  gaugeImage: {fileID: 0}
+  boostPoint: 0
+  effectPrefab: {fileID: 0}
+  effectObject: {fileID: 0}
+  BpDown: 50
+  isCharging: 0
+  PlayerNo: 2
 --- !u!114 &114723612248664768
 MonoBehaviour:
   m_ObjectHideFlags: 1
