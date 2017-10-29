@@ -21,12 +21,10 @@ public class MultiWayShoot : MonoBehaviour {
 	public Image gaugeImage;
 	public int boostPoint;
 	Bullet05 bullet05_script;
-	public GameObject effectPrefab;
-	public GameObject effectObject;
 	public int BulletGap = 15;
-	public float BulletRad = 5;
-	public int BulletNumber = 5;
-	public int FirstBullet = -2;
+	public float BulletRad = 1;
+	public int BulletNumber = 4;
+	public int FirstBullet = -3;
 	public int BpDown;
 	public int PlayerNo;
 	private Pause pause;
@@ -46,7 +44,7 @@ public class MultiWayShoot : MonoBehaviour {
 			//timeCount += 1;
 			// Fire1（標準ではCtrlキー)を押された瞬間.
 			shotInterval += Time.deltaTime;
-			if (Input.GetButton ("Fire1")) {
+			if (Input.GetButtonUp ("Fire1")) {
 				if (GetComponent<PlayerController> ().boostPoint >= BpDown)
 					//effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
 				if (timeCount % 5 == 0) {
@@ -72,6 +70,7 @@ public class MultiWayShoot : MonoBehaviour {
 			// 15度間隔の散弾
 			// -2,-1,0,1,2といった具合に5発を設定
 			for (int i = FirstBullet; i < BulletNumber; i++) {
+				//Debug.Log (i);
 				//初期配置の半径(弾の生成元からの半径)
 				float rad = BulletRad;
 				//真ん中を中心に15度間隔に配置位置　
@@ -82,30 +81,32 @@ public class MultiWayShoot : MonoBehaviour {
 				             );
 				//生成
 				GameObject bulletObject = Instantiate (Bullet05);			
-
+				//Debug.Log (Bullet05);
 			//弾を配置
 			bulletObject.transform.position = transform.TransformPoint (pos);
+			//bulletObject.transform.position = muzzle.position;
 			//回転を設定（弾を拡散するよう回転させる）
 			bulletObject.transform.rotation = Quaternion.LookRotation (bulletObject.transform.position - transform.position);
+				//Debug.Log (transform.rotation);
 			// 回転計算をした後に弾の座標を上に上げる
 			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
-			// bulletObjectのオブジェクトにダメージ計算を渡す
-					if (PlayerNo == 0) {
-						SoundManager.Instance.Play(24,gameObject);
-						SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
-					}
-					if (PlayerNo == 1) {
-						SoundManager.Instance.Play(26,gameObject);
-						SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
-					}
-					if (PlayerNo == 2) {
-						SoundManager.Instance.Play(28,gameObject);
-						SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
-					}
+				if (PlayerNo == 0) {
+					SoundManager.Instance.Play(21,gameObject);
+					SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
+				}
+				if (PlayerNo == 1) {
+					SoundManager.Instance.Play(22,gameObject);
+					SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
+				}
+				if (PlayerNo == 2) {
+					SoundManager.Instance.Play(23,gameObject);
+					SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
+				}
+					
 				GetComponent<PlayerController> ().boostPoint -= BpDown;
+				// bulletObjectのオブジェクトにダメージ計算を渡す
 				bulletObject.GetComponent<Bullet05> ().damage = this.damage;
 			}
-		//}
 
 	}
 

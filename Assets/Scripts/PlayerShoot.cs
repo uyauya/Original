@@ -70,10 +70,10 @@ public class PlayerShoot : MonoBehaviour {
 		if (Input.GetButton ("Fire1")) {
 				if (Time.time - triggerDownTimeStart >= chargeTime1 && Time.time - triggerDownTimeStart<= chargeTime2) {
 				effectObject.GetComponent<ParticleSystem> ().startColor = Color.red;
-				effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.yellow;
+				effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.white;
 		} else if (Time.time - triggerDownTimeStart > chargeTime2) {
 				effectObject.GetComponent<ParticleSystem> ().startColor = Color.blue;
-				effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.white;
+				effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.yellow;
 			}
 				// スケールを大きくする.
 				//effectObject.transform.localScale *= BiggerTime;
@@ -87,7 +87,7 @@ public class PlayerShoot : MonoBehaviour {
 			//エフェクトを削除
 			Destroy (effectObject);
 			// キーを離した状態から押し始めたじかんの差分を計測して
-			float chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
+			chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
 			// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
 			damage = Attack + attackPoint * 2.5f * chargeTime;
 				Debug.Log (damage);

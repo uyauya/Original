@@ -38,7 +38,7 @@ public class Bullet01 : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision collider) {
 		//着弾時に爆発エフェクトを表示する
-		Instantiate(explosion, transform.position, transform.rotation);
+		//Instantiate(explosion, transform.position, transform.rotation);
 		// 弾消滅
 		Destroy (gameObject);
 	}

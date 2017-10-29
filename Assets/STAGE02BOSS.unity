@@ -3029,7 +3029,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4121373427540760, guid: 5e429f44741ee9c438a7e06124f86992, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4121373427540760, guid: 5e429f44741ee9c438a7e06124f86992, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3059,6 +3059,11 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114444310589574026, guid: 5e429f44741ee9c438a7e06124f86992,
+        type: 2}
+      propertyPath: Boss02
+      value: 
+      objectReference: {fileID: 376120965}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e429f44741ee9c438a7e06124f86992, type: 2}
   m_IsPrefabParent: 0

@@ -16,11 +16,12 @@ public class Bullet05 : MonoBehaviour {
 	void Start () {
 		rb = this.GetComponent<Rigidbody>();
 		multiwayshoot = GameObject.FindWithTag("Player").GetComponent<MultiWayShoot> ();
-		transform.rotation = multiwayshoot.transform.rotation;
+		//transform.rotation = multiwayshoot.transform.rotation;
 		Destroy (gameObject, DestroyTime);
 	}	
 	void Update () {		
 		transform.position += transform.forward * Time.deltaTime * BulletSpeed;
+		//transform.Translate(Vector3.forward * Time.deltaTime);
 	}	
 	private void OnCollisionEnter(Collision collider) {
 
@@ -31,7 +32,7 @@ public class Bullet05 : MonoBehaviour {
 			Instantiate (explosion, transform.position, transform.rotation);
 		}	
 		//敵と衝突したら消滅させる
-		if (collider.gameObject.tag == "Enemy"||collider.gameObject.tag == "Wall") {
+		if (collider.gameObject.tag == "Enemy"||collider.gameObject.tag == "Wall"||collider.gameObject.tag == "Block") {
 			Instantiate (explosion, transform.position, transform.rotation);
 			Destroy (gameObject);
 		}

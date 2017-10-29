@@ -12,6 +12,7 @@ public class LimitedTimer : MonoBehaviour {
 		// 60で割った値を分、余りを秒とする
 		int minute = (int)time / 60;
 		int second = (int)time % 60;
+		// D2は十進法の２桁(00)を指す
 		GetComponent<Text> ().text = minute.ToString("D2") + ":" + second.ToString("D2") + "";
 	} 
 

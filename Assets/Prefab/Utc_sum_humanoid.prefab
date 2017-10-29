@@ -5454,18 +5454,16 @@ MonoBehaviour:
   muzzleFlash: {fileID: 152448, guid: f21f3b7ba967231478259de6aa3d5e85, type: 2}
   interval: 0
   shotInterval: 0
-  shotIntervalMax: 0.5
+  shotIntervalMax: 0
   attackPoint: 0
   damage: 1000
   gaugeImage: {fileID: 0}
   boostPoint: 0
-  effectPrefab: {fileID: 100004, guid: b49e37c2e747d4ed4bd2369d30fa0d68, type: 2}
-  effectObject: {fileID: 0}
   BulletGap: 15
-  BulletRad: 5
+  BulletRad: 1
   BulletNumber: 5
-  FirstBullet: -2
-  BpDown: 500
+  FirstBullet: -4
+  BpDown: 50
   PlayerNo: 0
 --- !u!114 &114632175688763656
 MonoBehaviour:
@@ -5794,10 +5792,10 @@ MonoBehaviour:
   chargeTime1: 1
   chargeTime2: 3
   BigSize: 0
-  BiggerTime: 0
+  BiggerTime: 1.0005
   gaugeImage: {fileID: 0}
   boostPoint: 0
-  effectPrefab: {fileID: 0}
+  effectPrefab: {fileID: 100004, guid: b49e37c2e747d4ed4bd2369d30fa0d68, type: 2}
   effectObject: {fileID: 0}
   BpDown: 50
   isCharging: 0
@@ -5908,7 +5906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2ce4beb9c1fc24ebe02658aa6b106b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armorPointMax: 3000
+  armorPointMax: 10
   armorText: {fileID: 0}
   myGreen: {r: 0, g: 0.9411765, b: 0, a: 1}
   myWhite: {r: 1, g: 1, b: 1, a: 1}

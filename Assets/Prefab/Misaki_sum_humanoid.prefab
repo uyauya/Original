@@ -7094,10 +7094,10 @@ MonoBehaviour:
   chargeTime1: 1
   chargeTime2: 3
   BigSize: 0
-  BiggerTime: 0
+  BiggerTime: 1.0005
   gaugeImage: {fileID: 0}
   boostPoint: 0
-  effectPrefab: {fileID: 0}
+  effectPrefab: {fileID: 100004, guid: b49e37c2e747d4ed4bd2369d30fa0d68, type: 2}
   effectObject: {fileID: 0}
   BpDown: 50
   isCharging: 0

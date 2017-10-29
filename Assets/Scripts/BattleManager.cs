@@ -68,6 +68,14 @@ public class BattleManager : MonoBehaviour {
 			if (PlayerAp.armorPoint <= 0) {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
+				// Scene移行時プレイヤーのパラメータの中身を取得
+				int level = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Level;
+				int attackPoint = GameObject.FindWithTag("Player").GetComponent<PlayerController>().AttackPoint;
+				int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
+				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
+				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score);
+				SceneManager.LoadScene ("Start");
+				//Time.timeScale = 1;
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
