@@ -2,7 +2,7 @@
 using System.Collections;
 
 // 銃としてPlayerShootスクリプト、弾をBullet01スクリプトとして作る
-// Shotオブジェクト用
+// Shot(Bullet01A)、ShotB(Bullet01B)、ShotC(Bullet01C)継承元スクリプト
 public class Bullet01 : MonoBehaviour {
 
 	public GameObject explosion;	// 着弾時のエフェクト

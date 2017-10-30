@@ -10,7 +10,7 @@ public class MultiWayShoot : MonoBehaviour {
 	public Transform muzzle;
 	public GameObject muzzleFlash;
 	public float interval = 0.5F;
-	public float shotInterval;			// ショットの時間間隔
+	public float shotInterval;					// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
 	private float Attack;
 	public float attackPoint;					// プレイヤの攻撃値（ショットする際に付け足す。PlayerController参照）
@@ -21,10 +21,10 @@ public class MultiWayShoot : MonoBehaviour {
 	public Image gaugeImage;
 	public int boostPoint;
 	Bullet05 bullet05_script;
-	public int BulletGap = 15;
-	public float BulletRad = 1;
-	public int BulletNumber = 4;
-	public int FirstBullet = -3;
+	public int BulletGap = 15;					// 弾の発射角度
+	public float BulletRad = 1;					// 弾の発射元（プレイヤから発射もとまでの距離）
+	public int BulletNumber = 5;				// 弾生成（～まで）
+	public int FirstBullet = -4;				// 弾生成（～から）
 	public int BpDown;
 	public int PlayerNo;
 	private Pause pause;
@@ -68,29 +68,26 @@ public class MultiWayShoot : MonoBehaviour {
 			//shotInterval = Time.time;
 			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
 			// 15度間隔の散弾
-			// -2,-1,0,1,2といった具合に5発を設定
+			// FirstBulletからBulletNumberまでの数を弾生成数（i）とする
 			for (int i = FirstBullet; i < BulletNumber; i++) {
 				//Debug.Log (i);
-				//初期配置の半径(弾の生成元からの半径)
+				//弾配置場所(弾の生成元からの半径)
 				float rad = BulletRad;
-				//真ん中を中心に15度間隔に配置位置　
+				//真ん中（０）を中心に（角度）BulletGap間隔に配置。配置場所をposとする　
 				Vector3 pos = new Vector3 (
 					             rad * Mathf.Sin (Mathf.Deg2Rad * (i * BulletGap)),
 					             0,
 					             rad * Mathf.Cos (Mathf.Deg2Rad * (i * BulletGap))
 				             );
-				//生成
+				// Bullet05の付いたオブジェクトを生成
 				GameObject bulletObject = Instantiate (Bullet05);			
-				//Debug.Log (Bullet05);
-			//弾を配置
+			// 弾を（posの場所に）配置
 			bulletObject.transform.position = transform.TransformPoint (pos);
-			//bulletObject.transform.position = muzzle.position;
-			//回転を設定（弾を拡散するよう回転させる）
+			// 回転を設定（弾を拡散するよう回転させて振り分けて配置）
 			bulletObject.transform.rotation = Quaternion.LookRotation (bulletObject.transform.position - transform.position);
-				//Debug.Log (transform.rotation);
-			// 回転計算をした後に弾の座標を上に上げる
+			// 回転計算をした後に弾の座標をnew Vector3(0,1,0)で上に上げる
 			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
-				if (PlayerNo == 0) {
+				if (PlayerNo == 0) { 
 					SoundManager.Instance.Play(21,gameObject);
 					SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
 				}
@@ -102,7 +99,7 @@ public class MultiWayShoot : MonoBehaviour {
 					SoundManager.Instance.Play(23,gameObject);
 					SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
 				}
-					
+				// 	ブーストポイントをBpDown分消費
 				GetComponent<PlayerController> ().boostPoint -= BpDown;
 				// bulletObjectのオブジェクトにダメージ計算を渡す
 				bulletObject.GetComponent<Bullet05> ().damage = this.damage;

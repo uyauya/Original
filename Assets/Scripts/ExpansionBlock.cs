@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // プレイヤが近づいたらブロックの高さをランダムな速さ、高さに上下させる。
-public class MovingBlock : MonoBehaviour {
+public class ExpansionBlock : MonoBehaviour {
+
 	protected EnemyBasic enemyBasic;
 	bool dead = false;
 	private int frameCnt = 0;				// ブロックをランダムで揺らすための時間取り
@@ -19,14 +20,14 @@ public class MovingBlock : MonoBehaviour {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
 			MoveBlock ();
 		}
 	}
-		
+
 	void MoveBlock () {
 		float Speedy = Random.Range (YBlockSpeedH, YBlockSpeedL);
 		BlockSpeed = Random.Range (1, 9) / 10f;
