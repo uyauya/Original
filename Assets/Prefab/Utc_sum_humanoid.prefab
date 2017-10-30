@@ -1572,23 +1572,22 @@ GameObject:
   - component: {fileID: 114681083139285114}
   - component: {fileID: 114124731887961612}
   - component: {fileID: 114113241009077298}
+  - component: {fileID: 114079346594583718}
   - component: {fileID: 54320169535040642}
   - component: {fileID: 136817747515047200}
-  - component: {fileID: 114307637246287380}
   - component: {fileID: 114140122671579044}
+  - component: {fileID: 114728882960573464}
   - component: {fileID: 114920329314263658}
+  - component: {fileID: 114241188447119344}
   - component: {fileID: 114690257930005578}
+  - component: {fileID: 114220998316928068}
+  - component: {fileID: 114098623500226768}
+  - component: {fileID: 114851097379381398}
+  - component: {fileID: 114899750684029078}
   - component: {fileID: 114465295405195670}
   - component: {fileID: 114668387893584030}
-  - component: {fileID: 114220998316928068}
   - component: {fileID: 114625657734026384}
-  - component: {fileID: 114899750684029078}
-  - component: {fileID: 114241188447119344}
-  - component: {fileID: 114079346594583718}
   - component: {fileID: 114796555594523450}
-  - component: {fileID: 114098623500226768}
-  - component: {fileID: 114728882960573464}
-  - component: {fileID: 114851097379381398}
   m_Layer: 8
   m_Name: Utc_sum_humanoid
   m_TagString: Player
@@ -5076,17 +5075,6 @@ MonoBehaviour:
   - {fileID: 114606804875570018}
   debug: 1
   threshold: 0.01
---- !u!114 &114307637246287380
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697289305068994}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3a5f8aa06f0cae4bb9536183fb547ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114316377126753468
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000010217177680}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RootControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000012653453854}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RIG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000012691124702}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TailJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,9 +65,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4000013931392504}
   - component: {fileID: 95000010452426964}
-  m_Layer: 0
+  - component: {fileID: 114142181221079072}
+  - component: {fileID: 114095612628981476}
+  - component: {fileID: 136676541601240176}
+  m_Layer: 11
   m_Name: Ghost_Violet
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,7 +83,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000014281392204}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RootJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +98,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000012930506918}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HeadControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +113,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000010762647616}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HeadTipJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +128,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000011760848564}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GhostControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000012799328290}
   - component: {fileID: 137000013712094104}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LV1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +159,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000011549681188}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TailControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +174,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000010860599848}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HeadJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,8 +189,23 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000013229559746}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MESH
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1926494245208990
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4660274550761648}
+  m_Layer: 0
+  m_Name: EnemyMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,7 +317,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4660274550761648}
   m_Father: {fileID: 4000013229559746}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -338,7 +357,7 @@ Transform:
   m_GameObject: {fileID: 1000011296433714}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4000013229559746}
   - {fileID: 4000012653453854}
@@ -360,6 +379,19 @@ Transform:
   m_Father: {fileID: 4000010217177680}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4660274550761648
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926494245208990}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.0116, z: 0.0106}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_Children: []
+  m_Father: {fileID: 4000012799328290}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &95000010452426964
 Animator:
   serializedVersion: 3
@@ -377,6 +409,71 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114095612628981476
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011296433714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea68b7b6b288e26409d1a89aed8a2449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLevel: 0
+  animator: {fileID: 0}
+  target: {fileID: 0}
+  shot: {fileID: 0}
+  shotInterval: 0
+  shotIntervalMax: 1
+  exprosion: {fileID: 0}
+  particle: {fileID: 0}
+  armorPoint: 0
+  armorPointMax: 0
+  TargetRange: 0
+  EnemySpeed: 0
+  JumpForce: 0
+  EnemyRotate: 0
+  Search: 0
+  timer: 0
+  InvincibleTime: 0
+  KnockBackRange: 0
+  DestroyTime: 0
+  DestroyEffect: {fileID: 0}
+  timeElapsed: 0
+  timeOut: 0
+  EnemyScore: 1000
+  battleManager: {fileID: 0}
+  RedSphere: {fileID: 0}
+  BlueSphere: {fileID: 0}
+  GreenSphere: {fileID: 0}
+  RedEncount: 16
+  BlueEncount: 8
+  GreenEncount: 32
+--- !u!114 &114142181221079072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011296433714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66e5b6f27157ab4c8a274761b978ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &136676541601240176
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011296433714}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.012
+  m_Height: 0.012
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.01, z: 0}
 --- !u!137 &137000013712094104
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

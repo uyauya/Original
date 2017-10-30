@@ -23,6 +23,7 @@ public class ExpansionBlock : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		// ターゲット（プレイヤー）との距離がSearch以内なら
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
 			MoveBlock ();
 		}
