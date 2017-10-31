@@ -4,7 +4,7 @@ using System.Collections;
 public partial class MapArrayFloor{
 	public GameObject[] enemy;			// 敵を格納する変数
 	private GameObject	en_folder;		// 敵を格納するフォルダー
-	private int			max_enemy = 20;	// 敵の最大数.
+	public int			max_enemy = 20;	// 敵の最大数.
 	
 	// ■■■敵オブジェクトのセット■■■
 	public void setEnemy(GameObject[] obj){ enemy = obj; }
@@ -20,8 +20,8 @@ public partial class MapArrayFloor{
 		if(enemy.Length != 0){
 			for (int x=1 ; x< size.getX()-1 ; x++) {
 				if(en_folder.transform.childCount >= max_enemy){ return; }	// フォルダー内に敵の数が最大数以上なら、以降は処理しない。
-				if(Random.Range(0,100) <= 10){ 					// 10%の確率で
-					createEnemy(x+posAxis.x , posAxis.z);		// 敵オブジェクトの作成
+				if(Random.Range(0,100) <= 10){ 								// 10%の確率で
+					createEnemy(x+posAxis.x , posAxis.z);					// 敵オブジェクトの作成
 				}
 			}
 		}

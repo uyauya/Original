@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// どのSceneでも情報を保持する
 public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBehaviour<T>
 {
 	protected static T instance;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 // スライダーと連動させるための処理
 [RequireComponent(typeof(Slider))]
 
-//効果音管理用
+//効果音管理用（どのSceneでも情報を保持したい場合MonoBehaviourをSingletonMonoBehaviour<スクリプト名>にする）
 public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
 	[SerializeField]

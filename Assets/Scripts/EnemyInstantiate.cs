@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// 敵生成スクリプト
 public class EnemyInstantiate : MonoBehaviour {
 
 	float timer = 3;

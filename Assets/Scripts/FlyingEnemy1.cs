@@ -13,10 +13,12 @@ public class FlyingEnemy1 : MonoBehaviour {
 	}
 
 	void Update () {
-		Vector3 Pog = this.gameObject.transform.position;
-		gameObject.transform.position = new Vector3(Pog.x , 3.0f, Pog.z);
-		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
-		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
+		//Vector3 Pog = this.gameObject.transform.position;
+		//gameObject.transform.position = new Vector3(Pog.x , 3.0f, Pog.z);
+		// 上下させる
+		transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time,10), transform.position.z);
+		//Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
+		//gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		enemyBasic.timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.TargetRange) {

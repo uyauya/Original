@@ -46,18 +46,18 @@ public class Bullet02 : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision collider) {
-
+		//衝突時に爆発エフェクトを表示する
+		Instantiate(explosion, transform.position, transform.rotation);
 		//地形とぶつかったら消滅させる
-		if (collider.gameObject.tag == "Floor") {		
+		/*if (collider.gameObject.tag == "Floor") {		
 			Destroy (gameObject);
 			Instantiate (explosion, transform.position, transform.rotation);
 		}	
 		//敵と衝突したら消滅させる
-		if (collider.gameObject.tag == "Enemy"||collider.gameObject.tag == "Wall") {
+		if (collider.gameObject.tag == "Enemy"||collider.gameObject.tag == "Wall") {*/
 			Destroy (gameObject);
 		}
-		//衝突時に爆発エフェクトを表示する
-		Instantiate(explosion, transform.position, transform.rotation);
-	}
+
+	//}
 }
 
