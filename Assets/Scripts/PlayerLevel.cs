@@ -11,8 +11,9 @@ public class UserParam
 	public int armorPointMax;	// プレイヤー体力最大値（PlayerAp参照）
 	public int Score;			// 点数兼経験値（BattleManager参照）
 	public int PlayerNo;		// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
+	public string SceneName;
 
-	public UserParam(int Pno, int level, int attackPoint, int boostMax, int armorMax, int score)
+	public UserParam(int Pno, int level, int attackPoint, int boostMax, int armorMax, int score, string sceneName)
 	{
 		PlayerNo = Pno;				 
 		Level = level;
@@ -20,6 +21,7 @@ public class UserParam
 		boostPointMax = boostMax;
 		armorPointMax = armorMax;
 		Score = score;
+		SceneName = sceneName;
 	}
 }
 
@@ -31,17 +33,17 @@ public class PlayerLevel : MonoBehaviour
 	// 順番（pno, level, attackPoint, boostMax, armorMax, scoreの順）にレベルアップ時の数値を設定
 	public List <UserParam> userParamList = new List<UserParam>() 
 	{
-		new UserParam(0,01,130,3000,3000,1000),		//Level01
-		new UserParam(1,01,110,4000,3800,1000),		//Level01
-		new UserParam(2,01,150,3000,4500,1000),		//Level01
+		new UserParam(0,01,130,3000,3000,1000, string.Empty),		//Level01
+		new UserParam(1,01,110,4000,3800,1000, string.Empty),		//Level01
+		new UserParam(2,01,150,3000,4500,1000, string.Empty),		//Level01
 
-		new UserParam(0,02,130,3300,4000,1000),		//Level02
-		new UserParam(1,02,110,4000,3800,1000),		//Level02
-		new UserParam(2,02,150,3000,4500,1000),		//Level02
+		new UserParam(0,02,130,3300,4000,1000, string.Empty),		//Level02
+		new UserParam(1,02,110,4000,3800,1000, string.Empty),		//Level02
+		new UserParam(2,02,150,3000,4500,1000, string.Empty),		//Level02
 
-		new UserParam(0,03,150,3400,4500,2200),		//Level03
-		new UserParam(1,03,130,4300,4200,2200),		//Level03
-		new UserParam(2,03,200,3100,4800,2200),		//Level03
+		new UserParam(0,03,150,3400,4500,2200, string.Empty),		//Level03
+		new UserParam(1,03,130,4300,4200,2200, string.Empty),		//Level03
+		new UserParam(2,03,200,3100,4800,2200, string.Empty),		//Level03
 	};
 
 	public Transform muzzle;

@@ -6,7 +6,7 @@ using UnityEngine;
 public class DataManager : MonoBehaviour {
 	[System.NonSerialized]
 	public static int PlayerNo;		//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
-	public static int SceneNo;		//ステージNo取得用
+	//public static int SceneNo;		//ステージNo取得用
 	public static bool FarstLevel;
 
 	// Use this for initialization

@@ -1575,8 +1575,8 @@ GameObject:
   - component: {fileID: 114124731887961612}
   - component: {fileID: 114113241009077298}
   - component: {fileID: 114079346594583718}
-  - component: {fileID: 114140122671579044}
   - component: {fileID: 114728882960573464}
+  - component: {fileID: 114140122671579044}
   - component: {fileID: 114920329314263658}
   - component: {fileID: 114241188447119344}
   - component: {fileID: 114690257930005578}
@@ -5894,7 +5894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2ce4beb9c1fc24ebe02658aa6b106b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armorPointMax: 10
+  armorPointMax: 2000
   armorText: {fileID: 0}
   myGreen: {r: 0, g: 0.9411765, b: 0, a: 1}
   myWhite: {r: 1, g: 1, b: 1, a: 1}

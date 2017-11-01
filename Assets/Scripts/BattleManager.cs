@@ -73,7 +73,8 @@ public class BattleManager : MonoBehaviour {
 				int attackPoint = GameObject.FindWithTag("Player").GetComponent<PlayerController>().AttackPoint;
 				int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
 				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
-				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score);
+				string sceneName = SceneManager.GetActiveScene ().name;
+				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
 				SceneManager.LoadScene ("Start");
 				//Time.timeScale = 1;
 			}
@@ -85,7 +86,8 @@ public class BattleManager : MonoBehaviour {
 				int attackPoint = GameObject.FindWithTag("Player").GetComponent<PlayerController>().AttackPoint;
 				int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
 				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
-				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score);
+				string sceneName = SceneManager.GetActiveScene ().name;
+				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
 				// DataManagerオブジェクトからSaveスクリプトのSaveDataを取得
 				GameObject.Find("DataManager").GetComponent<Save> ().SaveData (userParam);
 				//Debug.Log ("ワープ");
