@@ -6,8 +6,8 @@ using UnityEngine;
 // ステータス欄等の共通項目を保持。キャラクタ独自の項目のみ別スクリプトに書き足す。
 public class EnemyBasic : MonoBehaviour {
 	public int enemyLevel = 0;
-	public Animator animator;						// 《Animator》コンポーネント用の変数
-	public GameObject target;
+	public Animator animator;						// Animatorセット用
+	public GameObject target;						// プレイヤー認識用
 	public GameObject shot;
 	public float shotInterval = 0;					// 攻撃間隔計測開始
 	public float shotIntervalMax = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
@@ -30,12 +30,12 @@ public class EnemyBasic : MonoBehaviour {
 	protected ModelColorChange modelColorChange;	// 点滅処理
 	public float KnockBackRange;					// 攻撃を受けた際のノックバックの距離
 	public float DestroyTime;						// （HP0になった際の）消滅するまでの時間
-	public GameObject DestroyEffect;
+	public GameObject DestroyEffect;				// 消滅時発生エフェクト
 	public float timeElapsed;
 	public float timeOut;
+	public BattleManager battleManager;
 	PlayerLevel playerLevel;
 	public int EnemyScore = 1000;					// 敵を倒した時の得点
-	public BattleManager battleManager;
 	public GameObject RedSphere;					// アーマーポイント回復用玉（アイテムタグ3）
 	public GameObject BlueSphere;					// ブーストポイント回復用玉（アイテムタグ2）
 	public GameObject GreenSphere;					// ボス面移行用玉（アイテムタグ3）

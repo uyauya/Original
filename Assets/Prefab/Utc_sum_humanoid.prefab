@@ -1566,6 +1566,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4521056928926800}
   - component: {fileID: 95101826994552718}
+  - component: {fileID: 54320169535040642}
+  - component: {fileID: 136817747515047200}
   - component: {fileID: 114925817173165376}
   - component: {fileID: 114011034785441290}
   - component: {fileID: 114464424634815888}
@@ -1573,8 +1575,6 @@ GameObject:
   - component: {fileID: 114124731887961612}
   - component: {fileID: 114113241009077298}
   - component: {fileID: 114079346594583718}
-  - component: {fileID: 54320169535040642}
-  - component: {fileID: 136817747515047200}
   - component: {fileID: 114140122671579044}
   - component: {fileID: 114728882960573464}
   - component: {fileID: 114920329314263658}

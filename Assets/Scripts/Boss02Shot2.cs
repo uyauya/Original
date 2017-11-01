@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Boss02Shot2 : MonoBehaviour {
 
+	public float DestroyTime = 4.0F;
+
 	// Use this for initialization
 	void Start () {
-		Destroy(gameObject, 4.0F);
+		Destroy(gameObject, DestroyTime);
 	}
 	
 	// Update is called once per frame

@@ -41,8 +41,8 @@ GameObject:
   - component: {fileID: 65480170652546256}
   - component: {fileID: 23987847474033932}
   - component: {fileID: 54046696423607830}
-  - component: {fileID: 114247498318446254}
   - component: {fileID: 114764055461297628}
+  - component: {fileID: 114247498318446254}
   m_Layer: 11
   m_Name: PunmkinEnemy
   m_TagString: Enemy

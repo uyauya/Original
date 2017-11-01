@@ -6,6 +6,7 @@ using UnityEngine;
 public class FlyingEnemy1 : MonoBehaviour {
 
 	protected EnemyBasic enemyBasic;
+	bool dead = false;
 
 	void Start () {	
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
