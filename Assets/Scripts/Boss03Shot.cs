@@ -14,7 +14,8 @@ public class Boss03Shot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Destroy(gameObject, DestroyTime);
+		//Destroy(gameObject, DestroyTime);
+
 	}
 
 	// Update is called once per frame
