@@ -15,6 +15,7 @@ public class ExpansionBlock : MonoBehaviour {
 	private float YBlockHeightL;			// ブロックの上下させる高さ（低い）
 	private float YBlockHeightH;			// ブロックの上下させる高さ（高い）
 
+
 	// Use this for initialization
 	void Start () {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
@@ -36,4 +37,6 @@ public class ExpansionBlock : MonoBehaviour {
 		BlockHeight = Random.Range (1, 9) / 10f;
 		gameObject.transform.localScale += new Vector3 (0, Heighty, 0);
 	}
+
+
 }

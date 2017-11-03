@@ -44,6 +44,16 @@ public class BattleManager : MonoBehaviour {
 		Player = GameObject.FindWithTag("Player");
 		// 得点をテキスト形式で画面に表示
 		ScoreText.text = Score.ToString();
+
+		// Scene移行時プレイヤーのパラメータの中身を取得
+		int level = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Level;
+		int attackPoint = GameObject.FindWithTag("Player").GetComponent<PlayerController>().AttackPoint;
+		int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
+		int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
+		string sceneName = SceneManager.GetActiveScene ().name;
+		UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
+		// DataManagerオブジェクトからSaveスクリプトのSaveDataを取得
+		GameObject.Find("DataManager").GetComponent<Save> ().SaveData (userParam);
 	}
 
 	void Update () {
@@ -81,16 +91,7 @@ public class BattleManager : MonoBehaviour {
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
-				// Scene移行時プレイヤーのパラメータの中身を取得
-				int level = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Level;
-				int attackPoint = GameObject.FindWithTag("Player").GetComponent<PlayerController>().AttackPoint;
-				int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
-				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
-				string sceneName = SceneManager.GetActiveScene ().name;
-				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
-				// DataManagerオブジェクトからSaveスクリプトのSaveDataを取得
-				GameObject.Find("DataManager").GetComponent<Save> ().SaveData (userParam);
-				//Debug.Log ("ワープ");
+
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			}	
 			break;
