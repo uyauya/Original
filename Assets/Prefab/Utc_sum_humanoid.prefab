@@ -5894,7 +5894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2ce4beb9c1fc24ebe02658aa6b106b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armorPointMax: 2000
+  armorPointMax: 3000
   armorText: {fileID: 0}
   myGreen: {r: 0, g: 0.9411765, b: 0, a: 1}
   myWhite: {r: 1, g: 1, b: 1, a: 1}

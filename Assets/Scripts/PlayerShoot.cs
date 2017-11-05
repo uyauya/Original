@@ -90,7 +90,7 @@ public class PlayerShoot : MonoBehaviour {
 			chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
 			// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
 			damage = Attack + attackPoint * 2.5f * chargeTime;
-				Debug.Log (damage);
+				//Debug.Log (damage);
 			// もしboostPoint 数値がBpDown以上なら
 			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 				// Bullet01をmuzzleの位置、方向に合わせて生成

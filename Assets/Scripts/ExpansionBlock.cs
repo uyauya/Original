@@ -6,7 +6,7 @@ using UnityEngine;
 public class ExpansionBlock : MonoBehaviour {
 
 	protected EnemyBasic enemyBasic;
-	bool dead = false;
+	//bool dead = false;
 	private int frameCnt = 0;				// ブロックをランダムで揺らすための時間取り
 	private float BlockSpeed;
 	private float BlockHeight;
@@ -31,11 +31,14 @@ public class ExpansionBlock : MonoBehaviour {
 	}
 
 	void MoveBlock () {
-		float Speedy = Random.Range (YBlockSpeedH, YBlockSpeedL);
-		BlockSpeed = Random.Range (1, 9) / 10f;
-		float Heighty = Random.Range (YBlockHeightH, YBlockHeightL);
-		BlockHeight = Random.Range (1, 9) / 10f;
-		gameObject.transform.localScale += new Vector3 (0, Heighty, 0);
+		//float Speedy = Random.Range (YBlockSpeedH, YBlockSpeedL);
+		//BlockSpeed = Random.Range (1, 3) / 10f;
+		//float Heighty = Random.Range (YBlockHeightH, YBlockHeightL);
+		//BlockHeight = Random.Range (-5, 5) / 10f;
+		float Heighty = Random.Range (-5, 2) / 10f;
+		//gameObject.transform.localScale += new Vector3 (0, Heighty, 0);
+		gameObject.transform.localScale += new Vector3 (0, Mathf.Sin (Time.time * 1.2f) * 2,  0);
+		Debug.Log (Heighty);
 	}
 
 

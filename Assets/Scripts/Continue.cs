@@ -36,7 +36,7 @@ public class Continue : MonoBehaviour {
 
 	void LoadScene() {
 		//SceneManager.LoadScene("STAGE02BOSS");
-		UserParam userParam = GameObject.Find("DataManager").GetComponent<Save> ().LoadData ();
+		UserParam userParam = DataManager.userParam;
 		if (userParam != null) {
 			if (userParam.SceneName != null && userParam.SceneName != string.Empty) {
 				Debug.Log (string.Format ("LoadScene{0}", userParam.SceneName));

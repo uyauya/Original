@@ -1726,12 +1726,12 @@ MonoBehaviour:
   player: {fileID: 0}
   Boss02: {fileID: 0}
   prefab_BL:
-  - {fileID: 1673420166350562, guid: 879805caeb6e57a41840546ec44ff5d5, type: 2}
-  - {fileID: 1673420166350562, guid: 879805caeb6e57a41840546ec44ff5d5, type: 2}
+  - {fileID: 169498, guid: 0b5de3c2c0ec7a944a089de41f25b9d3, type: 2}
+  - {fileID: 163042, guid: 32ddef6897c6c4a46808cd7ff58af6a1, type: 2}
   prefab_WALL:
   - {fileID: 160858, guid: be400dba39119e0448163986d2426402, type: 2}
   prefab_enemy:
-  - {fileID: 1556545275713154, guid: f9077314aedf3f14dbd5913cde39a3d4, type: 2}
+  - {fileID: 0}
   EmitterTime: 1
   prefab_enemy2: []
   EmitterTime2: 1

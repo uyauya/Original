@@ -1025,8 +1025,8 @@ MonoBehaviour:
     type: 2}
   timeElapsed: 0
   timeOut: 0
-  EnemyScore: 1000
   battleManager: {fileID: 0}
+  EnemyScore: 1000
   RedSphere: {fileID: 100576, guid: 8bcadb38d3e27b749ab7fef5f7d48339, type: 2}
   BlueSphere: {fileID: 133498, guid: 0b12e93063b3af54faf20b6954e8651d, type: 2}
   GreenSphere: {fileID: 1282887652771124, guid: f0831b4ebf8a10844994fc4ee83d5db6,
@@ -3610,4 +3610,46 @@ Prefab:
       objectReference: {fileID: 974667649}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc90458f387aa9a408b0c2d2468c24b1, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &2087769742
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4210509633544074, guid: 8e9c94ad23cf7094c9929c18954ed8d8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.0000000018626451
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210509633544074, guid: 8e9c94ad23cf7094c9929c18954ed8d8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.011538759
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210509633544074, guid: 8e9c94ad23cf7094c9929c18954ed8d8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.001660178
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210509633544074, guid: 8e9c94ad23cf7094c9929c18954ed8d8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210509633544074, guid: 8e9c94ad23cf7094c9929c18954ed8d8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210509633544074, guid: 8e9c94ad23cf7094c9929c18954ed8d8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210509633544074, guid: 8e9c94ad23cf7094c9929c18954ed8d8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210509633544074, guid: 8e9c94ad23cf7094c9929c18954ed8d8, type: 2}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8e9c94ad23cf7094c9929c18954ed8d8, type: 2}
   m_IsPrefabParent: 0

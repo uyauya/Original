@@ -5,7 +5,7 @@ using UnityEngine;
 public class Save : MonoBehaviour {
 
 	// Use this for initialization
-	void Start()
+	/*void Start()
 	{
 		// シーン移動してもPlayerLevelを残しておく
 		DontDestroyOnLoad(this.gameObject);
@@ -35,5 +35,5 @@ public class Save : MonoBehaviour {
 		//データを変数に設定
 		UserParam userParam = JsonUtility.FromJson<UserParam> (UserParamLoadJson);
 		return userParam;
-	}
+	}*/
 }
