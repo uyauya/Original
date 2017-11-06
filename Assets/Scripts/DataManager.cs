@@ -9,7 +9,7 @@ public class DataManager : MonoBehaviour {
 	public static UserParam userParam;
 	public static bool FarstLevel;
 	//public static int SceneNo;		//ステージNo取得用
-
+	public static bool Continue = false;
 
 	// Use this for initialization
 	void Start () {
@@ -23,24 +23,5 @@ public class DataManager : MonoBehaviour {
 		
 	}
 
-	public void SaveData () 
-	{
-		//UserParam userParam = GetComponent<UserParam> ();
-		//UserParamインスタンスを文字列に変換
-		string UserParamSaveJson = JsonUtility.ToJson(userParam);
-		//セーブ
-		PlayerPrefs.SetString("UserParam",UserParamSaveJson);
-		//Debug.Log (UserParamSaveJson);
-	}
 
-	public UserParam LoadData()
-	{
-		//UserParam userParam = GetComponent<UserParam> ();
-		//ロード
-		// Jsonの文字列データをUserParamインスタンスに変換
-		string UserParamLoadJson = PlayerPrefs.GetString ("UserParam");
-		//データを変数に設定
-		userParam = JsonUtility.FromJson<UserParam> (UserParamLoadJson);
-		return userParam;
-	}
 }

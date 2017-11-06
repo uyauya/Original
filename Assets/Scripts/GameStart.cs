@@ -12,6 +12,7 @@ public class GameStart : MonoBehaviour {
 
 
 	{
+		DataManager.Continue = false;
 		DataManager.FarstLevel = true;
 		// ボタンを押してセレクト画面に移行
 		SoundManager00.Instance.Play(1);	//(1)はElmentの数

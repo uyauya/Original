@@ -4945,7 +4945,7 @@ MonoBehaviour:
   gravity: 9.8
   boostPoint: 0
   boostPointMax: 3000
-  AttackPoint: 100
+  AttackPoint: 130
   BpDown: 10
   RecoverPoint: 5
   gaugeImage: {fileID: 0}

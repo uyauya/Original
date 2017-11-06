@@ -8,7 +8,7 @@ public class PlayerAp : MonoBehaviour {
 
 	public static int armorPoint;		// プレイヤー体力
 	public int armorPointMax;			// プレイヤー体力最大値
-	int damage = 100;					// 敵から受けるダメージ
+	int damage = 1000;					// 敵から受けるダメージ
 	public Text armorText;
 	int displayArmorPoint;
 	public Color myGreen;				// RGBA(000,240,000,255) ※Aは透明度

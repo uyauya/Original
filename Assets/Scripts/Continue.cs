@@ -12,6 +12,7 @@ public class Continue : MonoBehaviour {
 	public void Onclick_Continue ()
 
 	{
+		DataManager.Continue = true;
 		DataManager.FarstLevel = false;
 		// ボタンを押してセレクト画面に移行
 		SoundManager00.Instance.Play(1);	//(1)はElmentの数

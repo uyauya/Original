@@ -5,6 +5,8 @@ using UnityEngine;
 // プレイヤーパラメータ管理
 public class UserParam
 {
+	public static UserParam instanse;
+
 	public int Level;			// プレイヤーレベル
 	public int AttackPoint;		// 攻撃力（PlayerController参照）
 	public int boostPointMax;	// ブーストポイント最大値（PlayerController参照）
@@ -22,5 +24,27 @@ public class UserParam
 		armorPointMax = armorMax;
 		Score = score;
 		SceneName = sceneName;
+		instanse = this;
+	}
+
+	public void SaveData () 
+	{
+		//UserParam userParam = GetComponent<UserParam> ();
+		//UserParamインスタンスを文字列に変換
+		string UserParamSaveJson = JsonUtility.ToJson(instanse);
+		//セーブ
+		PlayerPrefs.SetString("UserParam",UserParamSaveJson);
+		//Debug.Log (UserParamSaveJson);
+	}
+
+	public UserParam LoadData()
+	{
+		//UserParam userParam = GetComponent<UserParam> ();
+		//ロード
+		// Jsonの文字列データをUserParamインスタンスに変換
+		string UserParamLoadJson = PlayerPrefs.GetString ("UserParam");
+		//データを変数に設定
+		instanse = JsonUtility.FromJson<UserParam> (UserParamLoadJson);
+		return instanse;
 	}
 }	

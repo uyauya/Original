@@ -65,9 +65,19 @@ public class BattleManager : MonoBehaviour {
 			//時間経過でメッセージを消して状態移行
 			timer += Time.deltaTime;
 				if (timer > 3) {
+				//Debug.Log ("すたーと");
 				messageStart.enabled = false;
 				battleStatus = BATTLE_PLAY;
 				timer = 0;
+				if (DataManager.Continue == false) {
+					int level = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Level;
+					int attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
+					int boostpointMax = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax;
+					int armorpointMax = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().armorPointMax;
+					string sceneName = SceneManager.GetActiveScene ().name;
+					UserParam userParam = new UserParam (DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
+					UserParam.instanse.SaveData ();
+				}
 			}
 			break;
 			
@@ -85,7 +95,7 @@ public class BattleManager : MonoBehaviour {
 				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
 				string sceneName = SceneManager.GetActiveScene ().name;
 				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
-				//userParam.SaveData ();
+				UserParam.instanse.SaveData ();
 				SceneManager.LoadScene ("Start");
 				//Time.timeScale = 1;
 			}
@@ -101,7 +111,7 @@ public class BattleManager : MonoBehaviour {
 				string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
 				StageManager.Instance.StageNo++;
 				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
-				//userParam.SaveData ();
+				UserParam.instanse.SaveData ();
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			}	
 			break;

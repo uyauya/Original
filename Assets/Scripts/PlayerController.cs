@@ -73,8 +73,9 @@ public class PlayerController : MonoBehaviour {
 		// 画面上(Canvas)のブーストポイントと実際(Inspector)の数値(Inspector)を同じに設定
 		displayBoostPoint = boostPoint;
 		if (!DataManager.FarstLevel) {
-			UserParam userParam = DataManager.userParam;
+			UserParam userParam = UserParam.instanse.LoadData();
 			//Debug.Log (userParam);
+			GameObject.Find ("BattleManager").GetComponent<BattleManager> ().Score = userParam.Score;
 			GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Level = userParam.Level;
 			GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint = userParam.AttackPoint;
 			GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax = userParam.boostPointMax;
