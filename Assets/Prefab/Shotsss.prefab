@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2372176}
   - component: {fileID: 11439254}
   - component: {fileID: 5448090}
-  - component: {fileID: 114065975006730860}
   m_Layer: 0
   m_Name: Shotsss
   m_TagString: Untagged
@@ -116,6 +115,9 @@ MonoBehaviour:
   damage: 0
   BulletSpeed: 0.2
   DestroyTime: 9
+  XPower: -10
+  YPower: -10
+  ZPower: -10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -264,23 +266,6 @@ Transform:
   m_Father: {fileID: 488476}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114065975006730860
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48f03135beb894349bcb0a5372f926c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  XPower: 10
-  YPower: 10
-  ZPower: 10
-  XPower: 100
-  YPower: 100
-  ZPower: 100
 --- !u!198 &198417016174923668
 ParticleSystem:
   m_ObjectHideFlags: 1

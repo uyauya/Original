@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;	
 
+// PlayerShoot03から発射するボムのShotssオブジェクト用
 public class Bullet03 : MonoBehaviour {
 
 	public GameObject explosion;		// 着弾時のエフェクト

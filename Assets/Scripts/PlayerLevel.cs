@@ -37,12 +37,15 @@ public class PlayerLevel : MonoBehaviour
 	}
 
 	public void LevelUp() {
+		// （プレイヤーの）muzzleにレベルアップ用エフェクト設置
 		LevelUpObject = Instantiate (LevelUpPrefab, muzzle.position, Quaternion.identity);
+		// BattleManagerオブジェクトのBattleManagerのScoreをScoreと呼ぶ
 		int Score = GameObject.Find ("BattleManager").GetComponent<BattleManager> ().Score;
 		foreach(var Param in userParamList)
 		{
 			Debug.Log("ParamScore"+Param.Score);
 			Debug.Log("Score"+Score);
+			// 
 			if (Param.Score <= Score) {
 				if (Param.PlayerNo == DataManager.PlayerNo) {
 					GetComponent<PlayerController> ().Level = Param.Level;

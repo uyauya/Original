@@ -70,7 +70,7 @@ public class EnemyBasic : MonoBehaviour {
 		target = GameObject.FindWithTag("Player");	
 		// ゲーム開始時、アーマーポイントを最大にする
 		armorPoint = armorPointMax;					
-		//上で宣言したplayerLevelとはPlayerタグが付いているオブジェクトに付いているPlayerLevelスクリプトのことを言っている。
+		// Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelと呼ぶ
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 
 	}

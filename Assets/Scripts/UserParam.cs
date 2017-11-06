@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// プレイヤーパラメータ項目設定
+// プレイヤーパラメータ管理
 public class UserParam
 {
 	public int Level;			// プレイヤーレベル

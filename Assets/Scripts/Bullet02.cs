@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// PlayerShoot02の弾
+// PlayerShoot02から発射するホーミング弾のShotsオブジェクト用
 public class Bullet02 : MonoBehaviour {
 	
 	public GameObject explosion;		// 着弾時のエフェクト

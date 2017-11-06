@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// 銃としてPlayerShootスクリプト、弾をBullet01スクリプトとして作る
+// PlayerShootから発射するチャージ弾のShotオブジェクト用
 // Shot(Bullet01A)、ShotB(Bullet01B)、ShotC(Bullet01C)継承元スクリプト
 public class Bullet01 : MonoBehaviour {
 

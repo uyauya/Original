@@ -85,7 +85,7 @@ public class BattleManager : MonoBehaviour {
 				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
 				string sceneName = SceneManager.GetActiveScene ().name;
 				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
-				userParam.SaveData ();
+				//userParam.SaveData ();
 				SceneManager.LoadScene ("Start");
 				//Time.timeScale = 1;
 			}
@@ -101,7 +101,7 @@ public class BattleManager : MonoBehaviour {
 				string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
 				StageManager.Instance.StageNo++;
 				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
-				userParam.SaveData ();
+				//userParam.SaveData ();
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			}	
 			break;

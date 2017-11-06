@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// ブロック管理用
+// ステータス欄等の共通項目を保持。キャラクタ独自の項目のみ別スクリプトに書き足す。
 public class BlockBasic : MonoBehaviour {
 	GameObject target;
 	public GameObject exprosion;	
@@ -17,10 +19,11 @@ public class BlockBasic : MonoBehaviour {
 	public GameObject GreenSphere;
 
 	public void Initialize () {
-		//ターゲットを取得
+		// Playerタグが付いているオブジェクトをターゲットにする
 		target = GameObject.Find ("PlayerTarget");
+		// ゲーム開始時、アーマーポイントを最大にする
 		armorPoint = armorPointMax;
-		//上で宣言したplayerLevelとはPlayerタグが付いているオブジェクトに付いているPlayerLevelスクリプトのことを言っている。
+		// Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelと呼ぶ
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 	}
 
