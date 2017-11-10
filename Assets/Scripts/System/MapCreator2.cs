@@ -5,16 +5,16 @@ using UnityEngine;
 public class MapCreator2 : MonoBehaviour
 {
 	// ワールド生成のための設定値
-	public int MAP_SIZE_X;			// マップ横サイズ
-	public int MAP_SIZE_Z;			// マップ縦サイズ
-	public int MaxHeight;			// 陸ブロックの高さの最大
+	public int MAP_SIZE_X;						// マップ横サイズ
+	public int MAP_SIZE_Z;						// マップ縦サイズ
+	public int MaxHeight;						// 陸ブロックの高さの最大
 	public int Smoothness;
-	public int WaterHeight;			// 水ブロックの高さ
+	public int WaterHeight;						// 水ブロックの高さ
 	public Transform BlockHeight;
 	public float EmitterTime = 1.0f;
 
-	public GameObject Prefab_BL;	// 陸ブロック格納
-	public GameObject Prefab_Water;	// 水ブロック格納
+	public GameObject Prefab_BL;				// 陸ブロック格納
+	public GameObject Prefab_Water;				// 水ブロック格納
 	public GameObject		player;				// プレイヤーオブジェクト格納用
 	public GameObject[] 	Prefab_Player;
 	public	GameObject[]	prefab_enemy;		// 敵の格納用のプレファブ配列
