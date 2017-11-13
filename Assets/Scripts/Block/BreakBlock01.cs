@@ -13,6 +13,7 @@ public class BreakBlock01 : MonoBehaviour {
 	public GameObject RedSphere;
 	public GameObject BlueSphere;
 	public GameObject GreenSphere;
+	public GameObject YellowSphere;
 
 	void Start () {
 
@@ -44,6 +45,8 @@ public class BreakBlock01 : MonoBehaviour {
 					Instantiate (BlueSphere, transform.position, transform.rotation);
 				} else if (Random.Range (0, 2) == 0) {
 					Instantiate (GreenSphere, transform.position, transform.rotation);
+				} else if (Random.Range (0, 2) == 0) {
+					Instantiate (YellowSphere, transform.position, transform.rotation);
 				}
 				//リザルト用のスコアを加算する
 				BattleManager.score ++;

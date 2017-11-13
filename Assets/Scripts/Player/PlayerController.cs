@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour {
 			GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint = userParam.AttackPoint;
 			GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax = userParam.boostPointMax;
 			GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().armorPointMax = userParam.armorPointMax;
-			Debug.Log (userParam.armorPointMax);
+			//Debug.Log (userParam.armorPointMax);
 		}
 	}
 

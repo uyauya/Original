@@ -147,6 +147,23 @@ public class PlayerAp : MonoBehaviour {
 			// 体力上限以上には回復しない。
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 		}
+
+		//Itemタグをつけたもの（YellowSphere）を取ったら無敵＆巨大化
+		else if (collider.gameObject.tag == "Item4") {
+			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
+			HpHealObject.transform.SetParent (EffectPoint);
+			animator.SetTrigger ("ItemGet");
+			if (PlayerNo == 0) {
+				SoundManager.Instance.Play(18,gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager.Instance.Play(19,gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager.Instance.Play(20,gameObject);
+			}
+			StartCoroutine ("BigCoroutine");
+		}
 	}
 
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
@@ -177,7 +194,29 @@ public class PlayerAp : MonoBehaviour {
 		//レイヤーをPlayerに戻す
 		gameObject.layer = LayerMask.NameToLayer("Player");
 		//iTweenのアニメーション
-
 	}
-
+	IEnumerator BigCoroutine ()
+	{
+		// BigPlayerにタグ変更
+		gameObject.tag = "BigPlayer";
+		// 巨大化
+		iTween.ScaleTo (gameObject, iTween.Hash ("x", 3, "y", 3, "z", 3, "time", 3f));
+		// 無敵化
+		isInvincible = true;
+		float duration = 3.0f; //無敵時間
+		float blinkedTime = duration;
+		float blinkDuration = 0.5f; //点滅の切り替わるまでの期間
+		　while (blinkedTime > 0.0f) {
+			yield return new WaitForSeconds (blinkDuration);
+			blinkedTime -= blinkDuration;
+			GetComponent <Renderer>().enabled = !GetComponent <Renderer>().enabled;
+		}
+		GetComponent <Renderer>().enabled = true;
+		// 元のサイズに縮小
+		iTween.ScaleTo (gameObject, iTween.Hash ("x", -3, "y", -3, "z", -3, "time", 3f));
+		// Playerタグに戻す
+		gameObject.tag = "Player";
+		// 無敵解除
+		isInvincible = false;
+	}
 }
