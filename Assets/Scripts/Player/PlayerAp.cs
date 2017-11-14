@@ -209,11 +209,11 @@ public class PlayerAp : MonoBehaviour {
 		　while (blinkedTime > 0.0f) {
 			yield return new WaitForSeconds (blinkDuration);
 			blinkedTime -= blinkDuration;
-			GetComponent <Renderer>().enabled = !GetComponent <Renderer>().enabled;
+			GetComponent <SkinnedMeshRenderer>().enabled = !GetComponent <SkinnedMeshRenderer>().enabled;
 		}
-		GetComponent <Renderer>().enabled = true;
+		GetComponent <SkinnedMeshRenderer>().enabled = true;
 		// 元のサイズに縮小
-		iTween.ScaleTo (gameObject, iTween.Hash ("x", -3, "y", -3, "z", -3, "time", 3f));
+		iTween.ScaleTo (gameObject, iTween.Hash ("x", 1, "y", 1, "z", 1, "time", 3f));
 		// Playerタグに戻す
 		gameObject.tag = "Player";
 		// 無敵解除
