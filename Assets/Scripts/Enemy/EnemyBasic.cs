@@ -39,9 +39,11 @@ public class EnemyBasic : MonoBehaviour {
 	public GameObject RedSphere;					// アーマーポイント回復用玉（アイテムタグ3）
 	public GameObject BlueSphere;					// ブーストポイント回復用玉（アイテムタグ2）
 	public GameObject GreenSphere;					// ボス面移行用玉（アイテムタグ3）
+	public GameObject YellowSphere;					// プレイヤ巨大＆無敵化
 	public int RedEncount = 16;						// RedSphere生成率の分母
 	public int BlueEncount = 8;
 	public int GreenEncount= 32;
+	public int YellowEncount= 32;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -112,6 +114,8 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetBool("damaged" , true);
 			armorPoint -= damage;
+		} else if (collider.gameObject.tag == "BigPlayer") {
+			armorPoint -= 10000;
 		}
 
 		//体力が0以下になったら消滅する
@@ -132,6 +136,8 @@ public class EnemyBasic : MonoBehaviour {
 				Instantiate (BlueSphere, transform.position, transform.rotation);
 			} else if (Random.Range (0, GreenEncount) == 0) {
 				Instantiate (GreenSphere, transform.position, transform.rotation);
+			} else if (Random.Range (0, YellowEncount) == 0) {
+				Instantiate (YellowSphere, transform.position, transform.rotation);
 			}
 		}
 

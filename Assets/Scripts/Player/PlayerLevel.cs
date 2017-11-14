@@ -20,6 +20,30 @@ public class PlayerLevel : MonoBehaviour
 		new UserParam(0,03,150,3400,4500,2200, string.Empty),		//Level03
 		new UserParam(1,03,130,4300,4200,2200, string.Empty),		//Level03
 		new UserParam(2,03,200,3100,4800,2200, string.Empty),		//Level03
+
+		new UserParam(0,03,150,3400,4500,2200, string.Empty),		//Level04
+		new UserParam(1,03,130,4300,4200,2200, string.Empty),		//Level04
+		new UserParam(2,03,200,3100,4800,2200, string.Empty),		//Level04
+
+		new UserParam(0,03,150,3400,4500,2200, string.Empty),		//Level05
+		new UserParam(1,03,130,4300,4200,2200, string.Empty),		//Level05
+		new UserParam(2,03,200,3100,4800,2200, string.Empty),		//Level05
+
+		new UserParam(0,03,150,3400,4500,2200, string.Empty),		//Level06
+		new UserParam(1,03,130,4300,4200,2200, string.Empty),		//Level06
+		new UserParam(2,03,200,3100,4800,2200, string.Empty),		//Level06
+
+		new UserParam(0,03,150,3400,4500,2200, string.Empty),		//Level07
+		new UserParam(1,03,130,4300,4200,2200, string.Empty),		//Level07
+		new UserParam(2,03,200,3100,4800,2200, string.Empty),		//Level07
+
+		new UserParam(0,03,150,3400,4500,2200, string.Empty),		//Level08
+		new UserParam(1,03,130,4300,4200,2200, string.Empty),		//Level08
+		new UserParam(2,03,200,3100,4800,2200, string.Empty),		//Level08
+
+		new UserParam(0,03,150,3400,4500,2200, string.Empty),		//Level09
+		new UserParam(1,03,130,4300,4200,2200, string.Empty),		//Level09
+		new UserParam(2,03,200,3100,4800,2200, string.Empty),		//Level09
 	};
 
 	public Transform muzzle;

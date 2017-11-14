@@ -170,7 +170,7 @@ public class PlayerAp : MonoBehaviour {
 	IEnumerator DamageCoroutine ()
 	{
 		//レイヤーをPlayerDamageに変更
-		gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
+		//gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
 		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
@@ -192,7 +192,7 @@ public class PlayerAp : MonoBehaviour {
 		}
 		isInvincible = false;
 		//レイヤーをPlayerに戻す
-		gameObject.layer = LayerMask.NameToLayer("Player");
+		//gameObject.layer = LayerMask.NameToLayer("Player");
 		//iTweenのアニメーション
 	}
 	IEnumerator BigCoroutine ()
