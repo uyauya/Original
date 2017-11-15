@@ -25,6 +25,7 @@ public class EnemyBasic : MonoBehaviour {
 	public void Damaged(float damagedPoint){
 		this.armorPoint -= damagedPoint;			// Playerから受けたダメージの設定
 	}
+	public int EnemyAttack = 100;
 	protected bool isInvincible;					// 無敵処理（ダメージ受けた際に使用）
 	public float InvincibleTime;					// 無敵時間
 	protected ModelColorChange modelColorChange;	// 点滅処理
@@ -44,6 +45,7 @@ public class EnemyBasic : MonoBehaviour {
 	public int BlueEncount = 8;
 	public int GreenEncount= 32;
 	public int YellowEncount= 32;
+
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく

@@ -50,5 +50,4 @@ public class Zombie1 : MonoBehaviour {
 		if( enemyBasic.animator.GetBool("dead") == true ) return;
 
 	}
-
 }

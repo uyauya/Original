@@ -3,12 +3,13 @@ using System.Collections;
 using UnityEditor; 
 using UnityEngine.UI;
 
-// 
+// TODO ※プレイヤーのアニメーション処理
 public class PlayerAp : MonoBehaviour {
 
 	public static int armorPoint;		// プレイヤー体力
 	public int armorPointMax;			// プレイヤー体力最大値
-	int damage = 1000;					// 敵から受けるダメージ
+	//int damage = 100;					// 敵から受けるダメージ
+	public int enemyAttack;
 	public Text armorText;
 	int displayArmorPoint;
 	public Color myGreen;				// RGBA(000,240,000,255) ※Aは透明度
@@ -19,7 +20,7 @@ public class PlayerAp : MonoBehaviour {
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;			// 無敵処理（ダメージ受けた際に使用）
 	public float InvincibleTime;		// 無敵時間
-	private Animator animator;
+	private Animator animator;			// Animator（PlayerMotion)取得
 	public float KnockBackRange;		// ノックバック距離（ダメージ受けた際に使用）
 	public int PlayerNo;				// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public Transform muzzle;			// ショット発射口位置をTransformで位置取り
@@ -28,6 +29,7 @@ public class PlayerAp : MonoBehaviour {
 	public GameObject DamageObject;
 	public GameObject HpHealPrefab;		// アーマーポイント回復エフェクト格納場所
 	public GameObject HpHealObject;
+	public GameObject boddy_summer;
 
 	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
@@ -50,9 +52,10 @@ public class PlayerAp : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		gaugeImage = GameObject.Find ("ApGauge").GetComponent<Image> ();
 		armorText = GameObject.Find ("TextAp").GetComponent<Text> ();
-
+		//enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
+		boddy_summer = GameObject.Find("_body_summer");
 	}
-	
+
 
 	void Update () {
 		
@@ -94,7 +97,8 @@ public class PlayerAp : MonoBehaviour {
 		//ShotEnemyの弾と衝突したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		if (collider.gameObject.tag == "ShotEnemy") {
-			armorPoint -= damage;
+			//armorPoint -= damage;
+			//armorPoint -= enemyAttack;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 			DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 			DamageObject.transform.SetParent (EffectPoint);
@@ -112,7 +116,8 @@ public class PlayerAp : MonoBehaviour {
 		//Enemyと接触したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		} else if (collider.gameObject.tag == "Enemy") {
-			armorPoint -= damage;
+			//armorPoint -= damage;
+			//armorPoint -= enemyAttack;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 			DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 			DamageObject.transform.SetParent (EffectPoint);
@@ -203,15 +208,15 @@ public class PlayerAp : MonoBehaviour {
 		iTween.ScaleTo (gameObject, iTween.Hash ("x", 3, "y", 3, "z", 3, "time", 3f));
 		// 無敵化
 		isInvincible = true;
-		float duration = 3.0f; //無敵時間
+		float duration = 5.0f; //無敵時間
 		float blinkedTime = duration;
 		float blinkDuration = 0.5f; //点滅の切り替わるまでの期間
 		　while (blinkedTime > 0.0f) {
 			yield return new WaitForSeconds (blinkDuration);
 			blinkedTime -= blinkDuration;
-			GetComponent <SkinnedMeshRenderer>().enabled = !GetComponent <SkinnedMeshRenderer>().enabled;
+			//boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled = !boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled;
 		}
-		GetComponent <SkinnedMeshRenderer>().enabled = true;
+		//boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled = true;
 		// 元のサイズに縮小
 		iTween.ScaleTo (gameObject, iTween.Hash ("x", 1, "y", 1, "z", 1, "time", 3f));
 		// Playerタグに戻す

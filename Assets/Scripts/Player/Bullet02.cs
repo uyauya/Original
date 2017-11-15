@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 
 // PlayerShoot02から発射するホーミング弾のShotsオブジェクト用
