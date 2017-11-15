@@ -52,7 +52,7 @@ public class PlayerAp : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		gaugeImage = GameObject.Find ("ApGauge").GetComponent<Image> ();
 		armorText = GameObject.Find ("TextAp").GetComponent<Text> ();
-		//enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
+		enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
 		boddy_summer = GameObject.Find("_body_summer");
 		Debug.Log ("body");
 	}
@@ -99,7 +99,7 @@ public class PlayerAp : MonoBehaviour {
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		if (collider.gameObject.tag == "ShotEnemy") {
 			//armorPoint -= damage;
-			//armorPoint -= enemyAttack;
+			armorPoint -= enemyAttack;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 			DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 			DamageObject.transform.SetParent (EffectPoint);
@@ -118,7 +118,7 @@ public class PlayerAp : MonoBehaviour {
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		} else if (collider.gameObject.tag == "Enemy") {
 			//armorPoint -= damage;
-			//armorPoint -= enemyAttack;
+			armorPoint -= enemyAttack;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 			DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 			DamageObject.transform.SetParent (EffectPoint);
