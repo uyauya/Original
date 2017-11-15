@@ -71,9 +71,12 @@ public class EnemyBasic : MonoBehaviour {
 		// 被ダメージ時の点滅処理
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();　
 		// Playerタグが付いているオブジェクトをターゲットにする
-		target = GameObject.FindWithTag("Player");	
-		// ゲーム開始時、アーマーポイントを最大にする
-		armorPoint = armorPointMax;					
+		if (target = GameObject.FindWithTag ("Player")) {	
+			// ゲーム開始時、アーマーポイントを最大にする
+			armorPoint = armorPointMax;	
+		} else if (target = GameObject.FindWithTag ("BigPlayer")) {
+			armorPoint = 1;
+		}
 		// Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelと呼ぶ
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 

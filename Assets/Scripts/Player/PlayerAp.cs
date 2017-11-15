@@ -54,6 +54,7 @@ public class PlayerAp : MonoBehaviour {
 		armorText = GameObject.Find ("TextAp").GetComponent<Text> ();
 		//enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
 		boddy_summer = GameObject.Find("_body_summer");
+		Debug.Log ("body");
 	}
 
 
@@ -200,8 +201,10 @@ public class PlayerAp : MonoBehaviour {
 		//gameObject.layer = LayerMask.NameToLayer("Player");
 		//iTweenのアニメーション
 	}
-	IEnumerator BigCoroutine ()
+
+	/*IEnumerator BigCoroutine ()
 	{
+		boddy_summer = GameObject.Find("_body_summer");
 		// BigPlayerにタグ変更
 		gameObject.tag = "BigPlayer";
 		// 巨大化
@@ -214,9 +217,39 @@ public class PlayerAp : MonoBehaviour {
 		　while (blinkedTime > 0.0f) {
 			yield return new WaitForSeconds (blinkDuration);
 			blinkedTime -= blinkDuration;
-			//boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled = !boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled;
+			boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled = !boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled;
 		}
-		//boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled = true;
+		boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled = true;
+		// 元のサイズに縮小
+		iTween.ScaleTo (gameObject, iTween.Hash ("x", 1, "y", 1, "z", 1, "time", 3f));
+		// Playerタグに戻す
+		gameObject.tag = "Player";
+		// 無敵解除
+		isInvincible = false;
+	}*/
+
+	IEnumerator BigCoroutine ()
+	{
+		//gameObject.tag = "BigPlayer";
+		// 巨大化
+		iTween.ScaleTo (gameObject, iTween.Hash ("x", 3, "y", 3, "z", 3, "time", 3f));
+		int count = 10;
+		iTween.MoveTo(gameObject, iTween.Hash(
+			"time", InvincibleTime, // 好きな時間（秒）
+			"easetype", iTween.EaseType.linear
+		));
+		isInvincible = true;
+		while (count > 0){
+			//透明にする
+			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//0.1秒待つ
+			yield return new WaitForSeconds(0.1f);
+			//元に戻す
+			modelColorChange.ColorChange(new Color (1,1,1,1));
+			//0.1秒待つ
+			yield return new WaitForSeconds(0.1f);
+			count--;
+		}
 		// 元のサイズに縮小
 		iTween.ScaleTo (gameObject, iTween.Hash ("x", 1, "y", 1, "z", 1, "time", 3f));
 		// Playerタグに戻す
