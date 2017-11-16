@@ -11,7 +11,7 @@ public class PlayerAp : MonoBehaviour {
 	//int damage = 100;					// 敵から受けるダメージ
 	public int enemyAttack;
 	public Text armorText;
-	int displayArmorPoint;
+	int displayArmorPoint;				
 	public Color myGreen;				// RGBA(000,240,000,255) ※Aは透明度
 	public Color myWhite;				// RGBA(255,255,255,255)
 	public Color myYellow;				// RGBA(255,206,000,255)
@@ -52,6 +52,7 @@ public class PlayerAp : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		gaugeImage = GameObject.Find ("ApGauge").GetComponent<Image> ();
 		armorText = GameObject.Find ("TextAp").GetComponent<Text> ();
+		// Enemyタグの付いたオブジェクトのEnemyBasicの敵の攻撃値(EnemyAttack)をenemyAttackと呼ぶ
 		enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
 		boddy_summer = GameObject.Find("_body_summer");
 		Debug.Log ("body");

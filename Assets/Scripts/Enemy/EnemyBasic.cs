@@ -21,11 +21,11 @@ public class EnemyBasic : MonoBehaviour {
 	public float EnemyRotate;						// 振り向き速度
 	public float Search;							// プレイヤを探すサーチレンジ
 	public float timer;
-	protected float damage;							// playerに与えるダメージ
+	protected float damage;							// playerからのダメージ判定
 	public void Damaged(float damagedPoint){
-		this.armorPoint -= damagedPoint;			// Playerから受けたダメージの設定
+		this.armorPoint -= damagedPoint;			// Playerから受けたダメージの値
 	}
-	public int EnemyAttack = 100;
+	public int EnemyAttack = 100;					// プレイヤに与えるダメージ
 	protected bool isInvincible;					// 無敵処理（ダメージ受けた際に使用）
 	public float InvincibleTime;					// 無敵時間
 	protected ModelColorChange modelColorChange;	// 点滅処理
