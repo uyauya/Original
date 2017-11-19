@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class BattleManager : MonoBehaviour {
 	// Edit→ProjectSettings→ScriptExecutionOrder→＋でBattleManagerを出して一番上に
 	// BattleManagerスクリプトを一番最初に読み取るようにする

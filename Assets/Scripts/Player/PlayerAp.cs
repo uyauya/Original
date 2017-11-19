@@ -30,6 +30,9 @@ public class PlayerAp : MonoBehaviour {
 	public GameObject HpHealPrefab;		// アーマーポイント回復エフェクト格納場所
 	public GameObject HpHealObject;
 	public GameObject boddy_summer;
+	public int attackPoint;
+	public int BigAttack;
+	public bool isBig;
 
 	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
@@ -53,9 +56,10 @@ public class PlayerAp : MonoBehaviour {
 		gaugeImage = GameObject.Find ("ApGauge").GetComponent<Image> ();
 		armorText = GameObject.Find ("TextAp").GetComponent<Text> ();
 		// Enemyタグの付いたオブジェクトのEnemyBasicの敵の攻撃値(EnemyAttack)をenemyAttackと呼ぶ
-		enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
+		//enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
 		boddy_summer = GameObject.Find("_body_summer");
-		Debug.Log ("body");
+		attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
+		isBig = false;
 	}
 
 
@@ -95,10 +99,11 @@ public class PlayerAp : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision collider) {
-
+		
 		//ShotEnemyの弾と衝突したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		if (collider.gameObject.tag == "ShotEnemy") {
+			
 			//armorPoint -= damage;
 			armorPoint -= enemyAttack;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
@@ -118,22 +123,29 @@ public class PlayerAp : MonoBehaviour {
 		//Enemyと接触したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		} else if (collider.gameObject.tag == "Enemy") {
-			//armorPoint -= damage;
-			armorPoint -= enemyAttack;
-			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
-			DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
-			DamageObject.transform.SetParent (EffectPoint);
-			animator.SetTrigger ("Damage");
-			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(21,gameObject);
+			// Enemyタグの付いたオブジェクトのEnemyBasicの敵の攻撃値(EnemyAttack)をenemyAttackと呼ぶ
+			//enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
+			enemyAttack= collider.gameObject.GetComponent<EnemyBasic>().EnemyAttack;
+			if (isBig == true) {
+				armorPoint -= 0;
+			} else {
+				//armorPoint -= damage;
+				armorPoint -= enemyAttack;
+				armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
+				DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
+				DamageObject.transform.SetParent (EffectPoint);
+				animator.SetTrigger ("Damage");
+				if (PlayerNo == 0) {
+					SoundManager.Instance.Play (21, gameObject);
+				}
+				if (PlayerNo == 1) {
+					SoundManager.Instance.Play (22, gameObject);
+				}
+				if (PlayerNo == 2) {
+					SoundManager.Instance.Play (23, gameObject);
+				}
+				StartCoroutine ("DamageCoroutine");
 			}
-			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(22,gameObject);
-			}
-			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(23,gameObject);
-			}
-			StartCoroutine ("DamageCoroutine");
 		}
 
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
@@ -233,8 +245,12 @@ public class PlayerAp : MonoBehaviour {
 	{
 		//gameObject.tag = "BigPlayer";
 		// 巨大化
-		iTween.ScaleTo (gameObject, iTween.Hash ("x", 3, "y", 3, "z", 3, "time", 3f));
-		int count = 10;
+		iTween.ScaleTo (gameObject, iTween.Hash ("x", 3, "y", 3, "z", 3, "time", 3f,"easetype", iTween.EaseType.linear));
+		BigAttack = 10000;
+		isBig = true;
+
+		Debug.Log (BigAttack);
+		int count = 1000;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			"time", InvincibleTime, // 好きな時間（秒）
 			"easetype", iTween.EaseType.linear
@@ -253,8 +269,10 @@ public class PlayerAp : MonoBehaviour {
 		}
 		// 元のサイズに縮小
 		iTween.ScaleTo (gameObject, iTween.Hash ("x", 1, "y", 1, "z", 1, "time", 3f));
+		isBig = false;
+		BigAttack = 0;
 		// Playerタグに戻す
-		gameObject.tag = "Player";
+		//gameObject.tag = "Player";
 		// 無敵解除
 		isInvincible = false;
 	}

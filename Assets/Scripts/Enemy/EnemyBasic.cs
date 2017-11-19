@@ -14,7 +14,7 @@ public class EnemyBasic : MonoBehaviour {
 	public GameObject exprosion;					// 爆発処理
 	public GameObject particle;
 	public float armorPoint;						// HP現在値
-	public float armorPointMax;						// 最大HP 
+	public float armorPointMax = 100;						// 最大HP 
 	public int TargetRange;							// プレイヤをターゲット認識する距離
 	public float EnemySpeed;						// 移動スピード
 	public float JumpForce;							// ジャンプ力
@@ -45,6 +45,7 @@ public class EnemyBasic : MonoBehaviour {
 	public int BlueEncount = 8;
 	public int GreenEncount= 32;
 	public int YellowEncount= 32;
+	public int bigAttack;
 
 
 	/*[CustomEditor(typeof(Zombie))]
@@ -66,24 +67,23 @@ public class EnemyBasic : MonoBehaviour {
 	}*/
 
 	public void Initialize () {
+		
+	}
+
+	void Start () {
+		// BattleManagerオブジェクトのBattleManagerスクリプトをbattleManagerと呼ぶことにする
+		//battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
+		//bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
 		// 《Animator》コンポーネントの取得
 		animator = GetComponent< Animator >();		
 		// 被ダメージ時の点滅処理
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();　
 		// Playerタグが付いているオブジェクトをターゲットにする
-		if (target = GameObject.FindWithTag ("Player")) {	
-			// ゲーム開始時、アーマーポイントを最大にする
-			armorPoint = armorPointMax;	
-		} else if (target = GameObject.FindWithTag ("BigPlayer")) {
-			armorPoint = 1;
-		}
+		target = GameObject.FindWithTag ("Player");	
+		// ゲーム開始時、アーマーポイントを最大にする
+		armorPoint = armorPointMax;	
 		// Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelと呼ぶ
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
-
-	}
-
-	void Start () {
-		// BattleManagerオブジェクトのBattleManagerスクリプトをbattleManagerと呼ぶことにする
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 	}
 
@@ -119,8 +119,10 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetBool("damaged" , true);
 			armorPoint -= damage;
-		} else if (collider.gameObject.tag == "BigPlayer") {
-			armorPoint -= 10000;
+		} else if (collider.gameObject.tag == "Player") {
+			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
+			armorPoint -= bigAttack;
+			//Debug.Log (bigAttack);
 		}
 
 		//体力が0以下になったら消滅する
@@ -128,6 +130,7 @@ public class EnemyBasic : MonoBehaviour {
 			// 敵消滅用エフェクト発生
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
 			// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
+			battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 			battleManager.Score += EnemyScore;
 			// プレイヤのレベルアップ判定(PlayerLevel参照)
 			playerLevel.LevelUp ();
@@ -152,7 +155,7 @@ public class EnemyBasic : MonoBehaviour {
 	IEnumerator DamageCoroutine ()
 	{
 		//レイヤーをPlayerDamageに変更
-		gameObject.layer = LayerMask.NameToLayer("EnemyDamage");
+		//gameObject.layer = LayerMask.NameToLayer("EnemyDamage");
 		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
@@ -178,7 +181,7 @@ public class EnemyBasic : MonoBehaviour {
 		// 無敵解除
 		isInvincible = false;
 		//レイヤーをPlayerに戻す
-		gameObject.layer = LayerMask.NameToLayer("Enemy");
+		//gameObject.layer = LayerMask.NameToLayer("Enemy");
 		//iTweenのアニメーション
 	}	
 }

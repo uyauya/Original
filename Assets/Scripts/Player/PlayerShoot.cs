@@ -42,6 +42,7 @@ public class PlayerShoot : MonoBehaviour {
 	private AudioSource[] audioSources;
 	public int PlayerNo;						//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	private Pause pause;						// ポーズ中かどうか（Pause参照）
+	public bool isBig;
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
@@ -50,66 +51,70 @@ public class PlayerShoot : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();			// ポーズ中かどうか判定用
 		attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
+
 	}
 
 	void Update () {
 
-	if(pause.isPause == false) {
-		// Fire1（標準ではCtrlキー)を押された瞬間.
-		if (Input.GetButtonDown ("Fire1")) {
-			// Fire1を押してチャージ開始.
-			triggerDownTimeStart = Time.time;
-			// チャージ開始のフラグを立てる
-			isCharging = true;
-			//エフェクトを生成
-			effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
-			effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.red;　// チャージエフェクト用
-			// muzzleはプレイヤーの子で付いているのでSetParent (muzzle)で設定（オブジェクト生成の場合は必要なし）
-			effectObject.transform.SetParent (muzzle);
-		} 
-		if (Input.GetButton ("Fire1")) {
-				if (Time.time - triggerDownTimeStart >= chargeTime1 && Time.time - triggerDownTimeStart<= chargeTime2) {
-				effectObject.GetComponent<ParticleSystem> ().startColor = Color.red;
-				effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.white;
-		} else if (Time.time - triggerDownTimeStart > chargeTime2) {
-				effectObject.GetComponent<ParticleSystem> ().startColor = Color.blue;
-				effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.yellow;
+		if (pause.isPause == false) {
+			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
+			if (isBig == false) {	
+				// Fire1（標準ではCtrlキー)を押された瞬間.
+				if (Input.GetButtonDown ("Fire1")) {
+					// Fire1を押してチャージ開始.
+					triggerDownTimeStart = Time.time;
+					// チャージ開始のフラグを立てる
+					isCharging = true;
+					//エフェクトを生成
+					effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
+					effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.red;　// チャージエフェクト用
+					// muzzleはプレイヤーの子で付いているのでSetParent (muzzle)で設定（オブジェクト生成の場合は必要なし）
+					effectObject.transform.SetParent (muzzle);
+				} 
+				if (Input.GetButton ("Fire1")) {
+					if (Time.time - triggerDownTimeStart >= chargeTime1 && Time.time - triggerDownTimeStart <= chargeTime2) {
+						effectObject.GetComponent<ParticleSystem> ().startColor = Color.red;
+						effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.white;
+					} else if (Time.time - triggerDownTimeStart > chargeTime2) {
+						effectObject.GetComponent<ParticleSystem> ().startColor = Color.blue;
+						effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.yellow;
+					}
+					// スケールを大きくする.
+					//effectObject.transform.localScale *= BiggerTime;
+					//effectObject.GetComponent<ParticleSystem>().startSize = 1.0f;
+				}
+				// キーを離すことによりチャージ終了
+				if (Input.GetButtonUp ("Fire1")) {
+					triggerDownTimeEnd = Time.time;
+					// チャージ開始のフラグを消す
+					isCharging = false;
+					//エフェクトを削除
+					Destroy (effectObject);
+					// キーを離した状態から押し始めたじかんの差分を計測して
+					chargeTime = triggerDownTimeEnd - triggerDownTimeStart;
+					// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
+					damage = Attack + attackPoint * 2.5f * chargeTime;
+					//Debug.Log (damage);
+					// もしboostPoint 数値がBpDown以上なら
+					if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
+						// Bullet01をmuzzleの位置、方向に合わせて生成
+						//bullet01 = GameObject.Instantiate (Bullet01, muzzle.position, Quaternion.identity)as GameObject;
+						// Bulletnを設定（下記参照）
+						Bullet ();
+						// BpDown数値消費
+						GetComponent<PlayerController> ().boostPoint -= BpDown;
+					}
+					// Shotのアニメーションに切り替え
+					// ショットのように作動したら自動的にニュートラルに戻る場合はTriggerの方がよい
+					animator.SetTrigger ("Shot");　	
+					// 一定以上間が空いたらチャージタイムのリセット
+					if (time >= interval) {    
+						time = 0f;
+					}
+				}
+				//マズルフラッシュを表示する
+				//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 			}
-				// スケールを大きくする.
-				//effectObject.transform.localScale *= BiggerTime;
-				//effectObject.GetComponent<ParticleSystem>().startSize = 1.0f;
-		}
-		// キーを離すことによりチャージ終了
-		if (Input.GetButtonUp ("Fire1")) {
-			triggerDownTimeEnd = Time.time;
-			// チャージ開始のフラグを消す
-			isCharging = false;
-			//エフェクトを削除
-			Destroy (effectObject);
-			// キーを離した状態から押し始めたじかんの差分を計測して
-			chargeTime  = triggerDownTimeEnd - triggerDownTimeStart;
-			// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
-			damage = Attack + attackPoint * 2.5f * chargeTime;
-				//Debug.Log (damage);
-			// もしboostPoint 数値がBpDown以上なら
-			if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
-				// Bullet01をmuzzleの位置、方向に合わせて生成
-				bullet01 = GameObject.Instantiate (Bullet01, muzzle.position, Quaternion.identity)as GameObject;
-				// Bulletnを設定（下記参照）
-				Bullet ();
-				// BpDown数値消費
-				GetComponent<PlayerController> ().boostPoint -= BpDown;
-			}
-			// Shotのアニメーションに切り替え
-			// ショットのように作動したら自動的にニュートラルに戻る場合はTriggerの方がよい
-			animator.SetTrigger ("Shot");　	
-			// 一定以上間が空いたらチャージタイムのリセット
-			if (time >= interval) {    
-				time = 0f;
-			}
-		}
-		//マズルフラッシュを表示する
-		//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 		}
 	}
 	// Bullet(弾丸)スクリプトに受け渡す為の処理

@@ -67,8 +67,8 @@ public class PlayerLevel : MonoBehaviour
 		int Score = GameObject.Find ("BattleManager").GetComponent<BattleManager> ().Score;
 		foreach(var Param in userParamList)
 		{
-			Debug.Log("ParamScore"+Param.Score);
-			Debug.Log("Score"+Score);
+			//Debug.Log("ParamScore"+Param.Score);
+			//Debug.Log("Score"+Score);
 			// 
 			if (Param.Score <= Score) {
 				if (Param.PlayerNo == DataManager.PlayerNo) {

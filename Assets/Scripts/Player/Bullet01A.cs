@@ -11,6 +11,7 @@ public class Bullet01A : Bullet01 {
 		bullet01 = gameObject.GetComponent<Bullet01> ();
 		// Initializeで継承元のデータを最初に読み取る
 		bullet01.Initialize ();
+		//Initialize ();
 	}	
 
 	void Update () {

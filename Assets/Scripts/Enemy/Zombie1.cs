@@ -13,7 +13,7 @@ public class Zombie1 : MonoBehaviour {
 	void Start () {
 		// EnemyBasicスクリプトのデータを最初に呼び出しenemyBasicとする
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
-		enemyBasic.Initialize ();
+		//enemyBasic.Initialize ();
 	}
 
 	// Update is called once per frame
