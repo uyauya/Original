@@ -42,7 +42,7 @@ public class PlayerShoot : MonoBehaviour {
 	private AudioSource[] audioSources;
 	public int PlayerNo;						//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	private Pause pause;						// ポーズ中かどうか（Pause参照）
-	public bool isBig;
+	public bool isBig;							// 巨大化しているかどうか
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();

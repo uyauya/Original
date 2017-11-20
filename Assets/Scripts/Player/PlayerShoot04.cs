@@ -23,6 +23,7 @@ public class PlayerShoot04 : MonoBehaviour {
 	public int BpDown;
 	public int PlayerNo;
 	private Pause pause;
+	public bool isBig;							// 巨大化しているかどうか
 	
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
@@ -34,12 +35,15 @@ public class PlayerShoot04 : MonoBehaviour {
 	
 	void Update () {
 		if (pause.isPause == false) {
-			if (Input.GetButtonUp ("Fire1")) {
-				damage = Attack;
-				if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
-					animator.SetTrigger ("Shot");
-					GetComponent<PlayerController> ().boostPoint -= BpDown;
-					Bullet ();
+			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
+			if (isBig == false) {
+				if (Input.GetButtonUp ("Fire1")) {
+					damage = Attack;
+					if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
+						animator.SetTrigger ("Shot");
+						GetComponent<PlayerController> ().boostPoint -= BpDown;
+						Bullet ();
+					}
 				}
 			}
 		}

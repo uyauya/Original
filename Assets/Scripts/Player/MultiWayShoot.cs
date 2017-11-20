@@ -29,6 +29,7 @@ public class MultiWayShoot : MonoBehaviour {
 	public int PlayerNo;
 	private Pause pause;
 	private int timeCount;
+	public bool isBig;							// 巨大化しているかどうか
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
@@ -41,25 +42,29 @@ public class MultiWayShoot : MonoBehaviour {
 
 	void Update () {
 		if (pause.isPause == false) {
-			//timeCount += 1;
-			// Fire1（標準ではCtrlキー)を押された瞬間.
-			shotInterval += Time.deltaTime;
-			if (Input.GetButtonUp ("Fire1")) {
-				if (GetComponent<PlayerController> ().boostPoint >= BpDown)
+			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
+			if (isBig == false) {
+				//timeCount += 1;
+				// Fire1（標準ではCtrlキー)を押された瞬間.
+				shotInterval += Time.deltaTime;
+				if (Input.GetButtonUp ("Fire1")) {
+					if (GetComponent<PlayerController> ().boostPoint >= BpDown)
 					//effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
 				if (timeCount % 5 == 0) {
-					Bullet ();
-				}
-				damage = Attack + attackPoint;
-				animator.SetTrigger ("Shot");
+						Bullet ();
+					}
+					damage = Attack + attackPoint;
+					animator.SetTrigger ("Shot");
 
-				//マズルフラッシュを表示する
-				//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
+					//マズルフラッシュを表示する
+					//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
+				}
+				//音を重ねて再生する
+				//audioSource.PlayOneShot (audioSource.clip);
 			}
-			//音を重ねて再生する
-			//audioSource.PlayOneShot (audioSource.clip);
 		}
 	}
+
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
 	void Bullet ()
 	{

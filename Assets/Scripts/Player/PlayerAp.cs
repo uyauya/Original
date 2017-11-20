@@ -31,6 +31,7 @@ public class PlayerAp : MonoBehaviour {
 	public GameObject HpHealObject;
 	public GameObject boddy_summer;
 	public int attackPoint;
+	public float force;
 	public int BigAttack;
 	public bool isBig;
 
@@ -59,6 +60,7 @@ public class PlayerAp : MonoBehaviour {
 		//enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
 		boddy_summer = GameObject.Find("_body_summer");
 		attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
+		force = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Force;
 		isBig = false;
 	}
 
@@ -100,56 +102,57 @@ public class PlayerAp : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision collider) {
 		
-		//ShotEnemyの弾と衝突したらダメージ
+		//EnemyやEnemyの弾と衝突したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
-		if (collider.gameObject.tag == "ShotEnemy") {
-			
-			//armorPoint -= damage;
-			armorPoint -= enemyAttack;
-			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
-			DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
-			DamageObject.transform.SetParent (EffectPoint);
-			animator.SetTrigger ("Damage");
-			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(36,gameObject);
-			}
-			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(37,gameObject);
-			}
-			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(38,gameObject);
-			}
-			StartCoroutine ("DamageCoroutine");
-		//Enemyと接触したらダメージ
-		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
-		} else if (collider.gameObject.tag == "Enemy") {
-			// Enemyタグの付いたオブジェクトのEnemyBasicの敵の攻撃値(EnemyAttack)をenemyAttackと呼ぶ
-			//enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
+		if (collider.gameObject.tag == "ShotEnemy"|| collider.gameObject.tag == "Enemy") {
 			enemyAttack= collider.gameObject.GetComponent<EnemyBasic>().EnemyAttack;
+			// 巨大化していたらダメージなし
 			if (isBig == true) {
 				armorPoint -= 0;
 			} else {
-				//armorPoint -= damage;
+				//巨大化していなかったら（通常なら）
 				armorPoint -= enemyAttack;
 				armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
 				DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 				DamageObject.transform.SetParent (EffectPoint);
 				animator.SetTrigger ("Damage");
 				if (PlayerNo == 0) {
-					SoundManager.Instance.Play (21, gameObject);
+					SoundManager.Instance.Play (36, gameObject);
 				}
 				if (PlayerNo == 1) {
-					SoundManager.Instance.Play (22, gameObject);
+					SoundManager.Instance.Play (37, gameObject);
 				}
 				if (PlayerNo == 2) {
-					SoundManager.Instance.Play (23, gameObject);
+					SoundManager.Instance.Play (38, gameObject);
 				}
 				StartCoroutine ("DamageCoroutine");
 			}
-		}
-
+		
+		//壁と接触したらダメージ
+		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
+		} else if (collider.gameObject.tag == "Wall") {
+			if (isBig == true) {
+				armorPoint -= 0;
+			} else {
+				//if (force >= 10) {
+					armorPoint -= 1000;
+					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
+					DamageObject.transform.SetParent (EffectPoint);
+					animator.SetTrigger ("Damage");
+					if (PlayerNo == 0) {
+						SoundManager.Instance.Play (21, gameObject);
+					}
+					if (PlayerNo == 1) {
+						SoundManager.Instance.Play (22, gameObject);
+					}
+					if (PlayerNo == 2) {
+						SoundManager.Instance.Play (23, gameObject);
+					}
+					StartCoroutine ("DamageCoroutine2");
+				//}
+			}
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
-		else if (collider.gameObject.tag == "Item") {
+		} else if (collider.gameObject.tag == "Item") {
 			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
 			HpHealObject.transform.SetParent (EffectPoint);
 			animator.SetTrigger ("ItemGet");
@@ -215,6 +218,34 @@ public class PlayerAp : MonoBehaviour {
 		//iTweenのアニメーション
 	}
 
+	IEnumerator DamageCoroutine2 ()
+	{
+		//レイヤーをPlayerDamageに変更
+		//gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
+		//while文を10回ループ
+		int count = 10;
+		iTween.MoveTo(gameObject, iTween.Hash(
+			"position", transform.position - (transform.forward * KnockBackRange),
+			"time", InvincibleTime, // 好きな時間（秒）
+			"easetype", iTween.EaseType.linear
+		));
+		isInvincible = true;
+		while (count > 0){
+			//透明にする
+			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//0.1秒待つ
+			yield return new WaitForSeconds(0.1f);
+			//元に戻す
+			modelColorChange.ColorChange(new Color (1,1,1,1));
+			//0.1秒待つ
+			yield return new WaitForSeconds(0.1f);
+			count--;
+		}
+		isInvincible = false;
+		//レイヤーをPlayerに戻す
+		//gameObject.layer = LayerMask.NameToLayer("Player");
+		//iTweenのアニメーション
+	}
 	/*IEnumerator BigCoroutine ()
 	{
 		boddy_summer = GameObject.Find("_body_summer");
@@ -262,7 +293,7 @@ public class PlayerAp : MonoBehaviour {
 			//0.1秒待つ
 			yield return new WaitForSeconds(0.1f);
 			//元に戻す
-			modelColorChange.ColorChange(new Color (1,1,1,1));
+			modelColorChange.ColorChange(new Color (255,255,1,1));
 			//0.1秒待つ
 			yield return new WaitForSeconds(0.1f);
 			count--;

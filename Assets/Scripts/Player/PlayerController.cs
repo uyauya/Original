@@ -8,10 +8,10 @@ using UnityEditor;
 public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
-	private float force;				// 移動速度
-	public float MaxForce;				// 移動速度最大値
-	public float MaxBoostForce;			// ブースト時の移動速度最大値
-	public float AddTime;				// 移動速度加算時間
+	public float Force= 8;					// 移動速度
+	public float MaxForce = 10;				// 移動速度最大値
+	public float MaxBoostForce = 15;			// ブースト時の移動速度最大値
+	public float PlusForce= 0.1f;				// 移動速度加算数値
 	public float jumpSpeed;				// ジャンプ力
 	public float HighPoint;				// ジャンプの高さ最大値
 	public float gravity;				// 重力（ジャンプ時などに影響）
@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour {
 	public Transform EffectPoint;		// 回復等エフェクト発生元の位置取り
 	public GameObject BpHealPrefab;		// ブーストポイント回復エフェクト格納場所
 	public GameObject BpHealObject;
-	public int BpHealPoint = 500;
-	public int Level;
+	public int BpHealPoint = 500;		// ブーストポイント回復値（アイテム取得時）
+	public int Level;					// プレーヤーレベル
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -63,9 +63,9 @@ public class PlayerController : MonoBehaviour {
 	void Start()	//　ゲーム開始時の設定
 	{
 		animator = GetComponent<Animator>();
-		boostPoint = boostPointMax;				// ブーストポイントを最大値に設定
-		moveSpeed = Vector3.zero;				// 開始時は移動していないので速さはゼロに
-		isBoost = false;						// ブーストはオフに
+		boostPoint = boostPointMax;					// ブーストポイントを最大値に設定
+		moveSpeed = Vector3.zero;					// 開始時は移動していないので速さはゼロに
+		isBoost = false;							// ブーストはオフに
 		// Canvas上のゲージイメージを取得（オブジェクトに直接付いていない場合はゲットコンポーネントで取得する）
 		// BoostGaugeオブジェクトに付いているImageを取得
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate()
 	{
 
-		//ブーストボタンが押されてブーストポイント残が10以上あればフラグを立てブーストポイントを消費
+		//ブーストボタンが押されてブーストポイント残が1以上あればフラグを立てブーストポイントを消費
 		if (Input.GetButton("Boost") && boostPoint > 0)
 		{
 			boostPoint -= BpDown;			//ブーストポイントをBpDown設定値分消費
@@ -108,15 +108,18 @@ public class PlayerController : MonoBehaviour {
 		if (isBoost)						//ブーストなら
 		{
 			// ブースト時
-			if (force < MaxBoostForce) {			//MAX速度まで
-				force += Time.deltaTime * AddTime;	//通常速度（下の設定速度）に加速		
+			if (Force < MaxBoostForce) {				//MAX速度まで通常速度（下の設定速度）に加速
+				Force += Time.deltaTime * PlusForce;	
 			}
 			//ブーストキーが押されたらにパラメータを切り替える
 			animator.SetBool("Boost", Input.GetButton("Boost")&& boostPoint > 0);
 		}
 		else
 		{
-			force = MaxForce;							//通常速度
+			//Force = MaxForce;							//通常速度
+			if (Force < MaxForce) {				//MAX速度まで通常速度（下の設定速度）に加速
+				Force += Time.deltaTime * PlusForce;	
+			}
 			animator.SetBool("Boost", Input.GetButton("Boost")&& boostPoint > 0);
 		}
 			
@@ -130,27 +133,27 @@ public class PlayerController : MonoBehaviour {
 			animator.SetBool("Move", true);
 			// プレイヤに速度を加える（transform.Translateは移動だが、アッドフォースは後ろから押すような操作なので、坂道など段差が
 			// ある場合、自動で加減速処理して移動する
-			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
 		}
 		else if (Input.GetAxis("Horizontal") < 0)
 		{
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
 			animator.SetBool("Move", true);
-			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
 
 		}
 		else if (Input.GetAxis("Vertical") > 0)	// 縦軸操作（前か後か押されている場合）
 		{
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 			animator.SetBool("Move", true);
-			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
 
 		}
 		else if (Input.GetAxis("Vertical") < 0)
 		{
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * 5.0f);
 			animator.SetBool("Move", true);
-			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
 
 		}
 		else
@@ -160,7 +163,8 @@ public class PlayerController : MonoBehaviour {
 			// アッドフォースされた速度が0でなければフォースにマイナス処理して減速（滑り止め）
 			// プレイヤの滑り具合がグラビティを変えることによって調節できるが、変更すると重い軽いでジャンプなどにも影響が出てくる
 			// Edit→Project Settings→Physicsで全体的な重力は変えられるがインスペクタ上でGravity変更した方がよい
-			if(force != 0){ force -= 1.2f; }
+			//if(Force != 0){ Force -= 1.2f; }
+			if(Force >= MaxForce){ Force -= 2.2f; }
 		}
 
 		//ジャンプキーによる上昇（二段ジャンプ）

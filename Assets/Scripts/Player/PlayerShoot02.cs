@@ -23,6 +23,7 @@ public class PlayerShoot02 : MonoBehaviour {
 	public int BpDown;
 	public int PlayerNo;
 	private Pause pause;
+	public bool isBig;							// 巨大化しているかどうか
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
@@ -37,18 +38,22 @@ public class PlayerShoot02 : MonoBehaviour {
 		int boostpoint = GetComponent<PlayerController> ().boostPoint;
 		int Attackpoint = GetComponent<PlayerController> ().AttackPoint;
 		if (pause.isPause == false) {
-			if (Input.GetButtonUp ("Fire1")) {
-				if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
-					damage = Attack += attackPoint;
-					animator.SetTrigger ("Shots");
-					GetComponent<PlayerController> ().boostPoint -= BpDown;
-					Bullets ();
+			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
+			if (isBig == false) {
+				if (Input.GetButtonUp ("Fire1")) {
+					if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
+						damage = Attack += attackPoint;
+						animator.SetTrigger ("Shots");
+						GetComponent<PlayerController> ().boostPoint -= BpDown;
+						Bullets ();
+					}
+					//マズルフラッシュを表示する
+					//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 				}
-				//マズルフラッシュを表示する
-				//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 			}
 		}
 	}
+
 	void Bullets() {
 		// ショットの時間間隔
 		if (Time.time - shotInterval > shotIntervalMax) {

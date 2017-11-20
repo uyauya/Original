@@ -14,6 +14,7 @@ public class BreakBlock01 : MonoBehaviour {
 	public GameObject BlueSphere;
 	public GameObject GreenSphere;
 	public GameObject YellowSphere;
+	public int bigAttack;
 
 	void Start () {
 
@@ -33,6 +34,9 @@ public class BreakBlock01 : MonoBehaviour {
 		} else if (collider.gameObject.tag == "Shot5") {
 			//Instantiate(exprosion, transform.position, transform.rotation);
 			armorPoint -= collider.gameObject.GetComponent<Bullet05> ().damage;
+		} else if (collider.gameObject.tag == "Player") {
+			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
+			armorPoint -= bigAttack;
 		}
 			//体力が0以下になったら消滅する
 			if (armorPoint <= 0){
