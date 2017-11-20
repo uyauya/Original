@@ -104,7 +104,7 @@ public class BattleManager : MonoBehaviour {
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
 				// Scene移行時プレイヤーのパラメータの中身を取得
-				int level = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Level;
+				/*int level = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Level;
 				int attackPoint = GameObject.FindWithTag("Player").GetComponent<PlayerController>().AttackPoint;
 				int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
 				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
@@ -112,7 +112,7 @@ public class BattleManager : MonoBehaviour {
 				string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
 				StageManager.Instance.StageNo++;
 				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
-				UserParam.instanse.SaveData ();
+				UserParam.instanse.SaveData ();*/
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			}	
 			break;

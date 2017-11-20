@@ -13,8 +13,8 @@ public class EnemyBasic : MonoBehaviour {
 	public float shotIntervalMax = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
 	public GameObject exprosion;					// 爆発処理
 	public GameObject particle;
-	public float armorPoint;						// HP現在値
-	public float armorPointMax = 100;						// 最大HP 
+	public float armorPoint = 100;						// HP現在値
+	//public float armorPointMax = 100;				// 最大HP 
 	public int TargetRange;							// プレイヤをターゲット認識する距離
 	public float EnemySpeed;						// 移動スピード
 	public float JumpForce;							// ジャンプ力
@@ -81,7 +81,7 @@ public class EnemyBasic : MonoBehaviour {
 		// Playerタグが付いているオブジェクトをターゲットにする
 		target = GameObject.FindWithTag ("Player");	
 		// ゲーム開始時、アーマーポイントを最大にする
-		armorPoint = armorPointMax;	
+		//armorPoint = armorPointMax;	
 		// Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelと呼ぶ
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
@@ -127,6 +127,7 @@ public class EnemyBasic : MonoBehaviour {
 
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0){
+			Debug.Log ("敵"+gameObject.name);
 			// 敵消滅用エフェクト発生
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
 			// バトルマネージャーにスコア（EnemyScoreで設定）を加算する

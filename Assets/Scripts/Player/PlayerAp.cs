@@ -105,7 +105,12 @@ public class PlayerAp : MonoBehaviour {
 		//EnemyやEnemyの弾と衝突したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		if (collider.gameObject.tag == "ShotEnemy"|| collider.gameObject.tag == "Enemy") {
-			enemyAttack= collider.gameObject.GetComponent<EnemyBasic>().EnemyAttack;
+			if (collider.gameObject.tag == "ShotEnemy") {
+				enemyAttack = 100;
+			}
+			if (collider.gameObject.tag == "Enemy") {
+				enemyAttack = collider.gameObject.GetComponent<EnemyBasic>().EnemyAttack;
+			}
 			// 巨大化していたらダメージなし
 			if (isBig == true) {
 				armorPoint -= 0;
@@ -117,13 +122,13 @@ public class PlayerAp : MonoBehaviour {
 				DamageObject.transform.SetParent (EffectPoint);
 				animator.SetTrigger ("Damage");
 				if (PlayerNo == 0) {
-					SoundManager.Instance.Play (36, gameObject);
+					SoundManager.Instance.Play (21, gameObject);
 				}
 				if (PlayerNo == 1) {
-					SoundManager.Instance.Play (37, gameObject);
+					SoundManager.Instance.Play (22, gameObject);
 				}
 				if (PlayerNo == 2) {
-					SoundManager.Instance.Play (38, gameObject);
+					SoundManager.Instance.Play (23, gameObject);
 				}
 				StartCoroutine ("DamageCoroutine");
 			}
