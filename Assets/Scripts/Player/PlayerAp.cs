@@ -139,7 +139,7 @@ public class PlayerAp : MonoBehaviour {
 			if (isBig == true) {
 				armorPoint -= 0;
 			} else {
-				//if (force >= 10) {
+				if (force >= 10) {
 					armorPoint -= 1000;
 					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 					DamageObject.transform.SetParent (EffectPoint);
@@ -154,8 +154,9 @@ public class PlayerAp : MonoBehaviour {
 						SoundManager.Instance.Play (23, gameObject);
 					}
 					StartCoroutine ("DamageCoroutine2");
-				//}
+				}
 			}
+
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
 		} else if (collider.gameObject.tag == "Item") {
 			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
