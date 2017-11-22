@@ -1,31 +1,108 @@
 PlayerShoot1
-SoundManager1丂V005(Element0乣2)
-SoundManager2丂僉儍儞僙儖壒2
+if (PlayerNo == 0) {	// こはく
+SoundManager.Instance.Play(0,gameObject);	
+SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
+if (PlayerNo == 1) {	// ゆうこ
+SoundManager.Instance.Play(1,gameObject);	
+SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
+if (PlayerNo == 2) {	// みさき
+SoundManager.Instance.Play(2,gameObject);	
+SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 
 PlayerShoot2
-SoundManager1丂V002(Element3乣5)
-SoundManager2丂塅拡恖側偳偵傛傞價乕儉峌寕
+if (PlayerNo == 0) {
+SoundManager.Instance.Play(3,gameObject);
+SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
+if (PlayerNo == 1) {
+SoundManager.Instance.Play(4,gameObject);
+SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
+if (PlayerNo == 2) {
+SoundManager.Instance.Play(5,gameObject);
+SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
 
 PlayerShoot3
-SoundManager1丂V015(Element6乣8)
-SoundManager2丂悢抣傗埵抲側偳偑忋偑傞
+if (PlayerNo == 0) {
+SoundManager.Instance.Play(6,gameObject);
+SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);
+if (PlayerNo == 1) {
+SoundManager.Instance.Play(7,gameObject);
+SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);
+if (PlayerNo == 2) {
+SoundManager.Instance.Play(8,gameObject);
+SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);
 
-PlayerShoot4
-SoundManager1丂V005(Element9乣11)
-SoundManager2丂乮枹愝掕乯
+if (PlayerNo == 0) {
+SoundManager.Instance.Play(9,gameObject);
+SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
+if (PlayerNo == 1) {
+SoundManager.Instance.Play(10,gameObject);
+SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
+if (PlayerNo == 2) {
+SoundManager.Instance.Play(11,gameObject);
+SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
 
-MultyWayShoot4
-SoundManager1丂V006(Element12乣14)
-SoundManager2丂僔儑僢僩壒
+MultyWayShoot
+if (PlayerNo == 0) { 
+SoundManager.Instance.Play(21,gameObject);
+SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
+if (PlayerNo == 1) {
+SoundManager.Instance.Play(22,gameObject);
+SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
+if (PlayerNo == 2) {
+SoundManager.Instance.Play(23,gameObject);
+SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
 
-PlayerController乮僕儍儞僾乯
-SoundManager1丂V005(Element15乣17)
+PlayerController 
+// ジャンプ時
+if (PlayerNo == 0) {
+SoundManager.Instance.Play(15,gameObject);
+if (PlayerNo == 1) {
+SoundManager.Instance.Play(16,gameObject);
+if (PlayerNo == 2) {
+SoundManager.Instance.Play(17,gameObject);
 
-PlayerController乮僽乕僗僩夞暅乯
-SoundManager1丂V007(Element18乣20)
+PlayerController
+// Item2取得時
+if (PlayerNo == 0) {
+SoundManager.Instance.Play(18,gameObject);
+if (PlayerNo == 1) {
+SoundManager.Instance.Play(19,gameObject);
+if (PlayerNo == 2) {
+SoundManager.Instance.Play(20,gameObject);
 
-PlayerAp乮揋偐傜偺峌寕乯
-SoundManager1丂V004(Element21乣23)
+PlayerAp
+// 敵や敵の弾と接触時
+if (PlayerNo == 0) {
+SoundManager.Instance.Play (21, gameObject);
+if (PlayerNo == 1) {
+SoundManager.Instance.Play (22, gameObject);
+if (PlayerNo == 2) {
+SoundManager.Instance.Play (23, gameObject);
 
-PlayerAp乮僽乕僗僩夞暅乯
-SoundManager1丂V007(Element18乣20)
+PlayerAp
+// 壁に激突時
+if (PlayerNo == 0) {
+SoundManager.Instance.Play (21, gameObject);
+if (PlayerNo == 1) {
+SoundManager.Instance.Play (22, gameObject);
+if (PlayerNo == 2) {
+SoundManager.Instance.Play (23, gameObject);
+
+PlayerAp
+// Item取得時
+if (PlayerNo == 0) {
+SoundManager.Instance.Play(18,gameObject);
+if (PlayerNo == 1) {
+SoundManager.Instance.Play(19,gameObject);
+if (PlayerNo == 2) {
+SoundManager.Instance.Play(20,gameObject);
+
+PlayerAp
+// Item4取得時
+if (PlayerNo == 0) {
+SoundManager.Instance.Play(18,gameObject);
+if (PlayerNo == 1) {
+SoundManager.Instance.Play(19,gameObject);
+if (PlayerNo == 2) {
+SoundManager.Instance.Play(20,gameObject);
+

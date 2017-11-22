@@ -32,6 +32,7 @@ public class PlayerAp : MonoBehaviour {
 	public GameObject boddy_summer;
 	public int attackPoint;
 	public float force;
+	public float maxForce;
 	public int BigAttack;
 	public bool isBig;
 
@@ -60,7 +61,8 @@ public class PlayerAp : MonoBehaviour {
 		//enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
 		boddy_summer = GameObject.Find("_body_summer");
 		attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
-		force = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Force;
+		//force = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Force;
+		//maxForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().MaxForce;
 		isBig = false;
 	}
 
@@ -101,7 +103,8 @@ public class PlayerAp : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision collider) {
-		
+		force = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Force;
+		maxForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().MaxForce;
 		//EnemyやEnemyの弾と衝突したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		if (collider.gameObject.tag == "ShotEnemy"|| collider.gameObject.tag == "Enemy") {
@@ -139,8 +142,9 @@ public class PlayerAp : MonoBehaviour {
 			if (isBig == true) {
 				armorPoint -= 0;
 			} else {
-				if (force >= 10) {
-					armorPoint -= 1000;
+				if (force >= maxForce) {
+					Debug.Log (force);
+					armorPoint -= 100;
 					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 					DamageObject.transform.SetParent (EffectPoint);
 					animator.SetTrigger ("Damage");

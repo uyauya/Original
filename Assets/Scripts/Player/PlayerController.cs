@@ -10,36 +10,36 @@ public class PlayerController : MonoBehaviour {
 	private Animator animator;
 	public float Force= 8;					// 移動速度
 	public float MaxForce = 10;				// 移動速度最大値
-	public float MaxBoostForce = 15;			// ブースト時の移動速度最大値
-	public float PlusForce= 0.1f;				// 移動速度加算数値
-	public float jumpSpeed;				// ジャンプ力
-	public float HighPoint;				// ジャンプの高さ最大値
-	public float gravity;				// 重力（ジャンプ時などに影響）
+	public float MaxBoostForce = 15;		// ブースト時の移動速度最大値
+	public float PlusForce= 0.1f;			// 移動速度加算数値
+	public float jumpSpeed;					// ジャンプ力
+	public float HighPoint;					// ジャンプの高さ最大値
+	public float gravity;					// 重力（ジャンプ時などに影響）
 	private Vector3 moveDirection = Vector3.zero; //プレイヤ位置方向ニュートラル設定
-	public int boostPoint;				// ブーストポイント
-	public int boostPointMax;			// ブーストポイント最大値
-	public int AttackPoint;				// 攻撃力
-	public int BpDown = 20;				// ブーストゲージ消費値
-	public int RecoverPoint = 1;		// ブーストポイント回復値
-	public Image gaugeImage;			// ブーストゲージ（画面表示用）
-	int displayBoostPoint;				// ブーストポイント（画面表示用）
-	public Text boostText;				// ブースト最大・現在数値（画面表示用）
-	Vector3 moveSpeed;					// プレイヤの速さ
-	private int JumpCount;				// ジャンプ回数計算用（二段ジャンプ処理に使用）
+	public int boostPoint;					// ブーストポイント
+	public int boostPointMax;				// ブーストポイント最大値
+	public int AttackPoint;					// 攻撃力
+	public int BpDown = 20;					// ブーストゲージ消費値
+	public int RecoverPoint = 1;			// ブーストポイント回復値
+	public Image gaugeImage;				// ブーストゲージ（画面表示用）
+	int displayBoostPoint;					// ブーストポイント（画面表示用）
+	public Text boostText;					// ブースト最大・現在数値（画面表示用）
+	Vector3 moveSpeed;						// プレイヤの速さ
+	private int JumpCount;					// ジャンプ回数計算用（二段ジャンプ処理に使用）
 	private float interval = 2.0f;
-	bool isBoost;						// ブーストボタンをオン・オフ設定
-	private float timer = 0.0f;			//
-	bool onFloor = true;				// 床に設置しているかどうか
-	public int ItemCount;				// スフィア取得個数計算用
-	Vector3 targetSpeed = Vector3.zero; // 目標速度
-	Vector3 addSpeed = Vector3.zero;    // 加算速度
-	public GameObject BpHealEffect;		// ブーストポイント回復アイテム取得時のエフェクト
-	public int PlayerNo;				//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
-	public Transform EffectPoint;		// 回復等エフェクト発生元の位置取り
-	public GameObject BpHealPrefab;		// ブーストポイント回復エフェクト格納場所
+	bool isBoost;							// ブーストボタンをオン・オフ設定
+	private float timer = 0.0f;				//
+	bool onFloor = true;					// 床に設置しているかどうか
+	public int ItemCount;					// スフィア取得個数計算用
+	Vector3 targetSpeed = Vector3.zero; 	// 目標速度
+	Vector3 addSpeed = Vector3.zero;    	// 加算速度
+	public GameObject BpHealEffect;			// ブーストポイント回復アイテム取得時のエフェクト
+	public int PlayerNo;					//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
+	public Transform EffectPoint;			// 回復等エフェクト発生元の位置取り
+	public GameObject BpHealPrefab;			// ブーストポイント回復エフェクト格納場所
 	public GameObject BpHealObject;
-	public int BpHealPoint = 500;		// ブーストポイント回復値（アイテム取得時）
-	public int Level;					// プレーヤーレベル
+	public int BpHealPoint = 500;			// ブーストポイント回復値（アイテム取得時）
+	public int Level;						// プレーヤーレベル
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -96,20 +96,21 @@ public class PlayerController : MonoBehaviour {
 		//ブーストボタンが押されてブーストポイント残が1以上あればフラグを立てブーストポイントを消費
 		if (Input.GetButton("Boost") && boostPoint > 0)
 		{
-			boostPoint -= BpDown;			//ブーストポイントをBpDown設定値分消費
-			isBoost = true;					//ブースト状態
+			boostPoint -= BpDown;						//ブーストポイントをBpDown設定値分消費
+			isBoost = true;								//ブースト状態
 		}
 		else
 		{
-			isBoost = false;				//それ以外ならブーストなし（通常状態）
+			isBoost = false;							//それ以外ならブーストなし（通常状態）
 		}
 
 		//通常時とブースト時で変化
-		if (isBoost)						//ブーストなら
+		if (isBoost)									//ブーストなら
 		{
 			// ブースト時
-			if (Force < MaxBoostForce) {				//MAX速度まで通常速度（下の設定速度）に加速
-				Force += Time.deltaTime * PlusForce;	
+			if (Force <= MaxBoostForce) {				//MaxBoostForceまでMaxForce(通常最大速度)に加速
+				MaxForce += Time.deltaTime * PlusForce;	
+				//Debug.Log (Force);
 			}
 			//ブーストキーが押されたらにパラメータを切り替える
 			animator.SetBool("Boost", Input.GetButton("Boost")&& boostPoint > 0);
@@ -117,8 +118,9 @@ public class PlayerController : MonoBehaviour {
 		else
 		{
 			//Force = MaxForce;							//通常速度
-			if (Force < MaxForce) {				//MAX速度まで通常速度（下の設定速度）に加速
-				Force += Time.deltaTime * PlusForce;	
+			if (Force <= MaxForce) {					//MaxForceまでForce(通常速度)に加速
+				Force += Time.deltaTime * PlusForce;
+				//Debug.Log (Force);
 			}
 			animator.SetBool("Boost", Input.GetButton("Boost")&& boostPoint > 0);
 		}
@@ -134,12 +136,14 @@ public class PlayerController : MonoBehaviour {
 			// プレイヤに速度を加える（transform.Translateは移動だが、アッドフォースは後ろから押すような操作なので、坂道など段差が
 			// ある場合、自動で加減速処理して移動する
 			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+			//Debug.Log (Force);
 		}
 		else if (Input.GetAxis("Horizontal") < 0)
 		{
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
 			animator.SetBool("Move", true);
 			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+			//Debug.Log (Force);
 
 		}
 		else if (Input.GetAxis("Vertical") > 0)	// 縦軸操作（前か後か押されている場合）
