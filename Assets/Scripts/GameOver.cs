@@ -7,12 +7,12 @@ using UnityEngine.UI;						// UIを使う時は追加する
 // ゲームオーバー、コンティニュー画面
 public class GameOver : MonoBehaviour 
 {
-	private Text TextCountDown;
+	public Text TextCountDown;
 
 	// Use this for initialization
 	void Start () {
 		TextCountDown.text = "";
-		TextCountDown = GameObject.Find ("Button").GetComponent<TextCountdown> ();
+		//TextCountDown = GameObject.Find ("Button").GetComponent<Text> ();
 		StartCoroutine (CountdownCoroutine ());
 		Debug.Log (CountdownCoroutine());
 	}
@@ -47,7 +47,7 @@ public class GameOver : MonoBehaviour
 		yield return new WaitForSeconds (1.0f);
 
 		TextCountDown.text = "4";
-		SoundManager.Instance.Play(1,gameObject);
+		SoundManager00.Instance.Play(1,gameObject);
 		yield return new WaitForSeconds (1.0f);
 
 		TextCountDown.text = "3";
