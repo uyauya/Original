@@ -8,7 +8,14 @@ using UnityEngine.UI;						// UIを使う時は追加する
 public class GameOver : MonoBehaviour 
 {
 	public Text TextCountDown;
-
+	public void Onclick_Select ()
+	{
+		DataManager.Continue = false;
+		DataManager.FarstLevel = true;
+		// ボタンを押してセレクト画面に移行
+		SoundManager00.Instance.Play(1);	//(1)はElmentの数
+		Invoke("LoadScene",1.3f);
+	}
 	// Use this for initialization
 	void Start () {
 		TextCountDown.text = "";
@@ -20,6 +27,10 @@ public class GameOver : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void LoadScene() {
+		SceneManager.LoadScene(UserParam.instanse.SceneName);
 	}
 
 	IEnumerator CountdownCoroutine()
@@ -66,8 +77,8 @@ public class GameOver : MonoBehaviour
 		SoundManager00.Instance.Play(1,gameObject);
 		yield return new WaitForSeconds (1.0f);
 
-		TextCountDown.text = "";
-		TextCountDown.gameObject.SetActive (false);
+		//TextCountDown.text = "";
+		//TextCountDown.gameObject.SetActive (false);
 	}
 
 }

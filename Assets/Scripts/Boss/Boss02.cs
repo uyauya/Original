@@ -20,9 +20,9 @@ public class Boss02 : MonoBehaviour {
 		// EnemyBasic接続用
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
-		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) > TargetPosition) {
-			return;
-		}
+		//if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) > TargetPosition) {
+		//	return;
+		//}
 	}
 
 

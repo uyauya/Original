@@ -59,6 +59,7 @@ public class PlayerShoot05 : MonoBehaviour {
 		for (int j = 0; j < shootCount; j++)
 		{
 				Bullet ();
+			yield return new WaitForSeconds(0.2f);
 		}
 		yield return new WaitForSeconds(shotInterval);
 	}

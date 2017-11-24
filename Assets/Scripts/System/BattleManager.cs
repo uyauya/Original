@@ -18,6 +18,7 @@ public class BattleManager : MonoBehaviour {
 	public Image messageLose;
 	public static int score;			// 敵を倒した数。Enemyスクリプトでカウントアップ  
 	public Text ScoreText;				// スコア表示用
+
 	public int Score;					// 得点兼プレイヤ経験値
 	private int ItemCount;				// アイテム取得数をカウント
 	PlayerController playerController;
@@ -97,23 +98,26 @@ public class BattleManager : MonoBehaviour {
 				string sceneName = SceneManager.GetActiveScene ().name;
 				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
 				UserParam.instanse.SaveData ();
-				SceneManager.LoadScene ("Start");
+				SceneManager.LoadScene ("GameOver");
 				//Time.timeScale = 1;
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
+				battleStatus = BATTLE_PLAY;
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
 				// Scene移行時プレイヤーのパラメータの中身を取得
-				/*int level = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Level;
+				int level = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Level;
 				int attackPoint = GameObject.FindWithTag("Player").GetComponent<PlayerController>().AttackPoint;
 				int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
 				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
 				//string sceneName = SceneManager.GetActiveScene ().name;
+				Debug.Log(StageManager.Instance.StageNo);
 				string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
-				StageManager.Instance.StageNo++;
+				//StageManager.Instance.StageNo++;
 				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
-				UserParam.instanse.SaveData ();*/
+				UserParam.instanse.SaveData ();
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
+				playerController.ItemCount = 0;
 			}	
 			break;
 			
@@ -146,6 +150,6 @@ public class BattleManager : MonoBehaviour {
 	}
 
 	private void NextScene(){
-		SceneManager.LoadScene (StageManager.Instance.StageName[StageManager.Instance.StageNo]);
+		SceneManager.LoadScene (StageManager.Instance.StageName[StageManager.Instance.StageNo+1]);
 	}
 }
