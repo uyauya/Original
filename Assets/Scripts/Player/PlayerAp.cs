@@ -149,31 +149,34 @@ public class PlayerAp : MonoBehaviour {
 					DamageObject.transform.SetParent (EffectPoint);
 					animator.SetTrigger ("Damage");
 					if (PlayerNo == 0) {
-						SoundManager.Instance.Play (21, gameObject);
+						SoundManager.Instance.Play(24,gameObject);	
+						SoundManager.Instance.PlayDelayed (27, 0.2f, gameObject);
 					}
 					if (PlayerNo == 1) {
-						SoundManager.Instance.Play (22, gameObject);
+						SoundManager.Instance.Play(25,gameObject);	
+						SoundManager.Instance.PlayDelayed (28, 0.2f, gameObject);
 					}
 					if (PlayerNo == 2) {
-						SoundManager.Instance.Play (23, gameObject);
+						SoundManager.Instance.Play(26,gameObject);	
+						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
 					}
 					StartCoroutine ("DamageCoroutine2");
 				}
 			}
 
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
-		} else if (collider.gameObject.tag == "Item") {
+			} else if (collider.gameObject.tag == "Item") {
 			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
 			HpHealObject.transform.SetParent (EffectPoint);
 			animator.SetTrigger ("ItemGet");
 			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(18,gameObject);
+				SoundManager.Instance.Play(30,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(19,gameObject);
+				SoundManager.Instance.Play(31,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(20,gameObject);
+				SoundManager.Instance.Play(32,gameObject);
 			}
 			armorPoint += 1000;
 			// 体力上限以上には回復しない。
@@ -181,18 +184,18 @@ public class PlayerAp : MonoBehaviour {
 		}
 
 		//Itemタグをつけたもの（YellowSphere）を取ったら無敵＆巨大化
-		else if (collider.gameObject.tag == "Item4") {
+		else if (collider.gameObject.tag == "Item4") {	
 			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
 			HpHealObject.transform.SetParent (EffectPoint);
 			animator.SetTrigger ("ItemGet");
 			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(18,gameObject);
+				SoundManager2.Instance.Play(6,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(19,gameObject);
+				SoundManager2.Instance.Play(6,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(20,gameObject);
+				SoundManager2.Instance.Play(6,gameObject);
 			}
 			StartCoroutine ("BigCoroutine");
 		}

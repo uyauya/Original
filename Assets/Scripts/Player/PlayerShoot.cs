@@ -67,17 +67,17 @@ public class PlayerShoot : MonoBehaviour {
 					isCharging = true;
 					//エフェクトを生成
 					effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
-					effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.red;　// チャージエフェクト用
+					effectObject.transform.Find ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.red;　// チャージエフェクト用
 					// muzzleはプレイヤーの子で付いているのでSetParent (muzzle)で設定（オブジェクト生成の場合は必要なし）
 					effectObject.transform.SetParent (muzzle);
 				} 
 				if (Input.GetButton ("Fire1")) {
 					if (Time.time - triggerDownTimeStart >= chargeTime1 && Time.time - triggerDownTimeStart <= chargeTime2) {
 						effectObject.GetComponent<ParticleSystem> ().startColor = Color.red;
-						effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.white;
+						effectObject.transform.Find ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.white;
 					} else if (Time.time - triggerDownTimeStart > chargeTime2) {
 						effectObject.GetComponent<ParticleSystem> ().startColor = Color.blue;
-						effectObject.transform.FindChild ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.yellow;
+						effectObject.transform.Find ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.yellow;
 					}
 					// スケールを大きくする.
 					//effectObject.transform.localScale *= BiggerTime;

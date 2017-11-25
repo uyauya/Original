@@ -15,7 +15,7 @@ public class Continue : MonoBehaviour {
 		DataManager.Continue = true;
 		DataManager.FarstLevel = false;
 		// ボタンを押してセレクト画面に移行
-		SoundManager00.Instance.Play(1);	//(1)はElmentの数
+		SoundManager00.Instance.Play(2);	//(1)はElmentの数
 		// 1.3秒後にLoadScene起動
 		Invoke("LoadScene",1.3f);
 	}

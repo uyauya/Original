@@ -103,6 +103,7 @@ public class BattleManager : MonoBehaviour {
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
+				SoundManager2.Instance.Play(6,gameObject);
 				battleStatus = BATTLE_PLAY;
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
 				// Scene移行時プレイヤーのパラメータの中身を取得

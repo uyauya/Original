@@ -253,13 +253,13 @@ public class PlayerController : MonoBehaviour {
 			// アニメーターをItemGetに変更（SetTriggerなので自動的に元に戻る）
 			animator.SetTrigger ("ItemGet");
 			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(18,gameObject);
+				SoundManager.Instance.Play(30,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(19,gameObject);
+				SoundManager.Instance.Play(31,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(20,gameObject);
+				SoundManager.Instance.Play(32,gameObject);
 			}
 			// ブーストポイント回復
 			boostPoint += BpHealPoint;

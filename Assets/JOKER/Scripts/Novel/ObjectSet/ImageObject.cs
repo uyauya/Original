@@ -41,8 +41,8 @@ namespace Novel{
 
 			//サイズを指定できる
 
-			this.spriteFore = this.rootObject.transform.FindChild("fore").gameObject;
-			this.spriteBack = this.rootObject.transform.FindChild("back").gameObject;
+			this.spriteFore = this.rootObject.transform.Find("fore").gameObject;
+			this.spriteBack = this.rootObject.transform.Find("back").gameObject;
 
 			this.spriteRenderFore = this.spriteFore.GetComponent<SpriteRenderer> ();
 			this.spriteRenderBack = this.spriteBack.GetComponent<SpriteRenderer> ();

@@ -70,6 +70,7 @@ public class SelectEvent : MonoBehaviour {
 		SoundManager00.Instance.Play(0);
 		SoundManager00.Instance.Play(1);
 		SoundManager00.Instance.Play(2);
+		SoundManager00.Instance.PlayDelayed (6, 0.9f, gameObject);
 	}
 
 	void LoadScene1() {
