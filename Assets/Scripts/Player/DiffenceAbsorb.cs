@@ -62,13 +62,13 @@ public class DiffenceAbsorb : MonoBehaviour {
 							//Debug.LogFormat ("出る時：Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}", Vector2.Angle (nowDirection, direction), limitAngle, Time.time, nowTime, nextButtonDownTime);
 							diffence = true;
 							if (PlayerNo == 0) {
-								SoundManager.Instance.Play(0,gameObject);
+								//SoundManager.Instance.Play(0,gameObject);
 							}
 							if (PlayerNo == 1) {
-								SoundManager.Instance.Play(1,gameObject);
+								//SoundManager.Instance.Play(1,gameObject);
 							}
 							if (PlayerNo == 2) {
-								SoundManager.Instance.Play(2,gameObject);
+								//SoundManager.Instance.Play(2,gameObject);
 							}
 							Diffencer ();
 							Debug.Log ("Diffence");
@@ -83,13 +83,13 @@ public class DiffenceAbsorb : MonoBehaviour {
 						   && nowTime <= nextButtonDownTime) {
 							diffence = true;
 							if (PlayerNo == 0) {
-								SoundManager.Instance.Play(0,gameObject);
+								//SoundManager.Instance.Play(0,gameObject);
 							}
 							if (PlayerNo == 1) {
-								SoundManager.Instance.Play(1,gameObject);
+								//SoundManager.Instance.Play(1,gameObject);
 							}
 							if (PlayerNo == 2) {
-								SoundManager.Instance.Play(2,gameObject);
+								//SoundManager.Instance.Play(2,gameObject);
 							}
 							Absorb ();
 							Debug.Log ("Absorb");

@@ -225,6 +225,7 @@ public class PlayerController : MonoBehaviour {
 		// ブーストやジャンプが入力されていなければブースとポイントが徐々に回復（！は～されなければという否定形）
 		if (!Input.GetButton ("Boost"))
 			boostPoint += 1 * RecoverPoint;
+		
 		// ブーストポイントが最大以上にはならない
 		//ブーストポイント使用 ＝ 最大値を超えない(ポイントが,0から,マックスまで); の処理
 		boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);
@@ -247,24 +248,37 @@ public class PlayerController : MonoBehaviour {
 	{
 		// アイテム２タグの物に接触したら
 		if (collider.gameObject.tag == "Item2") {
+			if (boostPoint == boostPointMax) return;
 			// BpHealObjectを発生
 			BpHealObject = Instantiate (BpHealPrefab, EffectPoint.position, Quaternion.identity);
 			BpHealObject.transform.SetParent (EffectPoint);
 			// アニメーターをItemGetに変更（SetTriggerなので自動的に元に戻る）
 			animator.SetTrigger ("ItemGet");
-			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(30,gameObject);
-			}
-			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(31,gameObject);
-			}
-			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(32,gameObject);
-			}
 			// ブーストポイント回復
 			boostPoint += BpHealPoint;
+			if (boostPoint == boostPointMax) return;
+			if (boostPoint < boostPointMax) {
+				if (PlayerNo == 0) {
+					SoundManager.Instance.Play (18, gameObject);
+				}
+				if (PlayerNo == 1) {
+					SoundManager.Instance.Play (19, gameObject);
+				}
+				if (PlayerNo == 2) {
+					SoundManager.Instance.Play (20, gameObject);
+				}
+			} else if (boostPoint >= boostPointMax) {
+				if (PlayerNo == 0) {
+					SoundManager.Instance.PlayDelayed (36, 1.1f, gameObject);
+				}
+				if (PlayerNo == 1) {
+					SoundManager.Instance.PlayDelayed (37, 1.1f, gameObject);
+				}
+				if (PlayerNo == 2) {
+					SoundManager.Instance.PlayDelayed (38, 1.1f, gameObject);
+				}
+			}
 			// ブーストポイントが最大以上にはならない
-			// 
 			boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);
 		}
 		// 床(Floor)に着いたら全てニュートラル状態に

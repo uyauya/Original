@@ -35,6 +35,7 @@ public class PlayerAp : MonoBehaviour {
 	public float maxForce;
 	public int BigAttack;
 	public bool isBig;
+	public int HealApPoint = 1000;
 
 	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
@@ -166,21 +167,39 @@ public class PlayerAp : MonoBehaviour {
 
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
 			} else if (collider.gameObject.tag == "Item") {
+			if (armorPoint == armorPointMax) return;
+			if (armorPoint  < armorPointMax) {
+				if (armorPoint + HealApPoint < armorPointMax) {
+					if (PlayerNo == 0) {
+						SoundManager.Instance.Play (18, gameObject);
+					}
+					if (PlayerNo == 1) {
+						SoundManager.Instance.Play (19, gameObject);
+					}
+					if (PlayerNo == 2) {
+						SoundManager.Instance.Play (20, gameObject);
+					}
+				} else if (armorPoint + HealApPoint >= armorPointMax) {
+					if (PlayerNo == 0) {
+						SoundManager.Instance.PlayDelayed (39, 1.1f, gameObject);
+					}
+					if (PlayerNo == 1) {
+						SoundManager.Instance.PlayDelayed (40, 1.1f, gameObject);
+					}
+					if (PlayerNo == 2) {
+						SoundManager.Instance.PlayDelayed (41, 1.1f, gameObject);
+					}
+				}
+			}
 			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
 			HpHealObject.transform.SetParent (EffectPoint);
-			animator.SetTrigger ("ItemGet");
-			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(30,gameObject);
-			}
-			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(31,gameObject);
-			}
-			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(32,gameObject);
-			}
-			armorPoint += 1000;
+			armorPoint += HealApPoint;
 			// 体力上限以上には回復しない。
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
+			Debug.Log (armorPoint);
+			//armorPoint = Mathf.Min (armorPoint + HealApPoint, armorPointMax);
+			Debug.Log (armorPoint);
+			animator.SetTrigger ("ItemGet");
 		}
 
 		//Itemタグをつけたもの（YellowSphere）を取ったら無敵＆巨大化
@@ -294,7 +313,7 @@ public class PlayerAp : MonoBehaviour {
 		isBig = true;
 
 		Debug.Log (BigAttack);
-		int count = 1000;
+		int count = 100;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			"time", InvincibleTime, // 好きな時間（秒）
 			"easetype", iTween.EaseType.linear

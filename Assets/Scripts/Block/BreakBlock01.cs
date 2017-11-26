@@ -45,9 +45,9 @@ public class BreakBlock01 : MonoBehaviour {
 				// ブロック消滅時、一定確率（0,16で16分の1）でアイテム出現
 				if (Random.Range (0, 2) == 0) {
 					Instantiate (RedSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, 8) == 0) {
+				} else if (Random.Range (0, 2) == 0) {
 					Instantiate (BlueSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, 8) == 0) {
+				} else if (Random.Range (0, 16) == 0) {
 					Instantiate (GreenSphere, transform.position, transform.rotation);
 				} else if (Random.Range (0, 8) == 0) {
 					Instantiate (YellowSphere, transform.position, transform.rotation);

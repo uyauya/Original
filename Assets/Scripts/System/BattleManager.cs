@@ -27,6 +27,7 @@ public class BattleManager : MonoBehaviour {
 	public GameObject Player;			
 	public float ChangeTime;			// シーン変更までの時間
 	public int Count;					// ステージ移行する為のアイテム取得個
+	public int PlayerNo;				//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 
 	void Start () {	
 		ScoreText.text = "Score:0";
@@ -103,7 +104,15 @@ public class BattleManager : MonoBehaviour {
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
-				SoundManager2.Instance.Play(6,gameObject);
+				if (PlayerNo == 0) {
+					SoundManager.Instance.Play(18,gameObject);
+				}
+				if (PlayerNo == 1) {
+					SoundManager.Instance.Play(19,gameObject);
+				}
+				if (PlayerNo == 2) {
+					SoundManager.Instance.Play(20,gameObject);
+				}
 				battleStatus = BATTLE_PLAY;
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
 				// Scene移行時プレイヤーのパラメータの中身を取得

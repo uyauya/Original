@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;			//シーン遷移する時は追加
 using UnityEngine.UI;						// UIを使う時は追加する
 
 // ゲームオーバー、コンティニュー画面
+
 public class GameOver : MonoBehaviour 
 {
 	public Text TextCountDown;
@@ -75,6 +76,7 @@ public class GameOver : MonoBehaviour
 
 		TextCountDown.text = "げ～むお～ば～";
 		SoundManager00.Instance.Play(10,gameObject);
+		SoundManager00.Instance.PlayDelayed (11, 1.9f, gameObject);
 		yield return new WaitForSeconds (1.0f);
 
 		//TextCountDown.text = "";

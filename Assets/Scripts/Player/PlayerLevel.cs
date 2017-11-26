@@ -49,6 +49,7 @@ public class PlayerLevel : MonoBehaviour
 	public Transform muzzle;
 	public GameObject LevelUpPrefab;
 	public GameObject LevelUpObject;
+	public int PlayerNo;					//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 
 	// Use this for initialization
 	void Start () {
@@ -75,6 +76,15 @@ public class PlayerLevel : MonoBehaviour
 					GetComponent<PlayerController> ().Level = Param.Level;
 					//Playerのタグがついているオブジェクトを見つけPlayerControllerスクリプトのAttackPointに
 					//userParamListのAttackPoint数値を代入する
+					if (PlayerNo == 0) {
+						SoundManager.Instance.Play(42,gameObject);
+					}
+					if (PlayerNo == 1) {
+						SoundManager.Instance.Play(43,gameObject);
+					}
+					if (PlayerNo == 2) {
+						SoundManager.Instance.Play(44,gameObject);
+					}
 					Debug.Log("レベルアップ");
 					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint = Param.AttackPoint;
 					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax = Param.boostPointMax;
