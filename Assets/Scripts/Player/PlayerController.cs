@@ -195,13 +195,13 @@ public class PlayerController : MonoBehaviour {
 		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 10)) {
 			animator.SetBool("BoostUp", Input.GetButton ("Jump"));
 			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(15,gameObject);
+				SoundManager.Instance.Play(33,gameObject);
 			}
 			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(16,gameObject);
+				SoundManager.Instance.Play(34,gameObject);
 			}
 			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(17,gameObject);
+				SoundManager.Instance.Play(35,gameObject);
 			}
 			// ジャンプの最大値までは上昇（ボタン押し続けている間は上昇し、最大値まで行ったら上昇値を0にする）
 			if (transform.position.y > HighPoint)
