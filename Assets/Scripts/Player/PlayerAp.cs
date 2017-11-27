@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerAp : MonoBehaviour {
 
 	public static int armorPoint;		// プレイヤー体力
-	public int armorPointMax;			// プレイヤー体力最大値
+	//public int armorPointMax;			// プレイヤー体力最大値
 	//int damage = 100;					// 敵から受けるダメージ
 	public int enemyAttack;
 	public Text armorText;
@@ -52,7 +52,7 @@ public class PlayerAp : MonoBehaviour {
 	}*/
 
 	void Start () {	
-		armorPoint = armorPointMax;
+		armorPoint = DataManager.ArmorPointMax;
 		displayArmorPoint = armorPoint;
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 		animator = GetComponent<Animator> ();
@@ -61,7 +61,7 @@ public class PlayerAp : MonoBehaviour {
 		// Enemyタグの付いたオブジェクトのEnemyBasicの敵の攻撃値(EnemyAttack)をenemyAttackと呼ぶ
 		//enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
 		boddy_summer = GameObject.Find("_body_summer");
-		attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
+		attackPoint = DataManager.AttackPoint;
 		//force = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Force;
 		//maxForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().MaxForce;
 		isBig = false;
@@ -75,9 +75,9 @@ public class PlayerAp : MonoBehaviour {
 			displayArmorPoint = (int)Mathf.Lerp(displayArmorPoint, armorPoint, 0.1F);
 		
 		//現在の体力と最大体力をUI Textに表示する
-		armorText.text = string.Format("{0:0000} / {1:0000}", displayArmorPoint, armorPointMax);
+		armorText.text = string.Format("{0:0000} / {1:0000}", displayArmorPoint, DataManager.ArmorPointMax);
 		//残り体力の割合により文字の色を変える
-		float percentageArmorpoint = (float)displayArmorPoint / armorPointMax;
+		float percentageArmorpoint = (float)displayArmorPoint / DataManager.ArmorPointMax;
 		// myWhiteなどにして色を任意で指定できるようにする
 		// armorTesが数値、gougeImageがゲージの色
 		// ユーザーインターフェース（UI)の色を変える場合、画像の色は白一色にする
@@ -121,7 +121,7 @@ public class PlayerAp : MonoBehaviour {
 			} else {
 				//巨大化していなかったら（通常なら）
 				armorPoint -= enemyAttack;
-				armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
+				armorPoint = Mathf.Clamp (armorPoint, 0, DataManager.ArmorPointMax);
 				DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 				DamageObject.transform.SetParent (EffectPoint);
 				animator.SetTrigger ("Damage");
@@ -144,7 +144,7 @@ public class PlayerAp : MonoBehaviour {
 				armorPoint -= 0;
 			} else {
 				if (force >= maxForce) {
-					Debug.Log (force);
+					//Debug.Log (force);
 					armorPoint -= 100;
 					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 					DamageObject.transform.SetParent (EffectPoint);
@@ -167,9 +167,9 @@ public class PlayerAp : MonoBehaviour {
 
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
 			} else if (collider.gameObject.tag == "Item") {
-			if (armorPoint == armorPointMax) return;
-			if (armorPoint  < armorPointMax) {
-				if (armorPoint + HealApPoint < armorPointMax) {
+			if (armorPoint == DataManager.ArmorPointMax) return;
+			if (armorPoint  < DataManager.ArmorPointMax) {
+				if (armorPoint + HealApPoint < DataManager.ArmorPointMax) {
 					if (PlayerNo == 0) {
 						SoundManager.Instance.Play (18, gameObject);
 					}
@@ -179,7 +179,7 @@ public class PlayerAp : MonoBehaviour {
 					if (PlayerNo == 2) {
 						SoundManager.Instance.Play (20, gameObject);
 					}
-				} else if (armorPoint + HealApPoint >= armorPointMax) {
+				} else if (armorPoint + HealApPoint >= DataManager.ArmorPointMax) {
 					if (PlayerNo == 0) {
 						SoundManager.Instance.PlayDelayed (39, 1.1f, gameObject);
 					}
@@ -195,7 +195,7 @@ public class PlayerAp : MonoBehaviour {
 			HpHealObject.transform.SetParent (EffectPoint);
 			armorPoint += HealApPoint;
 			// 体力上限以上には回復しない。
-			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
+			armorPoint = Mathf.Clamp (armorPoint, 0, DataManager.ArmorPointMax);
 			Debug.Log (armorPoint);
 			//armorPoint = Mathf.Min (armorPoint + HealApPoint, armorPointMax);
 			Debug.Log (armorPoint);
@@ -312,7 +312,7 @@ public class PlayerAp : MonoBehaviour {
 		BigAttack = 10000;
 		isBig = true;
 
-		Debug.Log (BigAttack);
+		//Debug.Log (BigAttack);
 		int count = 100;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			"time", InvincibleTime, // 好きな時間（秒）

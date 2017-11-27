@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour {
 	public float gravity;					// 重力（ジャンプ時などに影響）
 	private Vector3 moveDirection = Vector3.zero; //プレイヤ位置方向ニュートラル設定
 	public int boostPoint;					// ブーストポイント
-	public int boostPointMax;				// ブーストポイント最大値
-	public int AttackPoint;					// 攻撃力
+	//public int boostPointMax;				// ブーストポイント最大値
+	//public int AttackPoint;					// 攻撃力
 	public int BpDown = 20;					// ブーストゲージ消費値
 	public int RecoverPoint = 1;			// ブーストポイント回復値
 	public Image gaugeImage;				// ブーストゲージ（画面表示用）
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject BpHealPrefab;			// ブーストポイント回復エフェクト格納場所
 	public GameObject BpHealObject;
 	public int BpHealPoint = 500;			// ブーストポイント回復値（アイテム取得時）
-	public int Level;						// プレーヤーレベル
+	//public int Level;						// プレーヤーレベル
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour {
 	void Start()	//　ゲーム開始時の設定
 	{
 		animator = GetComponent<Animator>();
-		boostPoint = boostPointMax;					// ブーストポイントを最大値に設定
+		boostPoint = DataManager.BoostPointMax;					// ブーストポイントを最大値に設定
 		moveSpeed = Vector3.zero;					// 開始時は移動していないので速さはゼロに
 		isBoost = false;							// ブーストはオフに
 		// Canvas上のゲージイメージを取得（オブジェクトに直接付いていない場合はゲットコンポーネントで取得する）
@@ -73,21 +73,22 @@ public class PlayerController : MonoBehaviour {
 		// 画面上(Canvas)のブーストポイントと実際(Inspector)の数値(Inspector)を同じに設定
 		displayBoostPoint = boostPoint;
 		if (!DataManager.FarstLevel) {
-			UserParam userParam = UserParam.instanse.LoadData();
+			/*UserParam userParam = UserParam.instanse.LoadData();
 			//Debug.Log (userParam);
-			GameObject.Find ("BattleManager").GetComponent<BattleManager> ().Score = userParam.Score;
+			DataManager.Score = userParam.Score;
 			GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Level = userParam.Level;
-			GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint = userParam.AttackPoint;
-			GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax = userParam.boostPointMax;
-			GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().armorPointMax = userParam.armorPointMax;
-			//Debug.Log (userParam.armorPointMax);
+			DataManager.AttackPoint = userParam.AttackPoint;
+			DataManager.BoostPointMax = userParam.boostPointMax;
+			DataManager.ArmorPointMax = userParam.armorPointMax;
+			//Debug.Log (userParam.armorPointMax);*/
+			//new UserParam ().LoadData ();
 		}
 	}
 
 	void Update()
 	{
 		//現在のブーストゲージと最大ブーストゲージをUI Textに表示する
-		boostText.text = string.Format("{0:0000} / {1:0000}", displayBoostPoint, boostPointMax);
+		boostText.text = string.Format("{0:0000} / {1:0000}", displayBoostPoint, DataManager.BoostPointMax);
 	}
 
 	void FixedUpdate()
@@ -228,7 +229,7 @@ public class PlayerController : MonoBehaviour {
 		
 		// ブーストポイントが最大以上にはならない
 		//ブーストポイント使用 ＝ 最大値を超えない(ポイントが,0から,マックスまで); の処理
-		boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);
+		boostPoint = Mathf.Clamp (boostPoint, 0, DataManager.BoostPointMax);
 
 		//移動速度に合わせてモーションブラーの値を変える（MainCameraにCameraMotionBlurスクリプトを追加)
 		//MainCameraのInspectorのCameraMotionBlurのExcludeLayersでプレイヤーと敵を選択して
@@ -239,7 +240,7 @@ public class PlayerController : MonoBehaviour {
 
 		//ブーストゲージの伸縮
 		// ゲージの最大以上には上がらない
-		gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / boostPointMax, 1, 1);
+		gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / DataManager.BoostPointMax, 1, 1);
 		//gaugeImage.transform.localScale = new Vector3(0.5f,1,1);
 	}
 
@@ -248,7 +249,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		// アイテム２タグの物に接触したら
 		if (collider.gameObject.tag == "Item2") {
-			if (boostPoint == boostPointMax) return;
+			if (boostPoint == DataManager.BoostPointMax) return;
 			// BpHealObjectを発生
 			BpHealObject = Instantiate (BpHealPrefab, EffectPoint.position, Quaternion.identity);
 			BpHealObject.transform.SetParent (EffectPoint);
@@ -256,8 +257,8 @@ public class PlayerController : MonoBehaviour {
 			animator.SetTrigger ("ItemGet");
 			// ブーストポイント回復
 			boostPoint += BpHealPoint;
-			if (boostPoint == boostPointMax) return;
-			if (boostPoint < boostPointMax) {
+			if (boostPoint == DataManager.BoostPointMax) return;
+			if (boostPoint < DataManager.BoostPointMax) {
 				if (PlayerNo == 0) {
 					SoundManager.Instance.Play (18, gameObject);
 				}
@@ -267,7 +268,7 @@ public class PlayerController : MonoBehaviour {
 				if (PlayerNo == 2) {
 					SoundManager.Instance.Play (20, gameObject);
 				}
-			} else if (boostPoint >= boostPointMax) {
+			} else if (boostPoint >= DataManager.BoostPointMax) {
 				if (PlayerNo == 0) {
 					SoundManager.Instance.PlayDelayed (36, 1.1f, gameObject);
 				}
@@ -279,7 +280,7 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 			// ブーストポイントが最大以上にはならない
-			boostPoint = Mathf.Clamp (boostPoint, 0, boostPointMax);
+			boostPoint = Mathf.Clamp (boostPoint, 0, DataManager.BoostPointMax);
 		}
 		// 床(Floor)に着いたら全てニュートラル状態に
 		if( collider.gameObject.tag == "Floor" ) {

@@ -31,12 +31,12 @@ public class PlayerShoot02 : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
-		attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
+		attackPoint = DataManager.AttackPoint;
 	}
 
 	void Update () {
 		int boostpoint = GetComponent<PlayerController> ().boostPoint;
-		int Attackpoint = GetComponent<PlayerController> ().AttackPoint;
+		int Attackpoint = DataManager.AttackPoint;
 		if (pause.isPause == false) {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 			if (isBig == false) {

@@ -54,7 +54,8 @@ public class PlayerLevel : MonoBehaviour
 	// Use this for initialization
 	void Start () {
 		// BattleManagerのオブジェクトを見つけてBattleManagerスクリプトのScoreを０にする
-		GameObject.Find ("BattleManager").GetComponent<BattleManager> ().Score = 0;
+		DataManager.Score = 0;
+		LevelInitialize (DataManager.Level);
 	}
 	
 	// Update is called once per frame
@@ -62,10 +63,9 @@ public class PlayerLevel : MonoBehaviour
 	}
 
 	public void LevelUp() {
-		// （プレイヤーの）muzzleにレベルアップ用エフェクト設置
-		LevelUpObject = Instantiate (LevelUpPrefab, muzzle.position, Quaternion.identity);
+		
 		// BattleManagerオブジェクトのBattleManagerのScoreをScoreと呼ぶ
-		int Score = GameObject.Find ("BattleManager").GetComponent<BattleManager> ().Score;
+		int Score = DataManager.Score;
 		foreach(var Param in userParamList)
 		{
 			//Debug.Log("ParamScore"+Param.Score);
@@ -73,9 +73,15 @@ public class PlayerLevel : MonoBehaviour
 			// 
 			if (Param.Score <= Score) {
 				if (Param.PlayerNo == DataManager.PlayerNo) {
-					GetComponent<PlayerController> ().Level = Param.Level;
+					DataManager.Level = Param.Level;
 					//Playerのタグがついているオブジェクトを見つけPlayerControllerスクリプトのAttackPointに
 					//userParamListのAttackPoint数値を代入する
+					Debug.Log("レベルアップ");
+					DataManager.AttackPoint = Param.AttackPoint;
+					DataManager.BoostPointMax = Param.boostPointMax;
+					DataManager.ArmorPointMax = Param.armorPointMax;
+					// （プレイヤーの）muzzleにレベルアップ用エフェクト設置
+					LevelUpObject = Instantiate (LevelUpPrefab, muzzle.position, Quaternion.identity);
 					if (PlayerNo == 0) {
 						SoundManager.Instance.Play(42,gameObject);
 					}
@@ -85,14 +91,23 @@ public class PlayerLevel : MonoBehaviour
 					if (PlayerNo == 2) {
 						SoundManager.Instance.Play(44,gameObject);
 					}
-					Debug.Log("レベルアップ");
-					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint = Param.AttackPoint;
-					GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax = Param.boostPointMax;
-					GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().armorPointMax = Param.armorPointMax;
 				}
 			}
 
 		}
 	}
+
+	public void LevelInitialize(int level) {
+		// （プレイヤーの）muzzleにレベルアップ用エフェクト設置
+		//LevelUpObject = Instantiate (LevelUpPrefab, muzzle.position, Quaternion.identity);
+		// BattleManagerオブジェクトのBattleManagerのScoreをScoreと呼ぶ
+		//int Score = DataManager.Score;
+					DataManager.Level = 1;
+					//Playerのタグがついているオブジェクトを見つけPlayerControllerスクリプトのAttackPointに
+					//userParamListのAttackPoint数値を代入する
+		DataManager.AttackPoint = userParamList[0].AttackPoint;
+		DataManager.BoostPointMax = userParamList[0].boostPointMax;
+		DataManager.ArmorPointMax = userParamList[0].armorPointMax;
+		}
 
 }

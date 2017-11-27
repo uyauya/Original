@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // プレイヤーパラメータ管理
 public class UserParam
@@ -27,8 +28,20 @@ public class UserParam
 		instanse = this;
 	}
 
+	public UserParam(){
+	}
+
 	public void SaveData () 
 	{
+		UserParam instanse = new UserParam (
+			                     DataManager.PlayerNo,
+			                     DataManager.Level,
+			                     DataManager.AttackPoint,
+			                     DataManager.BoostPointMax,
+			                     DataManager.ArmorPointMax,
+			                     DataManager.Score,
+			                     SceneManager.GetActiveScene ().name
+		                     );
 		//UserParam userParam = GetComponent<UserParam> ();
 		//UserParamインスタンスを文字列に変換
 		string UserParamSaveJson = JsonUtility.ToJson(instanse);
@@ -37,14 +50,22 @@ public class UserParam
 		//Debug.Log (UserParamSaveJson);
 	}
 
-	public UserParam LoadData()
+	public void LoadData()
 	{
+
 		//UserParam userParam = GetComponent<UserParam> ();
 		//ロード
 		// Jsonの文字列データをUserParamインスタンスに変換
 		string UserParamLoadJson = PlayerPrefs.GetString ("UserParam");
 		//データを変数に設定
 		instanse = JsonUtility.FromJson<UserParam> (UserParamLoadJson);
-		return instanse;
+		//return instanse;
+		DataManager.PlayerNo = instanse.PlayerNo;
+		DataManager.Level = instanse.Level;
+		DataManager.AttackPoint = instanse.AttackPoint;
+		DataManager.BoostPointMax = instanse.boostPointMax;
+		DataManager.ArmorPointMax = instanse.armorPointMax;
+		DataManager.Score = instanse.Score;
+		SceneManager.LoadScene (instanse.SceneName);
 	}
 }	

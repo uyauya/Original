@@ -127,12 +127,12 @@ public class EnemyBasic : MonoBehaviour {
 
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0){
-			Debug.Log ("敵"+gameObject.name);
+			//Debug.Log ("敵"+gameObject.name);
 			// 敵消滅用エフェクト発生
 			Instantiate(DestroyEffect, transform.position, transform.rotation);
 			// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
 			battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
-			battleManager.Score += EnemyScore;
+			DataManager.Score += EnemyScore;
 			// プレイヤのレベルアップ判定(PlayerLevel参照)
 			playerLevel.LevelUp ();
 			// 敵消滅

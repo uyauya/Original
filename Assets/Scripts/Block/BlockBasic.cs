@@ -54,7 +54,7 @@ public class BlockBasic : MonoBehaviour {
 		if (armorPoint <= 0){
 			Destroy (gameObject);
 			Instantiate(exprosion, transform.position, transform.rotation);
-			battleManager.Score += EnemyScore;
+			DataManager.Score += EnemyScore;
 			// ブロック消滅時、一定確率（0,16で16分の1）でアイテム出現
 			if (Random.Range (0, 16) == 0) {
 				Instantiate (RedSphere, transform.position, transform.rotation);
