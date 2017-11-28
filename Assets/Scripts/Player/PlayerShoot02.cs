@@ -35,7 +35,7 @@ public class PlayerShoot02 : MonoBehaviour {
 	}
 
 	void Update () {
-		int boostpoint = GetComponent<PlayerController> ().boostPoint;
+		float boostpoint = GetComponent<PlayerController> ().boostPoint;
 		int Attackpoint = DataManager.AttackPoint;
 		if (pause.isPause == false) {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;

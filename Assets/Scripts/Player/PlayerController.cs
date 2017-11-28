@@ -16,13 +16,13 @@ public class PlayerController : MonoBehaviour {
 	public float HighPoint;					// ジャンプの高さ最大値
 	public float gravity;					// 重力（ジャンプ時などに影響）
 	private Vector3 moveDirection = Vector3.zero; //プレイヤ位置方向ニュートラル設定
-	public int boostPoint;					// ブーストポイント
+	public float boostPoint;					// ブーストポイント
 	//public int boostPointMax;				// ブーストポイント最大値
 	//public int AttackPoint;					// 攻撃力
 	public int BpDown = 20;					// ブーストゲージ消費値
-	public int RecoverPoint = 1;			// ブーストポイント回復値
+	public float RecoverPoint = 0.2f;			// ブーストポイント回復値
 	public Image gaugeImage;				// ブーストゲージ（画面表示用）
-	int displayBoostPoint;					// ブーストポイント（画面表示用）
+	float displayBoostPoint;					// ブーストポイント（画面表示用）
 	public Text boostText;					// ブースト最大・現在数値（画面表示用）
 	Vector3 moveSpeed;						// プレイヤの速さ
 	private int JumpCount;					// ジャンプ回数計算用（二段ジャンプ処理に使用）
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
 	public Transform EffectPoint;			// 回復等エフェクト発生元の位置取り
 	public GameObject BpHealPrefab;			// ブーストポイント回復エフェクト格納場所
 	public GameObject BpHealObject;
-	public int BpHealPoint = 500;			// ブーストポイント回復値（アイテム取得時）
+	public float BpHealPoint = 500;			// ブーストポイント回復値（アイテム取得時）
 	//public int Level;						// プレーヤーレベル
 
 	/*[CustomEditor(typeof(PlayerController))]
@@ -220,7 +220,7 @@ public class PlayerController : MonoBehaviour {
 				// 自重に-0.05ずつ下降値を加算して落下
 				moveDirection.y -= 0.05f * Time.deltaTime;
 				// 加速が-1以下なら-1にする（ふわっと落下させるため減速処理）
-				if( moveDirection.y <= -1 ) moveDirection.y = -1;
+				if( moveDirection.y <= -1f ) moveDirection.y = -1f;
 			}
 		}
 		// ブーストやジャンプが入力されていなければブースとポイントが徐々に回復（！は～されなければという否定形）

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 using UnityEditor; 
 using UnityEngine.UI;
@@ -6,12 +7,12 @@ using UnityEngine.UI;
 // TODO ※プレイヤーのアニメーション処理
 public class PlayerAp : MonoBehaviour {
 
-	public static int armorPoint;		// プレイヤー体力
+	public static float armorPoint;		// プレイヤー体力
 	//public int armorPointMax;			// プレイヤー体力最大値
 	//int damage = 100;					// 敵から受けるダメージ
 	public int enemyAttack;
 	public Text armorText;
-	int displayArmorPoint;				
+	float displayArmorPoint;				
 	public Color myGreen;				// RGBA(000,240,000,255) ※Aは透明度
 	public Color myWhite;				// RGBA(255,255,255,255)
 	public Color myYellow;				// RGBA(255,206,000,255)
@@ -35,7 +36,7 @@ public class PlayerAp : MonoBehaviour {
 	public float maxForce;
 	public int BigAttack;
 	public bool isBig;
-	public int HealApPoint = 1000;
+	public float HealApPoint = 1000;
 
 	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
@@ -75,7 +76,8 @@ public class PlayerAp : MonoBehaviour {
 			displayArmorPoint = (int)Mathf.Lerp(displayArmorPoint, armorPoint, 0.1F);
 		
 		//現在の体力と最大体力をUI Textに表示する
-		armorText.text = string.Format("{0:0000} / {1:0000}", displayArmorPoint, DataManager.ArmorPointMax);
+		//armorText.text = string.Format("{0:0000} / {1:0000}", displayArmorPoint, DataManager.ArmorPointMax);
+		armorText.text = string.Format("{0:0000} / {1:0000}", armorPoint, DataManager.ArmorPointMax);
 		//残り体力の割合により文字の色を変える
 		float percentageArmorpoint = (float)displayArmorPoint / DataManager.ArmorPointMax;
 		// myWhiteなどにして色を任意で指定できるようにする

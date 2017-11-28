@@ -13,8 +13,8 @@ public class DataManager : MonoBehaviour {
 	public static bool Continue = false;
 	public static int Level;
 	public static int AttackPoint;
-	public static int BoostPointMax;
-	public static int ArmorPointMax;
+	public static float BoostPointMax;
+	public static float ArmorPointMax;
 	public static int Score;
 	public static string SceneName;
 
