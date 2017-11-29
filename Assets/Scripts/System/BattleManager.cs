@@ -86,10 +86,19 @@ public class BattleManager : MonoBehaviour {
 			break;
 			
 		case BATTLE_PLAY:
-			ScoreText.text = DataManager.Score.ToString();
+			ScoreText.text = DataManager.Score.ToString ();
 			//Score += enemyScore;
 			//プレイヤーの体力が0以下になったら敗北
 			if (PlayerAp.armorPoint <= 0) {
+				battleStatus = BATTLE_END;
+				messageLose.enabled = true;
+				new UserParam ().SaveData ();
+				//SceneManager.LoadScene ("GameOver");
+				SoundManager.Instance.Play(1,gameObject);
+				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
+			} else if (Player.transform.position.y <= -10.0f) { 
+				//PlayerAp.armorPoint = 0;
+				//Destroy(gameObject);
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 				// Scene移行時プレイヤーのパラメータの中身を取得
@@ -100,8 +109,10 @@ public class BattleManager : MonoBehaviour {
 				string sceneName = SceneManager.GetActiveScene ().name;
 				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
 				UserParam.instanse.SaveData ();*/
+				SoundManager.Instance.Play(1,gameObject);
 				new UserParam ().SaveData ();
-				SceneManager.LoadScene ("GameOver");
+				//SceneManager.LoadScene ("GameOver");
+				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				//Time.timeScale = 1;
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
@@ -136,9 +147,12 @@ public class BattleManager : MonoBehaviour {
 			break;
 
 		case BATTLE_END:
+			// スターオブジェクトを取得したら
+
 			// スコアが10000点以上ならボスステージクリア
 			if (DataManager.Score >= 10000) {
 			}
+
 			//一定時間経過したら遷移可能にする
 			timer += Time.deltaTime;
 			
@@ -165,5 +179,9 @@ public class BattleManager : MonoBehaviour {
 
 	private void NextScene(){
 		SceneManager.LoadScene (StageManager.Instance.StageName[StageManager.Instance.StageNo+1]);
+	}
+
+	private void GameOver(){
+		SceneManager.LoadScene ("GameOver");
 	}
 }

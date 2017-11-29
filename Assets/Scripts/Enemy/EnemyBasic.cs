@@ -41,10 +41,12 @@ public class EnemyBasic : MonoBehaviour {
 	public GameObject BlueSphere;					// ブーストポイント回復用玉（アイテムタグ2）
 	public GameObject GreenSphere;					// ボス面移行用玉（アイテムタグ3）
 	public GameObject YellowSphere;					// プレイヤ巨大＆無敵化
+	public GameObject Star;							// ボス面クリア用スター
 	public int RedEncount = 16;						// RedSphere生成率の分母
 	public int BlueEncount = 8;
 	public int GreenEncount= 32;
 	public int YellowEncount= 32;
+	public int StarEncount= 1;
 	public int bigAttack;
 
 
@@ -147,6 +149,8 @@ public class EnemyBasic : MonoBehaviour {
 				Instantiate (GreenSphere, transform.position, transform.rotation);
 			} else if (Random.Range (0, YellowEncount) == 0) {
 				Instantiate (YellowSphere, transform.position, transform.rotation);
+			} else if (Random.Range (0, StarEncount) == 0) {
+				Instantiate (Star, transform.position, transform.rotation);
 			}
 		}
 

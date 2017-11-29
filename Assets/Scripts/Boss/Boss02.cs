@@ -15,7 +15,7 @@ public class Boss02 : MonoBehaviour {
 	public float MoveSpeed;						
 	protected EnemyBasic enemyBasic;
 	bool dead = false;
-	public GameObject Star;					// ボス面クリア用スター
+
 
 	void Start () {
 		// EnemyBasic接続用
