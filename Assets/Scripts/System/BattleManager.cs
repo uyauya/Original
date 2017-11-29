@@ -94,7 +94,15 @@ public class BattleManager : MonoBehaviour {
 				messageLose.enabled = true;
 				new UserParam ().SaveData ();
 				//SceneManager.LoadScene ("GameOver");
-				SoundManager.Instance.Play(1,gameObject);
+				if (PlayerNo == 0) {
+					SoundManager.Instance.Play (45, gameObject);
+				}
+				if (PlayerNo == 1) {
+					SoundManager.Instance.Play (46, gameObject);
+				}
+				if (PlayerNo == 2) {
+					SoundManager.Instance.Play (47, gameObject);
+				}
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			} else if (Player.transform.position.y <= -10.0f) { 
 				//PlayerAp.armorPoint = 0;
@@ -111,6 +119,15 @@ public class BattleManager : MonoBehaviour {
 				UserParam.instanse.SaveData ();*/
 				SoundManager.Instance.Play(1,gameObject);
 				new UserParam ().SaveData ();
+				if (PlayerNo == 0) {
+					SoundManager.Instance.Play (45, gameObject);
+				}
+				if (PlayerNo == 1) {
+					SoundManager.Instance.Play (46, gameObject);
+				}
+				if (PlayerNo == 2) {
+					SoundManager.Instance.Play (47, gameObject);
+				}
 				//SceneManager.LoadScene ("GameOver");
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				//Time.timeScale = 1;

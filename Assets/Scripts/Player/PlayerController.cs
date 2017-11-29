@@ -296,6 +296,15 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if(collider.gameObject.tag == "Item3") {
+			if (PlayerNo == 0) {
+				SoundManager.Instance.PlayDelayed (30, 1.1f, gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager.Instance.PlayDelayed (31, 1.1f, gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
+			}
 			animator.SetTrigger ("ItemGet");
 			ItemCount += 1;
 		}
