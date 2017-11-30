@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour {
 	private float timer = 0.0f;				//
 	bool onFloor = true;					// 床に設置しているかどうか
 	public int ItemCount;					// スフィア取得個数計算用
+	public int GetStar;
+	public int GetBigStar;
 	Vector3 targetSpeed = Vector3.zero; 	// 目標速度
 	Vector3 addSpeed = Vector3.zero;    	// 加算速度
 	public GameObject BpHealEffect;			// ブーストポイント回復アイテム取得時のエフェクト
@@ -308,6 +310,35 @@ public class PlayerController : MonoBehaviour {
 			animator.SetTrigger ("ItemGet");
 			ItemCount += 1;
 		}
+
+		if(collider.gameObject.tag == "Star") {
+			if (PlayerNo == 0) {
+				SoundManager.Instance.PlayDelayed (30, 0.1f, gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager.Instance.PlayDelayed (31, 0.1f, gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager.Instance.PlayDelayed (32, 0.1f, gameObject);
+			}
+			animator.SetTrigger ("ItemGet");
+			GetStar += 1;
+		}
+
+		if(collider.gameObject.tag == "BigStar") {
+			if (PlayerNo == 0) {
+				SoundManager.Instance.PlayDelayed (30, 0.1f, gameObject);
+			}
+			if (PlayerNo == 1) {
+				SoundManager.Instance.PlayDelayed (31, 0.1f, gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager.Instance.PlayDelayed (32, 0.1f, gameObject);
+			}
+			animator.SetTrigger ("ItemGet");
+			GetBigStar += 1;
+		}
+
 	}
 
 	private void OnCollisionStay(Collision collisionInfo) {

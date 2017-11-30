@@ -7,14 +7,14 @@ public class Star : MonoBehaviour {
 	public float Interval = 1.0f;	// 点滅周期
 	public Vector3 localGravity;	// 重力(x,y,z)
 	private Rigidbody rb;
-	public float rbForce = 3f;
+	public float Force = 3f;
 
 	void Start () 
 	{		
 		rb = this.GetComponent<Rigidbody>();
 		rb.useGravity = false;
 		StartCoroutine ("Blink");
-		rb.AddForce (transform.up * rbForce);
+		rb.AddForce (transform.up * Force);
 	}
 
 	void FixedUpdate () 

@@ -12,6 +12,7 @@ public class BattleManager : MonoBehaviour {
 	const int BATTLE_START = 0;
 	const int BATTLE_PLAY  = 1;
 	const int BATTLE_END   = 2;
+	const int ENDING  	   = 3;
 	float timer;						// 時間計測洋(LimitedTimer参照）
 	public Image messageStart;
 	public Image messageWin;
@@ -25,6 +26,7 @@ public class BattleManager : MonoBehaviour {
 	public GameObject WarpEffect;		// ボス面移行用ワープ
 	int clearScore;						// クリア条件となるスコア  
 	public GameObject Player;			
+	public GameObject Star;
 	public float ChangeTime;			// シーン変更までの時間
 	public int Count;					// ステージ移行する為のアイテム取得個
 	public int PlayerNo;				//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
@@ -39,6 +41,7 @@ public class BattleManager : MonoBehaviour {
 		messageWin.enabled = false;
 		messageLose.enabled = false;
 		playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController> ();
+		Star = GameObject.FindWithTag("Star");
 		//敵の最大生成数をクリア数にする
 		//instantiateValueに値を代入するのをBattleManagerより早くするため
 		//EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
@@ -105,7 +108,6 @@ public class BattleManager : MonoBehaviour {
 				}
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			} else if (Player.transform.position.y <= -10.0f) { 
-				//PlayerAp.armorPoint = 0;
 				//Destroy(gameObject);
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
@@ -164,12 +166,25 @@ public class BattleManager : MonoBehaviour {
 			break;
 
 		case BATTLE_END:
-			// スターオブジェクトを取得したら
-
-			// スコアが10000点以上ならボスステージクリア
-			if (DataManager.Score >= 10000) {
+			// ボス撃破時スター1個出現
+			// スターオブジェクトを1個取得したら
+			if (playerController.GetStar == 1 ) {
+				string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
+				new UserParam ().SaveData ();
+				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
+				playerController.GetStar = 0;
 			}
-
+			// スコアが10000点以上ならボスステージクリア
+			//if (DataManager.Score >= 10000) {
+			//}
+			break;
+		
+		case ENDING:
+			// ラスボス撃破時スター7個出現
+			// スターオブジェクトを7個取得したら
+			if (playerController.GetBigStar == 1) {
+				Invoke ("ENDING", ChangeTime);
+			}
 			//一定時間経過したら遷移可能にする
 			timer += Time.deltaTime;
 			
@@ -189,8 +204,8 @@ public class BattleManager : MonoBehaviour {
 			break;
 
 			
-		default:
-			break;
+		//default:
+		//	break;
 		}
 	}
 
