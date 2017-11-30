@@ -167,6 +167,7 @@ public class BattleManager : MonoBehaviour {
 			// ボス撃破時スター出現
 			// スターオブジェクトを取得したら
 			if (playerController.GetStar >= 1 ) {
+				battleStatus = BATTLE_PLAY;
 				string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
 				new UserParam ().SaveData ();
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
@@ -181,7 +182,7 @@ public class BattleManager : MonoBehaviour {
 			// ラスボス撃破時ビッグスター出現
 			// ビッグスターオブジェクトを取得したら
 			if (playerController.GetBigStar >= 1) {
-				Invoke ("ENDING", ChangeTime);
+				Invoke ("END", ChangeTime);
 				playerController.GetBigStar = 0;
 			}
 			//一定時間経過したら遷移可能にする
@@ -214,5 +215,9 @@ public class BattleManager : MonoBehaviour {
 
 	private void GameOver(){
 		SceneManager.LoadScene ("GameOver");
+	}
+
+	private void END(){
+		SceneManager.LoadScene ("END");
 	}
 }
