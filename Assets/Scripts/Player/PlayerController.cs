@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour {
 	private float timer = 0.0f;				//
 	bool onFloor = true;					// 床に設置しているかどうか
 	public int ItemCount;					// スフィア取得個数計算用
-	public int GetStar;
-	public int GetBigStar;
+	public int GetStar = 0;
+	public int GetBigStar = 0;
 	Vector3 targetSpeed = Vector3.zero; 	// 目標速度
 	Vector3 addSpeed = Vector3.zero;    	// 加算速度
 	public GameObject BpHealEffect;			// ブーストポイント回復アイテム取得時のエフェクト
@@ -322,6 +322,7 @@ public class PlayerController : MonoBehaviour {
 				SoundManager.Instance.PlayDelayed (32, 0.1f, gameObject);
 			}
 			animator.SetTrigger ("ItemGet");
+			Debug.Log ("GetStar");
 			GetStar += 1;
 		}
 

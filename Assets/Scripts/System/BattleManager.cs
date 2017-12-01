@@ -153,7 +153,7 @@ public class BattleManager : MonoBehaviour {
 				//string sceneName = SceneManager.GetActiveScene ().name;
 				Debug.Log(StageManager.Instance.StageNo);*/
 
-				string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
+				//string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
 				//StageManager.Instance.StageNo++;
 				//UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
 				//UserParam.instanse.SaveData ();
@@ -161,34 +161,34 @@ public class BattleManager : MonoBehaviour {
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				playerController.ItemCount = 0;
 			}	
-			break;
+			//break;
 
-		case BATTLE_END:
 			// ボス撃破時スター出現
 			// スターオブジェクトを取得したら
+			//Debug.Log(playerController.GetStar);
 			if (playerController.GetStar >= 1 ) {
-				battleStatus = BATTLE_PLAY;
-				string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
+				//battleStatus = BATTLE_PLAY;
+				//string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
 				new UserParam ().SaveData ();
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				playerController.GetStar = 0;
 			}
-			// スコアが10000点以上ならボスステージクリア
-			//if (DataManager.Score >= 10000) {
-			//}
-			break;
-		
-		case ENDING:
+
 			// ラスボス撃破時ビッグスター出現
 			// ビッグスターオブジェクトを取得したら
 			if (playerController.GetBigStar >= 1) {
 				Invoke ("END", ChangeTime);
-				playerController.GetBigStar = 0;
-			}
+				playerController.GetBigStar = 0;		
+		}
+		break;
+
+		case BATTLE_END:
+			// スコアが10000点以上ならボスステージクリア
+			//if (DataManager.Score >= 10000) {
+			//}
 			//一定時間経過したら遷移可能にする
-			timer += Time.deltaTime;
-			
-		 if(timer > 3)
+			/*timer += Time.deltaTime;
+			if(timer > 3)
 			{
 				//動きを止める
 				//TimeScaleで制御できるのはタイマーにより制御されている処理だけ
@@ -200,8 +200,12 @@ public class BattleManager : MonoBehaviour {
 					SceneManager.LoadScene ("Start");
 					Time.timeScale = 1;
 				}
-			}
+			}*/
+
 			break;
+		
+			
+
 
 			
 		//default:

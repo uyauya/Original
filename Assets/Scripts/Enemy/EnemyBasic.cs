@@ -47,10 +47,9 @@ public class EnemyBasic : MonoBehaviour {
 	public int BlueEncount = 8;
 	public int GreenEncount= 32;
 	public int YellowEncount= 32;
-	public int StarEncount= 1;
-	public int BigStarEncount= 1;
 	public int bigAttack;
-
+	public bool isBoss;
+	public bool isLastBoss;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -130,10 +129,10 @@ public class EnemyBasic : MonoBehaviour {
 		}
 
 		//体力が0以下になったら消滅する
-		if (armorPoint <= 0){
+		if (armorPoint <= 0) {
 			//Debug.Log ("敵"+gameObject.name);
 			// 敵消滅用エフェクト発生
-			Instantiate(DestroyEffect, transform.position, transform.rotation);
+			Instantiate (DestroyEffect, transform.position, transform.rotation);
 			// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
 			battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 			DataManager.Score += EnemyScore;
@@ -143,7 +142,12 @@ public class EnemyBasic : MonoBehaviour {
 			Destroy (gameObject, DestroyTime);	
 			//Instantiate(exprosion, transform.position, transform.rotation);
 			// ブロック消滅時、一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
-			if (Random.Range (0, RedEncount) == 0) {
+			if (isBoss == true) {
+				Instantiate (Star, transform.position, transform.rotation);
+			}
+			if (isLastBoss == true) {
+				Instantiate (BigStar, transform.position, transform.rotation);
+			} else if (Random.Range (0, RedEncount) == 0) {
 				Instantiate (RedSphere, transform.position, transform.rotation);
 			} else if (Random.Range (0, BlueEncount) == 0) {
 				Instantiate (BlueSphere, transform.position, transform.rotation);
@@ -151,12 +155,8 @@ public class EnemyBasic : MonoBehaviour {
 				Instantiate (GreenSphere, transform.position, transform.rotation);
 			} else if (Random.Range (0, YellowEncount) == 0) {
 				Instantiate (YellowSphere, transform.position, transform.rotation);
-			} else if (Random.Range (0, StarEncount) == 0) {
-				Instantiate (Star, transform.position, transform.rotation);
-			} else if (Random.Range (0, BigStarEncount) == 0) {
-				Instantiate (BigStar, transform.position, transform.rotation);
 			}
-		}
+		}	
 
 	}
 

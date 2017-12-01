@@ -46,7 +46,7 @@ public class Boss02 : MonoBehaviour {
 
 		if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax) {
 			enemyBasic.animator.SetTrigger ("attack");
-			GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
+			//GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
 			enemyBasic.shotInterval = ShotInterval;
 		}
 		// Animator の dead が true なら Update 処理を抜ける

@@ -82,7 +82,7 @@ public class PlayerLevel : MonoBehaviour
 					DataManager.ArmorPointMax = Param.armorPointMax;
 					// （プレイヤーの）muzzleにレベルアップ用エフェクト設置
 					LevelUpObject = Instantiate (LevelUpPrefab, muzzle.position, Quaternion.identity);
-					if (PlayerNo == 0) {
+					/*if (PlayerNo == 0) {
 						SoundManager.Instance.Play(42,gameObject);
 					}
 					if (PlayerNo == 1) {
@@ -90,7 +90,7 @@ public class PlayerLevel : MonoBehaviour
 					}
 					if (PlayerNo == 2) {
 						SoundManager.Instance.Play(44,gameObject);
-					}
+					}*/
 				}
 			}
 
