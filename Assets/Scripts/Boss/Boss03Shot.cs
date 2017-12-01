@@ -6,7 +6,7 @@ using UnityEngine;
 // 弾をブレさせながら徐々に大きくして炎のパーティクルをつける
 public class Boss03Shot : MonoBehaviour {
 
-	public float DestroyTime = 100.0F;	// 弾消滅までの時間
+	/*public float DestroyTime = 100.0F;	// 弾消滅までの時間
 	public float Bigger = 1.0F;
 	public float Xsize = 1.001F;
 	public float Ysize = 1.001F;
@@ -39,6 +39,6 @@ public class Boss03Shot : MonoBehaviour {
 	void Scale() {
 		iTween.ScaleTo (obj, iTween.Hash ("x", scale.x + 1, "y", scale.y + 1, "z", scale.z + 1, "time", 3));
 		scale = obj.transform.localScale;
-	}
+	}*/
 }
 

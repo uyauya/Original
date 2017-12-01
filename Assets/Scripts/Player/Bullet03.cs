@@ -62,6 +62,6 @@ public class Bullet03 : MonoBehaviour {
 		//CamVibrationManager.vibration += Mathf.Clamp (0.5F - (distance / 200), 0, 0.5F);
 		//弾のShaderをCustom/clearScreenにすれば透明に。
 		//iTwwenでx,y,zの大きさをtime内に徐々に大きくする
-		iTween.ScaleTo(gameObject, iTween.Hash("x",7, "y",7, "z",7, "time",5, "easetype",iTween.EaseType.linear));
+		iTween.ScaleTo(gameObject, iTween.Hash("x",9, "y",9, "z",9, "time",5, "easetype",iTween.EaseType.linear));
 	}
 }
