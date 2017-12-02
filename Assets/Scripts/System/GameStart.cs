@@ -10,8 +10,6 @@ public class GameStart : MonoBehaviour {
 	private Animator animator;
 	public Text blinkText;					//点滅させる
 	public void Onclick_Select ()
-
-
 	{
 		DataManager.Continue = false;
 		DataManager.FarstLevel = true;
@@ -21,6 +19,12 @@ public class GameStart : MonoBehaviour {
 	}
 		
 	void Start () {
+		PlayerLevel playerLevel;
+		DataManager.Score = 0;
+		DataManager.Level = 1;
+		DataManager.AttackPoint = PlayerLevel.userParamList[0].AttackPoint;
+		DataManager.BoostPointMax = PlayerLevel.userParamList[0].boostPointMax;
+		DataManager.ArmorPointMax = PlayerLevel.userParamList[0].armorPointMax;
 		audioSources = gameObject.GetComponents<AudioSource> ();
 		animator = GetComponent<Animator> ();
 		SoundManager00.Instance.Play(0);

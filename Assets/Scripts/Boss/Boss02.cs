@@ -6,7 +6,7 @@ public class Boss02 : MonoBehaviour {
 
 	public GameObject Boss02shot;				// 弾
 	public float ShotInterval;					// ショット間隔
-	public GameObject exprosion;	
+	//public GameObject exprosion;	
 	int enemyLevel = 0;
 	Bullet01 b1;
 	public GameObject Boss02muzzle;				// ショットの発射口
