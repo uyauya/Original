@@ -98,6 +98,10 @@ public class EnemyBasic : MonoBehaviour {
 
 
 	void OnCollisionEnter(Collision collider) {
+		if( animator.GetBool("dead") == true ) {
+		//if(dead){
+		return;
+		}
 		// Shotタグが付いているオブジェクトに当たったら
 		if (collider.gameObject.tag == "Shot") {
 			// Bullet01スクリプトのdamageを受け取る
@@ -105,23 +109,27 @@ public class EnemyBasic : MonoBehaviour {
 			// ダメージコルーチン（下記参照）
 			StartCoroutine ("DamageCoroutine");
 			// 敵Animatorダメージ判定時に"damaged"をtrueへ
-			animator.SetTrigger ("damaged");
+			//animator.SetBool("damaged" , true);
+			animator.SetTrigger("damaged");
 			// 敵アーマーポイントからBullet01スクリプトのdamage値を差し引く
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			StartCoroutine ("DamageCoroutine");
-			animator.SetTrigger ("damaged");
+			animator.SetBool("damaged" , true);
+			//animator.SetTrigger("damaged");
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			StartCoroutine ("DamageCoroutine");
-			animator.SetTrigger ("damaged");
+			//animator.SetBool("damaged" , true);
+			animator.SetTrigger("damaged");
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			StartCoroutine ("DamageCoroutine");
-			animator.SetTrigger ("damaged");
+			//animator.SetBool("damaged" , true);
+			animator.SetTrigger("damaged");
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Player") {
 			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
@@ -131,10 +139,8 @@ public class EnemyBasic : MonoBehaviour {
 
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0) {
-			bool dead = true;
-			// 敵消滅
-			Destroy (gameObject, DestroyTime);
 			//Debug.Log ("敵"+gameObject.name);
+			animator.SetBool("dead" , true);
 			// 敵消滅用エフェクト発生
 			Instantiate (DestroyEffect, transform.position, transform.rotation);
 			// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
@@ -142,7 +148,8 @@ public class EnemyBasic : MonoBehaviour {
 			DataManager.Score += EnemyScore;
 			// プレイヤのレベルアップ判定(PlayerLevel参照)
 			playerLevel.LevelUp ();
-				
+			// 敵消滅
+			Destroy (gameObject, DestroyTime);	
 			//Instantiate(exprosion, transform.position, transform.rotation);
 			// ブロック消滅時、一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
 			if (isBoss == true) {

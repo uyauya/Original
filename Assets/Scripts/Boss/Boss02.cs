@@ -14,7 +14,7 @@ public class Boss02 : MonoBehaviour {
 	public float TargetSpeed;
 	public float MoveSpeed;						
 	protected EnemyBasic enemyBasic;
-	bool dead = false;
+
 
 
 	void Start () {
@@ -28,6 +28,10 @@ public class Boss02 : MonoBehaviour {
 
 
 	void Update () {
+		if( enemyBasic.armorPoint <= 0f)
+		{
+			return;	// 敵がすでにやられている場合は何もしない
+		}
 		// Animator の dead が true なら Update 処理を抜ける
 		if( enemyBasic.animator.GetBool("dead") == true ) return;
 		Vector3 Pog = this.gameObject.transform.position;

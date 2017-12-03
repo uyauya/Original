@@ -19,6 +19,12 @@ public class SmallBoss02 : MonoBehaviour {
 
 
 	void Update () {
+		if( enemyBasic.armorPoint <= 0f)
+		{
+			return;	// 敵がすでにやられている場合は何もしない
+		}
+		// Animator の dead が true なら Update 処理を抜ける
+		if( enemyBasic.animator.GetBool("dead") == true ) return;
 		enemyBasic.timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= 30) {
@@ -39,8 +45,7 @@ public class SmallBoss02 : MonoBehaviour {
 			enemyBasic.animator.SetBool ("attack", true);
 			//Debug.Log ("hit");
 		}
-		// Animator の dead が true なら Update 処理を抜ける
-		if( enemyBasic.animator.GetBool("dead") == true ) return;
+
 	}
 		
 }
