@@ -18,6 +18,8 @@ public class Zombie1 : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		// Animator の dead が true なら Update 処理を抜ける
+		if( enemyBasic.animator.GetBool("dead") == true ) return;
 		// オブジェクトの場所取りをする
 		Vector3 Pog = this.gameObject.transform.position;
 		// Y軸（高さ）を発生位置から0.01上で固定
@@ -46,8 +48,7 @@ public class Zombie1 : MonoBehaviour {
 			enemyBasic.animator.SetTrigger ("attack");
 			//Debug.Log ("hit");
 		}
-		// Animator の dead が true なら Update 処理を抜ける
-		if( enemyBasic.animator.GetBool("dead") == true ) return;
+
 
 	}
 }

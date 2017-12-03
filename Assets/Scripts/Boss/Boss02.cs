@@ -6,7 +6,7 @@ public class Boss02 : MonoBehaviour {
 
 	public GameObject Boss02shot;				// 弾
 	public float ShotInterval;					// ショット間隔
-	//public GameObject exprosion;	
+	public GameObject exprosion;	
 	int enemyLevel = 0;
 	Bullet01 b1;
 	public GameObject Boss02muzzle;				// ショットの発射口
@@ -28,6 +28,8 @@ public class Boss02 : MonoBehaviour {
 
 
 	void Update () {
+		// Animator の dead が true なら Update 処理を抜ける
+		if( enemyBasic.animator.GetBool("dead") == true ) return;
 		Vector3 Pog = this.gameObject.transform.position;
 		gameObject.transform.position = new Vector3(Pog.x , 1.0f, Pog.z);
 		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
@@ -46,10 +48,9 @@ public class Boss02 : MonoBehaviour {
 
 		if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax) {
 			enemyBasic.animator.SetTrigger ("attack");
-			//GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
+			GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
 			enemyBasic.shotInterval = ShotInterval;
 		}
-		// Animator の dead が true なら Update 処理を抜ける
-		if( enemyBasic.animator.GetBool("dead") == true ) return;
+
 	}
 }
