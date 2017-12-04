@@ -30,6 +30,7 @@ public class Bullet03 : MonoBehaviour {
 		BomUpdate();
 		BomAttack();				// ボムによる攻撃処理
 		yield return new WaitForSeconds(2.0f);		// 2.0秒、処理を待機.
+		//Camera.main.gameObject.GetComponent<ShakeCamera>().Shake();
 		Destroy(gameObject);	
 	}
 

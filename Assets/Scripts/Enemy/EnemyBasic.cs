@@ -141,6 +141,7 @@ public class EnemyBasic : MonoBehaviour {
 		if (armorPoint <= 0) {
 			//Debug.Log ("敵"+gameObject.name);
 			animator.SetBool("dead" , true);
+			EnemySpeed = 0;
 			// 敵消滅用エフェクト発生
 			Instantiate (DestroyEffect, transform.position, transform.rotation);
 			// バトルマネージャーにスコア（EnemyScoreで設定）を加算する

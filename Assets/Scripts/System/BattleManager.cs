@@ -167,8 +167,6 @@ public class BattleManager : MonoBehaviour {
 			// スターオブジェクトを取得したら
 			//Debug.Log(playerController.GetStar);
 			if (playerController.GetStar >= 1 ) {
-				//battleStatus = BATTLE_PLAY;
-				//string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
 				new UserParam ().SaveData ();
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				playerController.GetStar = 0;
