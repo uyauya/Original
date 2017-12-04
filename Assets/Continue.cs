@@ -38,7 +38,7 @@ public class Continue : MonoBehaviour {
 	void LoadScene() {
 		//SceneManager.LoadScene("STAGE02BOSS");
 		UserParam userParam = DataManager.userParam;
-		if (userParam != null) {
+		/*if (userParam != null) {
 			if (userParam.SceneName != null && userParam.SceneName != string.Empty) {
 				Debug.Log (string.Format ("LoadScene{0}", userParam.SceneName));
 				SceneManager.LoadScene (userParam.SceneName);
@@ -48,5 +48,9 @@ public class Continue : MonoBehaviour {
 				SceneManager.LoadScene ("Select");
 			}
 
+		}*/
+		if (userParam != null) {
+			SceneManager.LoadScene (StageManager.Instance.StageName [userParam.StageNo]);
 		}
+	}
 }

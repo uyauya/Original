@@ -21,9 +21,11 @@ public class DataManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// シーン移動してもPlayerNoを残しておく
-		DontDestroyOnLoad(this.gameObject);
-		FarstLevel = false;
-
+		if (GameObject.Find ("DataManager") == null) {
+			DontDestroyOnLoad (this.gameObject);
+			FarstLevel = false;
+		}
+		userParam = new UserParam ();
 	}
 	
 	// Update is called once per frame

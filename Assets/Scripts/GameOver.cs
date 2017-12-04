@@ -9,6 +9,7 @@ using UnityEngine.UI;						// UIを使う時は追加する
 public class GameOver : MonoBehaviour 
 {
 	public Text TextCountDown;
+	public GameObject ContinueButton;
 	public void Onclick_Select ()
 	{
 		DataManager.Continue = false;
@@ -77,7 +78,24 @@ public class GameOver : MonoBehaviour
 		TextCountDown.text = "げ～むお～ば～";
 		SoundManager00.Instance.Play(10,gameObject);
 		SoundManager00.Instance.PlayDelayed (11, 1.9f, gameObject);
-		yield return new WaitForSeconds (1.0f);
+		yield return new WaitForSeconds (6.0f);
+		ContinueButton.SetActive (false);
+
+		//yield return new WaitUntil (() => Input.GetButtonDown ("Fire1"));
+
+		SceneManager.LoadScene ("Start");
+		/*if (Input.GetButtonDown ("Fire1"))
+		{
+			SceneManager.LoadScene ("Start");
+		}*/
+		/*{
+
+			// Fire1ボタンを押してタイトルに戻すようにする
+			if (Input.GetButtonDown ("Fire1"))
+			{
+				SceneManager.LoadScene ("Start");
+			}
+		}*/
 
 		//TextCountDown.text = "";
 		//TextCountDown.gameObject.SetActive (false);

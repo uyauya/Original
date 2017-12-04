@@ -58,7 +58,7 @@ public class BattleManager : MonoBehaviour {
 		UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
 		// DataManagerオブジェクトからSaveスクリプトのSaveDataを取得
 		GameObject.Find("DataManager").GetComponent<Save> ().SaveData (userParam);*/
-		new UserParam ().SaveData ();
+		//new UserParam ().SaveData ();
 	}
 
 	void Update () {
@@ -212,7 +212,9 @@ public class BattleManager : MonoBehaviour {
 	}
 
 	private void NextScene(){
-		SceneManager.LoadScene (StageManager.Instance.StageName[StageManager.Instance.StageNo+1]);
+		StageManager.Instance.StageNo++;
+		//Debug.Log (StageManager.Instance.StageName[StageManager.Instance.StageNo+1]);
+		SceneManager.LoadScene (StageManager.Instance.StageName[StageManager.Instance.StageNo]);
 	}
 
 	private void GameOver(){

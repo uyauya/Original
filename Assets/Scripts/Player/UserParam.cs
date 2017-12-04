@@ -15,8 +15,9 @@ public class UserParam
 	public int Score;			// 点数兼経験値（BattleManager参照）
 	public int PlayerNo;		// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	public string SceneName;	// 面の名前
+	public int StageNo;
 
-	public UserParam(int Pno, int level, int attackPoint, float boostMax, float armorMax, int score, string sceneName)
+	public UserParam(int Pno, int level, int attackPoint, float boostMax, float armorMax, int score, string sceneName, int stageNo)
 	{
 		PlayerNo = Pno;				 
 		Level = level;
@@ -25,6 +26,7 @@ public class UserParam
 		armorPointMax = armorMax;
 		Score = score;
 		SceneName = sceneName;
+		StageNo = stageNo;
 		instanse = this;
 	}
 
@@ -40,7 +42,8 @@ public class UserParam
 			                     DataManager.BoostPointMax,
 			                     DataManager.ArmorPointMax,
 			                     DataManager.Score,
-			                     SceneManager.GetActiveScene ().name
+			                     SceneManager.GetActiveScene ().name,
+								 StageManager.Instance.StageNo
 		                     );
 		//UserParam userParam = GetComponent<UserParam> ();
 		//UserParamインスタンスを文字列に変換
@@ -66,6 +69,7 @@ public class UserParam
 		DataManager.BoostPointMax = instanse.boostPointMax;
 		DataManager.ArmorPointMax = instanse.armorPointMax;
 		DataManager.Score = instanse.Score;
-		SceneManager.LoadScene (instanse.SceneName);
+		//SceneManager.LoadScene (instanse.SceneName);
+		SceneManager.LoadScene(StageManager.Instance.StageName[StageManager.Instance.StageNo]);
 	}
 }	
