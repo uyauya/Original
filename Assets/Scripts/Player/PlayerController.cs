@@ -17,12 +17,12 @@ public class PlayerController : MonoBehaviour {
 	public float gravity;					// 重力（ジャンプ時などに影響）
 	private Vector3 moveDirection = Vector3.zero; //プレイヤ位置方向ニュートラル設定
 	public float boostPoint;					// ブーストポイント
+	public float displayBoostPoint;				// ブーストポイント（画面表示用）
 	//public int boostPointMax;				// ブーストポイント最大値
 	//public int AttackPoint;					// 攻撃力
 	public int BpDown = 20;					// ブーストゲージ消費値
 	public float RecoverPoint = 0.2f;			// ブーストポイント回復値
 	public Image gaugeImage;				// ブーストゲージ（画面表示用）
-	float displayBoostPoint;					// ブーストポイント（画面表示用）
 	public Text boostText;					// ブースト最大・現在数値（画面表示用）
 	Vector3 moveSpeed;						// プレイヤの速さ
 	private int JumpCount;					// ジャンプ回数計算用（二段ジャンプ処理に使用）
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour {
 	void Start()	//　ゲーム開始時の設定
 	{
 		animator = GetComponent<Animator>();
-		boostPoint = DataManager.BoostPointMax;					// ブーストポイントを最大値に設定
+		boostPoint = DataManager.BoostPointMax;		// ブーストポイントを最大値に設定
 		moveSpeed = Vector3.zero;					// 開始時は移動していないので速さはゼロに
 		isBoost = false;							// ブーストはオフに
 		// Canvas上のゲージイメージを取得（オブジェクトに直接付いていない場合はゲットコンポーネントで取得する）
@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour {
 			//Debug.Log (userParam.armorPointMax);*/
 			//new UserParam ().LoadData ();
 		}
+		//gameObject.layer = LayerMask.NameToLayer("Player");
 	}
 
 	void Update()
@@ -110,6 +111,8 @@ public class PlayerController : MonoBehaviour {
 		//通常時とブースト時で変化
 		if (isBoost)									//ブーストなら
 		{
+			//レイヤーをInvincibleに変更
+			//gameObject.layer = LayerMask.NameToLayer("Invincible");
 			// ブースト時
 			if (Force <= MaxBoostForce) {				//MaxBoostForceまでMaxForce(通常最大速度)に加速
 				MaxForce += Time.deltaTime * PlusForce;	
@@ -120,6 +123,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		else
 		{
+			//レイヤーをInvincibleに変更
+			//gameObject.layer = LayerMask.NameToLayer("Player");
 			//Force = MaxForce;							//通常速度
 			if (Force <= MaxForce) {					//MaxForceまでForce(通常速度)に加速
 				Force += Time.deltaTime * PlusForce;
@@ -322,7 +327,7 @@ public class PlayerController : MonoBehaviour {
 				SoundManager.Instance.PlayDelayed (32, 0.1f, gameObject);
 			}
 			animator.SetTrigger ("ItemGet");
-			Debug.Log ("GetStar");
+			//Debug.Log ("GetStar");
 			GetStar += 1;
 		}
 

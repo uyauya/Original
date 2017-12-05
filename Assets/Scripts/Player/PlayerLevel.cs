@@ -77,7 +77,7 @@ public class PlayerLevel : MonoBehaviour
 					DataManager.Level = Param.Level;
 					//Playerのタグがついているオブジェクトを見つけPlayerControllerスクリプトのAttackPointに
 					//userParamListのAttackPoint数値を代入する
-					Debug.Log ("レベルアップ");
+					//Debug.Log ("レベルアップ");
 					DataManager.AttackPoint = Param.AttackPoint;
 					DataManager.BoostPointMax = Param.boostPointMax;
 					DataManager.ArmorPointMax = Param.armorPointMax;

@@ -37,6 +37,7 @@ public class PlayerAp : MonoBehaviour {
 	public int BigAttack;
 	public bool isBig;
 	public float HealApPoint = 1000;
+	//gameObject.layer Player;
 
 	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
@@ -66,6 +67,7 @@ public class PlayerAp : MonoBehaviour {
 		//force = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Force;
 		//maxForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().MaxForce;
 		isBig = false;
+		gameObject.layer = LayerMask.NameToLayer("Player");
 	}
 
 
@@ -225,8 +227,8 @@ public class PlayerAp : MonoBehaviour {
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
 	IEnumerator DamageCoroutine ()
 	{
-		//レイヤーをPlayerDamageに変更
-		//gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
+		//レイヤーをInvincibleに変更
+		gameObject.layer = LayerMask.NameToLayer("Invincible");
 		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
@@ -248,67 +250,13 @@ public class PlayerAp : MonoBehaviour {
 		}
 		isInvincible = false;
 		//レイヤーをPlayerに戻す
-		//gameObject.layer = LayerMask.NameToLayer("Player");
+		gameObject.layer = LayerMask.NameToLayer("Player");
 		//iTweenのアニメーション
 	}
-
-	IEnumerator DamageCoroutine2 ()
-	{
-		//レイヤーをPlayerDamageに変更
-		//gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
-		//while文を10回ループ
-		int count = 10;
-		iTween.MoveTo(gameObject, iTween.Hash(
-			"position", transform.position - (transform.forward * KnockBackRange),
-			"time", InvincibleTime, // 好きな時間（秒）
-			"easetype", iTween.EaseType.linear
-		));
-		isInvincible = true;
-		while (count > 0){
-			//透明にする
-			modelColorChange.ColorChange(new Color (1,0,0,1));
-			//0.1秒待つ
-			yield return new WaitForSeconds(0.1f);
-			//元に戻す
-			modelColorChange.ColorChange(new Color (1,1,1,1));
-			//0.1秒待つ
-			yield return new WaitForSeconds(0.1f);
-			count--;
-		}
-		isInvincible = false;
-		//レイヤーをPlayerに戻す
-		//gameObject.layer = LayerMask.NameToLayer("Player");
-		//iTweenのアニメーション
-	}
-	/*IEnumerator BigCoroutine ()
-	{
-		boddy_summer = GameObject.Find("_body_summer");
-		// BigPlayerにタグ変更
-		gameObject.tag = "BigPlayer";
-		// 巨大化
-		iTween.ScaleTo (gameObject, iTween.Hash ("x", 3, "y", 3, "z", 3, "time", 3f));
-		// 無敵化
-		isInvincible = true;
-		float duration = 5.0f; //無敵時間
-		float blinkedTime = duration;
-		float blinkDuration = 0.5f; //点滅の切り替わるまでの期間
-		　while (blinkedTime > 0.0f) {
-			yield return new WaitForSeconds (blinkDuration);
-			blinkedTime -= blinkDuration;
-			boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled = !boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled;
-		}
-		boddy_summer.GetComponent <SkinnedMeshRenderer>().enabled = true;
-		// 元のサイズに縮小
-		iTween.ScaleTo (gameObject, iTween.Hash ("x", 1, "y", 1, "z", 1, "time", 3f));
-		// Playerタグに戻す
-		gameObject.tag = "Player";
-		// 無敵解除
-		isInvincible = false;
-	}*/
+		
 
 	IEnumerator BigCoroutine ()
 	{
-		//gameObject.tag = "BigPlayer";
 		// 巨大化
 		iTween.ScaleTo (gameObject, iTween.Hash ("x", 3, "y", 3, "z", 3, "time", 3f,"easetype", iTween.EaseType.linear));
 		BigAttack = 10000;
@@ -336,8 +284,6 @@ public class PlayerAp : MonoBehaviour {
 		iTween.ScaleTo (gameObject, iTween.Hash ("x", 1, "y", 1, "z", 1, "time", 3f));
 		isBig = false;
 		BigAttack = 0;
-		// Playerタグに戻す
-		//gameObject.tag = "Player";
 		// 無敵解除
 		isInvincible = false;
 	}

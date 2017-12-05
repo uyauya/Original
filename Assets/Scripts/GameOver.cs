@@ -83,7 +83,7 @@ public class GameOver : MonoBehaviour
 
 		//yield return new WaitUntil (() => Input.GetButtonDown ("Fire1"));
 
-		SceneManager.LoadScene ("Start");
+		SceneManager.LoadScene ("Save");
 		/*if (Input.GetButtonDown ("Fire1"))
 		{
 			SceneManager.LoadScene ("Start");
