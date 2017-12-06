@@ -138,10 +138,10 @@ public class PlayerAp : MonoBehaviour {
 				if (PlayerNo == 2) {
 					SoundManager.Instance.Play (23, gameObject);
 				}
-				StartCoroutine ("DamageCoroutine");
+				StartCoroutine ("EnemyDamageCoroutine");
 			}
 		
-		//壁と接触したらダメージ
+		//速度最大で壁と接触したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		} else if (collider.gameObject.tag == "Wall") {
 			if (isBig == true) {
@@ -149,6 +149,7 @@ public class PlayerAp : MonoBehaviour {
 			} else {
 				if (force >= maxForce) {
 					//Debug.Log (force);
+					Camera.main.gameObject.GetComponent<ShakeCamera>().Shake();
 					armorPoint -= 100;
 					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 					DamageObject.transform.SetParent (EffectPoint);
@@ -165,7 +166,7 @@ public class PlayerAp : MonoBehaviour {
 						SoundManager.Instance.Play(26,gameObject);	
 						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
 					}
-					StartCoroutine ("DamageCoroutine2");
+					StartCoroutine ("WallDamageCoroutine");
 				}
 			}
 
@@ -225,7 +226,8 @@ public class PlayerAp : MonoBehaviour {
 	}
 
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
-	IEnumerator DamageCoroutine ()
+	// 敵接触時の点滅
+	IEnumerator EnemyDamageCoroutine ()
 	{
 		//レイヤーをInvincibleに変更
 		gameObject.layer = LayerMask.NameToLayer("Invincible");
@@ -253,7 +255,31 @@ public class PlayerAp : MonoBehaviour {
 		gameObject.layer = LayerMask.NameToLayer("Player");
 		//iTweenのアニメーション
 	}
-		
+
+	// 壁接触時の点滅
+	IEnumerator WallDamageCoroutine ()
+	{
+		//while文を10回ループ
+		int count = 10;
+		iTween.MoveTo(gameObject, iTween.Hash(
+			"position", transform.position - (transform.forward * KnockBackRange),
+			"time", InvincibleTime, // 好きな時間（秒）
+			"easetype", iTween.EaseType.linear
+		));
+		isInvincible = true;
+		while (count > 0){
+			//透明にする
+			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//0.1秒待つ
+			yield return new WaitForSeconds(0.1f);
+			//元に戻す
+			modelColorChange.ColorChange(new Color (1,1,1,1));
+			//0.1秒待つ
+			yield return new WaitForSeconds(0.1f);
+			count--;
+		}
+		isInvincible = false;
+	}
 
 	IEnumerator BigCoroutine ()
 	{

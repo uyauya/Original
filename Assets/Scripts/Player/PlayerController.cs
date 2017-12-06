@@ -85,13 +85,14 @@ public class PlayerController : MonoBehaviour {
 			//Debug.Log (userParam.armorPointMax);*/
 			//new UserParam ().LoadData ();
 		}
-		//gameObject.layer = LayerMask.NameToLayer("Player");
+		gameObject.layer = LayerMask.NameToLayer("Player");
 	}
 
 	void Update()
 	{
 		//現在のブーストゲージと最大ブーストゲージをUI Textに表示する
-		boostText.text = string.Format("{0:0000} / {1:0000}", displayBoostPoint, DataManager.BoostPointMax);
+		//boostText.text = string.Format("{0:0000} / {1:0000}", displayBoostPoint, DataManager.BoostPointMax);
+		boostText.text = string.Format("{0:0000} / {1:0000}", boostPoint, DataManager.BoostPointMax);
 	}
 
 	void FixedUpdate()
@@ -102,10 +103,12 @@ public class PlayerController : MonoBehaviour {
 		{
 			boostPoint -= BpDown;						//ブーストポイントをBpDown設定値分消費
 			isBoost = true;								//ブースト状態
+			gameObject.layer = LayerMask.NameToLayer("Invincible");
 		}
 		else
 		{
 			isBoost = false;							//それ以外ならブーストなし（通常状態）
+			gameObject.layer = LayerMask.NameToLayer("Player");
 		}
 
 		//通常時とブースト時で変化
@@ -128,7 +131,7 @@ public class PlayerController : MonoBehaviour {
 			//Force = MaxForce;							//通常速度
 			if (Force <= MaxForce) {					//MaxForceまでForce(通常速度)に加速
 				Force += Time.deltaTime * PlusForce;
-				//Debug.Log (Force);
+				Debug.Log (Force);
 			}
 			animator.SetBool("Boost", Input.GetButton("Boost")&& boostPoint > 0);
 		}
@@ -231,7 +234,10 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 		// ブーストやジャンプが入力されていなければブースとポイントが徐々に回復（！は～されなければという否定形）
-		if (!Input.GetButton ("Boost"))
+		// ブーストなし最大速度で回避値3倍
+		if (!Input.GetButton ("Boost") && Force == MaxForce)
+			boostPoint += 3 * RecoverPoint;
+		else if (!Input.GetButton ("Boost") && Force < MaxForce)
 			boostPoint += 1 * RecoverPoint;
 		
 		// ブーストポイントが最大以上にはならない
