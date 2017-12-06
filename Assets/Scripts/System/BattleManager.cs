@@ -49,16 +49,6 @@ public class BattleManager : MonoBehaviour {
 		// 得点をテキスト形式で画面に表示
 		ScoreText.text = DataManager.Score.ToString();
 
-		// Scene移行時プレイヤーのパラメータの中身を取得
-		/*int level = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Level;
-		int attackPoint = GameObject.FindWithTag("Player").GetComponent<PlayerController>().AttackPoint;
-		int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
-		int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
-		string sceneName = SceneManager.GetActiveScene ().name;
-		UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
-		// DataManagerオブジェクトからSaveスクリプトのSaveDataを取得
-		GameObject.Find("DataManager").GetComponent<Save> ().SaveData (userParam);*/
-		//new UserParam ().SaveData ();
 	}
 
 	void Update () {
@@ -75,13 +65,6 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_PLAY;
 				timer = 0;
 				if (DataManager.Continue == false) {
-					/*int level = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Level;
-					int attackPoint = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().AttackPoint;
-					int boostpointMax = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().boostPointMax;
-					int armorpointMax = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().armorPointMax;
-					string sceneName = SceneManager.GetActiveScene ().name;*/
-					//UserParam userParam = new UserParam (DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
-					//UserParam.instanse.SaveData ();
 				}
 			}
 			break;
@@ -109,14 +92,6 @@ public class BattleManager : MonoBehaviour {
 				//Destroy(gameObject);
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
-				// Scene移行時プレイヤーのパラメータの中身を取得
-				/*int level = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Level;
-				int attackPoint = GameObject.FindWithTag("Player").GetComponent<PlayerController>().AttackPoint;
-				int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
-				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
-				string sceneName = SceneManager.GetActiveScene ().name;
-				UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
-				UserParam.instanse.SaveData ();*/
 				SoundManager.Instance.Play(1,gameObject);
 				new UserParam ().SaveData ();
 				if (PlayerNo == 0) {
@@ -146,17 +121,6 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_PLAY;
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
 				// Scene移行時プレイヤーのパラメータの中身を取得
-				/*int level = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Level;
-				int attackPoint = GameObject.FindWithTag("Player").GetComponent<PlayerController>().AttackPoint;
-				int boostpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerController>().boostPointMax;
-				int armorpointMax = GameObject.FindWithTag("Player").GetComponent<PlayerAp>().armorPointMax;
-				//string sceneName = SceneManager.GetActiveScene ().name;
-				Debug.Log(StageManager.Instance.StageNo);*/
-
-				//string sceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo +1];
-				//StageManager.Instance.StageNo++;
-				//UserParam userParam = new UserParam(DataManager.PlayerNo, level, attackPoint, boostpointMax, armorpointMax, Score, sceneName);
-				//UserParam.instanse.SaveData ();
 				new UserParam ().SaveData ();
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				playerController.ItemCount = 0;
@@ -181,6 +145,13 @@ public class BattleManager : MonoBehaviour {
 		break;
 
 		case BATTLE_END:
+
+			new UserParam ().SaveData (0);
+			new UserParam ().SaveData (0);
+			new UserParam ().SaveData (0);
+			new UserParam ().SaveData (0);
+			new UserParam ().SaveData (0);
+			new UserParam ().SaveData (0);
 			// スコアが10000点以上ならボスステージクリア
 			//if (DataManager.Score >= 10000) {
 			//}
