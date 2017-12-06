@@ -8,27 +8,30 @@ public class SaveSlot : MonoBehaviour {
 
 	public Text text;
 	public void OnClick(int number) {
-		switch (number) {
+		/*switch (number) {
 		case 0:
 			text.text = A;
-			btreak;
+			break;
 		case 1:
-			text.text = A;
-			btreak;
+			text.text = B;
+			break;
 		case 2:
-			text.text = A;
-			btreak;
+			text.text = C;
+			break;
 		case 3:
-			text.text = A;
-			btreak;
+			text.text = D;
+			break;
 		case 4:
-			text.text = A;
-			btreak;
+			text.text = E;
+			break;
 		case 5:
-			text.text = A;
-			btreak;
+			text.text = F;
+			break;
 		case 6:
-			text.text = A;
-			btreak;
-		}
+			text.text = G;
+			break;
+		default:
+			break;
+		}*/
+	}
 }

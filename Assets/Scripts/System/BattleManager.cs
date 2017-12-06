@@ -146,12 +146,12 @@ public class BattleManager : MonoBehaviour {
 
 		case BATTLE_END:
 
+			/*new UserParam ().SaveData (0);
 			new UserParam ().SaveData (0);
 			new UserParam ().SaveData (0);
 			new UserParam ().SaveData (0);
 			new UserParam ().SaveData (0);
-			new UserParam ().SaveData (0);
-			new UserParam ().SaveData (0);
+			new UserParam ().SaveData (0);*/
 			// スコアが10000点以上ならボスステージクリア
 			//if (DataManager.Score >= 10000) {
 			//}
