@@ -2,44 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShakeCamera : MonoBehaviour {
+public class ShakeCamera : MonoBehaviour
+{
 
-	public float ShakeTime = 0.5f;
-	public Vector3 ShakeRange = new Vector3(0.2f, 0.2f, 0f);
-
-	private float shakeTime;
-	private float timer;
-
-	private Vector3 originPos;
-	private bool onShakeEnd;
-
-	void Start () {
-		//init
-		shakeTime = -1f;
-		timer = 0f;
-		originPos = transform.position;
-		onShakeEnd = false;
-	}
+	public float shake_decay = 0.001f;
+	public float coef_shake_intensity = 0.1f;
+	private Vector3 originPosition;
+	private Quaternion originRotation;
+	private float shake_intensity;
 	
-	void Update () {
-		if (timer <= shakeTime) {
-			onShakeEnd = true;
-			timer += Time.deltaTime;
-			transform.position = originPos + MulVector3(ShakeRange, Random.insideUnitSphere);
-		} else {
-			if (onShakeEnd) {
-				transform.position = originPos;
-				onShakeEnd = false;
-			}
-			originPos = transform.position;
-		}
-	}
-	public void Shake() {
-		timer = 0f;
-		shakeTime = ShakeTime;
+	void Update ()
+	{  
+		if (shake_intensity > 0) {  
+			transform.position = originPosition + Random.insideUnitSphere * shake_intensity;  
+			transform.rotation = new Quaternion (
+				originRotation.x + Random.Range (-shake_intensity, shake_intensity) * 1.1f,  
+				originRotation.y + Random.Range (-shake_intensity, shake_intensity) * 1.1f,  
+				originRotation.z + Random.Range (-shake_intensity, shake_intensity) * 1.0f,  
+				originRotation.w + Random.Range (-shake_intensity, shake_intensity) * 1.0f);  
+			shake_intensity -= shake_decay;  
+		}  
 	}
 
-	private Vector3 MulVector3(Vector3 a, Vector3 b) {
-		return new Vector3(a.x * b.x, a.y * b.y, a.z * b.z);
-	}
+	public void Shake ()
+	{  
+		originPosition = transform.position;  
+		originRotation = transform.rotation;  
+		shake_intensity = coef_shake_intensity;  
+	}  
+
 }

@@ -75,20 +75,16 @@ public class EnemyBasic : MonoBehaviour {
 	}
 
 	void Start () {
-		// BattleManagerオブジェクトのBattleManagerスクリプトをbattleManagerと呼ぶことにする
-		//battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
-		//bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
 		// 《Animator》コンポーネントの取得
 		animator = GetComponent< Animator >();		
 		// 被ダメージ時の点滅処理
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();　
 		// Playerタグが付いているオブジェクトをターゲットにする
 		target = GameObject.FindWithTag ("Player");	
-		// ゲーム開始時、アーマーポイントを最大にする
-		//armorPoint = armorPointMax;	
 		// Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelと呼ぶ
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
+		gameObject.layer = LayerMask.NameToLayer("Enemy");
 	}
 
 
@@ -99,7 +95,6 @@ public class EnemyBasic : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collider) {
 		if( animator.GetBool("dead") == true ) {
-		//if(dead){
 		return;
 		}
 		// Shotタグが付いているオブジェクトに当たったら
@@ -174,8 +169,6 @@ public class EnemyBasic : MonoBehaviour {
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
 	IEnumerator DamageCoroutine ()
 	{
-		//レイヤーをPlayerDamageに変更
-		//gameObject.layer = LayerMask.NameToLayer("EnemyDamage");
 		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
@@ -200,8 +193,37 @@ public class EnemyBasic : MonoBehaviour {
 		}
 		// 無敵解除
 		isInvincible = false;
-		//レイヤーをPlayerに戻す
-		//gameObject.layer = LayerMask.NameToLayer("Enemy");
-		//iTweenのアニメーション
+	}
+
+	IEnumerator DeadCoroutine ()
+	{
+		//レイヤーをInvincibleに変更
+		gameObject.layer = LayerMask.NameToLayer("Invincible");
+		//while文を10回ループ
+		int count = 10;
+		iTween.MoveTo(gameObject, iTween.Hash(
+			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
+			"position", transform.position - (transform.forward * KnockBackRange),
+			// 無敵(ダメージ判定なし)時間設定（秒）
+			"time", InvincibleTime, 
+			"easetype", iTween.EaseType.linear
+		));
+		// 無敵(ダメージ判定なし)にして
+		isInvincible = true;
+		while (count > 0){
+			//透明にする(ModelColorChange参照)
+			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//0.05秒待つ
+			yield return new WaitForSeconds(0.1f);
+			//元に戻す
+			modelColorChange.ColorChange(new Color (1,1,1,1));
+			//0.05秒待つ
+			yield return new WaitForSeconds(0.1f);
+			count--;
+		}
+		// 無敵解除
+		isInvincible = false;
+		//レイヤーをEnemyに戻す
+		gameObject.layer = LayerMask.NameToLayer("Enemy");
 	}	
 }

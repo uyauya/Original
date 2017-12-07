@@ -37,7 +37,6 @@ public class PlayerAp : MonoBehaviour {
 	public int BigAttack;
 	public bool isBig;
 	public float HealApPoint = 1000;
-	//gameObject.layer Player;
 
 	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
@@ -60,12 +59,8 @@ public class PlayerAp : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		gaugeImage = GameObject.Find ("ApGauge").GetComponent<Image> ();
 		armorText = GameObject.Find ("TextAp").GetComponent<Text> ();
-		// Enemyタグの付いたオブジェクトのEnemyBasicの敵の攻撃値(EnemyAttack)をenemyAttackと呼ぶ
-		//enemyAttack= GameObject.FindWithTag("Enemy").GetComponent<EnemyBasic>().EnemyAttack;
 		boddy_summer = GameObject.Find("_body_summer");
 		attackPoint = DataManager.AttackPoint;
-		//force = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Force;
-		//maxForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().MaxForce;
 		isBig = false;
 		gameObject.layer = LayerMask.NameToLayer("Player");
 	}
@@ -150,6 +145,7 @@ public class PlayerAp : MonoBehaviour {
 				if (force >= maxForce) {
 					//Debug.Log (force);
 					Camera.main.gameObject.GetComponent<ShakeCamera>().Shake();
+					Debug.Log ("激突");
 					armorPoint -= 100;
 					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 					DamageObject.transform.SetParent (EffectPoint);
