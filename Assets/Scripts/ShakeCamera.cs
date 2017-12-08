@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// カメラの揺れ(MainCamera、SubCameraにつける）
 public class ShakeCamera : MonoBehaviour
 {
 
-	public float shake_decay = 0.001f;
-	public float coef_shake_intensity = 0.1f;
-	private Vector3 originPosition;
-	private Quaternion originRotation;
-	private float shake_intensity;
+	public float shake_decay = 0.001f;			// 揺れの減衰率
+	public float coef_shake_intensity = 0.1f;	// 揺れの強さ
+	private Vector3 originPosition;				// 揺れの元の場所
+	private Quaternion originRotation;			// 揺れの角度
+	private float shake_intensity;				// 揺れの強さ
 	
 	void Update ()
 	{  

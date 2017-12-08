@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Start()	//　ゲーム開始時の設定
 	{
-		animator = GetComponent<Animator>();
+		animator = GetComponent<Animator>();		// Animatorを使う場合は設定する
 		boostPoint = DataManager.BoostPointMax;		// ブーストポイントを最大値に設定
 		moveSpeed = Vector3.zero;					// 開始時は移動していないので速さはゼロに
 		isBoost = false;							// ブーストはオフに
@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour {
 		displayBoostPoint = boostPoint;
 		if (!DataManager.FarstLevel) {
 		}
+		// プレイヤーのレイヤーをPlayerに設定
 		gameObject.layer = LayerMask.NameToLayer("Player");
 	}
 
@@ -89,23 +90,28 @@ public class PlayerController : MonoBehaviour {
 		//ブーストボタンが押されてブーストポイント残が1以上あればフラグを立てブーストポイントを消費
 		if (Input.GetButton("Boost") && boostPoint > 0)
 		{
-			boostPoint -= BpDown;						//ブーストポイントをBpDown設定値分消費
-			isBoost = true;								//ブースト状態
+			boostPoint -= BpDown;							//ブーストポイントをBpDown設定値分消費
+			isBoost = true;									//ブースト状態にする
+			// プレイヤのレイヤーをInvincibleに変更
+			// Edit→ProjectSetting→Tags and LayersでInvicibleを追加
+			// Edit→ProjectSetting→Physicsで衝突させたくない対象と交差している所の✔を外す
+			// ここではEnemyと衝突させたくない（すり抜ける）為、Enemeyのレイヤーも追加
+			// EnemeyとPlayerの交差してる✔を外す（プレイヤのLayerをPlayer、EnemyのLayerをEnemyに設定しておく）
 			gameObject.layer = LayerMask.NameToLayer("Invincible");
 		}
 		else
 		{
-			isBoost = false;							//それ以外ならブーストなし（通常状態）
+			isBoost = false;								//それ以外ならブーストなし（通常状態）
 			gameObject.layer = LayerMask.NameToLayer("Player");
 		}
 
 		//通常時とブースト時で変化
-		if (isBoost)									//ブーストなら
+		if (isBoost)										//ブーストなら
 		{
 			// ブースト時
-			if (Force <= MaxBoostForce) {				//MaxBoostForceまでMaxForce(通常最大速度)に加速
-				MaxForce += Time.deltaTime * PlusForce;	
-				Force = Mathf.Min(Force, MaxBoostForce);
+			if (Force <= MaxBoostForce) {					// ForceがMaxBoostForceの値以下なら
+				MaxForce += Time.deltaTime * PlusForce;		// MaxBoostForceまでMaxForce(通常最大速度)に加速
+				Force = Mathf.Min(Force, MaxBoostForce);	// ForceがMaxBoostForceの値を超えない
 				//Debug.Log (Force);
 			}
 			//ブーストキーが押されたらにパラメータを切り替える
@@ -113,9 +119,9 @@ public class PlayerController : MonoBehaviour {
 		}
 		else
 		{
-			if (Force <= MaxForce) {					//MaxForceまでForce(通常速度)に加速
-				Force += Time.deltaTime * PlusForce;
-				Force = Mathf.Min(Force, MaxForce);
+			if (Force <= MaxForce) {					
+				Force += Time.deltaTime * PlusForce;	
+				Force = Mathf.Min(Force, MaxForce);		
 				//Debug.Log (Force);
 			}
 			animator.SetBool("Boost", Input.GetButton("Boost")&& boostPoint > 0);
@@ -219,7 +225,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 		// ブーストやジャンプが入力されていなければブースとポイントが徐々に回復（！は～されなければという否定形）
-		// ブーストなし最大速度で回避値10倍
+		// ブーストなし最大速度で回避値3倍
 		if (!Input.GetButton ("Boost") && Force == MaxForce) {
 			boostPoint += 3 * RecoverPoint;
 		} else if (!Input.GetButton ("Boost") && Force < MaxForce) {
@@ -255,7 +261,9 @@ public class PlayerController : MonoBehaviour {
 			animator.SetTrigger ("ItemGet");
 			// ブーストポイント回復
 			boostPoint += BpHealPoint;
+			// 既にboostPointがMaxだったら何もしない
 			if (boostPoint == DataManager.BoostPointMax) return;
+			// boostPointがMaxになったら声出し
 			if (boostPoint < DataManager.BoostPointMax) {
 				if (PlayerNo == 0) {
 					SoundManager.Instance.Play (18, gameObject);
@@ -280,7 +288,7 @@ public class PlayerController : MonoBehaviour {
 			// ブーストポイントが最大以上にはならない
 			boostPoint = Mathf.Clamp (boostPoint, 0, DataManager.BoostPointMax);
 		}
-		// 床(Floor)に着いたら全てニュートラル状態に
+		// 床(Floorタグ付いたもの)に着いたら全てニュートラル状態に
 		if( collider.gameObject.tag == "Floor" ) {
 			// 二段ジャンプ用ジャンプカウントをリセット
 			JumpCount = 0;
@@ -292,7 +300,7 @@ public class PlayerController : MonoBehaviour {
 			onFloor = true;
 			animator.SetBool("Jump", false);
 		}
-
+		// greenShere(Item3タグ付いたもの)接触時
 		if(collider.gameObject.tag == "Item3") {
 			if (PlayerNo == 0) {
 				SoundManager.Instance.PlayDelayed (30, 1.1f, gameObject);
@@ -304,9 +312,10 @@ public class PlayerController : MonoBehaviour {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
 			}
 			animator.SetTrigger ("ItemGet");
+			// greenShere取得数を１追加する
 			ItemCount += 1;
 		}
-
+		// Star（ボス撃破時ドロップするクリア用アイテム）取得時
 		if(collider.gameObject.tag == "Star") {
 			if (PlayerNo == 0) {
 				SoundManager.Instance.PlayDelayed (30, 0.1f, gameObject);
@@ -318,10 +327,9 @@ public class PlayerController : MonoBehaviour {
 				SoundManager.Instance.PlayDelayed (32, 0.1f, gameObject);
 			}
 			animator.SetTrigger ("ItemGet");
-			//Debug.Log ("GetStar");
 			GetStar += 1;
 		}
-
+		// BigStar（ラスボス撃破時ドロップするクリア用アイテム）取得時
 		if(collider.gameObject.tag == "BigStar") {
 			if (PlayerNo == 0) {
 				SoundManager.Instance.PlayDelayed (30, 0.1f, gameObject);
