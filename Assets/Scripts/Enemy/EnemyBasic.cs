@@ -13,8 +13,7 @@ public class EnemyBasic : MonoBehaviour {
 	public float shotIntervalMax = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
 	public GameObject exprosion;					// 爆発処理
 	public GameObject particle;
-	public float armorPoint = 100;						// HP現在値
-	//public float armorPointMax = 100;				// 最大HP 
+	public float armorPoint = 100;					// HP現在値
 	public int TargetRange;							// プレイヤをターゲット認識する距離
 	public float EnemySpeed;						// 移動スピード
 	public float JumpForce;							// ジャンプ力
@@ -48,9 +47,11 @@ public class EnemyBasic : MonoBehaviour {
 	public int GreenEncount= 32;
 	public int YellowEncount= 32;
 	public int bigAttack;
-	public bool isBoss;
-	public bool isLastBoss;
+	public bool isBoss;								// ボスの場合はインスペクタに✔を入れる
+	public bool isLastBoss;							// ラスボスの場合はインスペクタに✔を入れる
 	bool dead = false;
+	private Rigidbody rb;
+	public Vector3 localGravity;					// 重力設定(x,y,z)　標準の場合はｙに-9.8を入れておく
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -85,6 +86,8 @@ public class EnemyBasic : MonoBehaviour {
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 		gameObject.layer = LayerMask.NameToLayer("Enemy");
+		rb = this.GetComponent<Rigidbody>();
+		rb.useGravity = false;
 	}
 
 
@@ -92,8 +95,9 @@ public class EnemyBasic : MonoBehaviour {
 		
 	}
 
-
+	// 衝突判定
 	void OnCollisionEnter(Collision collider) {
+		// すでにdeadの場合は何もしない
 		if( animator.GetBool("dead") == true ) {
 		return;
 		}
@@ -137,6 +141,7 @@ public class EnemyBasic : MonoBehaviour {
 			//Debug.Log ("敵"+gameObject.name);
 			animator.SetBool("dead" , true);
 			EnemySpeed = 0;
+			StartCoroutine ("DeadCoroutine");
 			// 敵消滅用エフェクト発生
 			Instantiate (DestroyEffect, transform.position, transform.rotation);
 			// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
@@ -167,6 +172,7 @@ public class EnemyBasic : MonoBehaviour {
 	}
 
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
+
 	IEnumerator DamageCoroutine ()
 	{
 		//while文を10回ループ
@@ -203,7 +209,7 @@ public class EnemyBasic : MonoBehaviour {
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
-			"position", transform.position - (transform.forward * KnockBackRange),
+			//"position", transform.position - (transform.forward * KnockBackRange),
 			// 無敵(ダメージ判定なし)時間設定（秒）
 			"time", InvincibleTime, 
 			"easetype", iTween.EaseType.linear
@@ -225,5 +231,13 @@ public class EnemyBasic : MonoBehaviour {
 		isInvincible = false;
 		//レイヤーをEnemyに戻す
 		gameObject.layer = LayerMask.NameToLayer("Enemy");
-	}	
+	}
+
+	void FixedUpdate () {
+		setLocalGravity ();
+	}
+
+	void setLocalGravity(){
+		rb.AddForce (localGravity, ForceMode.Acceleration);
+	}
 }

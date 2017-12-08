@@ -8,25 +8,25 @@ public class Zombie1 : MonoBehaviour {
 	// 継承元（protectedにする）のEnemyBasicをenemyBasicとする
 	protected EnemyBasic enemyBasic;
 	bool dead = false;
-	public Vector3 localGravity;	// 重力(x,y,z)
-	private Rigidbody rb;
+	//public Vector3 localGravity;	// 重力(x,y,z)
+	//private Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {
 		// EnemyBasicスクリプトのデータを最初に呼び出しenemyBasicとする
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		//enemyBasic.Initialize ();
-		rb = this.GetComponent<Rigidbody>();
-		rb.useGravity = false;
+		//rb = this.GetComponent<Rigidbody>();
+		//rb.useGravity = false;
 	}
 
-	void FixedUpdate () {
+	/*void FixedUpdate () {
 		setLocalGravity ();
 	}
 
 	void setLocalGravity(){
 		rb.AddForce (localGravity, ForceMode.Acceleration);
-	}
+	}*/
 
 	// Update is called once per frame
 	void Update () {

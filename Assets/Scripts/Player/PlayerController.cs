@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour {
 	public GameObject BpHealPrefab;					// ブーストポイント回復エフェクト格納場所
 	public GameObject BpHealObject;
 	public float BpHealPoint = 500;					// ブーストポイント回復値（アイテム取得時）
+	protected bool isInvincible;					// 無敵処理（ダメージ受けた際に使用）
+	private ModelColorChange modelColorChange;
+	public float InvincibleTime;		// 無敵時間
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -75,6 +78,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		// プレイヤーのレイヤーをPlayerに設定
 		gameObject.layer = LayerMask.NameToLayer("Player");
+		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 	}
 
 	void Update()
@@ -92,6 +96,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			boostPoint -= BpDown;							//ブーストポイントをBpDown設定値分消費
 			isBoost = true;									//ブースト状態にする
+			StartCoroutine ("BoostCoroutine");
 			// プレイヤのレイヤーをInvincibleに変更
 			// Edit→ProjectSetting→Tags and LayersでInvicibleを追加
 			// Edit→ProjectSetting→Physicsで衝突させたくない対象と交差している所の✔を外す
@@ -344,6 +349,31 @@ public class PlayerController : MonoBehaviour {
 			GetBigStar += 1;
 		}
 
+	}
+
+	// ブース時の点滅
+	IEnumerator BoostCoroutine ()
+	{
+		//while文を10回ループ
+		int count = 10;
+		iTween.MoveTo(gameObject, iTween.Hash(
+			//"position", transform.position - (transform.forward * KnockBackRange),
+			"time", InvincibleTime, // 好きな時間（秒）
+			"easetype", iTween.EaseType.linear
+		));
+		isInvincible = true;
+		while (count > 0){
+			//透明にする
+			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//0.1秒待つ
+			yield return new WaitForSeconds(0.1f);
+			//元に戻す
+			modelColorChange.ColorChange(new Color (1,1,1,1));
+			//0.1秒待つ
+			yield return new WaitForSeconds(0.1f);
+			count--;
+		}
+		isInvincible = false;
 	}
 
 	private void OnCollisionStay(Collision collisionInfo) {
