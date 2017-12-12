@@ -62,13 +62,13 @@ public class DiffenceAbsorb : MonoBehaviour {
 							//Debug.LogFormat ("出る時：Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}", Vector2.Angle (nowDirection, direction), limitAngle, Time.time, nowTime, nextButtonDownTime);
 							diffence = true;
 							if (PlayerNo == 0) {
-								//SoundManager.Instance.Play(0,gameObject);
+								//SoundManagerKohaku.Instance.Play(0,gameObject);
 							}
 							if (PlayerNo == 1) {
-								//SoundManager.Instance.Play(1,gameObject);
+								//SoundManagerYuko.Instance.Play(0,gameObject);
 							}
 							if (PlayerNo == 2) {
-								//SoundManager.Instance.Play(2,gameObject);
+								//SoundManagerMisaki.Instance.Play(0,gameObject);	
 							}
 							Diffencer ();
 							Debug.Log ("Diffence");

@@ -79,12 +79,9 @@ public class PlayerAp : MonoBehaviour {
 		// armorTesが数値、gougeImageがゲージの色
 		// ユーザーインターフェース（UI)の色を変える場合、画像の色は白一色にする
 		//　白以外の場合、指定した色と混ざる為、指定した色にならなくなる
-		//if( percentageArmorpoint > 0.5F){
 		if( armorPoint > 4000){
 			armorText.color = myGreen;
 			gaugeImage.color = myGreen;
-			//gaugeImage.color = new Color(0.25F, 0.7F, 0.6F);
-		//}else if( percentageArmorpoint > 0.3F){
 		}else if( armorPoint > 2900){
 			armorText.color = myWhite;
 			gaugeImage.color = myWhite;
@@ -123,13 +120,16 @@ public class PlayerAp : MonoBehaviour {
 				DamageObject.transform.SetParent (EffectPoint);
 				animator.SetTrigger ("Damage");
 				if (PlayerNo == 0) {
-					SoundManager.Instance.Play (21, gameObject);
+					//SoundManager.Instance.Play (21, gameObject);
+					SoundManagerKohaku.Instance.Play (7, gameObject);
 				}
 				if (PlayerNo == 1) {
-					SoundManager.Instance.Play (22, gameObject);
+					//SoundManager.Instance.Play (22, gameObject);
+					SoundManagerYuko.Instance.Play (7, gameObject);
 				}
 				if (PlayerNo == 2) {
-					SoundManager.Instance.Play (23, gameObject);
+					//SoundManager.Instance.Play (23, gameObject);
+					SoundManagerMisaki.Instance.Play (7, gameObject);
 				}
 				StartCoroutine ("EnemyDamageCoroutine");
 			}
@@ -150,16 +150,22 @@ public class PlayerAp : MonoBehaviour {
 					DamageObject.transform.SetParent (EffectPoint);
 					animator.SetTrigger ("Damage");
 					if (PlayerNo == 0) {
-						SoundManager.Instance.Play(24,gameObject);	
-						SoundManager.Instance.PlayDelayed (27, 0.2f, gameObject);
+						//SoundManager.Instance.Play(24,gameObject);	
+						//SoundManager.Instance.PlayDelayed (27, 0.2f, gameObject);
+						SoundManagerKohaku.Instance.Play(8,gameObject);	
+						SoundManagerKohaku.Instance.PlayDelayed (9, 0.2f, gameObject);
 					}
 					if (PlayerNo == 1) {
-						SoundManager.Instance.Play(25,gameObject);	
-						SoundManager.Instance.PlayDelayed (28, 0.2f, gameObject);
+						//SoundManager.Instance.Play(25,gameObject);	
+						//SoundManager.Instance.PlayDelayed (28, 0.2f, gameObject);
+						SoundManagerYuko.Instance.Play(8,gameObject);	
+						SoundManagerYuko.Instance.PlayDelayed (9, 0.2f, gameObject);
 					}
 					if (PlayerNo == 2) {
-						SoundManager.Instance.Play(26,gameObject);	
-						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
+						//SoundManager.Instance.Play(26,gameObject);	
+						//SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
+						SoundManagerMisaki.Instance.Play(8,gameObject);	
+						SoundManagerMisaki.Instance.PlayDelayed (9, 0.2f, gameObject);
 					}
 					StartCoroutine ("WallDamageCoroutine");
 				}
@@ -173,23 +179,29 @@ public class PlayerAp : MonoBehaviour {
 			if (armorPoint  < DataManager.ArmorPointMax) {
 				if (armorPoint + HealApPoint < DataManager.ArmorPointMax) {
 					if (PlayerNo == 0) {
-						SoundManager.Instance.Play (18, gameObject);
+						//SoundManager.Instance.Play (18, gameObject);
+						SoundManagerKohaku.Instance.Play (6, gameObject);
 					}
 					if (PlayerNo == 1) {
-						SoundManager.Instance.Play (19, gameObject);
+						//SoundManager.Instance.Play (19, gameObject);
+						SoundManagerYuko.Instance.Play (6, gameObject);
 					}
 					if (PlayerNo == 2) {
-						SoundManager.Instance.Play (20, gameObject);
+						//SoundManager.Instance.Play (20, gameObject);
+						SoundManagerMisaki.Instance.Play (6, gameObject);
 					}
 				} else if (armorPoint + HealApPoint >= DataManager.ArmorPointMax) {
 					if (PlayerNo == 0) {
-						SoundManager.Instance.PlayDelayed (39, 1.1f, gameObject);
+						//SoundManager.Instance.PlayDelayed (39, 1.1f, gameObject);
+						SoundManagerKohaku.Instance.PlayDelayed (13, 1.1f, gameObject);
 					}
 					if (PlayerNo == 1) {
-						SoundManager.Instance.PlayDelayed (40, 1.1f, gameObject);
+						//SoundManager.Instance.PlayDelayed (40, 1.1f, gameObject);
+						SoundManagerYuko.Instance.PlayDelayed (13, 1.1f, gameObject);
 					}
 					if (PlayerNo == 2) {
-						SoundManager.Instance.PlayDelayed (41, 1.1f, gameObject);
+						//SoundManager.Instance.PlayDelayed (41, 1.1f, gameObject);
+						SoundManagerMisaki.Instance.PlayDelayed (13, 1.1f, gameObject);
 					}
 				}
 			}

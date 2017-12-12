@@ -93,15 +93,18 @@ public class MultiWayShoot : MonoBehaviour {
 			// 回転計算をした後に弾の座標をnew Vector3(0,1,0)で上に上げる
 			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
 				if (PlayerNo == 0) { 
-					SoundManager.Instance.Play(21,gameObject);
+					//SoundManager.Instance.Play(21,gameObject);
+					SoundManagerKohaku.Instance.Play(7,gameObject);
 					SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
 				}
 				if (PlayerNo == 1) {
-					SoundManager.Instance.Play(22,gameObject);
+					//SoundManager.Instance.Play(22,gameObject);
+					SoundManagerYuko.Instance.Play(7,gameObject);	
 					SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
 				}
 				if (PlayerNo == 2) {
-					SoundManager.Instance.Play(23,gameObject);
+					//SoundManager.Instance.Play(23,gameObject);
+					SoundManagerMisaki.Instance.Play(7,gameObject);	
 					SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
 				}
 				// 	ブーストポイントをBpDown分消費
