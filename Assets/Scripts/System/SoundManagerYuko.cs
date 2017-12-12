@@ -6,7 +6,7 @@ using UnityEngine.UI;
 // スライダーと連動させるための処理
 [RequireComponent(typeof(Slider))]
 
-//効果音管理用（どのSceneでも情報を保持したい場合MonoBehaviourをSingletonMonoBehaviour<スクリプト名>にする）
+//ゆうこの声管理用（どのSceneでも情報を保持したい場合MonoBehaviourをSingletonMonoBehaviour<スクリプト名>にする）
 public class SoundManagerYuko : SingletonMonoBehaviour<SoundManagerYuko> {
 
 	[SerializeField]
@@ -143,7 +143,7 @@ public class SoundManagerYuko : SingletonMonoBehaviour<SoundManagerYuko> {
 
 	public void SampleVoice()
 	{
-		Play (0);
+		Play (2);
 	}
 }
 

@@ -9,7 +9,6 @@ public class DataManager : MonoBehaviour {
 	public static int PlayerNo;			//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	public static UserParam userParam;
 	public static bool FarstLevel;
-	//public static int SceneNo;		//ステージNo取得用
 	public static bool Continue = false;
 	public static int Level;
 	public static int AttackPoint;

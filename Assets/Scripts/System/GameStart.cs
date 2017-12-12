@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;			//シーン遷移する時は追加
 using UnityEngine.UI;						// UIを使う時は追加する
 
+// ゲームスタート時DataManagerにプレイヤレベル1のデータを入れる
 public class GameStart : MonoBehaviour {
 	private AudioSource[] audioSources;
 	private Animator animator;
@@ -18,6 +19,7 @@ public class GameStart : MonoBehaviour {
 		Invoke("LoadScene",1.3f);
 	}
 		
+	// ゲームスタート時DataManagerにプレイヤレベル1のデータを入れる
 	void Start () {
 		PlayerLevel playerLevel;
 		DataManager.Score = 0;

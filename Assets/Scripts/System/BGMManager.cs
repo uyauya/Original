@@ -6,7 +6,7 @@ using UnityEngine.UI;
 // スライダーと連動させるための処理
 [RequireComponent(typeof(Slider))]
 
-//音楽管理用
+//BGM全般管理用
 public class BGMManager : MonoBehaviour {
 
 	public AudioSource SoundSource;

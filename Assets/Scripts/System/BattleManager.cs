@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
+// ゲームオーバーやステージ移行などゲーム全般の条件を管理
 public class BattleManager : MonoBehaviour {
 	// Edit→ProjectSettings→ScriptExecutionOrder→＋でBattleManagerを出して一番上に
 	// BattleManagerスクリプトを一番最初に読み取るようにする
@@ -19,8 +19,6 @@ public class BattleManager : MonoBehaviour {
 	public Image messageLose;
 	public static int score;			// 敵を倒した数。Enemyスクリプトでカウントアップ  
 	public Text ScoreText;				// スコア表示用
-
-	//public int Score;					// 得点兼プレイヤ経験値
 	private int ItemCount;				// アイテム取得数をカウント
 	PlayerController playerController;
 	public GameObject WarpEffect;		// ボス面移行用ワープ
@@ -43,8 +41,6 @@ public class BattleManager : MonoBehaviour {
 		//敵の最大生成数をクリア数にする
 		//instantiateValueに値を代入するのをBattleManagerより早くするため
 		//EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
-		//clearScore = EnemyInstantiate.instantiateValue;
-		//Score = 0;
 		Player = GameObject.FindWithTag("Player");
 		// 得点をテキスト形式で画面に表示
 		ScoreText.text = DataManager.Score.ToString();
@@ -60,7 +56,6 @@ public class BattleManager : MonoBehaviour {
 			//時間経過でメッセージを消して状態移行
 			timer += Time.deltaTime;
 				if (timer > 3) {
-				//Debug.Log ("すたーと");
 				messageStart.enabled = false;
 				battleStatus = BATTLE_PLAY;
 				timer = 0;
@@ -71,13 +66,11 @@ public class BattleManager : MonoBehaviour {
 			
 		case BATTLE_PLAY:
 			ScoreText.text = DataManager.Score.ToString ();
-			//Score += enemyScore;
 			//プレイヤーの体力が0以下になったら敗北
 			if (PlayerAp.armorPoint <= 0) {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 				new UserParam ().SaveData ();
-				//SceneManager.LoadScene ("GameOver");
 				if (PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 				}
@@ -89,7 +82,6 @@ public class BattleManager : MonoBehaviour {
 				}
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			} else if (Player.transform.position.y <= -10.0f) { 
-				//Destroy(gameObject);
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 				SoundManager.Instance.Play(1,gameObject);
@@ -103,9 +95,7 @@ public class BattleManager : MonoBehaviour {
 				if (PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
 				}
-				//SceneManager.LoadScene ("GameOver");
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
-				//Time.timeScale = 1;
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
@@ -128,8 +118,7 @@ public class BattleManager : MonoBehaviour {
 			//break;
 
 			// ボス撃破時スター出現
-			// スターオブジェクトを取得したら
-			//Debug.Log(playerController.GetStar);
+			// スターオブジェクトを取得したら次面へ
 			if (playerController.GetStar >= 1 ) {
 				new UserParam ().SaveData ();
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
@@ -137,7 +126,7 @@ public class BattleManager : MonoBehaviour {
 			}
 
 			// ラスボス撃破時ビッグスター出現
-			// ビッグスターオブジェクトを取得したら
+			// ビッグスターオブジェクトを取得したらエンディング
 			if (playerController.GetBigStar >= 1) {
 				Invoke ("END", ChangeTime);
 				playerController.GetBigStar = 0;		
@@ -170,21 +159,13 @@ public class BattleManager : MonoBehaviour {
 					Time.timeScale = 1;
 				}
 			}*/
-
 			break;
-		
-			
 
-
-			
-		//default:
-		//	break;
 		}
 	}
 
 	private void NextScene(){
 		StageManager.Instance.StageNo++;
-		//Debug.Log (StageManager.Instance.StageName[StageManager.Instance.StageNo+1]);
 		SceneManager.LoadScene (StageManager.Instance.StageName[StageManager.Instance.StageNo]);
 	}
 

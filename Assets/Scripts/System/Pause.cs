@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+// 一時停止呼び出し用
 public class Pause : MonoBehaviour
 {
 	public bool isPause;
@@ -21,6 +22,7 @@ public class Pause : MonoBehaviour
 	}
 	void Update ()
 	{
+		// ESCキー押した時にコンフィグ画面になっていなければ
 		if (Input.GetKeyDown (KeyCode.Escape)&& !isConfig) {
 			if (isPause) {
 				isPause = false;
