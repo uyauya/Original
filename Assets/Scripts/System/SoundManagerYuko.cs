@@ -75,7 +75,7 @@ public class SoundManagerYuko : SingletonMonoBehaviour<SoundManagerYuko> {
 	}
 
 	// 音を停止する
-	public void Stop(int number, GameObject go = null)
+	/*public void Stop(int number, GameObject go = null)
 	{
 		//Debug.Log("要素数" + audioClipList.Count);
 		AudioClip clip = audioClipList[number];
@@ -144,7 +144,7 @@ public class SoundManagerYuko : SingletonMonoBehaviour<SoundManagerYuko> {
 	public void SampleVoice()
 	{
 		Play (2);
-	}
+	}*/
 }
 
 

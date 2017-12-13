@@ -277,7 +277,7 @@ public class PlayerAp : MonoBehaviour {
 	IEnumerator WallDamageCoroutine ()
 	{
 		//while文を10回ループ
-		int count = 10;
+		int count = 4;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			"position", transform.position - (transform.forward * KnockBackRange),
 			"time", InvincibleTime, // 好きな時間（秒）

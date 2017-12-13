@@ -75,7 +75,7 @@ public class SoundManagerKohaku : SingletonMonoBehaviour<SoundManagerKohaku> {
 	}
 
 	// 音を停止する
-	public void Stop(int number, GameObject go = null)
+	/*public void Stop(int number, GameObject go = null)
 	{
 		//Debug.Log("要素数" + audioClipList.Count);
 		AudioClip clip = audioClipList[number];
@@ -144,6 +144,6 @@ public class SoundManagerKohaku : SingletonMonoBehaviour<SoundManagerKohaku> {
 	public void SampleVoice()
 	{
 		Play (0);
-	}
+	}*/
 }
 

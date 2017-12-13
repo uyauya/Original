@@ -72,13 +72,16 @@ public class BattleManager : MonoBehaviour {
 				messageLose.enabled = true;
 				new UserParam ().SaveData ();
 				if (PlayerNo == 0) {
-					SoundManager.Instance.Play (45, gameObject);
+					//SoundManager.Instance.Play (45, gameObject);
+					SoundManagerKohaku.Instance.Play (16, gameObject);
 				}
 				if (PlayerNo == 1) {
-					SoundManager.Instance.Play (46, gameObject);
+					//SoundManager.Instance.Play (46, gameObject);
+					SoundManagerYuko.Instance.Play (16, gameObject);
 				}
 				if (PlayerNo == 2) {
-					SoundManager.Instance.Play (47, gameObject);
+					//SoundManager.Instance.Play (47, gameObject);
+					SoundManagerMisaki.Instance.Play (16, gameObject);
 				}
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			} else if (Player.transform.position.y <= -10.0f) { 

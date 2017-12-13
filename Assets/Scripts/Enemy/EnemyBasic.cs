@@ -52,6 +52,17 @@ public class EnemyBasic : MonoBehaviour {
 	bool dead = false;
 	private Rigidbody rb;
 	public Vector3 localGravity;					// 重力設定(x,y,z)　標準の場合はｙに-9.8を入れておく
+	public Transform EffectPoint;					// エフェクト発生元の位置取り
+	public GameObject Hit01Prefab;					
+	public GameObject Hit01Object;
+	public GameObject Hit02Prefab;					
+	public GameObject Hit02Object;
+	public GameObject Hit03Prefab;					
+	public GameObject Hit03Object;
+	public GameObject Hit05Prefab;					
+	public GameObject Hit05Object;
+	public GameObject DeadPrefab;					
+	public GameObject DeadObject;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -105,6 +116,8 @@ public class EnemyBasic : MonoBehaviour {
 		if (collider.gameObject.tag == "Shot") {
 			// Bullet01スクリプトのdamageを受け取る
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
+			Hit01Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+			Hit01Object.transform.SetParent (EffectPoint);
 			// ダメージコルーチン（下記参照）
 			StartCoroutine ("DamageCoroutine");
 			// 敵Animatorダメージ判定時に"damaged"をtrueへ
@@ -114,18 +127,24 @@ public class EnemyBasic : MonoBehaviour {
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
+			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+			Hit02Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetBool("damaged" , true);
 			//animator.SetTrigger("damaged");
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
+			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+			Hit03Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
 			//animator.SetBool("damaged" , true);
 			animator.SetTrigger("damaged");
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
+			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+			Hit05Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
 			//animator.SetBool("damaged" , true);
 			animator.SetTrigger("damaged");
@@ -141,6 +160,8 @@ public class EnemyBasic : MonoBehaviour {
 			//Debug.Log ("敵"+gameObject.name);
 			animator.SetBool("dead" , true);
 			EnemySpeed = 0;
+			DeadObject = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+			DeadObject.transform.SetParent (EffectPoint);
 			StartCoroutine ("DeadCoroutine");
 			// 敵消滅用エフェクト発生
 			Instantiate (DestroyEffect, transform.position, transform.rotation);
