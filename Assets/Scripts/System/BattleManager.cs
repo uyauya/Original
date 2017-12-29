@@ -13,20 +13,20 @@ public class BattleManager : MonoBehaviour {
 	const int BATTLE_PLAY  = 1;
 	const int BATTLE_END   = 2;
 	const int ENDING  	   = 3;
-	float timer;						// 時間計測洋(LimitedTimer参照）
+	float timer;						 // 時間計測洋(LimitedTimer参照）
 	public Image messageStart;
 	public Image messageWin;
 	public Image messageLose;
-	public static int score;			// 敵を倒した数。Enemyスクリプトでカウントアップ  
-	public Text ScoreText;				// スコア表示用
-	private int ItemCount;				// アイテム取得数をカウント
+	public static int score;			 // 敵を倒した数。Enemyスクリプトでカウントアップ  
+	public Text ScoreText;				 // スコア表示用
+	private int ItemCount;				 // アイテム取得数をカウント
 	PlayerController playerController;
-	public GameObject WarpEffect;		// ボス面移行用ワープ
-	int clearScore;						// クリア条件となるスコア  
+	public GameObject WarpEffect;		 // ボス面移行用ワープ
+	int clearScore;						 // クリア条件となるスコア  
 	public GameObject Player;			
-	public float ChangeTime;			// シーン変更までの時間
-	public int Count;					// ステージ移行する為のアイテム取得個
-	public int PlayerNo;				//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
+	public float ChangeTime;			 // シーン変更までの時間
+	public int Count;					 // ステージ移行する為のアイテム取得個
+	public int PlayerNo;				 //プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 
 	void Start () {	
 		ScoreText.text = "Score:0";
@@ -124,7 +124,6 @@ public class BattleManager : MonoBehaviour {
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				playerController.ItemCount = 0;
 			}	
-			//break;
 
 			// ボス撃破時スター出現
 			// スターオブジェクトを取得したら次面へ
@@ -144,15 +143,6 @@ public class BattleManager : MonoBehaviour {
 
 		case BATTLE_END:
 
-			/*new UserParam ().SaveData (0);
-			new UserParam ().SaveData (0);
-			new UserParam ().SaveData (0);
-			new UserParam ().SaveData (0);
-			new UserParam ().SaveData (0);
-			new UserParam ().SaveData (0);*/
-			// スコアが10000点以上ならボスステージクリア
-			//if (DataManager.Score >= 10000) {
-			//}
 			//一定時間経過したら遷移可能にする
 			/*timer += Time.deltaTime;
 			if(timer > 3)

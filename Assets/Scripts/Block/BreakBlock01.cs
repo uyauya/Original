@@ -15,9 +15,11 @@ public class BreakBlock01 : MonoBehaviour {
 	public GameObject GreenSphere;
 	public GameObject YellowSphere;
 	public int bigAttack;
+	public int EnemyScore = 1000;		// 敵を倒した時の得点
+	public BattleManager battleManager;
 
 	void Start () {
-
+		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 		//ターゲットを取得
 		target = GameObject.Find("PlayerTarget");
 		armorPoint = armorPointMax;
@@ -53,7 +55,8 @@ public class BreakBlock01 : MonoBehaviour {
 					Instantiate (YellowSphere, transform.position, transform.rotation);
 				}
 				//リザルト用のスコアを加算する
-				BattleManager.score ++;
+				battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
+				DataManager.Score += EnemyScore;
 			}
 		}
 }
