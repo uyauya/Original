@@ -33,6 +33,7 @@ public class UserParam
 	public UserParam(){
 	}
 
+	// セーブ時の処理
 	public void SaveData () 
 	{
 		UserParam instanse = new UserParam (
@@ -45,7 +46,6 @@ public class UserParam
 			                     SceneManager.GetActiveScene ().name,
 								 StageManager.Instance.StageNo
 		                     );
-		//UserParam userParam = GetComponent<UserParam> ();
 		//UserParamインスタンスを文字列に変換
 		string UserParamSaveJson = JsonUtility.ToJson(instanse);
 		//セーブ
@@ -53,23 +53,19 @@ public class UserParam
 		//Debug.Log (UserParamSaveJson);
 	}
 
+	// ロード時の処理
 	public void LoadData()
 	{
-
-		//UserParam userParam = GetComponent<UserParam> ();
-		//ロード
 		// Jsonの文字列データをUserParamインスタンスに変換
 		string UserParamLoadJson = PlayerPrefs.GetString ("UserParam");
-		//データを変数に設定
+		//データを変数に設定してロード
 		instanse = JsonUtility.FromJson<UserParam> (UserParamLoadJson);
-		//return instanse;
 		DataManager.PlayerNo = instanse.PlayerNo;
 		DataManager.Level = instanse.Level;
 		DataManager.AttackPoint = instanse.AttackPoint;
 		DataManager.BoostPointMax = instanse.boostPointMax;
 		DataManager.ArmorPointMax = instanse.armorPointMax;
 		DataManager.Score = instanse.Score;
-		//SceneManager.LoadScene (instanse.SceneName);
 		SceneManager.LoadScene(StageManager.Instance.StageName[StageManager.Instance.StageNo]);
 	}
 }	

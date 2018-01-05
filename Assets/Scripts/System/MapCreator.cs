@@ -5,9 +5,8 @@ public class MapCreator : MonoBehaviour {
 	public int				MAP_SIZE_X = 7;		// マップ横幅 (偶数指定の場合は、自動的に奇数にされる)
 	public int				MAP_SIZE_Z = 10;	// マップ奥幅 (偶数指定の場合は、自動的に奇数にされる)
 	public	GameObject		player;				// プレイヤーオブジェクト格納用
-	public	GameObject		Boss02;				// 
-	private MapSize		size;					// マップサイズ型の変数
-	private MapAxis		playerAxis;				// プレイヤー座標を扱うPlayerAxis型の変数
+	private MapSize		    size;				// マップサイズ型の変数
+	private MapAxis			playerAxis;			// プレイヤー座標を扱うPlayerAxis型の変数
 	private MapArrayBlock	mapBlock;			// 地面用MapArrayBlock型の変数
 	private MapArrayFloor	mapFloor;			// 地上用MapArrayFloor型の変数
 	private GameObject[]	tagObjects;
@@ -22,11 +21,11 @@ public class MapCreator : MonoBehaviour {
 	private float timer = 0.0f;
 	private float interval = 2.0f;
 	public GameObject[] 	Prefab_Player;
+	public	GameObject		Boss02;				
 	//public  GameObject[]    bossPrefab;
 
 	// 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはバトルマネージャースクリプトで判別・管理）
 	void Awake(){
-		//player = Instantiate (Prefab_Player [GameObject.Find ("DataManager").GetComponent<DataManager> ().PlayerNo]);
 		player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
 	}
 

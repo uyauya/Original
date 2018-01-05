@@ -7,18 +7,16 @@ public class AbsorbWall : MonoBehaviour {
 	Enemy enemy;
 	private ModelColorChange modelColorChange;
 	private bool isInvincible;
-	public float Destroytime;
-	public float Speed;
+	public float Destroytime;					// 消滅するまでの時間
+	public float Speed;							// 発射速度
 
 	void Start () {
-		//Abs = GameObject.FindWithTag("Player").GetComponent<Absorb> ();
-		//transform.rotation = Abs.transform.rotation;
+		// 一定時間(Destroytime)で消滅
 		Destroy (gameObject, Destroytime);	
 	}	
 	void Update () {
-
+		// 現在値から前方×時間×速さ(Speed)で進む
 		transform.position += transform.forward * Time.deltaTime * Speed;
-
 	}
 
 	private void OnCollisionEnter(Collision collider) {

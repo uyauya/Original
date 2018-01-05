@@ -20,6 +20,7 @@ public class Pause : MonoBehaviour
 		Setting.SetActive(false);
 		bgmManager = GameObject.Find ("BGMManager").GetComponent<BGMManager> ();
 	}
+
 	void Update ()
 	{
 		// ESCキー押した時にコンフィグ画面になっていなければ
@@ -33,7 +34,6 @@ public class Pause : MonoBehaviour
 				isPause = true;
 				Tutorial.SetActive (true);
 				Time.timeScale = 0;
-				//SoundManager.Instance.Stop ();
 				bgmManager.Pause ();		//一時停止（完全停止する場合はaudioSource.Stop();
 			}
 		}
@@ -41,11 +41,9 @@ public class Pause : MonoBehaviour
 				if (isConfig) {
 					isConfig = false;
 					Setting.SetActive (false);
-					//Time.timeScale = 1f;
 				} else {
 					isConfig = true;
 					Setting.SetActive (true);
-					//Time.timeScale = 0;
 				}
 			}
 		}

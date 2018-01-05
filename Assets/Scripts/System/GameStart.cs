@@ -42,6 +42,7 @@ public class GameStart : MonoBehaviour {
 	}
 
 	void LoadScene() {
+		// Selectシーンへ移行
 		SceneManager.LoadScene("Select");
 	}
 

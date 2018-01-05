@@ -71,7 +71,6 @@ public class PlayerLevel : MonoBehaviour
 		{
 			//Debug.Log("ParamScore"+Param.Score);
 			//Debug.Log("Score"+Score);
-			// 
 			if (Param.Score <= Score && Score <= 2200) {
 				if (Param.PlayerNo == DataManager.PlayerNo) {
 					DataManager.Level = Param.Level;
@@ -103,7 +102,7 @@ public class PlayerLevel : MonoBehaviour
 
 	public void LevelInitialize(int level) {
 		// （プレイヤーの）muzzleにレベルアップ用エフェクト設置
-		//LevelUpObject = Instantiate (LevelUpPrefab, muzzle.position, Quaternion.identity);
+		// LevelUpObject = Instantiate (LevelUpPrefab, muzzle.position, Quaternion.identity);
 		// BattleManagerオブジェクトのBattleManagerのScoreをScoreと呼ぶ
 		//int Score = DataManager.Score;
 					DataManager.Level = 1;
