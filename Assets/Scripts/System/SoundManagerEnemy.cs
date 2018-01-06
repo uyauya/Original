@@ -6,15 +6,15 @@ using UnityEngine.UI;
 // スライダーと連動させるための処理
 [RequireComponent(typeof(Slider))]
 
-//こはくの声管理用（どのSceneでも情報を保持したい場合MonoBehaviourをSingletonMonoBehaviour<スクリプト名>にする）
-public class SoundManagerKohaku : SingletonMonoBehaviour<SoundManagerKohaku> {
+//キャラクタ声管理用
+public class SoundManagerEnemy : SingletonMonoBehaviour<SoundManagerEnemy> {
 
 	[SerializeField]
-	private List<AudioSource> _voiceAudioSource;
+	private List<AudioSource> _effectAudioSource;
 	[SerializeField]
 	private List<AudioClip> audioClipList = new List<AudioClip>(); 
 	[SerializeField]
-	GameObject Kohaku = null;
+	GameObject effect;
 	private float Value;
 
 	// 音を再生する
@@ -55,9 +55,9 @@ public class SoundManagerKohaku : SingletonMonoBehaviour<SoundManagerKohaku> {
 		AudioSource audioSource = go.AddComponent<AudioSource>();
 		audioSource.volume = Value;
 		audioSource.PlayOneShot(clip);
-		_voiceAudioSource.Add (audioSource);
+		_effectAudioSource.Add (audioSource);
 		yield return new WaitWhile(() => audioSource.isPlaying);
-		_voiceAudioSource.Remove (audioSource);
+		_effectAudioSource.Remove (audioSource);
 		Destroy(audioSource);
 	}
 
@@ -68,14 +68,14 @@ public class SoundManagerKohaku : SingletonMonoBehaviour<SoundManagerKohaku> {
 		audioSource.clip = clip;
 		audioSource.volume = Value;
 		audioSource.PlayDelayed(delay);
-		_voiceAudioSource.Add (audioSource);
+		_effectAudioSource.Add (audioSource);
 		yield return new WaitWhile(() => audioSource.isPlaying);
-		_voiceAudioSource.Remove (audioSource);
+		_effectAudioSource.Remove (audioSource);
 		Destroy(audioSource);
 	}
 
 	// 音を停止する
-	/*public void Stop(int number, GameObject go = null)
+	public void Stop(int number, GameObject go = null)
 	{
 		//Debug.Log("要素数" + audioClipList.Count);
 		AudioClip clip = audioClipList[number];
@@ -94,14 +94,16 @@ public class SoundManagerKohaku : SingletonMonoBehaviour<SoundManagerKohaku> {
 
 	private void Start()
 	{
-		Kohaku.GetComponent<Slider> ().value = Volume ();
-		Kohaku.GetComponent<Slider> ().onValueChanged.AddListener ((value) => {
-			Value = value;
-			foreach (var SoundSource in _voiceAudioSource) {
-				SoundSource.volume = value;
-			}
-		});
-	}*/
+		effect.GetComponent<Slider> ().value = Volume ();
+		effect.GetComponent<Slider>().onValueChanged.AddListener((value) =>
+			{
+				Value = value;
+				foreach(var SoundSource in _effectAudioSource)
+				{
+					SoundSource.volume = value;
+				}
+			});
+	}
 
 	private void Update()
 	{
@@ -110,40 +112,40 @@ public class SoundManagerKohaku : SingletonMonoBehaviour<SoundManagerKohaku> {
 
 	public void Play()
 	{
-		AudioSource Voiceplay = gameObject.GetComponent<AudioSource> ();
-		Voiceplay.Play ();
+		AudioSource Effectplay = gameObject.GetComponent<AudioSource> ();
+		Effectplay.Play ();
 	}
 
 	public void Stop()
 	{
-		AudioSource Voicestop = gameObject.GetComponent<AudioSource> ();
-		Voicestop.Stop ();
+		AudioSource Effectstop = gameObject.GetComponent<AudioSource> ();
+		Effectstop.Stop ();
 	}
 
 	public void Pause()
 	{
-		AudioSource Voicepause = gameObject.GetComponent<AudioSource> ();
-		Voicepause.Pause ();
+		AudioSource Effectpause = gameObject.GetComponent<AudioSource> ();
+		Effectpause.Pause ();
 	}
 
 	public float Volume()
 	{
-		AudioSource Voicevolume = gameObject.GetComponent<AudioSource> ();
-		return Voicevolume.volume;
+		AudioSource Effectvolume = gameObject.GetComponent<AudioSource> ();
+		return Effectvolume.volume;
 	}
 
 	public void ChangeVolume()
 	{
-		Value = Kohaku.GetComponent<Slider>().value;
-		foreach(var SoundSource in _voiceAudioSource)
+		Value = effect.GetComponent<Slider>().value;
+		foreach(var SoundSource in _effectAudioSource)
 		{
 			SoundSource.volume = Value;
 		}
 	}
 
-	/*public void SampleVoice()
+	public void SampleEffect()
 	{
 		Play (0);
-	}*/
+	}
 }
 
