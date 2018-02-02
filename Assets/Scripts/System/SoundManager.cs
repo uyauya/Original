@@ -16,7 +16,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 	[SerializeField]
 	GameObject voice = null;
 	private float Value;
-
+	public int PlayerNo;		//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	// 音を再生する
 	public void Play(int number, GameObject go = null)
 	{
@@ -134,7 +134,16 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
 	public void ChangeVolume()
 	{
-		Value = voice.GetComponent<Slider>().value;
+		if (PlayerNo == 0) {
+			Value = voice.GetComponent<Slider>().value * 1.0f;
+		}
+		if (PlayerNo == 1) {
+			Value = voice.GetComponent<Slider>().value * 1.2f;
+		}
+		if (PlayerNo == 2) {
+			Value = voice.GetComponent<Slider>().value * 1.0f;
+		}
+
 		foreach(var SoundSource in _voiceAudioSource)
 		{
 			SoundSource.volume = Value;
@@ -143,6 +152,14 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
 	public void SampleVoice()
 	{
-		Play (0);
+		if (DataManager.PlayerNo == 0) {
+			Play (0);
+		}
+		if (DataManager.PlayerNo == 1) {
+			Play (1);
+		}
+		if (DataManager.PlayerNo == 2) {
+			Play (2);
+		}
 	}
 }
