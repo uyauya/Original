@@ -63,18 +63,18 @@ public class PlayerShoot04 : MonoBehaviour {
 			GameObject bulletObject = GameObject.Instantiate (Bullet04)as GameObject;
 			bulletObject.transform.position = muzzle.position + transform.TransformDirection(Vector3.forward * 2) + new Vector3(0, -0.3f, 0);
 			if (PlayerNo == 0) {
-				//SoundManager.Instance.Play(9,gameObject);
-				SoundManagerKohaku.Instance.Play(3,gameObject);
+				SoundManager.Instance.Play(9,gameObject);
+				//SoundManagerKohaku.Instance.Play(3,gameObject);
 				SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
 			}
 			if (PlayerNo == 1) {
-				//SoundManager.Instance.Play(10,gameObject);
-				SoundManagerYuko.Instance.Play(4,gameObject);
+				SoundManager.Instance.Play(10,gameObject);
+				//SoundManagerYuko.Instance.Play(4,gameObject);
 				SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
 			}
 			if (PlayerNo == 2) {
-				//SoundManager.Instance.Play(11,gameObject);
-				SoundManagerMisaki.Instance.Play(5,gameObject);	
+				SoundManager.Instance.Play(11,gameObject);
+				//SoundManagerMisaki.Instance.Play(5,gameObject);	
 				SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
 			}
 		}
