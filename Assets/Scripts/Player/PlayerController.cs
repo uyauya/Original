@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 	public float displayBoostPoint;					// ブーストポイント（画面表示用）
 	public int BpDown = 20;							// ブーストゲージ消費値
 	public float RecoverPoint = 0.2f;				// ブーストポイント回復値
-	public Image gaugeImage;						// ブーストゲージ（画面表示用）
+	public GameObject gaugeImage;						// ブーストゲージ（画面表示用）
 	public Text boostText;							// ブースト最大・現在数値（画面表示用）
 	Vector3 moveSpeed;								// プレイヤの速さ
 	private int JumpCount;							// ジャンプ回数計算用（二段ジャンプ処理に使用）
@@ -70,7 +70,8 @@ public class PlayerController : MonoBehaviour {
 		isBoost = false;							// ブーストはオフに
 		// Canvas上のゲージイメージを取得（オブジェクトに直接付いていない場合はゲットコンポーネントで取得する）
 		// BoostGaugeオブジェクトに付いているImageを取得
-		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
+		//gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
+		gaugeImage = GameObject.Find ("BoostGauge");
 		boostText = GameObject.Find ("TextBg").GetComponent<Text> ();
 		// 画面上(Canvas)のブーストポイントと実際(Inspector)の数値(Inspector)を同じに設定
 		displayBoostPoint = boostPoint;
@@ -255,6 +256,7 @@ public class PlayerController : MonoBehaviour {
 
 		//ブーストゲージの伸縮
 		// ゲージの最大以上には上がらない
+		//gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / DataManager.BoostPointMax, 1, 1);
 		gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / DataManager.BoostPointMax, 1, 1);
 		//gaugeImage.transform.localScale = new Vector3(0.5f,1,1);
 	}

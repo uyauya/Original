@@ -20,10 +20,10 @@ public class DataManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// シーン移動してもPlayerNoを残しておく
-		if (GameObject.Find ("DataManager") == null) {
+		//if (GameObject.Find ("DataManager") == null) {
 			DontDestroyOnLoad (this.gameObject);
 			FarstLevel = false;
-		}
+		//}
 		userParam = new UserParam ();
 	}
 	

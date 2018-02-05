@@ -71,15 +71,15 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 				new UserParam ().SaveData ();
-				if (PlayerNo == 0) {
+				if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 					//SoundManagerKohaku.Instance.Play (16, gameObject);
 				}
-				if (PlayerNo == 1) {
+				if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play (46, gameObject);
 					//SoundManagerYuko.Instance.Play (16, gameObject);
 				}
-				if (PlayerNo == 2) {
+				if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
 					//SoundManagerMisaki.Instance.Play (16, gameObject);
 				}
@@ -89,15 +89,15 @@ public class BattleManager : MonoBehaviour {
 				messageLose.enabled = true;
 				//SoundManager.Instance.Play(1,gameObject);
 				new UserParam ().SaveData ();
-				if (PlayerNo == 0) {
+				if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 					//SoundManagerKohaku.Instance.Play (16, gameObject);
 				}
-				if (PlayerNo == 1) {
+				if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play (46, gameObject);
 					//SoundManagerYuko.Instance.Play (16, gameObject);
 				}
-				if (PlayerNo == 2) {
+				if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
 					//SoundManagerMisaki.Instance.Play (16, gameObject);
 				}
@@ -105,15 +105,15 @@ public class BattleManager : MonoBehaviour {
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
-				if (PlayerNo == 0) {
+				if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play(18,gameObject);
 					//SoundManagerKohaku.Instance.Play(6,gameObject);
 				}
-				if (PlayerNo == 1) {
+				if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play(19,gameObject);
 					//SoundManagerYuko.Instance.Play(6,gameObject);
 				}
-				if (PlayerNo == 2) {
+				if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play(20,gameObject);
 					//SoundManagerMisaki.Instance.Play(6,gameObject);
 				}
