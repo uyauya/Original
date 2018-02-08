@@ -12,6 +12,7 @@ public class GameStart : MonoBehaviour {
 	public Text blinkText;					//点滅させる
 	public void Onclick_Select ()
 	{
+		animator.SetBool("START", true);    // ボタンがクリックされたら拡大する
 		DataManager.Continue = false;
 		DataManager.FarstLevel = true;
 		// ボタンを押してセレクト画面に移行
@@ -33,12 +34,12 @@ public class GameStart : MonoBehaviour {
 	}
 
 	void Update () {
-		// テキスト点滅
-		if (Input.GetMouseButtonDown(0)){
+		// 
+		/*if (Input.GetMouseButtonDown(0)){
 			animator.SetBool ("START", true);
 		} else {
 			animator.SetBool ("START", false);
-		}
+		}*/
 	}
 
 	void LoadScene() {

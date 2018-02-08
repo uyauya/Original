@@ -26,14 +26,14 @@ public class Continue : MonoBehaviour {
 		SoundManager00.Instance.Play(0);
 	}
 
-	/*void Update () {
-		// テキスト点滅
-		if (Input.GetMouseButtonDown(0)){
+	void Update () {
+		// 
+		/*if (Input.GetMouseButtonDown(0)){
 			animator.SetBool ("Continue", true);
 		} else {
 			animator.SetBool ("Continue", false);
-		}
-	}*/
+		}*/
+	}
 
 	void LoadScene() {
 		//SceneManager.LoadScene("STAGE02BOSS");
