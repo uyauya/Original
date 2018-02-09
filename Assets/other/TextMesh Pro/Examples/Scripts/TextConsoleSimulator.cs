@@ -18,6 +18,7 @@ namespace TMPro.Examples
         void Start()
         {
             StartCoroutine(RevealCharacters(m_TextComponent));
+            //StartCoroutine(RevealWords(m_TextComponent));
         }
 
 
@@ -71,7 +72,7 @@ namespace TMPro.Examples
 
                 visibleCount += 1;
 
-                yield return new WaitForSeconds(0.0f);
+                yield return null;
             }
         }
 
