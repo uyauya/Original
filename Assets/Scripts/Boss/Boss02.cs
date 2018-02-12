@@ -14,13 +14,13 @@ public class Boss02 : MonoBehaviour {
 	public float TargetSpeed;
 	public float MoveSpeed;						
 	protected EnemyBasic enemyBasic;
-
+	bool dead = false;
 
 
 	void Start () {
 		// EnemyBasic接続用
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
-		enemyBasic.Initialize ();
+		//enemyBasic.Initialize ();
 		//if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) > TargetPosition) {
 		//	return;
 		//}
@@ -35,7 +35,7 @@ public class Boss02 : MonoBehaviour {
 		// Animator の dead が true なら Update 処理を抜ける
 		if( enemyBasic.animator.GetBool("dead") == true ) return;
 		Vector3 Pog = this.gameObject.transform.position;
-		gameObject.transform.position = new Vector3(Pog.x , 1.0f, Pog.z);
+		gameObject.transform.position = new Vector3(Pog.x , 0.0f, Pog.z);
 		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
 		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		enemyBasic.timer += Time.deltaTime;

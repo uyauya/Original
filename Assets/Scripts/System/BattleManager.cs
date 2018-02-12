@@ -17,6 +17,7 @@ public class BattleManager : MonoBehaviour {
 	public Image messageStart;
 	public Image messageWin;
 	public Image messageLose;
+	public GameObject mesaageClear;		 // ステージクリア表示
 	public static int score;			 // 敵を倒した数。Enemyスクリプトでカウントアップ  
 	public Text ScoreText;				 // スコア表示用
 	private int ItemCount;				 // アイテム取得数をカウント
@@ -70,7 +71,7 @@ public class BattleManager : MonoBehaviour {
 			if (PlayerAp.armorPoint <= 0) {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
-				new UserParam ().SaveData ();
+				DataManager.Instance.SaveData ();
 				if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 					//SoundManagerKohaku.Instance.Play (16, gameObject);
@@ -88,7 +89,7 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 				//SoundManager.Instance.Play(1,gameObject);
-				new UserParam ().SaveData ();
+				DataManager.Instance.SaveData ();
 				if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 					//SoundManagerKohaku.Instance.Play (16, gameObject);
@@ -120,7 +121,7 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_PLAY;
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
 				// Scene移行時プレイヤーのパラメータの中身を取得
-				new UserParam ().SaveData ();
+				DataManager.Instance.SaveData ();
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				playerController.ItemCount = 0;
 			}	
@@ -128,7 +129,8 @@ public class BattleManager : MonoBehaviour {
 			// ボス撃破時スター出現
 			// スターオブジェクトを取得したら次面へ
 			if (playerController.GetStar >= 1 ) {
-				new UserParam ().SaveData ();
+				DataManager.Instance.SaveData ();
+				mesaageClear.SetActive (true);		// ステージクリア表示
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				playerController.GetStar = 0;
 			}
@@ -136,7 +138,8 @@ public class BattleManager : MonoBehaviour {
 			// ラスボス撃破時ビッグスター出現
 			// ビッグスターオブジェクトを取得したらエンディング
 			if (playerController.GetBigStar >= 1) {
-				Invoke ("END", ChangeTime);
+				mesaageClear.SetActive (true);		// ステージクリア表示
+				Invoke ("END", ChangeTime);			// エンドシーン（エンディング）移動
 				playerController.GetBigStar = 0;		
 		}
 		break;
@@ -175,4 +178,6 @@ public class BattleManager : MonoBehaviour {
 	private void END(){
 		SceneManager.LoadScene ("END");
 	}
+
+
 }

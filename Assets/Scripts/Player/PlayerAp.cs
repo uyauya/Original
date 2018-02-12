@@ -215,7 +215,7 @@ public class PlayerAp : MonoBehaviour {
 			armorPoint = Mathf.Clamp (armorPoint, 0, DataManager.ArmorPointMax);
 			Debug.Log (armorPoint);
 			//armorPoint = Mathf.Min (armorPoint + HealApPoint, armorPointMax);
-			Debug.Log (armorPoint);
+			//Debug.Log (armorPoint);
 			animator.SetTrigger ("ItemGet");
 		}
 

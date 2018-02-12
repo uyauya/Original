@@ -167,7 +167,7 @@ public class EnemyBasic : MonoBehaviour {
 			// 敵消滅用エフェクト発生
 			// 敵消滅中にプレイヤに接触ダメージがを与えないようにDeadCoroutineで接触判定を無くす
 			DeadObject = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-			DeadObject.transform.SetParent (EffectPoint);
+			//DeadObject.transform.SetParent (EffectPoint);
 			StartCoroutine ("DeadCoroutine");
 			Instantiate (DestroyEffect, transform.position, transform.rotation);
 			// バトルマネージャーにスコア（EnemyScoreで設定）を加算する

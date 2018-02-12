@@ -34,7 +34,7 @@ public class UserParam
 	}
 
 	// セーブ時の処理
-	public void SaveData () 
+	/*public void SaveData () 
 	{
 		UserParam instanse = new UserParam (
 			                     DataManager.PlayerNo,
@@ -67,5 +67,5 @@ public class UserParam
 		DataManager.ArmorPointMax = instanse.armorPointMax;
 		DataManager.Score = instanse.Score;
 		SceneManager.LoadScene(StageManager.Instance.StageName[StageManager.Instance.StageNo]);
-	}
+	}*/
 }	
