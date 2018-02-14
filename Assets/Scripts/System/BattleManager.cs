@@ -17,6 +17,7 @@ public class BattleManager : MonoBehaviour {
 	public Image messageStart;
 	public Image messageWin;
 	public Image messageLose;
+	public GameObject mesaageSTART;		 // スタート表示
 	public GameObject mesaageClear;		 // ステージクリア表示
 	public static int score;			 // 敵を倒した数。Enemyスクリプトでカウントアップ  
 	public Text ScoreText;				 // スコア表示用
@@ -57,6 +58,7 @@ public class BattleManager : MonoBehaviour {
 			//時間経過でメッセージを消して状態移行
 			timer += Time.deltaTime;
 				if (timer > 3) {
+				mesaageSTART.SetActive (true);		// スタート表示
 				messageStart.enabled = false;
 				battleStatus = BATTLE_PLAY;
 				timer = 0;
