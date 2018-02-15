@@ -21,7 +21,7 @@ public class SlectLoad : MonoBehaviour {
 
 	private IEnumerator LoadTime (){
 		yield return new WaitForSeconds (WaitTime);
-		SceneManager.LoadScene ("STAGE02");
+		SceneManager.LoadScene ("STAGE01");
 	}
 	
 }
