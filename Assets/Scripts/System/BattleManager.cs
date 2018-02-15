@@ -29,6 +29,7 @@ public class BattleManager : MonoBehaviour {
 	public float ChangeTime;			 // シーン変更までの時間
 	public int Count;					 // ステージ移行する為のアイテム取得個
 	public int PlayerNo;				 //プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
+	public int StageNo;
 
 	void Start () {	
 		ScoreText.text = "Score:0";
