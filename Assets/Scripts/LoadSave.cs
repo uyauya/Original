@@ -27,6 +27,6 @@ public class LoadSave : MonoBehaviour {
 	}
 
 	void LoadScene() {
-		SceneManager.LoadScene("Save");
+		SceneManager.LoadScene("SavePoint");
 	}
 }
