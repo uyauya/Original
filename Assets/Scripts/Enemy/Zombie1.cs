@@ -35,7 +35,7 @@ public class Zombie1 : MonoBehaviour {
 		// オブジェクトの場所取りをする
 		Vector3 Pog = this.gameObject.transform.position;
 		// Y軸（高さ）を発生位置から0.01上で固定
-		gameObject.transform.position = new Vector3(Pog.x , 0.01f, Pog.z);
+		gameObject.transform.position = new Vector3(Pog.x , 0, Pog.z);
 		// 横回転設定（Y軸を固定）
 		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
 		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);

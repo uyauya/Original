@@ -11,7 +11,7 @@ public class StageSelectManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		//DataManager.Instance.ClearScene;
 	}
 	
 	// Update is called once per frame
@@ -23,7 +23,7 @@ public class StageSelectManager : MonoBehaviour {
 	public void StageSelectButton(int stageNo)
 	{
 		//BattleManagerのstageNoに入れた数値の面へ移動
-		SceneManager.LoadScene ("STAGE" + stageNo);
+		SceneManager.LoadScene (StageManager.Instance.StageName[stageNo]);
 	}
 
 

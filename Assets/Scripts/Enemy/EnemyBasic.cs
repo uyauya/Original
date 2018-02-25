@@ -111,7 +111,8 @@ public class EnemyBasic : MonoBehaviour {
 	}
 
 	// 衝突判定
-	void OnCollisionEnter(Collision collider) {
+	//void OnCollisionEnter(Collision collider) {
+	void OnTriggerEnter(Collider collider) {
 		// すでにアニメーターがdeadの場合は何もしない
 		if( animator.GetBool("dead") == true ) {
 		return;
@@ -122,7 +123,7 @@ public class EnemyBasic : MonoBehaviour {
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
 			// 当たり判定用のHit01ObjectをHit01Prefabにし生成
 			Hit01Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-			Hit01Object.transform.SetParent (EffectPoint);
+			//Hit01Object.transform.SetParent (EffectPoint);
 			// ダメージコルーチン（下記参照）
 			StartCoroutine ("DamageCoroutine");
 			// Shot接触時敵Animatorを"damaged"へ移行
@@ -133,21 +134,21 @@ public class EnemyBasic : MonoBehaviour {
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-			Hit02Object.transform.SetParent (EffectPoint);
+			//Hit02Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger("damaged");
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-			Hit03Object.transform.SetParent (EffectPoint);
+			//Hit03Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger("damaged");
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-			Hit05Object.transform.SetParent (EffectPoint);
+			//Hit05Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger("damaged");
 			armorPoint -= damage;

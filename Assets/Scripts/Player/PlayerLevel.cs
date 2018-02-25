@@ -113,4 +113,13 @@ public class PlayerLevel : MonoBehaviour
 		DataManager.ArmorPointMax = userParamList[0].armorPointMax;
 		}
 
+	public static UserParam SearchParam(int PlayerNo, int Level) {
+		foreach (UserParam Param in userParamList) {
+			if (Param.PlayerNo == PlayerNo && Param.Level == Level) {
+				return Param;
+			}
+		}
+		return null;
+	}
+
 }

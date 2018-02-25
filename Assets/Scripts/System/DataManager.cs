@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // シーンをまたいでデータ保持する処理
+
 public class DataManager : SingletonMonoBehaviour<DataManager> {
 	[System.NonSerialized]
 	public static int PlayerNo;			//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	public static UserParam userParam;
-	public static bool FarstLevel;
 	public static bool Continue = false;
 	public static int Level;
 	public static int AttackPoint;
@@ -17,6 +17,8 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 	public static float ArmorPointMax;
 	public static int Score;
 	public static string SceneName;
+	public static int ClearScene;
+	public static bool FarstLevel;
 
 	// Use this for initialization
 	void Start () {
@@ -34,38 +36,43 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 	}
 
 	// セーブ時の処理
-	public void SaveData () 
+	public void SaveData (string SlotName) 
 	{
-		UserParam instanse = new UserParam (
-			DataManager.PlayerNo,
-			DataManager.Level,
-			DataManager.AttackPoint,
-			DataManager.BoostPointMax,
-			DataManager.ArmorPointMax,
-			DataManager.Score,
-			SceneManager.GetActiveScene ().name,
-			StageManager.Instance.StageNo
-		);
+		UserData userData = new UserData ();
+		//UserParam instance = new UserParam (
+		userData.PlayerNo = PlayerNo;
+		userData.Level = Level;
+		userData.AttackPoint = AttackPoint;
+		userData.BoostPointMax = BoostPointMax;
+		userData.ArmorPointMax = ArmorPointMax;
+		userData.Score = Score;
+		userData.SceneName = SceneManager.GetActiveScene ().name;
+		userData.ClearScene = ClearScene;
+		//StageManager.Instance.StageNo;
+			//this.ClearScene
+		//);
 		//UserParamインスタンスを文字列に変換
-		string UserParamSaveJson = JsonUtility.ToJson(instanse);
+		string UserParamSaveJson = JsonUtility.ToJson(userData);
 		//セーブ
-		PlayerPrefs.SetString("UserParam",UserParamSaveJson);
+		PlayerPrefs.SetString("UserParam" + SlotName,UserParamSaveJson);
 		//Debug.Log (UserParamSaveJson);
 	}
 
 	// ロード時の処理
-	public void LoadData()
+	public void LoadData(string SlotName)
 	{
 		// Jsonの文字列データをUserParamインスタンスに変換
-		string UserParamLoadJson = PlayerPrefs.GetString ("UserParam");
+		string UserParamLoadJson = PlayerPrefs.GetString ("UserParam" + SlotName);
 		//データを変数に設定してロード
-		UserParam instanse = JsonUtility.FromJson<UserParam> (UserParamLoadJson);
-		DataManager.PlayerNo = instanse.PlayerNo;
-		DataManager.Level = instanse.Level;
-		DataManager.AttackPoint = instanse.AttackPoint;
-		DataManager.BoostPointMax = instanse.boostPointMax;
-		DataManager.ArmorPointMax = instanse.armorPointMax;
-		DataManager.Score = instanse.Score;
-		SceneManager.LoadScene(StageManager.Instance.StageName[StageManager.Instance.StageNo]);
+		UserData instance = JsonUtility.FromJson<UserData> (UserParamLoadJson);
+		PlayerNo = instance.PlayerNo;
+		Level = instance.Level;
+		UserParam Param = PlayerLevel.SearchParam (PlayerNo, Level);
+		AttackPoint = Param.AttackPoint;
+		BoostPointMax = Param.boostPointMax;
+		ArmorPointMax = Param.armorPointMax;
+		Score = instance.Score;
+		ClearScene = instance.ClearScene;
+		//SceneManager.LoadScene(StageManager.Instance.StageName[StageManager.Instance.StageNo]);
 	}
 }

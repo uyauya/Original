@@ -29,7 +29,7 @@ public class BattleManager : MonoBehaviour {
 	public float ChangeTime;			 // シーン変更までの時間
 	public int Count;					 // ステージ移行する為のアイテム取得個
 	public int PlayerNo;				 //プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
-	public int StageNo;
+	//public int StageNo;
 
 	void Start () {	
 		ScoreText.text = "Score:0";
@@ -74,7 +74,7 @@ public class BattleManager : MonoBehaviour {
 			if (PlayerAp.armorPoint <= 0) {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
-				DataManager.Instance.SaveData ();
+				//DataManager.Instance.SaveData ();
 				if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 					//SoundManagerKohaku.Instance.Play (16, gameObject);
@@ -92,7 +92,7 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 				//SoundManager.Instance.Play(1,gameObject);
-				DataManager.Instance.SaveData ();
+				//DataManager.Instance.SaveData ();
 				if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 					//SoundManagerKohaku.Instance.Play (16, gameObject);
@@ -124,7 +124,7 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_PLAY;
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
 				// Scene移行時プレイヤーのパラメータの中身を取得
-				DataManager.Instance.SaveData ();
+				//DataManager.Instance.SaveData ();
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				playerController.ItemCount = 0;
 			}	
@@ -132,7 +132,7 @@ public class BattleManager : MonoBehaviour {
 			// ボス撃破時スター出現
 			// スターオブジェクトを取得したら次面へ
 			if (playerController.GetStar >= 1 ) {
-				DataManager.Instance.SaveData ();
+				//DataManager.Instance.SaveData ();
 				mesaageClear.SetActive (true);		// ステージクリア表示
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				playerController.GetStar = 0;

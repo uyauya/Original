@@ -16,8 +16,9 @@ public class UserParam
 	public int PlayerNo;		// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	public string SceneName;	// 面の名前
 	public int StageNo;
+	public int ClearNo;
 
-	public UserParam(int Pno, int level, int attackPoint, float boostMax, float armorMax, int score, string sceneName, int stageNo)
+	public UserParam(int Pno, int level, int attackPoint, float boostMax, float armorMax, int score, string sceneName, int stageNo )
 	{
 		PlayerNo = Pno;				 
 		Level = level;
@@ -27,6 +28,7 @@ public class UserParam
 		Score = score;
 		SceneName = sceneName;
 		StageNo = stageNo;
+		//ClearNo = clearNo;
 		instanse = this;
 	}
 
