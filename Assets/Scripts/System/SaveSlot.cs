@@ -13,14 +13,19 @@ public class SaveSlot : MonoBehaviour {
 			DataManager.Instance.SaveData("SaveSlot01");
 			break;
 		case 1:
+			DataManager.Instance.SaveData("SaveSlot02");
 			break;
 		case 2:
+			DataManager.Instance.SaveData("SaveSlot03");
 			break;
 		case 3:
+			DataManager.Instance.SaveData("SaveSlot04");
 			break;
 		case 4:
+			DataManager.Instance.SaveData("SaveSlot05");
 			break;
 		case 5:
+			DataManager.Instance.SaveData("SaveSlot06");
 			break;
 		default:
 			break;
