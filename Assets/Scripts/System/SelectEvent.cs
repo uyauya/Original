@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加する
 
 // シーン移行用
+
 public class SelectEvent : MonoBehaviour {
 	private AudioSource[] audioSources;
 
