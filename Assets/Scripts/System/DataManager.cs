@@ -72,7 +72,9 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 		BoostPointMax = Param.boostPointMax;
 		ArmorPointMax = Param.armorPointMax;
 		Score = instance.Score;
+		SceneName = instance.SceneName;
 		ClearScene = instance.ClearScene;
+		SceneManager.LoadScene (SceneName);
 		//SceneManager.LoadScene(StageManager.Instance.StageName[StageManager.Instance.StageNo]);
 	}
 }

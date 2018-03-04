@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加する
 using UnityEngine.UI;				// UIを使う時は追加する
 
-public class SaveSlot : MonoBehaviour {
+public class LoadSlot : MonoBehaviour {
 	public GameObject Dialogs;
 	//public Text text;
 	private int Number;
@@ -12,28 +12,28 @@ public class SaveSlot : MonoBehaviour {
 		Number = number;
 		//Dialogs.SetActive (true);
 		//DialogSettings ();
-		DialogManager.Instance.Make("せーぶするよ？",OnYesButtonAction,OnNoButtonAction);
+		DialogManager.Instance.Make("ろーどするよ？",OnYesButtonAction,OnNoButtonAction);
 	}
 
 	public void OnYesButtonAction() {
 		switch (Number) {
 		case 0:
-			DataManager.Instance.SaveData("SaveSlot01");
+			DataManager.Instance.LoadData("SaveSlot01");
 			break;
 		case 1:
-			DataManager.Instance.SaveData("SaveSlot02");
+			DataManager.Instance.LoadData("SaveSlot02");
 			break;
 		case 2:
-			DataManager.Instance.SaveData("SaveSlot03");
+			DataManager.Instance.LoadData("SaveSlot03");
 			break;
 		case 3:
-			DataManager.Instance.SaveData("SaveSlot04");
+			DataManager.Instance.LoadData("SaveSlot04");
 			break;
 		case 4:
-			DataManager.Instance.SaveData("SaveSlot05");
+			DataManager.Instance.LoadData("SaveSlot05");
 			break;
 		case 5:
-			DataManager.Instance.SaveData("SaveSlot06");
+			DataManager.Instance.LoadData("SaveSlot06");
 			break;;
 		default:
 			break;
