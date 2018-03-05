@@ -19,7 +19,7 @@ public class BattleManager : MonoBehaviour {
 	public Image messageLose;
 	public GameObject mesaageSTART;		 // スタート表示
 	public GameObject mesaageClear;		 // ステージクリア表示
-	public static int score;			 // 敵を倒した数。Enemyスクリプトでカウントアップ  
+	//public static int score;			 // 敵を倒した数。Enemyスクリプトでカウントアップ  
 	public Text ScoreText;				 // スコア表示用
 	private int ItemCount;				 // アイテム取得数をカウント
 	PlayerController playerController;

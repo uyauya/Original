@@ -71,7 +71,7 @@ public class PlayerLevel : MonoBehaviour
 		{
 			//Debug.Log("ParamScore"+Param.Score);
 			//Debug.Log("Score"+Score);
-			if (Param.Score <= Score && Score <= 2200) {
+			if (Param.Score <= Score && Score <= 26000) {
 				if (Param.PlayerNo == DataManager.PlayerNo) {
 					DataManager.Level = Param.Level;
 					//Playerのタグがついているオブジェクトを見つけPlayerControllerスクリプトのAttackPointに

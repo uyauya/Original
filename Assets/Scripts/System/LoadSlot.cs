@@ -19,9 +19,11 @@ public class LoadSlot : MonoBehaviour {
 		switch (Number) {
 		case 0:
 			DataManager.Instance.LoadData("SaveSlot01");
+			SceneManager.LoadScene (DataManager.SceneName);
 			break;
 		case 1:
 			DataManager.Instance.LoadData("SaveSlot02");
+			SceneManager.LoadScene (DataManager.SceneName);
 			break;
 		case 2:
 			DataManager.Instance.LoadData("SaveSlot03");

@@ -46,13 +46,15 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 		userData.BoostPointMax = BoostPointMax;
 		userData.ArmorPointMax = ArmorPointMax;
 		userData.Score = Score;
-		userData.SceneName = SceneManager.GetActiveScene ().name;
+		//userData.SceneName = SceneManager.GetActiveScene ().name;
+		userData.SceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo];
 		userData.ClearScene = ClearScene;
 		//StageManager.Instance.StageNo;
 			//this.ClearScene
 		//);
 		//UserParamインスタンスを文字列に変換
 		string UserParamSaveJson = JsonUtility.ToJson(userData);
+		Debug.Log (UserParamSaveJson);
 		//セーブ
 		PlayerPrefs.SetString("UserParam" + SlotName,UserParamSaveJson);
 		//Debug.Log (UserParamSaveJson);
@@ -67,6 +69,7 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 		UserData instance = JsonUtility.FromJson<UserData> (UserParamLoadJson);
 		PlayerNo = instance.PlayerNo;
 		Level = instance.Level;
+
 		UserParam Param = PlayerLevel.SearchParam (PlayerNo, Level);
 		AttackPoint = Param.AttackPoint;
 		BoostPointMax = Param.boostPointMax;
@@ -74,7 +77,7 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 		Score = instance.Score;
 		SceneName = instance.SceneName;
 		ClearScene = instance.ClearScene;
-		SceneManager.LoadScene (SceneName);
+		//SceneManager.LoadScene (SceneName);
 		//SceneManager.LoadScene(StageManager.Instance.StageName[StageManager.Instance.StageNo]);
 	}
 }
