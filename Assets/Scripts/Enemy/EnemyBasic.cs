@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // 敵キャラクタ管理用
 // ステータス欄等の共通項目を保持。キャラクタ独自の項目のみ別スクリプトに書き足す。
 public class EnemyBasic : MonoBehaviour {
+	//public Image gaugeImage;
 	public int enemyLevel = 0;
 	public Animator animator;						// Animatorセット用
 	public GameObject target;						// プレイヤー認識用
@@ -87,6 +89,7 @@ public class EnemyBasic : MonoBehaviour {
 	}
 
 	void Start () {
+		//gaugeImage = GameObject.Find ("EnemyAp").GetComponent<Image> ();
 		// Animator取得
 		animator = GetComponent< Animator >();		
 		// 被ダメージ時の点滅処理（ModelColorChange参照）
