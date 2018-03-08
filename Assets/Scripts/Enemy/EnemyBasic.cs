@@ -6,7 +6,7 @@ using UnityEngine.UI;
 // 敵キャラクタ管理用
 // ステータス欄等の共通項目を保持。キャラクタ独自の項目のみ別スクリプトに書き足す。
 public class EnemyBasic : MonoBehaviour {
-	//public Image gaugeImage;
+	//private LifeBar lifeBar;
 	public int enemyLevel = 0;
 	public Animator animator;						// Animatorセット用
 	public GameObject target;						// プレイヤー認識用
@@ -16,6 +16,7 @@ public class EnemyBasic : MonoBehaviour {
 	public GameObject exprosion;					// 爆発処理
 	public GameObject particle;
 	public float armorPoint = 100;					// HP
+	//public float armorPointMax;					    // HP
 	public int TargetRange;							// プレイヤをターゲット認識する距離
 	public float EnemySpeed;						// 移動スピード
 	public float JumpForce;							// ジャンプ力
@@ -89,7 +90,7 @@ public class EnemyBasic : MonoBehaviour {
 	}
 
 	void Start () {
-		//gaugeImage = GameObject.Find ("EnemyAp").GetComponent<Image> ();
+		//lifeBar = GetComponentInChildren<LifeBar>();
 		// Animator取得
 		animator = GetComponent< Animator >();		
 		// 被ダメージ時の点滅処理（ModelColorChange参照）
@@ -279,4 +280,19 @@ public class EnemyBasic : MonoBehaviour {
 	void setLocalGravity(){
 		rb.AddForce (localGravity, ForceMode.Acceleration);
 	}
+
+	/*public void Setarmorpoint(float armorPoint) {
+		this.armorPoint = armorPoint;
+		LifeBar.UpdateArmorpointValue ();
+		if (armorPoint <= 0) {
+			LifeBar.SetDisable ();
+		}
+	}
+	public int GetarmorPoint() {
+		return armorPoint;
+	}
+
+	public int GetarmorPoint() {
+		return armorPointMax;
+	}*/
 }
