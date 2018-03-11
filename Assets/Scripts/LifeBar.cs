@@ -13,12 +13,13 @@ public class LifeBar : MonoBehaviour {
 	void Start () {
 		enemyBasic = transform.root.GetComponent <EnemyBasic> ();
 		hpSlider = transform.Find ("LifeBar").GetComponent <Slider>();
-		//hpSlider.value = (float) enemyBasic.GetarmorPointMax () / (float) enemyBasic.GetarmorPointMax ();
+		hpSlider.value = (float) enemyBasic.GetarmorPointMax () / (float) enemyBasic.GetarmorPointMax ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.rotation = Camera.main.transform.rotation;
+		//transform.rotation = Camera.main.transform.rotation;
+		transform.LookAt(Camera.main.transform);
 	}
 
 	public void SetDisable() {
@@ -26,7 +27,7 @@ public class LifeBar : MonoBehaviour {
 	}
 
 	public void UpdateArmorPointValue() {
-		//hpSlider.value = (float) enemyBasic.GetarmorPoint () / (float) enemyBasic.GetarmorPointMax ();
+		hpSlider.value = (float) enemyBasic.GetarmorPoint () / (float) enemyBasic.GetarmorPointMax ();
 	}
 
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 // 敵キャラクタ管理用
 // ステータス欄等の共通項目を保持。キャラクタ独自の項目のみ別スクリプトに書き足す。
 public class EnemyBasic : MonoBehaviour {
-	//private LifeBar lifeBar;
+	private LifeBar lifeBar;
 	public int enemyLevel = 0;
 	public Animator animator;						// Animatorセット用
 	public GameObject target;						// プレイヤー認識用
@@ -15,8 +15,8 @@ public class EnemyBasic : MonoBehaviour {
 	public float shotIntervalMax = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
 	public GameObject exprosion;					// 爆発処理
 	public GameObject particle;
-	public float armorPoint = 100;					// HP
-	//public float armorPointMax;					    // HP
+	public float armorPointMax = 100;				// 最大HP
+	public float armorPoint;					    // HP
 	public int TargetRange;							// プレイヤをターゲット認識する距離
 	public float EnemySpeed;						// 移動スピード
 	public float JumpForce;							// ジャンプ力
@@ -90,6 +90,7 @@ public class EnemyBasic : MonoBehaviour {
 	}
 
 	void Start () {
+		armorPoint = armorPointMax;
 		//lifeBar = GetComponentInChildren<LifeBar>();
 		// Animator取得
 		animator = GetComponent< Animator >();		
@@ -281,18 +282,18 @@ public class EnemyBasic : MonoBehaviour {
 		rb.AddForce (localGravity, ForceMode.Acceleration);
 	}
 
-	/*public void Setarmorpoint(float armorPoint) {
+	public void Setarmorpoint(float armorPoint) {
 		this.armorPoint = armorPoint;
-		LifeBar.UpdateArmorpointValue ();
+		lifeBar.UpdateArmorPointValue ();
 		if (armorPoint <= 0) {
-			LifeBar.SetDisable ();
+			lifeBar.SetDisable ();
 		}
 	}
-	public int GetarmorPoint() {
+	public float GetarmorPoint() {
 		return armorPoint;
 	}
 
-	public int GetarmorPoint() {
+	public float GetarmorPointMax() {
 		return armorPointMax;
-	}*/
+	}
 }

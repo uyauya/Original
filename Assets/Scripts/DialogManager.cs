@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class DialogManager : SingletonMonoBehaviour<DialogManager>
 {
+	private AudioSource[] audioSources;
 	// ダイアログ本体
 	[SerializeField]
 	private GameObject Dialog;

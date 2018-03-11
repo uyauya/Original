@@ -18,7 +18,7 @@ public class SaveSlotStatus : MonoBehaviour {
 	}
 
 	public void GetSlotStatus (string SlotName) {
-		DataManager.Instance.LoadData (SlotName);
+		//DataManager.Instance.LoadData (SlotName);
 		string Level = DataManager.Level.ToString();
 		text.text = Level;
 	}

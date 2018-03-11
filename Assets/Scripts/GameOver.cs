@@ -32,7 +32,26 @@ public class GameOver : MonoBehaviour
 	}
 
 	void LoadScene() {
-		SceneManager.LoadScene(UserParam.instanse.SceneName);
+		//SceneManager.LoadScene(UserParam.instanse.SceneName);
+		// ロード時の処理
+		//public void LoadData(string SlotName)
+		//{
+			// Jsonの文字列データをUserParamインスタンスに変換
+			//string UserParamLoadJson = PlayerPrefs.GetString ("UserParam" + SlotName);
+			//データを変数に設定してロード
+			//UserData instance = JsonUtility.FromJson<UserData> (UserParamLoadJson);
+			int PlayerNo = DataManager.PlayerNo;
+			int Level = DataManager.Level;
+			UserParam Param = PlayerLevel.SearchParam (PlayerNo, Level);
+			DataManager.AttackPoint = Param.AttackPoint;
+			DataManager.BoostPointMax = Param.boostPointMax;
+			DataManager.ArmorPointMax = Param.armorPointMax;
+			DataManager.Score = DataManager.Score;
+			//DataManager.SceneName;
+			//DataManager.ClearScene;
+			//SceneManager.LoadScene (DataManager.SceneName);
+			SceneManager.LoadScene(StageManager.Instance.StageName[StageManager.Instance.StageNo]);
+		//}
 	}
 
 	IEnumerator CountdownCoroutine()

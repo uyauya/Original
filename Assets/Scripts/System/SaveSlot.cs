@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加
 using UnityEngine.UI;				// UIを使う時は追加する
 
 public class SaveSlot : MonoBehaviour {
+	private AudioSource[] audioSources;
 	public GameObject Dialogs;
 	//public Text text;
 	private int Number;
