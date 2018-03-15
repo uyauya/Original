@@ -91,7 +91,7 @@ public class EnemyBasic : MonoBehaviour {
 
 	void Start () {
 		armorPoint = armorPointMax;
-		//lifeBar = GetComponentInChildren<LifeBar>();
+		lifeBar = GetComponentInChildren<LifeBar>();
 		// Animator取得
 		animator = GetComponent< Animator >();		
 		// 被ダメージ時の点滅処理（ModelColorChange参照）
@@ -112,7 +112,7 @@ public class EnemyBasic : MonoBehaviour {
 
 
 	void Update () {
-		
+		//GameObject.Find("LifeBar").transform.LookAt(GameObject.Find("Player"));
 	}
 
 	// 衝突判定
