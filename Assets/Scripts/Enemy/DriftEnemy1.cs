@@ -5,21 +5,26 @@ using UnityEngine;
 //フヨフヨ漂いながら移動する（収縮する）、ヒットさせるとしぼんでいく
 public class DriftEnemy1 : MonoBehaviour {
 	protected EnemyBasic enemyBasic;
-	public float Minimum = 150.0f;			// 最小（元の）サイズ
-	public float Magspeed = 0.01f;			// 拡大スピード
-	public float Magnification = 0.007f;		// 拡大率
+	public float Minimum = 140.0f;			// 最小（元の）サイズ
+	public float Magspeed = 0.001f;			// 拡大スピード
+	public float Magnification = 1.0f;		// 拡大率
 	public Vector3 BasicPoint;
 
 	void Start () {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
-		BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z);
+		BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z);
 	}
 
 	void Update () {
-		//this.transform.localScale = new Vector3(this.Minimum + Mathf.Sin(Time.time * this.Magspeed) * this.Magnification,
-			//Mathf.Sin(Time.time * this.Magspeed) * this.Magnification, Mathf.Sin(Time.time * this.Magspeed) * this.Magnification);
+		// 拡大、縮小繰り返す
+		this.transform.localScale = new Vector3(this.Minimum + Mathf.Sin(Time.time * this.Magspeed) * this.Magnification,
+			this.Minimum + Mathf.Sin(Time.time * this.Magspeed) * this.Magnification, this.Minimum 
+			+ Mathf.Sin(Time.time * this.Magspeed) * this.Magnification);
+		//Debug.Log (transform.localScale.x);
+		//Debug.Log (this.Minimum + Mathf.Sin(Time.time * this.Magspeed) * this.Magnification);
 		enemyBasic.timer += Time.deltaTime;
+		// 上下移動
 		this.transform.position = new Vector3 (this.transform.position.x, this.BasicPoint.y + Mathf.Sin (Time.time), 
 			this.transform.position.z);
 		//敵の攻撃範囲を設定する
