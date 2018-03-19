@@ -66,6 +66,7 @@ public class EnemyBasic : MonoBehaviour {
 	public GameObject Hit05Object;
 	public GameObject DeadPrefab;					
 	public GameObject DeadObject;
+	public bool DamageSet;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -90,6 +91,7 @@ public class EnemyBasic : MonoBehaviour {
 	}
 
 	void Start () {
+		DamageSet = false;
 		armorPoint = armorPointMax;
 		lifeBar = GetComponentInChildren<LifeBar>();
 		// Animator取得
@@ -118,10 +120,17 @@ public class EnemyBasic : MonoBehaviour {
 	// 衝突判定
 	//void OnCollisionEnter(Collision collider) {
 	void OnTriggerEnter(Collider collider) {
+		Debug.Log (collider.gameObject.name);
 		// すでにアニメーターがdeadの場合は何もしない
-		if( animator.GetBool("dead") == true ) {
-		return;
+		if (animator.GetBool ("dead") == true) {
+			return;
 		}
+
+		if (collider.gameObject.tag == "Player") {
+			Debug.Log ("damageSet");
+			DamageSet = true;
+		}
+
 		// Shotタグが付いているオブジェクトに当たったら
 		if (collider.gameObject.tag == "Shot") {
 			// Bullet01スクリプトのdamageを受け取る
@@ -133,7 +142,7 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			// Shot接触時敵Animatorを"damaged"へ移行
 			// アニメーションした後元に戻すのならSetTriggerの方が単純で良い
-			animator.SetTrigger("damaged");
+			animator.SetTrigger ("damaged");
 			// 敵アーマーポイントからBullet01スクリプトのdamage値を差し引く
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot2") {
@@ -141,26 +150,27 @@ public class EnemyBasic : MonoBehaviour {
 			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			//Hit02Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
-			animator.SetTrigger("damaged");
+			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			//Hit03Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
-			animator.SetTrigger("damaged");
+			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			//Hit05Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
-			animator.SetTrigger("damaged");
+			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
 		} else if (collider.gameObject.tag == "Player") {
 			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
-			armorPoint -= bigAttack;
+			armorPoint -= bigAttack;			
 		}
+
 
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0) {
@@ -205,7 +215,13 @@ public class EnemyBasic : MonoBehaviour {
 		}	
 
 	}
-
+	void OnCollisionEnter(Collision collider) {
+		//Debug.Log (collider.gameObject.name);
+		if(collider.gameObject.tag == "Player") {
+		//Debug.Log ("damageSet");
+		DamageSet = true;
+		}
+	}
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
 	// ダメージ時の点滅処理
 	IEnumerator DamageCoroutine ()

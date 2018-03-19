@@ -44,14 +44,14 @@ public class DriftEnemy1 : MonoBehaviour {
 		// ターゲット（プレイヤー）との距離が5以内なら
 		//if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= 5.0f) {
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
-			Debug.Log ("検出");
+			//Debug.Log ("検出");
 			//if (Vector3.Distance (Player.target.transform.position, transform.position) <= enemyBasic.Search) {
 			//ターゲットの方を徐々に向く
 			// Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
 			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * 5);
-			transform.position += transform.forward * Time.deltaTime * 20;
+			transform.position += transform.forward * Time.deltaTime * 5;
 			//一定間隔でショット
 			/*enemyBasic.shotInterval += Time.deltaTime;
 			// 次の攻撃待ち時間が一定以上になれば

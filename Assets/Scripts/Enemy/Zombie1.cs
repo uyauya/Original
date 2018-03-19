@@ -8,11 +8,13 @@ public class Zombie1 : MonoBehaviour {
 	// 継承元（protectedにする）のEnemyBasicをenemyBasicとする
 	protected EnemyBasic enemyBasic;
 	bool dead = false;
+	bool damageSet;
 	//public Vector3 localGravity;	// 重力(x,y,z)
 	//private Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {
+		
 		// EnemyBasicスクリプトのデータを最初に呼び出しenemyBasicとする
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		//enemyBasic.Initialize ();
@@ -30,6 +32,8 @@ public class Zombie1 : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		damageSet = GetComponent<EnemyBasic> ().DamageSet;
+		//Debug.Log (damageSet);
 		// Animator の dead が true なら Update 処理を抜ける
 		if( enemyBasic.animator.GetBool("dead") == true ) return;
 		// オブジェクトの場所取りをする
@@ -61,6 +65,17 @@ public class Zombie1 : MonoBehaviour {
 			//Debug.Log ("hit");
 		}
 
+		if (damageSet == true) {
+			Debug.Log ("DamageSet");
+			StartCoroutine ("DamageSetCoroutine");
+		}
+	}
 
+	IEnumerator DamageSetCoroutine (){
+		damageSet = false;
+		float LastEnemySpeed = enemyBasic.EnemySpeed;
+		enemyBasic.EnemySpeed = 0;
+		yield return new WaitForSeconds(5.0f);
+		enemyBasic.EnemySpeed = LastEnemySpeed;
 	}
 }

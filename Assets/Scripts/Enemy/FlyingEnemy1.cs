@@ -10,6 +10,7 @@ public class FlyingEnemy1 : MonoBehaviour {
 	public Vector3 BasicPoint;
 	public  float angle = 30f;
 	private Vector3 targetPos;
+	public GameObject target;
 
 	void Start () {	
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
@@ -24,8 +25,11 @@ public class FlyingEnemy1 : MonoBehaviour {
 	void Update () {
 		//Vector3 Pog = this.gameObject.transform.position;
 		//gameObject.transform.position = new Vector3(Pog.x , 3.0f, Pog.z);
-		this.transform.position = new Vector3 (this.transform.position.x, this.BasicPoint.y +3, this.transform.position.z);
-		transform.Rotate(new Vector3(0, Random.Range(0,360), 0),Space.World);	
+		transform.position = target.transform.position + (target.transform.forward * 2);
+		transform.position += transform.forward;
+		transform.RotateAround (target.transform.position + (target.transform.forward * 4), Vector3.up, 1);
+		this.transform.position = new Vector3 (this.transform.position.x, this.BasicPoint.y +1, this.transform.position.z);
+		//transform.Rotate(new Vector3(0, Random.Range(0,360), 0),Space.World);	
 		//Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
 		//gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		enemyBasic.timer += Time.deltaTime;
