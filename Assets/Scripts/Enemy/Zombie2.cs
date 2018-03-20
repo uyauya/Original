@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// ゾンビ（うろうろ歩くザコキャラ）
-public class Zombie1 : MonoBehaviour {
+// ゾンビ2（大きいゾンビ）
+public class Zombie2 : MonoBehaviour {
 
 	// 継承元（protectedにする）のEnemyBasicをenemyBasicとする
 	protected EnemyBasic enemyBasic;
 	bool dead = false;
 	bool damageSet;
+	public GameObject shot;
+	float shotInterval = 0;
+	float shotIntervalMax = 1.0f;
 	//public Vector3 localGravity;	// 重力(x,y,z)
 	//private Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {
-		
+
 		// EnemyBasicスクリプトのデータを最初に呼び出しenemyBasicとする
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		//enemyBasic.Initialize ();
@@ -60,13 +63,18 @@ public class Zombie1 : MonoBehaviour {
 			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemySpeed);
-
-			enemyBasic.animator.SetTrigger ("attack");
+			enemyBasic.shotInterval += Time.deltaTime;
+			// 次の攻撃待ち時間が一定以上になれば
+			if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax) {
+				enemyBasic.animator.SetTrigger ("attack");
+				Instantiate (enemyBasic.shot, transform.position, transform.rotation);
+				enemyBasic.shotInterval = 0;
+			}
 			//Debug.Log ("hit");
 		}
 
 		if (damageSet == true) {
-			//Debug.Log ("DamageSet");
+			Debug.Log ("DamageSet");
 			StartCoroutine ("DamageSetCoroutine");
 		}
 	}
@@ -79,3 +87,4 @@ public class Zombie1 : MonoBehaviour {
 		enemyBasic.EnemySpeed = LastEnemySpeed;
 	}
 }
+

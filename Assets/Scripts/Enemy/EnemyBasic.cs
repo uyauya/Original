@@ -67,6 +67,8 @@ public class EnemyBasic : MonoBehaviour {
 	public GameObject DeadPrefab;					
 	public GameObject DeadObject;
 	public bool DamageSet;
+	public float Mscale = 1.0f;
+	public float Sscale = 1.0f;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -115,6 +117,20 @@ public class EnemyBasic : MonoBehaviour {
 
 	void Update () {
 		//GameObject.Find("LifeBar").transform.LookAt(GameObject.Find("Player"));
+		float PerArmorpoint = armorPoint / armorPointMax;
+		if( PerArmorpoint < 0.8f) {
+			gameObject.transform.localScale = new Vector3(
+				gameObject.transform.localScale.x * Mscale,
+				gameObject.transform.localScale.x * Mscale,
+				gameObject.transform.localScale.x * Mscale
+			);
+		} else if( PerArmorpoint < 0.6f) {
+			gameObject.transform.localScale = new Vector3(
+				gameObject.transform.localScale.x * Sscale,
+				gameObject.transform.localScale.x * Sscale,
+				gameObject.transform.localScale.x * Sscale
+			);
+		}
 	}
 
 	// 衝突判定

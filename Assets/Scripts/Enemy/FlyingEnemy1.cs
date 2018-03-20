@@ -50,8 +50,8 @@ public class FlyingEnemy1 : MonoBehaviour {
 			// Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
 			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
-				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * 5);
-			transform.position += transform.forward * Time.deltaTime * 20;
+				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
+			transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
 			//一定間隔でショット
 			enemyBasic.shotInterval += Time.deltaTime;
 			// 次の攻撃待ち時間が一定以上になれば
