@@ -20,6 +20,7 @@ public class Bullet02 : MonoBehaviour {
 		transform.rotation = Plshoot02.transform.rotation;
 		// 現後一定時間(DestroyTime)で自動的に消滅させる
 		Destroy (gameObject, DestroyTime);
+
 	}	
 
 	void Update ()
@@ -43,7 +44,11 @@ public class Bullet02 : MonoBehaviour {
 		// 今の位置から敵の距離を測って敵に向かって移動
 		float step = Time.deltaTime * speed;
 		transform.position = Vector3.MoveTowards (transform.position, Enemy.transform.position, step);
-
+		//damage--;
+		damage = damage - (0.9f * Time.deltaTime);
+		if (damage <= 20)
+			damage = 20;
+		Debug.Log (damage);
 	}
 
 	private void OnCollisionEnter(Collision collider) {

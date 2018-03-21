@@ -75,7 +75,7 @@ public class Zombie1 : MonoBehaviour {
 		damageSet = false;
 		float LastEnemySpeed = enemyBasic.EnemySpeed;
 		enemyBasic.EnemySpeed = 0;
-		yield return new WaitForSeconds(5.0f);
+		yield return new WaitForSeconds(2.0f);
 		enemyBasic.EnemySpeed = LastEnemySpeed;
 	}
 }
