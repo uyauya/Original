@@ -8,6 +8,7 @@ public class Boss03Shot : MonoBehaviour {
 	protected EnemyBasic enemyBasic;
 	public float ShotTime = 0.5f;
 	bool dead = false;
+	public float Acceleration = 0.1f;
 
 	void Start () {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
@@ -23,15 +24,18 @@ public class Boss03Shot : MonoBehaviour {
 		enemyBasic.timer += Time.deltaTime;
 
 		// ターゲット（プレイヤー）との距離が0.5以内なら
-		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
+		//if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
+		if((Mathf.Abs( enemyBasic.target.transform.position.z - this.transform.position.z) < 2 && 
+			Mathf.Abs( enemyBasic.target.transform.position.x - this.transform.position.x) < 2)) {
 			StartCoroutine ("Boss03ShotCoroutine");
 		}
 	}
 
 	IEnumerator Boss03ShotCoroutine (){
-		transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * ShotTime;
+		this.transform.position += new Vector3(0,0,1) * Time.deltaTime * enemyBasic.EnemySpeed * ShotTime;
+		Acceleration++;
 		yield return new WaitForSeconds(1.0f);
-		transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * ShotTime;
+		this.transform.position += new Vector3(0,0,-1) * Time.deltaTime * enemyBasic.EnemySpeed * ShotTime * 0.5f;
 	}
 
 }
