@@ -34,7 +34,7 @@ public class Bullet01 : MonoBehaviour {
 		damage = damage - (0.5f * Time.deltaTime);
 		if (damage <= 20)
 			damage = 20;
-		Debug.Log (damage);
+		//Debug.Log (damage);
 		// 弾を発射した瞬間、プレイヤーと弾が衝突してしまうので、メインメニューからEdit→ProjectSettings
 		// →Tags and Layers →PlayerとShotを追加。プレイヤーのレイヤーをPlayer,Bullet01のレイヤーをShotにし、
 		// プレイヤーを選択してEdit→ProjectSettings→Physicsにし、InspectorでPhysicsManagerを開く

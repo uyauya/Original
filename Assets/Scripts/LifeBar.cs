@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 public class LifeBar : MonoBehaviour {
 
-	private EnemyBasic enemyBasic;
-
+	public EnemyBasic enemyBasic;
 	private Slider hpSlider;
 
 	// Use this for initialization
 	void Start () {
-		enemyBasic = transform.root.GetComponent <EnemyBasic> ();
+		//enemyBasic = transform.root.GetComponent <EnemyBasic> ();
 		hpSlider = transform.Find ("EnemyAp").GetComponent <Slider>();
 		hpSlider.value = (float) enemyBasic.GetarmorPointMax () / (float) enemyBasic.GetarmorPointMax ();
 	}
@@ -29,6 +28,7 @@ public class LifeBar : MonoBehaviour {
 
 	public void UpdateArmorPointValue() {
 		hpSlider.value = (float) enemyBasic.GetarmorPoint () / (float) enemyBasic.GetarmorPointMax ();
+		//Debug.Log ("armorPoint");
 	}
 
 }

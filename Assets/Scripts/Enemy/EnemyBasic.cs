@@ -69,6 +69,7 @@ public class EnemyBasic : MonoBehaviour {
 	public bool DamageSet;
 	public float Mscale = 1.0f;
 	public float Sscale = 1.0f;
+	public GameObject LifeBar;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -136,7 +137,7 @@ public class EnemyBasic : MonoBehaviour {
 	// 衝突判定
 	//void OnCollisionEnter(Collision collider) {
 	void OnTriggerEnter(Collider collider) {
-		Debug.Log (collider.gameObject.name);
+		//Debug.Log (collider.gameObject.name);
 		// すでにアニメーターがdeadの場合は何もしない
 		if (animator.GetBool ("dead") == true) {
 			return;
@@ -161,6 +162,7 @@ public class EnemyBasic : MonoBehaviour {
 			animator.SetTrigger ("damaged");
 			// 敵アーマーポイントからBullet01スクリプトのdamage値を差し引く
 			armorPoint -= damage;
+			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
 		} else if (collider.gameObject.tag == "Shot2") {
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
@@ -168,6 +170,7 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
+			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
 		} else if (collider.gameObject.tag == "Shot3") {
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
@@ -175,6 +178,7 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
+			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
 		} else if (collider.gameObject.tag == "Shot5") {
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
@@ -182,9 +186,12 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
+			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
 		} else if (collider.gameObject.tag == "Player") {
+			Debug.Log ("一撃");
 			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
-			armorPoint -= bigAttack;			
+			armorPoint -= bigAttack;
+			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
 		}
 
 
