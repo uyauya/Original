@@ -143,17 +143,14 @@ public class PlayerShoot : MonoBehaviour {
 			//キャラクタ別にSoundManager（声担当）とSoundManager2（効果音担当）から音を鳴らす
 			if (PlayerNo == 0) {	// こはく
 			SoundManager.Instance.Play(0,gameObject);
-			//SoundManagerKohaku.Instance.Play(0,gameObject);
 			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 			}
 			if (PlayerNo == 1) {	// ゆうこ
 			SoundManager.Instance.Play(1,gameObject);	
-			//SoundManagerYuko.Instance.Play(0,gameObject);	
 			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 			}
 			if (PlayerNo == 2) {	// みさき
-			SoundManager.Instance.Play(2,gameObject);	
-			//SoundManagerMisaki.Instance.Play(0,gameObject);	
+			SoundManager.Instance.Play(2,gameObject);		
 			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 			}
 	}

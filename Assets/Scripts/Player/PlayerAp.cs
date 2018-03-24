@@ -17,8 +17,8 @@ public class PlayerAp : MonoBehaviour {
 	public Color myRed;					// RGBA(219,000,000,255)
 	public Image gaugeImage;
 	private ModelColorChange modelColorChange;
-	private bool isInvincible;			// 無敵処理（ダメージ受けた際に使用）
-	public float InvincibleTime;		// 無敵時間
+	//private bool isInvincible;		
+	public float FlashTime;				// 点滅時間
 	private Animator animator;			// Animator（PlayerMotion)取得
 	public float KnockBackRange;		// ノックバック距離（ダメージ受けた際に使用）
 	public int PlayerNo;				// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
@@ -121,15 +121,12 @@ public class PlayerAp : MonoBehaviour {
 				animator.SetTrigger ("Damage");
 				if (PlayerNo == 0) {
 					SoundManager.Instance.Play (21, gameObject);
-					//SoundManagerKohaku.Instance.Play (7, gameObject);
 				}
 				if (PlayerNo == 1) {
 					SoundManager.Instance.Play (22, gameObject);
-					//SoundManagerYuko.Instance.Play (7, gameObject);
 				}
 				if (PlayerNo == 2) {
 					SoundManager.Instance.Play (23, gameObject);
-					//SoundManagerMisaki.Instance.Play (7, gameObject);
 				}
 				StartCoroutine ("EnemyDamageCoroutine");
 			}
@@ -152,20 +149,14 @@ public class PlayerAp : MonoBehaviour {
 					if (PlayerNo == 0) {
 						SoundManager.Instance.Play(24,gameObject);	
 						SoundManager.Instance.PlayDelayed (27, 0.2f, gameObject);
-						//SoundManagerKohaku.Instance.Play(8,gameObject);	
-						//SoundManagerKohaku.Instance.PlayDelayed (9, 0.2f, gameObject);
 					}
 					if (PlayerNo == 1) {
 						SoundManager.Instance.Play(25,gameObject);	
 						SoundManager.Instance.PlayDelayed (28, 0.2f, gameObject);
-						//SoundManagerYuko.Instance.Play(8,gameObject);	
-						//SoundManagerYuko.Instance.PlayDelayed (9, 0.2f, gameObject);
 					}
 					if (PlayerNo == 2) {
 						SoundManager.Instance.Play(26,gameObject);	
 						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
-						//SoundManagerMisaki.Instance.Play(8,gameObject);	
-						//SoundManagerMisaki.Instance.PlayDelayed (9, 0.2f, gameObject);
 					}
 					StartCoroutine ("WallDamageCoroutine");
 				}
@@ -180,28 +171,22 @@ public class PlayerAp : MonoBehaviour {
 				if (armorPoint + HealApPoint < DataManager.ArmorPointMax) {
 					if (PlayerNo == 0) {
 						SoundManager.Instance.Play (18, gameObject);
-						//SoundManagerKohaku.Instance.Play (6, gameObject);
 					}
 					if (PlayerNo == 1) {
 						SoundManager.Instance.Play (19, gameObject);
-						//SoundManagerYuko.Instance.Play (6, gameObject);
 					}
 					if (PlayerNo == 2) {
 						SoundManager.Instance.Play (20, gameObject);
-						//SoundManagerMisaki.Instance.Play (6, gameObject);
 					}
 				} else if (armorPoint + HealApPoint >= DataManager.ArmorPointMax) {
 					if (PlayerNo == 0) {
 						SoundManager.Instance.PlayDelayed (39, 1.1f, gameObject);
-						//SoundManagerKohaku.Instance.PlayDelayed (13, 1.1f, gameObject);
 					}
 					if (PlayerNo == 1) {
 						SoundManager.Instance.PlayDelayed (40, 1.1f, gameObject);
-						//SoundManagerYuko.Instance.PlayDelayed (13, 1.1f, gameObject);
 					}
 					if (PlayerNo == 2) {
 						SoundManager.Instance.PlayDelayed (41, 1.1f, gameObject);
-						//SoundManagerMisaki.Instance.PlayDelayed (13, 1.1f, gameObject);
 					}
 				}
 			}
@@ -214,8 +199,6 @@ public class PlayerAp : MonoBehaviour {
 			// 体力上限以上には回復しない。
 			armorPoint = Mathf.Clamp (armorPoint, 0, DataManager.ArmorPointMax);
 			Debug.Log (armorPoint);
-			//armorPoint = Mathf.Min (armorPoint + HealApPoint, armorPointMax);
-			//Debug.Log (armorPoint);
 			animator.SetTrigger ("ItemGet");
 		}
 
@@ -252,10 +235,10 @@ public class PlayerAp : MonoBehaviour {
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			"position", transform.position - (transform.forward * KnockBackRange),
-			"time", InvincibleTime, // 好きな時間（秒）
+			"time", FlashTime, // 好きな時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
-		isInvincible = true;
+		//isInvincible = true;
 		while (count > 0){
 			//透明にする
 			modelColorChange.ColorChange(new Color (1,0,0,1));
@@ -267,7 +250,7 @@ public class PlayerAp : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
-		isInvincible = false;
+		//isInvincible = false;
 		//レイヤーをPlayerに戻す
 		gameObject.layer = LayerMask.NameToLayer("Player");
 		//iTweenのアニメーション
@@ -280,10 +263,10 @@ public class PlayerAp : MonoBehaviour {
 		int count = 4;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			"position", transform.position - (transform.forward * KnockBackRange),
-			"time", InvincibleTime, // 好きな時間（秒）
+			"time", FlashTime, // 好きな時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
-		isInvincible = true;
+		//isInvincible = true;
 		while (count > 0){
 			//透明にする
 			modelColorChange.ColorChange(new Color (1,0,0,1));
@@ -295,7 +278,7 @@ public class PlayerAp : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
-		isInvincible = false;
+		//isInvincible = false;
 	}
 
 	IEnumerator BigCoroutine ()
@@ -309,10 +292,10 @@ public class PlayerAp : MonoBehaviour {
 		// 巨大化継続時間を設定
 		int count = 100;
 		iTween.MoveTo(gameObject, iTween.Hash(
-			"time", InvincibleTime, // 好きな時間（秒）
+			"time", FlashTime, // 好きな時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
-		isInvincible = true;
+		//isInvincible = true;
 		while (count > 0){
 			//点滅時の色を設定（ModelColorChangeスクリプト参照）
 			modelColorChange.ColorChange(new Color (1,0,0,1));
@@ -329,6 +312,6 @@ public class PlayerAp : MonoBehaviour {
 		isBig = false;
 		BigAttack = 0;
 		// isInvincible解除
-		isInvincible = false;
+		//isInvincible = false;
 	}
 }

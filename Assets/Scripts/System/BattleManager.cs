@@ -77,33 +77,25 @@ public class BattleManager : MonoBehaviour {
 				//DataManager.Instance.SaveData ();
 				if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
-					//SoundManagerKohaku.Instance.Play (16, gameObject);
 				}
 				if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play (46, gameObject);
-					//SoundManagerYuko.Instance.Play (16, gameObject);
 				}
 				if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
-					//SoundManagerMisaki.Instance.Play (16, gameObject);
 				}
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			} else if (Player.transform.position.y <= -10.0f) { 
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
-				//SoundManager.Instance.Play(1,gameObject);
-				//DataManager.Instance.SaveData ();
 				if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
-					//SoundManagerKohaku.Instance.Play (16, gameObject);
 				}
 				if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play (46, gameObject);
-					//SoundManagerYuko.Instance.Play (16, gameObject);
 				}
 				if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
-					//SoundManagerMisaki.Instance.Play (16, gameObject);
 				}
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			}
@@ -111,20 +103,16 @@ public class BattleManager : MonoBehaviour {
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
 				if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play(18,gameObject);
-					//SoundManagerKohaku.Instance.Play(6,gameObject);
 				}
 				if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play(19,gameObject);
-					//SoundManagerYuko.Instance.Play(6,gameObject);
 				}
 				if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play(20,gameObject);
-					//SoundManagerMisaki.Instance.Play(6,gameObject);
 				}
 				battleStatus = BATTLE_PLAY;
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
 				// Scene移行時プレイヤーのパラメータの中身を取得
-				//DataManager.Instance.SaveData ();
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 				playerController.ItemCount = 0;
 			}	

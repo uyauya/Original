@@ -4,12 +4,12 @@ using System.Collections;
 
 public class Boss03 : MonoBehaviour {
 
-	public GameObject Boss02shot;				// 弾
+	public GameObject Boss03shot;				// 弾
 	public float ShotInterval;					// ショット間隔
 	public GameObject exprosion;	
 	int enemyLevel = 0;
 	Bullet01 b1;
-	public GameObject Boss02muzzle;				// ショットの発射口
+	public GameObject Boss03muzzle;				// ショットの発射口
 	public int TargetPosition;
 	public float TargetSpeed;
 	public float MoveSpeed;						
@@ -52,7 +52,7 @@ public class Boss03 : MonoBehaviour {
 
 		if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax) {
 			enemyBasic.animator.SetTrigger ("attack");
-			GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
+			GameObject bossshot = GameObject.Instantiate (Boss03shot, Boss03muzzle.transform.position,Quaternion.identity)as GameObject;
 			enemyBasic.shotInterval = ShotInterval;
 		}
 

@@ -192,30 +192,24 @@ public class PlayerController : MonoBehaviour {
 			animator.SetBool("Jump", true);
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(15,gameObject);
-				//SoundManagerKohaku.Instance.Play(5,gameObject);
 			}
 			if (PlayerNo == 1) {
 				SoundManager.Instance.Play(16,gameObject);
-				//SoundManagerYuko.Instance.Play(5,gameObject);
 			}
 			if (PlayerNo == 2) {
 				SoundManager.Instance.Play(17,gameObject);
-				//SoundManagerMisaki.Instance.Play(5,gameObject);
 			}
 			// ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
 		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 10)) {
 			animator.SetBool("BoostUp", Input.GetButton ("Jump"));
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(33,gameObject);
-				//SoundManagerKohaku.Instance.Play(11,gameObject);
 			}
 			if (PlayerNo == 1) {
 				SoundManager.Instance.Play(34,gameObject);
-				//SoundManagerYuko.Instance.Play(11,gameObject);
 			}
 			if (PlayerNo == 2) {
 				SoundManager.Instance.Play(35,gameObject);
-				//SoundManagerMisaki.Instance.Play(11,gameObject);
 			}
 			// ジャンプの最大値までは上昇（ボタン押し続けている間は上昇し、最大値まで行ったら上昇値を0にする）
 			if (transform.position.y > HighPoint)
@@ -279,29 +273,23 @@ public class PlayerController : MonoBehaviour {
 			// boostPointがMaxになったら声出し
 			if (boostPoint < DataManager.BoostPointMax) {
 				if (PlayerNo == 0) {
-					//SoundManager.Instance.Play (18, gameObject);
-					SoundManagerKohaku.Instance.Play (6, gameObject);
+					SoundManager.Instance.Play (18, gameObject);
 				}
 				if (PlayerNo == 1) {
 					SoundManager.Instance.Play (19, gameObject);
-					//SoundManagerYuko.Instance.Play (6, gameObject);
 				}
 				if (PlayerNo == 2) {
 					SoundManager.Instance.Play (20, gameObject);
-					//SoundManagerMisaki.Instance.Play (6, gameObject);
 				}
 			} else if (boostPoint >= DataManager.BoostPointMax) {
 				if (PlayerNo == 0) {
 					SoundManager.Instance.PlayDelayed (36, 1.1f, gameObject);
-					//SoundManagerKohaku.Instance.PlayDelayed (12, 1.1f, gameObject);
 				}
 				if (PlayerNo == 1) {
 					SoundManager.Instance.PlayDelayed (37, 1.1f, gameObject);
-					//SoundManagerYuko.Instance.PlayDelayed (12, 1.1f, gameObject);
 				}
 				if (PlayerNo == 2) {
 					SoundManager.Instance.PlayDelayed (38, 1.1f, gameObject);
-					//SoundManagerMisaki.Instance.PlayDelayed (12, 1.1f, gameObject);
 				}
 			}
 			// ブーストポイントが最大以上にはならない
@@ -323,15 +311,12 @@ public class PlayerController : MonoBehaviour {
 		if(collider.gameObject.tag == "Item3") {
 			if (PlayerNo == 0) {
 				SoundManager.Instance.PlayDelayed (30, 1.1f, gameObject);
-				//SoundManagerKohaku.Instance.PlayDelayed (10, 1.1f, gameObject);
 			}
 			if (PlayerNo == 1) {
 				SoundManager.Instance.PlayDelayed (31, 1.1f, gameObject);
-				//SoundManagerYuko.Instance.PlayDelayed (10, 1.1f, gameObject);
 			}
 			if (PlayerNo == 2) {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
-				//SoundManagerMisaki.Instance.PlayDelayed (10, 1.1f, gameObject);
 			}
 			animator.SetTrigger ("ItemGet");
 			// greenShere取得数を１追加する
@@ -341,15 +326,12 @@ public class PlayerController : MonoBehaviour {
 		if(collider.gameObject.tag == "Star") {
 			if (PlayerNo == 0) {
 				SoundManager.Instance.PlayDelayed (30, 1.1f, gameObject);
-				//SoundManagerKohaku.Instance.PlayDelayed (10, 1.1f, gameObject);
 			}
 			if (PlayerNo == 1) {
 				SoundManager.Instance.PlayDelayed (31, 1.1f, gameObject);
-				//SoundManagerYuko.Instance.PlayDelayed (10, 1.1f, gameObject);
 			}
 			if (PlayerNo == 2) {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
-				//SoundManagerMisaki.Instance.PlayDelayed (10, 1.1f, gameObject);
 			}
 			animator.SetTrigger ("ItemGet");
 			GetStar += 1;
@@ -358,15 +340,12 @@ public class PlayerController : MonoBehaviour {
 		if(collider.gameObject.tag == "BigStar") {
 			if (PlayerNo == 0) {
 				SoundManager.Instance.PlayDelayed (30, 1.1f, gameObject);
-				//SoundManagerKohaku.Instance.PlayDelayed (10, 1.1f, gameObject);
 			}
 			if (PlayerNo == 1) {
 				SoundManager.Instance.PlayDelayed (31, 1.1f, gameObject);
-				//SoundManagerYuko.Instance.PlayDelayed (10, 1.1f, gameObject);
 			}
 			if (PlayerNo == 2) {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
-				//SoundManagerMisaki.Instance.PlayDelayed (10, 1.1f, gameObject);
 			}
 			animator.SetTrigger ("ItemGet");
 			GetBigStar += 1;
