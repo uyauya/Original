@@ -136,7 +136,7 @@ public class EnemyBasic : MonoBehaviour {
 		}
 	}
 
-	// 衝突判定
+	// ショット衝突判定
 	void OnTriggerEnter(Collider collider) {
 		if (animator.GetBool ("dead") == true) {
 			return;
@@ -156,7 +156,7 @@ public class EnemyBasic : MonoBehaviour {
 			animator.SetTrigger ("damaged");
 			// 敵アーマーポイントからBullet01スクリプトのdamage値を差し引く
 			armorPoint -= damage;
-			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
+			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot2") {
 			Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
@@ -165,7 +165,7 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
-			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
+			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot3") {
 			Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
@@ -174,7 +174,7 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
-			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
+			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot5") {
 			Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
@@ -183,16 +183,15 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
-			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
-		} else if (collider.gameObject.tag == "Player") {
-			Hit = true;
-			Debug.Log ("一撃");
-			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
-			armorPoint -= bigAttack;
-			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
-			DamageSet = true;
-		}
-
+			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
+			//} else if (collider.gameObject.tag == "Player") {
+			//	Hit = true;
+			//	Debug.Log ("一撃");
+			//	bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
+			//	armorPoint -= bigAttack;
+			//	LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
+			//	DamageSet = true;
+			}
 
 		//体力が0以下になったら消滅する
 		if (armorPoint <= 0) {
@@ -237,13 +236,21 @@ public class EnemyBasic : MonoBehaviour {
 		}	
 
 	}
-	/*void OnCollisionEnter(Collision collider) {
-		//Debug.Log (collider.gameObject.name);
-		if(collider.gameObject.tag == "Player") {
-		//Debug.Log ("damageSet");
-		DamageSet = true;
+		
+	void OnCollisionEnter(Collision collider) {
+		if (collider.gameObject.tag == "Player") {
+			Hit = true;
+			Debug.Log ("一撃");
+			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
+			armorPoint -= bigAttack;
+			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
+			if (armorPoint <= 0) {
+				Destroy (gameObject, DestroyTime);
+			}
+			DamageSet = true;
 		}
-	}*/
+	}
+
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
 	// ダメージ時の点滅処理
 	IEnumerator DamageCoroutine ()

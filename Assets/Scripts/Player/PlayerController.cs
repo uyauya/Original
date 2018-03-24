@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 	public float BpHealPoint = 500;					// ブーストポイント回復値（アイテム取得時）
 	protected bool isInvincible;					// 無敵処理（ダメージ受けた際に使用）
 	private ModelColorChange modelColorChange;
-	public float InvincibleTime;		// 無敵時間
+	public float InvincibleTime;					// 無敵時間
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -103,12 +103,13 @@ public class PlayerController : MonoBehaviour {
 			// Edit→ProjectSetting→Physicsで衝突させたくない対象と交差している所の✔を外す
 			// ここではEnemyと衝突させたくない（すり抜ける）為、Enemeyのレイヤーも追加
 			// EnemeyとPlayerの交差してる✔を外す（プレイヤのLayerをPlayer、EnemyのLayerをEnemyに設定しておく）
-			gameObject.layer = LayerMask.NameToLayer("Invincible");
+			//gameObject.layer = LayerMask.NameToLayer("Invincible");
+			StartCoroutine ("BoostCoroutine");
 		}
 		else
 		{
 			isBoost = false;								//それ以外ならブーストなし（通常状態）
-			gameObject.layer = LayerMask.NameToLayer("Player");
+			//gameObject.layer = LayerMask.NameToLayer("Player");
 		}
 
 		//通常時とブースト時で変化
@@ -356,6 +357,7 @@ public class PlayerController : MonoBehaviour {
 	// ブース時の点滅
 	IEnumerator BoostCoroutine ()
 	{
+		gameObject.layer = LayerMask.NameToLayer("Invincible");
 		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
@@ -375,7 +377,7 @@ public class PlayerController : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
-		isInvincible = false;
+		gameObject.layer = LayerMask.NameToLayer("Invincible");
 	}
 
 	private void OnCollisionStay(Collision collisionInfo) {
