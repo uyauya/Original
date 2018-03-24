@@ -194,47 +194,49 @@ public class EnemyBasic : MonoBehaviour {
 			}
 
 		//体力が0以下になったら消滅する
-		if (armorPoint <= 0) {
-			//Debug.Log ("敵"+gameObject.name);
-			// Animatorを"dead"へ移行
-			// 移行後元に戻さないならBool判定にした方がよい
-			animator.SetBool("dead" , true);
-			// 死亡アニメーション中に敵が移動しないようにスピードをゼロにする
-			EnemySpeed = 0;
-			// 敵消滅用エフェクト発生
-			// 敵消滅中にプレイヤに接触ダメージがを与えないようにDeadCoroutineで接触判定を無くす
-			DeadObject = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-			//DeadObject.transform.SetParent (EffectPoint);
-			StartCoroutine ("DeadCoroutine");
-			Instantiate (DestroyEffect, transform.position, transform.rotation);
-			// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
-			battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
-			// プレイヤのレベルアップ判定(PlayerLevel参照)
-			// レベルに関係している数値はDataManagedrで管理している
-			DataManager.Score += EnemyScore;
-			playerLevel.LevelUp ();
-			// 敵消滅
-			Destroy (gameObject, DestroyTime);	
-			//Instantiate(exprosion, transform.position, transform.rotation);
-			// ボス、ラスボス消滅後は必ずクリア用スターを出現させる
-			// インスペクタ画面でIsBoss、IsLastBossに✔を付ける
-			if (isBoss == true) {
-				Instantiate (Star, transform.position, transform.rotation);
+		if (collider.gameObject.tag == "Shot" || collider.gameObject.tag == "Shot2" || collider.gameObject.tag == "Shot3"
+		    || collider.gameObject.tag == "Shot5") {
+			if (armorPoint <= 0) {
+				//Debug.Log ("敵"+gameObject.name);
+				// Animatorを"dead"へ移行
+				// 移行後元に戻さないならBool判定にした方がよい
+				animator.SetBool ("dead", true);
+				// 死亡アニメーション中に敵が移動しないようにスピードをゼロにする
+				EnemySpeed = 0;
+				// 敵消滅用エフェクト発生
+				// 敵消滅中にプレイヤに接触ダメージがを与えないようにDeadCoroutineで接触判定を無くす
+				DeadObject = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+				//DeadObject.transform.SetParent (EffectPoint);
+				StartCoroutine ("DeadCoroutine");
+				Instantiate (DestroyEffect, transform.position, transform.rotation);
+				// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
+				battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
+				// プレイヤのレベルアップ判定(PlayerLevel参照)
+				// レベルに関係している数値はDataManagedrで管理している
+				DataManager.Score += EnemyScore;
+				playerLevel.LevelUp ();
+				// 敵消滅
+				Destroy (gameObject, DestroyTime);	
+				//Instantiate(exprosion, transform.position, transform.rotation);
+				// ボス、ラスボス消滅後は必ずクリア用スターを出現させる
+				// インスペクタ画面でIsBoss、IsLastBossに✔を付ける
+				if (isBoss == true) {
+					Instantiate (Star, transform.position, transform.rotation);
+				}
+				if (isLastBoss == true) {
+					Instantiate (BigStar, transform.position, transform.rotation);
+					// ボス、ラスボス以外が消滅後は一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
+				} else if (Random.Range (0, RedEncount) == 0) {
+					Instantiate (RedSphere, transform.position, transform.rotation);
+				} else if (Random.Range (0, BlueEncount) == 0) {
+					Instantiate (BlueSphere, transform.position, transform.rotation);
+				} else if (Random.Range (0, GreenEncount) == 0) {
+					Instantiate (GreenSphere, transform.position, transform.rotation);
+				} else if (Random.Range (0, YellowEncount) == 0) {
+					Instantiate (YellowSphere, transform.position, transform.rotation);
+				}
 			}
-			if (isLastBoss == true) {
-				Instantiate (BigStar, transform.position, transform.rotation);
-			// ボス、ラスボス以外が消滅後は一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
-			} else if (Random.Range (0, RedEncount) == 0) {
-				Instantiate (RedSphere, transform.position, transform.rotation);
-			} else if (Random.Range (0, BlueEncount) == 0) {
-				Instantiate (BlueSphere, transform.position, transform.rotation);
-			} else if (Random.Range (0, GreenEncount) == 0) {
-				Instantiate (GreenSphere, transform.position, transform.rotation);
-			} else if (Random.Range (0, YellowEncount) == 0) {
-				Instantiate (YellowSphere, transform.position, transform.rotation);
-			}
-		}	
-
+		}
 	}
 		
 	void OnCollisionEnter(Collision collider) {
@@ -244,11 +246,52 @@ public class EnemyBasic : MonoBehaviour {
 			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
 			armorPoint -= bigAttack;
 			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
-			if (armorPoint <= 0) {
-				Destroy (gameObject, DestroyTime);
-			}
 			DamageSet = true;
 		}
+		//体力が0以下になったら消滅する
+		if (collider.gameObject.tag == "Player" ) {
+			if (armorPoint <= 0) {
+				//Debug.Log ("敵"+gameObject.name);
+				// Animatorを"dead"へ移行
+				// 移行後元に戻さないならBool判定にした方がよい
+				animator.SetBool ("dead", true);
+				// 死亡アニメーション中に敵が移動しないようにスピードをゼロにする
+				EnemySpeed = 0;
+				// 敵消滅用エフェクト発生
+				// 敵消滅中にプレイヤに接触ダメージがを与えないようにDeadCoroutineで接触判定を無くす
+				DeadObject = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+				//DeadObject.transform.SetParent (EffectPoint);
+				StartCoroutine ("DeadCoroutine");
+				Instantiate (DestroyEffect, transform.position, transform.rotation);
+				// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
+				battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
+				// プレイヤのレベルアップ判定(PlayerLevel参照)
+				// レベルに関係している数値はDataManagedrで管理している
+				DataManager.Score += EnemyScore;
+				playerLevel.LevelUp ();
+				// 敵消滅
+				Destroy (gameObject, DestroyTime);	
+				//Instantiate(exprosion, transform.position, transform.rotation);
+				// ボス、ラスボス消滅後は必ずクリア用スターを出現させる
+				// インスペクタ画面でIsBoss、IsLastBossに✔を付ける
+				if (isBoss == true) {
+					Instantiate (Star, transform.position, transform.rotation);
+				}
+				if (isLastBoss == true) {
+					Instantiate (BigStar, transform.position, transform.rotation);
+					// ボス、ラスボス以外が消滅後は一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
+				} else if (Random.Range (0, RedEncount) == 0) {
+					Instantiate (RedSphere, transform.position, transform.rotation);
+				} else if (Random.Range (0, BlueEncount) == 0) {
+					Instantiate (BlueSphere, transform.position, transform.rotation);
+				} else if (Random.Range (0, GreenEncount) == 0) {
+					Instantiate (GreenSphere, transform.position, transform.rotation);
+				} else if (Random.Range (0, YellowEncount) == 0) {
+					Instantiate (YellowSphere, transform.position, transform.rotation);
+				}
+			}
+		}
+
 	}
 
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
