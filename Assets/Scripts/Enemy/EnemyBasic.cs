@@ -72,6 +72,7 @@ public class EnemyBasic : MonoBehaviour {
 	public float Sscale = 1.0f;
 	public GameObject LifeBar;
 
+
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
 	{
@@ -107,6 +108,7 @@ public class EnemyBasic : MonoBehaviour {
 		target = GameObject.FindWithTag ("Player");	
 		// Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelと呼ぶ
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
+
 		// BattleManagerオブジェクトのBattleManagerをbattleManagerと呼ぶ
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 		// レイヤーをEnemyにしておく（死亡処理時使用）
@@ -240,14 +242,18 @@ public class EnemyBasic : MonoBehaviour {
 	}
 		
 	void OnCollisionEnter(Collision collider) {
-		if (collider.gameObject.tag == "Player") {
+		
+		bool isbig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
+		if (collider.gameObject.tag == "Player" && isbig == true) {
 			Hit = true;
 			Debug.Log ("一撃");
 			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
 			armorPoint -= bigAttack;
-			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
+		} else if (collider.gameObject.tag == "Player") {
 			DamageSet = true;
 		}
+			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
+
 		//体力が0以下になったら消滅する
 		if (collider.gameObject.tag == "Player" ) {
 			if (armorPoint <= 0) {

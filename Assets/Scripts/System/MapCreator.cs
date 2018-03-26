@@ -40,6 +40,7 @@ public class MapCreator : MonoBehaviour {
 		mapFloor.setObstacle(prefab_BreakBlock);		// 障害物オブジェクトを渡す
 		//mapFloor.setObstacle(prefab_BombPoint);		// 起爆スイッチを渡す
 		mapFloor.setEnemy(prefab_enemy);				// 敵オブジェクトを渡す
+		mapFloor.setEnemy(prefab_enemy2);				// 敵オブジェクトを渡す
 		initialize();									// プレイヤー位置／マップ初期化
 		StartCoroutine("enemyEmitter" , EmitterTime);	// 敵出現用のコルーチン開始
 		StartCoroutine("enemyEmitter2" , EmitterTime2);	// 敵出現用のコルーチン開始

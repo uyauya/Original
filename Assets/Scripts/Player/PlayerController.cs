@@ -377,7 +377,7 @@ public class PlayerController : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
-		gameObject.layer = LayerMask.NameToLayer("Invincible");
+		gameObject.layer = LayerMask.NameToLayer("Player");
 	}
 
 	private void OnCollisionStay(Collision collisionInfo) {
