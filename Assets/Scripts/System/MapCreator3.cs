@@ -10,11 +10,15 @@ public class MapCreator3 : MonoBehaviour {
 	public int PlaceZ;          	//奥に並べる個数
 	public float TotalDepthX;    	//奥に並べる座標
 	public float TotalDepthZ;    	//奥に並べる座標
+	public float StartPointX;
+	public float StartPointY;
+	public float StartPointz;
+
 
 	// Use this for initialization
 	void Start () {
 		//配置する座標を設定
-		Vector3 placePosition = new Vector3(-1,-9,-1);
+		Vector3 placePosition = new Vector3(StartPointX,StartPointY,StartPointz);
 		/*Vector3 placePosition = new Vector3(
 			BaseWall.position.x-BaseWall.localScale.x/2+BlockPrefab.localScale.x/2,
 			0,
