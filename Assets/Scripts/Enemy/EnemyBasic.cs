@@ -246,7 +246,7 @@ public class EnemyBasic : MonoBehaviour {
 		bool isbig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 		if (collider.gameObject.tag == "Player" && isbig == true) {
 			Hit = true;
-			Debug.Log ("一撃");
+			//Debug.Log ("一撃");
 			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
 			armorPoint -= bigAttack;
 		} else if (collider.gameObject.tag == "Player") {

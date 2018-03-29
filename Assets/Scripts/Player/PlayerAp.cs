@@ -9,6 +9,7 @@ public class PlayerAp : MonoBehaviour {
 
 	public static float armorPoint;		// プレイヤー体力
 	public int enemyAttack;
+	public float poisonAttack;
 	public Text armorText;
 	float displayArmorPoint;				
 	public Color myGreen;				// RGBA(000,240,000,255) ※Aは透明度
@@ -102,13 +103,15 @@ public class PlayerAp : MonoBehaviour {
 		maxForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().MaxForce;
 		//EnemyやEnemyの弾と衝突したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
-		if (collider.gameObject.tag == "ShotEnemy"|| collider.gameObject.tag == "Enemy") {
+		if (collider.gameObject.tag == "ShotEnemy" || collider.gameObject.tag == "Enemy") {
 			if (collider.gameObject.tag == "ShotEnemy") {
-				enemyAttack = 100;
+				enemyAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyAttack;
+				//enemyshotAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyShotAttack;
 			}
 			if (collider.gameObject.tag == "Enemy") {
-				enemyAttack = collider.gameObject.GetComponent<EnemyBasic>().EnemyAttack;
+				enemyAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyAttack;
 			}
+
 			// 巨大化していたらダメージなし
 			if (isBig == true) {
 				armorPoint -= 0;
@@ -131,8 +134,8 @@ public class PlayerAp : MonoBehaviour {
 				StartCoroutine ("EnemyDamageCoroutine");
 			}
 		
-		//速度最大で壁と接触したらダメージ
-		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
+			//速度最大で壁と接触したらダメージ
+			//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		} else if (collider.gameObject.tag == "Wall") {
 			if (isBig == true) {
 				armorPoint -= 0;
@@ -140,13 +143,36 @@ public class PlayerAp : MonoBehaviour {
 				if (force >= maxForce) {
 					//Debug.Log (force);
 					//カメラに付けているShakeCameraのShakeを呼び出す（激突時の衝撃）
-					Camera.main.gameObject.GetComponent<ShakeCamera>().Shake();
+					Camera.main.gameObject.GetComponent<ShakeCamera> ().Shake ();
 					//Debug.Log ("激突");
 					armorPoint -= 100;
 					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 					DamageObject.transform.SetParent (EffectPoint);
 					animator.SetTrigger ("Damage");
 					if (PlayerNo == 0) {
+						SoundManager.Instance.Play (24, gameObject);	
+						SoundManager.Instance.PlayDelayed (27, 0.2f, gameObject);
+					}
+					if (PlayerNo == 1) {
+						SoundManager.Instance.Play (25, gameObject);	
+						SoundManager.Instance.PlayDelayed (28, 0.2f, gameObject);
+					}
+					if (PlayerNo == 2) {
+						SoundManager.Instance.Play (26, gameObject);	
+						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
+					}
+					StartCoroutine ("WallDamageCoroutine");
+				}
+			}
+		} else if (collider.gameObject.tag == "Poison") {
+			poisonAttack = collider.gameObject.GetComponent<B2Floor> ().PoisonAttack;
+			if (isBig == true) {
+				armorPoint -= 0;
+			} else {
+				armorPoint -= poisonAttack;
+				DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
+				DamageObject.transform.SetParent (EffectPoint);
+				/*if (PlayerNo == 0) {
 						SoundManager.Instance.Play(24,gameObject);	
 						SoundManager.Instance.PlayDelayed (27, 0.2f, gameObject);
 					}
@@ -157,9 +183,8 @@ public class PlayerAp : MonoBehaviour {
 					if (PlayerNo == 2) {
 						SoundManager.Instance.Play(26,gameObject);	
 						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
-					}
-					StartCoroutine ("WallDamageCoroutine");
-				}
+					}*/
+				StartCoroutine ("PoisonDamageCoroutine");
 			}
 
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
@@ -279,6 +304,29 @@ public class PlayerAp : MonoBehaviour {
 			count--;
 		}
 		//isInvincible = false;
+	}
+
+	// 毒床触時の点滅
+	IEnumerator PoisonDamageCoroutine ()
+	{
+		//while文を10回ループ
+		int count = 4;
+		iTween.MoveTo(gameObject, iTween.Hash(
+			//"position", transform.position - (transform.forward * KnockBackRange),
+			"time", FlashTime, // 好きな時間（秒）
+			"easetype", iTween.EaseType.linear
+		));
+		while (count > 0){
+			//透明にする
+			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//0.1秒待つ
+			yield return new WaitForSeconds(0.1f);
+			//元に戻す
+			modelColorChange.ColorChange(new Color (1,1,1,1));
+			//0.1秒待つ
+			yield return new WaitForSeconds(0.1f);
+			count--;
+		}
 	}
 
 	IEnumerator BigCoroutine ()
