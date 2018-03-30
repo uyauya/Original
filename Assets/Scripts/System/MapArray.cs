@@ -280,7 +280,7 @@ public partial class MapArrayFloor : MapArray{
 					if(Random.Range(0,100) < 30){		// 0～99のランダム値で、30未満だったら
 						cleateObject(obstacle[0] , x+posAxis.x , posAxis.z);		// オブジェクト作成
 					}else{
-						deleteObject(x+posAxis.x , posAxis.z);	// オブジェクトの作成
+						deleteObject(x+posAxis.x , posAxis.z);	// オブジェクトの削除
 					}
 				}
 			}

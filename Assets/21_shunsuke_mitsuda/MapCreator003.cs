@@ -33,35 +33,35 @@ public class MapCreator003 : MonoBehaviour
 			= placePosition
 				- Vector3.forward * BlockPrefab.localScale.z * i;
 
-			Debug.Log (currentPlacePosition);
+			//Debug.Log (currentPlacePosition);
 			for (int j = 0; j < PlaceX; j++)
 			{
 				Transform tx = Instantiate(BlockPrefab, currentPlacePosition, q);   // ルートに広げると面倒なので名前を付けて子オブジェクトとする
 				currentPlacePosition.x += BlockPrefab.transform.localScale.x;
 				tx.SetParent(this.transform);
-				tx.gameObject.name = BlockPrefab.name + System.String.Format("{0:00}", i) + System.String.Format("{0:00}", j);
+				tx.gameObject.name = BlockPrefab.name + System.String.Format("{0:00}", i) + System.String.Format("{0:00}", j); //座標番号表示
 			}
 		}
 		// ここからy軸にも生成する
 
 		for (int i = 0; i < PlaceZ; i++) {
-			Vector3 currentPlacePosition = placePosition + Vector3.up - Vector3.forward * BlockPrefab.localScale.z * i;
+			Vector3 currentPlacePosition = placePosition + Vector3.up - Vector3.forward * BlockPrefab.localScale.z * i;　//ブロックの上に設置
 
 			if (i == 0 || i == PlaceZ - 1) {
 				for (int j = 0; j < PlaceX; j++) {
-					Transform tx = Instantiate (BlockPrefab, currentPlacePosition, q);   
-					currentPlacePosition.x += BlockPrefab.transform.localScale.x;
+					Transform tx = Instantiate (WallPrefab, currentPlacePosition, q);   
+					currentPlacePosition.x += WallPrefab.transform.localScale.x;	
 					tx.SetParent (this.transform);
-					tx.gameObject.name = BlockPrefab.name + System.String.Format ("{0:00}", i) + System.String.Format ("{0:00}", j);
+					tx.gameObject.name = WallPrefab.name + System.String.Format ("{0:00}", i) + System.String.Format ("{0:00}", j);
 				}
 			} else {
 				for (int j = 0; j < PlaceX; j++) {
 					if (j == 0 || j == PlaceX - 1) {
-						Transform tx = Instantiate (BlockPrefab, currentPlacePosition, q);  
+						Transform tx = Instantiate (WallPrefab, currentPlacePosition, q);  
 						tx.SetParent (this.transform);
-						tx.gameObject.name = BlockPrefab.name + System.String.Format ("{0:00}", i) + System.String.Format ("{0:00}", j);
+						tx.gameObject.name = WallPrefab.name + System.String.Format ("{0:00}", i) + System.String.Format ("{0:00}", j);
 					}
-					currentPlacePosition.x += BlockPrefab.transform.localScale.x;
+					currentPlacePosition.x += WallPrefab.transform.localScale.x;
 				}
 			}
 		}

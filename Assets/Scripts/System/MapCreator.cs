@@ -13,9 +13,10 @@ public class MapCreator : MonoBehaviour {
 	public	GameObject[]	prefab_BL;			// 床ブロック格納用のプレファブ配列
 	public	GameObject[]	prefab_WALL;		// 壁ブロック格納用のプレファブ配列
 	public	GameObject[]	prefab_enemy;		// 敵の格納用のプレファブ配列
+	public float[] ApperanceRate;
 	public float EmitterTime = 1.0f;
-	public	GameObject[]	prefab_enemy2;		// 敵の格納用のプレファブ配列
-	public float EmitterTime2 = 1.0f;
+	//public	GameObject[]	prefab_enemy2;		// 敵の格納用のプレファブ配列
+	//public float EmitterTime2 = 1.0f;
 	public	GameObject[]	prefab_BreakBlock;
 	public	GameObject[]	prefab_BombPoint;
 	private float timer = 0.0f;
@@ -40,10 +41,10 @@ public class MapCreator : MonoBehaviour {
 		mapFloor.setObstacle(prefab_BreakBlock);		// 障害物オブジェクトを渡す
 		//mapFloor.setObstacle(prefab_BombPoint);		// 起爆スイッチを渡す
 		mapFloor.setEnemy(prefab_enemy);				// 敵オブジェクトを渡す
-		mapFloor.setEnemy(prefab_enemy2);				// 敵オブジェクトを渡す
+		//mapFloor.setEnemy(prefab_enemy2);				// 敵オブジェクトを渡す
 		initialize();									// プレイヤー位置／マップ初期化
 		StartCoroutine("enemyEmitter" , EmitterTime);	// 敵出現用のコルーチン開始
-		StartCoroutine("enemyEmitter2" , EmitterTime2);	// 敵出現用のコルーチン開始
+		//StartCoroutine("enemyEmitter2" , EmitterTime2);	// 敵出現用のコルーチン開始
 	}
 
 	// ■■■プレイヤー位置／マップ初期化■■■
@@ -74,14 +75,21 @@ public class MapCreator : MonoBehaviour {
 	// ■■■敵出現用のコルーチン■■■
 	IEnumerator enemyEmitter(float time){
 		while(true){
-			mapFloor.enemyArrival();					// 敵出現処理
+			float num = Random.Range (0.0f, 1.0f);
+			if (num < ApperanceRate [0]) {
+				GameObject.Instantiate (prefab_enemy[0]);
+			} else if (num < ApperanceRate [1]) {
+				GameObject.Instantiate (prefab_enemy[1]);
+			}
+			mapFloor.enemyArrival ();
 			yield return new WaitForSeconds(time);		// time秒、処理を待機.
 		}
 	}
-	IEnumerator enemyEmitter2(float time){
+
+	/*IEnumerator enemyEmitter2(float time){
 		while(true){
 			mapFloor.enemyArrival();					// 敵出現処理
 			yield return new WaitForSeconds(time);		// time秒、処理を待機.
 		}
-	}
+	}*/
 }
