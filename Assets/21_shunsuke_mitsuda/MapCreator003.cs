@@ -6,7 +6,7 @@ public class MapCreator003 : MonoBehaviour
 {
 	public Vector3 placePosition;	//配置する座標
 	public Transform BlockPrefab;
-	//public Transform BaseWall;    //上の壁の参照を追加
+	public Transform WallPrefab;    //上の壁の参照を追加
 	public int PlaceX;              //横に並べる個数
 	public int PlaceZ;              //奥に並べる個数
 	public float TotalDepthX;       //奥に並べる座標
