@@ -6,12 +6,21 @@ using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加
 
 public class StageSelectManager : MonoBehaviour {
 	private AudioSource[] audioSources;
+	public GameObject LockText;
+	public GameObject UnLockText;
+	public int MyStageNo;
 
-	public GameObject[] stageButtons;	// ステージセレクトボタン格納
+	//public GameObject[] stageButtons;	// ステージセレクトボタン格納
 
 	// Use this for initialization
 	void Start () {
-		//DataManager.Instance.ClearScene;
+		if (MyStageNo <= DataManager.ClearScene) {
+			LockText.SetActive (false);
+			UnLockText.SetActive (true);
+		} else {
+			LockText.SetActive (true);
+			UnLockText.SetActive (false);
+		}
 	}
 	
 	// Update is called once per frame
@@ -22,8 +31,10 @@ public class StageSelectManager : MonoBehaviour {
 	//ステージセレクトで指定したボタン押して
 	public void StageSelectButton(int stageNo)
 	{
-		//BattleManagerのstageNoに入れた数値の面へ移動
-		SceneManager.LoadScene (StageManager.Instance.StageName[stageNo]);
+		if (stageNo <= DataManager.ClearScene) {
+			//BattleManagerのstageNoに入れた数値の面へ移動
+			SceneManager.LoadScene (StageManager.Instance.StageName [stageNo]);
+		}
 	}
 
 

@@ -159,7 +159,10 @@ public class BattleManager : MonoBehaviour {
 
 	private void NextScene(){
 		StageManager.Instance.StageNo++;
-		SceneManager.LoadScene (StageManager.Instance.StageName[StageManager.Instance.StageNo]);
+		if (StageManager.Instance.StageNo > DataManager.ClearScene) {
+			DataManager.ClearScene = StageManager.Instance.StageNo;
+		}
+			SceneManager.LoadScene (StageManager.Instance.StageName [StageManager.Instance.StageNo]);
 	}
 
 	private void GameOver(){
