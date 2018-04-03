@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加
 
 public class StageSelectManager : MonoBehaviour {
 	private AudioSource[] audioSources;
-	public GameObject LockText;
-	public GameObject UnLockText;
-	public int MyStageNo;
-
-	//public GameObject[] stageButtons;	// ステージセレクトボタン格納
+	public GameObject LockText;			// ステージクリア前のに表示テキスト
+	public GameObject UnLockText;		// ステージクリアしてない時に表示
+	public int MyStageNo;				// ボタンにつけたステージの番号
 
 	// Use this for initialization
 	void Start () {
+		//ボタンに付けたステージ番号がClearSceneより大きければクリア済とみなして
+		//ステージ移行可能表示にする。
 		if (MyStageNo <= DataManager.ClearScene) {
 			LockText.SetActive (false);
 			UnLockText.SetActive (true);
