@@ -33,7 +33,9 @@ public class StageSelectManager : MonoBehaviour {
 	{
 		if (stageNo <= DataManager.ClearScene) {
 			//BattleManagerのstageNoに入れた数値の面へ移動
+			UserParam userParam = DataManager.userParam;
 			SceneManager.LoadScene (StageManager.Instance.StageName [stageNo]);
+
 		}
 	}
 

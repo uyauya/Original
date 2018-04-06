@@ -20,23 +20,29 @@ public class LoadSlot : MonoBehaviour {
 		switch (Number) {
 		case 0:
 			DataManager.Instance.LoadData("SaveSlot01");
-			SceneManager.LoadScene (DataManager.SceneName);
+			//SceneManager.LoadScene (DataManager.SceneName);
+			SceneManager.LoadScene ("StageSelect");
 			break;
 		case 1:
 			DataManager.Instance.LoadData("SaveSlot02");
-			SceneManager.LoadScene (DataManager.SceneName);
+			//SceneManager.LoadScene (DataManager.SceneName);
+			SceneManager.LoadScene ("StageSelect");
 			break;
 		case 2:
 			DataManager.Instance.LoadData("SaveSlot03");
+			SceneManager.LoadScene ("StageSelect");
 			break;
 		case 3:
 			DataManager.Instance.LoadData("SaveSlot04");
+			SceneManager.LoadScene ("StageSelect");
 			break;
 		case 4:
 			DataManager.Instance.LoadData("SaveSlot05");
+			SceneManager.LoadScene ("StageSelect");
 			break;
 		case 5:
 			DataManager.Instance.LoadData("SaveSlot06");
+			SceneManager.LoadScene ("StageSelect");
 			break;;
 		default:
 			break;

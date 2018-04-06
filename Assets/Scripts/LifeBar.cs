@@ -27,8 +27,11 @@ public class LifeBar : MonoBehaviour {
 	}
 
 	public void UpdateArmorPointValue() {
+		//Debug.Log (hpSlider);
+		if(hpSlider != null) {
 		hpSlider.value = (float) enemyBasic.GetarmorPoint () / (float) enemyBasic.GetarmorPointMax ();
 		//Debug.Log ("armorPoint");
+		}
 	}
 
 }
