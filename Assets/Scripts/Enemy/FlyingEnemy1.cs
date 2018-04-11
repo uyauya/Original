@@ -7,10 +7,10 @@ public class FlyingEnemy1 : MonoBehaviour {
 
 	protected EnemyBasic enemyBasic;
 	bool dead = false;
-	public Vector3 BasicPoint;
+	public Vector3 BasicPoint;		// 
 	public  float angle = 30f;
-	private Vector3 targetPos;
-	public GameObject target;
+	private Vector3 targetPos;		// 移動範囲の中心
+	public GameObject target;		// 出現時の座標（地上からの高さを決める）
 
 	void Start () {	
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();

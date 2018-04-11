@@ -8,7 +8,7 @@ public class DriftEnemy1 : MonoBehaviour {
 	public float Minimum = 140.0f;			// 最小（元の）サイズ
 	public float Magspeed = 0.001f;			// 拡大スピード
 	public float Magnification = 1.0f;		// 拡大率
-	public Vector3 BasicPoint;
+	public Vector3 BasicPoint;				// 出現時の座標（地上からの高さを決める）
 
 	void Start () {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
