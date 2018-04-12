@@ -29,7 +29,7 @@ public class FlyingEnemy1 : MonoBehaviour {
 		transform.position = target.transform.position + (target.transform.forward * 2);
 		transform.position += transform.forward;
 		//ターゲットを中心に（回る中心の座標、軸、速度）で回す
-		transform.RotateAround (target.transform.position + (target.transform.forward * 4), Vector3.up, 1);
+		transform.RotateAround (target.transform.position + (target.transform.forward * 2), Vector3.up, 1);
 		//軸と回すキャラクタの高低差の設定
 		this.transform.position = new Vector3 (this.transform.position.x, this.BasicPoint.y +1, this.transform.position.z);
 		//transform.Rotate(new Vector3(0, Random.Range(0,360), 0),Space.World);	
