@@ -7,10 +7,10 @@ public class FlyingEnemy1 : MonoBehaviour {
 
 	protected EnemyBasic enemyBasic;
 	bool dead = false;
-	public Vector3 BasicPoint;		// 
+	public Vector3 BasicPoint;		// 出現時の座標（地上からの高さを決める）
 	public  float angle = 30f;
-	private Vector3 targetPos;		// 移動範囲の中心
-	public GameObject target;		// 出現時の座標（地上からの高さを決める）
+	private Vector3 targetPos;		// 軸の場所
+	public GameObject target;		// 回転するための中心部（軸）
 
 	void Start () {	
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
@@ -25,9 +25,12 @@ public class FlyingEnemy1 : MonoBehaviour {
 	void Update () {
 		//Vector3 Pog = this.gameObject.transform.position;
 		//gameObject.transform.position = new Vector3(Pog.x , 3.0f, Pog.z);
+		//オブジェクト配置場所の前方×2の場所をターゲット（軸）とする
 		transform.position = target.transform.position + (target.transform.forward * 2);
 		transform.position += transform.forward;
+		//ターゲットを中心に（回る中心の座標、軸、速度）で回す
 		transform.RotateAround (target.transform.position + (target.transform.forward * 4), Vector3.up, 1);
+		//軸と回すキャラクタの高低差の設定
 		this.transform.position = new Vector3 (this.transform.position.x, this.BasicPoint.y +1, this.transform.position.z);
 		//transform.Rotate(new Vector3(0, Random.Range(0,360), 0),Space.World);	
 		//Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
@@ -35,7 +38,6 @@ public class FlyingEnemy1 : MonoBehaviour {
 		enemyBasic.timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.TargetRange) {
-
 			//ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);

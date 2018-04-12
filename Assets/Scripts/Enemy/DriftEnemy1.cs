@@ -28,20 +28,20 @@ public class DriftEnemy1 : MonoBehaviour {
 		this.transform.position = new Vector3 (this.transform.position.x, this.BasicPoint.y + Mathf.Sin (Time.time), 
 			this.transform.position.z);
 		//敵の攻撃範囲を設定する
+		//相手の位置と自分の位置の差がTargetRange以内なら
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.TargetRange) {
-
 			//ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
 			transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
 		}
-		enemyBasic.timeElapsed += Time.deltaTime;
-		if (enemyBasic.timeElapsed >= enemyBasic.timeOut) {
-			transform.position += transform.up * Time.deltaTime * enemyBasic.JumpForce;
-			enemyBasic.timeElapsed = 0.0f;
-		}
+		//enemyBasic.timeElapsed += Time.deltaTime;
+		//if (enemyBasic.timeElapsed >= enemyBasic.timeOut) {
+		//	transform.position += transform.up * Time.deltaTime * enemyBasic.JumpForce;
+		//	enemyBasic.timeElapsed = 0.0f;
+		//}
 
-		// ターゲット（プレイヤー）との距離が5以内なら
+		// ターゲット（プレイヤー）との距離がSearch以内なら
 		//if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= 5.0f) {
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
 			//Debug.Log ("検出");
@@ -60,23 +60,7 @@ public class DriftEnemy1 : MonoBehaviour {
 				enemyBasic.shotInterval = 0;
 			}*/			
 		}
-		/*if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
-			//ターゲットの方を徐々に向く
-			// Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
-			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
-			/*transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
-				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemySpeed);
-			transform.position += transform.forward * Time.deltaTime * 1;
-			if (enemyBasic.timeElapsed >= enemyBasic.timeOut) {
-				transform.position += transform.up * Time.deltaTime * enemyBasic.JumpForce;
-				enemyBasic.timeElapsed = 0.0f;
-			}
 
-			//animator.SetBool ("attack", true);
-			//Debug.Log ("hit");
-		}*/
-		// Animator の dead が true なら Update 処理を抜ける
-		//if( animator.GetBool("dead") == true ) return;
 	}
 
 }

@@ -66,11 +66,11 @@ public class EnemyBasic : MonoBehaviour {
 	public GameObject Hit05Object;
 	public GameObject DeadPrefab;					
 	public GameObject DeadObject;
-	public bool DamageSet;
-	public bool Hit;
-	public float Mscale = 1.0f;
-	public float Sscale = 1.0f;
-	public GameObject LifeBar;
+	public bool DamageSet;							// ダメージ判定の有無
+	//public bool Hit;
+	public float Mscale = 1.0f;						// 縮小（第一段階）				
+	public float Sscale = 1.0f;						// 縮小（第二段階）
+	public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
 
 
 	/*[CustomEditor(typeof(Zombie))]
@@ -97,7 +97,7 @@ public class EnemyBasic : MonoBehaviour {
 
 	void Start () {
 		DamageSet = false;
-		Hit = false;
+		//Hit = false;
 		armorPoint = armorPointMax;
 		lifeBar = GetComponentInChildren<LifeBar>();
 		// Animator取得
@@ -145,7 +145,7 @@ public class EnemyBasic : MonoBehaviour {
 		}
 		// Shotタグが付いているオブジェクトに当たったら
 		if (collider.gameObject.tag == "Shot") {
-			Hit = true;
+			//Hit = true;
 			// Bullet01スクリプトのdamageを受け取る
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
 			// 当たり判定用のHit01ObjectをHit01Prefabにし生成
@@ -160,7 +160,7 @@ public class EnemyBasic : MonoBehaviour {
 			armorPoint -= damage;
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot2") {
-			Hit = true;
+			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			//Hit02Object.transform.SetParent (EffectPoint);
@@ -169,7 +169,7 @@ public class EnemyBasic : MonoBehaviour {
 			armorPoint -= damage;
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot3") {
-			Hit = true;
+			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			//Hit03Object.transform.SetParent (EffectPoint);
@@ -178,7 +178,7 @@ public class EnemyBasic : MonoBehaviour {
 			armorPoint -= damage;
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot5") {
-			Hit = true;
+			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			//Hit05Object.transform.SetParent (EffectPoint);
@@ -186,14 +186,7 @@ public class EnemyBasic : MonoBehaviour {
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
-			//} else if (collider.gameObject.tag == "Player") {
-			//	Hit = true;
-			//	Debug.Log ("一撃");
-			//	bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
-			//	armorPoint -= bigAttack;
-			//	LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
-			//	DamageSet = true;
-			}
+		}
 
 		//体力が0以下になったら消滅する
 		if (collider.gameObject.tag == "Shot" || collider.gameObject.tag == "Shot2" || collider.gameObject.tag == "Shot3"
@@ -245,7 +238,7 @@ public class EnemyBasic : MonoBehaviour {
 		
 		bool isbig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 		if (collider.gameObject.tag == "Player" && isbig == true) {
-			Hit = true;
+			//Hit = true;
 			//Debug.Log ("一撃");
 			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
 			armorPoint -= bigAttack;
@@ -383,6 +376,7 @@ public class EnemyBasic : MonoBehaviour {
 			lifeBar.SetDisable ();
 		}
 	}
+
 	public float GetarmorPoint() {
 		return armorPoint;
 	}

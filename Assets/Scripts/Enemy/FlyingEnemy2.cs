@@ -21,8 +21,8 @@ public class FlyingEnemy2 : MonoBehaviour {
 	}
 
 	void Update () {
-		transform.position = target.transform.position + (target.transform.forward * 2);
 		//オブジェクト配置場所の前方×2の場所をターゲット（軸）とする
+		transform.position = target.transform.position + (target.transform.forward * 2);
 		transform.position += transform.forward;
 		//ターゲットを中心に（回る中心の座標、軸、速度）で回す
 		transform.RotateAround (target.transform.position + (target.transform.forward * 2), Vector3.up, 1);
