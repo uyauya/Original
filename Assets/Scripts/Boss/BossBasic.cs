@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 // 敵キャラクタ管理用
 // ステータス欄等の共通項目を保持。キャラクタ独自の項目のみ別スクリプトに書き足す。
-public class EnemyBasic : MonoBehaviour {
+public class BossBasic : MonoBehaviour {
 	private LifeBar lifeBar;
 	public int enemyLevel = 0;
 	public Animator animator;						// Animatorセット用
@@ -70,7 +70,7 @@ public class EnemyBasic : MonoBehaviour {
 	//public bool Hit;
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
-	public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
+	//public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
 	public GameObject BossLifeBar;
 
 	/*[CustomEditor(typeof(Zombie))]
@@ -92,15 +92,15 @@ public class EnemyBasic : MonoBehaviour {
 	}*/
 
 	public void Initialize () {
-		
+
 	}
 
 	void Start () {
-		LifeBar.SetActive (false);
+		BossLifeBar.SetActive (false);
 		DamageSet = false;
 		//Hit = false;
 		armorPoint = armorPointMax;
-		lifeBar = GetComponentInChildren<LifeBar>();
+		//lifeBar = GetComponentInChildren<LifeBar>();
 		// Animator取得
 		animator = GetComponent< Animator >();		
 		// 被ダメージ時の点滅処理（ModelColorChange参照）
@@ -160,7 +160,7 @@ public class EnemyBasic : MonoBehaviour {
 			animator.SetTrigger ("damaged");
 			// 敵アーマーポイントからBullet01スクリプトのdamage値を差し引く
 			armorPoint -= damage;
-			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
+			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot2") {
 			StartCoroutine ("LifeBarCoroutine");
 			//Hit = true;
@@ -170,7 +170,7 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
-			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
+			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot3") {
 			StartCoroutine ("LifeBarCoroutine");
 			//Hit = true;
@@ -180,7 +180,7 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
-			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
+			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot5") {
 			StartCoroutine ("LifeBarCoroutine");
 			//Hit = true;
@@ -190,12 +190,12 @@ public class EnemyBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
-			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
+			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		}
 
 		//体力が0以下になったら消滅する
 		if (collider.gameObject.tag == "Shot" || collider.gameObject.tag == "Shot2" || collider.gameObject.tag == "Shot3"
-		    || collider.gameObject.tag == "Shot5") {
+			|| collider.gameObject.tag == "Shot5") {
 			if (armorPoint <= 0) {
 				//Debug.Log ("敵"+gameObject.name);
 				// Animatorを"dead"へ移行
@@ -226,21 +226,21 @@ public class EnemyBasic : MonoBehaviour {
 				if (isLastBoss == true) {
 					Instantiate (BigStar, transform.position, transform.rotation);
 					// ボス、ラスボス以外が消滅後は一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
-				} else if (Random.Range (0, RedEncount) == 0) {
+				/*} else if (Random.Range (0, RedEncount) == 0) {
 					Instantiate (RedSphere, transform.position, transform.rotation);
 				} else if (Random.Range (0, BlueEncount) == 0) {
 					Instantiate (BlueSphere, transform.position, transform.rotation);
 				} else if (Random.Range (0, GreenEncount) == 0) {
 					Instantiate (GreenSphere, transform.position, transform.rotation);
 				} else if (Random.Range (0, YellowEncount) == 0) {
-					Instantiate (YellowSphere, transform.position, transform.rotation);
+					Instantiate (YellowSphere, transform.position, transform.rotation);*/
 				}
 			}
 		}
 	}
-		
+
 	void OnCollisionEnter(Collision collider) {
-		
+
 		bool isbig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 		if (collider.gameObject.tag == "Player" && isbig == true) {
 			//Hit = true;
@@ -250,7 +250,7 @@ public class EnemyBasic : MonoBehaviour {
 		} else if (collider.gameObject.tag == "Player") {
 			DamageSet = true;
 		}
-			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
+		BossLifeBar.GetComponent<BossLifeBar>().UpdateArmorPointValue();
 
 		//体力が0以下になったら消滅する
 		if (collider.gameObject.tag == "Player" ) {
@@ -390,10 +390,5 @@ public class EnemyBasic : MonoBehaviour {
 	public float GetarmorPointMax() {
 		return armorPointMax;
 	}
-
-	IEnumerator LifeBarCoroutine (){
-		LifeBar.SetActive (true);
-		yield return new WaitForSeconds (0.5f);
-		LifeBar.SetActive (false);
-	}
 }
+
