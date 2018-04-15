@@ -11,7 +11,7 @@ public class BossLifeBar : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//enemyBasic = transform.root.GetComponent <EnemyBasic> ();
-		hpSlider = transform.Find ("EnemyAp").GetComponent <Slider>();
+		hpSlider = transform.Find ("Slider").GetComponent <Slider>();
 		hpSlider.value = (float) bossBasic.GetarmorPointMax () / (float)bossBasic.GetarmorPointMax ();
 	}
 

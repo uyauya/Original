@@ -71,6 +71,7 @@ public class Zombie1 : MonoBehaviour {
 		}
 	}
 
+	//攻撃が当たったらWaitForSeconds分だけSpeedをゼロにする（動きを止める）
 	IEnumerator DamageSetCoroutine (){
 		damageSet = false;
 		float LastEnemySpeed = enemyBasic.EnemySpeed;

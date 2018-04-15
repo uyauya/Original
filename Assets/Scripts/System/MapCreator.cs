@@ -76,11 +76,13 @@ public class MapCreator : MonoBehaviour {
 	IEnumerator enemyEmitter(float time){
 		while(true){
 			float num = Random.Range (0.0f, 1.0f);
-			if (num < ApperanceRate [0]) {
+			if (ApperanceRate.Length == 0) {
+				;//何もしない
+			} else if (num < ApperanceRate [0]) {
 				GameObject.Instantiate (prefab_enemy[0]);
 			} else if (num < ApperanceRate [1]) {
 				GameObject.Instantiate (prefab_enemy[1]);
-			}
+			} 
 			mapFloor.enemyArrival ();
 			yield return new WaitForSeconds(time);		// time秒、処理を待機.
 		}

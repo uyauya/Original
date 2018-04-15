@@ -104,13 +104,18 @@ public class PlayerAp : MonoBehaviour {
 		//EnemyやEnemyの弾と衝突したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		if (collider.gameObject.tag == "ShotEnemy" || collider.gameObject.tag == "Enemy") {
-			if (collider.gameObject.tag == "ShotEnemy") {
-				enemyAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyAttack;
-				//enemyshotAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyShotAttack;
-			}
-			if (collider.gameObject.tag == "Enemy") {
+			if (collider.gameObject.tag == "ShotEnemy" && collider.gameObject.GetComponent<EnemyBasic> () != null) {
 				enemyAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyAttack;
 			}
+			if (collider.gameObject.tag == "ShotEnemy" && collider.gameObject.GetComponent<BossBasic>() != null) {
+				enemyAttack = collider.gameObject.GetComponent<BossBasic> ().EnemyAttack;
+			}
+			if (collider.gameObject.tag == "Enemy" && collider.gameObject.GetComponent<EnemyBasic>() != null) {
+				enemyAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyAttack;
+			} 	
+			if (collider.gameObject.tag == "Enemy" && collider.gameObject.GetComponent<BossBasic>() != null) {
+				enemyAttack = collider.gameObject.GetComponent<BossBasic> ().EnemyAttack;
+			} 	
 
 			// 巨大化していたらダメージなし
 			if (isBig == true) {

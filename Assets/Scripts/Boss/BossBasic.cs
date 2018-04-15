@@ -6,16 +6,15 @@ using UnityEngine.UI;
 // 敵キャラクタ管理用
 // ステータス欄等の共通項目を保持。キャラクタ独自の項目のみ別スクリプトに書き足す。
 public class BossBasic : MonoBehaviour {
-	private LifeBar lifeBar;
 	public int enemyLevel = 0;
 	public Animator animator;						// Animatorセット用
 	public GameObject target;						// プレイヤー認識用
 	public GameObject shot;
 	public float shotInterval = 0;					// 攻撃間隔計測開始
 	public float shotIntervalMax = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
-	public GameObject exprosion;					// 爆発処理
-	public GameObject particle;
-	public float armorPointMax = 100;				// 最大HP
+	//public GameObject exprosion;					// 爆発処理
+	//public GameObject particle;
+	public float armorPointMax = 10000;				// 最大HP
 	public float armorPoint;					    // HP
 	public int TargetRange;							// プレイヤをターゲット認識する距離
 	public float EnemySpeed;						// 移動スピード
@@ -39,17 +38,17 @@ public class BossBasic : MonoBehaviour {
 	public BattleManager battleManager;
 	PlayerLevel playerLevel;
 	public int EnemyScore = 1000;					// 敵を倒した時の得点
-	public GameObject RedSphere;					// アーマーポイント回復用玉（アイテムタグ3）
-	public GameObject BlueSphere;					// ブーストポイント回復用玉（アイテムタグ2）
-	public GameObject GreenSphere;					// ボス面移行用玉（アイテムタグ3）
-	public GameObject YellowSphere;					// プレイヤ巨大＆無敵化
+	//public GameObject RedSphere;					// アーマーポイント回復用玉（アイテムタグ3）
+	//public GameObject BlueSphere;					// ブーストポイント回復用玉（アイテムタグ2）
+	//public GameObject GreenSphere;					// ボス面移行用玉（アイテムタグ3）
+	//public GameObject YellowSphere;					// プレイヤ巨大＆無敵化
 	public GameObject Star;							// ボス面クリア用スター
 	public GameObject BigStar;						// ラスボス面クリア用スター
-	public int RedEncount = 16;						// RedSphere生成率の分母
-	public int BlueEncount = 8;
-	public int GreenEncount= 32;
-	public int YellowEncount= 32;
-	public int bigAttack;
+	//public int RedEncount = 16;						// RedSphere生成率の分母
+	//public int BlueEncount = 8;
+	//public int GreenEncount= 32;
+	//public int YellowEncount= 32;
+	//public int bigAttack;
 	public bool isBoss;								// ボスの場合はインスペクタに✔を入れる
 	public bool isLastBoss;							// ラスボスの場合はインスペクタに✔を入れる
 	bool dead = false;								// 敵死亡時のアニメーション判定用
@@ -96,7 +95,7 @@ public class BossBasic : MonoBehaviour {
 	}
 
 	void Start () {
-		BossLifeBar.SetActive (false);
+		BossLifeBar.SetActive (true);
 		DamageSet = false;
 		//Hit = false;
 		armorPoint = armorPointMax;
@@ -146,7 +145,7 @@ public class BossBasic : MonoBehaviour {
 		}
 		// Shotタグが付いているオブジェクトに当たったら
 		if (collider.gameObject.tag == "Shot") {
-			StartCoroutine ("LifeBarCoroutine");
+			//StartCoroutine ("LifeBarCoroutine");
 			//Hit = true;
 			// Bullet01スクリプトのdamageを受け取る
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
@@ -162,7 +161,7 @@ public class BossBasic : MonoBehaviour {
 			armorPoint -= damage;
 			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot2") {
-			StartCoroutine ("LifeBarCoroutine");
+			//StartCoroutine ("LifeBarCoroutine");
 			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
@@ -172,7 +171,7 @@ public class BossBasic : MonoBehaviour {
 			armorPoint -= damage;
 			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot3") {
-			StartCoroutine ("LifeBarCoroutine");
+			//StartCoroutine ("LifeBarCoroutine");
 			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
@@ -182,7 +181,7 @@ public class BossBasic : MonoBehaviour {
 			armorPoint -= damage;
 			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot5") {
-			StartCoroutine ("LifeBarCoroutine");
+			//StartCoroutine ("LifeBarCoroutine");
 			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
@@ -239,7 +238,7 @@ public class BossBasic : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter(Collision collider) {
+	/*void OnCollisionEnter(Collision collider) {
 
 		bool isbig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 		if (collider.gameObject.tag == "Player" && isbig == true) {
@@ -297,7 +296,7 @@ public class BossBasic : MonoBehaviour {
 			}
 		}
 
-	}
+	}*/
 
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
 	// ダメージ時の点滅処理
@@ -361,7 +360,7 @@ public class BossBasic : MonoBehaviour {
 		// 無敵解除
 		isInvincible = false;
 		//レイヤーをEnemyに戻す
-		gameObject.layer = LayerMask.NameToLayer("Enemy");
+		//gameObject.layer = LayerMask.NameToLayer("Enemy");
 	}
 
 	// 重力設定を個別で設定
@@ -377,9 +376,9 @@ public class BossBasic : MonoBehaviour {
 
 	public void Setarmorpoint(float armorPoint) {
 		this.armorPoint = armorPoint;
-		lifeBar.UpdateArmorPointValue ();
+		BossLifeBar.GetComponent<BossLifeBar>().UpdateArmorPointValue ();
 		if (armorPoint <= 0) {
-			lifeBar.SetDisable ();
+			BossLifeBar.GetComponent<BossLifeBar>().SetDisable ();
 		}
 	}
 
