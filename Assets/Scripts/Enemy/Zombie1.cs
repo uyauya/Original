@@ -23,7 +23,7 @@ public class Zombie1 : MonoBehaviour {
 	}
 
 	/*void FixedUpdate () {
-		setLocalGravity ();
+		
 	}
 
 	void setLocalGravity(){

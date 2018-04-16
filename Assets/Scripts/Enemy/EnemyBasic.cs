@@ -120,6 +120,7 @@ public class EnemyBasic : MonoBehaviour {
 
 
 	void Update () {
+		setLocalGravity ();
 		//GameObject.Find("LifeBar").transform.LookAt(GameObject.Find("Player"));
 		float PerArmorpoint = armorPoint / armorPointMax;
 		if( PerArmorpoint < 0.8f) {
@@ -170,6 +171,7 @@ public class EnemyBasic : MonoBehaviour {
 			armorPoint -= damage;
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot3") {
+			//Debug.Log (collider.gameObject.name);
 			StartCoroutine ("LifeBarCoroutine");
 			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;

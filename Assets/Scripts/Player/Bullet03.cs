@@ -39,13 +39,18 @@ public class Bullet03 : MonoBehaviour {
 		// 自分自身を中心に、半径50.0以内にいるColliderを探し、配列に格納
 		Collider[] targets = Physics.OverlapSphere (transform.position, 50.0f);
 		foreach (Collider col in targets) {		// targets配列を順番に処理 (その時に仮名をobjとする)
-			if (col.gameObject.tag == "Enemy") {			// タグ名がEnemyなら
+			if (col.gameObject.tag == "Enemy" && col.gameObject.GetComponent<EnemyBasic>() != null) {			// タグ名がEnemyなら
 				EnemyBasic enemyinsta = col.gameObject.GetComponent<EnemyBasic>();
 				if (enemyinsta != null) {
 				enemyinsta.Damaged(bombDamage);	// ダメージを与える
 				}
 			}
-
+			if (col.gameObject.tag == "Enemy" && col.gameObject.GetComponent<BossBasic>() != null) {			// タグ名がEnemyなら
+				BossBasic enemyinsta = col.gameObject.GetComponent<BossBasic>();
+				if (enemyinsta != null) {
+					enemyinsta.Damaged(bombDamage);	// ダメージを与える
+				}
+			}
 		}
 	}
 

@@ -99,6 +99,7 @@ public class PlayerAp : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision collider) {
+		Debug.Log (collider.gameObject.name);
 		force = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Force;
 		maxForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().MaxForce;
 		//EnemyやEnemyの弾と衝突したらダメージ
