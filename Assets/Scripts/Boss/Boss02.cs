@@ -8,25 +8,20 @@ public class Boss02 : MonoBehaviour {
 	public float ShotInterval;					// ショット間隔
 	public GameObject exprosion;	
 	int enemyLevel = 0;
-	Bullet01 b1;
 	public GameObject Boss02muzzle;				// ショットの発射口
-	public int TargetPosition;
-	public float TargetSpeed;
-	public float MoveSpeed;						
-	protected BossBasic bossBasic;
+	public int TargetPosition;					// ターゲットの場所検知
+	public float TargetSpeed;					// 振り向きの速度
+	public float MoveSpeed;						// 進む速度
+	protected BossBasic bossBasic;				// BossBasic接続用
 	bool dead = false;
 	public GameObject BossLifeBar;
 
 
 	void Start () {
-		// EnemyBasic接続用
+		// BossBasic接続用
 		bossBasic = gameObject.GetComponent<BossBasic> ();
 		BossLifeBar = GameObject.Find ("BossLife");
 		BossLifeBar.SetActive(true);
-		//enemyBasic.Initialize ();
-		//if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) > TargetPosition) {
-		//	return;
-		//}
 	}
 
 
@@ -43,19 +38,21 @@ public class Boss02 : MonoBehaviour {
 		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		bossBasic.timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する
+		//ターゲット（プレイヤ）の場所とボスの場所の距離がTargetPosition数値以内なら
 		if (Vector3.Distance (bossBasic.target.transform.position, transform.position) <= TargetPosition) {
-			
-			//ターゲットの方を徐々に向く
+			//ターゲットの方をTargetSpeedでに向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(bossBasic.target.transform.position - transform.position), Time.deltaTime * TargetSpeed);
+			//ターゲットに向かってMoveSpeed数値で進む
 			transform.position += transform.forward * Time.deltaTime * MoveSpeed;	
 		}
-		//一定間隔でショット
+		// ショット間隔計算
 		bossBasic.shotInterval += Time.deltaTime;
-
+		// shotIntervalMax数値以上になったらショット
 		if (bossBasic.shotInterval > bossBasic.shotIntervalMax) {
 			bossBasic.animator.SetTrigger ("attack");
 			GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
+			// 再びショット間隔計算開始
 			bossBasic.shotInterval = ShotInterval;
 		}
 

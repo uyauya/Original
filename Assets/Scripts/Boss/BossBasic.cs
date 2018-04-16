@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// 敵キャラクタ管理用
+// BOSS管理用
 // ステータス欄等の共通項目を保持。キャラクタ独自の項目のみ別スクリプトに書き足す。
 public class BossBasic : MonoBehaviour {
 	public int enemyLevel = 0;
@@ -12,8 +12,6 @@ public class BossBasic : MonoBehaviour {
 	public GameObject shot;
 	public float shotInterval = 0;					// 攻撃間隔計測開始
 	public float shotIntervalMax = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
-	//public GameObject exprosion;					// 爆発処理
-	//public GameObject particle;
 	public float armorPointMax = 10000;				// 最大HP
 	public float armorPoint;					    // HP
 	public int TargetRange;							// プレイヤをターゲット認識する距離
@@ -38,17 +36,8 @@ public class BossBasic : MonoBehaviour {
 	public BattleManager battleManager;
 	PlayerLevel playerLevel;
 	public int EnemyScore = 1000;					// 敵を倒した時の得点
-	//public GameObject RedSphere;					// アーマーポイント回復用玉（アイテムタグ3）
-	//public GameObject BlueSphere;					// ブーストポイント回復用玉（アイテムタグ2）
-	//public GameObject GreenSphere;					// ボス面移行用玉（アイテムタグ3）
-	//public GameObject YellowSphere;					// プレイヤ巨大＆無敵化
 	public GameObject Star;							// ボス面クリア用スター
 	public GameObject BigStar;						// ラスボス面クリア用スター
-	//public int RedEncount = 16;						// RedSphere生成率の分母
-	//public int BlueEncount = 8;
-	//public int GreenEncount= 32;
-	//public int YellowEncount= 32;
-	//public int bigAttack;
 	public bool isBoss;								// ボスの場合はインスペクタに✔を入れる
 	public bool isLastBoss;							// ラスボスの場合はインスペクタに✔を入れる
 	bool dead = false;								// 敵死亡時のアニメーション判定用
@@ -66,10 +55,8 @@ public class BossBasic : MonoBehaviour {
 	public GameObject DeadPrefab;					
 	public GameObject DeadObject;
 	public bool DamageSet;							// ダメージ判定の有無
-	//public bool Hit;
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
-	//public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
 	public GameObject BossLifeBar;
 
 	/*[CustomEditor(typeof(Zombie))]
@@ -97,9 +84,7 @@ public class BossBasic : MonoBehaviour {
 	void Start () {
 		BossLifeBar.SetActive (true);
 		DamageSet = false;
-		//Hit = false;
 		armorPoint = armorPointMax;
-		//lifeBar = GetComponentInChildren<LifeBar>();
 		// Animator取得
 		animator = GetComponent< Animator >();		
 		// 被ダメージ時の点滅処理（ModelColorChange参照）
@@ -108,7 +93,6 @@ public class BossBasic : MonoBehaviour {
 		target = GameObject.FindWithTag ("Player");	
 		// Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelと呼ぶ
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
-
 		// BattleManagerオブジェクトのBattleManagerをbattleManagerと呼ぶ
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 		// レイヤーをEnemyにしておく（死亡処理時使用）
@@ -121,7 +105,6 @@ public class BossBasic : MonoBehaviour {
 
 
 	void Update () {
-		//GameObject.Find("LifeBar").transform.LookAt(GameObject.Find("Player"));
 		float PerArmorpoint = armorPoint / armorPointMax;
 		if( PerArmorpoint < 0.8f) {
 			gameObject.transform.localScale = new Vector3(
@@ -145,8 +128,6 @@ public class BossBasic : MonoBehaviour {
 		}
 		// Shotタグが付いているオブジェクトに当たったら
 		if (collider.gameObject.tag == "Shot") {
-			//StartCoroutine ("LifeBarCoroutine");
-			//Hit = true;
 			// Bullet01スクリプトのdamageを受け取る
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
 			// 当たり判定用のHit01ObjectをHit01Prefabにし生成
@@ -161,8 +142,6 @@ public class BossBasic : MonoBehaviour {
 			armorPoint -= damage;
 			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot2") {
-			//StartCoroutine ("LifeBarCoroutine");
-			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			//Hit02Object.transform.SetParent (EffectPoint);
@@ -171,8 +150,6 @@ public class BossBasic : MonoBehaviour {
 			armorPoint -= damage;
 			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot3") {
-			//StartCoroutine ("LifeBarCoroutine");
-			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			//Hit03Object.transform.SetParent (EffectPoint);
@@ -181,8 +158,6 @@ public class BossBasic : MonoBehaviour {
 			armorPoint -= damage;
 			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot5") {
-			//StartCoroutine ("LifeBarCoroutine");
-			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			//Hit05Object.transform.SetParent (EffectPoint);
@@ -205,7 +180,6 @@ public class BossBasic : MonoBehaviour {
 				// 敵消滅用エフェクト発生
 				// 敵消滅中にプレイヤに接触ダメージがを与えないようにDeadCoroutineで接触判定を無くす
 				DeadObject = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-				//DeadObject.transform.SetParent (EffectPoint);
 				StartCoroutine ("DeadCoroutine");
 				Instantiate (DestroyEffect, transform.position, transform.rotation);
 				// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
@@ -216,7 +190,6 @@ public class BossBasic : MonoBehaviour {
 				playerLevel.LevelUp ();
 				// 敵消滅
 				Destroy (gameObject, DestroyTime);	
-				//Instantiate(exprosion, transform.position, transform.rotation);
 				// ボス、ラスボス消滅後は必ずクリア用スターを出現させる
 				// インスペクタ画面でIsBoss、IsLastBossに✔を付ける
 				if (isBoss == true) {
@@ -225,78 +198,10 @@ public class BossBasic : MonoBehaviour {
 				if (isLastBoss == true) {
 					Instantiate (BigStar, transform.position, transform.rotation);
 					// ボス、ラスボス以外が消滅後は一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
-				/*} else if (Random.Range (0, RedEncount) == 0) {
-					Instantiate (RedSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, BlueEncount) == 0) {
-					Instantiate (BlueSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, GreenEncount) == 0) {
-					Instantiate (GreenSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, YellowEncount) == 0) {
-					Instantiate (YellowSphere, transform.position, transform.rotation);*/
 				}
 			}
 		}
 	}
-
-	/*void OnCollisionEnter(Collision collider) {
-
-		bool isbig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
-		if (collider.gameObject.tag == "Player" && isbig == true) {
-			//Hit = true;
-			//Debug.Log ("一撃");
-			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
-			armorPoint -= bigAttack;
-		} else if (collider.gameObject.tag == "Player") {
-			DamageSet = true;
-		}
-		BossLifeBar.GetComponent<BossLifeBar>().UpdateArmorPointValue();
-
-		//体力が0以下になったら消滅する
-		if (collider.gameObject.tag == "Player" ) {
-			if (armorPoint <= 0) {
-				//Debug.Log ("敵"+gameObject.name);
-				// Animatorを"dead"へ移行
-				// 移行後元に戻さないならBool判定にした方がよい
-				animator.SetBool ("dead", true);
-				// 死亡アニメーション中に敵が移動しないようにスピードをゼロにする
-				EnemySpeed = 0;
-				// 敵消滅用エフェクト発生
-				// 敵消滅中にプレイヤに接触ダメージがを与えないようにDeadCoroutineで接触判定を無くす
-				DeadObject = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-				//DeadObject.transform.SetParent (EffectPoint);
-				StartCoroutine ("DeadCoroutine");
-				Instantiate (DestroyEffect, transform.position, transform.rotation);
-				// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
-				battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
-				// プレイヤのレベルアップ判定(PlayerLevel参照)
-				// レベルに関係している数値はDataManagedrで管理している
-				DataManager.Score += EnemyScore;
-				playerLevel.LevelUp ();
-				// 敵消滅
-				Destroy (gameObject, DestroyTime);	
-				//Instantiate(exprosion, transform.position, transform.rotation);
-				// ボス、ラスボス消滅後は必ずクリア用スターを出現させる
-				// インスペクタ画面でIsBoss、IsLastBossに✔を付ける
-				if (isBoss == true) {
-					BossLifeBar.SetActive(false);
-					Instantiate (Star, transform.position, transform.rotation);
-				}
-				if (isLastBoss == true) {
-					Instantiate (BigStar, transform.position, transform.rotation);
-					// ボス、ラスボス以外が消滅後は一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
-				} else if (Random.Range (0, RedEncount) == 0) {
-					Instantiate (RedSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, BlueEncount) == 0) {
-					Instantiate (BlueSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, GreenEncount) == 0) {
-					Instantiate (GreenSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, YellowEncount) == 0) {
-					Instantiate (YellowSphere, transform.position, transform.rotation);
-				}
-			}
-		}
-
-	}*/
 
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
 	// ダメージ時の点滅処理
