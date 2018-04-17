@@ -58,6 +58,7 @@ public class BossBasic : MonoBehaviour {
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
 	public GameObject BossLifeBar;
+	public float StarHeight = 1.0f;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -193,10 +194,14 @@ public class BossBasic : MonoBehaviour {
 				// ボス、ラスボス消滅後は必ずクリア用スターを出現させる
 				// インスペクタ画面でIsBoss、IsLastBossに✔を付ける
 				if (isBoss == true) {
-					Instantiate (Star, transform.position, transform.rotation);
+					//Instantiate (Star, transform.position, transform.rotation);
+					Vector3 Pog = this.gameObject.transform.position;
+					Instantiate (Star, transform.position += new Vector3(0, StarHeight, 0), transform.rotation);
 				}
 				if (isLastBoss == true) {
-					Instantiate (BigStar, transform.position, transform.rotation);
+					//Instantiate (BigStar, transform.position, transform.rotation);
+					Vector3 Pog = this.gameObject.transform.position;
+					Instantiate (BigStar, transform.position += new Vector3(0 , StarHeight, 0), transform.rotation);
 					// ボス、ラスボス以外が消滅後は一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
 				}
 			}
@@ -264,8 +269,6 @@ public class BossBasic : MonoBehaviour {
 		}
 		// 無敵解除
 		isInvincible = false;
-		//レイヤーをEnemyに戻す
-		//gameObject.layer = LayerMask.NameToLayer("Enemy");
 	}
 
 	// 重力設定を個別で設定

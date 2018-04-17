@@ -71,6 +71,7 @@ public class EnemyBasic : MonoBehaviour {
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
 	public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
+	public float SphereHeight = 1.0f;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -227,13 +228,18 @@ public class EnemyBasic : MonoBehaviour {
 					Instantiate (BigStar, transform.position, transform.rotation);
 					// ボス、ラスボス以外が消滅後は一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
 				} else if (Random.Range (0, RedEncount) == 0) {
-					Instantiate (RedSphere, transform.position, transform.rotation);
+					///Instantiate (BlueSphere, transform.position, transform.rotation);
+					Vector3 Pog = this.gameObject.transform.position;
+					Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
 				} else if (Random.Range (0, BlueEncount) == 0) {
-					Instantiate (BlueSphere, transform.position, transform.rotation);
+					Vector3 Pog = this.gameObject.transform.position;
+					Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
 				} else if (Random.Range (0, GreenEncount) == 0) {
-					Instantiate (GreenSphere, transform.position, transform.rotation);
+					Vector3 Pog = this.gameObject.transform.position;
+					Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
 				} else if (Random.Range (0, YellowEncount) == 0) {
-					Instantiate (YellowSphere, transform.position, transform.rotation);
+					Vector3 Pog = this.gameObject.transform.position;
+					Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
 				}
 			}
 		}

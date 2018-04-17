@@ -99,7 +99,7 @@ public class PlayerAp : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision collider) {
-		Debug.Log (collider.gameObject.name);
+		//Debug.Log (collider.gameObject.name);
 		force = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Force;
 		maxForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().MaxForce;
 		//EnemyやEnemyの弾と衝突したらダメージ
@@ -229,7 +229,7 @@ public class PlayerAp : MonoBehaviour {
 			armorPoint += HealApPoint;
 			// 体力上限以上には回復しない。
 			armorPoint = Mathf.Clamp (armorPoint, 0, DataManager.ArmorPointMax);
-			Debug.Log (armorPoint);
+			//Debug.Log (armorPoint);
 			animator.SetTrigger ("ItemGet");
 		}
 
