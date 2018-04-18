@@ -67,7 +67,7 @@ public class EnemyBasic : MonoBehaviour {
 	public GameObject DeadPrefab;					
 	public GameObject DeadObject;
 	public bool DamageSet;							// ダメージ判定の有無
-	//public bool Hit;
+	public bool FreezeSet;							// フリーズ判定の有無
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
 	public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
@@ -146,13 +146,12 @@ public class EnemyBasic : MonoBehaviour {
 		}
 		// Shotタグが付いているオブジェクトに当たったら
 		if (collider.gameObject.tag == "Shot") {
+			DamageSet = true;
 			StartCoroutine ("LifeBarCoroutine");
-			//Hit = true;
 			// Bullet01スクリプトのdamageを受け取る
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
 			// 当たり判定用のHit01ObjectをHit01Prefabにし生成
 			Hit01Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-			//Hit01Object.transform.SetParent (EffectPoint);
 			// ダメージコルーチン（下記参照）
 			StartCoroutine ("DamageCoroutine");
 			// Shot接触時敵Animatorを"damaged"へ移行
@@ -162,32 +161,29 @@ public class EnemyBasic : MonoBehaviour {
 			armorPoint -= damage;
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot2") {
+			DamageSet = true;
 			StartCoroutine ("LifeBarCoroutine");
-			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
 			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-			//Hit02Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot3") {
 			//Debug.Log (collider.gameObject.name);
+			DamageSet = true;
 			StartCoroutine ("LifeBarCoroutine");
-			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-			//Hit03Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot5") {
+			DamageSet = true;
 			StartCoroutine ("LifeBarCoroutine");
-			//Hit = true;
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-			//Hit05Object.transform.SetParent (EffectPoint);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
@@ -249,7 +245,6 @@ public class EnemyBasic : MonoBehaviour {
 		
 		bool isbig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 		if (collider.gameObject.tag == "Player" && isbig == true) {
-			//Hit = true;
 			//Debug.Log ("一撃");
 			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
 			armorPoint -= bigAttack;
@@ -333,6 +328,35 @@ public class EnemyBasic : MonoBehaviour {
 		// 無敵解除
 		isInvincible = false;
 	}
+
+	// フリーズ時の点滅処理
+	/*IEnumerator FreezeCoroutine ()
+	{
+		//while文を10回ループ
+		int count = 10;
+		iTween.MoveTo(gameObject, iTween.Hash(
+			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
+			"position", transform.position - (transform.forward * KnockBackRange),
+			// 無敵(ダメージ判定なし)時間設定（秒）
+			"time", InvincibleTime, 
+			"easetype", iTween.EaseType.linear
+		));
+		// 無敵(ダメージ判定なし)にして
+		isInvincible = true;
+		while (count > 0){
+			//透明にする(ModelColorChange参照)
+			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//0.05秒待つ
+			yield return new WaitForSeconds(0.1f);
+			//元に戻す
+			modelColorChange.ColorChange(new Color (1,1,1,1));
+			//0.05秒待つ
+			yield return new WaitForSeconds(0.1f);
+			count--;
+		}
+		// 無敵解除
+		isInvincible = false;
+	}*/
 
 	// 死亡時処理
 	IEnumerator DeadCoroutine ()

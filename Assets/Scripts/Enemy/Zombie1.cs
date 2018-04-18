@@ -9,30 +9,21 @@ public class Zombie1 : MonoBehaviour {
 	protected EnemyBasic enemyBasic;
 	bool dead = false;
 	bool damageSet;
-	//public Vector3 localGravity;	// 重力(x,y,z)
-	//private Rigidbody rb;
+	public float DamageTime = 2.0f;
+	//bool freezeSet;
+	//public float FreezeTime = 2.0f;
 
 	// Use this for initialization
 	void Start () {
 		
 		// EnemyBasicスクリプトのデータを最初に呼び出しenemyBasicとする
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
-		//enemyBasic.Initialize ();
-		//rb = this.GetComponent<Rigidbody>();
-		//rb.useGravity = false;
 	}
-
-	/*void FixedUpdate () {
-		
-	}
-
-	void setLocalGravity(){
-		rb.AddForce (localGravity, ForceMode.Acceleration);
-	}*/
 
 	// Update is called once per frame
 	void Update () {
 		damageSet = GetComponent<EnemyBasic> ().DamageSet;
+		//freezeSet = GetComponent<EnemyBasic> ().FreezeSet;
 		//Debug.Log (damageSet);
 		// Animator の dead が true なら Update 処理を抜ける
 		if( enemyBasic.animator.GetBool("dead") == true ) return;
@@ -71,12 +62,21 @@ public class Zombie1 : MonoBehaviour {
 		}
 	}
 
-	//攻撃が当たったらWaitForSeconds分だけSpeedをゼロにする（動きを止める）
+	//攻撃が当たったらDamageTime分だけSpeedをゼロにする（動きを止める）
 	IEnumerator DamageSetCoroutine (){
 		damageSet = false;
 		float LastEnemySpeed = enemyBasic.EnemySpeed;
 		enemyBasic.EnemySpeed = 0;
-		yield return new WaitForSeconds(2.0f);
+		yield return new WaitForSeconds(DamageTime);
 		enemyBasic.EnemySpeed = LastEnemySpeed;
 	}
+
+	//攻撃が当たったらFreezeTime分だけSpeedをゼロにする（動きを止める）
+	/*IEnumerator FreezeSetCoroutine (){
+		freezeSet = false;
+		float LastEnemySpeed = enemyBasic.EnemySpeed;
+		enemyBasic.EnemySpeed = 0;
+		yield return new WaitForSeconds(FreezeTime);
+		enemyBasic.EnemySpeed = LastEnemySpeed;
+	}*/
 }
