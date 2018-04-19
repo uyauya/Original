@@ -9,9 +9,9 @@ public class Zombie1 : MonoBehaviour {
 	protected EnemyBasic enemyBasic;
 	bool dead = false;
 	bool damageSet;
-	public float DamageTime = 2.0f;
-	//bool freezeSet;
-	//public float FreezeTime = 2.0f;
+	public float DamageTime = 0.5f;
+	bool freezeSet;
+	public float FreezeTime = 2.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +23,7 @@ public class Zombie1 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		damageSet = GetComponent<EnemyBasic> ().DamageSet;
-		//freezeSet = GetComponent<EnemyBasic> ().FreezeSet;
+		freezeSet = GetComponent<EnemyBasic> ().FreezeSet;
 		//Debug.Log (damageSet);
 		// Animator の dead が true なら Update 処理を抜ける
 		if( enemyBasic.animator.GetBool("dead") == true ) return;
@@ -72,11 +72,11 @@ public class Zombie1 : MonoBehaviour {
 	}
 
 	//攻撃が当たったらFreezeTime分だけSpeedをゼロにする（動きを止める）
-	/*IEnumerator FreezeSetCoroutine (){
+	IEnumerator FreezeSetCoroutine (){
 		freezeSet = false;
 		float LastEnemySpeed = enemyBasic.EnemySpeed;
 		enemyBasic.EnemySpeed = 0;
 		yield return new WaitForSeconds(FreezeTime);
 		enemyBasic.EnemySpeed = LastEnemySpeed;
-	}*/
+	}
 }

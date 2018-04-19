@@ -35,7 +35,7 @@ public class Zombie2 : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		damageSet = GetComponent<EnemyBasic> ().DamageSet;
+		//damageSet = GetComponent<EnemyBasic> ().DamageSet;
 		//Debug.Log (damageSet);
 		// Animator の dead が true なら Update 処理を抜ける
 		if( enemyBasic.animator.GetBool("dead") == true ) return;

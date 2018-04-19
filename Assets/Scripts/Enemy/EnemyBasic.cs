@@ -71,7 +71,7 @@ public class EnemyBasic : MonoBehaviour {
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
 	public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
-	public float SphereHeight = 1.0f;
+	//public float EnemyHeight = 1.0f;
 
 	/*[CustomEditor(typeof(Zombie))]
 	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
@@ -171,7 +171,8 @@ public class EnemyBasic : MonoBehaviour {
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot3") {
 			//Debug.Log (collider.gameObject.name);
-			DamageSet = true;
+			//DamageSet = true;
+			FreezeSet = true;
 			StartCoroutine ("LifeBarCoroutine");
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
 			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
@@ -224,18 +225,21 @@ public class EnemyBasic : MonoBehaviour {
 					Instantiate (BigStar, transform.position, transform.rotation);
 					// ボス、ラスボス以外が消滅後は一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
 				} else if (Random.Range (0, RedEncount) == 0) {
-					///Instantiate (BlueSphere, transform.position, transform.rotation);
-					Vector3 Pog = this.gameObject.transform.position;
-					Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
+					Instantiate (RedSphere, transform.position, transform.rotation);
+					//Vector3 Pog = this.gameObject.transform.position;
+					//Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
 				} else if (Random.Range (0, BlueEncount) == 0) {
-					Vector3 Pog = this.gameObject.transform.position;
-					Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
+					Instantiate (BlueSphere, transform.position, transform.rotation);
+					//Vector3 Pog = this.gameObject.transform.position;
+					//Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
 				} else if (Random.Range (0, GreenEncount) == 0) {
-					Vector3 Pog = this.gameObject.transform.position;
-					Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
+					Instantiate (GreenSphere, transform.position, transform.rotation);
+					//Vector3 Pog = this.gameObject.transform.position;
+					//Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
 				} else if (Random.Range (0, YellowEncount) == 0) {
-					Vector3 Pog = this.gameObject.transform.position;
-					Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
+					Instantiate (YellowSphere, transform.position, transform.rotation);
+					//Vector3 Pog = this.gameObject.transform.position;
+					//Instantiate (RedSphere, transform.position += new Vector3(0 , SphereHeight, 0), transform.rotation);
 				}
 			}
 		}
@@ -303,7 +307,7 @@ public class EnemyBasic : MonoBehaviour {
 	// ダメージ時の点滅処理
 	IEnumerator DamageCoroutine ()
 	{
-		//while文を10回ループ
+		//while文を10回ルー
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
@@ -313,20 +317,20 @@ public class EnemyBasic : MonoBehaviour {
 			"easetype", iTween.EaseType.linear
 		));
 		// 無敵(ダメージ判定なし)にして
-		isInvincible = true;
+		//isInvincible = true;
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
 			modelColorChange.ColorChange(new Color (1,0,0,1));
 			//0.05秒待つ
-			yield return new WaitForSeconds(0.1f);
+			yield return new WaitForSeconds(0.3f);
 			//元に戻す
 			modelColorChange.ColorChange(new Color (1,1,1,1));
 			//0.05秒待つ
-			yield return new WaitForSeconds(0.1f);
+			yield return new WaitForSeconds(0.3f);
 			count--;
 		}
 		// 無敵解除
-		isInvincible = false;
+		//isInvincible = false;
 	}
 
 	// フリーズ時の点滅処理
