@@ -16,6 +16,9 @@ public class PlayerAp : MonoBehaviour {
 	public Color myWhite;				// RGBA(255,255,255,255)
 	public Color myYellow;				// RGBA(255,206,000,255)
 	public Color myRed;					// RGBA(219,000,000,255)
+	public Color DamageColor;
+	public Color InvisibleColor;
+	public Color PoisonColor;
 	public Image gaugeImage;
 	private ModelColorChange modelColorChange;
 	//private bool isInvincible;		
@@ -272,7 +275,8 @@ public class PlayerAp : MonoBehaviour {
 		//isInvincible = true;
 		while (count > 0){
 			//透明にする
-			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//modelColorChange.ColorChange(new Color (1,0,0,1));
+			modelColorChange.ColorChange(DamageColor);
 			//0.1秒待つ
 			yield return new WaitForSeconds(0.1f);
 			//元に戻す
