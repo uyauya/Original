@@ -71,6 +71,9 @@ public class EnemyBasic : MonoBehaviour {
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
 	public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
+	public Color DamageColor;
+	public Color FreezeColor;
+	public Color DeadColor;
 	//public float EnemyHeight = 1.0f;
 
 	/*[CustomEditor(typeof(Zombie))]
@@ -320,7 +323,8 @@ public class EnemyBasic : MonoBehaviour {
 		//isInvincible = true;
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
-			modelColorChange.ColorChange(new Color (1,0,0,1));
+			//modelColorChange.ColorChange(new Color (1,0,0,1));
+			modelColorChange.ColorChange(DamageColor);
 			//0.05秒待つ
 			yield return new WaitForSeconds(0.3f);
 			//元に戻す
@@ -334,7 +338,7 @@ public class EnemyBasic : MonoBehaviour {
 	}
 
 	// フリーズ時の点滅処理
-	/*IEnumerator FreezeCoroutine ()
+	IEnumerator FreezeCoroutine ()
 	{
 		//while文を10回ループ
 		int count = 10;
@@ -349,7 +353,7 @@ public class EnemyBasic : MonoBehaviour {
 		isInvincible = true;
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
-			modelColorChange.ColorChange(new Color (1,0,0,1));
+			modelColorChange.ColorChange(FreezeColor);
 			//0.05秒待つ
 			yield return new WaitForSeconds(0.1f);
 			//元に戻す
@@ -360,7 +364,7 @@ public class EnemyBasic : MonoBehaviour {
 		}
 		// 無敵解除
 		isInvincible = false;
-	}*/
+	}
 
 	// 死亡時処理
 	IEnumerator DeadCoroutine ()
@@ -382,7 +386,7 @@ public class EnemyBasic : MonoBehaviour {
 		isInvincible = true;
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
-			modelColorChange.ColorChange(new Color (1,0,0,1));
+			modelColorChange.ColorChange(DeadColor);
 			//0.05秒待つ
 			yield return new WaitForSeconds(0.1f);
 			//元に戻す
@@ -393,8 +397,6 @@ public class EnemyBasic : MonoBehaviour {
 		}
 		// 無敵解除
 		isInvincible = false;
-		//レイヤーをEnemyに戻す
-		//gameObject.layer = LayerMask.NameToLayer("Enemy");
 	}
 
 	// 重力設定を個別で設定

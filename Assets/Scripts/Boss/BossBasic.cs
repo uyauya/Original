@@ -58,6 +58,8 @@ public class BossBasic : MonoBehaviour {
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
 	public GameObject BossLifeBar;
+	public Color DamageColor;
+	public Color FreezeColor;
 	//public float StarHeight = 1.0f;
 
 	/*[CustomEditor(typeof(Zombie))]
