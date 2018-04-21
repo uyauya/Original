@@ -16,13 +16,13 @@ public class FlyingEnemy1 : MonoBehaviour {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
 		BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z);
-		Transform target = GameObject.FindWithTag("Player").transform;
-		targetPos = target.position;
 		//transform.LookAt(target);
-
 	}
 
 	void Update () {
+		//Transform target = GameObject.FindWithTag("Player").transform;
+		Transform target = GameObject.FindWithTag("TargetPoint").transform;
+		targetPos = target.position;
 		//Vector3 Pog = this.gameObject.transform.position;
 		//gameObject.transform.position = new Vector3(Pog.x , 3.0f, Pog.z);
 		//オブジェクト配置場所の前方×2の場所をターゲット（軸）とする

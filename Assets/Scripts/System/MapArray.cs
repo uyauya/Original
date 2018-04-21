@@ -191,6 +191,9 @@ public partial class MapArrayFloor : MapArray{
 			checkAxis_setIsMoveArea(axis.getNowAxis());		// 該当座標を基準に調べ、プレイヤーが移動出来るエリアをtrueに変えていく
 			check_isMapJage();			// マップ上端一列を確認し、プレイヤーが移動出来るかどうかを確認する
 		}
+		for (float x = axis.getAxis_MapStartX(); x < axis.getAxis_MapEndX (); x++) {
+			cleateObject (wall [0], (int)x , 0);			
+		}
 	}
 
 	// ■■■マップ上端一列を確認し、プレイヤーが移動出来るかどうかを確認する■■■
