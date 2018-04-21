@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
 	public float MaxForce = 10;						// 移動速度最大値
 	public float MaxBoostForce = 15;				// ブースト時の移動速度最大値
 	public float PlusForce= 0.1f;					// 移動速度加算数値
-	public float jumpSpeed;							// ジャンプ力
+	public float JumpForce = 4.0f;							// ジャンプ力
 	public float HighPoint;							// ジャンプの高さ最大値
 	public float gravity;							// 重力（ジャンプ時などに影響）
 	private Vector3 moveDirection = Vector3.zero;	 //プレイヤ位置方向ニュートラル設定
@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour {
 	protected bool isInvincible;					// 無敵処理（ダメージ受けた際に使用）
 	private ModelColorChange modelColorChange;
 	public float InvincibleTime;					// 無敵時間
+	private bool IsDownJumpButton = false;
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -84,6 +85,10 @@ public class PlayerController : MonoBehaviour {
 
 	void Update()
 	{
+		if (Input.GetButtonDown("Jump"))
+		{
+			IsDownJumpButton = true;
+		}
 		//現在のブーストゲージと最大ブーストゲージをUI Textに表示する
 		//boostText.text = string.Format("{0:0000} / {1:0000}", displayBoostPoint, DataManager.BoostPointMax);
 		boostText.text = string.Format("{0:0000} / {1:0000}", boostPoint, DataManager.BoostPointMax);
@@ -182,13 +187,15 @@ public class PlayerController : MonoBehaviour {
 
 		//ジャンプキーによる上昇（二段ジャンプ）
 		//ジャンプが押されて1回目なら（2回目でないなら）（一番下のコライダー処理が関係してる）
+		Debug.Log("jump JumpCount:" + JumpCount);
+		IsDownJumpButton = false;
 		if (Input.GetButtonDown("Jump") == true && JumpCount < 2 ) {
 			// ジャンプ数加算
 			JumpCount++;
 
 			// ジャンプの上昇力を設定( v.x, 4, v.z )で縦方向に加算
 			Vector3 v = GetComponent<Rigidbody>().velocity;
-			GetComponent<Rigidbody>().velocity = new Vector3( v.x, 4, v.z );
+			GetComponent<Rigidbody>().velocity = new Vector3( v.x, JumpForce, v.z );
 			//ジャンプモーションに切り替える
 			animator.SetBool("Jump", true);
 			if (PlayerNo == 0) {
