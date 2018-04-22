@@ -47,14 +47,14 @@ public class Boss03 : MonoBehaviour {
 			transform.position += transform.forward * Time.deltaTime * MoveSpeed;	
 		}
 		// ショット間隔計算
-		bossBasic.shotInterval += Time.deltaTime;
+		/*bossBasic.shotInterval += Time.deltaTime;
 		// shotIntervalMax数値以上になったらショット
 		if (bossBasic.shotInterval > bossBasic.shotIntervalMax) {
 			bossBasic.animator.SetTrigger ("attack");
 			GameObject bossshot = GameObject.Instantiate (Boss03shot, Boss03muzzle.transform.position,Quaternion.identity)as GameObject;
 			// 再びショット間隔計算開始
 			bossBasic.shotInterval = ShotInterval;
-		}
+		}*/
 
 	}
 }

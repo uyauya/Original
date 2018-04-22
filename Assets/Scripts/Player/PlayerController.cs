@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour {
 	public float MaxForce = 10;						// 移動速度最大値
 	public float MaxBoostForce = 15;				// ブースト時の移動速度最大値
 	public float PlusForce= 0.1f;					// 移動速度加算数値
-	public float JumpForce = 4.0f;							// ジャンプ力
+	public float JumpForce = 4.0f;					// ジャンプ力
+	public float BoostJumpForce = 6.0f;
 	public float HighPoint;							// ジャンプの高さ最大値
 	public float gravity;							// 重力（ジャンプ時などに影響）
 	private Vector3 moveDirection = Vector3.zero;	 //プレイヤ位置方向ニュートラル設定
@@ -187,13 +188,13 @@ public class PlayerController : MonoBehaviour {
 
 		//ジャンプキーによる上昇（二段ジャンプ）
 		//ジャンプが押されて1回目なら（2回目でないなら）（一番下のコライダー処理が関係してる）
-		Debug.Log("jump JumpCount:" + JumpCount);
+		//Debug.Log("jump JumpCount:" + JumpCount);
 		IsDownJumpButton = false;
 		if (Input.GetButtonDown("Jump") == true && JumpCount < 2 ) {
 			// ジャンプ数加算
 			JumpCount++;
 
-			// ジャンプの上昇力を設定( v.x, 4, v.z )で縦方向に加算
+			// ジャンプの上昇力を設定( v.x, JumpForce, v.z )で縦方向に加算
 			Vector3 v = GetComponent<Rigidbody>().velocity;
 			GetComponent<Rigidbody>().velocity = new Vector3( v.x, JumpForce, v.z );
 			//ジャンプモーションに切り替える
@@ -209,6 +210,8 @@ public class PlayerController : MonoBehaviour {
 			}
 			// ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
 		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 10)) {
+			Vector3 v = GetComponent<Rigidbody>().velocity;
+			GetComponent<Rigidbody>().velocity = new Vector3( v.x, BoostJumpForce, v.z );
 			animator.SetBool("BoostUp", Input.GetButton ("Jump"));
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(33,gameObject);

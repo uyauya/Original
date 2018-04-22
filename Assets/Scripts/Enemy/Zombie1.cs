@@ -11,7 +11,7 @@ public class Zombie1 : MonoBehaviour {
 	bool damageSet;
 	public float DamageTime = 0.5f;
 	bool freezeSet;
-	public float FreezeTime = 2.0f;
+	public float FreezeTime = 1.0f;
 
 	// Use this for initialization
 	void Start () {
