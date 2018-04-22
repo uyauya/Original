@@ -163,6 +163,7 @@ public class EnemyBasic : MonoBehaviour {
 			// 敵アーマーポイントからBullet01スクリプトのdamage値を差し引く
 			armorPoint -= damage;
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
+			//DamageSet = false;
 		} else if (collider.gameObject.tag == "Shot2") {
 			DamageSet = true;
 			StartCoroutine ("LifeBarCoroutine");
