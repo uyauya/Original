@@ -258,6 +258,7 @@ public class EnemyBasic : MonoBehaviour {
 			armorPoint -= bigAttack;
 		} else if (collider.gameObject.tag == "Player") {
 			DamageSet = true;
+			animator.SetTrigger ("damaged");
 		}
 			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
 

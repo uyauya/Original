@@ -16,10 +16,9 @@ public class Zombie1 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 		// EnemyBasicスクリプトのデータを最初に呼び出しenemyBasicとする
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
-
+		LastEnemySpeed = enemyBasic.EnemySpeed;
 	}
 
 	// Update is called once per frame
@@ -70,16 +69,14 @@ public class Zombie1 : MonoBehaviour {
 
 	//攻撃が当たったらDamageTime分だけSpeedをゼロにする（動きを止める）
 	IEnumerator DamageSetCoroutine (){
-		//damageSet = false;
-		//GetComponent<EnemyBasic> ().DamageSet = false;
-		enemyBasic.DamageSet = false;
-		//float LastEnemySpeed = enemyBasic.EnemySpeed;
-		LastEnemySpeed = enemyBasic.EnemySpeed;
-		enemyBasic.EnemySpeed = 0;
-		yield return new WaitForSeconds(DamageTime);
-		enemyBasic.EnemySpeed = LastEnemySpeed;
-		Debug.Log (LastEnemySpeed);
+	enemyBasic.DamageSet = false;
+	LastEnemySpeed = enemyBasic.EnemySpeed;
+	enemyBasic.EnemySpeed = 0;
+	yield return new WaitForSeconds(DamageTime);
+	enemyBasic.EnemySpeed = LastEnemySpeed;
+	Debug.Log (LastEnemySpeed);
 	}
+
 
 	//攻撃が当たったらFreezeTime分だけSpeedをゼロにする（動きを止める）
 	IEnumerator FreezeSetCoroutine (){
