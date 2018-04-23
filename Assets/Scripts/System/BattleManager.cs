@@ -75,39 +75,48 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 				//DataManager.Instance.SaveData ();
-				if (UserParam.instanse.PlayerNo == 0) {
+				//if (UserParam.instanse.PlayerNo == 0) {
+				if (DataManager.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 				}
-				if (UserParam.instanse.PlayerNo == 1) {
+				if (DataManager.PlayerNo == 1) {
+				//if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play (46, gameObject);
 				}
-				if (UserParam.instanse.PlayerNo == 2) {
+				if (DataManager.PlayerNo == 2) {
+				//if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
 				}
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			} else if (Player.transform.position.y <= -10.0f) { 
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
-				if (UserParam.instanse.PlayerNo == 0) {
+				if (DataManager.PlayerNo == 0) {
+				//if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 				}
-				if (UserParam.instanse.PlayerNo == 1) {
+				if (DataManager.PlayerNo == 1) {
+				//if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play (46, gameObject);
 				}
-				if (UserParam.instanse.PlayerNo == 2) {
+				if (DataManager.PlayerNo == 2) {
+				//if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
 				}
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
-				if (UserParam.instanse.PlayerNo == 0) {
+				if (DataManager.PlayerNo == 0) {
+				//if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play(18,gameObject);
 				}
-				if (UserParam.instanse.PlayerNo == 1) {
+				if (DataManager.PlayerNo == 1) {
+				//if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play(19,gameObject);
 				}
-				if (UserParam.instanse.PlayerNo == 2) {
+				if (DataManager.PlayerNo == 2) {
+				//if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play(20,gameObject);
 				}
 				battleStatus = BATTLE_PLAY;
