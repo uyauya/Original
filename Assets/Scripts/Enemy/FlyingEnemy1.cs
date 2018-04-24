@@ -11,22 +11,24 @@ public class FlyingEnemy1 : MonoBehaviour {
 	public  float angle = 30f;
 	private Vector3 targetPos;		// 軸の場所
 	public GameObject target;		// 回転するための中心部（軸）
+	public float Hight;
+	public float Distance;
 
 	void Start () {	
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
-		BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z);
+		BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + Hight, this.transform.position.z);
 		//transform.LookAt(target);
 	}
 
 	void Update () {
 		//Transform target = GameObject.FindWithTag("Player").transform;
-		Transform target = GameObject.FindWithTag("TargetPoint").transform;
+		Transform target = GameObject.FindWithTag("Enemy").transform;
 		targetPos = target.position;
 		//Vector3 Pog = this.gameObject.transform.position;
 		//gameObject.transform.position = new Vector3(Pog.x , 3.0f, Pog.z);
 		//オブジェクト配置場所の前方×2の場所をターゲット（軸）とする
-		transform.position = target.transform.position + (target.transform.forward * 2);
+		transform.position = target.transform.position + (target.transform.forward * Distance);
 		transform.position += transform.forward;
 		//ターゲットを中心に（回る中心の座標、軸、速度）で回す
 		transform.RotateAround (target.transform.position + (target.transform.forward * 2), Vector3.up, 1);

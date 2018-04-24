@@ -28,7 +28,6 @@ public class EnemyBasic : MonoBehaviour {
 		this.armorPoint -= damagedPoint;			// Playerから受けたダメージの値
 	}
 	public int EnemyAttack = 100;					// プレイヤに与えるダメージ
-	protected bool isInvincible;					// 無敵処理（ダメージ受けた際に使用）
 	public float InvincibleTime;					// 無敵時間
 	protected ModelColorChange modelColorChange;	// 点滅処理
 	public float KnockBackRange;					// 攻撃を受けた際のノックバックの距離
@@ -101,7 +100,6 @@ public class EnemyBasic : MonoBehaviour {
 	void Start () {
 		LifeBar.SetActive (false);
 		DamageSet = false;
-		//Hit = false;
 		armorPoint = armorPointMax;
 		lifeBar = GetComponentInChildren<LifeBar>();
 		// Animator取得
@@ -321,8 +319,6 @@ public class EnemyBasic : MonoBehaviour {
 			"time", InvincibleTime, 
 			"easetype", iTween.EaseType.linear
 		));
-		// 無敵(ダメージ判定なし)にして
-		//isInvincible = true;
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
 			//modelColorChange.ColorChange(new Color (1,0,0,1));
@@ -335,8 +331,6 @@ public class EnemyBasic : MonoBehaviour {
 			yield return new WaitForSeconds(0.3f);
 			count--;
 		}
-		// 無敵解除
-		//isInvincible = false;
 	}
 
 	// フリーズ時の点滅処理
@@ -352,7 +346,6 @@ public class EnemyBasic : MonoBehaviour {
 			"easetype", iTween.EaseType.linear
 		));
 		// 無敵(ダメージ判定なし)にして
-		isInvincible = true;
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
 			modelColorChange.ColorChange(FreezeColor);
@@ -364,8 +357,6 @@ public class EnemyBasic : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
-		// 無敵解除
-		isInvincible = false;
 	}
 
 	// 死亡時処理
@@ -378,14 +369,10 @@ public class EnemyBasic : MonoBehaviour {
 		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
-			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
-			//"position", transform.position - (transform.forward * KnockBackRange),
 			// 無敵(ダメージ判定なし)時間設定（秒）
 			"time", InvincibleTime, 
 			"easetype", iTween.EaseType.linear
 		));
-		// 無敵(ダメージ判定なし)にして
-		isInvincible = true;
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
 			modelColorChange.ColorChange(DeadColor);
@@ -397,8 +384,6 @@ public class EnemyBasic : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
-		// 無敵解除
-		isInvincible = false;
 	}
 
 	// 重力設定を個別で設定

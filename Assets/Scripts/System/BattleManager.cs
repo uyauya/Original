@@ -19,7 +19,6 @@ public class BattleManager : MonoBehaviour {
 	public Image messageLose;
 	public GameObject mesaageSTART;		 // スタート表示
 	public GameObject mesaageClear;		 // ステージクリア表示
-	//public static int score;			 // 敵を倒した数。Enemyスクリプトでカウントアップ  
 	public Text ScoreText;				 // スコア表示用
 	private int ItemCount;				 // アイテム取得数をカウント
 	PlayerController playerController;
@@ -29,7 +28,6 @@ public class BattleManager : MonoBehaviour {
 	public float ChangeTime;			 // シーン変更までの時間
 	public int Count;					 // ステージ移行する為のアイテム取得個
 	public int PlayerNo;				 //プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
-	//public int StageNo;
 
 	void Start () {	
 		ScoreText.text = "Score:0";
@@ -74,17 +72,13 @@ public class BattleManager : MonoBehaviour {
 			if (PlayerAp.armorPoint <= 0) {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
-				//DataManager.Instance.SaveData ();
-				//if (UserParam.instanse.PlayerNo == 0) {
 				if (DataManager.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 				}
 				if (DataManager.PlayerNo == 1) {
-				//if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play (46, gameObject);
 				}
 				if (DataManager.PlayerNo == 2) {
-				//if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
 				}
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
@@ -92,15 +86,12 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 				if (DataManager.PlayerNo == 0) {
-				//if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 				}
 				if (DataManager.PlayerNo == 1) {
-				//if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play (46, gameObject);
 				}
 				if (DataManager.PlayerNo == 2) {
-				//if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
 				}
 				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
@@ -108,15 +99,12 @@ public class BattleManager : MonoBehaviour {
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
 				if (DataManager.PlayerNo == 0) {
-				//if (UserParam.instanse.PlayerNo == 0) {
 					SoundManager.Instance.Play(18,gameObject);
 				}
 				if (DataManager.PlayerNo == 1) {
-				//if (UserParam.instanse.PlayerNo == 1) {
 					SoundManager.Instance.Play(19,gameObject);
 				}
 				if (DataManager.PlayerNo == 2) {
-				//if (UserParam.instanse.PlayerNo == 2) {
 					SoundManager.Instance.Play(20,gameObject);
 				}
 				battleStatus = BATTLE_PLAY;
@@ -127,20 +115,19 @@ public class BattleManager : MonoBehaviour {
 			}	
 
 			// ボス撃破時スター出現
-			// スターオブジェクトを取得したら次面へ
+			// スターオブジェクトを1個以上取得したら次面へ
 			if (playerController.GetStar >= 1 ) {
-				//DataManager.Instance.SaveData ();
 				mesaageClear.SetActive (true);		// ステージクリア表示
 				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
-				playerController.GetStar = 0;
+				playerController.GetStar = 0;		// スター取得数をリセット	
 			}
 
 			// ラスボス撃破時ビッグスター出現
-			// ビッグスターオブジェクトを取得したらエンディング
+			// ビッグスターオブジェクトを1個以上取得したらエンディング
 			if (playerController.GetBigStar >= 1) {
 				mesaageClear.SetActive (true);		// ステージクリア表示
 				Invoke ("END", ChangeTime);			// エンドシーン（エンディング）移動
-				playerController.GetBigStar = 0;		
+				playerController.GetBigStar = 0;	// ビッグスター取得数をリセット	
 		}
 		break;
 

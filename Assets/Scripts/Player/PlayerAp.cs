@@ -20,8 +20,7 @@ public class PlayerAp : MonoBehaviour {
 	public Color InvisibleColor;
 	public Color PoisonColor;
 	public Image gaugeImage;
-	private ModelColorChange modelColorChange;
-	//private bool isInvincible;		
+	private ModelColorChange modelColorChange;		
 	public float FlashTime;				// 点滅時間
 	private Animator animator;			// Animator（PlayerMotion)取得
 	public float KnockBackRange;		// ノックバック距離（ダメージ受けた際に使用）
@@ -256,7 +255,7 @@ public class PlayerAp : MonoBehaviour {
 	}
 
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
-	// 敵接触時の点滅
+	// 敵接触時の点滅（オブジェクトの色をStandardなどにしておかないと点滅しない場合がある）
 	IEnumerator EnemyDamageCoroutine ()
 	{
 		// プレイヤのレイヤーをInvincibleに変更
@@ -268,11 +267,11 @@ public class PlayerAp : MonoBehaviour {
 		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
+			//KnockBackRange値だけ後に吹っ飛ぶ
 			"position", transform.position - (transform.forward * KnockBackRange),
-			"time", FlashTime, // 好きな時間（秒）
+			"time", FlashTime, // 点滅時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
-		//isInvincible = true;
 		while (count > 0){
 			//透明にする
 			//modelColorChange.ColorChange(new Color (1,0,0,1));
@@ -285,10 +284,8 @@ public class PlayerAp : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
-		//isInvincible = false;
 		//レイヤーをPlayerに戻す
 		gameObject.layer = LayerMask.NameToLayer("Player");
-		//iTweenのアニメーション
 	}
 
 	// 壁接触時の点滅
@@ -298,10 +295,9 @@ public class PlayerAp : MonoBehaviour {
 		int count = 4;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			"position", transform.position - (transform.forward * KnockBackRange),
-			"time", FlashTime, // 好きな時間（秒）
+			"time", FlashTime, // 点滅時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
-		//isInvincible = true;
 		while (count > 0){
 			//透明にする
 			modelColorChange.ColorChange(new Color (1,0,0,1));
@@ -313,7 +309,6 @@ public class PlayerAp : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
-		//isInvincible = false;
 	}
 
 	// 毒床触時の点滅
@@ -323,7 +318,7 @@ public class PlayerAp : MonoBehaviour {
 		int count = 4;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			//"position", transform.position - (transform.forward * KnockBackRange),
-			"time", FlashTime, // 好きな時間（秒）
+			"time", FlashTime, // 点滅時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
 		while (count > 0){
@@ -350,10 +345,9 @@ public class PlayerAp : MonoBehaviour {
 		// 巨大化継続時間を設定
 		int count = 100;
 		iTween.MoveTo(gameObject, iTween.Hash(
-			"time", FlashTime, // 好きな時間（秒）
+			"time", FlashTime, // 点滅時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
-		//isInvincible = true;
 		while (count > 0){
 			//点滅時の色を設定（ModelColorChangeスクリプト参照）
 			modelColorChange.ColorChange(new Color (1,0,0,1));
@@ -369,7 +363,5 @@ public class PlayerAp : MonoBehaviour {
 		iTween.ScaleTo (gameObject, iTween.Hash ("x", 1, "y", 1, "z", 1, "time", 3f));
 		isBig = false;
 		BigAttack = 0;
-		// isInvincible解除
-		//isInvincible = false;
 	}
 }

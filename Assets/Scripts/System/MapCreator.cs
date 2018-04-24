@@ -13,17 +13,14 @@ public class MapCreator : MonoBehaviour {
 	public	GameObject[]	prefab_BL;			// 床ブロック格納用のプレファブ配列
 	public	GameObject[]	prefab_WALL;		// 壁ブロック格納用のプレファブ配列
 	public	GameObject[]	prefab_enemy;		// 敵の格納用のプレファブ配列
-	public float[] ApperanceRate;
-	public float EmitterTime = 1.0f;
-	//public	GameObject[]	prefab_enemy2;		// 敵の格納用のプレファブ配列
-	//public float EmitterTime2 = 1.0f;
+	public float[] ApperanceRate;				// 敵の出現割合
+	public float EmitterTime = 1.0f;			// 敵が出現するまでの時間
 	public	GameObject[]	prefab_BreakBlock;
 	public	GameObject[]	prefab_BombPoint;
 	private float timer = 0.0f;
 	private float interval = 2.0f;
 	public GameObject[] 	Prefab_Player;
 	public	GameObject		Boss02;				
-	//public  GameObject[]    bossPrefab;
 
 	// 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはバトルマネージャースクリプトで判別・管理）
 	void Awake(){
@@ -41,10 +38,8 @@ public class MapCreator : MonoBehaviour {
 		mapFloor.setObstacle(prefab_BreakBlock);		// 障害物オブジェクトを渡す
 		//mapFloor.setObstacle(prefab_BombPoint);		// 起爆スイッチを渡す
 		mapFloor.setEnemy(prefab_enemy);				// 敵オブジェクトを渡す
-		//mapFloor.setEnemy(prefab_enemy2);				// 敵オブジェクトを渡す
 		initialize();									// プレイヤー位置／マップ初期化
-		StartCoroutine("enemyEmitter" , EmitterTime);	// 敵出現用のコルーチン開始
-		//StartCoroutine("enemyEmitter2" , EmitterTime2);	// 敵出現用のコルーチン開始
+		StartCoroutine("enemyEmitter" , EmitterTime);	// EmitterTimeの時間ごとに敵出現用のコルーチン開始
 	}
 
 	// ■■■プレイヤー位置／マップ初期化■■■
@@ -60,7 +55,7 @@ public class MapCreator : MonoBehaviour {
 		mapBlock.renewal ();							// マップ(床)の更新
 		mapFloor.renewal ();							// マップ(地上)の更新
 		
-		timer += Time.deltaTime;						// グリーンスフィア取得数計算 battlemanagerスクリプト参照
+		timer += Time.deltaTime;						// グリーンスフィア取得数計算 BattleManagerスクリプト参照
 		if (timer >= interval) {
 			Check ("Item3");
 			timer = 0;
@@ -75,7 +70,9 @@ public class MapCreator : MonoBehaviour {
 	// ■■■敵出現用のコルーチン■■■
 	IEnumerator enemyEmitter(float time){
 		while(true){
+			//敵が複数出現の場合は0.0～1.0で割合を決める
 			float num = Random.Range (0.0f, 1.0f);
+			//敵が1種類の場合は何もしない（割合計算しない）
 			if (ApperanceRate.Length == 0) {
 				;//何もしない
 			} else if (num < ApperanceRate [0]) {
@@ -88,10 +85,4 @@ public class MapCreator : MonoBehaviour {
 		}
 	}
 
-	/*IEnumerator enemyEmitter2(float time){
-		while(true){
-			mapFloor.enemyArrival();					// 敵出現処理
-			yield return new WaitForSeconds(time);		// time秒、処理を待機.
-		}
-	}*/
 }
