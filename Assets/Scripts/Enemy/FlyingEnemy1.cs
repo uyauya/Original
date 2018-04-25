@@ -22,6 +22,10 @@ public class FlyingEnemy1 : MonoBehaviour {
 	}
 
 	void Update () {
+		//target = GameObject.FindWithTag("Enemy");
+		//transform.RotateAround (target.transform.position, Vector3.up, 1);
+		//this.transform.position = new Vector3 (this.transform.position.x, this.BasicPoint.y +1, this.transform.position.z);
+
 		//Transform target = GameObject.FindWithTag("Player").transform;
 		Transform target = GameObject.FindWithTag("Enemy").transform;
 		targetPos = target.position;

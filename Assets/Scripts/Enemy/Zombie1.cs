@@ -74,7 +74,7 @@ public class Zombie1 : MonoBehaviour {
 	enemyBasic.EnemySpeed = 0;
 	yield return new WaitForSeconds(DamageTime);
 	enemyBasic.EnemySpeed = LastEnemySpeed;
-	Debug.Log (LastEnemySpeed);
+	//Debug.Log (LastEnemySpeed);
 	}
 
 

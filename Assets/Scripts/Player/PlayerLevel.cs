@@ -70,7 +70,8 @@ public class PlayerLevel : MonoBehaviour
 			//Debug.Log("ParamScore"+Param.Score);
 			//Debug.Log("Score"+Score);
 			//レベルアップ用スコアがレベル上限のスコア以下だったらレベルアップ判定
-			if (Param.Score <= Score && Score <= 52000) {
+			if ( Param.Level > DataManager.Level && Param.Score <= Score && Score <= 52000) {
+			//if (Param.Score <= Score && Score <= 52000) {
 				if (Param.PlayerNo == DataManager.PlayerNo) {
 					DataManager.Level = Param.Level;
 					//Playerのタグがついているオブジェクトを見つけPlayerControllerスクリプトのAttackPointに
@@ -90,6 +91,7 @@ public class PlayerLevel : MonoBehaviour
 					if (PlayerNo == 2) {
 						SoundManager.Instance.Play (44, gameObject);
 					}
+					DataManager.Level = Param.Level;
 				}
 				//すでにレベルMaxの場合は判定しない（MaxかどうかはScoreで判定）
 			} else if (Param.Score <= Score && Score > 52000) {
