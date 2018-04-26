@@ -5,7 +5,7 @@ using UnityEngine;
 // 時間経過で自動的に消去させる仕様
 public class AutoDelete : MonoBehaviour {
 
-	public float destroyTime = 0.1F;	// 自動的に消えるまでの時間
+	public float destroyTime = 1.0f;	// 自動的に消えるまでの時間
 
 	// Use this for initialization
 	void Start () {
