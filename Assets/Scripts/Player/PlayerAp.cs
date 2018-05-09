@@ -12,10 +12,10 @@ public class PlayerAp : MonoBehaviour {
 	public float poisonAttack;
 	public Text armorText;
 	float displayArmorPoint;				
-	public Color myGreen;				// RGBA(000,240,000,255) ※Aは透明度
-	public Color myWhite;				// RGBA(255,255,255,255)
-	public Color myYellow;				// RGBA(255,206,000,255)
-	public Color myRed;					// RGBA(219,000,000,255)
+	public Color MyGreen;				// RGBA(000,240,000,255) ※Aは透明度
+	public Color MyWhite;				// RGBA(255,255,255,255)
+	public Color MyYellow;				// RGBA(255,206,000,255)
+	public Color MyRed;					// RGBA(219,000,000,255)
 	public Color DamageColor;
 	public Color InvisibleColor;
 	public Color PoisonColor;
@@ -83,17 +83,17 @@ public class PlayerAp : MonoBehaviour {
 		// ユーザーインターフェース（UI)の色を変える場合、画像の色は白一色にする
 		//　白以外の場合、指定した色と混ざる為、指定した色にならなくなる
 		if( armorPoint > 4000){
-			armorText.color = myGreen;
-			gaugeImage.color = myGreen;
+			armorText.color = MyGreen;
+			gaugeImage.color = MyGreen;
 		}else if( armorPoint > 2900){
-			armorText.color = myWhite;
-			gaugeImage.color = myWhite;
+			armorText.color = MyWhite;
+			gaugeImage.color = MyWhite;
 		}else if( armorPoint > 2000){
-			armorText.color = myYellow;
-			gaugeImage.color = myYellow;
+			armorText.color = MyYellow;
+			gaugeImage.color = MyYellow;
 		}else{
-			armorText.color = myRed;
-			gaugeImage.color = myRed;
+			armorText.color = MyRed;
+			gaugeImage.color = MyRed;
 		}
 		
 		//ゲージの長さを体力の割合に合わせて伸縮させる

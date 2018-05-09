@@ -7,33 +7,35 @@ public class BrightnessRegulator : MonoBehaviour {
 	Material myMaterial;
 
 	// Emissionの最小値
-	private float minEmission = 0.3f;
+	public float minEmission = 0.3f;
 	// Emissionの強度
-	private float magEmission = 2.0f;
+	public float magEmission = 2.0f;
 	// 角度
-	private int degree = 0;
+	public int degree = 0;
 	//発光速度
-	private int speed = 10;
+	public int speed = 10;
 	// ターゲットのデフォルトの色
-	Color defaultColor = Color.white;
+	public Color Mywhite;
+	public Color MyYellow;
+	public Color MyRed;
 
 	// Use this for initialization
 	void Start () {
 
 		// タグによって光らせる色を変える
 		if (tag == "SmallStarTag") {
-			this.defaultColor = Color.white;
+			Color Mywhite;
 		} else if (tag == "LargeStarTag") {
-			this.defaultColor = Color.yellow;
+			Color MyYellow;
 		}else if(tag == "SmallCloudTag" || tag == "LargeCloudTag") {
-			this.defaultColor = Color.cyan;
+			Color MyRed;
 		}
 
 		//オブジェクトにアタッチしているMaterialを取得
 		this.myMaterial = GetComponent<Renderer> ().material;
 
 		//オブジェクトの最初の色を設定
-		myMaterial.SetColor ("_EmissionColor", this.defaultColor*minEmission);
+		myMaterial.SetColor ("_EmissionColor", Mywhite * minEmission);
 	}
 
 	// Update is called once per frame
@@ -41,7 +43,7 @@ public class BrightnessRegulator : MonoBehaviour {
 
 		if (this.degree >= 0) {
 			// 光らせる強度を計算する
-			Color emissionColor = this.defaultColor * (this.minEmission + Mathf.Sin (this.degree * Mathf.Deg2Rad) * this.magEmission);
+			Color emissionColor = Mywhite * (this.minEmission + Mathf.Sin (this.degree * Mathf.Deg2Rad) * this.magEmission);
 
 			// エミッションに色を設定する
 			myMaterial.SetColor ("_EmissionColor", emissionColor);
