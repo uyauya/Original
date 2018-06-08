@@ -16,9 +16,9 @@ public class PlayerAp : MonoBehaviour {
 	public Color MyWhite;				// RGBA(255,255,255,255)
 	public Color MyYellow;				// RGBA(255,206,000,255)
 	public Color MyRed;					// RGBA(219,000,000,255)
-	public Color DamageColor;
-	public Color InvisibleColor;
-	public Color PoisonColor;
+	public Color DamageColor;			// ダメージ点滅色
+	public Color InvisibleColor;		// 無敵状態時色
+	public Color PoisonColor;			// 毒ダメージ色
 	public Image gaugeImage;
 	private ModelColorChange modelColorChange;		
 	public float FlashTime;				// 点滅時間
@@ -28,16 +28,16 @@ public class PlayerAp : MonoBehaviour {
 	public Transform muzzle;			// ショット発射口位置をTransformで位置取り
 	public Transform EffectPoint;		// 回復等エフェクト発生元の位置取り
 	public GameObject DamagePrefab;		// ダメージエフェクト格納場所
-	public GameObject DamageObject;
+	public GameObject DamageObject;		// 被ダメージ時エフェクト発生用
 	public GameObject HpHealPrefab;		// アーマーポイント回復エフェクト格納場所
-	public GameObject HpHealObject;
+	public GameObject HpHealObject;		// 回復時エフェクト発生用
 	public GameObject boddy_summer;
-	public int attackPoint;
-	public float force;
-	public float maxForce;
-	public int BigAttack;
-	public bool isBig;
-	public float HealApPoint = 1000;
+	public int attackPoint;				// 攻撃値
+	public float force;					// 移動速度
+	public float maxForce;				// 移動速度最大
+	public int BigAttack;				// 巨大化した時の攻撃値
+	public bool isBig;					// 巨大化しているかどうか
+	public float HealApPoint = 1000;	// アイテム取得時の回復量
 
 	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
@@ -55,6 +55,7 @@ public class PlayerAp : MonoBehaviour {
 
 	void Start () {	
 		armorPoint = DataManager.ArmorPointMax;
+		// 画面上のarmorPointとPlayerApのarmorPointを連動させる
 		displayArmorPoint = armorPoint;
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 		animator = GetComponent<Animator> ();

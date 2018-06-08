@@ -98,6 +98,7 @@ public class EnemyBasic : MonoBehaviour {
 	}
 
 	void Start () {
+		//lifeBarは非表示（被ダメージ時表示）
 		LifeBar.SetActive (false);
 		DamageSet = false;
 		armorPoint = armorPointMax;
@@ -125,6 +126,7 @@ public class EnemyBasic : MonoBehaviour {
 		setLocalGravity ();
 		//GameObject.Find("LifeBar").transform.LookAt(GameObject.Find("Player"));
 		float PerArmorpoint = armorPoint / armorPointMax;
+		// ArmoPointの減少によりキャラクタの大きさを変更
 		if( PerArmorpoint < 0.8f) {
 			gameObject.transform.localScale = new Vector3(
 				gameObject.transform.localScale.x * Mscale,
@@ -142,12 +144,15 @@ public class EnemyBasic : MonoBehaviour {
 
 	// ショット衝突判定
 	void OnTriggerEnter(Collider collider) {
+		// Animatorがdeadだったら判定しない
 		if (animator.GetBool ("dead") == true) {
 			return;
 		}
 		// Shotタグが付いているオブジェクトに当たったら
 		if (collider.gameObject.tag == "Shot") {
+			// 相手を硬直させる（下記参照）
 			DamageSet = true;
+			// ライフバー表示（下記参照）
 			StartCoroutine ("LifeBarCoroutine");
 			// Bullet01スクリプトのdamageを受け取る
 			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
