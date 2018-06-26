@@ -73,23 +73,33 @@ public class EnemyBasic : MonoBehaviour {
 	public Color DamageColor;
 	public Color FreezeColor;
 	public Color DeadColor;
-	//public float EnemyHeight = 1.0f;
 
 	/*[CustomEditor(typeof(Zombie))]
-	public class ZombieEditor : Editor	// using UnityEditor; を入れておく
+	public class EnemyBasicEditor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
 
 		public override void OnInspectorGUI()
 		{
-			Zombie En = target as Zombie;
-			En.armorPointMax = EditorGUILayout.FloatField( "最大HP", En.armorPointMax);
-			En.InvincibleTime = EditorGUILayout.FloatField( "無敵時間", En.InvincibleTime);
-			En.KnockBackRange = EditorGUILayout.FloatField( "ノックバック距離", En.KnockBackRange);
-			En.TargetRange = EditorGUILayout.IntField( "プレイヤー探索範囲", En.TargetRange);
-			En.EnemySpeed  = EditorGUILayout.FloatField( "移動スピード", En.EnemySpeed );
-			En.EnemyRotate = EditorGUILayout.FloatField( "振り向き速度", En.EnemyRotate);
-			En.Search = EditorGUILayout.FloatField( "プレイヤーとの間合い", En.Search);
+			EnemyBasic En = target as EnemyBasic;
+			En.shotIntervalMax = EditorGUILayout.FloatField( "ショット間隔", En.shotIntervalMax);
+			En.armorPointMax   = EditorGUILayout.FloatField( "最大HP", En.armorPointMax);
+			En.TargetRange	   = EditorGUILayout.FloatField( "ターゲットレンジ", En.TargetRange);
+			En.EnemySpeed	   = EditorGUILayout.FloatField( "移動速度", EnEnemySpeed);
+			En.JumpForce	   = EditorGUILayout.FloatField( "ジャンプ力", En.JumpForce);
+			En.EnemyRotate     = EditorGUILayout.FloatField( "振り向き速度", En.EnemyRotate);
+			En.Search          = EditorGUILayout.FloatField( "プレイヤーとの間合い", En.Search);
+			En.EnemyAttack	   = EditorGUILayout.IntField("攻撃力", EnEnemyAttack);
+			En.InvincibleTime  = EditorGUILayout.FloatField( "無敵時間", En.InvincibleTime);
+			En.KnockBackRange  = EditorGUILayout.FloatField( "ノックバック距離", En.KnockBackRange);
+			En.DestroyTime 	   = EditorGUILatout.FloatField( "消滅するまでの時間", En.DestroyTime);
+			En.EnemyScore	   = EditorGUILayout.IntField( "スコア", En.EnemyScore);
+			En.RedEncount      = EditorGUILayout.IntField( "赤玉生成率", En.RedEncount);
+			En.BlueEncount	   = EditorGUILayout.IntField( "青玉生成率", En.BlueEncount);
+			En.GreenEncount	   = EditorGUILayout.IntField( "緑玉生成率", En.GreenEncount);
+			En.YellowEncount   = EditorGUILayout.IntField( "黄玉生成率", En.YellowEncount);
+			En.Mscale		   = EditorGUILayout.FloatField( "縮小率第1段階", En.Mscale);
+			En.Sscale		   = EditorGUILayout.FloatField( "縮小率第2段階", En.Sscale);
 		}
 	}*/
 

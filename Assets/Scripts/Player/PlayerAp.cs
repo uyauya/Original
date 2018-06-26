@@ -47,9 +47,11 @@ public class PlayerAp : MonoBehaviour {
 		public override void OnInspectorGUI()
 		{
 		PlayerAp PL = target as PlayerAp;
-			PL.armorPointMax = EditorGUILayout.IntField( "最大HP", PL.armorPointMax);
+			PL.FlashTime	  = EditorGUILayout.FloatField( "点滅時間", PL.FlashTime);
 			PL.InvincibleTime = EditorGUILayout.FloatField( "無敵時間", PL.InvincibleTime);
 			PL.KnockBackRange = EditorGUILayout.FloatField( "ノックバック距離", PL.KnockBackRange);
+			PL.BigAttack	  = EditorGUILayout.FloatField( "巨大化した時の攻撃値");
+			PL.HealApPoint	  = EditorGUILayout.FloatField( "アイテム取得時の回復量");
 		}
 	}*/
 

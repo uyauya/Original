@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
 	public float displayBoostPoint;					// ブーストポイント（画面表示用）
 	public int BpDown = 20;							// ブーストゲージ消費値
 	public float RecoverPoint = 0.2f;				// ブーストポイント回復値
-	public GameObject gaugeImage;						// ブーストゲージ（画面表示用）
+	public GameObject gaugeImage;					// ブーストゲージ（画面表示用）
 	public Text boostText;							// ブースト最大・現在数値（画面表示用）
 	Vector3 moveSpeed;								// プレイヤの速さ
 	private int JumpCount;							// ジャンプ回数計算用（二段ジャンプ処理に使用）
@@ -53,14 +53,16 @@ public class PlayerController : MonoBehaviour {
 			public override void OnInspectorGUI()
 			{
 			PlayerController PL= target as PlayerController;
-				PL.boostPointMax = EditorGUILayout.IntField( "最大ブーストポイント", PL.boostPointMax);
-				PL.BpDown = EditorGUILayout.IntField( "ブーストポイント消費量", PL.BpDown);
-				PL.RecoverPoint = EditorGUILayout.IntField( "ブーストポイント回復量", PL.RecoverPoint);
-				PL.MaxForce = EditorGUILayout.FloatField( "移動力", PL.MaxForce);
-				PL.MaxBoostForce = EditorGUILayout.FloatField( "ブースト時移動力", PL.MaxBoostForce);
+				PL.Force = EditorGUILayout.FloatField( "移動速度", PL.Force);
+				PL.MaxForce = EditorGUILayout.FloatField( "移動速度上限", PL.MaxForce);
+				PL.MaxBoostForce = EditorGUILayout.FloatField( "ブースト時の移動速度上限", PL.MaxBoostForce);
 				PL.jumpSpeed = EditorGUILayout.FloatField( "ジャンプ力", PL.jumpSpeed);	
 				PL.HighPoint = EditorGUILayout.FloatField( "ジャンプ高さ上限", PL.HighPoint);	
 				PL.gravity = EditorGUILayout.FloatField( "重力", PL.gravity);
+				PL.BpDown = EditorGUILayout.FloatField( "ブーストポイント消費量", PL.BpDown);
+				PL.RecoverPoint = EditorGUILayout.FloatField( "ブーストポイント回復値", PL.RecoverPoint);
+				PL.BpHealPoint = EditorGUILayout.FloatField( "アイテムでのBP回復値", PL.BpHealPoint);
+				PL.InvisibleTime = EditorGUILayout.FloatField( "無敵時間", PL.InvisibleTime);
 			}
 	}*/
 
