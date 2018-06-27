@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEditor;
 
 // ボム（シューティングなどの広範囲攻撃）
 public class PlayerShoot03 : MonoBehaviour {
@@ -24,6 +25,20 @@ public class PlayerShoot03 : MonoBehaviour {
 	private Pause pause;
 	public bool isBig;							// 巨大化しているかどうか
 	
+	/*[CustomEditor(typeof(PlayerShoot03))]
+	public class PlayerShoot03Editor : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+			PlayerShoot03 Ps03 = target as PlayerShoot03;
+			Ps03.shotIntervalMax = EditorGUILayout.FloatField( "ショット間隔", Ps03.shotIntervalMax);
+			Ps03.Damage	   		 = EditorGUILayout.FloatField( "攻撃力", Ps03.Damage);
+			Ps03.BpDown		     = EditorGUILayout.FloatField( "ゲージ消費量", Ps03.BpDown);
+		}
+	}*/
+
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();

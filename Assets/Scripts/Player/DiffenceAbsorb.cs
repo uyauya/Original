@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 // プレイヤー用ガード（レバー進行方向2回押しでガード壁出し）
 // レバー進行方向2回押し＋Fire3でエネルギー吸収（回復）壁出し
@@ -16,16 +17,31 @@ public class DiffenceAbsorb : MonoBehaviour {
 	private Vector3 input = Vector3.zero;
 	public bool diffence = false;        	  	//　ガードしているか
 	public bool push = false;          		  	//　最初に移動ボタンを押したかどうか
-	public float nextButtonDownTime;    	  	//　次に移動ボタンが押されるまでの時間
+	public float NextButtonDownTime;    	  	//　次に移動ボタンが押されるまでの時間
 	private float nowTime = 0f;         	  	//　最初に移動ボタンが押されてからの経過時間
-	public float limitAngle;            	  	//　最初に押した方向との違いの限度角度
+	public float LimitAngle;            	  	//　最初に押した方向との違いの限度角度
 	private Vector2 direction = Vector2.zero;   //　移動キーの押した方向
 	private Pause pause;
 	public int PlayerNo;
 	public int boostPoint;						// ブーストポイント
+	public int BpUp = 100;
 	public Transform EffectPoint;				// 回復等エフェクト発生元の位置取り
 	public GameObject BpHealPrefab;				// ブーストポイント回復エフェクト格納場所
 	public GameObject BpHealObject;
+
+	/*[CustomEditor(typeof(DiffenceAbsorb))]
+	public class DiffenceAbsorbEditor : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+			DiffenceAbsorb Da = target as DiffenceAbsorb;
+			Da.NextButtonDownTime = EditorGUILayout.FloatField( "次にボタンが押されるまでの時間", Da.NextButtonDownTime);
+			Da.LimitAngle 		  = EditorGUILayout.FloatField( "入力角度誤差", Da.LimitAngle);
+			Da.BpUp				  = EditorGUILayout.FloatField( "ブーストポイント回復値", Da.BpUp);
+		}
+	}*/
 
 	void Start()
 	{
@@ -56,8 +72,8 @@ public class DiffenceAbsorb : MonoBehaviour {
 						var nowDirection = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 						//Debug.LogFormat("Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}",Vector2.Angle(nowDirection, direction),limitAngle,Time.time,nowTime,nextButtonDownTime);
 						//　押した方向がリミットの角度を越えていない　かつ　制限時間内に移動キーが押されていればガード
-						if (Vector2.Angle (nowDirection, direction) < limitAngle
-						   && nowTime <= nextButtonDownTime) {							
+						if (Vector2.Angle (nowDirection, direction) < LimitAngle
+						   && nowTime <= NextButtonDownTime) {							
 							//&& Time.time - nowTime < nextButtonDownTime)
 							//Debug.LogFormat ("出る時：Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}", Vector2.Angle (nowDirection, direction), limitAngle, Time.time, nowTime, nextButtonDownTime);
 							diffence = true;
@@ -74,13 +90,13 @@ public class DiffenceAbsorb : MonoBehaviour {
 							Debug.Log ("Diffence");
 							diffence = false;
 							push = false;
-						} else if (nowTime > nextButtonDownTime) {
+						} else if (nowTime > NextButtonDownTime) {
 							diffence = false;
 							push = false;
 						}
 
-						if (Vector2.Angle (nowDirection, direction) < limitAngle && (Input.GetButton ("Fire3"))
-						   && nowTime <= nextButtonDownTime) {
+						if (Vector2.Angle (nowDirection, direction) < LimitAngle && (Input.GetButton ("Fire3"))
+						   && nowTime <= NextButtonDownTime) {
 							diffence = true;
 							if (PlayerNo == 0) {
 								//SoundManager.Instance.Play(0,gameObject);
@@ -95,7 +111,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 							Debug.Log ("Absorb");
 							diffence = false;
 							push = false;
-						} else if (nowTime > nextButtonDownTime) {
+						} else if (nowTime > NextButtonDownTime) {
 							diffence = false;
 							push = false;
 						}
@@ -110,7 +126,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 				//　時間計測
 				nowTime += Time.deltaTime;
 
-				if (nowTime > nextButtonDownTime) {
+				if (nowTime > NextButtonDownTime) {
 					push = false;
 				}
 			}
@@ -147,7 +163,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 			if (PlayerNo == 2) {
 				//SoundManager.Instance.Play (20, gameObject);
 			}
-			boostPoint += 1000;
+			boostPoint += BpUp;
 		}
 	}
 } 

@@ -23,10 +23,8 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 	// Use this for initialization
 	void Start () {
 		// シーン移動してもPlayerNoを残しておく
-		//if (GameObject.Find ("DataManager") == null) {
-			DontDestroyOnLoad (this.gameObject);
-			FarstLevel = false;
-		//}
+		DontDestroyOnLoad (this.gameObject);
+		FarstLevel = false;
 		userParam = new UserParam ();
 	}
 	
@@ -39,19 +37,15 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 	public void SaveData (string SlotName) 
 	{
 		UserData userData = new UserData ();
-		//UserParam instance = new UserParam (
 		userData.PlayerNo = PlayerNo;
 		userData.Level = Level;
 		userData.AttackPoint = AttackPoint;
 		userData.BoostPointMax = BoostPointMax;
 		userData.ArmorPointMax = ArmorPointMax;
 		userData.Score = Score;
-		//userData.SceneName = SceneManager.GetActiveScene ().name;
 		userData.SceneName = StageManager.Instance.StageName[StageManager.Instance.StageNo];
 		userData.ClearScene = ClearScene;
-		//StageManager.Instance.StageNo;
-			//this.ClearScene
-		//);
+
 		//UserParamインスタンスを文字列に変換
 		string UserParamSaveJson = JsonUtility.ToJson(userData);
 		Debug.Log (UserParamSaveJson);
@@ -77,7 +71,5 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 		Score = instance.Score;
 		SceneName = instance.SceneName;
 		ClearScene = instance.ClearScene;
-		//SceneManager.LoadScene (SceneName);
-		//SceneManager.LoadScene(StageManager.Instance.StageName[StageManager.Instance.StageNo]);
 	}
 }

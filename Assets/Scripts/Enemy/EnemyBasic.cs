@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor; 
 
 // 敵キャラクタ管理用
 // ステータス欄等の共通項目を保持。キャラクタ独自の項目のみ別スクリプトに書き足す。
@@ -74,7 +75,7 @@ public class EnemyBasic : MonoBehaviour {
 	public Color FreezeColor;
 	public Color DeadColor;
 
-	/*[CustomEditor(typeof(Zombie))]
+	/*[CustomEditor(typeof(EnemyBasic))]
 	public class EnemyBasicEditor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;

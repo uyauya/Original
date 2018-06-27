@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEditor;
 
 // 
 public class PlayerShoot04 : MonoBehaviour {
@@ -8,11 +9,11 @@ public class PlayerShoot04 : MonoBehaviour {
 	public GameObject Bullet04;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
-	public float speed = 1000F;
+	//public float speed = 1000F;
 	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
-	public float Attack;
-	public float damage = 100;
+	//public float Attack;
+	//public float damage = 100;
 	private float chargeTime;
 	private Animator animator;
 	private AudioSource audioSource;
@@ -25,6 +26,20 @@ public class PlayerShoot04 : MonoBehaviour {
 	private Pause pause;
 	public bool isBig;							// 巨大化しているかどうか
 	
+	/*[CustomEditor(typeof(PlayerShoot04))]
+	public class PlayerShoot04Editor : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+			PlayerShoot04 Ps04 = target as PlayerShoot03;
+			Ps04.shotIntervalMax = EditorGUILayout.FloatField( "ショット間隔", Ps04.shotIntervalMax);
+			//Ps04.Damage	   		 = EditorGUILayout.FloatField( "攻撃力", Ps04.Damage);
+			Ps04.BpDown		     = EditorGUILayout.FloatField( "ゲージ消費量", Ps04.BpDown);
+		}
+	}*/
+
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
@@ -38,7 +53,7 @@ public class PlayerShoot04 : MonoBehaviour {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 			if (isBig == false) {
 				if (Input.GetButtonUp ("Fire1")) {
-					damage = Attack;
+					//damage = Attack;
 					if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 						animator.SetTrigger ("Shot");
 						GetComponent<PlayerController> ().boostPoint -= BpDown;

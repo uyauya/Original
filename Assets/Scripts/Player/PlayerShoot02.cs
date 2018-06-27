@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEditor;
 
 // ホーミングショット
 public class PlayerShoot02 : MonoBehaviour {
@@ -24,6 +25,20 @@ public class PlayerShoot02 : MonoBehaviour {
 	public int PlayerNo;
 	private Pause pause;
 	public bool isBig;							// 巨大化しているかどうか
+
+	/*[CustomEditor(typeof(PlayerShoot02))]
+	public class PlayerShoot02Editor : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+			PlayerShoot02 Ps02 = target as PlayerShoot02;
+			Ps02.shotIntervalMax = EditorGUILayout.FloatField( "ショット間隔", Ps02.shotIntervalMax);
+			Ps02.Damage	   		 = EditorGUILayout.FloatField( "攻撃力", Ps02.Damage);
+			Ps02.BpDown		     = EditorGUILayout.FloatField( "ゲージ消費量", Ps02.BpDown);
+		}
+	}*/
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 // 銃としてPlayerShootスクリプト、弾をBullet01スクリプトとして作る
 public class PlayerShoot : MonoBehaviour {
@@ -24,12 +25,13 @@ public class PlayerShoot : MonoBehaviour {
 	public float attackPoint;					// プレイヤの攻撃値（ショットする際に付け足す。PlayerController参照）
 	private float power = 0;
 	public float damage;						// Bullet1に受け渡す弾自体の攻撃力
-	public float chargeTime;					// チャージ時間
-	public float chargeTime1 = 1.0f;					// チャージ時間
-	public float chargeTime2 = 3.0f;					// チャージ時間
+	public float ChargeTime;					// チャージ時間
+	public float ChargeTime1 = 1.0f;			// チャージ時間
+	public float ChargeTime2 = 3.0f;			// チャージ時間
+	public float AddAttackRate = 2.5f;          // 追加攻撃比率
 	private float NormalSize = 1.0F;
 	public float BigSize;
-	public float BiggerTime;
+	public float BiggerTime;					// 溜め攻撃拡大率
 	private Animator animator;
 	private Rigidbody rb;
 	public Image gaugeImage;
@@ -43,6 +45,24 @@ public class PlayerShoot : MonoBehaviour {
 	public int PlayerNo;						//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	private Pause pause;						// ポーズ中かどうか（Pause参照）
 	public bool isBig;							// 巨大化しているかどうか
+
+	/*[CustomEditor(typeof(PlayerShoot))]
+	public class PlayerShootEditor : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+			PlayerShoot Ps = target as PlayerShoot;
+			Ps.shotIntervalMax = EditorGUILayout.FloatField( "ショット間隔", Ps.shotIntervalMax);
+			Ps.Attack		   = EditorGUILayout.FloatField( "攻撃力", Ps.Attack);
+			Ps.ChargeTime1	   = EditorGUILayout.FloatField( "溜め時間1", Ps.ChargeTime1);
+			Ps.ChargeTime2	   = EditorGUILayout.FloatField( "溜め時間2", Ps.ChargeTime2);
+			Ps.AddAttackRate   = EditorGUILayout.FloatField( "追加攻撃比率", Ps.AddAttackRate);
+			Ps.BiggerTime	   = EditorGUILayout.FloatField( "拡大率", Ps.BiggerTime);
+			Ps.BpDown		   = EditorGUILayout.FloatField( "ゲージ消費量", Ps.BpDown);
+		}
+	}*/
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
@@ -72,10 +92,10 @@ public class PlayerShoot : MonoBehaviour {
 					effectObject.transform.SetParent (muzzle);
 				} 
 				if (Input.GetButton ("Fire1")) {
-					if (Time.time - triggerDownTimeStart >= chargeTime1 && Time.time - triggerDownTimeStart <= chargeTime2) {
+					if (Time.time - triggerDownTimeStart >= ChargeTime1 && Time.time - triggerDownTimeStart <= ChargeTime2) {
 						effectObject.GetComponent<ParticleSystem> ().startColor = Color.red;
 						effectObject.transform.Find ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.white;
-					} else if (Time.time - triggerDownTimeStart > chargeTime2) {
+					} else if (Time.time - triggerDownTimeStart > ChargeTime2) {
 						effectObject.GetComponent<ParticleSystem> ().startColor = Color.blue;
 						effectObject.transform.Find ("ErekiSmoke").GetComponent<ParticleSystem> ().startColor = Color.yellow;
 					}
@@ -91,9 +111,9 @@ public class PlayerShoot : MonoBehaviour {
 					//エフェクトを削除
 					Destroy (effectObject);
 					// キーを離した状態から押し始めたじかんの差分を計測して
-					chargeTime = triggerDownTimeEnd - triggerDownTimeStart;
+					ChargeTime = triggerDownTimeEnd - triggerDownTimeStart;
 					// ダメージを初期値＋時間に攻撃値を掛けた数値を計算
-					damage = Attack + attackPoint * 2.5f * chargeTime;
+					damage = Attack + attackPoint * AddAttackRate * ChargeTime;
 					//Debug.Log (damage);
 					// もしboostPoint 数値がBpDown以上なら
 					if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
@@ -123,13 +143,13 @@ public class PlayerShoot : MonoBehaviour {
 		//if (Time.time - shotInterval > shotIntervalMax) {
 			//shotInterval = Time.time;
 			// Bulletのゲームオブジェクトを生成してbulletObjectとする
-		if (chargeTime <= chargeTime1) {
+		if (ChargeTime <= ChargeTime1) {
 			GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
 			//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 			bulletObject.transform.position = muzzle.position;
 			// Bullet01オブジェクトにダメージ計算を渡す
 			bulletObject.GetComponent<Bullet01> ().damage = this.damage;
-		} else if (chargeTime1 < chargeTime && chargeTime  <= chargeTime2) {
+		} else if (ChargeTime1 < ChargeTime && ChargeTime  <= ChargeTime2) {
 			GameObject bulletObject = GameObject.Instantiate (Bullet01B)as GameObject;
 			bulletObject.transform.position = muzzle.position;
 			// Bullet01オブジェクトにダメージ計算を渡す

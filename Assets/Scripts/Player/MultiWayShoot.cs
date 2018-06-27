@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEditor;
 
 // 多段同時ショット
 public class MultiWayShoot : MonoBehaviour {
@@ -30,6 +31,24 @@ public class MultiWayShoot : MonoBehaviour {
 	private Pause pause;
 	private int timeCount;
 	public bool isBig;							// 巨大化しているかどうか
+
+	/*[CustomEditor(typeof(MultiWayShoot))]
+	public class MultiWayShootEditor : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+			MultiWayShoot Mws = target as MultiWayShoot;
+			Mws.shotIntervalMax = EditorGUILayout.FloatField( "ショット間隔", Mws.shotIntervalMax);
+			Mws.Damage	   		= EditorGUILayout.FloatField( "攻撃力", Mws.Damage);
+			Mws.BpDown		    = EditorGUILayout.FloatField( "ゲージ消費量", Mws.BpDown);
+			Mws.BulletGap		= EditorGUILayout.IntField( "弾の発射角度", Mws.BulletGap);
+			Mws.BulletRad		= EditorGUILayout.FloatField( "弾の発射元", Mws.BulletRad);
+			Mws.FirstBullet		= EditorGUILayout.IntField(" 弾生成（～から）", Mws.FirstBullet);
+			Mws.BulletNumbaer	= EditorGUILayout.IntField(" 弾生成（～まで）", Mws.BulletNumbaer);
+		}
+	}*/
 
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
