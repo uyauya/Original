@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // シーンをまたいでデータ保持する処理
-
 public class DataManager : SingletonMonoBehaviour<DataManager> {
 	[System.NonSerialized]
 	public static int PlayerNo;			//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照

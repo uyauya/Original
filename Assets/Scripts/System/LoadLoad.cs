@@ -9,7 +9,7 @@ public class LoadLoad : MonoBehaviour {
 	private AudioSource[] audioSources;
 	public void Onclick_Select ()
 	{
-		// ボタンを押してスタート画面に移行
+		// ボタンを押してロードポイント画面に移行
 		//SoundManager00.Instance.Play(1);	//(1)はElmentの数
 		//GetComponent<Animator>().SetBool("START", true);
 		Invoke("LoadScene",1.3f);

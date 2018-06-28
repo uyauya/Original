@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 // PlayerShoot02から発射するホーミング弾のShotsオブジェクト用
 public class Bullet02 : MonoBehaviour {
@@ -8,9 +9,26 @@ public class Bullet02 : MonoBehaviour {
 	public GameObject explosion;		// 着弾時のエフェクト
 	public float damage;				// 弾の威力
 	public float BulletSpeed;			// 弾のスピード
+	public float DecreaseDamage = 0.9f;	// 時間とともに減少していく攻撃値
+	public float LowestDamage = 20.0f;	// 最低限与えるダメージ
 	PlayerShoot02 Plshoot02;			// 発射元
 	private  GameObject Enemy;
 	public float DestroyTime = 1;		// 発射されてから消滅するまでの時間
+
+	/*[CustomEditor(typeof(Bullet02))]
+	public class Bullet02 : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+			Bullet02 B02 = target as Bullet02;
+			B02.BulletSpeed = EditorGUILayout.FloatField( "弾の速さ", B02.BulletSpeed);
+			B02.DecreaseDamage = EditorGUILayout.FloatField( "攻撃減少値", B02.DecreaseDamage);
+			B02.LowestDamage = EditorGUILayout.FloatField( "最低攻撃値", B02.LowestDamage);
+			B02.DestroyTime = EditorGUILayout.FloatField( "弾消滅までの時間", B02.DestroyTime);
+		}
+	}*/
 
 	void Start () 
 	{
@@ -45,9 +63,9 @@ public class Bullet02 : MonoBehaviour {
 		float step = Time.deltaTime * speed;
 		transform.position = Vector3.MoveTowards (transform.position, Enemy.transform.position, step);
 		//damage--;
-		damage = damage - (0.9f * Time.deltaTime);
-		if (damage <= 20)
-			damage = 20;
+		damage = damage - (DecreaseDamage * Time.deltaTime);
+		if (damage <= LowestDamage)
+			damage = LowestDamage;
 		Debug.Log (damage);
 	}
 

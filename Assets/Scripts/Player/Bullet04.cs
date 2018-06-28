@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 // PlayerShoot04から発射する特殊弾のShotsssオブジェクト用
 public class Bullet04 : MonoBehaviour {
@@ -13,6 +14,22 @@ public class Bullet04 : MonoBehaviour {
 	public float XPower;				// 接触時X方向に加える力
 	public float YPower;
 	public float ZPower;
+
+	/*[CustomEditor(typeof(Bullet04))]
+	public class Bullet04 : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+			Bullet04 B04 = target as Bullet04;
+			B04.BulletSpeed = EditorGUILayout.FloatField( "弾の速さ", B04.BulletSpeed);
+			B04.DestroyTime = EditorGUILayout.FloatField( "弾消滅までの時間", B04.DestroyTime);
+			B04.XPower = EditorGUILayout.FloatField( "X方向圧力", B04.XPower);
+			B04.YPower = EditorGUILayout.FloatField( "Y方向圧力", B04.YPower);
+			B04.ZPower = EditorGUILayout.FloatField( "Z方向圧力", B04.ZPower);
+		}
+	}*/
 
 	void Start () {
 		Plshoot04 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot04> ();

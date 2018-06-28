@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;	
+using UnityEditor;
 
 // PlayerShoot03から発射するボムのShotssオブジェクト用
 public class Bullet03 : MonoBehaviour {
@@ -12,8 +13,22 @@ public class Bullet03 : MonoBehaviour {
 	public float BulletSpeed;			// 弾のスピード
 	PlayerShoot03 Plshoot03;			// 発射元
 	public GameObject prefab_HitEffect2;
-	public int bombDamage = 2000;		// ボムの攻撃値
+	public int BombDamage = 2000;		// ボムの攻撃値
 	public float DestroyTime = 1;		// 発射されてから消滅するまでの時間
+
+	/*[CustomEditor(typeof(Bullet03))]
+	public class Bullet03 : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+			Bullet03 B03 = target as Bullet03;
+			B03.BulletSpeed = EditorGUILayout.FloatField( "弾の速さ", B03.BulletSpeed);
+			B03.BombDamage = EditorGUILayout.FloatField( "弾の速さ", B03.BombDamage);
+			B03.DestroyTime = EditorGUILayout.FloatField( "弾消滅までの時間", Ps.DestroyTime);
+		}
+	}*/
 
 	void Start () {
 		Plshoot03 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();
@@ -42,13 +57,13 @@ public class Bullet03 : MonoBehaviour {
 			if (col.gameObject.tag == "Enemy" && col.gameObject.GetComponent<EnemyBasic>() != null) {			// タグ名がEnemyなら
 				EnemyBasic enemyinsta = col.gameObject.GetComponent<EnemyBasic>();
 				if (enemyinsta != null) {
-				enemyinsta.Damaged(bombDamage);	// ダメージを与える
+				enemyinsta.Damaged(BombDamage);	// ダメージを与える
 				}
 			}
 			if (col.gameObject.tag == "Enemy" && col.gameObject.GetComponent<BossBasic>() != null) {			// タグ名がEnemyなら
 				BossBasic enemyinsta = col.gameObject.GetComponent<BossBasic>();
 				if (enemyinsta != null) {
-					enemyinsta.Damaged(bombDamage);	// ダメージを与える
+					enemyinsta.Damaged(BombDamage);	// ダメージを与える
 				}
 			}
 		}
