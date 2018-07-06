@@ -9,11 +9,11 @@ public class PlayerLevel : MonoBehaviour
 	// 順番（pno, level, attackPoint, boostMax, armorMax, scoreの順）にレベルアップ時の数値を設定
 	public static List <UserParam> userParamList = new List<UserParam>() 
 	{
-		new UserParam(0,01,130,3000,3000,2000, string.Empty,0),		//Level01
+		new UserParam(0,01,130,3000,3000,2000, string.Empty,0),		//Level01（List0）
 		new UserParam(2,01,150,3200,2700,2000, string.Empty,0),		//Level01
 		new UserParam(1,01,100,3200,3000,2000, string.Empty,0),		//Level01
 
-		new UserParam(0,02,136,3300,3150,3000, string.Empty,0),		//Level02
+		new UserParam(0,02,136,3300,3150,3000, string.Empty,0),		//Level02（List1）
 		new UserParam(2,02,165,3360,2830,3000, string.Empty,0),		//Level02
 		new UserParam(1,02,105,3520,3150,3000, string.Empty,0),		//Level02
 
@@ -47,10 +47,11 @@ public class PlayerLevel : MonoBehaviour
 
 	};
 
-	public Transform muzzle;				//レベルアップオブジェクト出現場所
+	public Transform muzzle;				//レベルアップオブジェクト出現場所をmuzzleに設定
 	public GameObject LevelUpPrefab;		//レベルアップオブジェクト格納
 	public GameObject LevelUpObject;
 	public int PlayerNo;					//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
+	public int MaxScore = 52000;			//レベル打ち止め用マックススコア設定
 
 	// Use this for initialization
 	void Start () {
@@ -63,24 +64,20 @@ public class PlayerLevel : MonoBehaviour
 
 	public void LevelUp() {
 		
-		// BattleManagerオブジェクトのBattleManagerのScoreをScoreと呼ぶ
+		// DataManagerのスコアを代入して判定
 		int Score = DataManager.Score;
+		// foreachで常にレベルアップ判定する
 		foreach(var Param in userParamList)
 		{
-			//Debug.Log("ParamScore"+Param.Score);
-			//Debug.Log("Score"+Score);
 			//レベルアップ用スコアがレベル上限のスコア以下だったらレベルアップ判定
-			if ( Param.Level > DataManager.Level && Param.Score <= Score && Score <= 52000) {
-			//if (Param.Score <= Score && Score <= 52000) {
+			if ( Param.Level > DataManager.Level && Param.Score <= Score && Score <= MaxScore) {
+				//userParamListの各数値を代入する
 				if (Param.PlayerNo == DataManager.PlayerNo) {
 					DataManager.Level = Param.Level;
-					//Playerのタグがついているオブジェクトを見つけPlayerControllerスクリプトのAttackPointに
-					//userParamListのAttackPoint数値を代入する
-					//Debug.Log ("レベルアップ");
 					DataManager.AttackPoint = Param.AttackPoint;
 					DataManager.BoostPointMax = Param.boostPointMax;
 					DataManager.ArmorPointMax = Param.armorPointMax;
-					// （プレイヤーの）muzzleにレベルアップ用エフェクト設置
+					//（プレイヤーの）muzzleにレベルアップ用エフェクト設置
 					LevelUpObject = Instantiate (LevelUpPrefab, muzzle.position, Quaternion.identity);
 					if (PlayerNo == 0) {
 						SoundManager.Instance.Play (42, gameObject);
@@ -94,8 +91,7 @@ public class PlayerLevel : MonoBehaviour
 					DataManager.Level = Param.Level;
 				}
 				//すでにレベルMaxの場合は判定しない（MaxかどうかはScoreで判定）
-			} else if (Param.Score <= Score && Score > 52000) {
-				//Debug.Log ("打ち止め");
+			} else if (Param.Score <= Score && Score > MaxScore) {
 				return;
 
 			}

@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityEditor;
+using UnityEngine.SceneManagement;	//シーンをまたいで使用する際に使用
+using UnityEditor;					//Editor画面を変更する際に使用
 
 // 銃としてPlayerShootスクリプト、弾をBullet01スクリプトとして作る
 public class PlayerShoot : MonoBehaviour {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor; 
 
 // ゾンビ（うろうろ歩くザコキャラ）
 public class Zombie1 : MonoBehaviour {
@@ -8,11 +9,24 @@ public class Zombie1 : MonoBehaviour {
 	// 継承元（protectedにする）のEnemyBasicをenemyBasicとする
 	protected EnemyBasic enemyBasic;
 	bool dead = false;
-	bool damageSet;
-	public float DamageTime = 0.5f;
-	bool freezeSet;
-	public float FreezeTime = 1.0f;
-	public float LastEnemySpeed;
+	bool damageSet;					//被ダメージ処理、一時的に移動不可
+	public float DamageTime = 0.5f;	//ダメージ処理時間
+	bool freezeSet;					//フリーズ処理、一時的に移動不可
+	public float FreezeTime = 1.0f;	//フリーズ処理時間
+	public float LastEnemySpeed;	//ダメージ、フリーズ処理する前の敵のスピード
+
+	/*[CustomEditor(typeof(Zombie1))]
+	public class Zombie1 : Editor	// using UnityEditor; を入れておく
+	{
+		bool folding = false;
+
+		public override void OnInspectorGUI()
+		{
+			Zombie1 Zn1 = target as Zombie1;
+			Zn1.DamageTime= EditorGUILayout.FloatField( "被ダメージ硬直時間", Zn1.DamageTime);
+			Zn1.FreezeTime= EditorGUILayout.FloatField( "フリーズ硬直時間", Zn1.FreezeTime);
+		}
+	}*/
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +39,6 @@ public class Zombie1 : MonoBehaviour {
 	void Update () {
 		damageSet = GetComponent<EnemyBasic> ().DamageSet;
 		freezeSet = GetComponent<EnemyBasic> ().FreezeSet;
-		//Debug.Log (damageSet);
 		// Animator の dead が true なら Update 処理を抜ける
 		if( enemyBasic.animator.GetBool("dead") == true ) return;
 		// オブジェクトの場所取りをする
@@ -54,11 +67,10 @@ public class Zombie1 : MonoBehaviour {
 				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemySpeed);
 
 			enemyBasic.animator.SetTrigger ("attack");
-			//Debug.Log ("hit");
 		}
 
+		//damageSet時、スピードが0なら何もしない。0でないならDamageSetCoroutine起動（下記参照）
 		if (damageSet == true) {
-			//Debug.Log ("DamageSet");
 			if (LastEnemySpeed == 0) {
 				return;
 			} else {
@@ -70,10 +82,10 @@ public class Zombie1 : MonoBehaviour {
 	//攻撃が当たったらDamageTime分だけSpeedをゼロにする（動きを止める）
 	IEnumerator DamageSetCoroutine (){
 	enemyBasic.DamageSet = false;
-	LastEnemySpeed = enemyBasic.EnemySpeed;
-	enemyBasic.EnemySpeed = 0;
-	yield return new WaitForSeconds(DamageTime);
-	enemyBasic.EnemySpeed = LastEnemySpeed;
+	LastEnemySpeed = enemyBasic.EnemySpeed;			//直前の動きの速さをLastEnemySpeedとして保存
+	enemyBasic.EnemySpeed = 0;						//スピードを0にする（硬直処理）
+	yield return new WaitForSeconds(DamageTime);	//DamageTimeが経過したら
+	enemyBasic.EnemySpeed = LastEnemySpeed;			//LastEnemySpeedに戻して再び移動可能にする
 	//Debug.Log (LastEnemySpeed);
 	}
 

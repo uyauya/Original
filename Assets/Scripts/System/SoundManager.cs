@@ -132,9 +132,11 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 		return Voicevolume.volume;
 	}
 
+	// 声の大きさ変更用
 	public void ChangeVolume()
 	{
 		if (PlayerNo == 0) {
+			//スライダーに比例して音の大きさを変える × デフォルト設定の大きさ × 1.0倍
 			Value = voice.GetComponent<Slider>().value * 1.0f;
 		}
 		if (PlayerNo == 1) {
@@ -150,6 +152,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 		}
 	}
 
+	// 声の大きさ変更用サンプルボイス
 	public void SampleVoice()
 	{
 		if (DataManager.PlayerNo == 0) {

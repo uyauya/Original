@@ -5,7 +5,7 @@ using UnityEngine;
 // スフィア用
 public class Sphere : MonoBehaviour {
 
-	public float SphereHeight = 0.4f;
+	public float SphereHeight = 0.4f;	//出現時のスフィアの高さ
 
 	void Start () {
 		Vector3 Pog = this.gameObject.transform.position;

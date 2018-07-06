@@ -7,8 +7,7 @@ public class SubCameraFollow : MonoBehaviour
 	{
 		public Transform target;
 		public float height;
-		//public float smoothing = 0.5f;
-		Vector3 offset;
+		Vector3 offset;				// カメラのデフォルトの位置
 
 		void Start ()
 		{
@@ -22,8 +21,7 @@ public class SubCameraFollow : MonoBehaviour
 		
 		void LateUpdate ()
 		{
-			// カメラがターゲット（プレイヤー）を見つけてから追いかける（少し遅れて追いかける）
-			//transform.position = target.position + offset;
+			// カメラがターゲット（プレイヤー）を見つけてから追いかける（カメラの高さは変更しない）
 			transform.position = new Vector3(target.position.x, height, target.position.z);
 		}
 	}

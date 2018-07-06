@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+// イベント用「はい」「いいえ」選択用
 public class YesOrNo : MonoBehaviour {
 	public Text DialogMessage;
 	public GameObject YesButton;

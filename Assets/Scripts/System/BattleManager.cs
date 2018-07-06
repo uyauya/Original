@@ -43,7 +43,7 @@ public class BattleManager : MonoBehaviour {
 		//instantiateValueに値を代入するのをBattleManagerより早くするため
 		//EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
 		Player = GameObject.FindWithTag("Player");
-		// 得点をテキスト形式で画面に表示
+		// スコアテキストにDataManagerのスコアを代入
 		ScoreText.text = DataManager.Score.ToString();
 
 	}
@@ -110,15 +110,15 @@ public class BattleManager : MonoBehaviour {
 				battleStatus = BATTLE_PLAY;
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
 				// Scene移行時プレイヤーのパラメータの中身を取得
-				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
-				playerController.ItemCount = 0;
+				Invoke("NextScene", ChangeTime);	// ChangeTime時間後シーン移動（ChangeTimeで時間設定）
+				playerController.ItemCount = 0;		// シーン移動時アイテム取得数をリセット
 			}	
 
 			// ボス撃破時スター出現
 			// スターオブジェクトを1個以上取得したら次面へ
 			if (playerController.GetStar >= 1 ) {
 				mesaageClear.SetActive (true);		// ステージクリア表示
-				Invoke("NextScene", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
+				Invoke("NextScene", ChangeTime);	// ChangeTime時間後シーン移動（ChangeTimeで時間設定）
 				playerController.GetStar = 0;		// スター取得数をリセット	
 			}
 
@@ -126,7 +126,7 @@ public class BattleManager : MonoBehaviour {
 			// ビッグスターオブジェクトを1個以上取得したらエンディング
 			if (playerController.GetBigStar >= 1) {
 				mesaageClear.SetActive (true);		// ステージクリア表示
-				Invoke ("END", ChangeTime);			// エンドシーン（エンディング）移動
+				Invoke ("END", ChangeTime);			// ChangeTime時間後エンドシーン（エンディング）移動
 				playerController.GetBigStar = 0;	// ビッグスター取得数をリセット	
 		}
 		break;

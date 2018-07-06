@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;	//シーンをまたいで使用する際に使用
 
-// プレイヤーパラメータ管理
+// プレイヤーパラメータ管理（セーブ時使用）
 public class UserParam
 {
 	public static UserParam instanse;
@@ -28,7 +28,6 @@ public class UserParam
 		Score = score;
 		SceneName = sceneName;
 		StageNo = stageNo;
-		//ClearNo = clearNo;
 		instanse = this;
 	}
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// 武器チェンジ
 // 選択した武器を使用可にして、他を不可にする仕様
 public class ChangeWeapon : MonoBehaviour {
 	
