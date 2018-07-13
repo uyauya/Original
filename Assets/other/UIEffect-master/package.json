@@ -1,0 +1,10 @@
+{
+  "name": "UIEffect",
+  "version": "2.6.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mob-sakai/UIEffect.git"
+  },
+  "src": "Assets/Coffee/UIExtensions/UIEffect",
+  "license": "MIT"
+}

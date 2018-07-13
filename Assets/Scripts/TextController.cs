@@ -9,14 +9,14 @@ public class TextController : MonoBehaviour
 	const float TEXT_SPEED_STRING = 0.05F;
 	const float COMPLETE_LINE_DELAY = 0.3F;
 
-	[SerializeField] Text lineText;		// 文字表示Text
-	[SerializeField] string[] scenarios;	// 会話内容
+	[SerializeField] Text lineText;					// 文字表示Text
+	[SerializeField] string[] scenarios;			// 会話内容
 
-	float textSpeed = 0;			        // 表示速度
+	float textSpeed = 0;			       			// 表示速度
 	float completeLineDelay = COMPLETE_LINE_DELAY;	// 表示し終えた後の待ち時間
-	int currentLine = 0;			        // 表示している行数
-	string currentText = string.Empty;		// 表示している文字
-	bool isCompleteLine = false;			// １文が全部表示されたか？
+	int currentLine = 0;			       			// 表示している行数
+	string currentText = string.Empty;				// 表示している文字
+	bool isCompleteLine = false;					// １文が全部表示されたか？
 
 	void Start()
 	{
