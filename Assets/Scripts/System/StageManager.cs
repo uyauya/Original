@@ -13,6 +13,7 @@ public class StageManager : SingletonMonoBehaviour<StageManager>  {
 
 	// Use this for initialization
 	void Start () {
+		// シーンをまたいでデータ保持する処理
 		DontDestroyOnLoad(this.gameObject);
 	}
 	

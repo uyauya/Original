@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
 	public float MaxBoostForce = 15;				// ブースト時の移動速度最大値
 	public float PlusForce= 0.1f;					// 移動速度加算数値
 	public float JumpForce = 4.0f;					// ジャンプ力
-	public float BoostJumpForce = 6.0f;
+	public float BoostJumpForce = 6.0f;				// ブースト時のジャンプ力
 	public float HighPoint;							// ジャンプの高さ最大値
 	public float gravity;							// 重力（ジャンプ時などに影響）
 	private Vector3 moveDirection = Vector3.zero;	 //プレイヤ位置方向ニュートラル設定
@@ -68,13 +68,10 @@ public class PlayerController : MonoBehaviour {
 
 	void Start()	//　ゲーム開始時の設定
 	{
-		animator = GetComponent<Animator>();		// Animatorを使う場合は設定する
-		boostPoint = DataManager.BoostPointMax;		// ブーストポイントを最大値に設定
-		moveSpeed = Vector3.zero;					// 開始時は移動していないので速さはゼロに
-		isBoost = false;							// ブーストはオフに
-		// Canvas上のゲージイメージを取得（オブジェクトに直接付いていない場合はゲットコンポーネントで取得する）
-		// BoostGaugeオブジェクトに付いているImageを取得
-		//gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
+		animator = GetComponent<Animator>();			// Animatorを使う場合は設定する
+		boostPoint = DataManager.BoostPointMax;			// ブーストポイントを最大値に設定
+		moveSpeed = Vector3.zero;						// 開始時は移動していないので速さはゼロに
+		isBoost = false;								// ブーストはオフに
 		gaugeImage = GameObject.Find ("BoostGauge");
 		boostText = GameObject.Find ("TextBg").GetComponent<Text> ();
 		// 画面上(Canvas)のブーストポイントと実際(Inspector)の数値(Inspector)を同じに設定
@@ -86,10 +83,13 @@ public class PlayerController : MonoBehaviour {
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
 	}
 
+	//ボタン等が押された時など、その都度Updateする
 	void Update()
 	{
+		//ProjectSettigでJumpに割り当てたキーが押されたら
 		if (Input.GetButtonDown("Jump"))
 		{
+			//ジャンプボタンをオンにする
 			IsDownJumpButton = true;
 		}
 		//現在のブーストゲージと最大ブーストゲージをUI Textに表示する
@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour {
 		boostText.text = string.Format("{0:0000} / {1:0000}", boostPoint, DataManager.BoostPointMax);
 	}
 
+	//一定時間間隔で常にUpdateする
 	void FixedUpdate()
 	{
 
@@ -105,14 +106,14 @@ public class PlayerController : MonoBehaviour {
 		{
 			boostPoint -= BpDown;							//ブーストポイントをBpDown設定値分消費
 			isBoost = true;									//ブースト状態にする
-			StartCoroutine ("BoostCoroutine");
+			StartCoroutine ("BoostCoroutine");				//コルーチン処理（下記参照）
 			// プレイヤのレイヤーをInvincibleに変更
 			// Edit→ProjectSetting→Tags and LayersでInvicibleを追加
 			// Edit→ProjectSetting→Physicsで衝突させたくない対象と交差している所の✔を外す
 			// ここではEnemyと衝突させたくない（すり抜ける）為、Enemeyのレイヤーも追加
 			// EnemeyとPlayerの交差してる✔を外す（プレイヤのLayerをPlayer、EnemyのLayerをEnemyに設定しておく）
 			//gameObject.layer = LayerMask.NameToLayer("Invincible");
-			StartCoroutine ("BoostCoroutine");
+			//StartCoroutine ("BoostCoroutine");
 		}
 		else
 		{
@@ -121,7 +122,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//通常時とブースト時で変化
-		if (isBoost)										//ブーストなら
+		if (isBoost)										//ブーストならMaxBoostForce値まで加速
 		{
 			// ブースト時
 			if (Force <= MaxBoostForce) {					// ForceがMaxBoostForceの値以下なら
@@ -129,10 +130,10 @@ public class PlayerController : MonoBehaviour {
 				Force = Mathf.Min(Force, MaxBoostForce);	// ForceがMaxBoostForceの値を超えない
 				//Debug.Log (Force);
 			}
-			//ブーストキーが押されたらにパラメータを切り替える
+			//ブースト状態ならアニメーターをBoostに切り替える
 			animator.SetBool("Boost", Input.GetButton("Boost")&& boostPoint > 0);
 		}
-		else
+		else　　　　　　　　　　　　　　　　　　　　　　　　　　
 		{
 			if (Force <= MaxForce) {					
 				Force += Time.deltaTime * PlusForce;	
@@ -144,11 +145,11 @@ public class PlayerController : MonoBehaviour {
 			
 
 		//モーションを切り替える
-		if (Input.GetAxis("Horizontal") > 0)	// 横軸操作（右か左か押されている場合）
+		if (Input.GetAxis("Horizontal") > 0)	// 横軸操作（右が押されている場合）
 		{
 			// クォータリオン（球体を動かすような処理）で5.0の速度でプレイヤを横に向かせる
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
-			// アニメーターをムーブに切り替え
+			// アニメーターをMoveに切り替え
 			animator.SetBool("Move", true);
 			// プレイヤに速度を加える（transform.Translateは移動だが、アッドフォースは後ろから押すような操作なので、坂道など段差が
 			// ある場合、自動で加減速処理して移動する
@@ -163,7 +164,7 @@ public class PlayerController : MonoBehaviour {
 			//Debug.Log (Force);
 
 		}
-		else if (Input.GetAxis("Vertical") > 0)	// 縦軸操作（前か後か押されている場合）
+		else if (Input.GetAxis("Vertical") > 0)	// 縦軸操作（前が押されている場合）
 		{
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 			animator.SetBool("Move", true);
@@ -179,28 +180,31 @@ public class PlayerController : MonoBehaviour {
 		}
 		else
 		{
-			// 何も押されていないニュートラル状態で
+			// 何も押されていないニュートラル状態ではmove解除
 			animator.SetBool("Move", false);
-			// アッドフォースされた速度が0でなければフォースにマイナス処理して減速（滑り止め）
+			// アッドフォースされた速度がMaxForce以上ならフォースにマイナス処理して減速（滑り止め）
 			// プレイヤの滑り具合がグラビティを変えることによって調節できるが、変更すると重い軽いでジャンプなどにも影響が出てくる
 			// Edit→Project Settings→Physicsで全体的な重力は変えられるがインスペクタ上でGravity変更した方がよい
-			//if(Force != 0){ Force -= 1.2f; }
 			if(Force >= MaxForce){ Force -= 2.2f; }
 		}
 
 		//ジャンプキーによる上昇（二段ジャンプ）
-		//ジャンプが押されて1回目なら（2回目でないなら）（一番下のコライダー処理が関係してる）
 		//Debug.Log("jump JumpCount:" + JumpCount);
-		IsDownJumpButton = false;
+		// ジャンプしてない（ジャンプボタン押されてない）状態で
+		IsDownJumpButton = false;		
+		//ジャンプが押されて1回目なら（2回目でないなら）（一番下のコライダー処理が関係してる）
 		if (Input.GetButtonDown("Jump") == true && JumpCount < 2 ) {
 			// ジャンプ数加算
 			JumpCount++;
 
 			// ジャンプの上昇力を設定( v.x, JumpForce, v.z )で縦方向に加算
+			// Rigidbodyのvelocityをｖと略す。
 			Vector3 v = GetComponent<Rigidbody>().velocity;
+			// y方向にJumpForce値加算（ジャンプ）
 			GetComponent<Rigidbody>().velocity = new Vector3( v.x, JumpForce, v.z );
 			//ジャンプモーションに切り替える
 			animator.SetBool("Jump", true);
+			// キャラ別に声変更
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(15,gameObject);
 			}
@@ -239,11 +243,11 @@ public class PlayerController : MonoBehaviour {
 			if( onFloor == false ) {
 				// 自重に-0.05ずつ下降値を加算して落下
 				moveDirection.y -= 0.05f * Time.deltaTime;
-				// 加速が-1以下なら-1にする（ふわっと落下させるため減速処理）
+				// 落下速度が-1以下なら-1にする（ふわっと落下させるための減速処理）
 				if( moveDirection.y <= -1f ) moveDirection.y = -1f;
 			}
 		}
-		// ブーストやジャンプが入力されていなければブースとポイントが徐々に回復（！は～されなければという否定形）
+		// ブーストやジャンプが入力されていなければブーストポイントが徐々に回復（！は～されなければという否定形）
 		// ブーストなし最大速度で回避値3倍
 		if (!Input.GetButton ("Boost") && Force == MaxForce) {
 			boostPoint += 3 * RecoverPoint;
@@ -283,7 +287,7 @@ public class PlayerController : MonoBehaviour {
 			boostPoint += BpHealPoint;
 			// 既にboostPointがMaxだったら何もしない
 			if (boostPoint == DataManager.BoostPointMax) return;
-			// boostPointがMaxになったら声出し
+			// boostPointがMax以下の時の声出し
 			if (boostPoint < DataManager.BoostPointMax) {
 				if (PlayerNo == 0) {
 					SoundManager.Instance.Play (18, gameObject);
@@ -294,6 +298,7 @@ public class PlayerController : MonoBehaviour {
 				if (PlayerNo == 2) {
 					SoundManager.Instance.Play (20, gameObject);
 				}
+			// boostPointがMaxになった時の声出し
 			} else if (boostPoint >= DataManager.BoostPointMax) {
 				if (PlayerNo == 0) {
 					SoundManager.Instance.PlayDelayed (36, 1.1f, gameObject);
@@ -308,9 +313,10 @@ public class PlayerController : MonoBehaviour {
 			// ブーストポイントが最大以上にはならない
 			boostPoint = Mathf.Clamp (boostPoint, 0, DataManager.BoostPointMax);
 		}
+		// 着地処理
 		// 床(Floorタグ付いたもの)に着いたら全てニュートラル状態に
 		if( collider.gameObject.tag == "Floor" ) {
-			// 二段ジャンプ用ジャンプカウントをリセット
+			// 二段ジャンプ用ジャンプカウントを0に（リセット）
 			JumpCount = 0;
 			// 上方向移動値をリセット
 			moveDirection.y = 0;
@@ -332,7 +338,7 @@ public class PlayerController : MonoBehaviour {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
 			}
 			animator.SetTrigger ("ItemGet");
-			// greenShere取得数を１追加する
+			// greenShere取得数を１追加する（取得数計算）
 			ItemCount += 1;
 		}
 		// Star（ボス撃破時ドロップするクリア用アイテム）取得時
@@ -366,19 +372,21 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	// ブース時の点滅
+	// ブースト時の点滅
 	IEnumerator BoostCoroutine ()
 	{
+		// 無敵処理
+		// Edit→ProjectSetting→PhysicsでInvicivleとEnemyやBossの交差部分の✔を外して接触判定無効にする
 		gameObject.layer = LayerMask.NameToLayer("Invincible");
 		//while文を10回ループ
-		int count = 10;
+		int count = 10;		// 点滅回数
 		iTween.MoveTo(gameObject, iTween.Hash(
 			//"position", transform.position - (transform.forward * KnockBackRange),
 			"time", InvincibleTime, // 好きな時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
 		isInvincible = true;
-		while (count > 0){
+		while (count > 0){	// 点滅処理
 			//透明にする
 			modelColorChange.ColorChange(new Color (1,0,0,1));
 			//0.1秒待つ
@@ -389,6 +397,7 @@ public class PlayerController : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
+		// レイヤーをPlayerに戻して無敵解除にする
 		gameObject.layer = LayerMask.NameToLayer("Player");
 	}
 

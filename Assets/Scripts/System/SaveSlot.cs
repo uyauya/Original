@@ -7,12 +7,9 @@ using UnityEngine.UI;				// UIを使う時は追加する
 public class SaveSlot : MonoBehaviour {
 	private AudioSource[] audioSources;
 	public GameObject Dialogs;
-	//public Text text;
 	private int Number;
 	public void PushButton(int number) {
 		Number = number;
-		//Dialogs.SetActive (true);
-		//DialogSettings ();
 		DialogManager.Instance.Make("せーぶするよ？",OnYesButtonAction,OnNoButtonAction);
 	}
 
@@ -40,14 +37,7 @@ public class SaveSlot : MonoBehaviour {
 			break;
 		}
 	}
-	//public void DialogSettings(){
-		
-	//	Dialog.Message ("いいよ",OnClick,DialogNo);
-	//}
-	//public void DialogNo(){
-	//	Dialogs.SetActive (false);
-	//}
-	//YesOrNo Dialog = new YesOrNo ();	
+
 	public void OnNoButtonAction()
 	{
 		Debug.Log("Noボタンが押されました");

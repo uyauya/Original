@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;			//シーン遷移する時は追加
 using UnityEngine.UI;						// UIを使う時は追加する
 
 // ゲームオーバー、コンティニュー画面
-
 public class GameOver : MonoBehaviour 
 {
 	public Text TextCountDown;
@@ -32,7 +31,8 @@ public class GameOver : MonoBehaviour
 	}
 
 	void LoadScene() {
-		// ロード時の処理
+		// ロード時の処理（セーブしたプレイヤーのパラメータを再現）
+		// パラメータはレベルで固定（PlayerLevel参照）
 		int PlayerNo = DataManager.PlayerNo;
 		int Level = DataManager.Level;
 		UserParam Param = PlayerLevel.SearchParam (PlayerNo, Level);
@@ -43,6 +43,7 @@ public class GameOver : MonoBehaviour
 		SceneManager.LoadScene(StageManager.Instance.StageName[StageManager.Instance.StageNo]);
 	}
 
+	//カウントダウン処理
 	IEnumerator CountdownCoroutine()
 	{
 		TextCountDown.gameObject.SetActive (true);
@@ -90,7 +91,7 @@ public class GameOver : MonoBehaviour
 		ContinueButton.SetActive (false);
 
 		//yield return new WaitUntil (() => Input.GetButtonDown ("Fire1"));
-
+		//セーブ画面移行
 		SceneManager.LoadScene ("Save");
 		/*if (Input.GetButtonDown ("Fire1"))
 		{

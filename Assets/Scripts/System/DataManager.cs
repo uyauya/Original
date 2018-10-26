@@ -9,15 +9,15 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 	[System.NonSerialized]
 	public static int PlayerNo;			  //プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	public static UserParam userParam;	  // UserParamスクリプトのデータをuserParamとして使用する
-	public static bool Continue = false;
+	public static bool Continue = false;  //Continue判定（初回はStartのみなのでfalse）
 	public static int Level;			  //プレイヤーレベル
 	public static int AttackPoint;		　//攻撃力
 	public static float BoostPointMax;	　//最大ブーストポイント
 	public static float ArmorPointMax;	　//最大HP
 	public static int Score;			　//スコア（兼経験値）
-	public static string SceneName;		　//ステージ
+	public static string SceneName;		　//ステージ名
 	public static int ClearScene;		　//クリアしたステージ（判定用）
-	public static bool FarstLevel;		　//ゲーム開始時のレベル
+	public static bool FarstLevel;		　//ゲーム開始時のプレイヤーレベル
 
 	// Use this for initialization
 	void Start () {
@@ -38,7 +38,7 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 	public void SaveData (string SlotName) 
 	{
 		UserData userData = new UserData ();	// ユーザーデータに新しいユーザーデータを入れる（更新する）
-		userData.PlayerNo = PlayerNo;			// ユーザーデータのプレイヤナンバーを更新する
+		userData.PlayerNo = PlayerNo;			// ユーザーデータの（キャラ判別用）プレイヤナンバーを更新する
 		userData.Level = Level;
 		userData.AttackPoint = AttackPoint;
 		userData.BoostPointMax = BoostPointMax;

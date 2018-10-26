@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public class PlayerAp : MonoBehaviour {
 
 	public static float armorPoint;		// プレイヤー体力
-	public int enemyAttack;
-	public float poisonAttack;
+	public int enemyAttack;				// 敵の攻撃値
+	public float poisonAttack;			// 毒
 	public Text armorText;
-	float displayArmorPoint;				
+	float displayArmorPoint;			// 画面表示用HPゲージ			
 	public Color MyGreen;				// RGBA(000,240,000,255) ※Aは透明度
 	public Color MyWhite;				// RGBA(255,255,255,255)
 	public Color MyYellow;				// RGBA(255,206,000,255)
@@ -85,7 +85,7 @@ public class PlayerAp : MonoBehaviour {
 		// armorTesが数値、gougeImageがゲージの色
 		// ユーザーインターフェース（UI)の色を変える場合、画像の色は白一色にする
 		//　白以外の場合、指定した色と混ざる為、指定した色にならなくなる
-		if( armorPoint > 4000){
+		if( armorPoint > 4000){				// armorPointが4000未満でゲージ色変化
 			armorText.color = MyGreen;
 			gaugeImage.color = MyGreen;
 		}else if( armorPoint > 2900){
@@ -103,13 +103,15 @@ public class PlayerAp : MonoBehaviour {
 		gaugeImage.transform.localScale = new Vector3(percentageArmorpoint, 1, 1);
 	}
 
+	//衝突判定
 	private void OnCollisionEnter(Collision collider) {
 		//Debug.Log (collider.gameObject.name);
+		//プレイヤの速度判定（壁衝突時に使う）
 		force = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Force;
 		maxForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().MaxForce;
-		//EnemyやEnemyの弾と衝突したらダメージ
-		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
+		//Enmey(敵)、もしくはShotEnemy(敵の弾)のタグが付いたものに衝突したら
 		if (collider.gameObject.tag == "ShotEnemy" || collider.gameObject.tag == "Enemy") {
+			//ShotEnemyタグ付きと接触し、
 			if (collider.gameObject.tag == "ShotEnemy" && collider.gameObject.GetComponent<EnemyBasic> () != null) {
 				enemyAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyAttack;
 			}
@@ -123,15 +125,18 @@ public class PlayerAp : MonoBehaviour {
 				enemyAttack = collider.gameObject.GetComponent<BossBasic> ().EnemyAttack;
 			} 	
 
-			// 巨大化していたらダメージなし
+			// 巨大化していたらダメージなし(armorPoint差し引きを0にする)
 			if (isBig == true) {
 				armorPoint -= 0;
 			} else {
 				//巨大化していなかったら（通常なら）
-				armorPoint -= enemyAttack;
+				armorPoint -= enemyAttack;	// enemyAttack値差し引く（ダメージ）
 				armorPoint = Mathf.Clamp (armorPoint, 0, DataManager.ArmorPointMax);
+				//EffectPointをセットした場所にDamagePrefabに格納しているDamageObjectを発生
 				DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
+				//SetParentにしてプレイヤが動いてもDamageObjectがプレイヤーに追随するようにする
 				DamageObject.transform.SetParent (EffectPoint);
+				//アニメーターをDamageに切り替え
 				animator.SetTrigger ("Damage");
 				if (PlayerNo == 0) {
 					SoundManager.Instance.Play (21, gameObject);
@@ -142,15 +147,17 @@ public class PlayerAp : MonoBehaviour {
 				if (PlayerNo == 2) {
 					SoundManager.Instance.Play (23, gameObject);
 				}
+				//コルーチン処理（下記参照）
 				StartCoroutine ("EnemyDamageCoroutine");
 			}
 		
-			//速度最大で壁と接触したらダメージ
-			//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
+		//速度最大で壁と接触したらダメージ
+		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
 		} else if (collider.gameObject.tag == "Wall") {
 			if (isBig == true) {
 				armorPoint -= 0;
 			} else {
+				//プレイヤ速度がmaxForce値以上ならダメージ
 				if (force >= maxForce) {
 					//Debug.Log (force);
 					//カメラに付けているShakeCameraのShakeを呼び出す（激突時の衝撃）
@@ -172,6 +179,7 @@ public class PlayerAp : MonoBehaviour {
 						SoundManager.Instance.Play (26, gameObject);	
 						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
 					}
+					//コルーチン処理（下記参照）
 					StartCoroutine ("WallDamageCoroutine");
 				}
 			}
@@ -195,6 +203,7 @@ public class PlayerAp : MonoBehaviour {
 						SoundManager.Instance.Play(26,gameObject);	
 						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
 					}*/
+				//コルーチン処理（下記参照）
 				StartCoroutine ("PoisonDamageCoroutine");
 			}
 
@@ -252,7 +261,7 @@ public class PlayerAp : MonoBehaviour {
 			if (PlayerNo == 2) {
 				SoundManager2.Instance.Play(6,gameObject);
 			}
-			// BigCoroutine開始（下記参照）
+			// コルーチン処理（下記参照）
 			StartCoroutine ("BigCoroutine");
 		}
 	}
@@ -362,7 +371,7 @@ public class PlayerAp : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
-		// 元のサイズに縮小
+		// 元のサイズに縮小して巨大化時の攻撃を無効にする
 		iTween.ScaleTo (gameObject, iTween.Hash ("x", 1, "y", 1, "z", 1, "time", 3f));
 		isBig = false;
 		BigAttack = 0;

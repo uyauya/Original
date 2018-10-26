@@ -12,7 +12,7 @@ public class LoadLoad : MonoBehaviour {
 		// ボタンを押してロードポイント画面に移行
 		//SoundManager00.Instance.Play(1);	//(1)はElmentの数
 		//GetComponent<Animator>().SetBool("START", true);
-		Invoke("LoadScene",1.3f);
+		Invoke("LoadScene",1.3f);			//1.3秒後LoadScene起動（下記参照）
 	}
 
 	// Use this for initialization
@@ -27,6 +27,7 @@ public class LoadLoad : MonoBehaviour {
 	}
 
 	void LoadScene() {
+		//LoadPointシーンに移行
 		SceneManager.LoadScene("LoadPoint");
 	}
 }

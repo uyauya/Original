@@ -12,9 +12,9 @@ public class GameStart : MonoBehaviour {
 	public Text blinkText;					//点滅させる
 	public void Onclick_Select ()
 	{
-		animator.SetBool("START", true);    // ボタンがクリックされたら拡大する
+		animator.SetBool("START", true);    
 		DataManager.Continue = false;
-		DataManager.FarstLevel = true;
+		DataManager.FarstLevel = true;		//レベル1データ代入用
 		// ボタンを押してセレクト画面に移行
 		SoundManager00.Instance.Play(1);	//(1)はElmentの数
 		Invoke("LoadScene",1.3f);

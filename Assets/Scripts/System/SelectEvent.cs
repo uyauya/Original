@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI;				// UI使用時は追加
 using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加する
 
 // シーン移行用
-
 public class SelectEvent : MonoBehaviour {
 	private AudioSource[] audioSources;
 
@@ -47,13 +46,16 @@ public class SelectEvent : MonoBehaviour {
 	}
 
 	void Start () {
+		//シーン起動直後にSoundManager00の指定音を鳴らす
 		SoundManager00.Instance.Play(0);
 		SoundManager00.Instance.Play(1);
 		SoundManager00.Instance.Play(2);
+		//シーン起動0.9秒後ににSoundManager00の指定音を鳴らす
 		SoundManager00.Instance.PlayDelayed (6, 0.9f, gameObject);
 	}
 
 	void LoadScene1() {
+		//Kohakuシーンに移行
 		SceneManager.LoadScene("Kohaku");
 	}
 	void LoadScene2() {

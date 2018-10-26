@@ -24,7 +24,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 	private Pause pause;
 	public int PlayerNo;
 	public int boostPoint;						// ブーストポイント
-	public int BpUp = 100;
+	public int BpUp = 100;						// エネルギー吸収した際の回復ポイント
 	public Transform EffectPoint;				// 回復等エフェクト発生元の位置取り
 	public GameObject BpHealPrefab;				// ブーストポイント回復エフェクト格納場所
 	public GameObject BpHealObject;
@@ -54,13 +54,15 @@ public class DiffenceAbsorb : MonoBehaviour {
 
 	void Update()
 	{
+		// レバーニュートラル設定
 		velocity = Vector3.zero;
+		// ポーズ中でなくて
 		if (pause.isPause == false) {
 			//　ガードしていないとき
 			if (!diffence) {
 				//　移動キーを押した
 				if ((Input.GetButtonDown ("Horizontal") || Input.GetButtonDown ("Vertical"))) {
-					//　最初に1回押していない時は押した事にする
+					//　最初に1回押していない時は押した事にする（レバー押し1回目）
 					if (!push) {
 						push = true;
 						//　最初に移動キーを押した時にその方向ベクトルを取得
@@ -74,7 +76,6 @@ public class DiffenceAbsorb : MonoBehaviour {
 						//　押した方向がリミットの角度を越えていない　かつ　制限時間内に移動キーが押されていればガード
 						if (Vector2.Angle (nowDirection, direction) < LimitAngle
 						   && nowTime <= NextButtonDownTime) {							
-							//&& Time.time - nowTime < nextButtonDownTime)
 							//Debug.LogFormat ("出る時：Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}", Vector2.Angle (nowDirection, direction), limitAngle, Time.time, nowTime, nextButtonDownTime);
 							diffence = true;
 							if (PlayerNo == 0) {

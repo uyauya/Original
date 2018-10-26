@@ -155,7 +155,7 @@ public class EnemyBasic : MonoBehaviour {
 
 	// ショット衝突判定
 	void OnTriggerEnter(Collider collider) {
-		// Animatorがdeadだったら判定しない
+		// Animatorがdead(死亡)だったら判定しない
 		if (animator.GetBool ("dead") == true) {
 			return;
 		}

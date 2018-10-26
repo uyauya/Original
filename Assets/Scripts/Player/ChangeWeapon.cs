@@ -39,7 +39,7 @@ public class ChangeWeapon : MonoBehaviour {
 		pshoot3 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();
 		pshoot4 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot04> ();
 		mshoot  = GameObject.FindWithTag("Player").GetComponent<MultiWayShoot> ();
-		// 最初に使用できるのはpshoot1にする。
+		// 最初に使用できる(選択してる)のはpshoot1にする。
 		pshoot1.enabled = true;
 		pshoot2.enabled = false;
 		pshoot3.enabled = false;

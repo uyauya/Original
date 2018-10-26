@@ -2,11 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
-// 一時停止呼び出し用
+// ポーズ画面、コンフィグ画面呼び出し
 public class Pause : MonoBehaviour
 {
-	public bool isPause;
-	public bool isConfig;
+	public bool isPause;				//ポーズ画面かどうか
+	public bool isConfig;				//コンフィグ画面かどうか
 	public GameObject Tutorial;
 	public GameObject Setting;
 	public AudioSource audioSource;
@@ -25,11 +25,13 @@ public class Pause : MonoBehaviour
 	{
 		// ESCキー押した時にコンフィグ画面になっていなければ
 		if (Input.GetKeyDown (KeyCode.Escape)&& !isConfig) {
+			//ポーズ中だったら何もしない
 			if (isPause) {
 				isPause = false;
 				Tutorial.SetActive (false);
 				Time.timeScale = 1f;
 				bgmManager.Play ();
+			//ポーズ画面でなかったらポーズ画面にする
 			} else {
 				isPause = true;
 				Tutorial.SetActive (true);
@@ -37,15 +39,18 @@ public class Pause : MonoBehaviour
 				bgmManager.Pause ();		//一時停止（完全停止する場合はaudioSource.Stop();
 			}
 		}
-				if (Input.GetKeyDown (KeyCode.LeftShift) && isPause ) {
-				if (isConfig) {
-					isConfig = false;
-					Setting.SetActive (false);
-				} else {
-					isConfig = true;
-					Setting.SetActive (true);
-				}
+		// ポーズ中に左Shiftキー押したとき
+		if (Input.GetKeyDown (KeyCode.LeftShift) && isPause ) {
+			//コンフィグ画面だったら何もしない
+			if (isConfig) {
+				isConfig = false;
+				Setting.SetActive (false);
+			//コンフィグ画面でなかったらコンフィグ画面にする
+			} else {
+				isConfig = true;
+				Setting.SetActive (true);
 			}
 		}
+	}
 	
 }

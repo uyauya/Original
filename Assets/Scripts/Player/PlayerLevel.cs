@@ -7,6 +7,7 @@ public class PlayerLevel : MonoBehaviour
 {
 	// UserParamをuserParamListとしてリスト化する
 	// 順番（pno, level, attackPoint, boostMax, armorMax, scoreの順）にレベルアップ時の数値を設定
+	// 値は上からこはく、ゆうこ、みさきの順
 	public static List <UserParam> userParamList = new List<UserParam>() 
 	{
 		new UserParam(0,01,130,3000,3000,2000, string.Empty,0),		//Level01（List0）

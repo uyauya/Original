@@ -31,21 +31,21 @@ public class BattleManager : MonoBehaviour {
 
 	void Start () {	
 		ScoreText.text = "Score:0";
-		ScoreText = GameObject.Find ("Score").GetComponent<Text> ();
-		battleStatus = BATTLE_START;	//時間0秒、最初にスタートを表示させる
 		timer = 0;
+		battleStatus = BATTLE_START;	//時間0秒、最初にスタートを表示させる
+		//ScoreTextにScoreオブジェクトのTextテキストの値を代入する
+		ScoreText = GameObject.Find ("Score").GetComponent<Text> ();
+		// スコアテキストにDataManagerのスコアを代入
+		ScoreText.text = DataManager.Score.ToString();
 		//スタート時はStartは表示、WinとLoseは非表示
 		messageStart.enabled = true;
 		messageWin.enabled = false;
 		messageLose.enabled = false;
+		//playerControllerにPlayerタグのついたオブジェクトのPlayerControllerの値を代入する
 		playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController> ();
-		//敵の最大生成数をクリア数にする
+		Player = GameObject.FindWithTag("Player");
 		//instantiateValueに値を代入するのをBattleManagerより早くするため
 		//EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
-		Player = GameObject.FindWithTag("Player");
-		// スコアテキストにDataManagerのスコアを代入
-		ScoreText.text = DataManager.Score.ToString();
-
 	}
 
 	void Update () {
@@ -54,13 +54,14 @@ public class BattleManager : MonoBehaviour {
 		switch (battleStatus) {
 		
 		case BATTLE_START:
-			//時間経過でメッセージを消して状態移行
+			//3秒経過でメッセージを消して状態移行
 			timer += Time.deltaTime;
 				if (timer > 3) {
 				mesaageSTART.SetActive (true);		// スタート表示
 				messageStart.enabled = false;
 				battleStatus = BATTLE_PLAY;
 				timer = 0;
+				//コンティニュー判別処理
 				if (DataManager.Continue == false) {
 				}
 			}
@@ -68,10 +69,11 @@ public class BattleManager : MonoBehaviour {
 			
 		case BATTLE_PLAY:
 			ScoreText.text = DataManager.Score.ToString ();
-			//プレイヤーの体力が0以下になったら敗北
+			//プレイヤーの体力が0以下になったらゲームオーバー
 			if (PlayerAp.armorPoint <= 0) {
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
+				//キャラクター別に声変更
 				if (DataManager.PlayerNo == 0) {
 					SoundManager.Instance.Play (45, gameObject);
 				}
@@ -81,7 +83,10 @@ public class BattleManager : MonoBehaviour {
 				if (DataManager.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
 				}
-				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
+				// 一定時間後シーン移動（ChangeTimeで時間設定）
+				// GameOver処理起動（下記参照）
+				Invoke("GameOver", ChangeTime);	
+			//プレイヤが現地点から高さ（Y軸）10下がったらゲームオーバー（落下判定）
 			} else if (Player.transform.position.y <= -10.0f) { 
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
@@ -94,7 +99,9 @@ public class BattleManager : MonoBehaviour {
 				if (DataManager.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
 				}
-				Invoke("GameOver", ChangeTime);	// 一定時間後シーン移動（ChangeTimeで時間設定）
+				// 一定時間後シーン移動（ChangeTimeで時間設定）
+				// GameOver処理起動（下記参照）
+				Invoke("GameOver", ChangeTime);	
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
@@ -109,16 +116,19 @@ public class BattleManager : MonoBehaviour {
 				}
 				battleStatus = BATTLE_PLAY;
 				Instantiate(WarpEffect, Player.transform.position, Player.transform.rotation);	// ワープ用エフェクト発生
-				// Scene移行時プレイヤーのパラメータの中身を取得
-				Invoke("NextScene", ChangeTime);	// ChangeTime時間後シーン移動（ChangeTimeで時間設定）
-				playerController.ItemCount = 0;		// シーン移動時アイテム取得数をリセット
+				// 一定時間後シーン移動（ChangeTimeで時間設定）
+				// NextScene処理起動（下記参照）
+				Invoke("NextScene", ChangeTime);	
+				playerController.ItemCount = 0;		// シーン移動時グリーンスフィア取得数をリセット
 			}	
 
 			// ボス撃破時スター出現
 			// スターオブジェクトを1個以上取得したら次面へ
 			if (playerController.GetStar >= 1 ) {
 				mesaageClear.SetActive (true);		// ステージクリア表示
-				Invoke("NextScene", ChangeTime);	// ChangeTime時間後シーン移動（ChangeTimeで時間設定）
+				// 一定時間後シーン移動（ChangeTimeで時間設定）
+				// NextScene処理起動（下記参照）
+				Invoke("NextScene", ChangeTime);	
 				playerController.GetStar = 0;		// スター取得数をリセット	
 			}
 
@@ -126,7 +136,7 @@ public class BattleManager : MonoBehaviour {
 			// ビッグスターオブジェクトを1個以上取得したらエンディング
 			if (playerController.GetBigStar >= 1) {
 				mesaageClear.SetActive (true);		// ステージクリア表示
-				Invoke ("END", ChangeTime);			// ChangeTime時間後エンドシーン（エンディング）移動
+				Invoke ("END", ChangeTime);			// ChangeTime時間後END処理起動（下記参照）
 				playerController.GetBigStar = 0;	// ビッグスター取得数をリセット	
 		}
 		break;
@@ -153,18 +163,24 @@ public class BattleManager : MonoBehaviour {
 		}
 	}
 
+	//次面移動処理
 	private void NextScene(){
+		//StageManagerに次面番号作成
 		StageManager.Instance.StageNo++;
+		//DataManagerにクリアしたStageNo作成（ステージセレクト用処理）
+		//ステージセレクトではクリアしたステージのみ選択出来るようにする
 		if (StageManager.Instance.StageNo > DataManager.ClearScene) {
 			DataManager.ClearScene = StageManager.Instance.StageNo;
 		}
 			SceneManager.LoadScene (StageManager.Instance.StageName [StageManager.Instance.StageNo]);
 	}
 
+	//ゲームオー画面に移動
 	private void GameOver(){
 		SceneManager.LoadScene ("GameOver");
 	}
 
+	//エンディング画面に移動
 	private void END(){
 		SceneManager.LoadScene ("END");
 	}

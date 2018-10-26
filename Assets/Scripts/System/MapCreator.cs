@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//MAP自動作成用（MaAxis、MapArrayスクリプト連動）
+//キャラクタが進むにつれて前方に足場を自動的に作っていく）
 public class MapCreator : MonoBehaviour {
 	public int				MAP_SIZE_X = 7;		// マップ横幅 (偶数指定の場合は、自動的に奇数にされる)
 	public int				MAP_SIZE_Z = 10;	// マップ奥幅 (偶数指定の場合は、自動的に奇数にされる)
@@ -15,14 +17,14 @@ public class MapCreator : MonoBehaviour {
 	public	GameObject[]	prefab_enemy;		// 敵の格納用のプレファブ配列
 	public float[] ApperanceRate;				// 敵の出現割合
 	public float EmitterTime = 1.0f;			// 敵が出現するまでの時間
-	public	GameObject[]	prefab_BreakBlock;
+	public	GameObject[]	prefab_BreakBlock;	// 壊せるブロック格納用のプレファブ配列
 	public	GameObject[]	prefab_BombPoint;
-	private float timer = 0.0f;
-	private float interval = 2.0f;
+	private float timer = 0.0f;					// グリーンスフィア取得計算用???
+	private float interval = 2.0f;				// グリーンスフィア取得計算用???
 	public GameObject[] 	Prefab_Player;
 	public	GameObject		Boss02;				
 
-	// 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはバトルマネージャースクリプトで判別・管理）
+	// 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはDataManagerクリプトで判別・管理）
 	void Awake(){
 		player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
 	}
@@ -38,8 +40,8 @@ public class MapCreator : MonoBehaviour {
 		mapFloor.setObstacle(prefab_BreakBlock);		// 障害物オブジェクトを渡す
 		//mapFloor.setObstacle(prefab_BombPoint);		// 起爆スイッチを渡す
 		mapFloor.setEnemy(prefab_enemy);				// 敵オブジェクトを渡す
-		initialize();									// プレイヤー位置／マップ初期化
-		StartCoroutine("enemyEmitter" , EmitterTime);	// EmitterTimeの時間ごとに敵出現用のコルーチン開始
+		initialize();									// プレイヤー位置／マップ初期化（下記参照）
+		StartCoroutine("enemyEmitter" , EmitterTime);	// EmitterTimeの時間ごとに敵出現用のコルーチン開始（下記参照）
 	}
 
 	// ■■■プレイヤー位置／マップ初期化■■■
@@ -49,13 +51,13 @@ public class MapCreator : MonoBehaviour {
 		mapFloor.startMap_Create();						// スタート時のマップ(地上)作成
 	}
 	
-	// ■■■■■■
+	// プレイヤーが進むにつれmapBlock生成
 	void Update(){
 		playerAxis.updateAxis ();						// プレイヤー座標を更新
 		mapBlock.renewal ();							// マップ(床)の更新
 		mapFloor.renewal ();							// マップ(地上)の更新
 		
-		timer += Time.deltaTime;						// グリーンスフィア取得数計算 BattleManagerスクリプト参照
+		timer += Time.deltaTime;						// グリーンスフィア取得数計算 BattleManagerスクリプト参照???
 		if (timer >= interval) {
 			Check ("Item3");
 			timer = 0;
@@ -71,8 +73,9 @@ public class MapCreator : MonoBehaviour {
 	IEnumerator enemyEmitter(float time){
 		while(true){
 			//敵が複数出現の場合は0.0～1.0で割合を決める
+			//(0.1,0.9)や(0.4,0.6)など合計が1.0になるよう割り振る
 			float num = Random.Range (0.0f, 1.0f);
-			//敵が1種類の場合は何もしない（割合計算しない）
+			//敵が1種類の場合は何もしない（割り振らないので1.0のまま）
 			if (ApperanceRate.Length == 0) {
 				;//何もしない
 			} else if (num < ApperanceRate [0]) {

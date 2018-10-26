@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-// ユーザーインターフェイスをスクリプトで制御する為追加
 using UnityEngine.UI;
 
+//敵探知レーダー用コンパス
 public class Compass : MonoBehaviour {
 	
 	public Image compassImage;
