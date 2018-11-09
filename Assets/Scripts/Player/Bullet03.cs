@@ -37,30 +37,32 @@ public class Bullet03 : MonoBehaviour {
 		//Enemy = GetComponent<Enemy>();
 	}	
 
-	// ボム設定（StartCoroutine("bom")の内容）
+	// ボム設定（下記StartCoroutine("bom")の内容）
 	IEnumerator bom(){		
-			
-		GameObject effect = Instantiate(prefab_HitEffect2 , transform.position , Quaternion.identity) as GameObject;	// ボムエフェクト発生
-		Destroy(effect , DestroyTime);		// ボムエフェクトを、2秒後に消滅させる
+		// ボムエフェクト発生
+		GameObject effect = Instantiate(prefab_HitEffect2 , transform.position , Quaternion.identity) as GameObject;	
+		Destroy(effect , DestroyTime);			// ボムエフェクトを、2秒後に消滅させる
 		BomUpdate();
-		BomAttack();				// ボムによる攻撃処理
-		yield return new WaitForSeconds(2.0f);		// 2.0秒、処理を待機.
+		BomAttack();							// ボムによる攻撃処理
+		yield return new WaitForSeconds(2.0f);	// 2.0秒、処理を待機.
 		//Camera.main.gameObject.GetComponent<ShakeCamera>().Shake();
 		Destroy(gameObject);	
 	}
 
 	// ボム攻撃範囲設定
 	private void BomAttack(){
-		// 自分自身を中心に、半径50.0以内にいるColliderを探し、配列に格納
+		// 自分自身を中心に、半径50.0以内にいるCollider(敵)を探し、配列に格納
 		Collider[] targets = Physics.OverlapSphere (transform.position, 50.0f);
-		foreach (Collider col in targets) {		// targets配列を順番に処理 (その時に仮名をobjとする)
-			if (col.gameObject.tag == "Enemy" && col.gameObject.GetComponent<EnemyBasic>() != null) {			// タグ名がEnemyなら
+		foreach (Collider col in targets) {	
+			//Enemyタグがあり、EnemyBasicが付いているものがあればenemyinstaとする
+			if (col.gameObject.tag == "Enemy" && col.gameObject.GetComponent<EnemyBasic>() != null) {
 				EnemyBasic enemyinsta = col.gameObject.GetComponent<EnemyBasic>();
+				//enemyinstaにBombDamage値のダメージを与える
 				if (enemyinsta != null) {
-				enemyinsta.Damaged(BombDamage);	// ダメージを与える
+				enemyinsta.Damaged(BombDamage);	
 				}
 			}
-			if (col.gameObject.tag == "Enemy" && col.gameObject.GetComponent<BossBasic>() != null) {			// タグ名がEnemyなら
+			if (col.gameObject.tag == "Enemy" && col.gameObject.GetComponent<BossBasic>() != null) {
 				BossBasic enemyinsta = col.gameObject.GetComponent<BossBasic>();
 				if (enemyinsta != null) {
 					enemyinsta.Damaged(BombDamage);	// ダメージを与える
@@ -70,6 +72,7 @@ public class Bullet03 : MonoBehaviour {
 	}
 
 	void Update(){
+		//発生場所から前方に向かってTime.deltaTime * BulletSpeedで弾が移動
 		transform.position += transform.forward * Time.deltaTime * BulletSpeed;
 	}
 

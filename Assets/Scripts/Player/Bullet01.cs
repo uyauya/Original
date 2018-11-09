@@ -8,7 +8,7 @@ public class Bullet01 : MonoBehaviour {
 
 	public GameObject explosion;		// 着弾時のエフェクト
 	public float damage;				// 弾の威力
-	public float BulletSpeed = 3.0f;			// 弾のスピード
+	public float BulletSpeed = 3.0f;	// 弾のスピード
 	public float DecreaseDamage = 0.5f;	// 時間とともに減少していく攻撃値
 	public float LowestDamage = 20.0f;	// 最低限与えるダメージ
 	Enemy enemy;
@@ -47,9 +47,9 @@ public class Bullet01 : MonoBehaviour {
 	void Update () {
 		// 弾を前進させる（前に時間場×弾の速度）
 		transform.position += transform.forward * Time.deltaTime * BulletSpeed;
-
-		//damage--;
+		//時間経過と共に攻撃値をDecreaseDamage分減らす
 		damage = damage - (DecreaseDamage * Time.deltaTime);
+		//攻撃値がLowestDamageより低かったらLowestDamageにする(最低攻撃値)
 		if (damage <= LowestDamage)
 			damage = LowestDamage;
 		//Debug.Log (damage);
@@ -61,9 +61,10 @@ public class Bullet01 : MonoBehaviour {
 	}	
 
 	private void OnCollisionEnter(Collision collider) {
-		//衝突時に爆発エフェクトを表示する
+		//衝突時に爆発エフェクトを表示する(敵か壁か床に当たったら)
 		if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Wall" || collider.gameObject.tag == "Floor") {
-			Instantiate (explosion, transform.position, transform.rotation);	
+			Instantiate (explosion, transform.position, transform.rotation);
+			//着弾後、弾消滅
 			Destroy (gameObject);
 		}
 	}

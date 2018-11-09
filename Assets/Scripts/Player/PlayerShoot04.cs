@@ -3,17 +3,17 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEditor;
 
-// 
+// 足場兼壁
 public class PlayerShoot04 : MonoBehaviour {
 
 	public GameObject Bullet04;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
 	//public float speed = 1000F;
-	public float shotInterval;			// ショットの時間間隔
-	public float shotIntervalMax = 0.25F;
 	//public float Attack;
 	//public float damage = 100;
+	public float shotInterval;			// ショットの時間間隔
+	public float shotIntervalMax = 0.25F;
 	private float chargeTime;
 	private Animator animator;
 	private AudioSource audioSource;
@@ -76,7 +76,9 @@ public class PlayerShoot04 : MonoBehaviour {
 		if (Time.time - shotInterval > shotIntervalMax) {
 			shotInterval = Time.time;
 			GameObject bulletObject = GameObject.Instantiate (Bullet04)as GameObject;
-			bulletObject.transform.position = muzzle.position + transform.TransformDirection(Vector3.forward * 2) + new Vector3(0, -0.3f, 0);
+			// 弾生成場所をmuzzleの前方２、下0.3の場所に生成する
+			bulletObject.transform.position = muzzle.position + transform.TransformDirection(Vector3.forward * 2) 
+				+ new Vector3(0, -0.3f, 0);
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(9,gameObject);
 				SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);

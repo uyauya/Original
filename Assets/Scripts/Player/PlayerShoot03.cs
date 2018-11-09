@@ -54,7 +54,7 @@ public class PlayerShoot03 : MonoBehaviour {
 				if (Input.GetButtonUp ("Fire1")) {	
 					damage = Attack;
 					if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
-						animator.SetTrigger ("Shotss");
+						animator.SetTrigger ("Shot");
 						GetComponent<PlayerController> ().boostPoint -= BpDown;
 						Bulletss ();
 						//マズルフラッシュを表示する

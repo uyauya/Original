@@ -27,28 +27,12 @@ public class Continue : MonoBehaviour {
 	}
 
 	void Update () {
-		// 
-		/*if (Input.GetMouseButtonDown(0)){
-			animator.SetBool ("Continue", true);
-		} else {
-			animator.SetBool ("Continue", false);
-		}*/
+		
 	}
 
 	void LoadScene() {
 		//SceneManager.LoadScene("STAGE02BOSS");
 		UserParam userParam = DataManager.userParam;
-		/*if (userParam != null) {
-			if (userParam.SceneName != null && userParam.SceneName != string.Empty) {
-				Debug.Log (string.Format ("LoadScene{0}", userParam.SceneName));
-				SceneManager.LoadScene (userParam.SceneName);
-			}
-		} else
-			{
-				SceneManager.LoadScene ("Select");
-			}
-
-		}*/
 		if (userParam != null) {
 			SceneManager.LoadScene (StageManager.Instance.StageName [userParam.StageNo]);
 		}

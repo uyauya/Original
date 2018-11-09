@@ -66,12 +66,12 @@ public class EnemyBasic : MonoBehaviour {
 	public GameObject Hit05Object;
 	public GameObject DeadPrefab;					
 	public GameObject DeadObject;
-	public bool DamageSet;							// ダメージ判定の有無
+	public bool DamageSet;							// ダメージ判定の有無(処理内容は継承先に記載)
 	public bool FreezeSet;							// フリーズ判定の有無
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
 	public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
-	public Color DamageColor;
+	public Color DamageColor;						// 被ダメージ時の点滅色
 	public Color FreezeColor;
 	public Color DeadColor;
 
@@ -109,22 +109,24 @@ public class EnemyBasic : MonoBehaviour {
 	}
 
 	void Start () {
-		//lifeBarは非表示（被ダメージ時表示）
-		LifeBar.SetActive (false);
-		DamageSet = false;
-		armorPoint = armorPointMax;
+		//lifeBarをオブジェクトの子として取得、基本は非表示（被ダメージ時表示）
 		lifeBar = GetComponentInChildren<LifeBar>();
+		LifeBar.SetActive (false);
+		//被ダメージ時にtrueに返す
+		DamageSet = false;
+		//敵HP初期値設定(最大)
+		armorPoint = armorPointMax;
 		// Animator取得
 		animator = GetComponent< Animator >();		
 		// 被ダメージ時の点滅処理（ModelColorChange参照）
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();　
 		// Playerタグが付いているオブジェクトをターゲットにする
 		target = GameObject.FindWithTag ("Player");	
-		// Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelと呼ぶ
+		// Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelとする
 		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
-		// BattleManagerオブジェクトのBattleManagerをbattleManagerと呼ぶ
+		// BattleManagerオブジェクトのBattleManagerをbattleManagerとする
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
-		// レイヤーをEnemyにしておく（死亡処理時使用）
+		// レイヤーをEnemyにしておく（被ダメージ時、死亡処理時使用）
 		gameObject.layer = LayerMask.NameToLayer("Enemy");
 		// Rigidbodyを取得し、以後rbと略す
 		rb = this.GetComponent<Rigidbody>();
@@ -134,10 +136,12 @@ public class EnemyBasic : MonoBehaviour {
 
 
 	void Update () {
+		//重力をカスタムする時用
 		setLocalGravity ();
-		//GameObject.Find("LifeBar").transform.LookAt(GameObject.Find("Player"));
+		//体力を最大体力で割った割合をPerArmorpointとする
 		float PerArmorpoint = armorPoint / armorPointMax;
 		// ArmoPointの減少によりキャラクタの大きさを変更
+		// PerArmorpointの割合が0.8を下回ったなら縦、横、高さにMscale割合分縮小する
 		if( PerArmorpoint < 0.8f) {
 			gameObject.transform.localScale = new Vector3(
 				gameObject.transform.localScale.x * Mscale,
@@ -155,13 +159,13 @@ public class EnemyBasic : MonoBehaviour {
 
 	// ショット衝突判定
 	void OnTriggerEnter(Collider collider) {
-		// Animatorがdead(死亡)だったら判定しない
+		// Animatorがdead(死亡)だったら判定しない(何もしない)
 		if (animator.GetBool ("dead") == true) {
 			return;
 		}
 		// Shotタグが付いているオブジェクトに当たったら
 		if (collider.gameObject.tag == "Shot") {
-			// 相手を硬直させる（下記参照）
+			// 相手を硬直させる（下記DamageSet参照）
 			DamageSet = true;
 			// ライフバー表示（下記参照）
 			StartCoroutine ("LifeBarCoroutine");
@@ -176,6 +180,7 @@ public class EnemyBasic : MonoBehaviour {
 			animator.SetTrigger ("damaged");
 			// 敵アーマーポイントからBullet01スクリプトのdamage値を差し引く
 			armorPoint -= damage;
+			//ライフバーからもダメージ分ゲージを減らす
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 			//DamageSet = false;
 		} else if (collider.gameObject.tag == "Shot2") {
@@ -209,7 +214,7 @@ public class EnemyBasic : MonoBehaviour {
 			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
 		}
 
-		//体力が0以下になったら消滅する
+		//プレイヤーのいずれかの弾に当たって体力が0以下になったら消滅する
 		if (collider.gameObject.tag == "Shot" || collider.gameObject.tag == "Shot2" || collider.gameObject.tag == "Shot3"
 		    || collider.gameObject.tag == "Shot5") {
 			if (armorPoint <= 0) {
@@ -220,20 +225,18 @@ public class EnemyBasic : MonoBehaviour {
 				// 死亡アニメーション中に敵が移動しないようにスピードをゼロにする
 				EnemySpeed = 0;
 				// 敵消滅用エフェクト発生
-				// 敵消滅中にプレイヤに接触ダメージがを与えないようにDeadCoroutineで接触判定を無くす
+				// 敵消滅中にプレイヤに接触ダメージがを与えないようにDeadCoroutine(下記参照)で接触判定を無くす
 				DeadObject = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-				//DeadObject.transform.SetParent (EffectPoint);
 				StartCoroutine ("DeadCoroutine");
 				Instantiate (DestroyEffect, transform.position, transform.rotation);
 				// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
 				battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
+				DataManager.Score += EnemyScore;
 				// プレイヤのレベルアップ判定(PlayerLevel参照)
 				// レベルに関係している数値はDataManagedrで管理している
-				DataManager.Score += EnemyScore;
 				playerLevel.LevelUp ();
-				// 敵消滅
+				// DestroyTime時間後敵消滅
 				Destroy (gameObject, DestroyTime);	
-				//Instantiate(exprosion, transform.position, transform.rotation);
 				// ボス、ラスボス消滅後は必ずクリア用スターを出現させる
 				// インスペクタ画面でIsBoss、IsLastBossに✔を付ける
 				if (isBoss == true) {
@@ -241,7 +244,7 @@ public class EnemyBasic : MonoBehaviour {
 				}
 				if (isLastBoss == true) {
 					Instantiate (BigStar, transform.position, transform.rotation);
-					// ボス、ラスボス以外が消滅後は一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
+				// ボス、ラスボス以外が消滅後は一定確率（0,RedEncountでRedEncount分の1）でアイテム出現
 				} else if (Random.Range (0, RedEncount) == 0) {
 					Instantiate (RedSphere, transform.position, transform.rotation);
 					//Vector3 Pog = this.gameObject.transform.position;
@@ -263,21 +266,27 @@ public class EnemyBasic : MonoBehaviour {
 		}
 	}
 		
+	//巨大化したプレイヤに接触したらダメージ
 	void OnCollisionEnter(Collision collider) {
-		
+		//PlayerApのisBig(巨大化)状態をisbigとする
 		bool isbig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
+		//プレイヤのタグがついていてisbig状態(巨大化中)なら
 		if (collider.gameObject.tag == "Player" && isbig == true) {
 			//Debug.Log ("一撃");
+			//armorPointからプレイヤのbigAttack値を差し引く
 			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
 			armorPoint -= bigAttack;
+			//それ以外(巨大化してない)ならDamageSet状態にする
 		} else if (collider.gameObject.tag == "Player") {
 			DamageSet = true;
 			animator.SetTrigger ("damaged");
 		}
+			//ライフバーからダメージ分ゲージを減らす
 			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
 
-		//体力が0以下になったら消滅する
+		//
 		if (collider.gameObject.tag == "Player" ) {
+			//体力が0以下になったら消滅する
 			if (armorPoint <= 0) {
 				//Debug.Log ("敵"+gameObject.name);
 				// Animatorを"dead"へ移行
@@ -288,7 +297,6 @@ public class EnemyBasic : MonoBehaviour {
 				// 敵消滅用エフェクト発生
 				// 敵消滅中にプレイヤに接触ダメージがを与えないようにDeadCoroutineで接触判定を無くす
 				DeadObject = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
-				//DeadObject.transform.SetParent (EffectPoint);
 				StartCoroutine ("DeadCoroutine");
 				Instantiate (DestroyEffect, transform.position, transform.rotation);
 				// バトルマネージャーにスコア（EnemyScoreで設定）を加算する
@@ -323,10 +331,10 @@ public class EnemyBasic : MonoBehaviour {
 	}
 
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
-	// ダメージ時の点滅処理
+	// ダメージ時の点滅処理(DamageColor色で点滅)
 	IEnumerator DamageCoroutine ()
 	{
-		//while文を10回ルー
+		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
@@ -339,11 +347,11 @@ public class EnemyBasic : MonoBehaviour {
 			//透明にする(ModelColorChange参照)
 			//modelColorChange.ColorChange(new Color (1,0,0,1));
 			modelColorChange.ColorChange(DamageColor);
-			//0.05秒待つ
+			//0.03秒待つ
 			yield return new WaitForSeconds(0.3f);
 			//元に戻す
 			modelColorChange.ColorChange(new Color (1,1,1,1));
-			//0.05秒待つ
+			//0.03月秒待つ
 			yield return new WaitForSeconds(0.3f);
 			count--;
 		}
@@ -365,11 +373,11 @@ public class EnemyBasic : MonoBehaviour {
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
 			modelColorChange.ColorChange(FreezeColor);
-			//0.05秒待つ
+			//0.03秒待つ
 			yield return new WaitForSeconds(0.1f);
 			//元に戻す
 			modelColorChange.ColorChange(new Color (1,1,1,1));
-			//0.05秒待つ
+			//0.03秒待つ
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
