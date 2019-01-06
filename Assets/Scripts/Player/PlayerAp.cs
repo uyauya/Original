@@ -16,10 +16,10 @@ public class PlayerAp : MonoBehaviour {
 	public Color MyWhite;				// RGBA(255,255,255,255)
 	public Color MyYellow;				// RGBA(255,206,000,255)
 	public Color MyRed;					// RGBA(219,000,000,255)
-	public Color DamageColor;			// ダメージ点滅色
-	public Color InvisibleColor;		// 無敵状態時色
-	public Color PoisonColor;			// 毒ダメージ色
-	public Image gaugeImage;
+	public Color DamageColor;           // RGBA(255,000,000,120)ダメージ点滅色
+    public Color InvisibleColor;        // RGBA(255,255,255,120)無敵状態時色
+    public Color PoisonColor;           // RGBA(241,010,229,120)毒ダメージ色
+    public Image gaugeImage;
 	private ModelColorChange modelColorChange;		
 	public float FlashTime;				// 点滅時間
 	private Animator animator;			// Animator（PlayerMotion)取得

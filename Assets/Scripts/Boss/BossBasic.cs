@@ -56,9 +56,9 @@ public class BossBasic : MonoBehaviour {
 	public bool DamageSet;							// ダメージ判定の有無
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
-	public GameObject BossLifeBar;
-	public Color DamageColor;
-	public Color FreezeColor;
+	public GameObject BossLifeBar;                  
+    public Color DamageColor;                       // RGBA(248,007,007,120)ダメージ点滅色
+    public Color FreezeColor;                       // RGBA(009,232,242,255)フリーズ点滅色
 	//public float StarHeight = 1.0f;
 
 	/*[CustomEditor(typeof(Zombie))]

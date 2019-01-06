@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 // ゲームオーバーやステージ移行などゲーム全般の条件を管理
 public class BattleManager : MonoBehaviour {
-	// Edit→ProjectSettings→ScriptExecutionOrder→＋でBattleManagerを出して一番上に
-	// BattleManagerスクリプトを一番最初に読み取るようにする
-
-	int battleStatus;
+    // Edit→ProjectSettings→ScriptExecutionOrder→＋でBattleManagerを出して一番上に
+    // BattleManagerスクリプトを一番最初に読み取るようにする
+    private Animator animator;
+    int battleStatus;
 	const int BATTLE_START = 0;
 	const int BATTLE_PLAY  = 1;
 	const int BATTLE_END   = 2;
@@ -29,8 +29,9 @@ public class BattleManager : MonoBehaviour {
 	public int Count;					 // ステージ移行する為のアイテム取得個
 	public int PlayerNo;				 //プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 
-	void Start () {	
-		ScoreText.text = "Score:0";
+	void Start () {
+        animator = GetComponent<Animator>();            // Animatorを使う場合は設定する
+        ScoreText.text = "Score:0";
 		timer = 0;
 		battleStatus = BATTLE_START;	//時間0秒、最初にスタートを表示させる
 		//ScoreTextにScoreオブジェクトのTextテキストの値を代入する
@@ -125,8 +126,11 @@ public class BattleManager : MonoBehaviour {
 			// ボス撃破時スター出現
 			// スターオブジェクトを1個以上取得したら次面へ
 			if (playerController.GetStar >= 1 ) {
-				mesaageClear.SetActive (true);		// ステージクリア表示
-				// 一定時間後シーン移動（ChangeTimeで時間設定）
+                //正面を向いてポーズ！
+                Player.transform.LookAt(Camera.main.transform);
+                //animator.SetBool("Salute", true);
+                mesaageClear.SetActive (true);      // ステージクリア表示
+                // 一定時間後シーン移動（ChangeTimeで時間設定）
 				// NextScene処理起動（下記参照）
 				Invoke("NextScene", ChangeTime);	
 				playerController.GetStar = 0;		// スター取得数をリセット	
