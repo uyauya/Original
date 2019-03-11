@@ -152,9 +152,12 @@ public class PlayerController : MonoBehaviour {
 		//モーションを切り替える
 		if (Input.GetAxis("Horizontal") > 0)	// 横軸操作（右が押されている場合）
 		{
-			if (PlayerShoot.isShoot == true)  {
+			if (PlayerShoot.isShoot == true)
+            {
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 2.0f);
-			} else  {
+			}
+            else
+            {
 			// クォータリオン（球体を動かすような処理）で5.0の速度でプレイヤを横に向かせる
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
 			// アニメーターをMoveに切り替え
@@ -167,11 +170,17 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (Input.GetAxis("Horizontal") < 0)
 		{
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
-			animator.SetBool("Move", true);
-			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
-			//Debug.Log (Force);
-
+            if (PlayerShoot.isShoot == true)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 2.0f);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
+                animator.SetBool("Move", true);
+                gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+                //Debug.Log (Force);
+            }
 		}
 		else if (Input.GetAxis("Vertical") > 0)	// 縦軸操作（前が押されている場合）
 		{

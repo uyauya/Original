@@ -115,8 +115,9 @@ public class PlayerShoot : MonoBehaviour {
 				}
 				// Fire1を離した時
 				if (Input.GetButtonUp ("Fire1")) {
-					//チャージ時間計測終了
-					triggerDownTimeEnd = Time.time;
+                    isShoot = false;
+                    //チャージ時間計測終了
+                    triggerDownTimeEnd = Time.time;
 					// チャージ開始のフラグを消す
 					isCharging = false;
 					//エフェクトを削除
