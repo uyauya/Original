@@ -43,7 +43,8 @@ public class PlayerController : MonoBehaviour {
 	protected bool isInvincible;					// 無敵処理（ダメージ受けた際に使用）
 	private ModelColorChange modelColorChange;
 	public float InvincibleTime;					// 無敵時間
-	private bool IsDownJumpButton = false;
+	private bool IsDownJumpButton = false;			//ジャンプ不可
+	private bool IsClear = false;					//ステージクリアしたかどうか
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -100,6 +101,10 @@ public class PlayerController : MonoBehaviour {
 	//一定時間間隔で常にUpdateする
 	void FixedUpdate()
 	{
+		if (IsClear == true) 
+		{
+			return;
+		}
 
 		//ブーストボタンが押されてブーストポイント残が1以上あればフラグを立てブーストポイントを消費
 		if (Input.GetButton("Boost") && boostPoint > 0)
@@ -147,6 +152,9 @@ public class PlayerController : MonoBehaviour {
 		//モーションを切り替える
 		if (Input.GetAxis("Horizontal") > 0)	// 横軸操作（右が押されている場合）
 		{
+			if (PlayerShoot.isShoot == true)  {
+				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 2.0f);
+			} else  {
 			// クォータリオン（球体を動かすような処理）で5.0の速度でプレイヤを横に向かせる
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
 			// アニメーターをMoveに切り替え
@@ -155,6 +163,7 @@ public class PlayerController : MonoBehaviour {
 			// ある場合、自動で加減速処理して移動する
 			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
 			//Debug.Log (Force);
+			}
 		}
 		else if (Input.GetAxis("Horizontal") < 0)
 		{
@@ -352,7 +361,9 @@ public class PlayerController : MonoBehaviour {
 			if (PlayerNo == 2) {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
 			}
-			animator.SetTrigger ("ItemGet");
+			//移動不可でSalute
+			IsClear = true;	
+			animator.SetBool("Salute", true);
 			GetStar += 1;
 		}
 		// BigStar（ラスボス撃破時ドロップするクリア用アイテム）取得時
@@ -366,7 +377,8 @@ public class PlayerController : MonoBehaviour {
 			if (PlayerNo == 2) {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
 			}
-			animator.SetTrigger ("ItemGet");
+			animator.SetBool("Move", false);
+			animator.SetBool("Salute", true);
 			GetBigStar += 1;
 		}
 

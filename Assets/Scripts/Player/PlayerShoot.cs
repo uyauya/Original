@@ -45,6 +45,7 @@ public class PlayerShoot : MonoBehaviour {
 	public int PlayerNo;						//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	private Pause pause;						// ポーズ中かどうか（Pause参照）
 	public bool isBig;							// 巨大化しているかどうか
+	public static bool isShoot = false;			//ショットを撃っている状態
 
 	/*[CustomEditor(typeof(PlayerShoot))]
 	public class PlayerShootEditor : Editor	// using UnityEditor; を入れておく
@@ -96,6 +97,7 @@ public class PlayerShoot : MonoBehaviour {
 				}
 				// Fire1を押し続けている間
 				if (Input.GetButton ("Fire1")) {
+					isShoot = true;
 					//押している時間がChargeTime1以上であり、ChargeTime2以下なら
 					if (Time.time - triggerDownTimeStart >= ChargeTime1 && Time.time - triggerDownTimeStart <= ChargeTime2) {
 						//ParticleSystemを赤に、ErekiSmokeの色を赤から白に変更

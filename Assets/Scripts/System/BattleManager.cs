@@ -124,11 +124,10 @@ public class BattleManager : MonoBehaviour {
 			}	
 
 			// ボス撃破時スター出現
-			// スターオブジェクトを1個以上取得したら次面へ
+			// スタースフィアを1個以上取得したら次面へ
 			if (playerController.GetStar >= 1 ) {
-                //正面を向いてポーズ！
+                //正面を向く
                 Player.transform.LookAt(Camera.main.transform);
-                //animator.SetBool("Salute", true);
                 mesaageClear.SetActive (true);      // ステージクリア表示
                 // 一定時間後シーン移動（ChangeTimeで時間設定）
 				// NextScene処理起動（下記参照）
