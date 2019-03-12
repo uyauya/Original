@@ -138,6 +138,7 @@ public class BattleManager : MonoBehaviour {
 			// ラスボス撃破時ビッグスター出現
 			// ビッグスターオブジェクトを1個以上取得したらエンディング
 			if (playerController.GetBigStar >= 1) {
+				Player.transform.LookAt(Camera.main.transform);
 				mesaageClear.SetActive (true);		// ステージクリア表示
 				Invoke ("END", ChangeTime);			// ChangeTime時間後END処理起動（下記参照）
 				playerController.GetBigStar = 0;	// ビッグスター取得数をリセット	

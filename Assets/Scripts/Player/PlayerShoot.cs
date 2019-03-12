@@ -45,7 +45,7 @@ public class PlayerShoot : MonoBehaviour {
 	public int PlayerNo;						//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	private Pause pause;						// ポーズ中かどうか（Pause参照）
 	public bool isBig;							// 巨大化しているかどうか
-	public static bool isShoot = false;			//ショットを撃っている状態
+	public static bool isShoot = false;			//ショットを撃っている状態かどうか
 
 	/*[CustomEditor(typeof(PlayerShoot))]
 	public class PlayerShootEditor : Editor	// using UnityEditor; を入れておく
