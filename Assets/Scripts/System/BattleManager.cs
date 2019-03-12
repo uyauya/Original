@@ -13,21 +13,22 @@ public class BattleManager : MonoBehaviour {
 	const int BATTLE_PLAY  = 1;
 	const int BATTLE_END   = 2;
 	const int ENDING  	   = 3;
-	float timer;						 // 時間計測洋(LimitedTimer参照）
+	float timer;						 	// 時間計測洋(LimitedTimer参照）
 	public Image messageStart;
 	public Image messageWin;
 	public Image messageLose;
-	public GameObject mesaageSTART;		 // スタート表示
-	public GameObject mesaageClear;		 // ステージクリア表示
-	public Text ScoreText;				 // スコア表示用
-	private int ItemCount;				 // アイテム取得数をカウント
+	public GameObject mesaageSTART;		 	// スタート表示
+	public GameObject mesaageClear;		 	// ステージクリア表示
+	public Text ScoreText;				 	// スコア表示用
+	private int ItemCount;				 	// アイテム取得数をカウント
 	PlayerController playerController;
-	public GameObject WarpEffect;		 // ボス面移行用ワープ
-	int clearScore;						 // クリア条件となるスコア  
+	public GameObject WarpEffect;		 	// ボス面移行用ワープ
+	int clearScore;						 	// クリア条件となるスコア  
 	public GameObject Player;			
-	public float ChangeTime;			 // シーン変更までの時間
-	public int Count;					 // ステージ移行する為のアイテム取得個
-	public int PlayerNo;				 //プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
+	public float ChangeTime;			 	// シーン変更までの時間
+	public int Count;					 	// ステージ移行する為のアイテム取得個
+	public int PlayerNo;				 	//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
+	public static bool PlayerDead = false;	//プレイヤキャラが死亡したかどうか
 
 	void Start () {
         animator = GetComponent<Animator>();            // Animatorを使う場合は設定する
@@ -84,6 +85,7 @@ public class BattleManager : MonoBehaviour {
 				if (DataManager.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
 				}
+				PlayerDead = true;
 				// 一定時間後シーン移動（ChangeTimeで時間設定）
 				// GameOver処理起動（下記参照）
 				Invoke("GameOver", ChangeTime);	
@@ -100,6 +102,7 @@ public class BattleManager : MonoBehaviour {
 				if (DataManager.PlayerNo == 2) {
 					SoundManager.Instance.Play (47, gameObject);
 				}
+				PlayerDead = true;
 				// 一定時間後シーン移動（ChangeTimeで時間設定）
 				// GameOver処理起動（下記参照）
 				Invoke("GameOver", ChangeTime);	
@@ -177,6 +180,8 @@ public class BattleManager : MonoBehaviour {
 			DataManager.ClearScene = StageManager.Instance.StageNo;
 		}
 			SceneManager.LoadScene (StageManager.Instance.StageName [StageManager.Instance.StageNo]);
+			//クリア条件解除（プレイヤキャラの操作を元に戻す）
+			PlayerController.IsClear = false;
 	}
 
 	//ゲームオー画面に移動

@@ -35,6 +35,12 @@ public class Boss02Shot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//if (Interval > 0.5f)
+		//ボスが死んだらスモールボスも消滅
+		if (BossBasic.BossDead == true)
+		{
+			Destroy (gameObject);
+			//Debug.Log("死亡");
+		}
 		{
 			// スピードをランダムにする
 			float x = Random.Range (XspeedS,XspeedL);

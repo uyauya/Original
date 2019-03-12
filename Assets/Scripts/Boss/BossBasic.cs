@@ -59,6 +59,7 @@ public class BossBasic : MonoBehaviour {
 	public GameObject BossLifeBar;                  
     public Color DamageColor;                       // RGBA(248,007,007,120)ダメージ点滅色
     public Color FreezeColor;                       // RGBA(009,232,242,255)フリーズ点滅色
+	public static bool BossDead = false;			//ボスが死んだかどうかの判定
 	//public float StarHeight = 1.0f;
 
 	/*[CustomEditor(typeof(Zombie))]
@@ -125,6 +126,7 @@ public class BossBasic : MonoBehaviour {
 
 	// ショット衝突判定
 	void OnTriggerEnter(Collider collider) {
+		//既に死んでいたら何もしない
 		if (animator.GetBool ("dead") == true) {
 			return;
 		}
@@ -169,6 +171,7 @@ public class BossBasic : MonoBehaviour {
 		if (collider.gameObject.tag == "Shot" || collider.gameObject.tag == "Shot2" || collider.gameObject.tag == "Shot3"
 			|| collider.gameObject.tag == "Shot5") {
 			if (armorPoint <= 0) {
+				BossDead = true;
 				//Debug.Log ("敵"+gameObject.name);
 				// Animatorを"dead"へ移行
 				// 移行後元に戻さないならBool判定にした方がよい

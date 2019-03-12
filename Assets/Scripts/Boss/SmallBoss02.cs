@@ -19,6 +19,11 @@ public class SmallBoss02 : MonoBehaviour {
 
 
 	void Update () {
+		//ボスが死んだらスモールボスも消滅
+		if (BossBasic.BossDead == true)
+		{
+			Destroy (gameObject);
+		}
 		if( enemyBasic.armorPoint <= 0f)
 		{
 			return;	// 敵がすでにやられている場合は何もしない

@@ -44,7 +44,8 @@ public class PlayerController : MonoBehaviour {
 	private ModelColorChange modelColorChange;
 	public float InvincibleTime;					// 無敵時間
 	private bool IsDownJumpButton = false;			//ジャンプ不可
-	private bool IsClear = false;					//ステージクリアしたかどうか
+	public static bool IsClear = false;				//ステージクリアしたかどうか
+	public static bool IsStop = false;				//プレイヤーの動きを止めたい時に使う
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -87,6 +88,11 @@ public class PlayerController : MonoBehaviour {
 	//ボタン等が押された時など、その都度Updateする
 	void Update()
 	{
+		//ステージクリア条件かストップ条件で動けなくする
+		if ((IsClear == true) || (IsStop == true))
+		{
+			return;
+		}
 		//ProjectSettigでJumpに割り当てたキーが押されたら
 		if (Input.GetButtonDown("Jump"))
 		{
@@ -101,7 +107,14 @@ public class PlayerController : MonoBehaviour {
 	//一定時間間隔で常にUpdateする
 	void FixedUpdate()
 	{
-		if (IsClear == true) 
+		//プレイヤー死亡条件になってたらDeadアニメーション
+		//if (BattleManager.PlayerDead == true)
+		//{
+		//	animator.SetBool("Dead", true);
+		//}
+
+		//ステージクリア条件かストップ条件で動けなくする
+		if ((IsClear == true) || (IsStop == true))
 		{
 			return;
 		}
@@ -416,7 +429,7 @@ public class PlayerController : MonoBehaviour {
 			if (PlayerNo == 2) {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
 			}
-			animator.SetBool("Move", false);
+			IsClear = true;	
 			animator.SetBool("Salute", true);
 			GetBigStar += 1;
 		}
