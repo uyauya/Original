@@ -42,7 +42,9 @@ public class PlayerShoot05 : MonoBehaviour {
 	}
 
 	void Update () {
-		if (pause.isPause == false) {
+		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
+		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
+			if (pause.isPause == false) {
 			if (Input.GetButton ("Fire1")) {
 				if (GetComponent<PlayerController> ().boostPoint >= BpDown)
 					StartCoroutine (AutoShoot (shootCount));

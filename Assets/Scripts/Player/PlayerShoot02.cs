@@ -52,6 +52,8 @@ public class PlayerShoot02 : MonoBehaviour {
 	void Update () {
 		float boostpoint = GetComponent<PlayerController> ().boostPoint;
 		int Attackpoint = DataManager.AttackPoint;
+		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
+		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
 		if (pause.isPause == false) {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 			if (isBig == false) {

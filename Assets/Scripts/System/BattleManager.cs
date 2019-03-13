@@ -25,7 +25,7 @@ public class BattleManager : MonoBehaviour {
 	public GameObject WarpEffect;		 	// ボス面移行用ワープ
 	int clearScore;						 	// クリア条件となるスコア  
 	public GameObject Player;			
-	public float ChangeTime;			 	// シーン変更までの時間
+	public float ChangeTime = 5.0f;			// シーン変更までの時間
 	public int Count;					 	// ステージ移行する為のアイテム取得個
 	public int PlayerNo;				 	//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public static bool PlayerDead = false;	//プレイヤキャラが死亡したかどうか
@@ -109,6 +109,8 @@ public class BattleManager : MonoBehaviour {
 			}
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
+				//プレイヤーの動きを止める
+				PlayerController.IsStop = true;
 				if (DataManager.PlayerNo == 0) {
 					SoundManager.Instance.Play(18,gameObject);
 				}
@@ -124,6 +126,8 @@ public class BattleManager : MonoBehaviour {
 				// NextScene処理起動（下記参照）
 				Invoke("NextScene", ChangeTime);	
 				playerController.ItemCount = 0;		// シーン移動時グリーンスフィア取得数をリセット
+				//プレイヤーの動けるようにする
+				PlayerController.IsStop = false;
 			}	
 
 			// ボス撃破時スター出現

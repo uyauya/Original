@@ -49,6 +49,8 @@ public class PlayerShoot04 : MonoBehaviour {
 	}
 	
 	void Update () {
+		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
+		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
 		if (pause.isPause == false) {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 			if (isBig == false) {

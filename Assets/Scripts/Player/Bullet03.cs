@@ -15,9 +15,10 @@ public class Bullet03 : MonoBehaviour {
 	public GameObject prefab_HitEffect2;
 	public int BombDamage = 2000;		// ボムの攻撃値
 	public float DestroyTime = 1;		// 発射されてから消滅するまでの時間
+	public float RadDistance = 50.0f;	// ボムの攻撃範囲（半径）
 
 	/*[CustomEditor(typeof(Bullet03))]
-	public class Bullet03 : Editor	// using UnityEditor; を入れておく
+	public class Bullet03 : Editor	// using UntyEditor; を入れておく
 	{
 		bool folding = false;
 
@@ -38,7 +39,9 @@ public class Bullet03 : MonoBehaviour {
 	}	
 
 	// ボム設定（下記StartCoroutine("bom")の内容）
-	IEnumerator bom(){		
+	IEnumerator bom(){	
+		//プレイヤーの動きを止める
+		PlayerController.IsStop = true;
 		// ボムエフェクト発生
 		GameObject effect = Instantiate(prefab_HitEffect2 , transform.position , Quaternion.identity) as GameObject;	
 		Destroy(effect , DestroyTime);			// ボムエフェクトを、2秒後に消滅させる
@@ -47,12 +50,14 @@ public class Bullet03 : MonoBehaviour {
 		yield return new WaitForSeconds(2.0f);	// 2.0秒、処理を待機.
 		//Camera.main.gameObject.GetComponent<ShakeCamera>().Shake();
 		Destroy(gameObject);	
+		//プレイヤーの動けるようにする
+		PlayerController.IsStop = false;
 	}
 
 	// ボム攻撃範囲設定
 	private void BomAttack(){
 		// 自分自身を中心に、半径50.0以内にいるCollider(敵)を探し、配列に格納
-		Collider[] targets = Physics.OverlapSphere (transform.position, 50.0f);
+		Collider[] targets = Physics.OverlapSphere (transform.position, RadDistance);
 		foreach (Collider col in targets) {	
 			//Enemyタグがあり、EnemyBasicが付いているものがあればenemyinstaとする
 			if (col.gameObject.tag == "Enemy" && col.gameObject.GetComponent<EnemyBasic>() != null) {

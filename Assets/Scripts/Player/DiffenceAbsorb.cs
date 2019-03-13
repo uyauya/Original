@@ -58,7 +58,8 @@ public class DiffenceAbsorb : MonoBehaviour {
 		// レバーニュートラル設定
 		velocity = Vector3.zero;
 		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
-		if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
+		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
+		if (pause.isPause == false) {
 			//　ガードしていないとき
 			if (!diffence) {
 				//　移動キーを押した

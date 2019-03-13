@@ -76,7 +76,8 @@ public class PlayerShoot : MonoBehaviour {
 	}
 
 	void Update () {
-		//ポーズ中でなく
+		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
+		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
 		if (pause.isPause == false) {
 			//プレイヤが巨大化中だったらショット不可(PlayerAp参照)
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;

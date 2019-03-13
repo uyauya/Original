@@ -108,10 +108,10 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate()
 	{
 		//プレイヤー死亡条件になってたらDeadアニメーション
-		//if (BattleManager.PlayerDead == true)
-		//{
-		//	animator.SetBool("Dead", true);
-		//}
+		if (BattleManager.PlayerDead == true)
+		{
+			animator.SetBool("Dead", true);
+		}
 
 		//ステージクリア条件かストップ条件で動けなくする
 		if ((IsClear == true) || (IsStop == true))

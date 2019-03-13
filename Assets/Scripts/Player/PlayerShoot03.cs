@@ -8,6 +8,7 @@ public class PlayerShoot03 : MonoBehaviour {
 	
 	public GameObject Bullet03;
 	public Transform muzzle;
+	public Transform Bomber;
 	public GameObject muzzleFlash;
 	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
@@ -48,7 +49,9 @@ public class PlayerShoot03 : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (pause.isPause == false) {
+		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
+		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
+			if (pause.isPause == false) {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 			if (isBig == false) {
 				if (Input.GetButtonUp ("Fire1")) {	
@@ -71,6 +74,7 @@ public class PlayerShoot03 : MonoBehaviour {
 			shotInterval = Time.time;
 			GameObject bulletObject = GameObject.Instantiate (Bullet03)as GameObject;
 			bulletObject.transform.position = muzzle.position;
+			//bulletObject.transform.position = Bomber.position;
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(6,gameObject);
 				SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);

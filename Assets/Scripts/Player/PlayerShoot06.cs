@@ -44,6 +44,8 @@ public class PlayerShoot06 : MonoBehaviour {
 	}
 
 	void Update () {
+		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
+		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
 		if (pause.isPause == false) {
 			if (Input.GetButton ("Fire1")) {
 				if (GetComponent<PlayerController> ().boostPoint >= BpDown)

@@ -60,7 +60,9 @@ public class MultiWayShoot : MonoBehaviour {
 	}
 
 	void Update () {
-		if (pause.isPause == false) {
+		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
+		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
+			if (pause.isPause == false) {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 			if (isBig == false) {
 				//timeCount += 1;
