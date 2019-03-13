@@ -8,7 +8,7 @@ public class PlayerShoot03 : MonoBehaviour {
 	
 	public GameObject Bullet03;
 	public Transform muzzle;
-	public Transform Bomber;
+	//public Transform Bomber;
 	public GameObject muzzleFlash;
 	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
