@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;			//シーン遷移する時は追加
 using UnityEngine.UI;						// UIを使う時は追加する
 
@@ -10,6 +11,7 @@ public class GameStart : MonoBehaviour {
 	private AudioSource[] audioSources;
 	private Animator animator;
 	public Text blinkText;					//点滅させる
+
 	public void Onclick_Select ()
 	{
 		animator.SetBool("START", true);    
@@ -19,6 +21,7 @@ public class GameStart : MonoBehaviour {
 		SoundManager00.Instance.Play(1);	//(1)はElmentの数
 		Invoke("LoadScene",1.3f);
 	}
+		
 		
 	// ゲームスタート時DataManagerにプレイヤレベル1のデータを入れる
 	void Start () {
@@ -33,13 +36,17 @@ public class GameStart : MonoBehaviour {
 		SoundManager00.Instance.Play(0);
 	}
 
-	void Update () {
-		// 
-		/*if (Input.GetMouseButtonDown(0)){
-			animator.SetBool ("START", true);
-		} else {
-			animator.SetBool ("START", false);
-		}*/
+	void Update()
+	{
+		if (Input.GetButtonDown ("Fire1")) 
+		{
+			ExecuteEvents.Execute
+			(
+				target      : this.gameObject,
+				eventData   : new PointerEventData( EventSystem.current ),
+				functor     : ExecuteEvents.pointerClickHandler
+			);
+		}
 	}
 
 	void LoadScene() {
