@@ -8,9 +8,9 @@ using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加
 // シーン移行用
 public class SelectEvent : MonoBehaviour {
 	private AudioSource[] audioSources;
-    public Button Kohaku;
-    public Button Yuko;
-    public Button Misaki;
+    //public Button Kohaku;
+    //public Button Yuko;
+    //public Button Misaki;
 
     public void Onclick_Kohaku() 
 	{
@@ -61,21 +61,21 @@ public class SelectEvent : MonoBehaviour {
 		SoundManager00.Instance.PlayDelayed (6, 0.9f, gameObject);
 	}
 
-    void Update()
+    /*void Update()
     {
         
         if (Input.GetButtonDown("Fire1"))
             
         {
-            Kohaku.onClick.Invoke();
-            /*ExecuteEvents.Execute
+            //Kohaku.onClick.Invoke();
+            ExecuteEvents.Execute
             (
                 target: this.gameObject,
                 eventData: new PointerEventData(EventSystem.current),
                 functor: ExecuteEvents.pointerClickHandler
-            );*/
+            );
         }
-    }
+    }*/
 
     void LoadScene1() {
 		//Kohakuシーンに移行

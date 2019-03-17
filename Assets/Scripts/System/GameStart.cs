@@ -41,15 +41,15 @@ public class GameStart : MonoBehaviour {
 	{
 		if (Input.GetButtonDown ("Fire1")) 
 		{
-            Debug.Log("Debug");
+            //Debug.Log("Debug");
             start.onClick.Invoke();
 
-            /*ExecuteEvents.Execute
+            ExecuteEvents.Execute
 			(
 				target      : this.gameObject,
 				eventData   : new PointerEventData( EventSystem.current ),
 				functor     : ExecuteEvents.pointerClickHandler
-			);*/
+			);
 
         }
 	}
