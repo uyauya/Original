@@ -46,9 +46,10 @@ public class BattleManager : MonoBehaviour {
 		//playerControllerにPlayerタグのついたオブジェクトのPlayerControllerの値を代入する
 		playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController> ();
 		Player = GameObject.FindWithTag("Player");
-		//instantiateValueに値を代入するのをBattleManagerより早くするため
-		//EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
-	}
+        //instantiateValueに値を代入するのをBattleManagerより早くするため
+        //EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
+        PlayerDead = false;
+    }
 
 	void Update () {
 		// 得点をテキスト形式で画面に表示
@@ -56,8 +57,9 @@ public class BattleManager : MonoBehaviour {
 		switch (battleStatus) {
 		
 		case BATTLE_START:
-			//3秒経過でメッセージを消して状態移行
-			timer += Time.deltaTime;
+                
+                //3秒経過でメッセージを消して状態移行
+                timer += Time.deltaTime;
 				if (timer > 3) {
 				mesaageSTART.SetActive (true);		// スタート表示
 				messageStart.enabled = false;
@@ -70,10 +72,10 @@ public class BattleManager : MonoBehaviour {
 			break;
 			
 		case BATTLE_PLAY:
-			ScoreText.text = DataManager.Score.ToString ();
-			//プレイヤーの体力が0以下になったらゲームオーバー
-			if (PlayerAp.armorPoint <= 0) {
-				battleStatus = BATTLE_END;
+                ScoreText.text = DataManager.Score.ToString();
+                //プレイヤーの体力が0以下になったらゲームオーバー
+                if (PlayerAp.armorPoint <= 0) {
+				//battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 				//キャラクター別に声変更
 				if (DataManager.PlayerNo == 0) {
@@ -103,10 +105,16 @@ public class BattleManager : MonoBehaviour {
 					SoundManager.Instance.Play (47, gameObject);
 				}
 				PlayerDead = true;
-				// 一定時間後シーン移動（ChangeTimeで時間設定）
-				// GameOver処理起動（下記参照）
-				Invoke("GameOver", ChangeTime);	
-			}
+                   /* timer += Time.deltaTime;
+                    if (timer > ChangeTime - 0.2f)
+                    {
+                        // 一定時間後シーン移動（ChangeTimeで時間設定）
+                        // GameOver処理起動（下記参照）
+                        PlayerDead = false;
+                    }*/
+                    Invoke("GameOver", ChangeTime);
+                
+                }
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
 				//プレイヤーの動きを止める
@@ -190,7 +198,7 @@ public class BattleManager : MonoBehaviour {
 
 	//ゲームオー画面に移動
 	private void GameOver(){
-		SceneManager.LoadScene ("GameOver");
+        SceneManager.LoadScene ("GameOver");
 	}
 
 	//エンディング画面に移動

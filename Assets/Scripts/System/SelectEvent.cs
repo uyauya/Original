@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;				// UI使用時は追加
 using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加する
 
 // シーン移行用
 public class SelectEvent : MonoBehaviour {
 	private AudioSource[] audioSources;
-	public Button target;
+    public Button Kohaku;
+    public Button Yuko;
+    public Button Misaki;
 
-	public void Onclick_Kohaku() 
+    public void Onclick_Kohaku() 
 	{
 		DataManager.PlayerNo = 0;			// DataManagerからPlayerNoを取得
-		SoundManager00.Instance.Play(3);	// SoundManager00から3の音を鳴らして
+        SoundManager00.Instance.Play(3);	// SoundManager00から3の音を鳴らして
 		Invoke("LoadScene1",1.3f);			// 1.3秒後にLoadScene1（kohakuシーンに移行）※下記参照
 	}
 		
@@ -20,7 +23,7 @@ public class SelectEvent : MonoBehaviour {
 	public void Onclick_Yuko() 
 	{
 		DataManager.PlayerNo = 1;
-		SoundManager00.Instance.Play(4);
+        SoundManager00.Instance.Play(4);
 		Invoke("LoadScene2",1.3f);
 	}
 
@@ -58,7 +61,23 @@ public class SelectEvent : MonoBehaviour {
 		SoundManager00.Instance.PlayDelayed (6, 0.9f, gameObject);
 	}
 
-	void LoadScene1() {
+    void Update()
+    {
+        
+        if (Input.GetButtonDown("Fire1"))
+            
+        {
+            Kohaku.onClick.Invoke();
+            /*ExecuteEvents.Execute
+            (
+                target: this.gameObject,
+                eventData: new PointerEventData(EventSystem.current),
+                functor: ExecuteEvents.pointerClickHandler
+            );*/
+        }
+    }
+
+    void LoadScene1() {
 		//Kohakuシーンに移行
 		SceneManager.LoadScene("Kohaku");
 	}

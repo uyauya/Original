@@ -11,8 +11,9 @@ public class GameStart : MonoBehaviour {
 	private AudioSource[] audioSources;
 	private Animator animator;
 	public Text blinkText;					//点滅させる
+    public Button start; //スタートボタン
 
-	public void Onclick_Select ()
+    public void Onclick_Select ()
 	{
 		animator.SetBool("START", true);    
 		DataManager.Continue = false;
@@ -40,13 +41,17 @@ public class GameStart : MonoBehaviour {
 	{
 		if (Input.GetButtonDown ("Fire1")) 
 		{
-			ExecuteEvents.Execute
+            Debug.Log("Debug");
+            start.onClick.Invoke();
+
+            /*ExecuteEvents.Execute
 			(
 				target      : this.gameObject,
 				eventData   : new PointerEventData( EventSystem.current ),
 				functor     : ExecuteEvents.pointerClickHandler
-			);
-		}
+			);*/
+
+        }
 	}
 
 	void LoadScene() {
