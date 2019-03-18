@@ -14,6 +14,7 @@ public class SelectEvent : MonoBehaviour {
 
 	public void OnSelectKohaku(GameObject target){
 		SelectKohaku.SetActive(true);
+        Debug.Log("kohaku");
 	}
 
 	public void OnDeselectKohaku(GameObject target){
