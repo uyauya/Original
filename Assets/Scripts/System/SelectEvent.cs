@@ -8,9 +8,33 @@ using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加
 // シーン移行用
 public class SelectEvent : MonoBehaviour {
 	private AudioSource[] audioSources;
-    //public Button Kohaku;
-    //public Button Yuko;
-    //public Button Misaki;
+	public GameObject SelectKohaku;
+	public GameObject SelectYuko;
+	public GameObject SelectMisaki;
+
+	public void OnSelectKohaku(GameObject target){
+		SelectKohaku.SetActive(true);
+	}
+
+	public void OnDeselectKohaku(GameObject target){
+		SelectKohaku.SetActive(false);
+	}
+
+	public void OnSelectYuko(GameObject target){
+		SelectYuko.SetActive(true);
+	}
+
+	public void OnDeselectYuko(GameObject target){
+		SelectYuko.SetActive(false);
+	}
+
+	public void OnSelectMisaki(GameObject target){
+		SelectMisaki.SetActive(true);
+	}
+
+	public void OnDeselectMisaki(GameObject target){
+		SelectMisaki.SetActive(false);
+	}
 
     public void Onclick_Kohaku() 
 	{
@@ -64,7 +88,7 @@ public class SelectEvent : MonoBehaviour {
     /*void Update()
     {
         
-        if (Input.GetButtonDown("Fire1"))
+
             
         {
             //Kohaku.onClick.Invoke();
