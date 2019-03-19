@@ -12,28 +12,33 @@ public class SelectEvent : MonoBehaviour {
 	public GameObject SelectYuko;
 	public GameObject SelectMisaki;
 
-	public void OnSelectKohaku(GameObject target){
+	//public void OnSelectKohaku(GameObject target){
+	public void OnSelectKohaku() {
 		SelectKohaku.SetActive(true);
-        Debug.Log("kohaku");
 	}
 
-	public void OnDeselectKohaku(GameObject target){
+	//public void OnDeselectKohaku(GameObject target){
+	public void OnDeselectKohaku() {
 		SelectKohaku.SetActive(false);
 	}
 
-	public void OnSelectYuko(GameObject target){
+	//public void OnSelectYuko(GameObject target){
+	public void OnSelectYuko(){
 		SelectYuko.SetActive(true);
 	}
 
-	public void OnDeselectYuko(GameObject target){
+	//public void OnDeselectYuko(GameObject target){
+	public void OnDeselectYuko(){
 		SelectYuko.SetActive(false);
 	}
 
-	public void OnSelectMisaki(GameObject target){
+	//public void OnSelectMisaki(GameObject target){
+	public void OnSelectMisaki(){
 		SelectMisaki.SetActive(true);
 	}
 
-	public void OnDeselectMisaki(GameObject target){
+	//public void OnDeselectMisaki(GameObject target){
+	public void OnDeselectMisaki(){
 		SelectMisaki.SetActive(false);
 	}
 
