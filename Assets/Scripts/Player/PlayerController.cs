@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 	public float MaxBoostForce = 15;				// ブースト時の移動速度最大値
 	public float PlusForce= 0.1f;					// 移動速度加算数値
 	public float JumpForce = 4.0f;					// ジャンプ力
+	public float DoubleJump = 4.0f;					// 二段ジャンプ
 	public float BoostJumpForce = 6.0f;				// ブースト時のジャンプ力
 	public float HighPoint;							// ジャンプの高さ最大値
 	public float gravity;							// 重力（ジャンプ時などに影響）
@@ -257,7 +258,7 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetButtonDown("Jump") == true && JumpCount < 2 ) {
 			// ジャンプ数加算
 			JumpCount++;
-
+			Debug.Log(JumpCount);
 			// ジャンプの上昇力を設定( v.x, JumpForce, v.z )で縦方向に加算
 			// Rigidbodyのvelocityをｖと略す。
 			Vector3 v = GetComponent<Rigidbody>().velocity;
@@ -265,6 +266,15 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<Rigidbody>().velocity = new Vector3( v.x, JumpForce, v.z );
 			//ジャンプモーションに切り替える
 			animator.SetBool("Jump", true);
+			/*if(JumpCount == 2){
+				GetComponent<Rigidbody>().velocity = new Vector3( v.x, DoubleJump, v.z );
+				animator.SetBool("DoubleJump", true);
+				Debug.Log("ダブル");
+			} else {
+				GetComponent<Rigidbody>().velocity = new Vector3( v.x, JumpForce, v.z );
+				animator.SetBool("Jump", true);
+				Debug.Log("ジャンプ");
+			}*/
 			// キャラ別に声変更
 			if (PlayerNo == 0) {
 				SoundManager.Instance.Play(15,gameObject);

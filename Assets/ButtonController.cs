@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public class ButtonController : MonoBehaviour
 {
     [SerializeField] bool m_defaultSelected;
-    [SerializeField] AudioClip m_selectionSe;
-    [SerializeField] GameObject[] m_objectsActivatedOnlyOnSelection;
+    [SerializeField] AudioClip m_selectionSe;							//鳴らす音
+    [SerializeField] GameObject[] m_objectsActivatedOnlyOnSelection;	//表示をON/OFFさせるものの格納場所
     Button m_button;
     AudioSource m_audioSource;
 
+	//非選択状態とする
     void Start()
     {
         m_button = GetComponent<Button>();
@@ -29,6 +30,7 @@ public class ButtonController : MonoBehaviour
 
     }
 
+	//選択状態の時音を鳴らし、表示をONにする。
     public void OnSelected()
     {
         m_audioSource.PlayOneShot(m_selectionSe);

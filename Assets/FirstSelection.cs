@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//デフォルト(最初)に選んだ状態にしたいボタンに付ける
 public class FirstSelection : MonoBehaviour
 {
 
