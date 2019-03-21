@@ -103,7 +103,144 @@ public class PlayerController : MonoBehaviour {
 		//現在のブーストゲージと最大ブーストゲージをUI Textに表示する
 		//boostText.text = string.Format("{0:0000} / {1:0000}", displayBoostPoint, DataManager.BoostPointMax);
 		boostText.text = string.Format("{0:0000} / {1:0000}", boostPoint, DataManager.BoostPointMax);
-	}
+
+        //プレイヤー死亡条件になってたらDeadアニメーション
+        if (BattleManager.PlayerDead == true)
+        {
+            animator.SetBool("Dead", true);
+        }
+
+        //ステージクリア条件かストップ条件で動けなくする
+        if ((IsClear == true) || (IsStop == true))
+        {
+            return;
+        }
+
+        //ブーストボタンが押されてブーストポイント残が1以上あればフラグを立てブーストポイントを消費
+        if (Input.GetButton("Boost") && boostPoint > 0)
+        {
+            boostPoint -= BpDown;                           //ブーストポイントをBpDown設定値分消費
+            isBoost = true;                                 //ブースト状態にする
+            StartCoroutine("BoostCoroutine");               //コルーチン処理（下記参照）
+                                                            // プレイヤのレイヤーをInvincibleに変更
+                                                            // Edit→ProjectSetting→Tags and LayersでInvicibleを追加
+                                                            // Edit→ProjectSetting→Physicsで衝突させたくない対象と交差している所の✔を外す
+                                                            // ここではEnemyと衝突させたくない（すり抜ける）為、Enemeyのレイヤーも追加
+                                                            // EnemeyとPlayerの交差してる✔を外す（プレイヤのLayerをPlayer、EnemyのLayerをEnemyに設定しておく）
+                                                            //gameObject.layer = LayerMask.NameToLayer("Invincible");
+                                                            //StartCoroutine ("BoostCoroutine");
+        }
+        else
+        {
+            isBoost = false;                                //それ以外ならブーストなし（通常状態）
+                                                            //gameObject.layer = LayerMask.NameToLayer("Player");
+        }
+
+        //通常時とブースト時で変化
+        if (isBoost)                                        //ブーストならMaxBoostForce値まで加速
+        {
+            // ブースト時
+            if (Force <= MaxBoostForce)
+            {                   // ForceがMaxBoostForceの値以下なら
+                MaxForce += Time.deltaTime * PlusForce;     // MaxBoostForceまでMaxForce(通常最大速度)に加速
+                Force = Mathf.Min(Force, MaxBoostForce);    // ForceがMaxBoostForceの値を超えない
+                                                            //Debug.Log (Force);
+            }
+            //ブースト状態ならアニメーターをBoostに切り替える
+            animator.SetBool("Boost", Input.GetButton("Boost") && boostPoint > 0);
+        }
+        else
+        {
+            if (Force <= MaxForce)
+            {
+                Force += Time.deltaTime * PlusForce;
+                Force = Mathf.Min(Force, MaxForce);
+                //Debug.Log (Force);
+            }
+            animator.SetBool("Boost", Input.GetButton("Boost") && boostPoint > 0);
+        }
+
+        //ジャンプキーによる上昇（二段ジャンプ）
+        //Debug.Log("jump JumpCount:" + JumpCount);
+        // ジャンプしてない（ジャンプボタン押されてない）状態で
+        IsDownJumpButton = false;
+        //ジャンプが押されて1回目なら（2回目でないなら）（一番下のコライダー処理が関係してる）
+        if (Input.GetButtonDown("Jump") == true && JumpCount < 2)
+        {
+            // ジャンプ数加算
+            JumpCount++;
+            //Debug.Log(JumpCount);
+            // ジャンプの上昇力を設定( v.x, JumpForce, v.z )で縦方向に加算
+            // Rigidbodyのvelocityをｖと略す。
+            Vector3 v = GetComponent<Rigidbody>().velocity;
+            // y方向にJumpForce値加算（ジャンプ）
+            GetComponent<Rigidbody>().velocity = new Vector3(v.x, JumpForce, v.z);
+            //ジャンプモーションに切り替える
+            animator.SetBool("Jump", true);
+            if(JumpCount == 2){
+				GetComponent<Rigidbody>().velocity = new Vector3( v.x, DoubleJump, v.z );
+				animator.SetBool("DoubleJump", true);
+				//Debug.Log("ダブル");
+			} else {
+				GetComponent<Rigidbody>().velocity = new Vector3( v.x, JumpForce, v.z );
+				animator.SetBool("Jump", true);
+				//Debug.Log("ジャンプ");
+			}
+            // キャラ別に声変更
+            if (PlayerNo == 0)
+            {
+                SoundManager.Instance.Play(15, gameObject);
+            }
+            if (PlayerNo == 1)
+            {
+                SoundManager.Instance.Play(16, gameObject);
+            }
+            if (PlayerNo == 2)
+            {
+                SoundManager.Instance.Play(17, gameObject);
+            }
+            // ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
+        }
+        else if (Input.GetButton("Jump") && (Input.GetButton("Boost") && boostPoint > 10))
+        {
+            Vector3 v = GetComponent<Rigidbody>().velocity;
+            GetComponent<Rigidbody>().velocity = new Vector3(v.x, BoostJumpForce, v.z);
+            animator.SetBool("BoostUp", Input.GetButton("Jump"));
+            if (PlayerNo == 0)
+            {
+                SoundManager.Instance.Play(33, gameObject);
+            }
+            if (PlayerNo == 1)
+            {
+                SoundManager.Instance.Play(34, gameObject);
+            }
+            if (PlayerNo == 2)
+            {
+                SoundManager.Instance.Play(35, gameObject);
+            }
+            // ジャンプの最大値までは上昇（ボタン押し続けている間は上昇し、最大値まで行ったら上昇値を0にする）
+            if (transform.position.y > HighPoint)
+                moveDirection.y = 0;
+            moveDirection.y += gravity * Time.deltaTime;
+            //ブーストポイント消費
+            boostPoint -= BpDown;
+            //ブーストアップモーションに切り替える
+            animator.SetBool("BoostUp", Input.GetButton("Jump"));
+
+        }
+        else
+        {
+            // それ以外の場合は落下
+            // フロア（地上）にいないなら
+            if (onFloor == false)
+            {
+                // 自重に-0.05ずつ下降値を加算して落下
+                moveDirection.y -= 0.05f * Time.deltaTime;
+                // 落下速度が-1以下なら-1にする（ふわっと落下させるための減速処理）
+                if (moveDirection.y <= -1f) moveDirection.y = -1f;
+            }
+        }
+    }
 
 	//一定時間間隔で常にUpdateする
 	void FixedUpdate()
@@ -250,74 +387,7 @@ public class PlayerController : MonoBehaviour {
 			if(Force >= MaxForce){ Force -= 2.2f; }
 		}
 
-		//ジャンプキーによる上昇（二段ジャンプ）
-		//Debug.Log("jump JumpCount:" + JumpCount);
-		// ジャンプしてない（ジャンプボタン押されてない）状態で
-		IsDownJumpButton = false;		
-		//ジャンプが押されて1回目なら（2回目でないなら）（一番下のコライダー処理が関係してる）
-		if (Input.GetButtonDown("Jump") == true && JumpCount < 2 ) {
-			// ジャンプ数加算
-			JumpCount++;
-			Debug.Log(JumpCount);
-			// ジャンプの上昇力を設定( v.x, JumpForce, v.z )で縦方向に加算
-			// Rigidbodyのvelocityをｖと略す。
-			Vector3 v = GetComponent<Rigidbody>().velocity;
-			// y方向にJumpForce値加算（ジャンプ）
-			GetComponent<Rigidbody>().velocity = new Vector3( v.x, JumpForce, v.z );
-			//ジャンプモーションに切り替える
-			animator.SetBool("Jump", true);
-			/*if(JumpCount == 2){
-				GetComponent<Rigidbody>().velocity = new Vector3( v.x, DoubleJump, v.z );
-				animator.SetBool("DoubleJump", true);
-				Debug.Log("ダブル");
-			} else {
-				GetComponent<Rigidbody>().velocity = new Vector3( v.x, JumpForce, v.z );
-				animator.SetBool("Jump", true);
-				Debug.Log("ジャンプ");
-			}*/
-			// キャラ別に声変更
-			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(15,gameObject);
-			}
-			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(16,gameObject);
-			}
-			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(17,gameObject);
-			}
-			// ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
-		} else if (Input.GetButton ("Jump") && (Input.GetButton ("Boost") && boostPoint > 10)) {
-			Vector3 v = GetComponent<Rigidbody>().velocity;
-			GetComponent<Rigidbody>().velocity = new Vector3( v.x, BoostJumpForce, v.z );
-			animator.SetBool("BoostUp", Input.GetButton ("Jump"));
-			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(33,gameObject);
-			}
-			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(34,gameObject);
-			}
-			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(35,gameObject);
-			}
-			// ジャンプの最大値までは上昇（ボタン押し続けている間は上昇し、最大値まで行ったら上昇値を0にする）
-			if (transform.position.y > HighPoint)
-				moveDirection.y = 0;
-			moveDirection.y += gravity * Time.deltaTime;
-			//ブーストポイント消費
-			boostPoint -= BpDown;
-			//ブーストアップモーションに切り替える
-			animator.SetBool("BoostUp", Input.GetButton("Jump"));
-
-		} else {
-			// それ以外の場合は落下
-			// フロア（地上）にいないなら
-			if( onFloor == false ) {
-				// 自重に-0.05ずつ下降値を加算して落下
-				moveDirection.y -= 0.05f * Time.deltaTime;
-				// 落下速度が-1以下なら-1にする（ふわっと落下させるための減速処理）
-				if( moveDirection.y <= -1f ) moveDirection.y = -1f;
-			}
-		}
+		
 		// ブーストやジャンプが入力されていなければブーストポイントが徐々に回復（！は～されなければという否定形）
 		// ブーストなし最大速度で回避値3倍
 		if (!Input.GetButton ("Boost") && Force == MaxForce) {
