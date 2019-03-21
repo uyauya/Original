@@ -26,6 +26,7 @@ public class PlayerShoot02 : MonoBehaviour {
 	private Pause pause;
 	public bool isBig;							// 巨大化しているかどうか
 
+
 	/*[CustomEditor(typeof(PlayerShoot02))]
 	public class PlayerShoot02Editor : Editor	// using UnityEditor; を入れておく
 	{
@@ -58,12 +59,17 @@ public class PlayerShoot02 : MonoBehaviour {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 			if (isBig == false) {
 				if (Input.GetButtonUp ("Fire1")) {
-					if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
-						damage = Attack += attackPoint;
-						animator.SetTrigger ("Shot");
-						GetComponent<PlayerController> ().boostPoint -= BpDown;
-						Bullets ();
-					}
+                    if (PlayerLevel.PSoot02Level <= DataManager.Level)
+                    {
+                        Debug.Log("レベル" + DataManager.Level);
+                        if (GetComponent<PlayerController>().boostPoint >= BpDown)
+                        {
+                            damage = Attack += attackPoint;
+                            animator.SetTrigger("Shot");
+                            GetComponent<PlayerController>().boostPoint -= BpDown;
+                            Bullets();
+                        }
+                    }
 					//マズルフラッシュを表示する
 					//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 				}
