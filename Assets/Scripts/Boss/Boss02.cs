@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Boss02 : MonoBehaviour {
 
+	public GameObject Boss01shot;				// 弾
 	public GameObject Boss02shot;				// 弾
 	public float ShotInterval;					// ショット間隔
 	public GameObject exprosion;	
@@ -54,10 +55,26 @@ public class Boss02 : MonoBehaviour {
 		// shotIntervalMax数値以上になったらショット
 		if (bossBasic.shotInterval > bossBasic.shotIntervalMax) {
 			bossBasic.animator.SetTrigger ("attack");
-			GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
+			GameObject bossshot = GameObject.Instantiate (Boss01shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
 			// 再びショット間隔計算開始
 			bossBasic.shotInterval = ShotInterval;
 		}
 
+		if(BossShot02Range.isHitDesision == true) {
+			bossBasic.shotInterval += Time.deltaTime;
+			// shotIntervalMax数値以上になったらショット
+			if (bossBasic.shotInterval > bossBasic.shotIntervalMax) {
+				bossBasic.animator.SetTrigger ("attack");
+				GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
+				// 再びショット間隔計算開始
+				bossBasic.shotInterval = ShotInterval;
+			}
+		}
+
+		if(BossShot02Range.isHitDesision == false) {
+			return;
+		}
 	}
+
+
 }
