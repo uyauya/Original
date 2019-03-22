@@ -144,7 +144,9 @@ public class PlayerController : MonoBehaviour {
             {                   // ForceがMaxBoostForceの値以下なら
                 MaxForce += Time.deltaTime * PlusForce;     // MaxBoostForceまでMaxForce(通常最大速度)に加速
                 Force = Mathf.Min(Force, MaxBoostForce);    // ForceがMaxBoostForceの値を超えない
-                                                            //Debug.Log (Force);
+                //Debug.Log (Force);
+				//ブースト時プレイヤー攻撃値2倍に
+				DataManager.AttackPoint *= 2;
             }
             //ブースト状態ならアニメーターをBoostに切り替える
             animator.SetBool("Boost", Input.GetButton("Boost") && boostPoint > 0);
@@ -155,6 +157,7 @@ public class PlayerController : MonoBehaviour {
             {
                 Force += Time.deltaTime * PlusForce;
                 Force = Mathf.Min(Force, MaxForce);
+				DataManager.AttackPoint *= 1;
                 //Debug.Log (Force);
             }
             animator.SetBool("Boost", Input.GetButton("Boost") && boostPoint > 0);

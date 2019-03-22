@@ -14,7 +14,7 @@ public class Boss02 : MonoBehaviour {
 	public float MoveSpeed;						// 進む速度
 	protected BossBasic bossBasic;				// BossBasic接続用
 	bool dead = false;
-	public GameObject BossLifeBar;
+	public static GameObject BossLifeBar;
 
 
 	void Start () {
@@ -28,13 +28,16 @@ public class Boss02 : MonoBehaviour {
 	void Update () {
 		if( bossBasic.armorPoint <= 0f)
 		{
+			BossLifeBar.SetActive(false);
 			return;	// 敵がすでにやられている場合は何もしない
 		}
 		// Animator の dead が true なら Update 処理を抜ける
 		if( bossBasic.animator.GetBool("dead") == true ) return;
 		Vector3 Pog = this.gameObject.transform.position;
+		//地上に固定
 		gameObject.transform.position = new Vector3(Pog.x , 0.0f, Pog.z);
 		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
+		//縦に傾かないよう固定
 		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		bossBasic.timer += Time.deltaTime;
 		//敵の攻撃範囲を設定する

@@ -67,6 +67,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 					//　最初に1回押していない時は押した事にする（レバー押し1回目）
 					if (!push) {
 						push = true;
+						Debug.Log("カベ1");
 						//　最初に移動キーを押した時にその方向ベクトルを取得
 						direction = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 						nowTime = 0f;
@@ -80,6 +81,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 						   && nowTime <= NextButtonDownTime) {							
 							//Debug.LogFormat ("出る時：Vector2.Angle:{0} LimitAngle:{1} Time.time:{2} nowTime:{3} nextButtonDownTime:{4}", Vector2.Angle (nowDirection, direction), limitAngle, Time.time, nowTime, nextButtonDownTime);
 							diffence = true;
+							Debug.Log("カベ2");
 							if (PlayerNo == 0) {
 								//SoundManagerKohaku.Instance.Play(0,gameObject);
 							}
