@@ -54,7 +54,8 @@ public class PlayerShoot03 : MonoBehaviour {
 			if (pause.isPause == false) {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 			if (isBig == false) {
-				if (Input.GetButtonUp ("Fire1")) {	
+				if (Input.GetButtonUp ("Fire1")) {
+					if (DataManager.Level >= PlayerLevel.PSoot03Level){
 					damage = Attack;
 					if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 						animator.SetTrigger ("Shot");
@@ -62,6 +63,7 @@ public class PlayerShoot03 : MonoBehaviour {
 						Bulletss ();
 						//マズルフラッシュを表示する
 						//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
+						}
 					}
 				}
 			}

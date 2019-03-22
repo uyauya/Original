@@ -69,6 +69,7 @@ public class MultiWayShoot : MonoBehaviour {
 				// Fire1（標準ではCtrlキー)を押された瞬間.
 				shotInterval += Time.deltaTime;
 				if (Input.GetButtonUp ("Fire1")) {
+					if (DataManager.Level >= PlayerLevel.PMSootLevel){
 					if (GetComponent<PlayerController> ().boostPoint >= BpDown)
 					//effectObject = Instantiate (effectPrefab, muzzle.position, Quaternion.identity);
 				//経過時間を５で割って余りが0の時にBullet(下記参照）発動
@@ -79,6 +80,7 @@ public class MultiWayShoot : MonoBehaviour {
 					animator.SetTrigger ("Shot");
 					//マズルフラッシュを表示する
 					//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
+					}
 				}
 				//音を重ねて再生する
 				//audioSource.PlayOneShot (audioSource.clip);

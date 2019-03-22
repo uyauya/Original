@@ -59,9 +59,9 @@ public class PlayerShoot02 : MonoBehaviour {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 			if (isBig == false) {
 				if (Input.GetButtonUp ("Fire1")) {
-                    if (PlayerLevel.PSoot02Level <= DataManager.Level)
+					if (DataManager.Level >= PlayerLevel.PSoot02Level)
                     {
-                        Debug.Log("レベル" + DataManager.Level);
+                        //Debug.Log("レベル" + DataManager.Level);
                         if (GetComponent<PlayerController>().boostPoint >= BpDown)
                         {
                             damage = Attack += attackPoint;

@@ -55,11 +55,13 @@ public class PlayerShoot04 : MonoBehaviour {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 			if (isBig == false) {
 				if (Input.GetButtonUp ("Fire1")) {
+					if (DataManager.Level >= PlayerLevel.PSoot04Level){
 					//damage = Attack;
 					if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
 						animator.SetTrigger ("Shot");
 						GetComponent<PlayerController> ().boostPoint -= BpDown;
 						Bullet ();
+						}
 					}
 				}
 			}
