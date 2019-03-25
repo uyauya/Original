@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;	//シーンをまたいで使用する際に使用
 
-// シーンをまたいでデータ保持する処理
+// シーンをまたいでデータ保持する処理（セーブ時のレベル等を管理）
 public class DataManager : SingletonMonoBehaviour<DataManager> {
+	//[System.NonSerialized]にするとインスペクタ上に変数が表示されない。
+	//DataManagerの変数は他スクリプトで管理しているのでインスペクタから操作できないよう隠した方が良い
 	[System.NonSerialized]
+	//staticを付けるとインスペクタ上に変数が表示されない。他スクリプトで変数を共有できる
 	public static int PlayerNo;			  //プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照
 	public static UserParam userParam;	  // UserParamスクリプトのデータをuserParamとして使用する
 	public static bool Continue = false;  //Continue判定（初回はStartのみなのでfalse）

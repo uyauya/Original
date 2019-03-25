@@ -10,8 +10,10 @@ public class BossBasic : MonoBehaviour {
 	public Animator animator;						// Animatorセット用
 	public GameObject target;						// プレイヤー認識用
 	public GameObject shot;
-	public float shotInterval = 0;					// 攻撃間隔計測開始
-	public float shotIntervalMax = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
+	public float shotInterval01 = 0;				// 攻撃間隔計測開始（ショット1種類目）
+	public float shotInterval01Max = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
+	public float shotInterval02 = 0;				// 攻撃間隔計測開始（ショット2種類目）
+	public float shotInterval02Max = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
 	public float armorPointMax = 10000;				// 最大HP
 	public float armorPoint;					    // HP
 	public int TargetRange;							// プレイヤをターゲット認識する距離

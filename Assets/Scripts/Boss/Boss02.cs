@@ -6,7 +6,8 @@ public class Boss02 : MonoBehaviour {
 
 	public GameObject Boss01shot;				// 弾
 	public GameObject Boss02shot;				// 弾
-	public float ShotInterval;					// ショット間隔
+	public float ShotInterval01;				// ショット間隔
+	public float ShotInterval02;				// ショット間隔
 	public GameObject exprosion;	
 	int enemyLevel = 0;
 	public GameObject Boss02muzzle;				// ショットの発射口
@@ -51,24 +52,24 @@ public class Boss02 : MonoBehaviour {
 			transform.position += transform.forward * Time.deltaTime * MoveSpeed;	
 		}
 		// ショット間隔計算
-		bossBasic.shotInterval += Time.deltaTime;
+		bossBasic.shotInterval01 += Time.deltaTime;
 		// shotIntervalMax数値以上になったらショット
-		if (bossBasic.shotInterval > bossBasic.shotIntervalMax) {
+		if (bossBasic.shotInterval01 > bossBasic.shotInterval01Max) {
 			bossBasic.animator.SetTrigger ("attack");
-			GameObject bossshot = GameObject.Instantiate (Boss01shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
+			GameObject bossshot01 = GameObject.Instantiate (Boss01shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
 			// 再びショット間隔計算開始
-			bossBasic.shotInterval = ShotInterval;
+			bossBasic.shotInterval01 = ShotInterval01;
 		}
 
 		if(BossShot02Range.isHitDesision == true) {
-			bossBasic.shotInterval += Time.deltaTime;
+			bossBasic.shotInterval02 += Time.deltaTime;
 			// shotIntervalMax数値以上になったらショット
-			if (bossBasic.shotInterval > bossBasic.shotIntervalMax) {
+			//if (bossBasic.shotInterval02 > bossBasic.shotInterval02Max) {
 				bossBasic.animator.SetTrigger ("attack");
-				GameObject bossshot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
+				GameObject bossshot02 = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
 				// 再びショット間隔計算開始
-				bossBasic.shotInterval = ShotInterval;
-			}
+				bossBasic.shotInterval02 = ShotInterval02;
+			//}
 		}
 
 		if(BossShot02Range.isHitDesision == false) {

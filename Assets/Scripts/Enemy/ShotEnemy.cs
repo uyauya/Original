@@ -16,7 +16,7 @@ public class ShotEnemy : MonoBehaviour {
 	void Update () {
 	
 		//弾を前進させる
-		transform.position += transform.forward * Time.deltaTime * 100;
+		transform.position += transform.forward * Time.deltaTime * 1;
 	}
 	
 	private void OnCollisionEnter(Collision collider) {
