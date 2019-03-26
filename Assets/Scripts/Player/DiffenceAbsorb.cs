@@ -100,7 +100,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 							push = false;
 						}
 
-						if (Vector2.Angle (nowDirection, direction) < LimitAngle && (Input.GetButton ("Fire3"))
+						if (Vector2.Angle (nowDirection, direction) < LimitAngle && (Input.GetButton ("Fire1"))
 						   && nowTime <= NextButtonDownTime) {
 							diffence = true;
 							if (PlayerNo == 0) {
