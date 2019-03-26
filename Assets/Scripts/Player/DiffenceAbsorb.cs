@@ -158,7 +158,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 		if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "ShotEnemy") {
 			BpHealObject = Instantiate (BpHealPrefab, EffectPoint.position, Quaternion.identity);
 			BpHealObject.transform.SetParent (EffectPoint);
-			animator.SetTrigger ("Absorb");
+			//animator.SetTrigger ("Absorb");
 			if (PlayerNo == 0) {
 				//SoundManager.Instance.Play (18, gameObject);
 			}

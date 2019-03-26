@@ -10,8 +10,9 @@ public class Boss02 : MonoBehaviour {
 	public float ShotInterval02;				// ショット間隔
 	public GameObject exprosion;	
 	int enemyLevel = 0;
-	public GameObject Boss02muzzle;				// ショットの発射口
-	public int TargetPosition;					// ターゲットの場所検知
+	//public GameObject Boss02muzzle;				// ショットの発射口
+    public Transform Boss02muzzle;              // 弾発射元（銃口）
+    public int TargetPosition;					// ターゲットの場所検知
 	public float TargetSpeed;					// 振り向きの速度
 	public float MoveSpeed;						// 進む速度
 	protected BossBasic bossBasic;				// BossBasic接続用
@@ -56,9 +57,11 @@ public class Boss02 : MonoBehaviour {
 		// shotIntervalMax数値以上になったらショット
 		if (bossBasic.shotInterval01 > bossBasic.shotInterval01Max) {
 			bossBasic.animator.SetTrigger ("attack");
-			GameObject boss02shot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
-			// 再びショット間隔計算開始
-			bossBasic.shotInterval01 = ShotInterval01;
+			//GameObject boss02shot = GameObject.Instantiate (Boss02shot, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
+            GameObject boss02shot = GameObject.Instantiate(Boss02shot) as GameObject;
+            boss02shot.transform.position = Boss02muzzle.position;
+            // 再びショット間隔計算開始
+            bossBasic.shotInterval01 = ShotInterval01;
 		}
 
 		if(BossShot02Range.isHitDesision == true) {
@@ -66,9 +69,11 @@ public class Boss02 : MonoBehaviour {
 			// shotIntervalMax数値以上になったらショット
 			if (bossBasic.shotInterval02 > bossBasic.shotInterval02Max) {
 				bossBasic.animator.SetTrigger ("attack");
-				GameObject boss02shot2 = GameObject.Instantiate (Boss02shot2, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
-				// 再びショット間隔計算開始
-				bossBasic.shotInterval02 = ShotInterval02;
+                //GameObject boss02shot2 = GameObject.Instantiate (Boss02shot2, Boss02muzzle.transform.position,Quaternion.identity)as GameObject;
+                GameObject boss02shot2 = GameObject.Instantiate(Boss02shot2) as GameObject;
+                boss02shot2.transform.position = Boss02muzzle.position;
+                // 再びショット間隔計算開始
+                bossBasic.shotInterval02 = ShotInterval02;
 			}
 		}
 
