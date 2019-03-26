@@ -18,14 +18,18 @@ public class BossShot02Range : MonoBehaviour
 		
     }
 
-	private void OnOnTriggerEnter(Collision collider) {
-		if (collider.gameObject.tag == "Player") {
+	//private void OnTriggerEnter(Collision Collider) {
+	private void OnTriggerEnter(Collider other) {
+		//if (collider.gameObject.tag == "Player") {
+		if (other.tag == "Player"){
 			isHitDesision = true;
 		}
 	}
 
-	private void OnTriggerExit(Collider collider) {  
-		if (collider.gameObject.tag == "Player") {
+	//private void OnTriggerExit(Collider Collider) { 
+	private void OnTriggerExit(Collider other) {
+		//if (collider.gameObject.tag == "Player") {
+		if (other.tag == "Player") {
 			isHitDesision = false;
 		}
 	}

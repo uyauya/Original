@@ -24,8 +24,9 @@ public class FullDash : MonoBehaviour {
 	public GameObject DAEffectPrefab;				
 	public GameObject DAEffectObject;
 	public bool isDash = false;        	  		//ダッシュしているか
-	public int BpUp = 100;						//エネルギー吸収した際の回復ポイント
+
 	public float DashDistance = 2.0f;			//瞬間移動距離
+	private ModelColorChange modelColorChange;	
 
 	void Start()
 	{
@@ -42,7 +43,8 @@ public class FullDash : MonoBehaviour {
 		velocity = Vector3.zero;
 		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
 		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
-		if (pause.isPause == false) {
+		//ポーズ中でなくプレイヤーのHPが500以下なら
+		if ((pause.isPause == false) && (PlayerAp.armorPoint <= 500.0f)) {
 			//　ガードしていないとき
 			if (!isDash) {
 				//　移動キーを押した
@@ -124,7 +126,9 @@ public class FullDash : MonoBehaviour {
 
 	//現在地より進行方向(direction側)より数歩先に瞬間移動。敵との接触は無効とする
 	void Dash() {
+		gameObject.layer = LayerMask.NameToLayer("Invincible");
 		//transform.position = new Vector3(x + DashDistance,y + DashDistance,z + DashDistance);
+		gameObject.layer = LayerMask.NameToLayer("Player");
 	}
 
 	//ダッシュ直後に攻撃。攻撃＋BP吸収
@@ -135,22 +139,5 @@ public class FullDash : MonoBehaviour {
 		dattack.transform.position = muzzle.position;
 	}
 
-	private void OnCollisionEnter (Collision collider)
-	{
-		if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "ShotEnemy") {
-			DAEffectObject = Instantiate (DAEffectPrefab, EffectPoint.position, Quaternion.identity);
-			DAEffectObject.transform.SetParent (EffectPoint);
-			//animator.SetTrigger ("Dash");
-			if (PlayerNo == 0) {
-			//SoundManager.Instance.Play (18, gameObject);
-			}
-			if (PlayerNo == 1) {
-			//SoundManager.Instance.Play (19, gameObject);
-			}
-			if (PlayerNo == 2) {
-			//SoundManager.Instance.Play (20, gameObject);
-			}
-			boostPoint += BpUp;
-		}
-	}
+
 } 
