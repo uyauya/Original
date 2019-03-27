@@ -48,14 +48,14 @@ public class EscapeEnemy1 : MonoBehaviour {
 			//ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
-				//transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
+				//transform.position -= transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
 		}
 		// ターゲット（プレイヤー）との距離が0.5以内なら
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
 			//ターゲットの反対方向を向きダッシュで逃げる
 			// Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
-				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemySpeed * Dash);
+				(transform.position - enemyBasic.target.transform.position ), Time.deltaTime * enemyBasic.EnemySpeed * Dash);
 			transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed* Dash;
 		}
 		// Animator の dead が true なら Update 処理を抜ける
