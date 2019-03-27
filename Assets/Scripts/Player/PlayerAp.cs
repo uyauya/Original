@@ -125,35 +125,37 @@ public class PlayerAp : MonoBehaviour {
 				enemyAttack = collider.gameObject.GetComponent<BossBasic> ().EnemyAttack;
 			} 	
 
-			// 巨大化していたらダメージなし(armorPoint差し引きを0にする)
-			if (isBig == true) {
-				armorPoint -= 0;
-			} else {
-				//巨大化していなかったら（通常なら）
-				armorPoint -= enemyAttack;	// enemyAttack値差し引く（ダメージ）
-				armorPoint = Mathf.Clamp (armorPoint, 0, DataManager.ArmorPointMax);
-				//EffectPointをセットした場所にDamagePrefabに格納しているDamageObjectを発生
-				DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
-				//SetParentにしてプレイヤが動いてもDamageObjectがプレイヤーに追随するようにする
-				DamageObject.transform.SetParent (EffectPoint);
-				//アニメーターをDamageに切り替え
-				animator.SetTrigger ("Damage");
-				if (PlayerNo == 0) {
-					SoundManager.Instance.Play (21, gameObject);
-				}
-				if (PlayerNo == 1) {
-					SoundManager.Instance.Play (22, gameObject);
-				}
-				if (PlayerNo == 2) {
-					SoundManager.Instance.Play (23, gameObject);
-				}
-				//コルーチン処理（下記参照）
-				StartCoroutine ("EnemyDamageCoroutine");
+		// 巨大化もしくはダッシュしていたらダメージなし(armorPoint差し引きを0にする)
+		if (isBig == true) {
+			armorPoint -= 0;
+		} else if (FullDash.isDash == true){
+			StartCoroutine ("DashCoroutine");	
+		} else {
+			//巨大化していなかったら（通常なら）
+			armorPoint -= enemyAttack;	// enemyAttack値差し引く（ダメージ）
+			armorPoint = Mathf.Clamp (armorPoint, 0, DataManager.ArmorPointMax);
+			//EffectPointをセットした場所にDamagePrefabに格納しているDamageObjectを発生
+			DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
+			//SetParentにしてプレイヤが動いてもDamageObjectがプレイヤーに追随するようにする
+			DamageObject.transform.SetParent (EffectPoint);
+			//アニメーターをDamageに切り替え
+			animator.SetTrigger ("Damage");
+			if (PlayerNo == 0) {
+				SoundManager.Instance.Play (21, gameObject);
 			}
-		
+			if (PlayerNo == 1) {
+				SoundManager.Instance.Play (22, gameObject);
+			}
+			if (PlayerNo == 2) {
+				SoundManager.Instance.Play (23, gameObject);
+			}
+			//コルーチン処理（下記参照）
+			StartCoroutine ("EnemyDamageCoroutine");
+			}
+		}
 		//速度最大で壁と接触したらダメージ
 		//ぶつかった時にコルーチンを実行（下記IEnumerator参照）
-		} else if (collider.gameObject.tag == "Wall") {
+		if (collider.gameObject.tag == "Wall") {
 			if (isBig == true) {
 				armorPoint -= 0;
 			} else {
@@ -183,7 +185,8 @@ public class PlayerAp : MonoBehaviour {
 					StartCoroutine ("WallDamageCoroutine");
 				}
 			}
-		} else if (collider.gameObject.tag == "Poison") {
+		}
+		if (collider.gameObject.tag == "Poison") {
 			poisonAttack = collider.gameObject.GetComponent<B2Floor> ().PoisonAttack;
 			if (isBig == true) {
 				armorPoint -= 0;
@@ -206,9 +209,10 @@ public class PlayerAp : MonoBehaviour {
 				//コルーチン処理（下記参照）
 				StartCoroutine ("PoisonDamageCoroutine");
 			}
+		}
 
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
-		} else if (collider.gameObject.tag == "Item") {
+		if (collider.gameObject.tag == "Item") {
 			// 既にarmorPointがMaxだったら何もしない
 			if (armorPoint == DataManager.ArmorPointMax) return;
 			// armorPointがMaxになったら声出し
@@ -248,7 +252,7 @@ public class PlayerAp : MonoBehaviour {
 		}
 
 		//Itemタグをつけたもの（YellowSphere）を取ったら無敵＆巨大化
-		else if (collider.gameObject.tag == "Item4") {	
+		if (collider.gameObject.tag == "Item4") {	
 			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
 			HpHealObject.transform.SetParent (EffectPoint);
 			animator.SetTrigger ("ItemGet");
@@ -375,5 +379,19 @@ public class PlayerAp : MonoBehaviour {
 		iTween.ScaleTo (gameObject, iTween.Hash ("x", 1, "y", 1, "z", 1, "time", 3f));
 		isBig = false;
 		BigAttack = 0;
+	}
+
+	IEnumerator DashCoroutine ()
+	{
+		gameObject.layer = LayerMask.NameToLayer("Invincible");
+		int count = 10;
+		while (count > 0){
+			modelColorChange.ColorChange(DamageColor);
+			yield return new WaitForSeconds(0.1f);
+			modelColorChange.ColorChange(new Color (1,1,1,1));
+			yield return new WaitForSeconds(0.1f);
+			count--;
+		}
+		gameObject.layer = LayerMask.NameToLayer("Player");
 	}
 }

@@ -10,7 +10,7 @@ public class Boss02 : MonoBehaviour {
 	public float ShotInterval02;				// ショット間隔
 	public GameObject exprosion;	
 	int enemyLevel = 0;
-	//public GameObject Boss02muzzle;				// ショットの発射口
+	//public GameObject Boss02muzzle;			// ショットの発射口
     public Transform Boss02muzzle;              // 弾発射元（銃口）
     public int TargetPosition;					// ターゲットの場所検知
 	public float TargetSpeed;					// 振り向きの速度

@@ -23,7 +23,7 @@ public class FullDash : MonoBehaviour {
 	public GameObject DashAttck;	
 	public GameObject DAEffectPrefab;				
 	public GameObject DAEffectObject;
-	public bool isDash = false;        	  		//ダッシュしているか
+	public static bool isDash = false;        	  		//ダッシュしているか
 
 	public float DashDistance = 2.0f;			//瞬間移動距離
 	private ModelColorChange modelColorChange;	
@@ -75,7 +75,8 @@ public class FullDash : MonoBehaviour {
 							if (PlayerNo == 2) {
 							//SoundManagerMisaki.Instance.Play(0,gameObject);	
 							}
-							Dash ();
+							//Dash ();
+							isDash = true;
 							Debug.Log ("Dash");
 							isDash = false;
 							push = false;
@@ -125,11 +126,11 @@ public class FullDash : MonoBehaviour {
 	}
 
 	//現在地より進行方向(direction側)より数歩先に瞬間移動。敵との接触は無効とする
-	void Dash() {
+	/*void Dash() {
 		gameObject.layer = LayerMask.NameToLayer("Invincible");
 		//transform.position = new Vector3(x + DashDistance,y + DashDistance,z + DashDistance);
 		gameObject.layer = LayerMask.NameToLayer("Player");
-	}
+	}*/
 
 	//ダッシュ直後に攻撃。攻撃＋BP吸収
 	void DashAttack() {

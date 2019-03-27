@@ -7,9 +7,12 @@ public class Boss02Shot2 : MonoBehaviour {
 	public GameObject explosion;
 	public float DestroyTime = 2.0F;
 	public float ShotSpeed = 1.0F;
+	private Boss02 boss02shot02;			// 発射元
 
 	// Use this for initialization
 	void Start () {
+		boss02shot02 = GameObject.FindWithTag("Enemy").GetComponent<Boss02> ();
+		transform.rotation = boss02shot02.transform.rotation;
 		Destroy(gameObject, DestroyTime);
 	}
 	

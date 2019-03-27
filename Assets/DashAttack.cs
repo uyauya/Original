@@ -5,11 +5,12 @@ using UnityEngine;
 public class DashAttack : MonoBehaviour
 {
 	
+	public float damage = 100.0f;
 	private AudioSource audioSource;
 	public GameObject HitEffectPrefab;				
 	public GameObject HitEffectObject;
 	public Transform EffectPoint;				//エフェクト発生元の位置取り
-	public static bool Hit = false;				//敵に当たったかどうか
+	public static bool isDAttack = false;		//敵に当たったかどうか
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,8 @@ public class DashAttack : MonoBehaviour
 		if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "ShotEnemy") {
 			HitEffectObject = Instantiate (HitEffectPrefab, EffectPoint.position, Quaternion.identity);
 			HitEffectObject.transform.SetParent (EffectPoint);
-			Hit = true;
+			//isDAttack内動作はPlayerApに記述
+			isDAttack = true;
 		}
 	}
 }
