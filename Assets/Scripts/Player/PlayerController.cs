@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 	public float DoubleJump = 4.0f;					// 二段ジャンプ
 	public float BoostJumpForce = 6.0f;				// ブースト時のジャンプ力
 	public float HighPoint;							// ジャンプの高さ最大値
+	public float InvincibleTime;					// 無敵時間
 	public float gravity;							// 重力（ジャンプ時などに影響）
 	private Vector3 moveDirection = Vector3.zero;	 //プレイヤ位置方向ニュートラル設定
 	public float boostPoint;						// ブーストポイント
@@ -27,9 +28,7 @@ public class PlayerController : MonoBehaviour {
 	Vector3 moveSpeed;								// プレイヤの速さ
 	private int JumpCount;							// ジャンプ回数計算用（二段ジャンプ処理に使用）
 	private float interval = 2.0f;
-	bool isBoost;									// ブーストボタンをオン・オフ設定
 	private float timer = 0.0f;				
-	bool onFloor = true;							// 床に設置しているかどうか
 	public int ItemCount;							// スフィア取得個数計算用
 	public int GetStar = 0;
 	public int GetBigStar = 0;
@@ -43,10 +42,18 @@ public class PlayerController : MonoBehaviour {
 	public float BpHealPoint = 500;					// ブーストポイント回復値（アイテム取得時）
 	protected bool isInvincible;					// 無敵処理（ダメージ受けた際に使用）
 	private ModelColorChange modelColorChange;
-	public float InvincibleTime;					// 無敵時間
+	private bool onFloor = true;					// 床に設置しているかどうか
 	private bool IsDownJumpButton = false;			//ジャンプ不可
-	public static bool IsClear = false;				//ステージクリアしたかどうか
-	public static bool IsStop = false;				//プレイヤーの動きを止めたい時に使う
+	public static bool isBoost;						// ブーストボタンをオン・オフ設定
+	public static bool isClear = false;				//ステージクリアしたかどうか
+	public static bool isStop = false;				//プレイヤーの動きを止めたい時に使う
+	public float DashDistance = 2.0f;				//ダッシュ（瞬間移動）距離
+	public float DashIdleTime = 1.0f;				//ダッシュ後のダッシュ操作不能時間
+	public GameObject DashAttck;	
+	public GameObject DAEffectPrefab;				
+	public GameObject DAEffectObject;
+	public Transform muzzle;						//DashAttackプレハブ発生元
+	public float DashBpDown = 1.0f;					//DashAttack起動時の消費ブーストポイント
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -90,7 +97,7 @@ public class PlayerController : MonoBehaviour {
 	void Update()
 	{
 		//ステージクリア条件かストップ条件で動けなくする
-		if ((IsClear == true) || (IsStop == true))
+		if ((isClear == true) || (isStop == true))
 		{
 			return;
 		}
@@ -111,15 +118,15 @@ public class PlayerController : MonoBehaviour {
         }
 
         //ステージクリア条件かストップ条件で動けなくする
-        if ((IsClear == true) || (IsStop == true))
+        if ((isClear == true) || (isStop == true))
         {
             return;
         }
 
         //ブーストボタンが押されてブーストポイント残が1以上あればフラグを立てブーストポイントを消費
-        if (Input.GetButton("Boost") && boostPoint > 0)
+        if (Input.GetButtonDown("Boost") && boostPoint > 0)
         {
-            boostPoint -= BpDown;                           //ブーストポイントをBpDown設定値分消費
+            boostPoint -= BpDown * Time.deltaTime;          //ブーストポイントをBpDown設定値分消費
             isBoost = true;                                 //ブースト状態にする
             StartCoroutine("BoostCoroutine");               //コルーチン処理（下記参照）
                                                             // プレイヤのレイヤーをInvincibleに変更
@@ -130,6 +137,18 @@ public class PlayerController : MonoBehaviour {
                                                             //gameObject.layer = LayerMask.NameToLayer("Invincible");
                                                             //StartCoroutine ("BoostCoroutine");
         }
+		if(isBoost == true) 
+		{
+			if (Input.GetButtonDown("Fire3")) 				//ブースト中にFire3でブースト解除
+			{
+				isBoost = false;
+			}
+			else if (Input.GetButtonDown("Boost"))
+			{
+				boostPoint -= DashBpDown;  
+				DashAttack ();
+			}
+		}
         else
         {
             isBoost = false;                                //それ以外ならブーストなし（通常状態）
@@ -255,7 +274,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//ステージクリア条件かストップ条件で動けなくする
-		if ((IsClear == true) || (IsStop == true))
+		if ((isClear == true) || (isStop == true))
 		{
 			return;
 		}
@@ -497,7 +516,7 @@ public class PlayerController : MonoBehaviour {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
 			}
 			//移動不可でSalute
-			IsClear = true;	
+			isClear = true;	
 			animator.SetBool("Salute", true);
 			GetStar += 1;
 		}
@@ -512,7 +531,7 @@ public class PlayerController : MonoBehaviour {
 			if (PlayerNo == 2) {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
 			}
-			IsClear = true;	
+			isClear = true;	
 			animator.SetBool("Salute", true);
 			GetBigStar += 1;
 		}
@@ -546,6 +565,14 @@ public class PlayerController : MonoBehaviour {
 		}
 		// レイヤーをPlayerに戻して無敵解除にする
 		gameObject.layer = LayerMask.NameToLayer("Player");
+	}
+
+	//ダッシュ直後に攻撃。
+	void DashAttack() {
+		// Bullet01のゲームオブジェクトを生成してbulletObjectとする
+		GameObject dattack = GameObject.Instantiate (DashAttck)as GameObject;
+		//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
+		dattack.transform.position = muzzle.position;
 	}
 
 	private void OnCollisionStay(Collision collisionInfo) {

@@ -118,7 +118,7 @@ public class BattleManager : MonoBehaviour {
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
 				//プレイヤーの動きを止める
-				PlayerController.IsStop = true;
+				PlayerController.isStop = true;
 				if (DataManager.PlayerNo == 0) {
 					SoundManager.Instance.Play(18,gameObject);
 				}
@@ -135,7 +135,7 @@ public class BattleManager : MonoBehaviour {
 				Invoke("NextScene", ChangeTime);	
 				playerController.ItemCount = 0;		// シーン移動時グリーンスフィア取得数をリセット
 				//プレイヤーの動けるようにする
-				PlayerController.IsStop = false;
+				PlayerController.isStop = false;
 			}	
 
 			// ボス撃破時スター出現
@@ -193,7 +193,7 @@ public class BattleManager : MonoBehaviour {
 		}
 			SceneManager.LoadScene (StageManager.Instance.StageName [StageManager.Instance.StageNo]);
 			//クリア条件解除（プレイヤキャラの操作を元に戻す）
-			PlayerController.IsClear = false;
+			PlayerController.isClear = false;
 	}
 
 	//ゲームオー画面に移動
