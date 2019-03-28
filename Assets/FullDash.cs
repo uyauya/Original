@@ -5,16 +5,16 @@ using UnityEngine;
 //前方に瞬間移動　+　瞬間移動後に特殊攻撃
 public class FullDash : MonoBehaviour {
 
-	public Transform muzzle;					// 壁発射元
+	public Transform muzzle;					//DashAttackプレハブ発生元
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
 	private Vector3 velocity = Vector3.zero;
 	private Vector3 input = Vector3.zero;
 	public bool push = false;          		  	//最初に移動ボタンを押したかどうか
-	public float NextButtonDownTime;    	  	//次に移動ボタンが押されるまでの時間
+	public float NextButtonDownTime;    	  	//次に移動ボタンが押されるまでの制限時間
 	private float nowTime = 0f;         	  	//最初に移動ボタンが押されてからの経過時間
-	public float LimitAngle;            	  	//最初に押した方向との違いの限度角度
+	public float LimitAngle;            	  	//最初に押した方向との違いの限界角度
 	private Vector2 direction = Vector2.zero;   //移動キーの押した方向
 	private Pause pause;
 	public int PlayerNo;
@@ -23,7 +23,10 @@ public class FullDash : MonoBehaviour {
 	public GameObject DashAttck;	
 	public GameObject DAEffectPrefab;				
 	public GameObject DAEffectObject;
-	public static bool isDash = false;        	  		//ダッシュしているか
+	public static bool isDash = false;        	//ダッシュしているか
+	public float DangerAp = 500.0f;				//ダッシュ出来るようになるHP
+	public float DashDistanceX = 2.0f;			//ダッシュする横軸距離
+	public float DashDistanceZ = 2.0f;			//ダッシュする縦軸距離
 
 	public float DashDistance = 2.0f;			//瞬間移動距離
 	private ModelColorChange modelColorChange;	
@@ -43,8 +46,8 @@ public class FullDash : MonoBehaviour {
 		velocity = Vector3.zero;
 		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
 		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
-		//ポーズ中でなくプレイヤーのHPが500以下なら
-		if ((pause.isPause == false) && (PlayerAp.armorPoint <= 500.0f)) {
+		//ポーズ中でなくプレイヤーのHPがDangerAp)以下なら
+		if ((pause.isPause == false) && (PlayerAp.armorPoint <= DangerAp)) {
 			//　ガードしていないとき
 			if (!isDash) {
 				//　移動キーを押した
@@ -129,7 +132,7 @@ public class FullDash : MonoBehaviour {
 	//現在地より進行方向(direction側)より数歩先に瞬間移動。敵との接触は無効とする
 	void Dash() {
 		gameObject.layer = LayerMask.NameToLayer("Invincible");
-		//transform.position = new Vector3(x + DashDistance,y + DashDistance,z + DashDistance);
+		//transform.position = new Vector3(direction * DashDistanceX, 0, direction * DashDistanceZ);
 		gameObject.layer = LayerMask.NameToLayer("Player");
 	}
 
