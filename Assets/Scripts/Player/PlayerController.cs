@@ -8,45 +8,47 @@ using UnityEditor;
 public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
-	public float Force= 8;							// 移動速度
-	public float MaxForce = 10;						// 移動速度最大値
-	public float MaxBoostForce = 15;				// ブースト時の移動速度最大値
-	public float PlusForce= 0.1f;					// 移動速度加算数値
-	public float JumpForce = 4.0f;					// ジャンプ力
-	public float DoubleJump = 4.0f;					// 二段ジャンプ
-	public float BoostJumpForce = 6.0f;				// ブースト時のジャンプ力
-	public float HighPoint;							// ジャンプの高さ最大値
-	public float InvincibleTime;					// 無敵時間
-	public float gravity;							// 重力（ジャンプ時などに影響）
-	private Vector3 moveDirection = Vector3.zero;	 //プレイヤ位置方向ニュートラル設定
-	public float boostPoint;						// ブーストポイント
-	public float displayBoostPoint;					// ブーストポイント（画面表示用）
-	public int BpDown = 20;							// ブーストゲージ消費値
-	public float RecoverPoint = 0.2f;				// ブーストポイント回復値
-	public GameObject gaugeImage;					// ブーストゲージ（画面表示用）
-	public Text boostText;							// ブースト最大・現在数値（画面表示用）
-	Vector3 moveSpeed;								// プレイヤの速さ
-	private int JumpCount;							// ジャンプ回数計算用（二段ジャンプ処理に使用）
+	public float Force= 8;							//移動速度
+	public float MaxForce = 10;						//移動速度最大値
+	public float MaxBoostForce = 15;				//ブースト時の移動速度最大値
+	public float Deceleration = 2.2f;				//減速(オートブレーキ)
+	public float PlusForce= 0.1f;					//移動速度加算数値
+	public float JumpForce = 4.0f;					//ジャンプ力
+	public float DoubleJump = 4.0f;					//二段ジャンプ
+	public float BoostJumpForce = 6.0f;				//ブースト時のジャンプ力
+	public float HighPoint;							//ジャンプの高さ最大値
+	public float InvincibleTime;					//無敵時間
+	public float gravity;							//重力（ジャンプ時などに影響）
+	private Vector3 moveDirection = Vector3.zero;	//プレイヤ位置方向ニュートラル設定
+	public float boostPoint;						//ブーストポイント
+	public float displayBoostPoint;					//ブーストポイント（画面表示用）
+	public int BpDown = 20;							//ブーストゲージ消費値
+	public float RecoverPoint = 0.2f;				//ブーストポイント回復値
+	public GameObject gaugeImage;					//ブーストゲージ（画面表示用）
+	public Text boostText;							//ブースト最大・現在数値（画面表示用）
+	Vector3 moveSpeed;								//プレイヤの速さ
+	private int JumpCount;							//ジャンプ回数計算用（二段ジャンプ処理に使用）
 	private float interval = 2.0f;
 	private float timer = 0.0f;				
-	public int ItemCount;							// スフィア取得個数計算用
+	public int ItemCount;							//スフィア取得個数計算用
 	public int GetStar = 0;
 	public int GetBigStar = 0;
-	Vector3 targetSpeed = Vector3.zero; 			// 目標速度
-	Vector3 addSpeed = Vector3.zero;    			// 加算速度
-	public GameObject BpHealEffect;					// ブーストポイント回復アイテム取得時のエフェクト
+	Vector3 targetSpeed = Vector3.zero; 			//目標速度
+	Vector3 addSpeed = Vector3.zero;    			//加算速度
+	public GameObject BpHealEffect;					//ブーストポイント回復アイテム取得時のエフェクト
 	public int PlayerNo;							//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
-	public Transform EffectPoint;					// 回復等エフェクト発生元の位置取り
-	public GameObject BpHealPrefab;					// ブーストポイント回復エフェクト格納場所
+	public Transform EffectPoint;					//回復等エフェクト発生元の位置取り
+	public GameObject BpHealPrefab;					//ブーストポイント回復エフェクト格納場所
 	public GameObject BpHealObject;
-	public float BpHealPoint = 500;					// ブーストポイント回復値（アイテム取得時）
-	protected bool isInvincible;					// 無敵処理（ダメージ受けた際に使用）
+	public float BpHealPoint = 500;					//ブーストポイント回復値（アイテム取得時）
+	protected bool isInvincible;					//無敵処理（ダメージ受けた際に使用）
 	private ModelColorChange modelColorChange;
-	private bool onFloor = true;					// 床に設置しているかどうか
+	private bool onFloor = true;					//床に設置しているかどうか
 	private bool IsDownJumpButton = false;			//ジャンプ不可
-	public static bool isBoost;						// ブーストボタンをオン・オフ設定
+	public static bool isBoost;						//ブーストボタンをオン・オフ設定
 	public static bool isClear = false;				//ステージクリアしたかどうか
 	public static bool isStop = false;				//プレイヤーの動きを止めたい時に使う
+	public static bool isDash = false;				//ダッシュしているかどうか
 	public float DashDistance = 2.0f;				//ダッシュ（瞬間移動）距離
 	public float DashIdleTime = 1.0f;				//ダッシュ後のダッシュ操作不能時間
 	public GameObject DashAttck;	
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject DAEffectObject;
 	public Transform muzzle;						//DashAttackプレハブ発生元
 	public float DashBpDown = 1.0f;					//DashAttack起動時の消費ブーストポイント
+	public float DashRate = 2.0f;					//ダッシュ時の速度の掛け率
 
 	/*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -123,10 +126,12 @@ public class PlayerController : MonoBehaviour {
             return;
         }
 
-        //ブーストボタンが押されてブーストポイント残が1以上あればフラグを立てブーストポイントを消費
+//ブーストボタンが押されてブーストポイント残が1以上あればフラグを立てブーストポイントを消費
+//ブーストで速度、攻撃力UP。ブースト中ブーストボタンでダッシュアタック(瞬間移動)
         if (Input.GetButtonDown("Boost") && boostPoint > 0)
         {
-            boostPoint -= BpDown * Time.deltaTime;          //ブーストポイントをBpDown設定値分消費
+			Debug.Log("ブースト");
+			boostPoint -= BpDown * Time.deltaTime;          //ブーストポイントをBpDown設定値分消費
             isBoost = true;                                 //ブースト状態にする
             StartCoroutine("BoostCoroutine");               //コルーチン処理（下記参照）
                                                             // プレイヤのレイヤーをInvincibleに変更
@@ -142,11 +147,13 @@ public class PlayerController : MonoBehaviour {
 			if (Input.GetButtonDown("Fire3")) 				//ブースト中にFire3でブースト解除
 			{
 				isBoost = false;
+				Debug.Log("ブースト解除");
 			}
-			else if (Input.GetButtonDown("Boost"))
+			if (Input.GetButtonDown("Boost"))
 			{
+				isDash = true;
 				boostPoint -= DashBpDown;  
-				DashAttack ();
+				Debug.Log("ダッシュ");
 			}
 		}
         else
@@ -155,10 +162,10 @@ public class PlayerController : MonoBehaviour {
                                                             //gameObject.layer = LayerMask.NameToLayer("Player");
         }
 
-        //通常時とブースト時で変化
+        //ブースト時は
         if (isBoost)                                        //ブーストならMaxBoostForce値まで加速
         {
-            // ブースト時
+            // ブースト時、モーション変更、Attackpoint2倍に
             if (Force <= MaxBoostForce)
             {                   // ForceがMaxBoostForceの値以下なら
                 MaxForce += Time.deltaTime * PlusForce;     // MaxBoostForceまでMaxForce(通常最大速度)に加速
@@ -170,7 +177,7 @@ public class PlayerController : MonoBehaviour {
             //ブースト状態ならアニメーターをBoostに切り替える
             animator.SetBool("Boost", Input.GetButton("Boost") && boostPoint > 0);
         }
-        else
+        else 
         {
             if (Force <= MaxForce)
             {
@@ -182,8 +189,8 @@ public class PlayerController : MonoBehaviour {
             animator.SetBool("Boost", Input.GetButton("Boost") && boostPoint > 0);
         }
 
-        //ジャンプキーによる上昇（二段ジャンプ）
-        //Debug.Log("jump JumpCount:" + JumpCount);
+//ジャンプキーによる上昇（二段ジャンプ）
+		//Debug.Log("jump JumpCount:" + JumpCount);
         // ジャンプしてない（ジャンプボタン押されてない）状態で
         IsDownJumpButton = false;
         //ジャンプが押されて1回目なら（2回目でないなら）（一番下のコライダー処理が関係してる）
@@ -264,7 +271,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-	//一定時間間隔で常にUpdateする
+//一定時間間隔で常にUpdateする
 	void FixedUpdate()
 	{
 		//プレイヤー死亡条件になってたらDeadアニメーション
@@ -325,6 +332,15 @@ public class PlayerController : MonoBehaviour {
 		//モーションを切り替える
 		if (Input.GetAxis("Horizontal") > 0)	// 右移動（右が押されている場合）
 		{
+			//ダッシュアタック時
+			if (isDash == true)
+			{
+				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
+				animator.SetBool("Move", true);
+				gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+				DashAttack ();
+				isDash = false;
+			}
 			//ショットを撃っている状態（減速処理）
 			if (PlayerShoot.isShoot == true)
             {
@@ -348,6 +364,15 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (Input.GetAxis("Horizontal") < 0)	//左移動
 		{
+			//ダッシュアタック時
+			if (isDash == true)
+			{
+				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
+				animator.SetBool("Move", true);
+				gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+				DashAttack ();
+				isDash = false;
+			}
 			//ショットを撃っている状態（減速処理）
             if (PlayerShoot.isShoot == true)
             {
@@ -366,6 +391,15 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (Input.GetAxis("Vertical") > 0)	// 前移動（前が押されている場合）
 		{
+			//ダッシュアタック時
+			if (isDash == true)
+			{
+				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
+				animator.SetBool("Move", true);
+				gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+				DashAttack ();
+				isDash = false;
+			}
 			//ショットを撃っている状態（減速処理）
 			if (PlayerShoot.isShoot == true)
 			{
@@ -384,6 +418,15 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (Input.GetAxis("Vertical") < 0)	//後移動
 		{
+			//ダッシュアタック時
+			if (isDash == true)
+			{
+				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -18, 0), Time.deltaTime * 5.0f);
+				animator.SetBool("Move", true);
+				gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+				DashAttack ();
+				isDash = false;
+			}
 			//ショットを撃っている状態（減速処理）
 			if (PlayerShoot.isShoot == true)
 			{
@@ -406,7 +449,7 @@ public class PlayerController : MonoBehaviour {
 			// アッドフォースされた速度がMaxForce以上ならフォースにマイナス処理して減速（滑り止め）
 			// プレイヤの滑り具合がグラビティを変えることによって調節できるが、変更すると重い軽いでジャンプなどにも影響が出てくる
 			// Edit→Project Settings→Physicsで全体的な重力は変えられるがインスペクタ上でGravity変更した方がよい
-			if(Force >= MaxForce){ Force -= 2.2f; }
+			if(Force >= MaxForce){ Force -= Deceleration; }
 		}
 
 		
