@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
 	public float Deceleration = 2.2f;				//減速(オートブレーキ)
 	public float PlusForce= 0.1f;					//移動速度加算数値
 	public float JumpForce = 4.0f;					//ジャンプ力
+    public float DeGravity = -1.0f;
 	public float DoubleJump = 4.0f;					//二段ジャンプ
 	public float BoostJumpForce = 6.0f;				//ブースト時のジャンプ力
 	public float HighPoint;							//ジャンプの高さ最大値
@@ -57,8 +58,9 @@ public class PlayerController : MonoBehaviour {
 	public Transform muzzle;						//DashAttackプレハブ発生元
 	public float DashBpDown = 1.0f;					//DashAttack起動時の消費ブーストポイント
 	public float DashRate = 2.0f;					//ダッシュ時の速度の掛け率
+    int layerMask = ~0;
 
-	/*[CustomEditor(typeof(PlayerController))]
+    /*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
@@ -79,7 +81,7 @@ public class PlayerController : MonoBehaviour {
 			}
 	}*/
 
-	void Start()	//　ゲーム開始時の設定
+    void Start()	//　ゲーム開始時の設定
 	{
 		animator = GetComponent<Animator>();			// Animatorを使う場合は設定する
 		boostPoint = DataManager.BoostPointMax;			// ブーストポイントを最大値に設定
@@ -125,9 +127,16 @@ public class PlayerController : MonoBehaviour {
         {
             return;
         }
+        /*if(animator.SetBool("Move", false))
+        {
+            isDash = false;
+            rigidbody.constraints = RigidbodyConstraints.FreezePosition;
+            Debug.Log("急ブレーキ");
+        }*/
+        
 
-//ブーストボタンが押されてブーストポイント残が1以上あればフラグを立てブーストポイントを消費
-//ブーストで速度、攻撃力UP。ブースト中ブーストボタンでダッシュアタック(瞬間移動)
+        //ブーストボタンが押されてブーストポイント残が1以上あればフラグを立てブーストポイントを消費
+        //ブーストで速度、攻撃力UP。ブースト中ブーストボタンでダッシュアタック(瞬間移動)
         if (Input.GetButtonDown("Boost") && boostPoint > 0)
 		{
 			if(isBoost)
@@ -263,7 +272,7 @@ public class PlayerController : MonoBehaviour {
                 // 自重に-0.05ずつ下降値を加算して落下
                 moveDirection.y -= 0.05f * Time.deltaTime;
                 // 落下速度が-1以下なら-1にする（ふわっと落下させるための減速処理）
-                if (moveDirection.y <= -1f) moveDirection.y = -1f;
+                if (moveDirection.y <= DeGravity) moveDirection.y = DeGravity;
             }
         }
     }
@@ -337,7 +346,15 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-				gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                RaycastHit hit;
+                if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+               {
+                    transform.position = hit.point - transform.forward;
+                }else
+                {
+                    gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                }
+                //gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
 				DashAttack ();
 				isDash = false;
 			}
@@ -369,7 +386,16 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-				gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+                {
+                    transform.position = hit.point - transform.forward;
+                }
+                else
+                {
+                    gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                }
+                //gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
 				DashAttack ();
 				isDash = false;
 			}
@@ -396,7 +422,16 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-				gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+                {
+                    transform.position = hit.point - transform.forward;
+                }
+                else
+                {
+                    gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                }
+                //gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
 				DashAttack ();
 				isDash = false;
 			}
@@ -423,7 +458,16 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -18, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-				gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+                {
+                    transform.position = hit.point - transform.forward;
+                }
+                else
+                {
+                    gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                }
+                //gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
 				DashAttack ();
 				isDash = false;
 			}
@@ -447,16 +491,18 @@ public class PlayerController : MonoBehaviour {
 			// 何も押されていないニュートラル状態ではmove解除
 			animator.SetBool("Move", false);
 			isDash = false;
-			// アッドフォースされた速度がMaxForce以上ならフォースにマイナス処理して減速（滑り止め）
-			// プレイヤの滑り具合がグラビティを変えることによって調節できるが、変更すると重い軽いでジャンプなどにも影響が出てくる
-			// Edit→Project Settings→Physicsで全体的な重力は変えられるがインスペクタ上でGravity変更した方がよい
-			if(Force >= MaxForce){ Force -= Deceleration; }
-		}
+            // アッドフォースされた速度がMaxForce以上ならフォースにマイナス処理して減速（滑り止め）
+            // プレイヤの滑り具合がグラビティを変えることによって調節できるが、変更すると重い軽いでジャンプなどにも影響が出てくる
+            // Edit→Project Settings→Physicsで全体的な重力は変えられるがインスペクタ上でGravity変更した方がよい
+            if(Force >= MaxForce){ Force -= Deceleration; }
+            
 
-		
-		// ブーストやジャンプが入力されていなければブーストポイントが徐々に回復（！は～されなければという否定形）
-		// ブーストなし最大速度で回避値3倍
-		if (!Input.GetButton ("Boost") && Force == MaxForce) {
+        }
+
+
+        // ブーストやジャンプが入力されていなければブーストポイントが徐々に回復（！は～されなければという否定形）
+        // ブーストなし最大速度で回避値3倍
+        if (!Input.GetButton ("Boost") && Force == MaxForce) {
 			boostPoint += 3 * RecoverPoint;
 		} else if (!Input.GetButton ("Boost") && Force < MaxForce) {
 			boostPoint += 1 * RecoverPoint;
