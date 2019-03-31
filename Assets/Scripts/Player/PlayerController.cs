@@ -55,8 +55,10 @@ public class PlayerController : MonoBehaviour {
 	public GameObject DashAttck;	
 	public GameObject DAEffectPrefab;				
 	public GameObject DAEffectObject;
-	public Transform muzzle;						//DashAttackプレハブ発生元
-	public float DashBpDown = 1.0f;					//DashAttack起動時の消費ブーストポイント
+    public GameObject ClearWall;
+    public Transform muzzle;						//DashAttackプレハブ発生元
+    public Transform Attack;
+    public float DashBpDown = 1.0f;					//DashAttack起動時の消費ブーストポイント
 	public float DashRate = 2.0f;					//ダッシュ時の速度の掛け率
     int layerMask = ~0;
 
@@ -275,10 +277,31 @@ public class PlayerController : MonoBehaviour {
                 if (moveDirection.y <= DeGravity) moveDirection.y = DeGravity;
             }
         }
+
+        // 何も押されていないニュートラル状態ではmove解除
+        /*if ((Input.GetAxis("Horizontal") == 0) && (Input.GetAxis("Vertical") == 0))
+        {
+            animator.SetBool("Move", false);
+        //if(animator.SetBool("Move", false)) {
+            isDash = false;
+            // アッドフォースされた速度がMaxForce以上ならフォースにマイナス処理して減速（滑り止め）
+            // プレイヤの滑り具合がグラビティを変えることによって調節できるが、変更すると重い軽いでジャンプなどにも影響が出てくる
+            // Edit→Project Settings→Physicsで全体的な重力は変えられるがインスペクタ上でGravity変更した方がよい
+            //速度がMaxForceより上(ブースト状態)なら減速
+            if (Force > MaxForce)
+            {
+                Force -= Deceleration;
+                //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            }
+            else if (Force > 8.0f)
+            {
+                CrearWall();
+            }
+        }*/
     }
 
-//一定時間間隔で常にUpdateする
-	void FixedUpdate()
+    //一定時間間隔で常にUpdateする
+    void FixedUpdate()
 	{
 		//プレイヤー死亡条件になってたらDeadアニメーション
 		if (BattleManager.PlayerDead == true)
@@ -403,8 +426,9 @@ public class PlayerController : MonoBehaviour {
             if (PlayerShoot.isShoot == true)
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 2.0f);
-				animator.SetBool("Move", true);
-				gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+                animator.SetBool("Move", true);
+                gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+                
             }
 			//ショット撃っていない状態
             else
@@ -412,9 +436,9 @@ public class PlayerController : MonoBehaviour {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
                 animator.SetBool("Move", true);
                 gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
-                //Debug.Log (Force);
+                
             }
-		}
+        }
 		else if (Input.GetAxis("Vertical") > 0)	// 前移動（前が押されている場合）
 		{
 			//ダッシュアタック時
@@ -434,7 +458,8 @@ public class PlayerController : MonoBehaviour {
                 //gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
 				DashAttack ();
 				isDash = false;
-			}
+                
+            }
 			//ショットを撃っている状態（減速処理）
 			if (PlayerShoot.isShoot == true)
 			{
@@ -448,7 +473,8 @@ public class PlayerController : MonoBehaviour {
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
 				gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
-			}
+                //Debug.Log("速度" + Force);
+            }
 
 		}
 		else if (Input.GetAxis("Vertical") < 0)	//後移動
@@ -488,14 +514,28 @@ public class PlayerController : MonoBehaviour {
 		}
 		else
 		{
-			// 何も押されていないニュートラル状態ではmove解除
-			animator.SetBool("Move", false);
+            // 何も押されていないニュートラル状態ではmove解除
+            animator.SetBool("Move", false);
 			isDash = false;
             // アッドフォースされた速度がMaxForce以上ならフォースにマイナス処理して減速（滑り止め）
             // プレイヤの滑り具合がグラビティを変えることによって調節できるが、変更すると重い軽いでジャンプなどにも影響が出てくる
             // Edit→Project Settings→Physicsで全体的な重力は変えられるがインスペクタ上でGravity変更した方がよい
-            if(Force >= MaxForce){ Force -= Deceleration; }
-            
+            if (onFloor == false)
+            {
+                return;
+            } else if (onFloor == true)
+            {
+                if (Force > MaxForce)
+                {
+                    Force -= Deceleration;
+                    //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                }
+                else
+                {
+                    Vector3 v = GetComponent<Rigidbody>().velocity;
+                    GetComponent<Rigidbody>().velocity = new Vector3(0, v.y, 0);
+                }
+            }
 
         }
 
@@ -658,12 +698,20 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	//ダッシュ直後に攻撃。
-	void DashAttack() {
+	void DashAttack()
+    {
 		// Bullet01のゲームオブジェクトを生成してbulletObjectとする
 		GameObject dattack = GameObject.Instantiate (DashAttck)as GameObject;
 		//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 		dattack.transform.position = muzzle.position;
 	}
+
+    /*void CrearWall()
+    {
+        GameObject clearWall = GameObject.Instantiate(ClearWall) as GameObject;
+        clearWall.transform.position = Attack.position;
+        Debug.Log("かべ");
+    }*/
 
 	private void OnCollisionStay(Collision collisionInfo) {
 	}

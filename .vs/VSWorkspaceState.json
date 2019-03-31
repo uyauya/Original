@@ -3,8 +3,8 @@
     "",
     "\\Assets",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Enemy"
+    "\\Assets\\Scripts\\Player"
   ],
-  "SelectedNode": "\\Assets\\Scripts\\Enemy\\Zombie1.cs",
+  "SelectedNode": "\\Assets\\Scripts\\Player\\PlayerShoot.cs",
   "PreviewInSolutionExplorer": false
 }
