@@ -153,9 +153,11 @@ public class PlayerController : MonoBehaviour {
 			else
 			{
 				Debug.Log("ブースト");
-				boostPoint -= BpDown * Time.deltaTime;      //ブーストポイントをBpDown設定値分消費
-            	isBoost = true;                             //ブースト状態にする
-            	StartCoroutine("BoostCoroutine");           //コルーチン処理（下記参照）
+				isBoost = true;                             //ブースト状態にする
+				Boost();
+				//boostPoint -= BpDown * Time.deltaTime;      //ブーストポイントをBpDown設定値分消費
+				//Debug.Log("BPダウン" + BpDown);
+            	//StartCoroutine("BoostCoroutine");           //コルーチン処理（下記参照）
 				                                          	// プレイヤのレイヤーをInvincibleに変更
                                                             // Edit→ProjectSetting→Tags and LayersでInvicibleを追加
                                                             // Edit→ProjectSetting→Physicsで衝突させたくない対象と交差している所の✔を外す
@@ -706,12 +708,12 @@ public class PlayerController : MonoBehaviour {
 		dattack.transform.position = muzzle.position;
 	}
 
-    /*void CrearWall()
+    void Boost()
     {
-        GameObject clearWall = GameObject.Instantiate(ClearWall) as GameObject;
-        clearWall.transform.position = Attack.position;
-        Debug.Log("かべ");
-    }*/
+        boostPoint -= BpDown * Time.deltaTime;      //ブーストポイントをBpDown設定値分消費
+		Debug.Log("BPダウン" + BpDown);
+		//StartCoroutine("BoostCoroutine");  
+    }
 
 	private void OnCollisionStay(Collision collisionInfo) {
 	}
