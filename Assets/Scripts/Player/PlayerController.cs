@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 	public float Deceleration = 2.2f;				//減速(オートブレーキ)
 	public float PlusForce= 0.1f;					//移動速度加算数値
 	public float JumpForce = 4.0f;					//ジャンプ力
-    public float DeGravity = -1.0f;
+    public float DeGravity = -1.0f;					//重力軽減用
 	public float DoubleJump = 4.0f;					//二段ジャンプ
 	public float BoostJumpForce = 6.0f;				//ブースト時のジャンプ力
 	public float HighPoint;							//ジャンプの高さ最大値
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 moveDirection = Vector3.zero;	//プレイヤ位置方向ニュートラル設定
 	public float boostPoint;						//ブーストポイント
 	public float displayBoostPoint;					//ブーストポイント（画面表示用）
-	public int BpDown = 20;							//ブーストゲージ消費値
+	public int BpDown = 20;							//ブーストゲージ消費値（ブースト時）
 	public float RecoverPoint = 0.2f;				//ブーストポイント回復値
 	public GameObject gaugeImage;					//ブーストゲージ（画面表示用）
 	public Text boostText;							//ブースト最大・現在数値（画面表示用）
@@ -40,12 +40,12 @@ public class PlayerController : MonoBehaviour {
 	public int PlayerNo;							//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public Transform EffectPoint;					//回復等エフェクト発生元の位置取り
 	public GameObject BpHealPrefab;					//ブーストポイント回復エフェクト格納場所
-	public GameObject BpHealObject;
+	public GameObject BpHealObject;					//ブーストポイント回復エフェクト発生用
 	public float BpHealPoint = 500;					//ブーストポイント回復値（アイテム取得時）
 	protected bool isInvincible;					//無敵処理（ダメージ受けた際に使用）
-	private ModelColorChange modelColorChange;
+	private ModelColorChange modelColorChange;		//プレイヤー点滅処理用
 	private bool onFloor = true;					//床に設置しているかどうか
-	private bool IsDownJumpButton = false;			//ジャンプ不可
+	private bool IsDownJumpButton = false;			//ジャンプ不可（二段ジャンプ使用時）
 	public static bool isBoost;						//ブーストボタンをオン・オフ設定
 	public static bool isClear = false;				//ステージクリアしたかどうか
 	public static bool isStop = false;				//プレイヤーの動きを止めたい時に使う
@@ -55,9 +55,9 @@ public class PlayerController : MonoBehaviour {
 	public GameObject DashAttck;	
 	public GameObject DAEffectPrefab;				
 	public GameObject DAEffectObject;
-    public GameObject ClearWall;
-    public Transform muzzle;						//DashAttackプレハブ発生元
-    public Transform Attack;
+    //public GameObject ClearWall;
+    public Transform muzzle;						
+	public Transform Attack;						//DashAttackプレハブ発生元
     public float DashBpDown = 1.0f;					//DashAttack起動時の消費ブーストポイント
 	public float DashRate = 2.0f;					//ダッシュ時の速度の掛け率
     int layerMask = ~0;
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour {
 		//ステージクリア条件かストップ条件で動けなくする
 		if ((isClear == true) || (isStop == true))
 		{
-			return;
+			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 		}
 		//ProjectSettigでJumpに割り当てたキーが押されたら
 		if (Input.GetButtonDown("Jump"))
@@ -123,46 +123,43 @@ public class PlayerController : MonoBehaviour {
         {
             animator.SetBool("Dead", true);
         }
-
-        //ステージクリア条件かストップ条件で動けなくする
-        if ((isClear == true) || (isStop == true))
-        {
-            return;
-        }
     
-        //ブーストボタンが押されてブーストポイント残が1以上あればフラグを立てブーストポイントを消費
+        //ブーストボタンが押されてブーストポイント残が1以上あれば
         //ブーストで速度、攻撃力UP。ブースト中ブーストボタンでダッシュアタック(瞬間移動)
         if (Input.GetButtonDown("Boost") && boostPoint > 0)
 		{
+			//既にブースト中だったら
 			if(isBoost)
         	{
+				//再度ブーストボタン押してダッシュ（下記参照）
 				if (Input.GetButtonDown("Boost"))
 				{
-					isDash = true;
+					isDash = true;							//ダッシュ切り替え
 					Debug.Log("ダッシュ");
 					boostPoint -= DashBpDown;  
 				}
 			}
+			//それ以外（何も押さなければ）ブーストを維持
 			else
 			{
 				Debug.Log("ブースト");
-				isBoost = true;                             //ブースト状態にする
-            	StartCoroutine("BoostCoroutine");           //コルーチン処理（下記参照）
-				                                          	// プレイヤのレイヤーをInvincibleに変更
-                                                            // Edit→ProjectSetting→Tags and LayersでInvicibleを追加
-                                                            // Edit→ProjectSetting→Physicsで衝突させたくない対象と交差している所の✔を外す
-                                                            // ここではEnemyと衝突させたくない（すり抜ける）為、Enemeyのレイヤーも追加
-                                                            // EnemeyとPlayerの交差してる✔を外す（プレイヤのLayerをPlayer、EnemyのLayerをEnemyに設定しておく）
-                                                            //gameObject.layer = LayerMask.NameToLayer("Invincible");
-                                           					//StartCoroutine ("BoostCoroutine");
+				isBoost = true;                             		//ブースト切り替え
+            	StartCoroutine("BoostCoroutine");           		//コルーチン処理（下記参照）
+				                                          			// プレイヤのレイヤーをInvincibleに変更
+                                                           		 	// Edit→ProjectSetting→Tags and LayersでInvicibleを追加
+                                                            		// Edit→ProjectSetting→Physicsで衝突させたくない対象と交差している所の✔を外す
+                                                            		// ここではEnemyと衝突させたくない（すり抜ける）為、Enemeyのレイヤーも追加
+                                                            		// EnemeyとPlayerの交差してる✔を外す（プレイヤのLayerをPlayer、EnemyのLayerをEnemyに設定しておく）
+                                                            		//gameObject.layer = LayerMask.NameToLayer("Invincible");
+                                           							//StartCoroutine ("BoostCoroutine");
 					// ブースト時、モーション変更、Attackpoint2倍に
-					if (Force <= MaxBoostForce)
-					{                   // ForceがMaxBoostForceの値以下なら
+					if (Force <= MaxBoostForce)						// ForceがMaxBoostForceの値以下なら
+					{                   
 						MaxForce += Time.deltaTime * PlusForce;     // MaxBoostForceまでMaxForce(通常最大速度)に加速
 						Force = Mathf.Min(Force, MaxBoostForce);    // ForceがMaxBoostForceの値を超えない
-						//Debug.Log (Force);
-						//ブースト時プレイヤー攻撃値2倍に
-						DataManager.AttackPoint *= 2;
+						//Debug.Log ("速度" + Force);
+						
+						DataManager.AttackPoint *= 2;				//ブースト時プレイヤー攻撃値2倍に
 					}
 					//ブースト状態ならアニメーターをBoostに切り替える
 					if(isBoost)
@@ -174,22 +171,29 @@ public class PlayerController : MonoBehaviour {
 		}
         if (isBoost)
         {
-            boostPoint -= BpDown * Time.deltaTime;      //ブーストポイントをBpDown設定値分消費
-            Debug.Log("BPダウン" + BpDown);
+            boostPoint -= BpDown * Time.deltaTime;      //ブーストポイントをBpDown設定値分徐々に消費
+            //Debug.Log("BPダウン" + BpDown);
         }
-        if (Input.GetButtonDown("Fire3")) 				//ブースト中にFire3でブースト解除
+		//ブースト中にFire3でブースト解除
+        if (Input.GetButtonDown("Fire3")) 				
 		{
+			//ブースト中なら
 			if(isBoost)
 			{
+				//ブースト解除
 				(isBoost) = false;
 				Debug.Log("ブースト解除");
+				//移送速度がMaxForce以下ならMaxForceになるまで加速（通常移動）
 				if (Force <= MaxForce)
 				{
 					Force += Time.deltaTime * PlusForce;
+					//ForceがMaxForceを超えない
 					Force = Mathf.Min(Force, MaxForce);
+					//ブースト時2倍にしたプレイヤーの攻撃力を1倍に戻す
 					DataManager.AttackPoint *= 1;
 					//Debug.Log (Force);
 				}
+				//通常状態に戻したので、再びブースト起動条件に戻す
 				animator.SetBool("Boost", Input.GetButtonDown("Boost") && boostPoint > 0);
 			}
 		}
@@ -201,18 +205,20 @@ public class PlayerController : MonoBehaviour {
         //ジャンプが押されて1回目なら（2回目でないなら）（一番下のコライダー処理が関係してる）
         if (Input.GetButtonDown("Jump") == true && JumpCount < 2)
         {
-            // ジャンプ数加算
+            // ジャンプ数加算（2段ジャンプなので2回まで加算できる）
             JumpCount++;
             //Debug.Log(JumpCount);
             // ジャンプの上昇力を設定( v.x, JumpForce, v.z )で縦方向に加算
             // Rigidbodyのvelocityをｖと略す。
             Vector3 v = GetComponent<Rigidbody>().velocity;
-            // y方向にJumpForce値加算（ジャンプ）
+            // y方向にJumpForce値加算（通常ジャンプ）
             GetComponent<Rigidbody>().velocity = new Vector3(v.x, JumpForce, v.z);
             //ジャンプモーションに切り替える
             animator.SetBool("Jump", true);
+			//ジャンプカウントが2だったらy方向にDoubleJump値加算（二段ジャンプ）
             if(JumpCount == 2){
 				GetComponent<Rigidbody>().velocity = new Vector3( v.x, DoubleJump, v.z );
+				//二段ジャンプモーションに切り替える
 				animator.SetBool("DoubleJump", true);
 				//Debug.Log("ダブル");
 			} else {
@@ -233,11 +239,12 @@ public class PlayerController : MonoBehaviour {
             {
                 SoundManager.Instance.Play(17, gameObject);
             }
-            // ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
         }
+		// ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
         else if (Input.GetButton("Jump") && (Input.GetButton("Boost") && boostPoint > 10))
         {
             Vector3 v = GetComponent<Rigidbody>().velocity;
+			// y方向にBoostJumpForce値加算（ブーストジャンプ）
             GetComponent<Rigidbody>().velocity = new Vector3(v.x, BoostJumpForce, v.z);
             animator.SetBool("BoostUp", Input.GetButton("Jump"));
             if (PlayerNo == 0)
@@ -270,7 +277,7 @@ public class PlayerController : MonoBehaviour {
             {
                 // 自重に-0.05ずつ下降値を加算して落下
                 moveDirection.y -= 0.05f * Time.deltaTime;
-                // 落下速度が-1以下なら-1にする（ふわっと落下させるための減速処理）
+				// 落下速度がDeGravity以下ならDeGravityにする（ふわっと落下させるための減速処理）
                 if (moveDirection.y <= DeGravity) moveDirection.y = DeGravity;
             }
         }
@@ -288,16 +295,18 @@ public class PlayerController : MonoBehaviour {
 		//ステージクリア条件かストップ条件で動けなくする
 		if ((isClear == true) || (isStop == true))
 		{
-			return;
+			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 		}
 
 		//通常時とブースト時で変化
 		if (isBoost)										//ブーストならMaxBoostForce値まで加速
 		{
 			// ブースト時
-			if (Force <= MaxBoostForce) {					// ForceがMaxBoostForceの値以下なら
+			if (Force <= MaxBoostForce) 					// ForceがMaxBoostForceの値以下なら
+			{					
 				MaxForce += Time.deltaTime * PlusForce;		// MaxBoostForceまでMaxForce(通常最大速度)に加速
 				Force = Mathf.Min(Force, MaxBoostForce);	// ForceがMaxBoostForceの値を超えない
+				animator.SetBool("Boost",true);
 				//Debug.Log (Force);
 			}
 			//ブースト状態ならアニメーターをBoostに切り替える
@@ -308,7 +317,9 @@ public class PlayerController : MonoBehaviour {
 		}
 		else　　　　　　　　　　　　　　　　　　　　　　　　　　
 		{
-			if (Force <= MaxForce) {					
+			//通常状態
+			if (Force <= MaxForce) 
+			{					
 				Force += Time.deltaTime * PlusForce;	
 				Force = Mathf.Min(Force, MaxForce);		
 				//Debug.Log (Force);
@@ -472,20 +483,26 @@ public class PlayerController : MonoBehaviour {
 		{
             // 何も押されていないニュートラル状態ではmove解除
             animator.SetBool("Move", false);
+			//進行方向キー押していなければダッシュもしない）
 			isDash = false;
             // アッドフォースされた速度がMaxForce以上ならフォースにマイナス処理して減速（滑り止め）
             // プレイヤの滑り具合がグラビティを変えることによって調節できるが、変更すると重い軽いでジャンプなどにも影響が出てくる
             // Edit→Project Settings→Physicsで全体的な重力は変えられるがインスペクタ上でGravity変更した方がよい
+
+			//地上にいなければ（空中）何もしない
             if (onFloor == false)
             {
                 return;
+			//地上にいれば
             } else if (onFloor == true)
             {
+				//移動速度がMaxForceより上（ブースト時）なら現在速度からDeceleration値引いて減速処理
                 if (Force > MaxForce)
                 {
                     Force -= Deceleration;
                     //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 }
+				//他、通常移動時ならその場に配置（即停止）
                 else
                 {
                     Vector3 v = GetComponent<Rigidbody>().velocity;
@@ -496,8 +513,8 @@ public class PlayerController : MonoBehaviour {
         }
 
 
-        // ブーストやジャンプが入力されていなければブーストポイントが徐々に回復（！は～されなければという否定形）
-        // ブーストなし最大速度で回避値3倍
+        // 非ブースト時ブーストポイントが徐々に回復（！は～されなければという否定形）
+		// 非ブースト時（通常移動時）最大速度で回避値3倍
         /*if (!Input.GetButton ("Boost") && Force == MaxForce) {
 			boostPoint += 3 * RecoverPoint;
 		} else if (!Input.GetButton ("Boost") && Force < MaxForce) {
@@ -511,7 +528,7 @@ public class PlayerController : MonoBehaviour {
         {
             boostPoint += 1 * RecoverPoint;
         }
-        // ブーストポイントが最大以上にはならない
+        //ブーストポイントが最大以上にはならない
         //ブーストポイント使用 ＝ 最大値を超えない(ポイントが,0から,マックスまで); の処理
         boostPoint = Mathf.Clamp (boostPoint, 0, DataManager.BoostPointMax);
 
@@ -522,29 +539,26 @@ public class PlayerController : MonoBehaviour {
 		//motionBlurValue = Mathf.Clamp (motionBlurValue, 0, 5);
 		//Camera.main.GetComponent<CameraMotionBlur> ().velocityScale = motionBlurValue;
 
-		//ブーストゲージの伸縮
-		// ゲージの最大以上には上がらない
-		//gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / DataManager.BoostPointMax, 1, 1);
+		//ブーストゲージの伸縮（ゲージの最大以上には上がらない）
 		gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / DataManager.BoostPointMax, 1, 1);
-		//gaugeImage.transform.localScale = new Vector3(0.5f,1,1);
 	}
 
-
+	//アイテム接触（取得）時処理
 	private void OnCollisionEnter (Collision collider)
 	{
 		// アイテム２タグの物に接触したら
 		if (collider.gameObject.tag == "Item2") {
+			// 既にboostPointがMaxだったら何もしない（これ以上増えない）
 			if (boostPoint == DataManager.BoostPointMax) return;
-			// BpHealObjectを発生
+			// BpHealObjectをEffectPoint.positionに発生
+			//プレイヤーオブジェクトの子オブジェクトにするとプレイヤーにエフェクトがかかったように見える
 			BpHealObject = Instantiate (BpHealPrefab, EffectPoint.position, Quaternion.identity);
 			BpHealObject.transform.SetParent (EffectPoint);
 			// アニメーターをItemGetに変更（SetTriggerなので自動的に元に戻る）
 			animator.SetTrigger ("ItemGet");
-			// ブーストポイント回復
+			// BpHealPoint値分ブーストポイント回復
 			boostPoint += BpHealPoint;
-			// 既にboostPointがMaxだったら何もしない
-			if (boostPoint == DataManager.BoostPointMax) return;
-			// boostPointがMax以下の時の声出し
+			// 取得時boostPointがMax以下の時の声出し
 			if (boostPoint < DataManager.BoostPointMax) {
 				if (PlayerNo == 0) {
 					SoundManager.Instance.Play (18, gameObject);
@@ -555,7 +569,7 @@ public class PlayerController : MonoBehaviour {
 				if (PlayerNo == 2) {
 					SoundManager.Instance.Play (20, gameObject);
 				}
-			// boostPointがMaxになった時の声出し
+			// 取得時boostPointがMaxになった時の声出し
 			} else if (boostPoint >= DataManager.BoostPointMax) {
 				if (PlayerNo == 0) {
 					SoundManager.Instance.PlayDelayed (36, 1.1f, gameObject);
