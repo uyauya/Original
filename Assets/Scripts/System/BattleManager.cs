@@ -29,8 +29,9 @@ public class BattleManager : MonoBehaviour {
 	public int Count;					 	// ステージ移行する為のアイテム取得個
 	public int PlayerNo;				 	//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public static bool PlayerDead = false;	//プレイヤキャラが死亡したかどうか
+    
 
-	void Start () {
+    void Start () {
         animator = GetComponent<Animator>();            // Animatorを使う場合は設定する
         ScoreText.text = "Score:0";
 		timer = 0;
@@ -52,8 +53,13 @@ public class BattleManager : MonoBehaviour {
     }
 
 	void Update () {
-		// 得点をテキスト形式で画面に表示
-		ScoreText.text = DataManager.Score.ToString();
+
+        if (Input.GetButtonUp("Fire1"))
+        {
+            DataManager.PlayerChange = true;
+        }
+        // 得点をテキスト形式で画面に表示
+            ScoreText.text = DataManager.Score.ToString();
 		switch (battleStatus) {
 		
 		case BATTLE_START:

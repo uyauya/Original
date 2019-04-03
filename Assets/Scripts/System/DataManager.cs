@@ -21,9 +21,10 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 	public static string SceneName;		　//ステージ名
 	public static int ClearScene;		　//クリアしたステージ（判定用）
 	public static bool FarstLevel;		　//ゲーム開始時のプレイヤーレベル
+    public static bool PlayerChange = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		// シーン移動してもプレイヤーのステータスを残しておく
 		// レベルでステータスを管理する
 		DontDestroyOnLoad (this.gameObject);
