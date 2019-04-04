@@ -4,33 +4,33 @@ using System.Collections;
 //MAP自動作成用（MaAxis、MapArrayスクリプト連動）
 //キャラクタが進むにつれて前方に足場を自動的に作っていく）
 public class MapCreator : MonoBehaviour {
-	public int				MAP_SIZE_X = 7;		// マップ横幅 (偶数指定の場合は、自動的に奇数にされる)
-	public int				MAP_SIZE_Z = 10;	// マップ奥幅 (偶数指定の場合は、自動的に奇数にされる)
-	public GameObject		player;				// プレイヤーオブジェクト格納用
-    public GameObject OriginalChara;
+	public int				MAP_SIZE_X = 7;		//マップ横幅 (偶数指定の場合は、自動的に奇数にされる)
+	public int				MAP_SIZE_Z = 10;	//マップ奥幅 (偶数指定の場合は、自動的に奇数にされる)
+	public GameObject		player;				//プレイヤーオブジェクト格納用
+    public GameObject OriginalChara;			//ステージ上に存在するPlayer判別（キャラチェンジ用）
 
-    private MapSize		    size;				// マップサイズ型の変数
-	private MapAxis			playerAxis;			// プレイヤー座標を扱うPlayerAxis型の変数
-	private MapArrayBlock	mapBlock;			// 地面用MapArrayBlock型の変数
-	private MapArrayFloor	mapFloor;			// 地上用MapArrayFloor型の変数
+    private MapSize		    size;				//マップサイズ型の変数
+	private MapAxis			playerAxis;			//プレイヤー座標を扱うPlayerAxis型の変数
+	private MapArrayBlock	mapBlock;			//地面用MapArrayBlock型の変数
+	private MapArrayFloor	mapFloor;			//地上用MapArrayFloor型の変数
 	private GameObject[]	tagObjects;
-	public	GameObject[]	prefab_BL;			// 床ブロック格納用のプレファブ配列
-	public	GameObject[]	prefab_WALL;		// 壁ブロック格納用のプレファブ配列
-	public	GameObject[]	prefab_enemy;		// 敵の格納用のプレファブ配列
-	public float[] ApperanceRate;				// 敵の出現割合
-	public float EmitterTime = 1.0f;			// 敵が出現するまでの時間
-	public	GameObject[]	prefab_BreakBlock;	// 壊せるブロック格納用のプレファブ配列
+	public	GameObject[]	prefab_BL;			//床ブロック格納用のプレファブ配列
+	public	GameObject[]	prefab_WALL;		//壁ブロック格納用のプレファブ配列
+	public	GameObject[]	prefab_enemy;		//敵の格納用のプレファブ配列
+	public float[] ApperanceRate;				//敵の出現割合
+	public float EmitterTime = 1.0f;			//敵が出現するまでの時間
+	public	GameObject[]	prefab_BreakBlock;	//壊せるブロック格納用のプレファブ配列
 	public	GameObject[]	prefab_BombPoint;
-	private float timer = 0.0f;					// グリーンスフィア取得計算用???
-	private float interval = 2.0f;				// グリーンスフィア取得計算用???
+	private float timer = 0.0f;					//グリーンスフィア取得計算用???
+	private float interval = 2.0f;				//グリーンスフィア取得計算用???
 	public GameObject[] 	Prefab_Player;
 	public	GameObject		Boss02;				
 
 	// 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはDataManagerクリプトで判別・管理）
 	void Awake(){
 		player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
-        OriginalChara = player;
-
+		OriginalChara = player;			//作成いたプレイヤーをOriginalChara
+		//OriginalChara.SetActive (true);
     }
 
 	void Start(){
@@ -57,10 +57,16 @@ public class MapCreator : MonoBehaviour {
 	
 	// プレイヤーが進むにつれmapBlock生成
 	void Update(){
-        if(DataManager.PlayerChange == true)
+        /*if(DataManager.PlayerChange == true)
         {
-            
-        }
+			OriginalChara.SetActive (false);
+			dobj = FindGameObjectsWithTag("Player"));	//プレイヤー削除
+			Destroy("dobj");
+			if(DataManager.PlayerNo == 0)				//新たなプレイヤー発生
+			{
+			player = Instantiate (Prefab_Player [DataManager.PlayerNo = 4]);
+			}
+        }*/
 
         playerAxis.updateAxis ();						// プレイヤー座標を更新
 		mapBlock.renewal ();							// マップ(床)の更新

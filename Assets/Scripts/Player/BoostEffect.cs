@@ -8,7 +8,7 @@ public class BoostEffect : MonoBehaviour {
 	public GameObject boostLight;
 	//public GameObject DashLight;
 	private bool FlagBoost = false;
-	//private bool DashBoost = false;
+	//private bool FlagDash = false;
 
 	void Start () 
 	{
@@ -28,7 +28,7 @@ public class BoostEffect : MonoBehaviour {
 		/*else if (PlayerController.isDash)
 		{
 			DashBoost = true;
-			DashLight.SetActive (FlagBoost);
+			DashLight.SetActive (FlagDash);
 			FlagBoost = false;
 			boostLight.SetActive (false);
 		}

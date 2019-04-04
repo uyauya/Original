@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,6 +46,7 @@ public class PlayerLevel : MonoBehaviour
 		new UserParam(0,09,228,5300,5340,52000, string.Empty,0),	//Level09
 		new UserParam(2,09,320,4730,3900,52000, string.Empty,0),	//Level09
 		new UserParam(1,09,148,6860,4430,52000, string.Empty,0),	//Level09
+		//new UserParam(4,09,1500,18000,15000,52000, string.Empty,0),	//Level09	//キャラチェンジ用
 
 	};
 

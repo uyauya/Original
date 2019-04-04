@@ -54,7 +54,7 @@ public class BattleManager : MonoBehaviour {
 
 	void Update () {
 
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire4"))
         {
             DataManager.PlayerChange = true;
         }
