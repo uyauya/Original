@@ -8,7 +8,7 @@ public class MapCreator : MonoBehaviour {
 	public int				MAP_SIZE_Z = 10;	//マップ奥幅 (偶数指定の場合は、自動的に奇数にされる)
 	public GameObject		player;				//プレイヤーオブジェクト格納用
     public GameObject OriginalChara;			//ステージ上に存在するPlayer判別（キャラチェンジ用）
-
+    //public GameObject Utc_sum_humanoid;
     private MapSize		    size;				//マップサイズ型の変数
 	private MapAxis			playerAxis;			//プレイヤー座標を扱うPlayerAxis型の変数
 	private MapArrayBlock	mapBlock;			//地面用MapArrayBlock型の変数
@@ -57,16 +57,15 @@ public class MapCreator : MonoBehaviour {
 	
 	// プレイヤーが進むにつれmapBlock生成
 	void Update(){
-        /*if(DataManager.PlayerChange == true)
+        if(DataManager.PlayerChange == true)
         {
 			OriginalChara.SetActive (false);
-			dobj = FindGameObjectsWithTag("Player"));	//プレイヤー削除
-			Destroy("dobj");
 			if(DataManager.PlayerNo == 0)				//新たなプレイヤー発生
 			{
-			player = Instantiate (Prefab_Player [DataManager.PlayerNo = 4]);
+                Destroy(OriginalChara);
+            player = Instantiate (Prefab_Player [DataManager.PlayerNo = 3]);
 			}
-        }*/
+        }
 
         playerAxis.updateAxis ();						// プレイヤー座標を更新
 		mapBlock.renewal ();							// マップ(床)の更新

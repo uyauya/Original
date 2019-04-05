@@ -31,7 +31,6 @@ public class PlayerShoot : MonoBehaviour {
 	public float AddAttackRate = 2.5f;          // 追加攻撃比率
 	private float NormalSize = 1.0F;
 	public float BigSize;
-	//public float BiggerTime;					// 溜め攻撃拡大率
 	private Animator animator;
 	private Rigidbody rb;
 	public Image gaugeImage;
