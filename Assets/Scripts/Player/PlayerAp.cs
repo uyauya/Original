@@ -7,37 +7,37 @@ using UnityEngine.UI;
 // TODO ※プレイヤーのアニメーション処理
 public class PlayerAp : MonoBehaviour {
 
-	public static float armorPoint;		// プレイヤー体力
-	public int enemyAttack;				// 敵の攻撃値
-	public float poisonAttack;			// 毒
+	public static float armorPoint;			// プレイヤー体力
+	public int enemyAttack;					// 敵の攻撃値
+	public float poisonAttack;				// 毒
 	public Text armorText;
-	float displayArmorPoint;			// 画面表示用HPゲージ			
-	public Color MyGreen;				// RGBA(000,240,000,255) ※Aは透明度
-	public Color MyWhite;				// RGBA(255,255,255,255)
-	public Color MyYellow;				// RGBA(255,206,000,255)
-	public Color MyRed;					// RGBA(219,000,000,255)
-	public Color DamageColor;           // RGBA(255,000,000,120)ダメージ点滅色
-    public Color InvisibleColor;        // RGBA(255,255,255,120)無敵状態時色
-    public Color PoisonColor;           // RGBA(241,010,229,120)毒ダメージ色
+	float displayArmorPoint;				// 画面表示用HPゲージ			
+	public Color MyGreen  		= new Color (000,240,000,255);	//RGBA ※Aは透明度(0に近くなるほど透明化)
+	public Color MyWhite  		= new Color (255,255,255,255);	
+	public Color MyYellow 		= new Color (255,206,000,255);	
+	public Color MyRed 			= new Color (219,000,000,255);	
+	public Color DamageColor 	= new Color (246,040,061,249);  //ダメージ点滅色
+	public Color InvisibleColor = new Color (255,255,255,000);  //無敵状態時色
+	public Color PoisonColor 	= new Color (255,025,233,119);  //毒ダメージ色
     public Image gaugeImage;
 	private ModelColorChange modelColorChange;		
-	public float FlashTime;				// 点滅時間
-	private Animator animator;			// Animator（PlayerMotion)取得
-	public float KnockBackRange;		// ノックバック距離（ダメージ受けた際に使用）
-	public int PlayerNo;				// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
-	public Transform muzzle;			// ショット発射口位置をTransformで位置取り
-	public Transform EffectPoint;		// 回復等エフェクト発生元の位置取り
-	public GameObject DamagePrefab;		// ダメージエフェクト格納場所
-	public GameObject DamageObject;		// 被ダメージ時エフェクト発生用
-	public GameObject HpHealPrefab;		// アーマーポイント回復エフェクト格納場所
-	public GameObject HpHealObject;		// 回復時エフェクト発生用
+	public float FlashTime =10.0f;			// 点滅時間
+	private Animator animator;				// Animator（PlayerMotion)取得
+	public float KnockBackRange = 2.0f;		// ノックバック距離（ダメージ受けた際に使用）
+	public int PlayerNo;					// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
+	public Transform muzzle;				// ショット発射口位置をTransformで位置取り
+	public Transform EffectPoint;			// 回復等エフェクト発生元の位置取り
+	public GameObject DamagePrefab;			// ダメージエフェクト格納場所
+	public GameObject DamageObject;			// 被ダメージ時エフェクト発生用
+	public GameObject HpHealPrefab;			// アーマーポイント回復エフェクト格納場所
+	public GameObject HpHealObject;			// 回復時エフェクト発生用
 	public GameObject boddy_summer;
-	public int attackPoint;				// 攻撃値
-	public float force;					// 移動速度
-	public float maxForce;				// 移動速度最大
-	public int BigAttack;				// 巨大化した時の攻撃値
-	public bool isBig;					// 巨大化しているかどうか
-	public float HealApPoint = 1000;	// アイテム取得時の回復量
+	public int attackPoint;					// 攻撃値
+	public float force;						// 移動速度
+	public float maxForce;					// 移動速度最大
+	public int BigAttack = 10000;			// 巨大化した時の攻撃値
+	public bool isBig;						// 巨大化しているかどうか
+	public float HealApPoint = 1000;		// アイテム取得時の回復量
 
 	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく

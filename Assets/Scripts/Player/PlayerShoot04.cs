@@ -21,7 +21,7 @@ public class PlayerShoot04 : MonoBehaviour {
 	public Image gaugeImage;
 	public int boostPoint;
 	Bullet01 bullet04_script;
-	public int BpDown;
+	public int BpDown = 100;
 	public int PlayerNo;
 	private Pause pause;
 	public bool isBig;							// 巨大化しているかどうか

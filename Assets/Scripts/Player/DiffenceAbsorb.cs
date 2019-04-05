@@ -17,9 +17,9 @@ public class DiffenceAbsorb : MonoBehaviour {
 	private Vector3 input = Vector3.zero;
 	public bool diffence = false;        	  	//　ガードしているか
 	public bool push = false;          		  	//　最初に移動ボタンを押したかどうか
-	public float NextButtonDownTime;    	  	//　次に移動ボタンが押されるまでの時間
+	public float NextButtonDownTime = 0.2f;     //　次に移動ボタンが押されるまでの時間
 	private float nowTime = 0f;         	  	//　最初に移動ボタンが押されてからの経過時間
-	public float LimitAngle;            	  	//　最初に押した方向との違いの限度角度
+	public float LimitAngle = 15.0f;            //　最初に押した方向との違いの限度角度
 	private Vector2 direction = Vector2.zero;   //　移動キーの押した方向
 	private Pause pause;
 	public int PlayerNo;

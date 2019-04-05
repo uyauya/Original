@@ -9,8 +9,8 @@ public class Continue : MonoBehaviour {
 	private AudioSource[] audioSources;
 	private Animator animator;
 	public Text blinkText;					//点滅させる
-	public void Onclick_Continue ()
 
+	public void Onclick_Continue ()
 	{
 		DataManager.Continue = true;
 		DataManager.FarstLevel = false;
@@ -31,7 +31,6 @@ public class Continue : MonoBehaviour {
 	}
 
 	void LoadScene() {
-		//SceneManager.LoadScene("STAGE02BOSS");
 		UserParam userParam = DataManager.userParam;
 		if (userParam != null) {
 			SceneManager.LoadScene (StageManager.Instance.StageName [userParam.StageNo]);

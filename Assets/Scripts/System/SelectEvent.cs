@@ -8,39 +8,6 @@ using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加
 // シーン移行用
 public class SelectEvent : MonoBehaviour {
 	private AudioSource[] audioSources;
-	//public GameObject SelectKohaku;
-	//public GameObject SelectYuko;
-	//public GameObject SelectMisaki;
-
-	//public void OnSelectKohaku(GameObject target){
-	/*public void OnSelectKohaku() {
-		SelectKohaku.SetActive(true);
-	}
-
-	//public void OnDeselectKohaku(GameObject target){
-	public void OnDeselectKohaku() {
-		SelectKohaku.SetActive(false);
-	}
-
-	//public void OnSelectYuko(GameObject target){
-	public void OnSelectYuko(){
-		SelectYuko.SetActive(true);
-	}
-
-	//public void OnDeselectYuko(GameObject target){
-	public void OnDeselectYuko(){
-		SelectYuko.SetActive(false);
-	}
-
-	//public void OnSelectMisaki(GameObject target){
-	public void OnSelectMisaki(){
-		SelectMisaki.SetActive(true);
-	}
-
-	//public void OnDeselectMisaki(GameObject target){
-	public void OnDeselectMisaki(){
-		SelectMisaki.SetActive(false);
-	}*/
 
     public void Onclick_Kohaku() 
 	{
@@ -91,21 +58,10 @@ public class SelectEvent : MonoBehaviour {
 		SoundManager00.Instance.PlayDelayed (6, 0.9f, gameObject);
 	}
 
-    /*void Update()
+    void Update()
     {
-        
-
-            
-        {
-            //Kohaku.onClick.Invoke();
-            ExecuteEvents.Execute
-            (
-                target: this.gameObject,
-                eventData: new PointerEventData(EventSystem.current),
-                functor: ExecuteEvents.pointerClickHandler
-            );
-        }
-    }*/
+       
+    }
 
     void LoadScene1() {
 		//Kohakuシーンに移行

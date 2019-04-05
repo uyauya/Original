@@ -15,7 +15,7 @@ public class MultiWayShoot : MonoBehaviour {
 	public float shotIntervalMax = 0.25F;
 	private float Attack;
 	public float attackPoint;					// プレイヤの攻撃値（ショットする際に付け足す。PlayerController参照）
-	public float damage = 2000;
+	public float damage = 300.0f;
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
@@ -26,7 +26,7 @@ public class MultiWayShoot : MonoBehaviour {
 	public float BulletRad = 1;					// 弾の発射元（プレイヤから発射もとまでの距離）
 	public int BulletNumber = 5;				// 弾生成（～まで）
 	public int FirstBullet = -4;				// 弾生成（～から）
-	public int BpDown;
+	public int BpDown = 200;
 	public int PlayerNo;
 	private Pause pause;
 	private int timeCount;

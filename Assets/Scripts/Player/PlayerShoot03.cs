@@ -8,20 +8,19 @@ public class PlayerShoot03 : MonoBehaviour {
 	
 	public GameObject Bullet03;
 	public Transform muzzle;
-	//public Transform Bomber;
 	public GameObject muzzleFlash;
 	public float shotInterval;			// ショットの時間間隔
 	public float shotIntervalMax = 0.25F;
 	private float time = 0F;
 	private float Attack;
-	public float damage = 500;
+	public float damage = 1000;
 	public Image gaugeImage;
 	public int boostPoint;
 	private Animator animator;
 	private AudioSource audioSource;
 	private Rigidbody rb;
 	Bullet03 bullet03_script;
-	public int BpDown;
+	public int BpDown = 1000;
 	public int PlayerNo;
 	private Pause pause;
 	public bool isBig;							// 巨大化しているかどうか

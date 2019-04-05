@@ -13,7 +13,7 @@ public class PlayerShoot02 : MonoBehaviour {
 	public float shotIntervalMax = 0.25F;
 	private float time = 0F;
 	private float Attack;
-	public float damage = 500;
+	public float damage = 200;
 	public Image gaugeImage;
 	public int boostPoint;
 	public int attackPoint;
@@ -21,7 +21,7 @@ public class PlayerShoot02 : MonoBehaviour {
 	private AudioSource audioSource;
 	private Rigidbody rb;
 	Bullet02 bullet02_script;
-	public int BpDown;
+	public int BpDown = 100;
 	public int PlayerNo;
 	private Pause pause;
 	public bool isBig;							// 巨大化しているかどうか

@@ -19,11 +19,11 @@ public class ChangeWeapon : MonoBehaviour {
 	public RawImage weponImage3;
 	public RawImage weponImage4;
 	public RawImage weponImage5;
-	public Color myWhite;			//RGBA(255,255,255,255)
-	public Color myBlue;			//RGBA(026,008,255,255)
-	public Color myYellow;			//RGBA(207,253,000,255)
-	public Color myGreen;			//RGBA(123,248,022,255)
-	public Color myRed;				//RGBA(255,041,041,255)
+	public Color myWhite  = new Color (255,255,255,255);
+	public Color myBlue   = new Color (026,008,255,255);
+	public Color myYellow = new Color (207,253,000,255);	
+	public Color myGreen  = new Color (123,248,022,255);
+	public Color myRed	  = new Color (255,041,041,255);	
 
 
 	// Use this for initialization

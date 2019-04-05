@@ -39,7 +39,7 @@ public class PlayerShoot : MonoBehaviour {
 	Bullet01 bullet01_script;					// 弾Shot
 	public GameObject effectPrefab;				// チャージ用エフェクトの格納場所
 	public GameObject effectObject;
-	public int BpDown;							// 発射時の消費ブーストポイント
+	public int BpDown = 50;						// 発射時の消費ブーストポイント
 	public bool isCharging = false;				// チャージ中かどうかの判定（開始時はチャージしていないのでfalse）		
 	private AudioSource[] audioSources;
 	public int PlayerNo;						//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）SelectEventスクリプト参照

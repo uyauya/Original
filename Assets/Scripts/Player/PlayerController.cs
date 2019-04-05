@@ -17,14 +17,14 @@ public class PlayerController : MonoBehaviour {
     public float DeGravity = -1.0f;					//重力軽減用
 	public float DoubleJump = 4.0f;					//二段ジャンプ
 	public float BoostJumpForce = 6.0f;				//ブースト時のジャンプ力
-	public float HighPoint;							//ジャンプの高さ最大値
-	public float InvincibleTime;					//無敵時間
-	public float gravity;							//重力（ジャンプ時などに影響）
+	public float HighPoint = 120.0f;							//ジャンプの高さ最大値
+	public float InvincibleTime = 1.0f;					//無敵時間
+	public float gravity = 9.8f;							//重力（ジャンプ時などに影響）
 	private Vector3 moveDirection = Vector3.zero;	//プレイヤ位置方向ニュートラル設定
 	public float boostPoint;						//ブーストポイント
 	public float displayBoostPoint;					//ブーストポイント（画面表示用）
 	public int BpDown = 20;							//ブーストゲージ消費値（ブースト時）
-	public float RecoverPoint = 0.2f;				//ブーストポイント回復値
+	public float RecoverPoint = 1.0f;				//ブーストポイント回復値
 	public GameObject gaugeImage;					//ブーストゲージ（画面表示用）
 	public Text boostText;							//ブースト最大・現在数値（画面表示用）
 	Vector3 moveSpeed;								//プレイヤの速さ
