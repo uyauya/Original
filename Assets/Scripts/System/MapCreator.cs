@@ -24,10 +24,11 @@ public class MapCreator : MonoBehaviour {
 	private float timer = 0.0f;					//グリーンスフィア取得計算用???
 	private float interval = 2.0f;				//グリーンスフィア取得計算用???
 	public GameObject[] 	Prefab_Player;
-	public	GameObject		Boss02;				
+	public	GameObject		Boss02;	
+    private int CurrentLevel;
 
-	// 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはDataManagerクリプトで判別・管理）
-	void Awake(){
+    // 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはDataManagerクリプトで判別・管理）
+    void Awake(){
 		player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
 		OriginalChara = player;			//作成いたプレイヤーをOriginalChara
 		//OriginalChara.SetActive (true);
@@ -59,12 +60,15 @@ public class MapCreator : MonoBehaviour {
 	void Update(){
         if(DataManager.PlayerChange == true)
         {
-			OriginalChara.SetActive (false);
-			if(DataManager.PlayerNo == 0)				//新たなプレイヤー発生
+            Vector3 PlayerPos = OriginalChara.transform.position;
+            CurrentLevel = DataManager.Level;
+            Destroy(OriginalChara);
+            if (DataManager.PlayerNo == 0)				//新たなプレイヤー発生
 			{
-                Destroy(OriginalChara);
             player = Instantiate (Prefab_Player [DataManager.PlayerNo = 3]);
-			}
+            player.transform.position = PlayerPos;
+            DataManager.Level = CurrentLevel;
+            }
         }
 
         playerAxis.updateAxis ();						// プレイヤー座標を更新

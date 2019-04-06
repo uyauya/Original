@@ -14,14 +14,17 @@ public class PlayerLevel : MonoBehaviour
 		new UserParam(0,01,130,3000,3000,2000, string.Empty,0),		//Level01（List0）
 		new UserParam(2,01,150,3200,2700,2000, string.Empty,0),		//Level01
 		new UserParam(1,01,100,3200,3000,2000, string.Empty,0),		//Level01
+        new UserParam(3,01,100,3200,6000,2000, string.Empty,0),		//Level01
 
 		new UserParam(0,02,136,3300,3150,3000, string.Empty,0),		//Level02（List1）
 		new UserParam(2,02,165,3360,2830,3000, string.Empty,0),		//Level02
 		new UserParam(1,02,105,3520,3150,3000, string.Empty,0),		//Level02
+        new UserParam(3,02,105,3520,8150,3000, string.Empty,0),		//Level02
 
 		new UserParam(0,03,150,3500,3460,4400, string.Empty,0),		//Level03
 		new UserParam(2,03,181,3530,2970,4400, string.Empty,0),		//Level03
 		new UserParam(1,03,110,3870,3310,4400, string.Empty,0),		//Level03
+        new UserParam(3,03,110,3870,9000,4400, string.Empty,0),		//Level03
 
 		new UserParam(0,04,157,3800,3630,6600, string.Empty,0),		//Level04
 		new UserParam(2,04,200,3700,3120,6600, string.Empty,0),		//Level04
@@ -46,7 +49,7 @@ public class PlayerLevel : MonoBehaviour
 		new UserParam(0,09,228,5300,5340,52000, string.Empty,0),	//Level09
 		new UserParam(2,09,320,4730,3900,52000, string.Empty,0),	//Level09
 		new UserParam(1,09,148,6860,4430,52000, string.Empty,0),	//Level09
-		//new UserParam(4,09,1500,18000,15000,52000, string.Empty,0),	//Level09	//キャラチェンジ用
+		
 
 	};
 
