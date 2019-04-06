@@ -2,9 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
+    "\\Assets\\Prefab",
+    "\\Assets\\Prefab\\Enemy",
+    "\\Assets\\Prefab\\ManagerObject",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Player"
+    "\\Assets\\Scripts\\Player",
+    "\\Assets\\Scripts\\System"
   ],
-  "SelectedNode": "\\Assets\\Scripts\\Player\\PlayerLevel.cs",
   "PreviewInSolutionExplorer": false
 }

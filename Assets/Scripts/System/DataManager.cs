@@ -22,6 +22,7 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 	public static int ClearScene;		　//クリアしたステージ（判定用）
 	public static bool FarstLevel;		　//ゲーム開始時のプレイヤーレベル
     public static bool PlayerChange = false;
+    public static bool PlayerReturn = false;
 
     // Use this for initialization
     void Start () {

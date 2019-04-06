@@ -26,12 +26,14 @@ public class MapCreator : MonoBehaviour {
 	public GameObject[] 	Prefab_Player;
 	public	GameObject		Boss02;	
     private int CurrentLevel;
+    public BattleManager battleManager;
 
     // 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはDataManagerクリプトで判別・管理）
     void Awake(){
 		player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
-		OriginalChara = player;			//作成いたプレイヤーをOriginalChara
-		//OriginalChara.SetActive (true);
+		//OriginalChara = player;			//作成いたプレイヤーをOriginalChara
+        battleManager.Player = player;
+        //OriginalChara.SetActive (true);
     }
 
 	void Start(){
@@ -60,14 +62,16 @@ public class MapCreator : MonoBehaviour {
 	void Update(){
         if(DataManager.PlayerChange == true)
         {
-            Vector3 PlayerPos = OriginalChara.transform.position;
+            Vector3 PlayerPos = battleManager.Player.transform.position;
             CurrentLevel = DataManager.Level;
-            Destroy(OriginalChara);
+            Destroy(battleManager.Player);
             if (DataManager.PlayerNo == 0)				//新たなプレイヤー発生
 			{
             player = Instantiate (Prefab_Player [DataManager.PlayerNo = 3]);
+            battleManager.Player = player;
             player.transform.position = PlayerPos;
             DataManager.Level = CurrentLevel;
+            DataManager.PlayerChange = false;
             }
         }
 
