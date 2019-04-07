@@ -7,13 +7,14 @@ public class CameraFollow : MonoBehaviour
 	public Transform target;
 	public float height;
 	private Vector3 offset;
+    public BattleManager battleManager;
 
-	void Start ()
+    void Start ()
 	{
-		// Playerタグの付いたオブジェクトの位置をtargetとして取得
-		target = GameObject.FindGameObjectWithTag ("Player").transform;
-		// カメラとターゲット（プレイヤー)の距離を設定
-		offset = transform.position - target.position;
+        // Playerタグの付いたオブジェクトの位置をtargetとして取得
+        target = GameObject.FindGameObjectWithTag ("Player").transform;
+        // カメラとターゲット（プレイヤー)の距離を設定
+        offset = transform.position - target.position;
 	}
 		
 	void LateUpdate ()

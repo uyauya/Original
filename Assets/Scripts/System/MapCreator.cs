@@ -69,7 +69,7 @@ public class MapCreator : MonoBehaviour {
 			{
             player = Instantiate (Prefab_Player [DataManager.PlayerNo = 3]);
             battleManager.Player = player;
-            player.transform.position = PlayerPos;
+            battleManager.Player.transform.position = PlayerPos;
             DataManager.Level = CurrentLevel;
             DataManager.PlayerChange = false;
             }
