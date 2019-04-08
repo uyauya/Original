@@ -20,7 +20,9 @@ public class BattleManager : MonoBehaviour {
 	public GameObject mesaageSTART;		 	// スタート表示
 	public GameObject mesaageClear;		 	// ステージクリア表示
 	public Text ScoreText;				 	// スコア表示用
-	private int ItemCount;				 	// アイテム取得数をカウント
+    //public Text levelText;
+    //public GameObject playerImage;          
+    private int ItemCount;				 	// アイテム取得数をカウント
 	PlayerController playerController;
 	public GameObject WarpEffect;		 	// ボス面移行用ワープ
 	int clearScore;						 	// クリア条件となるスコア  
@@ -35,14 +37,17 @@ public class BattleManager : MonoBehaviour {
     void Start () {
         animator = GetComponent<Animator>();            // Animatorを使う場合は設定する
         ScoreText.text = "Score:0";
-		timer = 0;
+        //levelText.text = "Lv 0";
+        timer = 0;
 		battleStatus = BATTLE_START;	//時間0秒、最初にスタートを表示させる
 		//ScoreTextにScoreオブジェクトのTextテキストの値を代入する
 		ScoreText = GameObject.Find ("Score").GetComponent<Text> ();
 		// スコアテキストにDataManagerのスコアを代入
 		ScoreText.text = DataManager.Score.ToString();
-		//スタート時はStartは表示、WinとLoseは非表示
-		messageStart.enabled = true;
+        //playerImage = GameObject.Find("PlayerImage");
+        //levelText = GameObject.Find("LevelImage").GetComponent<Text>();
+        //スタート時はStartは表示、WinとLoseは非表示
+        messageStart.enabled = true;
 		messageWin.enabled = false;
 		messageLose.enabled = false;
 		//playerControllerにPlayerタグのついたオブジェクトのPlayerControllerの値を代入する

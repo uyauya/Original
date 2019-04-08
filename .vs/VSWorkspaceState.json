@@ -3,11 +3,11 @@
     "",
     "\\Assets",
     "\\Assets\\Prefab",
-    "\\Assets\\Prefab\\Enemy",
     "\\Assets\\Prefab\\ManagerObject",
     "\\Assets\\Scripts",
     "\\Assets\\Scripts\\Player",
-    "\\Assets\\Scripts\\System"
+    "\\Assets\\Scripts\\System",
+    "\\Assets\\UnityChan.SpringBone"
   ],
   "PreviewInSolutionExplorer": false
 }
