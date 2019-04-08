@@ -91,7 +91,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 							if (PlayerNo == 2) {
 								//SoundManagerMisaki.Instance.Play(0,gameObject);	
 							}
-							Diffencer ();
+							//Diffencer ();
 							Debug.Log ("Diffence");
 							diffence = false;
 							push = false;
@@ -140,12 +140,12 @@ public class DiffenceAbsorb : MonoBehaviour {
 		}
 	}
 
-	void Diffencer() {
+	/*void Diffencer() {
 		// Bullet01のゲームオブジェクトを生成してbulletObjectとする
 		GameObject diffenceObject = GameObject.Instantiate (DiffenceWall)as GameObject;
 		//　弾丸をmuzzleから発射(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 		diffenceObject.transform.position = muzzle.position;
-	}
+	}*/
 	void Absorb() {
 		// Bullet01のゲームオブジェクトを生成してbulletObjectとする
 		GameObject absorbObject = GameObject.Instantiate (AbsorbWall)as GameObject;
