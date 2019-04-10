@@ -75,6 +75,7 @@ public class EnemyBasic : MonoBehaviour {
 	public Color FreezeColor;
 	public Color DeadColor;
 
+
 	/*[CustomEditor(typeof(EnemyBasic))]
 	public class EnemyBasicEditor : Editor	// using UnityEditor; を入れておく
 	{
@@ -119,11 +120,12 @@ public class EnemyBasic : MonoBehaviour {
 		// Animator取得
 		animator = GetComponent< Animator >();		
 		// 被ダメージ時の点滅処理（ModelColorChange参照）
-		modelColorChange = gameObject.GetComponent<ModelColorChange>();　
-		// Playerタグが付いているオブジェクトをターゲットにする
-		target = GameObject.FindWithTag ("Player");	
-		// Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelとする
-		playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
+		modelColorChange = gameObject.GetComponent<ModelColorChange>();
+        // Playerタグが付いているオブジェクトをターゲットにする
+        //target = GameObject.FindWithTag ("Player");	
+        target = battleManager.Player;
+        // Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelとする
+        playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 		// BattleManagerオブジェクトのBattleManagerをbattleManagerとする
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 		// レイヤーをEnemyにしておく（被ダメージ時、死亡処理時使用）

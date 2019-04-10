@@ -39,7 +39,7 @@ public class MapCreator : MonoBehaviour {
 	void Start(){
 		
 		size		= new MapSize(MAP_SIZE_X , MAP_SIZE_Z);								// MapSizeクラスのインスタンス生成
-		playerAxis	= new MapAxis(player , size , prefab_BL[0].transform.localScale);	// PlayerAxisクラスのインスタンス生成
+		playerAxis	= new MapAxis(battleManager, size , prefab_BL[0].transform.localScale);	// PlayerAxisクラスのインスタンス生成
 		mapBlock	= new MapArrayBlock(prefab_BL , "BL" , size , playerAxis);			// 地面用MapArrayクラスのインスタンス生成
 		mapFloor	= new MapArrayFloor("FL" , size , playerAxis);						// 地上用MapArrayクラスのインスタンス生成
 		

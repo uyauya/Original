@@ -9,23 +9,24 @@ public class MapAxis{
 	private Axis_XZ		nowAxis;		// 現在(移動後)の位置座標
 	private Axis_XZ		differenceAxis;	// 差分『現在位置－移動前位置』の格納要
 	
-	private GameObject	player;			// プレイヤーオブジェクトへの参照用変数
+	//private GameObject	player;			// プレイヤーオブジェクトへの参照用変数
 	private MapSize	size;			// マップサイズへの参照用変数
 	private Vector3		scale;			// 床ブロックのサイズ用
+    public BattleManager battleManager;
 
 	// ■■■床ブロックのサイズを返す■■■
 	public Vector3 getScale(){ return scale; }
 		
 	// ■■■コンストラクタ■■■
-	public MapAxis(GameObject player , MapSize size , Vector3 scale){
+	public MapAxis(BattleManager battleManager, MapSize size , Vector3 scale){
 		this.beforeAxis.x = 0;
 		this.beforeAxis.x = 0;
 		this.nowAxis.x = 0;
 		this.nowAxis.z = 0;
 		this.differenceAxis.x = 0;
 		this.differenceAxis.z = 0;
-		
-		this.player	= player;		// 引数で受け渡された変数を参照する様に設定。
+        this.battleManager = battleManager;
+		//this.player	= player;		// 引数で受け渡された変数を参照する様に設定。
 		this.size	= size;			// 引数で受け渡された変数を参照する様に設定。
 		this.scale	= scale;		// Vector3型は値そのものがコピーされる。
 	}
@@ -33,20 +34,20 @@ public class MapAxis{
 	// ■■■プレイヤーの初期座標を設定 (マップ中央座標)■■■
 	public void initialize(){
 		nowAxis.x = size.getHx();		// 初期位置(移動後の座標)は、半マップサイズ
-		nowAxis.z = size.getHz();		// 初期位置(移動後の座標)は、半マップサイズ
-		player.transform.position = new Vector3(nowAxis.x*scale.x , player.transform.position.y , nowAxis.z*scale.z);	// プレイヤーの位置を移動
+		nowAxis.z = size.getHz();       // 初期位置(移動後の座標)は、半マップサイズ
+        battleManager.Player.transform.position = new Vector3(nowAxis.x*scale.x , battleManager.Player.transform.position.y , nowAxis.z*scale.z);	// プレイヤーの位置を移動
 	}
 	
 	// ■■■プレイヤーの現在座標を取得■■■
 	private void setNowAxisX(){
-		nowAxis.x = Mathf.FloorToInt((player.transform.position.x + scale.x/2) / scale.x);	// (現在位置+ブロック幅/2) / ブロック幅
+		nowAxis.x = Mathf.FloorToInt((battleManager.Player.transform.position.x + scale.x/2) / scale.x);	// (現在位置+ブロック幅/2) / ブロック幅
 	}
 	private void setNowAxisZ(){
-		nowAxis.z = Mathf.FloorToInt((player.transform.position.z + scale.z/2) / scale.z);	// (現在位置+ブロック幅/2) / ブロック幅
+		nowAxis.z = Mathf.FloorToInt((battleManager.Player.transform.position.z + scale.z/2) / scale.z);	// (現在位置+ブロック幅/2) / ブロック幅
 	}
 	private void setNowAxis(){
-		nowAxis.x = Mathf.FloorToInt((player.transform.position.x + scale.x/2) / scale.x);	// (現在位置+ブロック幅/2) / ブロック幅
-		nowAxis.z = Mathf.FloorToInt((player.transform.position.z + scale.z/2) / scale.z);	// (現在位置+ブロック幅/2) / ブロック幅
+		nowAxis.x = Mathf.FloorToInt((battleManager.Player.transform.position.x + scale.x/2) / scale.x);	// (現在位置+ブロック幅/2) / ブロック幅
+		nowAxis.z = Mathf.FloorToInt((battleManager.Player.transform.position.z + scale.z/2) / scale.z);	// (現在位置+ブロック幅/2) / ブロック幅
 	}
 	
 	// ■■■『現在位置－移動前位置』の更新■■■

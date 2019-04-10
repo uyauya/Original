@@ -2,12 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Prefab",
-    "\\Assets\\Prefab\\ManagerObject",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Player",
+    "\\Assets\\Scripts\\Enemy",
     "\\Assets\\Scripts\\System",
-    "\\Assets\\UnityChan.SpringBone"
+    "\\Assets\\Textures",
+    "\\Assets\\Toon"
   ],
   "PreviewInSolutionExplorer": false
 }
