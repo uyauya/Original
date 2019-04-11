@@ -138,10 +138,13 @@ public class EnemyBasic : MonoBehaviour {
 
 
 	void Update () {
-		//重力をカスタムする時用
+		//重力をカスタムする時に使用
 		setLocalGravity ();
+
 		//体力を最大体力で割った割合をPerArmorpointとする
 		float PerArmorpoint = armorPoint / armorPointMax;
+
+		//ダメージと共にキャラクタの大きさを縮小する時に使用
 		// ArmoPointの減少によりキャラクタの大きさを変更
 		// PerArmorpointの割合が0.8を下回ったなら縦、横、高さにMscale割合分縮小する
 		if( PerArmorpoint < 0.8f) {
