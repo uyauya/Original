@@ -13,6 +13,7 @@ public class Zombie1 : MonoBehaviour {
 	bool freezeSet;					//フリーズ処理、一時的に移動不可
 	public float FreezeTime = 1.0f;	//フリーズ処理(硬直)時間
 	public float LastEnemySpeed;	//ダメージ、フリーズ処理する前の敵の基本スピード
+    
 
 	/*[CustomEditor(typeof(Zombie1))]
 	public class Zombie1 : Editor	// using UnityEditor; を入れておく
@@ -49,23 +50,27 @@ public class Zombie1 : MonoBehaviour {
 		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		enemyBasic.timer += Time.deltaTime;
 		// ターゲット（プレイヤ）と自分の距離がTargetRange値以内なら
-		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.TargetRange) {
+		//if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.TargetRange) {
+        if(Vector3.Distance(enemyBasic.battleManager.Player.transform.position, transform.position) <= enemyBasic.TargetRange) {
 			//ターゲットの方を徐々に向く
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
-				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
-			// enemySpeed × 時間でプレイヤに向かって直線的に移動
-			transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
+			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
+            (enemyBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
+            //(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
+            // enemySpeed × 時間でプレイヤに向かって直線的に移動
+            transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
 		}
 
-		// ターゲット（プレイヤー）との距離がSearch値以内なら
-		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
-			//ターゲットの方を徐々に向く
-			// Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
-			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
-				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemySpeed);
-			//アニメーターをattackに変更（攻撃モーション）
-			enemyBasic.animator.SetTrigger ("attack");
+        // ターゲット（プレイヤー）との距離がSearch値以内なら
+        //if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
+        if (Vector3.Distance(enemyBasic.battleManager.Player.transform.position, transform.position) <= enemyBasic.Search) {
+                //ターゲットの方を徐々に向く
+                // Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
+                // Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
+                transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
+                //(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemySpeed);
+                (enemyBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemySpeed);
+            //アニメーターをattackに変更（攻撃モーション）
+            enemyBasic.animator.SetTrigger ("attack");
 		}
 
 		//damageSet時、スピードが0なら何もしない。0でないならDamageSetCoroutine起動（下記参照）

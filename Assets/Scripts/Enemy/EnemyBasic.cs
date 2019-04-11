@@ -123,13 +123,14 @@ public class EnemyBasic : MonoBehaviour {
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
         // Playerタグが付いているオブジェクトをターゲットにする
         //target = GameObject.FindWithTag ("Player");	
-        target = battleManager.Player;
+        
         // Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelとする
         playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 		// BattleManagerオブジェクトのBattleManagerをbattleManagerとする
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
-		// レイヤーをEnemyにしておく（被ダメージ時、死亡処理時使用）
-		gameObject.layer = LayerMask.NameToLayer("Enemy");
+        target = battleManager.Player;
+        // レイヤーをEnemyにしておく（被ダメージ時、死亡処理時使用）
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
 		// Rigidbodyを取得し、以後rbと略す
 		rb = this.GetComponent<Rigidbody>();
 		// 重力を個別に設定する場合場合はデフォルト設定時のGravity設定を無効にする
