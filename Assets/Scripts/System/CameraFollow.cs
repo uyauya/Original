@@ -13,14 +13,14 @@ public class CameraFollow : MonoBehaviour
 	{
         // Playerタグの付いたオブジェクトの位置をtargetとして取得
         //target = GameObject.FindGameObjectWithTag ("Player").transform;
-       
+		// カメラとターゲット（プレイヤー)の距離を設定
+		offset = transform.position - battleManager.Player.transform.position;
         
 	}
 		
 	void LateUpdate ()
 	{
-        // カメラとターゲット（プレイヤー)の距離を設定
-        offset = transform.position - battleManager.Player.transform.position;
+        
         // カメラがターゲット（プレイヤー）を見つけてから追いかける（少し遅れて追いかける）
         transform.position = battleManager.Player.transform.position + offset;
 
