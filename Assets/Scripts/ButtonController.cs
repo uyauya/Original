@@ -11,11 +11,13 @@ public class ButtonController : MonoBehaviour
     [SerializeField] GameObject[] m_objectsActivatedOnlyOnSelection;	//表示をON/OFFさせるものの格納場所
     Button m_button;
     AudioSource m_audioSource;
+	public static bool SelectAction;
 
 	//非選択状態とする
     void Start()
     {
-        m_button = GetComponent<Button>();
+		SelectAction = false;
+		m_button = GetComponent<Button>();
         m_audioSource = GetComponent<AudioSource>();
         OnDeselected();
 
@@ -33,19 +35,24 @@ public class ButtonController : MonoBehaviour
 	//選択状態の時音を鳴らし、表示をONにする。
     public void OnSelected()
     {
-        m_audioSource.PlayOneShot(m_selectionSe);
+        //m_audioSource.PlayOneShot(m_selectionSe);
 
         foreach(var go in m_objectsActivatedOnlyOnSelection)
         {
-            go.SetActive(true);
+			go.SetActive(true);
+			SelectAction = true;
+
         }
     }
 
     public void OnDeselected()
     {
-        foreach (var go in m_objectsActivatedOnlyOnSelection)
+		
+		foreach (var go in m_objectsActivatedOnlyOnSelection)
         {
-            go.SetActive(false);
+
+			SelectAction = false;
+			go.SetActive(false);
         }
     }
 }

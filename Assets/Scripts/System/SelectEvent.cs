@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;	// ステージ移行したい場合は追加
 // シーン移行用
 public class SelectEvent : MonoBehaviour {
 	private AudioSource[] audioSources;
+	private Animator animator;
 
     public void Onclick_Kohaku() 
 	{
@@ -50,6 +51,7 @@ public class SelectEvent : MonoBehaviour {
 	}
 
 	void Start () {
+		animator = GetComponent<Animator>();			// Animatorを使う場合は設定する
 		//シーン起動直後にSoundManager00の指定音を鳴らす
 		SoundManager00.Instance.Play(0);
 		SoundManager00.Instance.Play(1);
@@ -60,7 +62,7 @@ public class SelectEvent : MonoBehaviour {
 
     void Update()
     {
-       
+		
     }
 
     void LoadScene1() {
