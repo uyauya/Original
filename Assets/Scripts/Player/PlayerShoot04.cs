@@ -83,8 +83,8 @@ public class PlayerShoot04 : MonoBehaviour {
 			// 弾生成場所をmuzzleの前方２、下0.3の場所に生成する
 			bulletObject.transform.position = muzzle.position + transform.TransformDirection(Vector3.forward * 2) 
 				+ new Vector3(0, -0.3f, 0);
-			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(9,gameObject);
+            if((PlayerNo == 0) || (PlayerNo == 3)){
+                SoundManager.Instance.Play(9,gameObject);
 				SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
 			}
 			if (PlayerNo == 1) {

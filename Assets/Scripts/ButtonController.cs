@@ -11,7 +11,7 @@ public class ButtonController : MonoBehaviour
     [SerializeField] GameObject[] m_objectsActivatedOnlyOnSelection;	//表示をON/OFFさせるものの格納場所
     Button m_button;
     AudioSource m_audioSource;
-	public static bool SelectAction;
+	public bool SelectAction;
 
 	//非選択状態とする
     void Start()

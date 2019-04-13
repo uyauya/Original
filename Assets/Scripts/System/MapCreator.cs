@@ -72,6 +72,7 @@ public class MapCreator : MonoBehaviour {
             battleManager.Player.transform.position = PlayerPos;
             DataManager.Level = CurrentLevel;
             DataManager.PlayerChange = false;
+            //Debug.Log("レベル" + DataManager.Level);
             }
         }
 

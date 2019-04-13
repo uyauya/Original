@@ -111,7 +111,7 @@ public class MultiWayShoot : MonoBehaviour {
 			bulletObject.transform.rotation = Quaternion.LookRotation (bulletObject.transform.position - transform.position);
 			// 回転計算をした後に弾の座標をnew Vector3(0,1,0)で上に上げる
 			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
-			if (PlayerNo == 0) { 
+			if ((PlayerNo == 0)|| (PlayerNo == 3)){
 				SoundManager.Instance.Play(21,gameObject);
 				SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
 			}

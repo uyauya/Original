@@ -43,11 +43,13 @@ public class Boss02 : MonoBehaviour {
 		//縦に傾かないよう固定
 		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		bossBasic.timer += Time.deltaTime;
-		//敵の攻撃範囲を設定する
-		//ターゲット（プレイヤ）の場所とボスの場所の距離がTargetPosition数値以内なら
-		if (Vector3.Distance (bossBasic.target.transform.position, transform.position) <= TargetPosition) {
-			//ターゲットの方をTargetSpeedでに向く
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
+        //敵の攻撃範囲を設定する
+        //ターゲット（プレイヤ）の場所とボスの場所の距離がTargetPosition数値以内なら
+        //if (Vector3.Distance (bossBasic.target.transform.position, transform.position) <= TargetPosition) {
+        if (Vector3.Distance(bossBasic.battleManager.Player.transform.position, transform.position) <= TargetPosition)
+        {
+            //ターゲットの方をTargetSpeedでに向く
+            transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(bossBasic.target.transform.position - transform.position), Time.deltaTime * TargetSpeed);
 			//ターゲットに向かってMoveSpeed数値で進む
 			transform.position += transform.forward * Time.deltaTime * MoveSpeed;	

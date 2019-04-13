@@ -95,7 +95,7 @@ public class BattleManager : MonoBehaviour {
 				//battleStatus = BATTLE_END;
 				messageLose.enabled = true;
 				//キャラクター別に声変更
-				if (DataManager.PlayerNo == 0) {
+				if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 3)) {
 					SoundManager.Instance.Play (45, gameObject);
 				}
 				if (DataManager.PlayerNo == 1) {
@@ -112,7 +112,7 @@ public class BattleManager : MonoBehaviour {
 			} else if (Player.transform.position.y <= -10.0f) { 
 				battleStatus = BATTLE_END;
 				messageLose.enabled = true;
-				if (DataManager.PlayerNo == 0) {
+				if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 3)) {
 					SoundManager.Instance.Play (45, gameObject);
 				}
 				if (DataManager.PlayerNo == 1) {
@@ -136,7 +136,7 @@ public class BattleManager : MonoBehaviour {
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
 				//プレイヤーの動きを止める
 				PlayerController.isStop = true;
-				if (DataManager.PlayerNo == 0) {
+				if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 3)) {
 					SoundManager.Instance.Play(18,gameObject);
 				}
 				if (DataManager.PlayerNo == 1) {

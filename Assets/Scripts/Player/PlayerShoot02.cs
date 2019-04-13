@@ -83,7 +83,7 @@ public class PlayerShoot02 : MonoBehaviour {
 			shotInterval = Time.time;
 			GameObject bulletObject = GameObject.Instantiate (Bullet02)as GameObject;
 			bulletObject.transform.position = muzzle.position;
-			if (PlayerNo == 0) {
+			if ((PlayerNo == 0)|| (PlayerNo == 3)){
 				SoundManager.Instance.Play(3,gameObject);
 				//SoundManagerKohaku.Instance.Play(1,gameObject);
 				SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);

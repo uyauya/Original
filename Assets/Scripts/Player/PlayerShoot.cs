@@ -173,7 +173,7 @@ public class PlayerShoot : MonoBehaviour {
 			bulletObject.GetComponent<Bullet01C> ().damage = this.damage;
 		}
 			//キャラクタ別にSoundManager（声担当）とSoundManager2（効果音担当）から音を鳴らす
-			if (PlayerNo == 0) {	// こはく
+			if ((PlayerNo == 0)|| (PlayerNo == 3)){	// こはく
 			SoundManager.Instance.Play(0,gameObject);
 			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
 			}

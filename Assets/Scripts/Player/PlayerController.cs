@@ -227,7 +227,7 @@ public class PlayerController : MonoBehaviour {
 				//Debug.Log("ジャンプ");
 			}
             // キャラ別に声変更
-            if (PlayerNo == 0)
+            if ((PlayerNo == 0)|| (PlayerNo == 3))
             {
                 SoundManager.Instance.Play(15, gameObject);
             }
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour {
 			// y方向にBoostJumpForce値加算（ブーストジャンプ）
             GetComponent<Rigidbody>().velocity = new Vector3(v.x, BoostJumpForce, v.z);
             animator.SetBool("BoostUp", Input.GetButton("Jump"));
-            if (PlayerNo == 0)
+            if ((PlayerNo == 0) || (PlayerNo == 3))
             {
                 SoundManager.Instance.Play(33, gameObject);
             }
@@ -560,8 +560,8 @@ public class PlayerController : MonoBehaviour {
 			boostPoint += BpHealPoint;
 			// 取得時boostPointがMax以下の時の声出し
 			if (boostPoint < DataManager.BoostPointMax) {
-				if (PlayerNo == 0) {
-					SoundManager.Instance.Play (18, gameObject);
+                if ((PlayerNo == 0) || (PlayerNo == 3)){
+                    SoundManager.Instance.Play (18, gameObject);
 				}
 				if (PlayerNo == 1) {
 					SoundManager.Instance.Play (19, gameObject);
@@ -571,7 +571,7 @@ public class PlayerController : MonoBehaviour {
 				}
 			// 取得時boostPointがMaxになった時の声出し
 			} else if (boostPoint >= DataManager.BoostPointMax) {
-				if (PlayerNo == 0) {
+				if ((PlayerNo == 0) || (PlayerNo == 3)){
 					SoundManager.Instance.PlayDelayed (36, 1.1f, gameObject);
 				}
 				if (PlayerNo == 1) {
@@ -599,7 +599,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		// greenShere(Item3タグ付いたもの)接触時
 		if(collider.gameObject.tag == "Item3") {
-			if (PlayerNo == 0) {
+			if ((PlayerNo == 0) || (PlayerNo == 3)){
 				SoundManager.Instance.PlayDelayed (30, 1.1f, gameObject);
 			}
 			if (PlayerNo == 1) {
@@ -614,7 +614,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		// Star（ボス撃破時ドロップするクリア用アイテム）取得時
 		if(collider.gameObject.tag == "Star") {
-			if (PlayerNo == 0) {
+			if ((PlayerNo == 0) || (PlayerNo == 3)){
 				SoundManager.Instance.PlayDelayed (30, 1.1f, gameObject);
 			}
 			if (PlayerNo == 1) {
@@ -630,8 +630,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		// BigStar（ラスボス撃破時ドロップするクリア用アイテム）取得時
 		if(collider.gameObject.tag == "BigStar") {
-			if (PlayerNo == 0) {
-				SoundManager.Instance.PlayDelayed (30, 1.1f, gameObject);
+            if((PlayerNo == 0) || (PlayerNo == 3)){
+                SoundManager.Instance.PlayDelayed (30, 1.1f, gameObject);
 			}
 			if (PlayerNo == 1) {
 				SoundManager.Instance.PlayDelayed (31, 1.1f, gameObject);

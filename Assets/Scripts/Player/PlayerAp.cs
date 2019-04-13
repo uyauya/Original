@@ -140,7 +140,7 @@ public class PlayerAp : MonoBehaviour {
 			DamageObject.transform.SetParent (EffectPoint);
 			//アニメーターをDamageに切り替え
 			animator.SetTrigger ("Damage");
-			if (PlayerNo == 0) {
+			if ((PlayerNo == 0)|| (PlayerNo == 3)) {
 				SoundManager.Instance.Play (21, gameObject);
 			}
 			if (PlayerNo == 1) {
@@ -169,8 +169,9 @@ public class PlayerAp : MonoBehaviour {
 					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 					DamageObject.transform.SetParent (EffectPoint);
 					animator.SetTrigger ("Damage");
-					if (PlayerNo == 0) {
-						SoundManager.Instance.Play (24, gameObject);	
+                    if ((PlayerNo == 0) || (PlayerNo == 3))
+                    {
+                        SoundManager.Instance.Play (24, gameObject);	
 						SoundManager.Instance.PlayDelayed (27, 0.2f, gameObject);
 					}
 					if (PlayerNo == 1) {
@@ -194,7 +195,7 @@ public class PlayerAp : MonoBehaviour {
 				armorPoint -= poisonAttack;
 				DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 				DamageObject.transform.SetParent (EffectPoint);
-				/*if (PlayerNo == 0) {
+                /*if ((PlayerNo == 0)|| (PlayerNo == 3)) {
 						SoundManager.Instance.Play(24,gameObject);	
 						SoundManager.Instance.PlayDelayed (27, 0.2f, gameObject);
 					}
@@ -206,8 +207,8 @@ public class PlayerAp : MonoBehaviour {
 						SoundManager.Instance.Play(26,gameObject);	
 						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
 					}*/
-				//コルーチン処理（下記参照）
-				StartCoroutine ("PoisonDamageCoroutine");
+                //コルーチン処理（下記参照）
+                StartCoroutine("PoisonDamageCoroutine");
 			}
 		}
 
@@ -218,8 +219,9 @@ public class PlayerAp : MonoBehaviour {
 			// armorPointがMaxになったら声出し
 			if (armorPoint  < DataManager.ArmorPointMax) {
 				if (armorPoint + HealApPoint < DataManager.ArmorPointMax) {
-					if (PlayerNo == 0) {
-						SoundManager.Instance.Play (18, gameObject);
+                    if ((PlayerNo == 0) || (PlayerNo == 3))
+                    {
+                        SoundManager.Instance.Play (18, gameObject);
 					}
 					if (PlayerNo == 1) {
 						SoundManager.Instance.Play (19, gameObject);
@@ -228,8 +230,9 @@ public class PlayerAp : MonoBehaviour {
 						SoundManager.Instance.Play (20, gameObject);
 					}
 				} else if (armorPoint + HealApPoint >= DataManager.ArmorPointMax) {
-					if (PlayerNo == 0) {
-						SoundManager.Instance.PlayDelayed (39, 1.1f, gameObject);
+                    if ((PlayerNo == 0) || (PlayerNo == 3))
+                    {
+                        SoundManager.Instance.PlayDelayed (39, 1.1f, gameObject);
 					}
 					if (PlayerNo == 1) {
 						SoundManager.Instance.PlayDelayed (40, 1.1f, gameObject);
@@ -256,7 +259,7 @@ public class PlayerAp : MonoBehaviour {
 			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
 			HpHealObject.transform.SetParent (EffectPoint);
 			animator.SetTrigger ("ItemGet");
-			if (PlayerNo == 0) {
+			if ((PlayerNo == 0)|| (PlayerNo == 3)) {
 				SoundManager2.Instance.Play(6,gameObject);
 			}
 			if (PlayerNo == 1) {

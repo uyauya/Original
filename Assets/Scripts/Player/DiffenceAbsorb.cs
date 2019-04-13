@@ -103,7 +103,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 						if (Vector2.Angle (nowDirection, direction) < LimitAngle && (Input.GetButton ("Fire1"))
 						   && nowTime <= NextButtonDownTime) {
 							diffence = true;
-							if (PlayerNo == 0) {
+							if ((PlayerNo == 0) || (PlayerNo == 3)){
 								//SoundManager.Instance.Play(0,gameObject);
 							}
 							if (PlayerNo == 1) {
@@ -159,7 +159,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 			BpHealObject = Instantiate (BpHealPrefab, EffectPoint.position, Quaternion.identity);
 			BpHealObject.transform.SetParent (EffectPoint);
 			//animator.SetTrigger ("Absorb");
-			if (PlayerNo == 0) {
+			if ((PlayerNo == 0) || (PlayerNo == 3)){
 				//SoundManager.Instance.Play (18, gameObject);
 			}
 			if (PlayerNo == 1) {

@@ -75,9 +75,10 @@ public class PlayerShoot03 : MonoBehaviour {
 			shotInterval = Time.time;
 			GameObject bulletObject = GameObject.Instantiate (Bullet03)as GameObject;
 			bulletObject.transform.position = muzzle.position;
-			//bulletObject.transform.position = Bomber.position;
-			if (PlayerNo == 0) {
-				SoundManager.Instance.Play(6,gameObject);
+            //bulletObject.transform.position = Bomber.position;
+            if ((PlayerNo == 0) || (PlayerNo == 3))
+            {
+                SoundManager.Instance.Play(6,gameObject);
 				SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);
 			}
 			if (PlayerNo == 1) {
