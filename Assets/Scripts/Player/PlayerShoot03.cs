@@ -24,8 +24,9 @@ public class PlayerShoot03 : MonoBehaviour {
 	public int PlayerNo;
 	private Pause pause;
 	public bool isBig;							// 巨大化しているかどうか
-	
-	/*[CustomEditor(typeof(PlayerShoot03))]
+    //public BattleManager battleManager;
+
+    /*[CustomEditor(typeof(PlayerShoot03))]
 	public class PlayerShoot03Editor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
@@ -39,7 +40,7 @@ public class PlayerShoot03 : MonoBehaviour {
 		}
 	}*/
 
-	void Start () {
+    void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
@@ -51,8 +52,9 @@ public class PlayerShoot03 : MonoBehaviour {
 		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
 		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
 			if (pause.isPause == false) {
-			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
-			if (isBig == false) {
+            isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
+            //isBig = battleManager.Player.GetComponent<PlayerAp>().isBig;
+            if (isBig == false) {
 				if (Input.GetButtonUp ("Fire1")) {
 					if (DataManager.Level >= PlayerLevel.PSoot03Level){
 					damage = Attack;

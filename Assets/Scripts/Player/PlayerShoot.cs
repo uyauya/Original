@@ -45,8 +45,9 @@ public class PlayerShoot : MonoBehaviour {
 	private Pause pause;						// ポーズ中かどうか（Pause参照）
 	public bool isBig;							// 巨大化しているかどうか
 	public static bool isShoot = false;			//ショットを撃っている状態かどうか
+    //public BattleManager battleManager;
 
-	/*[CustomEditor(typeof(PlayerShoot))]
+    /*[CustomEditor(typeof(PlayerShoot))]
 	public class PlayerShootEditor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
@@ -64,7 +65,7 @@ public class PlayerShoot : MonoBehaviour {
 		}
 	}*/
 
-	void Start () {
+    void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSources = gameObject.GetComponents<AudioSource>(); 			// 音源が複数の場合はGetComponents（複数形）になる
 		animator = GetComponent<Animator> ();
@@ -78,10 +79,11 @@ public class PlayerShoot : MonoBehaviour {
 		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
 		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
 		if (pause.isPause == false) {
-			//プレイヤが巨大化中だったらショット不可(PlayerAp参照)
-			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
-			//巨大化中でなかったら
-			if (isBig == false) {	
+            //プレイヤが巨大化中だったらショット不可(PlayerAp参照)
+            isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
+            //isBig = battleManager.Player.GetComponent<PlayerAp>().isBig;
+            //巨大化中でなかったら
+            if (isBig == false) {	
 				// Fire1（標準ではCtrlキー)を押した時
 				if (Input.GetButtonDown ("Fire1")) {
 					//チャージ開始（チャージ時間計測開始）

@@ -23,25 +23,44 @@ public class ChangeWeapon : MonoBehaviour {
 	public Color myBlue   = new Color (026,008,255,255);
 	public Color myYellow = new Color (207,253,000,255);	
 	public Color myGreen  = new Color (123,248,022,255);
-	public Color myRed	  = new Color (255,041,041,255);	
+	public Color myRed	  = new Color (255,041,041,255);
+    public BattleManager battleManager;
+    public MapCreator mapCreator;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		// Weapon1という名前のオブジェクトのRawImageを（このスクリプト内では）weponImage1と呼ぶことにする
 		weponImage1 = GameObject.Find ("Weapon1").GetComponent<RawImage> ();
 		weponImage2 = GameObject.Find ("Weapon2").GetComponent<RawImage> ();
 		weponImage3 = GameObject.Find ("Weapon3").GetComponent<RawImage> ();
 		weponImage4 = GameObject.Find ("Weapon4").GetComponent<RawImage> ();
 		weponImage5 = GameObject.Find ("Weapon5").GetComponent<RawImage> ();
-		// Playerタグが付いているオブジェクトのPlayerShootスクリプトを（このスクリプト内では）pshoot1と呼ぶことにする
-		pshoot1 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot> ();
-		pshoot2 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot02> ();
-		pshoot3 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();
-		pshoot4 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot04> ();
-		mshoot  = GameObject.FindWithTag("Player").GetComponent<MultiWayShoot> ();
-		// 最初に使用できる(選択してる)のはpshoot1にする。
-		pshoot1.enabled = true;
+        // Playerタグが付いているオブジェクトのPlayerShootスクリプトを（このスクリプト内では）pshoot1と呼ぶことにする
+        //pshoot1 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot> ();
+        //pshoot1 = battleManager.Player.GetComponent<PlayerShoot>();
+        pshoot1 = mapCreator.player.GetComponent<PlayerShoot>();
+        GameObject player;
+        if (battleManager.Player)
+        {
+            Debug.Log("いる");
+        }
+        else
+        {
+            Debug.Log("いない");
+        }
+        //pshoot2 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot02> ();
+        pshoot2 = mapCreator.player.GetComponent<PlayerShoot02>();
+        //pshoot2 = battleManager.Player.GetComponent<PlayerShoot02>();
+        //pshoot3 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();
+        //pshoot3 = mapCreator.player.GetComponent<PlayerShoot03>();
+        pshoot3 = battleManager.Player.GetComponent<PlayerShoot03>();
+        //pshoot4 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot04> ();
+        pshoot4 = mapCreator.player.GetComponent<PlayerShoot04>();
+        //mshoot  = GameObject.FindWithTag("Player").GetComponent<MultiWayShoot> ();
+        mshoot = mapCreator.player.GetComponent<MultiWayShoot>();
+        // 最初に使用できる(選択してる)のはpshoot1にする。
+        pshoot1.enabled = true;
 		pshoot2.enabled = false;
 		pshoot3.enabled = false;
 		pshoot4.enabled = false;
@@ -61,8 +80,8 @@ public class ChangeWeapon : MonoBehaviour {
 		if (Input.GetButtonUp ("Fire2")) { 
 			changeWeapon (); 	//武器交換
 			SoundManager2.Instance.Play(5,gameObject);}
-		if (DataManager.Level >= PlayerLevel.PSoot02Level) {
-			weponImage2.enabled = true;
+        if (DataManager.Level >= PlayerLevel.PSoot02Level) {
+            weponImage2.enabled = true;
 		}
 		if (DataManager.Level >= PlayerLevel.PSoot03Level) {
 			weponImage3.enabled = true;
@@ -89,7 +108,7 @@ public class ChangeWeapon : MonoBehaviour {
 			weponImage3.color = Color.white;
 			weponImage4.color = Color.white;
 			weponImage5.color = Color.white;
-			pshoot1.enabled = true;
+            pshoot1.enabled = true;
 			pshoot2.enabled = false;
 			pshoot3.enabled = false;
 			pshoot4.enabled = false;

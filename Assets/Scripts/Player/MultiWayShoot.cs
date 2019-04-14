@@ -31,8 +31,9 @@ public class MultiWayShoot : MonoBehaviour {
 	private Pause pause;
 	private int timeCount;
 	public bool isBig;							// 巨大化しているかどうか
+    //public BattleManager battleManager;
 
-	/*[CustomEditor(typeof(MultiWayShoot))]
+    /*[CustomEditor(typeof(MultiWayShoot))]
 	public class MultiWayShootEditor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
@@ -50,7 +51,7 @@ public class MultiWayShoot : MonoBehaviour {
 		}
 	}*/
 
-	void Start () {
+    void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
@@ -63,8 +64,9 @@ public class MultiWayShoot : MonoBehaviour {
 		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
 		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
 			if (pause.isPause == false) {
-			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
-			if (isBig == false) {
+            isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
+            //isBig = battleManager.Player.GetComponent<PlayerAp>().isBig;
+            if (isBig == false) {
 				//timeCount += 1;
 				// Fire1（標準ではCtrlキー)を押された瞬間.
 				shotInterval += Time.deltaTime;
