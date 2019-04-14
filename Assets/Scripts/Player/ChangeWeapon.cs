@@ -36,9 +36,10 @@ public class ChangeWeapon : MonoBehaviour {
 		weponImage3 = GameObject.Find ("Weapon3").GetComponent<RawImage> ();
 		weponImage4 = GameObject.Find ("Weapon4").GetComponent<RawImage> ();
 		weponImage5 = GameObject.Find ("Weapon5").GetComponent<RawImage> ();
+        mapCreator = GameObject.Find("MapCreator").GetComponent<MapCreator>();
+        battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
         // Playerタグが付いているオブジェクトのPlayerShootスクリプトを（このスクリプト内では）pshoot1と呼ぶことにする
         //pshoot1 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot> ();
-        //pshoot1 = battleManager.Player.GetComponent<PlayerShoot>();
         pshoot1 = mapCreator.player.GetComponent<PlayerShoot>();
         GameObject player;
         if (battleManager.Player)
@@ -51,10 +52,8 @@ public class ChangeWeapon : MonoBehaviour {
         }
         //pshoot2 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot02> ();
         pshoot2 = mapCreator.player.GetComponent<PlayerShoot02>();
-        //pshoot2 = battleManager.Player.GetComponent<PlayerShoot02>();
         //pshoot3 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();
-        //pshoot3 = mapCreator.player.GetComponent<PlayerShoot03>();
-        pshoot3 = battleManager.Player.GetComponent<PlayerShoot03>();
+        pshoot3 = mapCreator.player.GetComponent<PlayerShoot03>();
         //pshoot4 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot04> ();
         pshoot4 = mapCreator.player.GetComponent<PlayerShoot04>();
         //mshoot  = GameObject.FindWithTag("Player").GetComponent<MultiWayShoot> ();

@@ -11,15 +11,15 @@ public class PlayerLevel : MonoBehaviour
 	// 値は上からこはく、ゆうこ、みさきの順
 	public static List <UserParam> userParamList = new List<UserParam>() 
 	{
-		new UserParam(0,01,130,3000,3000,0000, string.Empty,0),		//Level01（List0）
-		new UserParam(2,01,150,3200,2700,0000, string.Empty,0),		//Level01
-		new UserParam(1,01,100,3200,3000,0000, string.Empty,0),		//Level01
-        new UserParam(3,01,100,3200,6000,0000, string.Empty,0),		//Level01
+		new UserParam(0,01,130,3000,3000,2000, string.Empty,0),		//Level01（List0）
+		new UserParam(2,01,150,3200,2700,2000, string.Empty,0),		//Level01
+		new UserParam(1,01,100,3200,3000,2000, string.Empty,0),		//Level01
+        new UserParam(3,01,100,3200,6000,2000, string.Empty,0),		//Level01
 
-		new UserParam(0,02,136,3300,3150,1000, string.Empty,0),		//Level02（List1）
-		new UserParam(2,02,165,3360,2830,1000, string.Empty,0),		//Level02
-		new UserParam(1,02,105,3520,3150,1000, string.Empty,0),		//Level02
-        new UserParam(3,02,105,3520,8150,1000, string.Empty,0),		//Level02
+		new UserParam(0,02,136,3300,3150,3000, string.Empty,0),		//Level02（List1）
+		new UserParam(2,02,165,3360,2830,3000, string.Empty,0),		//Level02
+		new UserParam(1,02,105,3520,3150,3000, string.Empty,0),		//Level02
+        new UserParam(3,02,105,3520,8150,3000, string.Empty,0),		//Level02
 
 		new UserParam(0,03,150,3500,3460,44000, string.Empty,0),		//Level03
 		new UserParam(2,03,181,3530,2970,4400, string.Empty,0),		//Level03
