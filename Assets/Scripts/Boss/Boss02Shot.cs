@@ -33,7 +33,8 @@ public class Boss02Shot : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		//if (Interval > 0.5f)
 		//ボスが死んだらスモールボスも消滅
 		if (BossBasic.BossDead == true)
@@ -55,7 +56,7 @@ public class Boss02Shot : MonoBehaviour {
 			_dir = new Vector3 (x, y, z);
 		}
 		//Interval += Time.deltaTime;
-		// 現後一定時間(DestroyTime)で自動的に消滅させる
+		// 出現後一定時間(DestroyTime)で自動的に消滅させる
 		Destroy(gameObject, DestroyTime);
 		// 弾を(_dir方向 * _speed速度で)前進させる
 		gameObject.transform.Translate (_dir * _speed);

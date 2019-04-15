@@ -5,52 +5,80 @@ using UnityEngine;
 
 public class Boss03Shot : MonoBehaviour 
 {
-	private GameObject ThrowingObject;  // 射出するオブジェクト
+	public GameObject ThrowingShot;  	// 放物線を描く弾
 	private float ThrowingSpeed;		// 射出速度
 	private float ThrowingAngle;        // 射出角度
+	private Vector3 ThrowingAngleDirection;		// 射出方向
 	private float Interval = 0;			// 射出間隔
+	public float DestroyTime = 5;		// 射出後消滅するまでの時間
+	public GameObject explosion;		// 弾の爆発
 	public float XspeedS = -0.1f;		// X方向最低速度
 	public float XspeedL = 0.1f;		// X方向最高速度	
 	public float YspeedS = -0.1f;
 	public float YspeedL = 0.1f;
 	public float ZspeedS = -0.1f;
 	public float ZspeedL = 0.1f;
-	public float XangleS = -0.1f;		// X方向最低角度
-	public float XangleL = 0.1f;		// X方向最高角度	
-	public float YangleS = -0.1f;
-	public float YangleL = 0.1f;
-	public float ZangleS = -0.1f;
-	public float ZangleL = 0.1f;
+	public float XdirectionS = -0.1f;	// X方向範囲（ここから）
+	public float XdirectionL = 0.1f;	// X方向範囲（ここまで）
+	public float YdirectionS = -0.1f;
+	public float YdirectionL = 0.1f;
+	public float ZdirectionS = -0.1f;
+	public float ZdirectionL = 0.1f;
+	public float XangleS = 0.0f;			// X方向最低角度
+	public float XangleL = 90.0f;			// X方向最高角度	
+	public float YangleS = 0.0f;	
+	public float YangleL = 90.0f;
+	public float ZangleS = 0.0f;	
+	public float ZangleL = 90.0f;
 
 	private void Start()
 	{
-		Collider collider = GetComponent<Collider>();
-		if (collider != null)
+		
+	}
+
+	private void Update()
+	{
+		//ボスが死んだら弾も消滅
+		if (BossBasic.BossDead == true)
 		{
-			// 干渉しないようにisTriggerをつける
-			collider.isTrigger = true;
+			Destroy (gameObject);
+			//Debug.Log("死亡");
 		}
 	}
 
 	private void FixedUpdate()
 	{
-			ThrowingShot();
+			ThrowingShoot();
 	}
 
 	/// ボールを射出する
-	private void ThrowingShot()
+	private void ThrowingShoot()
 	{
-		if (ThrowingObject != null)
+		if (ThrowingShot != null)
 		{
-			// Ballオブジェクトの生成
-			GameObject Boss03Bullet = Instantiate(ThrowingObject, this.transform.position, Quaternion.identity);
-			// 射出角度
-			float angle = ThrowingAngle;
-			// 射出速度を算出
-			//Vector3 velocity = CalculateVelocity(this.transform.position, 10, angle);
-			// 射出
-			Rigidbody rid = Boss03Bullet.GetComponent<Rigidbody>();
-			//rid.AddForce(velocity * rid.mass, ForceMode.Impulse);
+			{
+				// スピードをランダムにする
+				float x = Random.Range (XspeedS,XspeedL);
+				float y = Random.Range (YspeedS,YspeedL);
+				float z = Random.Range (ZspeedS,ZspeedL);
+				gameObject.transform.localPosition += new Vector3 (x, y, z);
+				ThrowingSpeed = Random.Range (1, 9) / 10f;
+				// 方向をランダムにする
+				x = Random.Range (XdirectionS,XdirectionL);
+				y = Random.Range (YdirectionS,YdirectionL);
+				z = Random.Range (ZdirectionS,ZdirectionL);
+				ThrowingAngleDirection = new Vector3 (x, y, z);
+				// 角度をランダムにする
+				float xx = Random.Range (XangleS,XangleL);
+				float yy = Random.Range (XangleS,XangleL);
+				float zz = Random.Range (XangleS,XangleL);
+				ThrowingAngle = Random.Range (1, 9) / 10f;
+			}
+			//Interval += Time.deltaTime;
+			// 出現後一定時間(DestroyTime)で自動的に消滅させる
+			Destroy(gameObject, DestroyTime);
+			// 弾を(ThrowingAngle * ThrowingSpeed速度）で前進
+			gameObject.transform.Translate (ThrowingAngle * ThrowingSpeed　* ThrowingAngleDirection　);
 		}
 		else
 		{
@@ -58,29 +86,14 @@ public class Boss03Shot : MonoBehaviour
 		}
 	}
 
-	/// 標的に命中する射出速度の計算
-	/// <param name="pointA">射出開始座標</param>
-	/// <param name="pointB">標的の座標</param>
-	/// <returns>射出速度</returns>
-	private Vector3 CalculateVelocity(Vector3 pointA, Vector3 pointB, float angle)
+	private void OnCollisionEnter(Collision collider) 
 	{
-		// 射出角をラジアンに変換
-		float rad = angle * Mathf.PI / 180;
-		// 水平方向の距離x
-		float x = Vector2.Distance(new Vector2(pointA.x, pointA.z), new Vector2(pointB.x, pointB.z));
-		// 垂直方向の距離y
-		float y = pointA.y - pointB.y;
-		// 斜方投射の公式を初速度について解く
-		float speed = Mathf.Sqrt(-Physics.gravity.y * Mathf.Pow(x, 2) / (2 * Mathf.Pow(Mathf.Cos(rad), 2) * (x * Mathf.Tan(rad) + y)));
 
-		if (float.IsNaN(speed))
+		//プレイヤータグの付いたオブジェクトと衝突したら爆発して消滅する
+		if (collider.gameObject.tag == "Player" || collider.gameObject.tag == "Shot") 
 		{
-			// 条件を満たす初速を算出できなければVector3.zeroを返す
-			return Vector3.zero;
-		}
-		else
-		{
-			return (new Vector3(pointB.x - pointA.x, x * Mathf.Tan(rad), pointB.z - pointA.z).normalized * speed);
+			Destroy (gameObject);
+			Instantiate (explosion, transform.position, transform.rotation);
 		}
 	}
 }
