@@ -1,13 +1,26 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss03Shot : MonoBehaviour 
 {
-	[SerializeField, Tooltip("射出するオブジェクトをここに割り当てる")]
-	private GameObject ThrowingObject;      // 射出するオブジェクト
-	[SerializeField, Range(0F, 90F), Tooltip("射出する角度")]
-	private float ThrowingAngle;            // 射出角度
+	private GameObject ThrowingObject;  // 射出するオブジェクト
+	private float ThrowingSpeed;		// 射出速度
+	private float ThrowingAngle;        // 射出角度
+	private float Interval = 0;			// 射出間隔
+	public float XspeedS = -0.1f;		// X方向最低速度
+	public float XspeedL = 0.1f;		// X方向最高速度	
+	public float YspeedS = -0.1f;
+	public float YspeedL = 0.1f;
+	public float ZspeedS = -0.1f;
+	public float ZspeedL = 0.1f;
+	public float XangleS = -0.1f;		// X方向最低角度
+	public float XangleL = 0.1f;		// X方向最高角度	
+	public float YangleS = -0.1f;
+	public float YangleL = 0.1f;
+	public float ZangleS = -0.1f;
+	public float ZangleL = 0.1f;
 
 	private void Start()
 	{

@@ -41,7 +41,7 @@ public class Bullet03 : MonoBehaviour {
 	// ボム設定（下記StartCoroutine("bom")の内容）
 	IEnumerator bom(){	
 		//プレイヤーの動きを止める
-		PlayerController.isStop = true;
+		//PlayerController.isStop = true;
 		// ボムエフェクト発生
 		GameObject effect = Instantiate(prefab_HitEffect2 , transform.position , Quaternion.identity) as GameObject;	
 		Destroy(effect , DestroyTime);			// ボムエフェクトを、2秒後に消滅させる
@@ -51,7 +51,7 @@ public class Bullet03 : MonoBehaviour {
 		//Camera.main.gameObject.GetComponent<ShakeCamera>().Shake();
 		Destroy(gameObject);	
 		//プレイヤーの動けるようにする
-		PlayerController.isStop = false;
+		//PlayerController.isStop = false;
 	}
 
 	// ボム攻撃範囲設定

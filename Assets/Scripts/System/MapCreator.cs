@@ -31,7 +31,7 @@ public class MapCreator : MonoBehaviour {
     // 起動時一番最初に選んだプレイヤーをマップに作成。（プレイヤーはDataManagerクリプトで判別・管理）
     void Awake(){
 		player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
-		//OriginalChara = player;			//作成いたプレイヤーをOriginalChara
+		//OriginalChara = player;			//作成したプレイヤーをOriginalChara
         battleManager.Player = player;
         //OriginalChara.SetActive (true);
     }
