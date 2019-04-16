@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class Boss03Shot : MonoBehaviour 
 {
-	public GameObject ThrowingShot;  	// 放物線を描く弾
-	private float ThrowingSpeed;		// 射出速度
-	private float ThrowingAngle;        // 射出角度
-	private Vector3 ThrowingAngleDirection;		// 射出方向
+	public GameObject BossShot;  		// 放物線を描く弾
+	private float ShotSpeed;			// 射出速度
+	private float ShotAngle;        	// 射出角度
+	private Vector3 ShotDirection;		// 射出方向
 	private float Interval = 0;			// 射出間隔
+	private int frameCnt = 0;			 
 	public float DestroyTime = 5;		// 射出後消滅するまでの時間
 	public GameObject explosion;		// 弾の爆発
 	public float XspeedS = -0.1f;		// X方向最低速度
@@ -24,8 +25,8 @@ public class Boss03Shot : MonoBehaviour
 	public float YdirectionL = 0.1f;
 	public float ZdirectionS = -0.1f;
 	public float ZdirectionL = 0.1f;
-	public float XangleS = 0.0f;			// X方向最低角度
-	public float XangleL = 90.0f;			// X方向最高角度	
+	public float XangleS = 0.0f;		// X方向最低角度
+	public float XangleL = 90.0f;		// X方向最高角度	
 	public float YangleS = 0.0f;	
 	public float YangleL = 90.0f;
 	public float ZangleS = 0.0f;	
@@ -48,37 +49,42 @@ public class Boss03Shot : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-			ThrowingShoot();
+			BossShoot();
 	}
 
 	/// ボールを射出する
-	private void ThrowingShoot()
+	private void BossShoot()
 	{
-		if (ThrowingShot != null)
+		if (BossShot != null)
 		{
+			GameObject bossShot = Instantiate(BossShot, this.transform.position, Quaternion.identity);
+			Rigidbody rid = bossShot.GetComponent<Rigidbody>();
 			{
 				// スピードをランダムにする
 				float x = Random.Range (XspeedS,XspeedL);
 				float y = Random.Range (YspeedS,YspeedL);
 				float z = Random.Range (ZspeedS,ZspeedL);
-				gameObject.transform.localPosition += new Vector3 (x, y, z);
-				ThrowingSpeed = Random.Range (1, 9) / 10f;
+				ShotSpeed = Random.Range (1, 9) / 10f;
 				// 方向をランダムにする
 				x = Random.Range (XdirectionS,XdirectionL);
 				y = Random.Range (YdirectionS,YdirectionL);
 				z = Random.Range (ZdirectionS,ZdirectionL);
-				ThrowingAngleDirection = new Vector3 (x, y, z);
+				ShotDirection = new Vector3 (x, y, z);
 				// 角度をランダムにする
-				float xx = Random.Range (XangleS,XangleL);
-				float yy = Random.Range (XangleS,XangleL);
-				float zz = Random.Range (XangleS,XangleL);
-				ThrowingAngle = Random.Range (1, 9) / 10f;
+				float xr = Random.Range (XangleS,XangleL);
+				float yr = Random.Range (XangleS,XangleL);
+				float zr = Random.Range (XangleS,XangleL);
+				ShotAngle = Random.Range (1, 9) / 10f;
 			}
-			//Interval += Time.deltaTime;
+			// 弾を(ShotAngle角度 * ShotSpeed速度* ShotDirection方向）で前進
+			rid.AddForce(ShotAngle * ShotSpeed　* ShotDirection, ForceMode.Impulse);
 			// 出現後一定時間(DestroyTime)で自動的に消滅させる
 			Destroy(gameObject, DestroyTime);
-			// 弾を(ThrowingAngle * ThrowingSpeed速度）で前進
-			gameObject.transform.Translate (ThrowingAngle * ThrowingSpeed　* ThrowingAngleDirection　);
+			frameCnt += 1;
+			// フレームカウントリセット用
+			if (10000 <= frameCnt) {
+				frameCnt = 0;
+			}
 		}
 		else
 		{
@@ -96,5 +102,6 @@ public class Boss03Shot : MonoBehaviour
 			Instantiate (explosion, transform.position, transform.rotation);
 		}
 	}
+
 }
 
