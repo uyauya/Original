@@ -38,14 +38,17 @@ public class BattleManager : MonoBehaviour {
         animator = GetComponent<Animator>();            // Animatorを使う場合は設定する
         ScoreText.text = "Score:0";
         LevelText.text = "Lv:0";
+        Debug.Log("レベルテキスト");
         timer = 0;
 		battleStatus = BATTLE_START;	//時間0秒、最初にスタートを表示させる
 		//ScoreTextにScoreオブジェクトのTextテキストの値を代入する
 		ScoreText = GameObject.Find ("Score").GetComponent<Text> ();
 		LevelText = GameObject.Find ("Level").GetComponent<Text> ();
+        Debug.Log("レベル");
 		// スコアテキストにDataManagerのスコアを代入
 		ScoreText.text = DataManager.Score.ToString();
 		LevelText.text = DataManager.Level.ToString();
+        Debug.Log("DMレベル");
         //playerImage = GameObject.Find("PlayerImage");
         //スタート時はStartは表示、WinとLoseは非表示
         messageStart.enabled = true;
@@ -73,6 +76,7 @@ public class BattleManager : MonoBehaviour {
         // 得点をテキスト形式で画面に表示
         ScoreText.text = DataManager.Score.ToString();
 		LevelText.text = DataManager.Level.ToString();
+
 		switch (battleStatus) {
 		
 		case BATTLE_START:

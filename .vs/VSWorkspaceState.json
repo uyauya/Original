@@ -2,13 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Materials",
     "\\Assets\\Prefab",
+    "\\Assets\\Prefab\\ManagerObject",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Block",
-    "\\Assets\\Scripts\\Boss",
-    "\\Assets\\Scripts\\Enemy",
-    "\\Assets\\Scripts\\Player"
+    "\\Assets\\Scripts\\System",
+    "\\Assets\\UnityChanTPK",
+    "\\Assets\\UnityChanTPK\\Script",
+    "\\Assets\\UnityChanTPK\\Script\\SpringBone",
+    "\\Assets\\UnityChanTPK\\Script\\SpringBone\\Setup"
   ],
   "PreviewInSolutionExplorer": false
 }
