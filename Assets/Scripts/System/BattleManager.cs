@@ -20,7 +20,7 @@ public class BattleManager : MonoBehaviour {
 	public GameObject mesaageSTART;		 	// スタート表示
 	public GameObject mesaageClear;		 	// ステージクリア表示
 	public Text ScoreText;				 	// スコア表示用
-    //public Text levelText;
+	public Text LevelText;
     //public GameObject playerImage;          
     private int ItemCount;				 	// アイテム取得数をカウント
 	PlayerController playerController;
@@ -37,15 +37,16 @@ public class BattleManager : MonoBehaviour {
     void Start () {
         animator = GetComponent<Animator>();            // Animatorを使う場合は設定する
         ScoreText.text = "Score:0";
-        //levelText.text = "Lv 0";
+        LevelText.text = "Lv:0";
         timer = 0;
 		battleStatus = BATTLE_START;	//時間0秒、最初にスタートを表示させる
 		//ScoreTextにScoreオブジェクトのTextテキストの値を代入する
 		ScoreText = GameObject.Find ("Score").GetComponent<Text> ();
+		LevelText = GameObject.Find ("Level").GetComponent<Text> ();
 		// スコアテキストにDataManagerのスコアを代入
 		ScoreText.text = DataManager.Score.ToString();
+		LevelText.text = DataManager.Level.ToString();
         //playerImage = GameObject.Find("PlayerImage");
-        //levelText = GameObject.Find("LevelImage").GetComponent<Text>();
         //スタート時はStartは表示、WinとLoseは非表示
         messageStart.enabled = true;
 		messageWin.enabled = false;
@@ -71,6 +72,7 @@ public class BattleManager : MonoBehaviour {
         }
         // 得点をテキスト形式で画面に表示
         ScoreText.text = DataManager.Score.ToString();
+		LevelText.text = DataManager.Level.ToString();
 		switch (battleStatus) {
 		
 		case BATTLE_START:

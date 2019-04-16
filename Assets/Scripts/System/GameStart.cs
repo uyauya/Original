@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,6 +14,7 @@ public class GameStart : MonoBehaviour {
 
     public void Onclick_Select ()
 	{
+		Debug.Log("スタート");
 		animator.SetBool("START", true);    
 		DataManager.Continue = false;
 		DataManager.FarstLevel = true;		//レベル1データ代入用

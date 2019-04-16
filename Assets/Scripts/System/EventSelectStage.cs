@@ -7,11 +7,11 @@ using UnityEngine.UI;						// UIを使う時は追加する
 //ステージセレクトシーン移行用
 public class EventSelectStage : MonoBehaviour {
 	//private AudioSource[] audioSources;
-	//private Animator animator;
+	private Animator animator;
 	//public Text blinkText;					//点滅させる
 	public void Onclick_Select ()
 	{
-		//animator.SetBool("START", true);    
+		animator.SetBool("START", true);     
 		//DataManager.Continue = false;
 		//DataManager.FarstLevel = true;
 		// ボタンを押してセレクト画面に移行

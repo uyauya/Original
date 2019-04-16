@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;			//シーン遷移する時は追加
 using UnityEngine.UI;						// UIを使う時は追加する
 
@@ -12,6 +13,8 @@ public class Continue : MonoBehaviour {
 
 	public void Onclick_Continue ()
 	{
+		Debug.Log("コンティニュー");
+		animator.SetBool("CONTINUE", true);  
 		DataManager.Continue = true;
 		DataManager.FarstLevel = false;
 		// ボタンを押してセレクト画面に移行
