@@ -140,6 +140,7 @@ public class BattleManager : MonoBehaviour {
                 }
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
 			if (playerController.ItemCount >= Count) {	// countで取得数設定
+				Debug.Log("スフィアゲット");
 				//プレイヤーの動きを止める
 				PlayerController.isStop = true;
 				if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 3)) {
@@ -164,6 +165,7 @@ public class BattleManager : MonoBehaviour {
 			// ボス撃破時スター出現
 			// スタースフィアを1個以上取得したら次面へ
 			if (playerController.GetStar >= 1 ) {
+				Debug.Log("スターゲット");
                 //正面を向く
                 Player.transform.LookAt(Camera.main.transform);
                 mesaageClear.SetActive (true);      // ステージクリア表示
