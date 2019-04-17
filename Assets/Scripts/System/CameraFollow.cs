@@ -11,7 +11,8 @@ public class CameraFollow : MonoBehaviour
 
     void Start ()
 	{
-        // Playerタグの付いたオブジェクトの位置をtargetとして取得
+		battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
+		// Playerタグの付いたオブジェクトの位置をtargetとして取得
         //target = GameObject.FindGameObjectWithTag ("Player").transform;
 		// カメラとターゲット（プレイヤー)の距離を設定
 		offset = transform.position - battleManager.Player.transform.position;

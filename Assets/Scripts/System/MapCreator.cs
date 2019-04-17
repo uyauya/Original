@@ -42,7 +42,7 @@ public class MapCreator : MonoBehaviour {
 		playerAxis	= new MapAxis(battleManager, size , prefab_BL[0].transform.localScale);	// PlayerAxisクラスのインスタンス生成
 		mapBlock	= new MapArrayBlock(prefab_BL , "BL" , size , playerAxis);			// 地面用MapArrayクラスのインスタンス生成
 		mapFloor	= new MapArrayFloor("FL" , size , playerAxis);						// 地上用MapArrayクラスのインスタンス生成
-		
+		battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
 		mapFloor.setWall(prefab_WALL);					// 壁オブジェクトの渡す
 		mapFloor.setObstacle(prefab_BreakBlock);		// 障害物オブジェクトを渡す
 		//mapFloor.setObstacle(prefab_BombPoint);		// 起爆スイッチを渡す
