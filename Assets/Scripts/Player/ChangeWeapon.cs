@@ -19,13 +19,17 @@ public class ChangeWeapon : MonoBehaviour {
 	public RawImage weponImage3;
 	public RawImage weponImage4;
 	public RawImage weponImage5;
-	public Color myWhite  = new Color (255,255,255,255);
-	public Color myBlue   = new Color (026,008,255,255);
-	public Color myYellow = new Color (207,253,000,255);	
+	//public Color myWhite  = new Color (255,255,255,255);
+    public Color myWhite = new Color(1, 1, 1, 1);
+    //public Color myBlue   = new Color (026,008,255,255);
+    public Color myBlue = new Color(0.1f, 0.03f, 1, 1);
+    public Color myYellow = new Color (207,253,000,255);
+    
 	public Color myGreen  = new Color (123,248,022,255);
+
 	public Color myRed	  = new Color (255,041,041,255);
-    //public BattleManager battleManager;
-    public MapCreator mapCreator;
+    public BattleManager battleManager;
+    //public MapCreator mapCreator;
 
 
     // Use this for initialization
@@ -36,13 +40,13 @@ public class ChangeWeapon : MonoBehaviour {
 		weponImage3 = GameObject.Find ("Weapon3").GetComponent<RawImage> ();
 		weponImage4 = GameObject.Find ("Weapon4").GetComponent<RawImage> ();
 		weponImage5 = GameObject.Find ("Weapon5").GetComponent<RawImage> ();
-        mapCreator = GameObject.Find("MapCreator").GetComponent<MapCreator>();
-        //battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
+        //mapCreator = GameObject.Find("MapCreator").GetComponent<MapCreator>();
+        battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
         // Playerタグが付いているオブジェクトのPlayerShootスクリプトを（このスクリプト内では）pshoot1と呼ぶことにする
         //pshoot1 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot> ();
-        pshoot1 = mapCreator.player.GetComponent<PlayerShoot>();
-        GameObject player;
-        /*if (battleManager.Player)
+        pshoot1 = battleManager.Player.GetComponent<PlayerShoot>();
+        /*GameObject player;
+        if (battleManager.Player)
         {
             Debug.Log("いる");
         }
@@ -51,13 +55,13 @@ public class ChangeWeapon : MonoBehaviour {
             Debug.Log("いない");
         }*/
         //pshoot2 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot02> ();
-        pshoot2 = mapCreator.player.GetComponent<PlayerShoot02>();
+        pshoot2 = battleManager.Player.GetComponent<PlayerShoot02>();
         //pshoot3 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();
-        pshoot3 = mapCreator.player.GetComponent<PlayerShoot03>();
+        pshoot3 = battleManager.Player.GetComponent<PlayerShoot03>();
         //pshoot4 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot04> ();
-        pshoot4 = mapCreator.player.GetComponent<PlayerShoot04>();
+        pshoot4 = battleManager.Player.GetComponent<PlayerShoot04>();
         //mshoot  = GameObject.FindWithTag("Player").GetComponent<MultiWayShoot> ();
-        mshoot = mapCreator.player.GetComponent<MultiWayShoot>();
+        mshoot = battleManager.Player.GetComponent<MultiWayShoot>();
 
         // 最初に使用できる(選択してる)のはpshoot1にする。
         pshoot1.enabled = true;
@@ -75,7 +79,8 @@ public class ChangeWeapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		// Fire2キーで下記changeWeaponを起動。その際SoundManager2の「5」に入れた音を鳴らす。
+		
+        // Fire2キーで下記changeWeaponを起動。その際SoundManager2の「5」に入れた音を鳴らす。
 		// Fire2キーはEdit→ProjectSetting→Inputでキー設定変更可能。
 		if (Input.GetButtonUp ("Fire2")) { 
 			changeWeapon (); 	//武器交換
@@ -97,8 +102,16 @@ public class ChangeWeapon : MonoBehaviour {
 
 	private void changeWeapon ()
 	{
-		//「値+1」を武器個数(num)で割り、余りをtypeに入れて選択武器とする
-		type = (type + 1) % num;
+        pshoot1 = battleManager.Player.GetComponent<PlayerShoot>();
+        pshoot2 = battleManager.Player.GetComponent<PlayerShoot02>();
+        //pshoot3 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot03> ();
+        pshoot3 = battleManager.Player.GetComponent<PlayerShoot03>();
+        //pshoot4 = GameObject.FindWithTag("Player").GetComponent<PlayerShoot04> ();
+        pshoot4 = battleManager.Player.GetComponent<PlayerShoot04>();
+        //mshoot  = GameObject.FindWithTag("Player").GetComponent<MultiWayShoot> ();
+        mshoot = battleManager.Player.GetComponent<MultiWayShoot>();
+        //「値+1」を武器個数(num)で割り、余りをtypeに入れて選択武器とする
+        type = (type + 1) % num;
 		// 選択された武器には色を付けて他は白に。
 		// 選択された武器は使用可（該当スクリプトをtrueにする)にして他は不可に。
 		if (type == 0) 
@@ -108,6 +121,7 @@ public class ChangeWeapon : MonoBehaviour {
 			weponImage3.color = Color.white;
 			weponImage4.color = Color.white;
 			weponImage5.color = Color.white;
+            
             pshoot1.enabled = true;
 			pshoot2.enabled = false;
 			pshoot3.enabled = false;

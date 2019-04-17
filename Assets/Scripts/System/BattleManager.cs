@@ -31,8 +31,16 @@ public class BattleManager : MonoBehaviour {
 	public int Count;					 	// ステージ移行する為のアイテム取得個
 	public int PlayerNo;				 	//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public static bool PlayerDead = false;	//プレイヤキャラが死亡したかどうか
+    public GameObject[] Prefab_Player;
+    private int CurrentLevel;
     //public static GameObject Player;
-    
+
+    void Awake(){
+            Player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
+            //OriginalChara = player;			//作成したプレイヤーをOriginalChara
+            //battleManager.Player = player;
+            //OriginalChara.SetActive (true);
+     }
 
     void Start () {
         animator = GetComponent<Animator>();            // Animatorを使う場合は設定する
@@ -63,6 +71,22 @@ public class BattleManager : MonoBehaviour {
     }
 
 	void Update () {
+
+        if(DataManager.PlayerChange == true)
+        {
+            Vector3 PlayerPos = Player.transform.position;
+            CurrentLevel = DataManager.Level;
+            Destroy(Player);
+            if (DataManager.PlayerNo == 0)				//新たなプレイヤー発生
+			{
+            Player = Instantiate (Prefab_Player [DataManager.PlayerNo = 3]);
+            //battleManager.Player = player;
+            Player.transform.position = PlayerPos;
+            DataManager.Level = CurrentLevel;
+            DataManager.PlayerChange = false;
+            //Debug.Log("レベル" + DataManager.Level);
+            }
+        }
 
         if (Input.GetButtonUp("Fire4"))
         {
