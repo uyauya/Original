@@ -7,6 +7,7 @@ using UnityEditor;
 public class MultiWayShoot : MonoBehaviour {
 
 	public GameObject Bullet05;
+	public GameObject UBullet05;
 	private GameObject bullet05;
 	public Transform muzzle;
 	public GameObject muzzleFlash;

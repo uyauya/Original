@@ -10,6 +10,9 @@ public class PlayerShoot : MonoBehaviour {
 	public GameObject Bullet01;					// 弾（Shotオブジェクトのスクリプト）
 	public GameObject Bullet01B;				// 弾（Shotオブジェクトのスクリプト）
 	public GameObject Bullet01C;				// 弾（Shotオブジェクトのスクリプト）
+	public GameObject UBullet01;					// 弾（Shotオブジェクトのスクリプト）
+	public GameObject UBullet01B;				// 弾（Shotオブジェクトのスクリプト）
+	public GameObject UBullet01C;				// 弾（Shotオブジェクトのスクリプト）
 	private GameObject bullet01;
 	public Transform muzzle;					// 弾発射元（銃口）
 	public GameObject muzzleFlash;				// 発射する時のフラッシュ（現在未使用）
@@ -152,41 +155,74 @@ public class PlayerShoot : MonoBehaviour {
 		}
 	}
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
-	void Bullet() {
+	void Bullet() 
+	{
 		//ショット溜め時間がChargeTime1以下だったら
-		if (ChargeTime <= ChargeTime1) {
-			// Bullet01(小弾)を生成
-			GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
-			// Bullet01の生成位置をmuzzleに設定(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
-			bulletObject.transform.position = muzzle.position;
-			// Bullet01オブジェクトにダメージ計算を渡す(上記参照)
-			bulletObject.GetComponent<Bullet01> ().damage = this.damage;
-		//ショット溜め時間がChargeTime1を超えChargeTime2以下だったら
-		} else if (ChargeTime1 < ChargeTime && ChargeTime  <= ChargeTime2) {
-			// Bullet01B(中弾)を生成
-			GameObject bulletObject = GameObject.Instantiate (Bullet01B)as GameObject;
-			bulletObject.transform.position = muzzle.position;
-			bulletObject.GetComponent<Bullet01B> ().damage = this.damage;
-		//それ以外(溜め時間がChargeTime2を超えた)なら
-		} else {
-			// Bullet01C(大弾)を生成
-			GameObject bulletObject = GameObject.Instantiate (Bullet01C)as GameObject;
-			bulletObject.transform.position = muzzle.position;
-			bulletObject.GetComponent<Bullet01C> ().damage = this.damage;
+		if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 1)|| (DataManager.PlayerNo == 2)) 
+		{
+			if (ChargeTime <= ChargeTime1) 
+			{
+				// Bullet01(小弾)を生成
+				GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
+				// Bullet01の生成位置をmuzzleに設定(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
+				bulletObject.transform.position = muzzle.position;
+				// Bullet01オブジェクトにダメージ計算を渡す(上記参照)
+				bulletObject.GetComponent<Bullet01> ().damage = this.damage;
+				//ショット溜め時間がChargeTime1を超えChargeTime2以下だったら
+			} else if (ChargeTime1 < ChargeTime && ChargeTime  <= ChargeTime2) 
+			{
+				// Bullet01B(中弾)を生成
+				GameObject bulletObject = GameObject.Instantiate (Bullet01B)as GameObject;
+				bulletObject.transform.position = muzzle.position;
+				bulletObject.GetComponent<Bullet01B> ().damage = this.damage;
+			//それ以外(溜め時間がChargeTime2を超えた)なら
+			} else 
+			{
+				// Bullet01C(大弾)を生成
+				GameObject bulletObject = GameObject.Instantiate (Bullet01C)as GameObject;
+				bulletObject.transform.position = muzzle.position;
+				bulletObject.GetComponent<Bullet01C> ().damage = this.damage;
+			}
 		}
-			//キャラクタ別にSoundManager（声担当）とSoundManager2（効果音担当）から音を鳴らす
-			if ((PlayerNo == 0)|| (PlayerNo == 3)){	// こはく
-			SoundManager.Instance.Play(0,gameObject);
-			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
+		else if (DataManager.PlayerNo == 3)
+		{
+			if (ChargeTime <= ChargeTime1) 
+			{	
+				// Bullet01(小弾)を生成
+				GameObject bulletObject = GameObject.Instantiate (UBullet01)as GameObject;
+				// Bullet01の生成位置をmuzzleに設定(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
+				bulletObject.transform.position = muzzle.position;
+				// Bullet01オブジェクトにダメージ計算を渡す(上記参照)
+				bulletObject.GetComponent<Bullet01> ().damage = this.damage;
+					//ショット溜め時間がChargeTime1を超えChargeTime2以下だったら
+			} else if (ChargeTime1 < ChargeTime && ChargeTime  <= ChargeTime2) 
+			{
+				// Bullet01B(中弾)を生成
+				GameObject bulletObject = GameObject.Instantiate (UBullet01B)as GameObject;
+				bulletObject.transform.position = muzzle.position;
+				bulletObject.GetComponent<Bullet01B> ().damage = this.damage;
+				//それ以外(溜め時間がChargeTime2を超えた)なら
+			} else 
+			{
+				// Bullet01C(大弾)を生成
+				GameObject bulletObject = GameObject.Instantiate (UBullet01C)as GameObject;
+				bulletObject.transform.position = muzzle.position;
+				bulletObject.GetComponent<Bullet01C> ().damage = this.damage;
 			}
-			if (PlayerNo == 1) {	// ゆうこ
-			SoundManager.Instance.Play(1,gameObject);	
-			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
-			}
-			if (PlayerNo == 2) {	// みさき
-			SoundManager.Instance.Play(2,gameObject);		
-			SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
-			}
+		}
+		//キャラクタ別にSoundManager（声担当）とSoundManager2（効果音担当）から音を鳴らす
+		if ((PlayerNo == 0)|| (PlayerNo == 3)){	// こはく
+		SoundManager.Instance.Play(0,gameObject);
+		SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
+		}
+		if (PlayerNo == 1) {	// ゆうこ
+		SoundManager.Instance.Play(1,gameObject);	
+		SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
+		}
+		if (PlayerNo == 2) {	// みさき
+		SoundManager.Instance.Play(2,gameObject);		
+		SoundManager2.Instance.PlayDelayed (0, 0.2f, gameObject);
+		}
 	}
 
 	public void KickEvent (){	//ショット時のアニメーション

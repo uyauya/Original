@@ -7,6 +7,7 @@ using UnityEditor;
 public class PlayerShoot02 : MonoBehaviour {
 
 	public GameObject Bullet02;
+	public GameObject UBullet02;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
 	public float shotInterval;			// ショットの時間間隔
