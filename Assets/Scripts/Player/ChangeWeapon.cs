@@ -19,15 +19,17 @@ public class ChangeWeapon : MonoBehaviour {
 	public RawImage weponImage3;
 	public RawImage weponImage4;
 	public RawImage weponImage5;
-	//public Color myWhite  = new Color (255,255,255,255);
+	//デフォルトカラー設定inspector→ColorでRGBAのそれぞれの値を255で割った数値を入れる
+	//RGBA ※Aは透明度(0に近くなるほど透明化)
     public Color myWhite = new Color(1, 1, 1, 1);
     //public Color myBlue   = new Color (026,008,255,255);
     public Color myBlue = new Color(0.1f, 0.03f, 1, 1);
-    public Color myYellow = new Color (207,253,000,255);
-    
-	public Color myGreen  = new Color (123,248,022,255);
-
-	public Color myRed	  = new Color (255,041,041,255);
+    //public Color myYellow = new Color (207,253,000,255);
+	public Color myYellow = new Color (0.81f,0.99f,0,1);
+	//public Color myGreen  = new Color (123,248,022,255);
+	public Color myGreen  = new Color (0.48f,0.97f,0.08f,1);
+	//public Color myRed	  = new Color (255,041,041,255);
+	public Color myRed	  = new Color (1,0.16f,0.16f,1);
     public BattleManager battleManager;
     //public MapCreator mapCreator;
 

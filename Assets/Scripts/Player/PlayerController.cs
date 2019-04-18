@@ -31,9 +31,12 @@ public class PlayerController : MonoBehaviour {
 	private int JumpCount;							//ジャンプ回数計算用（二段ジャンプ処理に使用）
 	private float interval = 2.0f;
 	private float timer = 0.0f;				
-	public int ItemCount;							//スフィア取得個数計算用
-	public int GetStar = 0;
-	public int GetBigStar = 0;
+	//public int ItemCount;							//スフィア取得個数計算用
+	//public int GetStar = 0;
+	//public int GetBigStar = 0;
+	public static bool ItemCount = false;							//スフィア取得個数計算用
+	public static bool GetStar = false;
+	public static bool GetBigStar = false;
 	Vector3 targetSpeed = Vector3.zero; 			//目標速度
 	Vector3 addSpeed = Vector3.zero;    			//加算速度
 	public GameObject BpHealEffect;					//ブーストポイント回復アイテム取得時のエフェクト
@@ -104,10 +107,10 @@ public class PlayerController : MonoBehaviour {
 	void Update()
 	{
 		//ステージクリア条件かストップ条件で動けなくする
-		if ((isClear == true) || (isStop == true))
+		/*if ((isClear == true) || (isStop == true))
 		{
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-		}
+		}*/
 		//ProjectSettigでJumpに割り当てたキーが押されたら
 		if (Input.GetButtonDown("Jump"))
 		{
@@ -293,10 +296,10 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//ステージクリア条件かストップ条件で動けなくする
-		if ((isClear == true) || (isStop == true))
+		/*if ((isClear == true) || (isStop == true))
 		{
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-		}
+		}*/
 
 		//通常時とブースト時で変化
 		if (isBoost)										//ブーストならMaxBoostForce値まで加速
@@ -610,7 +613,8 @@ public class PlayerController : MonoBehaviour {
 			}
 			animator.SetTrigger ("ItemGet");
 			// greenShere取得数を１追加する（取得数計算）
-			ItemCount += 1;
+			//ItemCount += 1;
+			ItemCount = true;
 		}
 		// Star（ボス撃破時ドロップするクリア用アイテム）取得時
 		if(collider.gameObject.tag == "Star") {
@@ -626,7 +630,8 @@ public class PlayerController : MonoBehaviour {
 			//移動不可でSalute
 			isClear = true;	
 			animator.SetBool("Salute", true);
-			GetStar += 1;
+			//GetStar += 1;
+			GetStar = true;
 		}
 		// BigStar（ラスボス撃破時ドロップするクリア用アイテム）取得時
 		if(collider.gameObject.tag == "BigStar") {
@@ -641,7 +646,8 @@ public class PlayerController : MonoBehaviour {
 			}
 			isClear = true;	
 			animator.SetBool("Salute", true);
-			GetBigStar += 1;
+			//GetBigStar += 1;
+			GetBigStar = true;
 		}
 
 	}

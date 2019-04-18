@@ -33,6 +33,9 @@ public class BattleManager : MonoBehaviour {
 	public static bool PlayerDead = false;	//プレイヤキャラが死亡したかどうか
     public GameObject[] Prefab_Player;
     private int CurrentLevel;
+	public int GetStar = 0;
+	public int GetBigStar = 0;
+	public static bool isClear = false;				//ステージクリアしたかどうか
     //public static GameObject Player;
 
     void Awake(){
@@ -163,7 +166,13 @@ public class BattleManager : MonoBehaviour {
                 
                 }
 			// プレイヤーのアイテム（グリーンスフィア）取得数が一定以上ならボス面に移行
-			if (playerController.ItemCount >= Count) {	// countで取得数設定
+			//if (playerController.ItemCount >= Count) {	// countで取得数設定
+			if (PlayerController.ItemCount == true)
+			{
+				ItemCount += 1;
+				PlayerController.ItemCount = false;
+			}
+			if (ItemCount >= Count) {	// countで取得数設定
 				Debug.Log("スフィアゲット");
 				//プレイヤーの動きを止める
 				PlayerController.isStop = true;
@@ -181,14 +190,20 @@ public class BattleManager : MonoBehaviour {
 				// 一定時間後シーン移動（ChangeTimeで時間設定）
 				// NextScene処理起動（下記参照）
 				Invoke("NextScene", ChangeTime);	
-				playerController.ItemCount = 0;		// シーン移動時グリーンスフィア取得数をリセット
+				//playerController.ItemCount = 0;		// シーン移動時グリーンスフィア取得数をリセット
+				ItemCount = 0;		// シーン移動時グリーンスフィア取得数をリセット
 				//プレイヤーの動けるようにする
 				PlayerController.isStop = false;
 			}	
 
 			// ボス撃破時スター出現
 			// スタースフィアを1個以上取得したら次面へ
-			if (playerController.GetStar >= 1 ) {
+			if (PlayerController.GetStar == true)
+			{
+				GetStar += 1;
+				PlayerController.GetStar = false;
+			}
+			if (GetStar >= 1 ) {
 				Debug.Log("スターゲット");
                 //正面を向く
                 Player.transform.LookAt(Camera.main.transform);
@@ -196,40 +211,33 @@ public class BattleManager : MonoBehaviour {
                 // 一定時間後シーン移動（ChangeTimeで時間設定）
 				// NextScene処理起動（下記参照）
 				Invoke("NextScene", ChangeTime);	
-				playerController.GetStar = 0;		// スター取得数をリセット	
+				//playerController.GetStar = 0;		// スター取得数をリセット
+				GetStar = 0;		// スター取得数をリセット
 			}
 
 			// ラスボス撃破時ビッグスター出現
 			// ビッグスターオブジェクトを1個以上取得したらエンディング
-			if (playerController.GetBigStar >= 1) {
+			if (PlayerController.GetBigStar == true)
+			{
+				GetBigStar += 1;
+				PlayerController.GetBigStar = false;
+			}
+			if (GetBigStar >= 1) {
 				Player.transform.LookAt(Camera.main.transform);
 				mesaageClear.SetActive (true);		// ステージクリア表示
 				Invoke ("END", ChangeTime);			// ChangeTime時間後END処理起動（下記参照）
-				playerController.GetBigStar = 0;	// ビッグスター取得数をリセット	
+				//playerController.GetBigStar = 0;	// ビッグスター取得数をリセット	
+				GetBigStar = 0;	// ビッグスター取得数をリセット	
 		}
 		break;
 
 		case BATTLE_END:
-
-			//一定時間経過したら遷移可能にする
-			/*timer += Time.deltaTime;
-			if(timer > 3)
-			{
-				//動きを止める
-				//TimeScaleで制御できるのはタイマーにより制御されている処理だけ
-				Time.timeScale = 0;	
-				// Fire1ボタンを押してタイトルに戻すようにする
-				if (Input.GetButtonDown ("Fire1"))
-				{
-					//Application.LoadLevel("Start");
-					SceneManager.LoadScene ("Start");
-					Time.timeScale = 1;
-				}
-			}*/
 			break;
 
 		}
 	}
+
+
 
 	//次面移動処理
 	private void NextScene(){
@@ -242,7 +250,8 @@ public class BattleManager : MonoBehaviour {
 		}
 			SceneManager.LoadScene (StageManager.Instance.StageName [StageManager.Instance.StageNo]);
 			//クリア条件解除（プレイヤキャラの操作を元に戻す）
-			PlayerController.isClear = false;
+			//PlayerController.isClear = false;
+			isClear = false;
 	}
 
 	//ゲームオー画面に移動

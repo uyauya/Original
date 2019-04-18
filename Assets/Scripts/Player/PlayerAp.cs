@@ -11,18 +11,27 @@ public class PlayerAp : MonoBehaviour {
 	public int enemyAttack;					// 敵の攻撃値
 	public float poisonAttack;				// 毒
 	public Text armorText;
-	float displayArmorPoint;				// 画面表示用HPゲージ			
-	public Color MyGreen  		= new Color (000,240,000,255);	//RGBA ※Aは透明度(0に近くなるほど透明化)
-	public Color MyWhite  		= new Color (255,255,255,255);	
-	public Color MyYellow 		= new Color (255,206,000,255);	
-	public Color MyRed 			= new Color (219,000,000,255);	
-	public Color DamageColor 	= new Color (246,040,061,249);  //ダメージ点滅色
-	public Color InvisibleColor = new Color (255,255,255,000);  //無敵状態時色
-	public Color PoisonColor 	= new Color (255,025,233,119);  //毒ダメージ色
+	float displayArmorPoint;				// 画面表示用HPゲージ
+	//デフォルトカラー設定inspector→ColorでRGBAのそれぞれの値を255で割った数値を入れる
+	//RGBA ※Aは透明度(0に近くなるほど透明化)
+	//public Color MyGreen  		= new Color (000,240,000,255);	
+	public Color MyGreen  = new Color (0.48f,0.97f,0.08f,1);
+	//public Color MyWhite  		= new Color (255,255,255,255);
+	public Color MyWhite  		= new Color (1,1,1,1);
+	//public Color MyYellow 		= new Color (255,206,000,255);	
+	public Color MyYellow = new Color (0.81f,0.99f,0,1);
+	//public Color MyRed 			= new Color (219,000,000,255);
+	public Color MyRed	  = new Color (1,0.16f,0.16f,1);
+	//public Color DamageColor 	= new Color (246,040,061,249);  //ダメージ点滅色
+	public Color DamageColor 	= new Color (0.96f,0.06f,0.24f,0.98f);  //ダメージ点滅色
+	//public Color InvisibleColor = new Color (255,255,255,000);  //無敵状態時色
+	public Color InvisibleColor = new Color (1,1,1,0);  //無敵状態時色
+	//public Color PoisonColor 	= new Color (255,025,233,119);  //毒ダメージ色
+	public Color PoisonColor 	= new Color (1,0.1f,0.91f,0.47f);  //毒ダメージ色
     public Image gaugeImage;
 	private ModelColorChange modelColorChange;		
 	public float FlashTime =10.0f;			// 点滅時間
-	private Animator animator;				// Animator（PlayerMotion)取得
+	public static Animator Panimator;				// Animator（PlayerMotion)取得
 	public float KnockBackRange = 2.0f;		// ノックバック距離（ダメージ受けた際に使用）
 	public int PlayerNo;					// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public Transform muzzle;				// ショット発射口位置をTransformで位置取り
@@ -60,7 +69,7 @@ public class PlayerAp : MonoBehaviour {
 		// 画面上のarmorPointとPlayerApのarmorPointを連動させる
 		displayArmorPoint = armorPoint;
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
-		animator = GetComponent<Animator> ();
+		Panimator = GetComponent<Animator> ();
 		gaugeImage = GameObject.Find ("ApGauge").GetComponent<Image> ();
 		armorText = GameObject.Find ("TextAp").GetComponent<Text> ();
 		boddy_summer = GameObject.Find("_body_summer");
@@ -139,7 +148,7 @@ public class PlayerAp : MonoBehaviour {
 			//SetParentにしてプレイヤが動いてもDamageObjectがプレイヤーに追随するようにする
 			DamageObject.transform.SetParent (EffectPoint);
 			//アニメーターをDamageに切り替え
-			animator.SetTrigger ("Damage");
+			Panimator.SetTrigger ("Damage");
 			if ((PlayerNo == 0)|| (PlayerNo == 3)) {
 				SoundManager.Instance.Play (21, gameObject);
 			}
@@ -168,7 +177,7 @@ public class PlayerAp : MonoBehaviour {
 					armorPoint -= 100;
 					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 					DamageObject.transform.SetParent (EffectPoint);
-					animator.SetTrigger ("Damage");
+					Panimator.SetTrigger ("Damage");
                     if ((PlayerNo == 0) || (PlayerNo == 3))
                     {
                         SoundManager.Instance.Play (24, gameObject);	
@@ -251,14 +260,14 @@ public class PlayerAp : MonoBehaviour {
 			// 体力上限以上には回復しない。
 			armorPoint = Mathf.Clamp (armorPoint, 0, DataManager.ArmorPointMax);
 			//Debug.Log (armorPoint);
-			animator.SetTrigger ("ItemGet");
+			Panimator.SetTrigger ("ItemGet");
 		}
 
 		//Itemタグをつけたもの（YellowSphere）を取ったら無敵＆巨大化
 		if (collider.gameObject.tag == "Item4") {	
 			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
 			HpHealObject.transform.SetParent (EffectPoint);
-			animator.SetTrigger ("ItemGet");
+			Panimator.SetTrigger ("ItemGet");
 			if ((PlayerNo == 0)|| (PlayerNo == 3)) {
 				SoundManager2.Instance.Play(6,gameObject);
 			}
