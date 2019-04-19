@@ -36,6 +36,7 @@ public class BattleManager : MonoBehaviour {
 	public int GetStar = 0;
 	public int GetBigStar = 0;
 	public static bool isClear = false;				//ステージクリアしたかどうか
+	public bool isPChange = false;
     //public static GameObject Player;
 
     void Awake(){
@@ -87,18 +88,39 @@ public class BattleManager : MonoBehaviour {
             Player.transform.position = PlayerPos;
             DataManager.Level = CurrentLevel;
             DataManager.PlayerChange = false;
+			//isPChange = true;
             //Debug.Log("レベル" + DataManager.Level);
             }
         }
+
+		if(DataManager.PlayerReturn == true)
+		{
+			Vector3 PlayerPos = Player.transform.position;
+			CurrentLevel = DataManager.Level;
+			Destroy(Player);
+			if (DataManager.PlayerNo == 3)				//新たなプレイヤー発生
+			{
+				Player = Instantiate (Prefab_Player [DataManager.PlayerNo = 0]);
+				//Debug.Break();
+				//battleManager.Player = player;
+				Player.transform.position = PlayerPos;
+				DataManager.Level = CurrentLevel;
+				DataManager.PlayerReturn = false;
+				//Debug.Log("レベル" + DataManager.Level);
+			}
+		}
 
         if (Input.GetButtonUp("Fire4"))
         {
             DataManager.PlayerChange = true;
         }
         else if(DataManager.PlayerChange == true)
+		//if(isPChange = true)
         {
             if (Input.GetButtonUp("Fire4"))
+				Debug.Log("押したよ");
                 DataManager.PlayerReturn = true;
+				Debug.Log("戻るよ");
         }
         // 得点をテキスト形式で画面に表示
         ScoreText.text = DataManager.Score.ToString();

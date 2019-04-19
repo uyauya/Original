@@ -94,9 +94,11 @@ public class MultiWayShoot : MonoBehaviour {
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
 	void Bullet ()
 	{
-		if(GetComponent<PlayerController> ().boostPoint >= BpDown)
-		// FirstBulletからBulletNumberまでの数を弾生成数（i）とする
-		for (int i = FirstBullet; i < BulletNumber; i++) {
+		if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 1)|| (DataManager.PlayerNo == 2)) 
+		{
+			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
+			// FirstBulletからBulletNumberまでの数を弾生成数（i）とする
+			for (int i = FirstBullet; i < BulletNumber; i++) {
 			//Debug.Log (i);
 			//弾配置場所(弾の生成元からの半径)
 			float rad = BulletRad;
@@ -114,6 +116,40 @@ public class MultiWayShoot : MonoBehaviour {
 			bulletObject.transform.rotation = Quaternion.LookRotation (bulletObject.transform.position - transform.position);
 			// 回転計算をした後に弾の座標をnew Vector3(0,1,0)で上に上げる
 			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
+			// 	ブーストポイントをBpDown分消費
+			GetComponent<PlayerController> ().boostPoint -= BpDown;
+			// bulletObjectのオブジェクトにダメージ計算を渡す
+			bulletObject.GetComponent<Bullet05> ().damage = this.damage;
+			}
+		}
+		else if(DataManager.PlayerNo == 3)
+		{
+			if(GetComponent<PlayerController> ().boostPoint >= BpDown)
+			// FirstBulletからBulletNumberまでの数を弾生成数（i）とする
+			for (int i = FirstBullet; i < BulletNumber; i++) {
+			//Debug.Log (i);
+			//弾配置場所(弾の生成元からの半径)
+			float rad = BulletRad;
+			//真ん中（０）を中心にBulletGap（角度）間隔に配置。配置場所をposとする　
+			Vector3 pos = new Vector3 (
+						rad * Mathf.Sin (Mathf.Deg2Rad * (i * BulletGap)),
+						0,
+						rad * Mathf.Cos (Mathf.Deg2Rad * (i * BulletGap))
+					);
+			// Bullet05の付いたオブジェクトを生成
+			GameObject bulletObject = Instantiate (UBullet05);			
+			// 弾を（posの場所に）配置
+			bulletObject.transform.position = transform.TransformPoint (pos);
+			// 回転を設定（弾を拡散するよう回転させて振り分けて配置）
+			bulletObject.transform.rotation = Quaternion.LookRotation (bulletObject.transform.position - transform.position);
+			// 回転計算をした後に弾の座標をnew Vector3(0,1,0)で上に上げる
+			bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
+			// 	ブーストポイントをBpDown分消費
+			GetComponent<PlayerController> ().boostPoint -= BpDown;
+			// bulletObjectのオブジェクトにダメージ計算を渡す
+			bulletObject.GetComponent<Bullet05> ().damage = this.damage;
+			}
+		}
 			if ((PlayerNo == 0)|| (PlayerNo == 3)){
 				SoundManager.Instance.Play(21,gameObject);
 				SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
@@ -126,14 +162,8 @@ public class MultiWayShoot : MonoBehaviour {
 				SoundManager.Instance.Play(23,gameObject);	
 				SoundManager2.Instance.PlayDelayed (4, 0.2f, gameObject);
 			}
-			// 	ブーストポイントをBpDown分消費
-			GetComponent<PlayerController> ().boostPoint -= BpDown;
-			// bulletObjectのオブジェクトにダメージ計算を渡す
-			bulletObject.GetComponent<Bullet05> ().damage = this.damage;
-			}
-
 	}
-
+		
 	public void KickEvent (){
 		Debug.Log("kick");
 	}

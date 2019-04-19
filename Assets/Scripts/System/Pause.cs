@@ -7,6 +7,9 @@ public class Pause : MonoBehaviour
 {
 	public bool isPause;				//ポーズ画面かどうか
 	public bool isConfig;				//コンフィグ画面かどうか
+	//public bool isTutorial
+	//public bool isStatus;
+	//public bool isSound;
 	public GameObject Tutorial;
 	public GameObject Setting;
 	public AudioSource audioSource;
@@ -39,8 +42,10 @@ public class Pause : MonoBehaviour
 				bgmManager.Pause ();		//一時停止（完全停止する場合はaudioSource.Stop();
 			}
 		}
-		// ポーズ中に左Shiftキー押したとき
-		if (Input.GetKeyDown (KeyCode.LeftShift) && isPause ) {
+		// ポーズ中に方向キー上押した時コンフィグ画面に移行
+		if(Input.GetKey(KeyCode.UpArrow)&& isPause)
+		//if (Input.GetKeyDown (KeyCode.LeftShift) && isPause ) 
+		{
 			//コンフィグ画面だったら何もしない
 			if (isConfig) {
 				isConfig = false;
@@ -51,6 +56,45 @@ public class Pause : MonoBehaviour
 				Setting.SetActive (true);
 			}
 		}
+		// ポーズ中に方向キー下押した時チュートリアル画面に移行
+		/*if(Input.GetKey(KeyCode.DownArrow)&& isPause)
+		{
+			//チュートリアル画面だったら何もしない
+			if (isTutorial) {
+				isTutorial = false;
+				Setting.SetActive (false);
+				//チュートリアル画面でなかったらコンフィグ画面にする
+			} else {
+				isTutorial = true;
+				Setting.SetActive (true);
+			}
+		}
+		// ポーズ中に方向キー左押した時ステータス画面に移行
+		if(Input.GetKey(KeyCode.LeftArrow)&& isPause)
+		{
+			//ステータス画面だったら何もしない
+			if (isStatus) {
+				isStatus = false;
+				Setting.SetActive (false);
+				//ステータス画面でなかったらコンフィグ画面にする
+			} else {
+				isStatus = true;
+				Setting.SetActive (true);
+			}
+		}
+		// ポーズ中に方向キー右押した時サウンド画面に移行
+		if(Input.GetKey(KeyCode.RightArrow)&& isPause)
+		{
+			//サウンド画面だったら何もしない
+			if (isSound) {
+				isSound = false;
+				Setting.SetActive (false);
+				//サウンド画面でなかったらコンフィグ画面にする
+			} else {
+				isSound = true;
+				Setting.SetActive (true);
+			}
+		}*/
 	}
 	
 }

@@ -80,29 +80,49 @@ public class PlayerShoot02 : MonoBehaviour {
 	}
 
 	void Bullets() {
-		// ショットの時間間隔
-		if (Time.time - shotInterval > shotIntervalMax) {
-			shotInterval = Time.time;
-			GameObject bulletObject = GameObject.Instantiate (Bullet02)as GameObject;
-			bulletObject.transform.position = muzzle.position;
-			if ((PlayerNo == 0)|| (PlayerNo == 3)){
-				SoundManager.Instance.Play(3,gameObject);
-				//SoundManagerKohaku.Instance.Play(1,gameObject);
-				SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
+
+		if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 1)|| (DataManager.PlayerNo == 2)) 
+		{
+			// ショットの時間間隔
+			if (Time.time - shotInterval > shotIntervalMax)
+			{
+				shotInterval = Time.time;
+				GameObject bulletObject = GameObject.Instantiate (Bullet02)as GameObject;
+				bulletObject.transform.position = muzzle.position;
+				bulletObject.GetComponent<Bullet02> ().damage = this.damage;
 			}
-			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(4,gameObject);
-				//SoundManagerYuko.Instance.Play(1,gameObject);	
-				SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
-			}
-			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(5,gameObject);
-				//SoundManagerMisaki.Instance.Play(1,gameObject);	
-				SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
-			}
-			bulletObject.GetComponent<Bullet02> ().damage = this.damage;
 		}
-	}
+		else if (DataManager.PlayerNo == 3)
+		{
+			// ショットの時間間隔
+			if (Time.time - shotInterval > shotIntervalMax)
+			{
+				shotInterval = Time.time;
+				GameObject bulletObject = GameObject.Instantiate (UBullet02)as GameObject;
+				bulletObject.transform.position = muzzle.position;
+				bulletObject.GetComponent<Bullet02> ().damage = this.damage;
+			}
+		}
+
+		if ((PlayerNo == 0)|| (PlayerNo == 3))
+			{
+			SoundManager.Instance.Play(3,gameObject);
+			//SoundManagerKohaku.Instance.Play(1,gameObject);
+			SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
+			}
+			if (PlayerNo == 1) 
+			{
+			SoundManager.Instance.Play(4,gameObject);
+			//SoundManagerYuko.Instance.Play(1,gameObject);	
+			SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
+			}
+			if (PlayerNo == 2) 
+			{
+			SoundManager.Instance.Play(5,gameObject);
+			//SoundManagerMisaki.Instance.Play(1,gameObject);	
+			SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
+				}
+		}
 
 	public void KickEvent (){
 		Debug.Log("kick");

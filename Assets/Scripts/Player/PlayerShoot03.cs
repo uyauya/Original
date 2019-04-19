@@ -7,6 +7,7 @@ using UnityEditor;
 public class PlayerShoot03 : MonoBehaviour {
 	
 	public GameObject Bullet03;
+	public GameObject UBullet03;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
 	public float shotInterval;			// ショットの時間間隔
@@ -72,26 +73,40 @@ public class PlayerShoot03 : MonoBehaviour {
 	}
 
 	void Bulletss() {
+		if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 1)|| (DataManager.PlayerNo == 2)) 
+		{
 		// ショットの時間間隔
 		if (Time.time - shotInterval > shotIntervalMax) {
 			shotInterval = Time.time;
 			GameObject bulletObject = GameObject.Instantiate (Bullet03)as GameObject;
 			bulletObject.transform.position = muzzle.position;
             //bulletObject.transform.position = Bomber.position;
-            if ((PlayerNo == 0) || (PlayerNo == 3))
-            {
-                SoundManager.Instance.Play(6,gameObject);
-				SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);
-			}
-			if (PlayerNo == 1) {
-				SoundManager.Instance.Play(7,gameObject);
-				SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);
-			}
-			if (PlayerNo == 2) {
-				SoundManager.Instance.Play(8,gameObject);	
-				SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);
-			}
 			bulletObject.GetComponent<Bullet03> ().damage = this.damage;
+			}
+		}
+		else if (DataManager.PlayerNo == 0)
+		{
+		// ショットの時間間隔
+		if (Time.time - shotInterval > shotIntervalMax) {
+			shotInterval = Time.time;
+			GameObject bulletObject = GameObject.Instantiate (UBullet03)as GameObject;
+			bulletObject.transform.position = muzzle.position;
+			//bulletObject.transform.position = Bomber.position;
+			bulletObject.GetComponent<Bullet03> ().damage = this.damage;
+			}
+		}
+         if ((PlayerNo == 0) || (PlayerNo == 3))
+        {
+            SoundManager.Instance.Play(6,gameObject);
+			SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);
+		}
+		if (PlayerNo == 1) {
+			SoundManager.Instance.Play(7,gameObject);
+			SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);
+		}
+		if (PlayerNo == 2) {
+			SoundManager.Instance.Play(8,gameObject);	
+			SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);
 		}
 	}
 

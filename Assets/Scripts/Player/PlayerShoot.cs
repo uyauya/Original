@@ -157,9 +157,10 @@ public class PlayerShoot : MonoBehaviour {
 	// Bullet(弾丸)スクリプトに受け渡す為の処理
 	void Bullet() 
 	{
-		//ショット溜め時間がChargeTime1以下だったら
+		
 		if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 1)|| (DataManager.PlayerNo == 2)) 
 		{
+			//ショット溜め時間がChargeTime1以下だったら
 			if (ChargeTime <= ChargeTime1) 
 			{
 				// Bullet01(小弾)を生成

@@ -7,6 +7,7 @@ using UnityEditor;
 public class PlayerShoot04 : MonoBehaviour {
 
 	public GameObject Bullet04;
+	public GameObject UBullet04;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
 	//public float speed = 1000F;
@@ -78,6 +79,8 @@ public class PlayerShoot04 : MonoBehaviour {
 	//}
 	
 	void Bullet() {
+		if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 1)|| (DataManager.PlayerNo == 2)) 
+		{
 		// ショットの時間間隔
 		if (Time.time - shotInterval > shotIntervalMax) {
 			shotInterval = Time.time;
@@ -85,6 +88,19 @@ public class PlayerShoot04 : MonoBehaviour {
 			// 弾生成場所をmuzzleの前方２、下0.3の場所に生成する
 			bulletObject.transform.position = muzzle.position + transform.TransformDirection(Vector3.forward * 2) 
 				+ new Vector3(0, -0.3f, 0);
+			}
+		}
+		else if (DataManager.PlayerNo == 0)
+		{
+			// ショットの時間間隔
+			if (Time.time - shotInterval > shotIntervalMax) {
+				shotInterval = Time.time;
+				GameObject bulletObject = GameObject.Instantiate (UBullet04)as GameObject;
+				// 弾生成場所をmuzzleの前方２、下0.3の場所に生成する
+				bulletObject.transform.position = muzzle.position + transform.TransformDirection(Vector3.forward * 2) 
+					+ new Vector3(0, -0.3f, 0);
+			}
+		}
             if((PlayerNo == 0) || (PlayerNo == 3)){
                 SoundManager.Instance.Play(9,gameObject);
 				SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
@@ -97,7 +113,6 @@ public class PlayerShoot04 : MonoBehaviour {
 				SoundManager.Instance.Play(11,gameObject);	
 				SoundManager2.Instance.PlayDelayed (3, 0.2f, gameObject);
 			}
-		}
 	}
 
 	public void KickEvent (){
