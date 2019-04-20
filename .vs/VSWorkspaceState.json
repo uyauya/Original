@@ -2,10 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Prefab",
-    "\\Assets\\Prefab\\ManagerObject",
+    "\\Assets\\Scene",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Player",
+    "\\Assets\\Scripts\\Boss",
+    "\\Assets\\Scripts\\Enemy",
     "\\Assets\\Scripts\\System"
   ],
   "PreviewInSolutionExplorer": false

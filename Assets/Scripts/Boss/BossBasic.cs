@@ -191,8 +191,9 @@ public class BossBasic : MonoBehaviour {
 				// レベルに関係している数値はDataManagedrで管理している
 				DataManager.Score += EnemyScore;
 				playerLevel.LevelUp ();
-				// 敵消滅
-				Destroy (gameObject, DestroyTime);	
+                // 敵消滅
+                Debug.Log("ボス消滅");
+                Destroy (gameObject, DestroyTime);	
 				// ボス、ラスボス消滅後は必ずクリア用スターを出現させる
 				// インスペクタ画面でIsBoss、IsLastBossに✔を付ける
 				if (isBoss == true) {
