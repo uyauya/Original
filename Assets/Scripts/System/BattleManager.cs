@@ -50,17 +50,17 @@ public class BattleManager : MonoBehaviour {
         animator = GetComponent<Animator>();            // Animatorを使う場合は設定する
         ScoreText.text = "Score:0";
         LevelText.text = "Lv:0";
-        Debug.Log("レベルテキスト");
+        //Debug.Log("レベルテキスト");
         timer = 0;
 		battleStatus = BATTLE_START;	//時間0秒、最初にスタートを表示させる
 		//ScoreTextにScoreオブジェクトのTextテキストの値を代入する
 		ScoreText = GameObject.Find ("Score").GetComponent<Text> ();
 		LevelText = GameObject.Find ("Level").GetComponent<Text> ();
-        Debug.Log("レベル");
+        //Debug.Log("レベル");
 		// スコアテキストにDataManagerのスコアを代入
 		ScoreText.text = DataManager.Score.ToString();
 		LevelText.text = DataManager.Level.ToString();
-        Debug.Log("DMレベル");
+        //Debug.Log("DMレベル");
         //playerImage = GameObject.Find("PlayerImage");
         //スタート時はStartは表示、WinとLoseは非表示
         messageStart.enabled = true;
@@ -88,7 +88,7 @@ public class BattleManager : MonoBehaviour {
             Player.transform.position = PlayerPos;
             DataManager.Level = CurrentLevel;
             DataManager.PlayerChange = false;
-			//isPChange = true;
+            isPChange = true;
             //Debug.Log("レベル" + DataManager.Level);
             }
         }
@@ -105,23 +105,28 @@ public class BattleManager : MonoBehaviour {
 				//battleManager.Player = player;
 				Player.transform.position = PlayerPos;
 				DataManager.Level = CurrentLevel;
-				DataManager.PlayerReturn = false;
-				//Debug.Log("レベル" + DataManager.Level);
-			}
+                DataManager.PlayerReturn = false;
+                isPChange = false;
+                //Debug.Log("レベル" + DataManager.Level);
+            }
 		}
 
         if (Input.GetButtonUp("Fire4"))
         {
-            DataManager.PlayerChange = true;
+            if ((DataManager.PlayerChange == false)&&(DataManager.PlayerReturn == false))
+            {
+                DataManager.PlayerChange = true;
+                Debug.Log("変わるよ");
+
+            }
+        if ((Input.GetButtonUp("Fire4"))&&(isPChange == true))
+            {
+                    DataManager.PlayerReturn = true;
+                    Debug.Log("戻るよ");
+            }
         }
-        else if(DataManager.PlayerChange == true)
-		//if(isPChange = true)
-        {
-            if (Input.GetButtonUp("Fire4"))
-				Debug.Log("押したよ");
-                DataManager.PlayerReturn = true;
-				Debug.Log("戻るよ");
-        }
+
+
         // 得点をテキスト形式で画面に表示
         ScoreText.text = DataManager.Score.ToString();
 		LevelText.text = DataManager.Level.ToString();
