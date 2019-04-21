@@ -3,8 +3,8 @@ using UnityEngine;
 using System.Collections;
 
 public class Boss02Shot : MonoBehaviour {
-
-	public GameObject explosion;
+    protected BossBasic bossBasic;              // BossBasic接続用
+    public GameObject explosion;
 	public float amplitude = 0.01f;		// ショットの揺れ具合
 	private int frameCnt = 0;			// ショットをランダムで揺らすための時間取り
 	private Vector3 _dir;				// ショット方向
@@ -29,8 +29,8 @@ public class Boss02Shot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        bossBasic = gameObject.GetComponent<BossBasic>();
+    }
 
 	// Update is called once per frame
 	void Update () 

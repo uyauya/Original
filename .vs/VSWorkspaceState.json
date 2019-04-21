@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Scene",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Boss",
-    "\\Assets\\Scripts\\Enemy",
+    "\\Assets\\Scripts\\Player",
     "\\Assets\\Scripts\\System"
   ],
   "PreviewInSolutionExplorer": false

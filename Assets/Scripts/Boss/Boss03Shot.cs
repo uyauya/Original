@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Boss03Shot : MonoBehaviour 
 {
+
     public Transform Bossmuzzle;		// 弾発射元（銃口）
     public GameObject BossShot;  		// 放物線を描く弾
 	private float ShotSpeed;			// 射出速度
@@ -12,8 +13,8 @@ public class Boss03Shot : MonoBehaviour
 	private Vector3 ShotDirection;		// 射出方向
 	private float Interval = 0;			// 射出間隔
 	private int frameCnt = 0;			 
-	public float DestroyTime = 5;		// 射出後消滅するまでの時間
-	public GameObject explosion;		// 弾の爆発
+	//public float DestroyTime = 5;		// 射出後消滅するまでの時間
+	//public GameObject explosion;		// 弾の爆発
 	public float XspeedS = -0.1f;		// X方向最低速度
 	public float XspeedL = 0.1f;		// X方向最高速度	
 	public float YspeedS = -0.1f;
@@ -26,12 +27,12 @@ public class Boss03Shot : MonoBehaviour
 	public float YdirectionL = 0.1f;
 	public float ZdirectionS = -0.1f;
 	public float ZdirectionL = 0.1f;
-	public float XangleS = 0.0f;		// X方向最低角度
-	public float XangleL = 90.0f;		// X方向最高角度	
-	public float YangleS = 0.0f;	
-	public float YangleL = 90.0f;
-	public float ZangleS = 0.0f;	
-	public float ZangleL = 90.0f;
+	//public float XangleS = 0.0f;		// X方向最低角度
+	//public float XangleL = 90.0f;		// X方向最高角度	
+	//public float YangleS = 0.0f;	
+	//public float YangleL = 90.0f;
+	//public float ZangleS = 0.0f;	
+	//public float ZangleL = 90.0f;
 
 	private void Start()
 	{
@@ -41,11 +42,12 @@ public class Boss03Shot : MonoBehaviour
 	private void Update()
 	{
 		//ボスが死んだら弾も消滅
-		if (BossBasic.BossDead == true)
+		/*if (BossBasic.BossDead == true)
 		{
-			Destroy (gameObject);
-			//Debug.Log("死亡");
-		}
+            Debug.Log("死亡");
+            Destroy (gameObject);
+			
+		}*/
 	}
 
 	private void FixedUpdate()
@@ -75,8 +77,8 @@ public class Boss03Shot : MonoBehaviour
 				ShotSpeed = Random.Range (1, 9) / 10f;
 				// 方向をランダムにする
 				x = Random.Range (XdirectionS,XdirectionL);
-                //y = Random.Range (YdirectionS,YdirectionL);
-                y = 0;
+                y = Random.Range (YdirectionS,YdirectionL);
+                //y = 0;
 				z = Random.Range (ZdirectionS,ZdirectionL);
 				ShotDirection = new Vector3 (x, y, z);
                 ShotDirection = ShotDirection.normalized;
@@ -89,8 +91,8 @@ public class Boss03Shot : MonoBehaviour
             // 弾を(ShotAngle角度 * ShotSpeed速度* ShotDirection方向）で前進
             //rid.AddForce(ShotAngle * ShotSpeed　* ShotDirection, ForceMode.Impulse);
             rid.AddForce(ShotSpeed * ShotDirection, ForceMode.Impulse);
-            // 出現後一定時間(DestroyTime)で自動的に消滅させる
-            Destroy(gameObject, DestroyTime);
+            //出現後一定時間(DestroyTime)で自動的に消滅させる
+            //Destroy(gameObject, DestroyTime);
 			//frameCnt += 10;
 			// フレームカウントリセット用
 			//if (10000 <= frameCnt) {
@@ -103,7 +105,7 @@ public class Boss03Shot : MonoBehaviour
 		}
 	}
 
-	private void OnCollisionEnter(Collision collider) 
+	/*private void OnCollisionEnter(Collision collider) 
 	{
 
 		//プレイヤータグの付いたオブジェクトと衝突したら爆発して消滅する
@@ -113,7 +115,7 @@ public class Boss03Shot : MonoBehaviour
             Destroy (gameObject);
 			Instantiate (explosion, transform.position, transform.rotation);
 		}
-	}
+	}*/
 
 }
 
