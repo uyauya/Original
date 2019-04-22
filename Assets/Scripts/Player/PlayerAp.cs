@@ -14,19 +14,12 @@ public class PlayerAp : MonoBehaviour {
 	float displayArmorPoint;				// 画面表示用HPゲージ
 	//デフォルトカラー設定inspector→ColorでRGBAのそれぞれの値を255で割った数値を入れる
 	//RGBA ※Aは透明度(0に近くなるほど透明化)
-	//public Color MyGreen  		= new Color (000,240,000,255);	
 	public Color MyGreen  = new Color (0.48f,0.97f,0.08f,1);
-	//public Color MyWhite  		= new Color (255,255,255,255);
 	public Color MyWhite  		= new Color (1,1,1,1);
-	//public Color MyYellow 		= new Color (255,206,000,255);	
 	public Color MyYellow = new Color (0.81f,0.99f,0,1);
-	//public Color MyRed 			= new Color (219,000,000,255);
 	public Color MyRed	  = new Color (1,0.16f,0.16f,1);
-	//public Color DamageColor 	= new Color (246,040,061,249);  //ダメージ点滅色
 	public Color DamageColor 	= new Color (0.96f,0.06f,0.24f,0.98f);  //ダメージ点滅色
-	//public Color InvisibleColor = new Color (255,255,255,000);  //無敵状態時色
 	public Color InvisibleColor = new Color (1,1,1,0);  //無敵状態時色
-	//public Color PoisonColor 	= new Color (255,025,233,119);  //毒ダメージ色
 	public Color PoisonColor 	= new Color (1,0.1f,0.91f,0.47f);  //毒ダメージ色
     public Image gaugeImage;
 	private ModelColorChange modelColorChange;		

@@ -17,7 +17,8 @@ public class MapCreator02 : MonoBehaviour
     void Start()
     {
 		battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
-        battleManager.Player = player;
+		GameObject player = GameObject.FindWithTag ("Player");
+		player = battleManager.Player;
         player.transform.position = StartPosition.transform.position;
     }
 

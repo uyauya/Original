@@ -37,13 +37,9 @@ public class BattleManager : MonoBehaviour {
 	public int GetBigStar = 0;
 	public static bool isClear = false;				//ステージクリアしたかどうか
 	public bool isPChange = false;
-    //public static GameObject Player;
 
     void Awake(){
             Player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
-            //OriginalChara = player;			//作成したプレイヤーをOriginalChara
-            //battleManager.Player = player;
-            //OriginalChara.SetActive (true);
      }
 
     void Start () {
@@ -85,7 +81,6 @@ public class BattleManager : MonoBehaviour {
 			{
             Player = Instantiate (Prefab_Player [DataManager.PlayerNo = 3]);
             Debug.Log("プレイヤ3");
-            //battleManager.Player = player;
             Player.transform.position = PlayerPos;
             DataManager.Level = CurrentLevel;
             DataManager.PlayerChange = false;
@@ -104,7 +99,6 @@ public class BattleManager : MonoBehaviour {
 				Player = Instantiate (Prefab_Player [DataManager.PlayerNo = 0]);
                 Debug.Log("プレイヤ0");
                 //Debug.Break();
-                //battleManager.Player = player;
                 Player.transform.position = PlayerPos;
 				DataManager.Level = CurrentLevel;
                 DataManager.PlayerReturn = false;

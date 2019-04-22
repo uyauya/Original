@@ -1,4 +1,5 @@
 ﻿
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,6 @@ public class Boss03Shot : MonoBehaviour
 	private Vector3 ShotDirection;		// 射出方向
 	private float Interval = 0;			// 射出間隔
 	private int frameCnt = 0;			 
-	//public float DestroyTime = 5;		// 射出後消滅するまでの時間
-	//public GameObject explosion;		// 弾の爆発
 	public float XspeedS = -0.1f;		// X方向最低速度
 	public float XspeedL = 0.1f;		// X方向最高速度	
 	public float YspeedS = -0.1f;
@@ -27,12 +26,6 @@ public class Boss03Shot : MonoBehaviour
 	public float YdirectionL = 0.1f;
 	public float ZdirectionS = -0.1f;
 	public float ZdirectionL = 0.1f;
-	//public float XangleS = 0.0f;		// X方向最低角度
-	//public float XangleL = 90.0f;		// X方向最高角度	
-	//public float YangleS = 0.0f;	
-	//public float YangleL = 90.0f;
-	//public float ZangleS = 0.0f;	
-	//public float ZangleL = 90.0f;
 
 	private void Start()
 	{
@@ -41,13 +34,7 @@ public class Boss03Shot : MonoBehaviour
 
 	private void Update()
 	{
-		//ボスが死んだら弾も消滅
-		/*if (BossBasic.BossDead == true)
-		{
-            Debug.Log("死亡");
-            Destroy (gameObject);
-			
-		}*/
+
 	}
 
 	private void FixedUpdate()
@@ -82,40 +69,15 @@ public class Boss03Shot : MonoBehaviour
 				z = Random.Range (ZdirectionS,ZdirectionL);
 				ShotDirection = new Vector3 (x, y, z);
                 ShotDirection = ShotDirection.normalized;
-                // 角度をランダムにする
-                /*float xr = Random.Range (XangleS,XangleL);
-				float yr = Random.Range (XangleS,XangleL);
-				float zr = Random.Range (XangleS,XangleL);
-				ShotAngle = Random.Range (1, 9) / 10f;*/
 			}
-            // 弾を(ShotAngle角度 * ShotSpeed速度* ShotDirection方向）で前進
-            //rid.AddForce(ShotAngle * ShotSpeed　* ShotDirection, ForceMode.Impulse);
+            // 弾を(ShotSpeed速度* ShotDirection方向）で前進
             rid.AddForce(ShotSpeed * ShotDirection, ForceMode.Impulse);
-            //出現後一定時間(DestroyTime)で自動的に消滅させる
-            //Destroy(gameObject, DestroyTime);
-			//frameCnt += 10;
-			// フレームカウントリセット用
-			//if (10000 <= frameCnt) {
-				//frameCnt = 0;
-			//}
 		}
 		else
 		{
 			return;
 		}
 	}
-
-	/*private void OnCollisionEnter(Collision collider) 
-	{
-
-		//プレイヤータグの付いたオブジェクトと衝突したら爆発して消滅する
-		if (collider.gameObject.tag == "Player" || collider.gameObject.tag == "Shot") 
-		{
-            Debug.Log("衝突");
-            Destroy (gameObject);
-			Instantiate (explosion, transform.position, transform.rotation);
-		}
-	}*/
 
 }
 
