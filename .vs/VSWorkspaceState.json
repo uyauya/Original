@@ -2,9 +2,20 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
+    "\\Assets\\Prefab",
+    "\\Assets\\Prefab\\Enemy",
+    "\\Assets\\Prefab\\Enemy\\Toon Zombie S",
+    "\\Assets\\Prefab\\Enemy\\Toon Zombie S\\Model",
+    "\\Assets\\Prefab\\Enemy\\Toon Zombie S\\Model\\Materials",
+    "\\Assets\\Prefab\\Enemy\\Toon Zombie S\\Prefab",
+    "\\Assets\\Prefab\\Enemy\\Toon Zombie S\\Textures",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Player",
-    "\\Assets\\Scripts\\System"
+    "\\Assets\\Scripts\\Enemy",
+    "\\Assets\\ToonyTinyPeople",
+    "\\Assets\\ToonyTinyPeople\\TT_demo",
+    "\\Assets\\ToonyTinyPeople\\TT_demo\\animation",
+    "\\Assets\\ToonyTinyPeople\\TT_demo\\models",
+    "\\Assets\\ToonyTinyPeople\\TT_demo\\prefabs"
   ],
   "PreviewInSolutionExplorer": false
 }
