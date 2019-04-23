@@ -13,7 +13,7 @@ public class Zombie1 : MonoBehaviour {
 	bool freezeSet;					//フリーズ処理、一時的に移動不可
 	public float FreezeTime = 1.0f;	//フリーズ処理(硬直)時間
 	public float LastEnemySpeed;	//ダメージ、フリーズ処理する前の敵の基本スピード
-    int layerMask = ~0;
+    //int layerMask = ~0;
 
 	/*[CustomEditor(typeof(Zombie1))]
 	public class Zombie1 : Editor	// using UnityEditor; を入れておく
@@ -57,8 +57,8 @@ public class Zombie1 : MonoBehaviour {
             (enemyBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
             //(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
             // enemySpeed × 時間でプレイヤに向かって直線的に移動
-            RaycastHit hit;
-            //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+            /*RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
             Vector3 position = transform.position;
             position.y = 0.1f;
             transform.position = position;
@@ -68,9 +68,10 @@ public class Zombie1 : MonoBehaviour {
                 
             }
             else
-            {
-                transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
-            }
+            {*/
+                //transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
+			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Time.deltaTime * enemyBasic.EnemySpeed);
+            //}
                 
 		}
 
