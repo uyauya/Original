@@ -20,6 +20,7 @@ public class EnemyBasic : MonoBehaviour {
 	public float armorPoint;					    // HP
 	public int TargetRange;							// プレイヤをターゲット認識する距離
 	public float EnemySpeed;						// 移動スピード
+	//public float LimitedSpeed;						// 移動スピード最大値
 	public float JumpForce;							// ジャンプ力
 	public float EnemyRotate;						// 振り向き速度
 	public float Search;							// プレイヤを探すサーチレンジ
@@ -290,7 +291,7 @@ public class EnemyBasic : MonoBehaviour {
 			//ライフバーからダメージ分ゲージを減らす
 			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
 
-		//
+
 		if (collider.gameObject.tag == "Player" ) {
 			//体力が0以下になったら消滅する
 			if (armorPoint <= 0) {

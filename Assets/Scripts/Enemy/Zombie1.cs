@@ -13,6 +13,8 @@ public class Zombie1 : MonoBehaviour {
 	bool freezeSet;					//フリーズ処理、一時的に移動不可
 	public float FreezeTime = 1.0f;	//フリーズ処理(硬直)時間
 	public float LastEnemySpeed;	//ダメージ、フリーズ処理する前の敵の基本スピード
+	public float Speed;
+	Rigidbody rigidbody;
     //int layerMask = ~0;
 
 	/*[CustomEditor(typeof(Zombie1))]
@@ -33,6 +35,7 @@ public class Zombie1 : MonoBehaviour {
 		// EnemyBasicスクリプトのデータを最初に呼び出しenemyBasicとする
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		LastEnemySpeed = enemyBasic.EnemySpeed;
+		rigidbody = GetComponent<Rigidbody>();
 	}
 
 	// Update is called once per frame
@@ -70,8 +73,16 @@ public class Zombie1 : MonoBehaviour {
             else
             {*/
                 //transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
-			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Time.deltaTime * enemyBasic.EnemySpeed);
-            //}
+			//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Time.deltaTime * enemyBasic.EnemySpeed);
+			//rigidbody.AddForce(transform.forward * Time.deltaTime * enemyBasic.EnemySpeed, ForceMode.VelocityChange);
+			rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed);
+			/*rigidbody.velocity = Vector3.zero;
+			rigidbody.angularVelocity = Vector3.zero;
+			if (enemyBasic.LimitedSpeed <= enemyBasic.EnemySpeed)
+			{
+				enemyBasic.EnemySpeed = enemyBasic.LimitedSpeed;
+			}
+            }*/
                 
 		}
 
