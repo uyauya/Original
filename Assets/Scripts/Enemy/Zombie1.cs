@@ -53,36 +53,16 @@ public class Zombie1 : MonoBehaviour {
 		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		enemyBasic.timer += Time.deltaTime;
 		// ターゲット（プレイヤ）と自分の距離がTargetRange値以内なら
-		//if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.TargetRange) {
         if(Vector3.Distance(enemyBasic.battleManager.Player.transform.position, transform.position) <= enemyBasic.TargetRange) {
+
 			//ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
             (enemyBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
             //(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
             // enemySpeed × 時間でプレイヤに向かって直線的に移動
-            /*RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
-            Vector3 position = transform.position;
-            position.y = 0.1f;
-            transform.position = position;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f, layerMask))
-            {
-                transform.position = hit.point - transform.forward;
-                
-            }
-            else
-            {*/
-                //transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
-			//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Time.deltaTime * enemyBasic.EnemySpeed);
+            //transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
 			//rigidbody.AddForce(transform.forward * Time.deltaTime * enemyBasic.EnemySpeed, ForceMode.VelocityChange);
 			rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed);
-			/*rigidbody.velocity = Vector3.zero;
-			rigidbody.angularVelocity = Vector3.zero;
-			if (enemyBasic.LimitedSpeed <= enemyBasic.EnemySpeed)
-			{
-				enemyBasic.EnemySpeed = enemyBasic.LimitedSpeed;
-			}
-            }*/
                 
 		}
 
