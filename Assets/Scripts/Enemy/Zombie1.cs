@@ -126,14 +126,16 @@ public class Zombie1 : MonoBehaviour {
 	}
 
 	IEnumerator RightMoveCoroutine(){
-		Debug.Log("右に曲る");
+		//Debug.Log("右に曲る");
 		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
-		rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * MoveTime);
-		yield return new WaitForSeconds(MoveTime);
+        Debug.Log("rigidbody" + rigidbody == null);
+        Debug.Log("enemyBasic" + enemyBasic == null);
+        rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * MoveTime);
+        yield return new WaitForSeconds(MoveTime);
 	}
 
 	IEnumerator MoveCoroutine(){
-		Debug.Log("通常移動");
+		//Debug.Log("通常移動");
 		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 		(enemyBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
 		rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * MoveTime);
@@ -153,7 +155,7 @@ public class Zombie1 : MonoBehaviour {
 			RaycastHit hit;
              if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f, layerMask))
             {
-				Debug.Log("障害物発見");
+				//Debug.Log("障害物発見");
 				StartCoroutine ("RightMoveCoroutine");
 				//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
 				//rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * MoveTime);
