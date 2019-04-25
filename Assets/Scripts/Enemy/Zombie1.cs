@@ -14,8 +14,11 @@ public class Zombie1 : MonoBehaviour {
 	public float FreezeTime = 1.0f;	//フリーズ処理(硬直)時間
 	public float LastEnemySpeed;	//ダメージ、フリーズ処理する前の敵の基本スピード
 	public float Speed;
+	public float MoveTime;			//自動的に進む時間（障害物が有った時に使用）
 	Rigidbody rigidbody;
-    //int layerMask = ~0;
+	public bool LeftMove;
+	public bool RightMove;
+    int layerMask = ~0;
 
 	/*[CustomEditor(typeof(Zombie1))]
 	public class Zombie1 : Editor	// using UnityEditor; を入れておく
@@ -36,6 +39,7 @@ public class Zombie1 : MonoBehaviour {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		LastEnemySpeed = enemyBasic.EnemySpeed;
 		rigidbody = GetComponent<Rigidbody>();
+		gameObject.layer = LayerMask.NameToLayer("Enemy");
 	}
 
 	// Update is called once per frame
@@ -54,16 +58,18 @@ public class Zombie1 : MonoBehaviour {
 		enemyBasic.timer += Time.deltaTime;
 		// ターゲット（プレイヤ）と自分の距離がTargetRange値以内なら
         if(Vector3.Distance(enemyBasic.battleManager.Player.transform.position, transform.position) <= enemyBasic.TargetRange) {
-
 			//ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
             (enemyBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
-            //(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
             // enemySpeed × 時間でプレイヤに向かって直線的に移動
+			//障害物など全て無視して等速（最初からトップスピード）で進む場合はtransform.position +=処理（障害物はすり抜けるワープ処理）
             //transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
+			//徐々に加速させる場合はrigidbody.AddForce（後ろにForceMode.VelocityChangeで質量無視）
+			//質量無視にすれば慣性の動きもなくなるので、惰性で滑る事も無くなる）
 			//rigidbody.AddForce(transform.forward * Time.deltaTime * enemyBasic.EnemySpeed, ForceMode.VelocityChange);
-			rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed);
-                
+			//障害物判定＆＆等速の場合はrigidbody.velocity =にする。
+			//rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed);
+			rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
 		}
 
         // ターゲット（プレイヤー）との距離がSearch値以内なら
@@ -76,6 +82,8 @@ public class Zombie1 : MonoBehaviour {
                 //(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemySpeed);
                 (enemyBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemySpeed);
             //アニメーターをattackに変更（攻撃モーション）
+			//SetTriggerを使う場合、戻りの部分のHasExitTimeに✔を入れておく。入れないと戻りの判定が出来なくて
+			//アニメーションがattack後デフォルトアニメーションに戻らなくなる
             enemyBasic.animator.SetTrigger ("attack");
 		}
 
@@ -115,5 +123,49 @@ public class Zombie1 : MonoBehaviour {
 		enemyBasic.EnemySpeed = 0;
 		yield return new WaitForSeconds(FreezeTime);
 		enemyBasic.EnemySpeed = LastEnemySpeed;
+	}
+
+	IEnumerator RightMoveCoroutine(){
+		Debug.Log("右に曲る");
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
+		rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * MoveTime);
+		yield return new WaitForSeconds(MoveTime);
+	}
+
+	IEnumerator MoveCoroutine(){
+		Debug.Log("通常移動");
+		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
+		(enemyBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
+		rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * MoveTime);
+		yield return new WaitForSeconds(MoveTime);
+	}
+
+	void OnCollisionEnter(Collision collider) 
+	{
+		if (collider.gameObject.tag == "Obstacle") 
+			Debug.Log("障害物");
+		{
+			//壁にぶつかったら方向を90度変えてある程度進む
+			//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
+			//rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * MoveTime);
+			StartCoroutine ("RightMoveCoroutine");
+			//進んだ後壁があったら90度プレイヤの方に向きを変えて進む
+			RaycastHit hit;
+             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f, layerMask))
+            {
+				Debug.Log("障害物発見");
+				StartCoroutine ("RightMoveCoroutine");
+				//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
+				//rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * MoveTime);
+			}
+			//進んだ後壁がなかったら障害物がないので通常通りPlayerに向かって進む
+			else
+			{
+				StartCoroutine ("MoveCoroutine");
+				//transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
+            	//(enemyBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
+				//rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * MoveTime);
+			}
+		}
 	}
 }

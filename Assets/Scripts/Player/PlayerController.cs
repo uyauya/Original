@@ -31,9 +31,6 @@ public class PlayerController : MonoBehaviour {
 	private int JumpCount;							//ジャンプ回数計算用（二段ジャンプ処理に使用）
 	private float interval = 2.0f;
 	private float timer = 0.0f;				
-	//public int ItemCount;							//スフィア取得個数計算用
-	//public int GetStar = 0;
-	//public int GetBigStar = 0;
 	public static bool ItemCount = false;							//スフィア取得個数計算用
 	public static bool GetStar = false;
 	public static bool GetBigStar = false;

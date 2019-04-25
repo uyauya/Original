@@ -335,6 +335,7 @@ public class EnemyBasic : MonoBehaviour {
 			}
 		}
 
+			
 	}
 
 	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
