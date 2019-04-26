@@ -354,7 +354,8 @@ public class PlayerController : MonoBehaviour {
 				//撃たない時より動作速度を落とす（敵を狙いやすくする）
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
-				gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+				//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force * 0.5f);
 			}
 			//ショット撃っていない状態
             else
@@ -365,7 +366,8 @@ public class PlayerController : MonoBehaviour {
 			animator.SetBool("Move", true);
 			// プレイヤに速度を加える（transform.Translateは移動だが、アッドフォースは後ろから押すような操作なので、坂道など段差が
 			// ある場合、自動で加減速処理して移動する
-			gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+			//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+			gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force);
 			//Debug.Log (Force);
 			}
 		}
@@ -394,16 +396,16 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 2.0f);
                 animator.SetBool("Move", true);
-                gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
-                
+                //gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force * 0.5f);
             }
 			//ショット撃っていない状態
             else
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
                 animator.SetBool("Move", true);
-                gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
-                
+                //gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force);
             }
         }
 		else if (Input.GetAxis("Vertical") > 0)	// 前移動（前が押されている場合）
@@ -432,14 +434,16 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
-				gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+				//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force * 0.5f);
 			}
 			//ショット撃っていない状態
 			else
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-				gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+				//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force);
                 //Debug.Log("速度" + Force);
             }
 
@@ -469,14 +473,16 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
-				gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+				//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force * 0.5f);
 			}
 			//ショット撃っていない状態
 			else
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-				gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+				//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force);
 			}
 		}
 		else
