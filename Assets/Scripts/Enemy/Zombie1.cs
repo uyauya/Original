@@ -14,12 +14,15 @@ public class Zombie1 : MonoBehaviour {
 	public float FreezeTime = 1.0f;	//フリーズ処理(硬直)時間
 	public float LastEnemySpeed;	//ダメージ、フリーズ処理する前の敵の基本スピード
 	public float Speed;
-	public float MoveTime;			//自動的に進む時間（障害物が有った時に使用）
+	//public float MoveTime;			//自動的に進む時間（障害物が有った時に使用）
 	Rigidbody rigidbody;
     //int layerMask = ~0;
 	int LayerMask = ~(1 << 8);		//8はlayerのPlayer。　playerにはRayCastHitしない
+    public bool RighrtMove = false;
+    public bool LeftMove = false;
+    public float RandomMoeCount = 0;
 
-	/*[CustomEditor(typeof(Zombie1))]
+    /*[CustomEditor(typeof(Zombie1))]
 	public class Zombie1 : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
@@ -32,8 +35,8 @@ public class Zombie1 : MonoBehaviour {
 		}
 	}*/
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		// EnemyBasicスクリプトのデータを最初に呼び出しenemyBasicとする
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		LastEnemySpeed = enemyBasic.EnemySpeed;
@@ -62,36 +65,36 @@ public class Zombie1 : MonoBehaviour {
 		//ターゲットの方を徐々に向く
 		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
         (enemyBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
-        // enemySpeed × 時間でプレイヤに向かって直線的に移動
-		//障害物など全て無視して等速（最初からトップスピード）で進む場合はtransform.position +=処理（障害物はすり抜けるワープ処理）
-        //transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
-		//徐々に加速させる場合はrigidbody.AddForce（後ろにForceMode.VelocityChangeで質量無視）
-		//質量無視にすれば慣性の動きもなくなるので、惰性で滑る事も無くなる）
-		//rigidbody.AddForce(transform.forward * Time.deltaTime * enemyBasic.EnemySpeed, ForceMode.VelocityChange);
-		//障害物判定＆＆等速の場合はrigidbody.velocity =にする。
-		//rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed);
-		rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
-		RaycastHit hit;
-			//if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f, layerMask))
-			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f))
-			{
-				//ランダムでもし4以下なら右に、5より上なら左に方向転換して移動
-				int num = Random.Range (0, 9);
-				if (num <= 4) 
-				{
-					Debug.Log("右");
-				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 10.0f);
-				rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * MoveTime);
-				//rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed * MoveTime);
-				}
-				else if (num > 5) 
-				{
-					Debug.Log("左");
-				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 10.0f);
-				rigidbody.velocity = (transform.forward * Time.deltaTime * enemyBasic.EnemySpeed * MoveTime);
-				//rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed * MoveTime);
-				}
-			}
+            // enemySpeed × 時間でプレイヤに向かって直線的に移動
+            //障害物など全て無視して等速（最初からトップスピード）で進む場合はtransform.position +=処理（障害物はすり抜けるワープ処理）
+            //transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
+            //徐々に加速させる場合はrigidbody.AddForce（後ろにForceMode.VelocityChangeで質量無視）
+            //質量無視にすれば慣性の動きもなくなるので、惰性で滑る事も無くなる）
+            //rigidbody.AddForce(transform.forward * Time.deltaTime * enemyBasic.EnemySpeed, ForceMode.VelocityChange);
+            //障害物判定＆＆等速の場合はrigidbody.velocity =にする。
+            rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
+            RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1.0f))
+            {
+                RandomMoeCount -= Time.deltaTime;
+                if (RandomMoeCount <= 0)
+                {
+                    RandomMove();
+                    RandomMoeCount = 5;
+                }          
+            }
+            if (RighrtMove == true)
+            {
+                //Debug.Log("右");
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 10.0f);
+                //rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed * MoveTime);
+            }
+            else if (LeftMove == true)
+                {
+                //Debug.Log("左");
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 10.0f);
+                //rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed * MoveTime);
+            }
 		}
 
         // ターゲット（プレイヤー）との距離がSearch値以内なら
@@ -126,8 +129,23 @@ public class Zombie1 : MonoBehaviour {
 		}
 	}
 
-	//攻撃が当たったらDamageTime分だけSpeedをゼロにする（動きを止める）
-	IEnumerator DamageSetCoroutine (){
+    public void RandomMove()
+    {
+        int num = Random.Range(0, 9);
+            if (num <= 4)
+            {
+                RighrtMove = true;
+                LeftMove = false; ;
+        }
+            else if (num > 5)
+            {
+                LeftMove = true;
+                RighrtMove = false;
+        }
+    }
+
+    //攻撃が当たったらDamageTime分だけSpeedをゼロにする（動きを止める）
+    IEnumerator DamageSetCoroutine (){
 		enemyBasic.DamageSet = false;
 		LastEnemySpeed = enemyBasic.EnemySpeed;			//直前の動きの速さをLastEnemySpeedとして保存
 		enemyBasic.EnemySpeed = 0;						//スピードを0にする（硬直処理）

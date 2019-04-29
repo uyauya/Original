@@ -8,12 +8,14 @@ using UnityEditor;
 public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
-	public float Force= 8;							//移動速度
-	public float MaxForce = 10;						//移動速度最大値
-	public float MaxBoostForce = 15;				//ブースト時の移動速度最大値
+    Rigidbody rigidbody;
+    public float Force= 7;							//移動速度
+	public float MaxForce = 9;						//移動速度最大値
+	public float MaxBoostForce = 14;				//ブースト時の移動速度最大値
 	public float Deceleration = 2.2f;				//減速(オートブレーキ)
-	public float PlusForce= 0.1f;					//移動速度加算数値
-	public float JumpForce = 4.0f;					//ジャンプ力
+	public float PlusForce= 0.2f;					//移動速度加算数値
+    public float BPlusForce = 0.5f;                 //移動速度加算数値（ブースト時）
+    public float JumpForce = 4.0f;					//ジャンプ力
     public float DeGravity = -1.0f;					//重力軽減用
 	public float DoubleJump = 4.0f;					//二段ジャンプ
 	public float BoostJumpForce = 6.0f;				//ブースト時のジャンプ力
@@ -85,7 +87,8 @@ public class PlayerController : MonoBehaviour {
 
     void Start()	//　ゲーム開始時の設定
 	{
-		animator = GetComponent<Animator>();			// Animatorを使う場合は設定する
+        rigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();			// Animatorを使う場合は設定する
 		boostPoint = DataManager.BoostPointMax;			// ブーストポイントを最大値に設定
 		moveSpeed = Vector3.zero;						// 開始時は移動していないので速さはゼロに
 		isBoost = false;								// ブーストはオフに
@@ -165,7 +168,7 @@ public class PlayerController : MonoBehaviour {
 					if(isBoost)
 					{
 					animator.SetBool("Boost", true);
-						Debug.Log("飛ぶ");
+						//Debug.Log("飛ぶ");
 					}
 			}
 		}
@@ -217,12 +220,12 @@ public class PlayerController : MonoBehaviour {
             animator.SetBool("Jump", true);
 			//ジャンプカウントが2だったらy方向にDoubleJump値加算（二段ジャンプ）
             if(JumpCount == 2){
-				GetComponent<Rigidbody>().velocity = new Vector3( v.x, DoubleJump, v.z );
+                GetComponent<Rigidbody>().velocity = new Vector3( v.x, DoubleJump, v.z );
 				//二段ジャンプモーションに切り替える
 				animator.SetBool("DoubleJump", true);
 				//Debug.Log("ダブル");
 			} else {
-				GetComponent<Rigidbody>().velocity = new Vector3( v.x, JumpForce, v.z );
+                GetComponent<Rigidbody>().velocity = new Vector3( v.x, JumpForce, v.z );
 				animator.SetBool("Jump", true);
 				//Debug.Log("ジャンプ");
 			}
@@ -244,7 +247,7 @@ public class PlayerController : MonoBehaviour {
         else if (Input.GetButton("Jump") && (Input.GetButton("Boost") && boostPoint > 10))
         {
             Vector3 v = GetComponent<Rigidbody>().velocity;
-			// y方向にBoostJumpForce値加算（ブーストジャンプ）
+            // y方向にBoostJumpForce値加算（ブーストジャンプ）
             GetComponent<Rigidbody>().velocity = new Vector3(v.x, BoostJumpForce, v.z);
             animator.SetBool("BoostUp", Input.GetButton("Jump"));
             if ((PlayerNo == 0) || (PlayerNo == 3))
@@ -304,7 +307,7 @@ public class PlayerController : MonoBehaviour {
 			// ブースト時
 			if (Force <= MaxBoostForce) 					// ForceがMaxBoostForceの値以下なら
 			{					
-				MaxForce += Time.deltaTime * PlusForce;		// MaxBoostForceまでMaxForce(通常最大速度)に加速
+				Force += Time.deltaTime * BPlusForce;		// MaxBoostForceまでMaxForce(通常最大速度)に加速
 				Force = Mathf.Min(Force, MaxBoostForce);	// ForceがMaxBoostForceの値を超えない
 				animator.SetBool("Boost",true);
 				//Debug.Log (Force);
@@ -342,7 +345,7 @@ public class PlayerController : MonoBehaviour {
                     transform.position = hit.point - transform.forward;
                 }else
                 {
-                    gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                    GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
                 }
                 //gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
 				DashAttack ();
@@ -354,8 +357,8 @@ public class PlayerController : MonoBehaviour {
 				//撃たない時より動作速度を落とす（敵を狙いやすくする）
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
-				//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
-				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force * 0.5f);
+                GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+                //rigidbody.velocity = (transform.forward * Force * 0.5f);
 			}
 			//ショット撃っていない状態
             else
@@ -364,10 +367,10 @@ public class PlayerController : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
 			// アニメーターをMoveに切り替え
 			animator.SetBool("Move", true);
-			// プレイヤに速度を加える（transform.Translateは移動だが、アッドフォースは後ろから押すような操作なので、坂道など段差が
-			// ある場合、自動で加減速処理して移動する
-			//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
-			gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force);
+                // プレイヤに速度を加える（transform.Translateは移動だが、アッドフォースは後ろから押すような操作なので、坂道など段差が
+                // ある場合、自動で加減速処理して移動する
+                GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+                //rigidbody.velocity = (transform.forward * Force);
 			//Debug.Log (Force);
 			}
 		}
@@ -385,10 +388,10 @@ public class PlayerController : MonoBehaviour {
                 }
                 else
                 {
-                    gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                    GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
                 }
-                //gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
-				DashAttack ();
+                //rigidbody.transform.position += transform.forward * DashRate;
+                DashAttack();
 				isDash = false;
 			}
 			//ショットを撃っている状態（減速処理）
@@ -396,16 +399,16 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 2.0f);
                 animator.SetBool("Move", true);
-                //gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
-				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force * 0.5f);
+                GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+                //rigidbody.velocity = (transform.forward * Force * 0.5f);
             }
 			//ショット撃っていない状態
             else
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
                 animator.SetBool("Move", true);
-                //gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
-				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force);
+                GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+                //rigidbody.velocity = (transform.forward * Force);
             }
         }
 		else if (Input.GetAxis("Vertical") > 0)	// 前移動（前が押されている場合）
@@ -422,9 +425,9 @@ public class PlayerController : MonoBehaviour {
                 }
                 else
                 {
-                    gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                    GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
                 }
-                //gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                //rigidbody.transform.position += transform.forward * DashRate;
 				DashAttack ();
 				isDash = false;
                 
@@ -434,16 +437,16 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
-				//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
-				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force * 0.5f);
+                GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+                //rigidbody.velocity = (transform.forward * Force * 0.5f);
 			}
 			//ショット撃っていない状態
 			else
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-				//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
-				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force);
+                GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+                //rigidbody.velocity = (transform.forward * Force);
                 //Debug.Log("速度" + Force);
             }
 
@@ -462,10 +465,10 @@ public class PlayerController : MonoBehaviour {
                 }
                 else
                 {
-                    gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                    GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
                 }
-                //gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
-				DashAttack ();
+                //rigidbody.transform.position += transform.forward * DashRate;
+                DashAttack();
 				isDash = false;
 			}
 			//ショットを撃っている状態（減速処理）
@@ -473,16 +476,16 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
-				//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
-				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force * 0.5f);
+                GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
+                //rigidbody.velocity = (transform.forward * Force * 0.5f);
 			}
 			//ショット撃っていない状態
 			else
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-				//gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Force);
-				gameObject.GetComponent<Rigidbody>().velocity = (transform.forward * Force);
+                GetComponent<Rigidbody>().AddForce(transform.forward * Force);
+                //rigidbody.velocity = (transform.forward * Force);
 			}
 		}
 		else

@@ -15,15 +15,23 @@ public class EscapeEnemy1 : MonoBehaviour {
 	private float chargeTime = 5.0f; //方向転換するまでの時間制限
 	private float timeCount;
 	public float Dash = 3.0f;		 //通常移動とダッシュ移動の比率
+    Rigidbody rigidbody;
+    int LayerMask = ~(1 << 8);		//8はlayerのPlayer。　playerにはRayCastHitしない
+    public bool RighrtMove = false;
+    public bool LeftMove = false;
+    public float RandomMoeCount = 0;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start ()
+    {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
-	}
+        rigidbody = GetComponent<Rigidbody>();
+    }
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		damageSet = GetComponent<EnemyBasic> ().DamageSet;
 		freezeSet = GetComponent<EnemyBasic> ().FreezeSet;
 		Vector3 Pog = this.gameObject.transform.position;
@@ -32,32 +40,53 @@ public class EscapeEnemy1 : MonoBehaviour {
 		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		enemyBasic.timer += Time.deltaTime;
 		timeCount += Time.deltaTime;
-		//Playerが近くにいなければ敵の移動方向をランダムで変える
-		transform.position += transform.forward * Time.deltaTime* enemyBasic.EnemySpeed;
-		if (timeCount > chargeTime)
-		{
-			Vector3 course = new Vector3(0, Random.Range(0, 180), 0);
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
-				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
-			//transform.localRotation = Quaternion.Euler(course);
-			timeCount = 0;
-		}
+        
+        rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1.0f))
+        {
+            RandomMoeCount -= Time.deltaTime;
+            if (RandomMoeCount <= 0)
+            {
+                RandomMove();
+                RandomMoeCount = 5;
+            }
+        }
+        if (RighrtMove == true)
+        {
+            //Debug.Log("右");
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 10.0f);
+            //rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed * MoveTime);
+        }
+        else if (LeftMove == true)
+        {
+            //Debug.Log("左");
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 10.0f);
+            //rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed * MoveTime);
+        }
+        //Playerが近くにいなければ敵の移動方向をランダムで変える
+        else if (timeCount > chargeTime)
+        {
+            Vector3 course = new Vector3(0, Random.Range(0, 180), 0);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation
+                (enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
+            timeCount = 0;
+        }
+        
 		//敵の攻撃範囲を設定する
 		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.TargetRange) {
-
-			//ターゲットの方を徐々に向く
+            //ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
-				//transform.position -= transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
 		}
-		// ターゲット（プレイヤー）との距離が0.5以内なら
-		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
+        // ターゲット（プレイヤー）との距離がSearch以内なら
+        if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
 			//ターゲットの反対方向を向きダッシュで逃げる
 			// Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(transform.position - enemyBasic.target.transform.position ), Time.deltaTime * enemyBasic.EnemySpeed * Dash);
-			transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed* Dash;
-		}
+                rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed * Dash);
+        }
 		// Animator の dead が true なら Update 処理を抜ける
 		if( enemyBasic.animator.GetBool("dead") == true ) return;
 
@@ -79,8 +108,23 @@ public class EscapeEnemy1 : MonoBehaviour {
 		}
 	}
 
-	//攻撃が当たったらDamageTime分だけSpeedをゼロにする（動きを止める）
-	IEnumerator DamageSetCoroutine (){
+    public void RandomMove()
+    {
+        int num = Random.Range(0, 9);
+        if (num <= 4)
+        {
+            RighrtMove = true;
+            LeftMove = false; ;
+        }
+        else if (num > 5)
+        {
+            LeftMove = true;
+            RighrtMove = false;
+        }
+    }
+
+    //攻撃が当たったらDamageTime分だけSpeedをゼロにする（動きを止める）
+    IEnumerator DamageSetCoroutine (){
 		enemyBasic.DamageSet = false;
 		LastEnemySpeed = enemyBasic.EnemySpeed;			//直前の動きの速さをLastEnemySpeedとして保存
 		enemyBasic.EnemySpeed = 0;						//スピードを0にする（硬直処理）
