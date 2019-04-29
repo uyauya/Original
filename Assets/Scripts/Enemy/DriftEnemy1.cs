@@ -5,7 +5,8 @@ using UnityEngine;
 //フヨフヨ漂いながら移動する（収縮する）、ヒットさせるとしぼんでいく
 public class DriftEnemy1 : MonoBehaviour {
 	protected EnemyBasic enemyBasic;
-	public float Minimum = 140.0f;		// 最小（元の）サイズ
+    Rigidbody rigidbody;
+    public float Minimum = 140.0f;		// 最小（元の）サイズ
 	public float Magspeed = 0.001f;		// 拡大スピード
 	public float Magnification = 1.0f;	// 拡大率
 	public Vector3 BasicPoint;			// 出現時の座標（地上からの高さを決める）
@@ -18,7 +19,8 @@ public class DriftEnemy1 : MonoBehaviour {
 	void Start () {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
-		BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z);
+        rigidbody = GetComponent<Rigidbody>();
+        BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z);
 	}
 
 	void Update () {
@@ -42,8 +44,8 @@ public class DriftEnemy1 : MonoBehaviour {
 			//ターゲットの方を徐々に向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
-			transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
-		}
+            rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
+        }
 		//enemyBasic.timeElapsed += Time.deltaTime;
 		//if (enemyBasic.timeElapsed >= enemyBasic.timeOut) {
 		//	transform.position += transform.up * Time.deltaTime * enemyBasic.JumpForce;

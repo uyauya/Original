@@ -7,7 +7,8 @@ using UnityEditor;
 //遠距離攻撃あり。
 public class FlyingEnemy2 : MonoBehaviour {
 	protected EnemyBasic enemyBasic;
-	bool dead = false;
+    Rigidbody rigidbody;
+    bool dead = false;
 	public Vector3 BasicPoint;		// 出現時の座標（地上からの高さを決める）
 	//public  float angle = 30f;
 	private Vector3 targetPos;		// 軸の場所
@@ -17,18 +18,22 @@ public class FlyingEnemy2 : MonoBehaviour {
 	bool freezeSet;					 //フリーズ処理、一時的に移動不可
 	public float FreezeTime = 1.0f;	 //フリーズ処理(硬直)時間
 	public float LastEnemySpeed;	 //ダメージ、フリーズ処理する前の敵の基本スピード
+    int LayerMask = ~(1 << 8);      //8はlayerのPlayer。　playerにはRayCastHitしない
+    public bool RighrtMove = false;
 
-	void Start () {
+    void Start () {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
-		//出現の高さ調整。Hight値の高さとする
-		BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z);
+        rigidbody = GetComponent<Rigidbody>();
+        //出現の高さ調整。Hight値の高さとする
+        BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z);
 		Transform target = GameObject.FindWithTag("Player").transform;
 		targetPos = target.position;
 	}
 
 	void Update () {
-		damageSet = GetComponent<EnemyBasic> ().DamageSet;
+        rigidbody = GetComponent<Rigidbody>();
+        damageSet = GetComponent<EnemyBasic> ().DamageSet;
 		freezeSet = GetComponent<EnemyBasic> ().FreezeSet;
 		//オブジェクト配置場所の前方×2の場所をターゲットとする
 		transform.position = target.transform.position + (target.transform.forward * 2);
@@ -43,14 +48,13 @@ public class FlyingEnemy2 : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
 			// enemySpeed × 時間でプレイヤに向かって直線的に移動
-			transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
-		}
+            rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
+        }
 
 		enemyBasic.timeElapsed += Time.deltaTime;
 		if (enemyBasic.timeElapsed >= enemyBasic.timeOut) {
 			transform.position += transform.up * Time.deltaTime * enemyBasic.JumpForce;
-
-			enemyBasic.timeElapsed = 0.0f;
+            enemyBasic.timeElapsed = 0.0f;
 		}
 
 		// ターゲット（プレイヤー）との距離がSearch以内なら
@@ -61,10 +65,10 @@ public class FlyingEnemy2 : MonoBehaviour {
 			// Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
-			transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
-			//一定間隔でショット
-			//animator.SetBool ("attack", true);
-			enemyBasic.shotInterval += Time.deltaTime;
+            rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
+            //一定間隔でショット
+            //animator.SetBool ("attack", true);
+            enemyBasic.shotInterval += Time.deltaTime;
 			// 次の攻撃待ち時間が一定以上になれば
 			if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax) {
 				Instantiate (enemyBasic.shot, transform.position, transform.rotation);
