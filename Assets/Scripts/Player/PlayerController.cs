@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour {
 	public Transform Attack;						//DashAttackプレハブ発生元
     public float DashBpDown = 1.0f;					//DashAttack起動時の消費ブーストポイント
 	public float DashRate = 2.0f;					//ダッシュ時の速度の掛け率
+    public float KnockBack = -18.0f;
     int layerMask = ~0;
 
     /*[CustomEditor(typeof(PlayerController))]
@@ -357,6 +358,7 @@ public class PlayerController : MonoBehaviour {
 				//撃たない時より動作速度を落とす（敵を狙いやすくする）
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
+                
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
                 //rigidbody.velocity = (transform.forward * Force * 0.5f);
 			}
@@ -512,6 +514,13 @@ public class PlayerController : MonoBehaviour {
                     //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 }
 				//他、通常移動時ならその場に配置（即停止）
+                else if(PlayerAp.enemyAttack > 0)
+                {
+                    return;
+                    //rigidbody.AddForce((transform.forward * KnockBack));
+                    //KnockBack *= 0.99f; 
+                }
+                //他、通常移動時ならその場に配置（即停止）
                 else
                 {
                     Vector3 v = GetComponent<Rigidbody>().velocity;

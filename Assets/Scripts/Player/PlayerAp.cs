@@ -7,8 +7,9 @@ using UnityEngine.UI;
 // TODO ※プレイヤーのアニメーション処理
 public class PlayerAp : MonoBehaviour {
 
-	public static float armorPoint;			// プレイヤー体力
-	public int enemyAttack;					// 敵の攻撃値
+    Rigidbody rigidbody;
+    public static float armorPoint;			// プレイヤー体力
+	public static int enemyAttack;					// 敵の攻撃値
 	public float poisonAttack;				// 毒
 	public Text armorText;
 	float displayArmorPoint;				// 画面表示用HPゲージ
@@ -57,8 +58,9 @@ public class PlayerAp : MonoBehaviour {
 		}
 	}*/
 
-	void Start () {	
-		armorPoint = DataManager.ArmorPointMax;
+	void Start () {
+        rigidbody = GetComponent<Rigidbody>();
+        armorPoint = DataManager.ArmorPointMax;
 		// 画面上のarmorPointとPlayerApのarmorPointを連動させる
 		displayArmorPoint = armorPoint;
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
@@ -151,8 +153,10 @@ public class PlayerAp : MonoBehaviour {
 			if (PlayerNo == 2) {
 				SoundManager.Instance.Play (23, gameObject);
 			}
-			//コルーチン処理（下記参照）
-			StartCoroutine ("EnemyDamageCoroutine");
+                //コルーチン処理（下記参照）
+                //rigidbody.AddForce(transform.forward * -5f);
+                StartCoroutine ("EnemyDamageCoroutine");
+                Debug.Log("ダメージ");
 			}
 		}
 		//速度最大で壁と接触したらダメージ
@@ -161,11 +165,17 @@ public class PlayerAp : MonoBehaviour {
 			if (isBig == true) {
 				armorPoint -= 0;
 			} else {
-				//プレイヤ速度がmaxForce値以上ならダメージ
-				if (force >= maxForce) {
-					//Debug.Log (force);
-					//カメラに付けているShakeCameraのShakeを呼び出す（激突時の衝撃）
-					Camera.main.gameObject.GetComponent<ShakeCamera> ().Shake ();
+                //プレイヤ速度がmaxForce値以上ならダメージ
+                //if (force >= maxForce) {
+                if (force >= 1.0f)
+                {
+                    //rigidbody.transform.position -= transform.forward * 2;
+                    //rigidbody.transform.position = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(0, 0, -2), Time.deltaTime * 2);
+                    //Vector3 force = new Vector3(0.0f, 0.0f, -5.0f);
+                    //rigidbody.AddForce(force);
+                    //Debug.Log (force);
+                    //カメラに付けているShakeCameraのShakeを呼び出す（激突時の衝撃）
+                    Camera.main.gameObject.GetComponent<ShakeCamera> ().Shake ();
 					//Debug.Log ("激突");
 					armorPoint -= 100;
 					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
@@ -287,15 +297,15 @@ public class PlayerAp : MonoBehaviour {
 		gameObject.layer = LayerMask.NameToLayer("Invincible");
 		//while文を10回ループ
 		int count = 10;
-		iTween.MoveTo(gameObject, iTween.Hash(
-			//KnockBackRange値だけ後に吹っ飛ぶ
-			"position", transform.position - (transform.forward * KnockBackRange),
-			"time", FlashTime, // 点滅時間（秒）
-			"easetype", iTween.EaseType.linear
+        iTween.MoveTo(gameObject, iTween.Hash(
+            //KnockBackRange値だけ後に吹っ飛ぶ
+            "position", transform.position - (transform.forward * KnockBackRange),
+            "time", FlashTime, // 点滅時間（秒）
+            "easetype", iTween.EaseType.linear
 		));
-		while (count > 0){
+        Debug.Log("後退");
+        while (count > 0){
 			//透明にする
-			//modelColorChange.ColorChange(new Color (1,0,0,1));
 			modelColorChange.ColorChange(DamageColor);
 			//0.1秒待つ
 			yield return new WaitForSeconds(0.1f);
@@ -314,12 +324,13 @@ public class PlayerAp : MonoBehaviour {
 	{
 		//while文を10回ループ
 		int count = 4;
-		iTween.MoveTo(gameObject, iTween.Hash(
-			"position", transform.position - (transform.forward * KnockBackRange),
-			"time", FlashTime, // 点滅時間（秒）
+        //rigidbody.transform.position -= transform.forward * 2;
+        iTween.MoveTo(gameObject, iTween.Hash(
+            "position", transform.position - (transform.forward * KnockBackRange),
+            "time", FlashTime, // 点滅時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
-		while (count > 0){
+        while (count > 0){
 			//透明にする
 			modelColorChange.ColorChange(new Color (1,0,0,1));
 			//0.1秒待つ

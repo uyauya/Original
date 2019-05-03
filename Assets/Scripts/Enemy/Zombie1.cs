@@ -21,6 +21,8 @@ public class Zombie1 : MonoBehaviour {
     public bool RighrtMove = false;
     public bool LeftMove = false;
     public float RandomMoeCount = 0;
+    public float InvincibleTime = 0.5f;                    // 無敵時間
+    public float KnockBackRange = 1.5f;
 
     /*[CustomEditor(typeof(Zombie1))]
 	public class Zombie1 : Editor	// using UnityEditor; を入れておく
@@ -145,12 +147,31 @@ public class Zombie1 : MonoBehaviour {
     }
 
     //攻撃が当たったらDamageTime分だけSpeedをゼロにする（動きを止める）
-    IEnumerator DamageSetCoroutine (){
-		enemyBasic.DamageSet = false;
+    IEnumerator DamageSetCoroutine ()
+    {
+        int count = 2;
+        iTween.MoveTo(gameObject, iTween.Hash(
+            // その場からKnockBackRange数値分後(-transform.forwardで後)に移動
+            "position", transform.position - (transform.forward * KnockBackRange),
+            // 無敵(ダメージ判定なし)時間設定（秒）
+            "time", InvincibleTime,
+            "easetype", iTween.EaseType.linear
+        ));
+        Debug.Log("下がった" + KnockBackRange);
+        /*while (count > 0)
+        {
+            modelColorChange.ColorChange(new Color(1, 0, 0, 1));
+            yield return new WaitForSeconds(0.1f);
+            modelColorChange.ColorChange(new Color(1, 1, 1, 1));
+            yield return new WaitForSeconds(0.1f);
+            count--;
+        }*/
+        enemyBasic.DamageSet = false;
 		LastEnemySpeed = enemyBasic.EnemySpeed;			//直前の動きの速さをLastEnemySpeedとして保存
 		enemyBasic.EnemySpeed = 0;						//スピードを0にする（硬直処理）
 		yield return new WaitForSeconds(DamageTime);	//DamageTimeが経過したら
-		enemyBasic.EnemySpeed = LastEnemySpeed;			//LastEnemySpeedに戻して再び移動可能にする
+        //iTween.MoveBy(gameObject, iTween.Hash("z", 10f, "time", 0.1f));
+        enemyBasic.EnemySpeed = LastEnemySpeed;			//LastEnemySpeedに戻して再び移動可能にする
 		//Debug.Log (LastEnemySpeed);
 	}
 

@@ -6,9 +6,7 @@ using System.Collections;
 public class MapCreator : MonoBehaviour {
 	public int				MAP_SIZE_X = 7;		//マップ横幅 (偶数指定の場合は、自動的に奇数にされる)
 	public int				MAP_SIZE_Z = 10;	//マップ奥幅 (偶数指定の場合は、自動的に奇数にされる)
-	//public GameObject		player;				//プレイヤーオブジェクト格納用
     public GameObject OriginalChara;			//ステージ上に存在するPlayer判別（キャラチェンジ用）
-    //public GameObject Utc_sum_humanoid;
     private MapSize		    size;				//マップサイズ型の変数
 	private MapAxis			playerAxis;			//プレイヤー座標を扱うPlayerAxis型の変数
 	private MapArrayBlock	mapBlock;			//地面用MapArrayBlock型の変数
@@ -23,7 +21,6 @@ public class MapCreator : MonoBehaviour {
 	public	GameObject[]	prefab_BombPoint;
 	private float timer = 0.0f;					//グリーンスフィア取得計算用???
 	private float interval = 2.0f;				//グリーンスフィア取得計算用???
-	//public GameObject[] 	Prefab_Player;
 	public	GameObject		Boss02;	
     private int CurrentLevel;
     public BattleManager battleManager;
@@ -60,27 +57,12 @@ public class MapCreator : MonoBehaviour {
 	
 	// プレイヤーが進むにつれmapBlock生成
 	void Update(){
-        /*if(DataManager.PlayerChange == true)
-        {
-            Vector3 PlayerPos = battleManager.Player.transform.position;
-            CurrentLevel = DataManager.Level;
-            Destroy(battleManager.Player);
-            if (DataManager.PlayerNo == 0)				//新たなプレイヤー発生
-			{
-            player = Instantiate (Prefab_Player [DataManager.PlayerNo = 3]);
-            battleManager.Player = player;
-            battleManager.Player.transform.position = PlayerPos;
-            DataManager.Level = CurrentLevel;
-            DataManager.PlayerChange = false;
-            //Debug.Log("レベル" + DataManager.Level);
-            }
-        }*/
 
         playerAxis.updateAxis ();						// プレイヤー座標を更新
 		mapBlock.renewal ();							// マップ(床)の更新
 		mapFloor.renewal ();							// マップ(地上)の更新
 		
-		timer += Time.deltaTime;						// グリーンスフィア取得数計算 BattleManagerスクリプト参照???
+		timer += Time.deltaTime;						// グリーンスフィア取得数計算 BattleManagerスクリプト参照
 		if (timer >= interval) {
 			Check ("Item3");
 			timer = 0;

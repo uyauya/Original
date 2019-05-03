@@ -20,7 +20,7 @@ public class EnemyBasic : MonoBehaviour {
 	public float armorPoint;					    // HP
 	public int TargetRange;							// プレイヤをターゲット認識する距離
 	public float EnemySpeed;						// 移動スピード
-	//public float LimitedSpeed;						// 移動スピード最大値
+	//public float LimitedSpeed;				    // 移動スピード最大値
 	public float JumpForce;							// ジャンプ力
 	public float EnemyRotate;						// 振り向き速度
 	public float Search;							// プレイヤを探すサーチレンジ
@@ -32,8 +32,9 @@ public class EnemyBasic : MonoBehaviour {
 	public int EnemyAttack = 100;					// プレイヤに与えるダメージ
 	public float InvincibleTime;					// 無敵時間
 	protected ModelColorChange modelColorChange;	// 点滅処理
-	public float KnockBackRange;					// 攻撃を受けた際のノックバックの距離
-	public float DestroyTime;						// （HP0になった際の）消滅するまでの時間
+	public float KnockBackRange = 1.5f;				// 攻撃をした際のノックバックの距離
+    public float DKnockBackRange;                   // 攻撃を受けた際のノックバックの距離
+    public float DestroyTime;						// （HP0になった際の）消滅するまでの時間
 	public GameObject DestroyEffect;				// 消滅時発生エフェクト
 	public float timeElapsed;
 	public float timeOut;
@@ -72,12 +73,13 @@ public class EnemyBasic : MonoBehaviour {
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
 	public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
-	public Color DamageColor;						// 被ダメージ時の点滅色
-	public Color FreezeColor;
-	public Color DeadColor;
+	public Color DamageColor = new Color(0.96f, 0.06f, 0.24f, 0.98f);  
+    public Color FreezeColor = new Color(0.96f, 0.06f, 0.24f, 0.98f);  
+    public Color DeadColor = new Color(0.96f, 0.06f, 0.24f, 0.98f);  
 
 
-	/*[CustomEditor(typeof(EnemyBasic))]
+
+    /*[CustomEditor(typeof(EnemyBasic))]
 	public class EnemyBasicEditor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
@@ -106,7 +108,7 @@ public class EnemyBasic : MonoBehaviour {
 		}
 	}*/
 
-	public void Initialize () {
+    public void Initialize () {
 		
 	}
 
@@ -129,6 +131,18 @@ public class EnemyBasic : MonoBehaviour {
         playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 		// BattleManagerオブジェクトのBattleManagerをbattleManagerとする
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
+        GameObject Hit01Prefab = GameObject.Find("Hit01");
+        GameObject Hit02Prefab = GameObject.Find("Hit02");
+        GameObject Hit03Prefab = GameObject.Find("Hit03");
+        GameObject Hit05Prefab = GameObject.Find("Hit05");
+        GameObject DeadPrefab = GameObject.Find("Dead");
+        GameObject RedSphere = GameObject.Find("RedSphere");
+        GameObject BlueSphere = GameObject.Find("BlueSphere");
+        GameObject GreenSphere = GameObject.Find("GreenSphere");
+        GameObject YellowSphere = GameObject.Find("YellowSphere");
+        //GameObject LifeBar = GameObject.Find("LifeBar");
+        GameObject Star = GameObject.Find("Star");
+        GameObject BigStar = GameObject.Find("BigStar");
         target = battleManager.Player;
         // レイヤーをEnemyにしておく（被ダメージ時、死亡処理時使用）
         gameObject.layer = LayerMask.NameToLayer("Enemy");
@@ -287,7 +301,9 @@ public class EnemyBasic : MonoBehaviour {
 		} else if (collider.gameObject.tag == "Player") {
 			DamageSet = true;
 			animator.SetTrigger ("damaged");
-		}
+            StartCoroutine("KnockBackCoroutine");
+            Debug.Log("下がる" + KnockBackRange);
+        }
 			//ライフバーからダメージ分ゲージを減らす
 			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
 
@@ -338,22 +354,22 @@ public class EnemyBasic : MonoBehaviour {
 			
 	}
 
-	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
-	// ダメージ時の点滅処理(DamageColor色で点滅)
-	IEnumerator DamageCoroutine ()
+    // Itweenを使ってコルーチン作成（Itweenインストール必要あり）
+    // ダメージ時の点滅処理(DamageColor色で点滅)
+    IEnumerator DamageCoroutine ()
 	{
 		//while文を10回ループ
 		int count = 10;
-		iTween.MoveTo(gameObject, iTween.Hash(
+        iTween.MoveBy(gameObject, iTween.Hash("z", -50f));
+        /*iTween.MoveTo(gameObject, iTween.Hash(
 			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
-			"position", transform.position - (transform.forward * KnockBackRange),
+			"position", transform.position - (transform.forward * DKnockBackRange),
 			// 無敵(ダメージ判定なし)時間設定（秒）
 			"time", InvincibleTime, 
 			"easetype", iTween.EaseType.linear
-		));
+		));*/
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
-			//modelColorChange.ColorChange(new Color (1,0,0,1));
 			modelColorChange.ColorChange(DamageColor);
 			//0.03秒待つ
 			yield return new WaitForSeconds(0.3f);
@@ -372,7 +388,7 @@ public class EnemyBasic : MonoBehaviour {
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
-			"position", transform.position - (transform.forward * KnockBackRange),
+			//"position", transform.position - (transform.forward * DKnockBackRange),
 			// 無敵(ダメージ判定なし)時間設定（秒）
 			"time", InvincibleTime, 
 			"easetype", iTween.EaseType.linear
@@ -418,9 +434,30 @@ public class EnemyBasic : MonoBehaviour {
 		}
 	}
 
-	// 重力設定を個別で設定
-	// 常に一定の割合で処理を続ける場合はFixedUpdateを使う。操作時などの場合はUpdateの方がよい
-	void FixedUpdate () {
+    IEnumerator KnockBackCoroutine()
+    {
+        int count = 2;
+        iTween.MoveTo(gameObject, iTween.Hash(
+            // その場からKnockBackRange数値分後(-transform.forwardで後)に移動
+            "position", transform.position - (transform.forward * KnockBackRange),
+            // 無敵(ダメージ判定なし)時間設定（秒）
+            "time", InvincibleTime,
+            "easetype", iTween.EaseType.linear
+        ));
+        Debug.Log("下がった" + KnockBackRange);
+        while (count > 0)
+        {
+            modelColorChange.ColorChange(new Color(1, 0, 0, 1));
+            yield return new WaitForSeconds(0.1f);
+            modelColorChange.ColorChange(new Color(1, 1, 1, 1));
+            yield return new WaitForSeconds(0.1f);
+            count--;
+        }
+    }
+
+    // 重力設定を個別で設定
+    // 常に一定の割合で処理を続ける場合はFixedUpdateを使う。操作時などの場合はUpdateの方がよい
+    void FixedUpdate () {
 		setLocalGravity ();
 	}
 
