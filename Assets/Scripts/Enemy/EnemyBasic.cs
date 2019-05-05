@@ -301,8 +301,8 @@ public class EnemyBasic : MonoBehaviour {
 		} else if (collider.gameObject.tag == "Player") {
 			DamageSet = true;
 			animator.SetTrigger ("damaged");
-            StartCoroutine("KnockBackCoroutine");
-            Debug.Log("下がる" + KnockBackRange);
+            //StartCoroutine("KnockBackCoroutine");
+            //Debug.Log("下がる" + KnockBackRange);
         }
 			//ライフバーからダメージ分ゲージを減らす
 			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
@@ -358,9 +358,8 @@ public class EnemyBasic : MonoBehaviour {
     // ダメージ時の点滅処理(DamageColor色で点滅)
     IEnumerator DamageCoroutine ()
 	{
-		//while文を10回ループ
-		int count = 10;
-        iTween.MoveBy(gameObject, iTween.Hash("z", -50f));
+        //while文を10回ループ
+        int count = 10;
         /*iTween.MoveTo(gameObject, iTween.Hash(
 			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
 			"position", transform.position - (transform.forward * DKnockBackRange),
@@ -386,13 +385,13 @@ public class EnemyBasic : MonoBehaviour {
 	{
 		//while文を10回ループ
 		int count = 10;
-		iTween.MoveTo(gameObject, iTween.Hash(
+		/*iTween.MoveTo(gameObject, iTween.Hash(
 			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
 			//"position", transform.position - (transform.forward * DKnockBackRange),
 			// 無敵(ダメージ判定なし)時間設定（秒）
 			"time", InvincibleTime, 
 			"easetype", iTween.EaseType.linear
-		));
+		));*/
 		// 無敵(ダメージ判定なし)にして
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
@@ -434,7 +433,7 @@ public class EnemyBasic : MonoBehaviour {
 		}
 	}
 
-    IEnumerator KnockBackCoroutine()
+    /*IEnumerator KnockBackCoroutine()
     {
         int count = 2;
         iTween.MoveTo(gameObject, iTween.Hash(
@@ -444,7 +443,7 @@ public class EnemyBasic : MonoBehaviour {
             "time", InvincibleTime,
             "easetype", iTween.EaseType.linear
         ));
-        Debug.Log("下がった" + KnockBackRange);
+        //Debug.Log("下がった" + KnockBackRange);
         while (count > 0)
         {
             modelColorChange.ColorChange(new Color(1, 0, 0, 1));
@@ -453,7 +452,7 @@ public class EnemyBasic : MonoBehaviour {
             yield return new WaitForSeconds(0.1f);
             count--;
         }
-    }
+    }*/
 
     // 重力設定を個別で設定
     // 常に一定の割合で処理を続ける場合はFixedUpdateを使う。操作時などの場合はUpdateの方がよい

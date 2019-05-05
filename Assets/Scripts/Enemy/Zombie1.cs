@@ -157,7 +157,7 @@ public class Zombie1 : MonoBehaviour {
             "time", InvincibleTime,
             "easetype", iTween.EaseType.linear
         ));
-        Debug.Log("下がった" + KnockBackRange);
+        //Debug.Log("下がった" + KnockBackRange);
         /*while (count > 0)
         {
             modelColorChange.ColorChange(new Color(1, 0, 0, 1));

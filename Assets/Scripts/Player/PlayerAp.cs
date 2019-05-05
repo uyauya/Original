@@ -156,7 +156,7 @@ public class PlayerAp : MonoBehaviour {
                 //コルーチン処理（下記参照）
                 //rigidbody.AddForce(transform.forward * -5f);
                 StartCoroutine ("EnemyDamageCoroutine");
-                Debug.Log("ダメージ");
+                //Debug.Log("ダメージ");
 			}
 		}
 		//速度最大で壁と接触したらダメージ
@@ -296,14 +296,16 @@ public class PlayerAp : MonoBehaviour {
 		// EnemeyとPlayerの交差してる✔を外す（プレイヤのLayerをPlayer、EnemyのLayerをEnemyに設定しておく）
 		gameObject.layer = LayerMask.NameToLayer("Invincible");
 		//while文を10回ループ
-		int count = 10;
+		int count = 4;
+        //iTween.MoveTo(gameObject, iTween.Hash("z", -0.2f));
         iTween.MoveTo(gameObject, iTween.Hash(
             //KnockBackRange値だけ後に吹っ飛ぶ
             "position", transform.position - (transform.forward * KnockBackRange),
+            //"position", transform.position - (transform.forward * 5f),
             "time", FlashTime, // 点滅時間（秒）
             "easetype", iTween.EaseType.linear
 		));
-        Debug.Log("後退");
+        //Debug.Log("後退");
         while (count > 0){
 			//透明にする
 			modelColorChange.ColorChange(DamageColor);
@@ -349,7 +351,7 @@ public class PlayerAp : MonoBehaviour {
 		//while文を10回ループ
 		int count = 4;
 		iTween.MoveTo(gameObject, iTween.Hash(
-			//"position", transform.position - (transform.forward * KnockBackRange),
+			"position", transform.position - (transform.forward * KnockBackRange),
 			"time", FlashTime, // 点滅時間（秒）
 			"easetype", iTween.EaseType.linear
 		));

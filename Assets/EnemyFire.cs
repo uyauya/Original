@@ -13,7 +13,7 @@ public class EnemyFire : MonoBehaviour
     void Start()
     {
         driftEnemy1 = GameObject.FindWithTag("Enemy").GetComponent<DriftEnemy1>();
-        transform.rotation = driftEnemy1.transform.rotation;
+        //transform.rotation = driftEnemy1.transform.rotation;
         Destroy(gameObject, DestroyTime);
     }
 

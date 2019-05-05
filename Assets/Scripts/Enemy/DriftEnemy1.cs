@@ -34,19 +34,20 @@ public class DriftEnemy1 : MonoBehaviour {
         BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z);
 	}
 
-	void Update () {
+    void Update() {
         AttackPhaseTime += Time.deltaTime;
         switch (AttackPhase) {
 
             case 1:
+                rigidbody.velocity = Vector3.zero;
                 if (AttackPhaseTime >= 2) {
                     AttackPhase = 2;
                 }
-                iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(-20f, 0f, 0f), "time", 0.5f));
+                /*iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(-20f, 0f, 0f), "time", 0.5f));
                 iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(0f, 60f, 0f), "time", 0.5f));
                 iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(0f, -120f, 0f), "time", 5f));
                 iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(0f, 60f, 0f), "time", 5f));
-                iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(20f, 0f, 0f), "time", 5f));
+                iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(20f, 0f, 0f), "time", 5f));*/
 
 
                 //一定間隔でショット
@@ -56,24 +57,26 @@ public class DriftEnemy1 : MonoBehaviour {
                 {
                     GameObject enemyFire = GameObject.Instantiate(EnemyFire) as GameObject;
                     enemyFire.transform.position = EnemyMuzzle.position;
+                    enemyFire.transform.rotation = EnemyMuzzle.transform.rotation;
                     //Instantiate(enemyBasic.shot, transform.position, transform.rotation);
                     enemyBasic.shotInterval = 0;
                 }
                 break;
             case 2:
-                
+
                 break;
         }
-        damageSet = GetComponent<EnemyBasic> ().DamageSet;
-		freezeSet = GetComponent<EnemyBasic> ().FreezeSet;
+        damageSet = GetComponent<EnemyBasic>().DamageSet;
+        freezeSet = GetComponent<EnemyBasic>().FreezeSet;
 
-        rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
+        //rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
         Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
         gameObject.transform.eulerAngles = new Vector3(1, Ros.y, 1);
         enemyBasic.timer += Time.deltaTime;
         timeCount += Time.deltaTime;
-
+        if (AttackPhase == 0) { 
         rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
+        }
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1.0f))
         {
@@ -96,38 +99,46 @@ public class DriftEnemy1 : MonoBehaviour {
 		// 上記同様Y軸にSin式を入れ上下させる
 		this.transform.position = new Vector3 (this.transform.position.x, this.BasicPoint.y + Mathf.Sin (Time.time), 
 			this.transform.position.z);
-		//敵の攻撃範囲を設定する
-		//相手の位置と自分の位置の差がTargetRange以内なら
-		if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.TargetRange)
+        //敵の攻撃範囲を設定する
+        //相手の位置と自分の位置の差がTargetRange以内なら
+        if (AttackPhase == 0)
         {
-			//ターゲットの方を徐々に向く
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
-				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
-            rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
-        }
-        //Playerが近くにいなければ敵の移動方向をランダムで変える
-        else if (timeCount > chargeTime)
-        {
-            Vector3 course = new Vector3(0, Random.Range(0, 360), 0);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation
-                (enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
-            timeCount = 0;
+            if (Vector3.Distance(enemyBasic.target.transform.position, transform.position) <= enemyBasic.TargetRange)
+            {
+                //ターゲットの方を徐々に向く
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation
+                    (enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
+                rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
+            }
+            //Playerが近くにいなければ敵の移動方向をランダムで変える
+            else if (timeCount > chargeTime)
+            {
+                Vector3 course = new Vector3(0, Random.Range(0, 360), 0);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation
+                    (enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
+                timeCount = 0;
+            }
         }
         // ターゲット（プレイヤー）との距離がSearch以内なら
         //if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= 5.0f) {
         if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
-            AttackPhase = 1;
-            AttackPhaseTime = 0.0f;
+            if(AttackPhase == 0)
+            {
+                AttackPhase = 1;
+                iTween.RotateTo(gameObject, iTween.Hash("x", 0f, "y", 90f, "z", 0f));
+                AttackPhaseTime = 0.0f;
+            }
+
             //Debug.Log ("検出");
             //if (Vector3.Distance (Player.target.transform.position, transform.position) <= enemyBasic.Search) {
             //ターゲットの方を徐々に向く
             // Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
             // Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
-            transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
+            /*transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
 			transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
 			//一定間隔でショット
-			enemyBasic.shotInterval += Time.deltaTime;
+			enemyBasic.shotInterval += Time.deltaTime;*/
 			// 次の攻撃待ち時間が一定以上になれば
 			/*if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax) {
                 Instantiate (enemyBasic.shot, transform.position, transform.rotation);

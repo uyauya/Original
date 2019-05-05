@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour {
 	private Animator animator;
     Rigidbody rigidbody;
     public float Force= 7;							//移動速度
-	public float MaxForce = 9;						//移動速度最大値
+    public float ReForce = 7;                       //衝突後の再開移動速度
+    public float MaxForce = 9;						//移動速度最大値
 	public float MaxBoostForce = 14;				//ブースト時の移動速度最大値
 	public float Deceleration = 2.2f;				//減速(オートブレーキ)
 	public float PlusForce= 0.2f;					//移動速度加算数値
@@ -19,9 +20,9 @@ public class PlayerController : MonoBehaviour {
     public float DeGravity = -1.0f;					//重力軽減用
 	public float DoubleJump = 4.0f;					//二段ジャンプ
 	public float BoostJumpForce = 6.0f;				//ブースト時のジャンプ力
-	public float HighPoint = 120.0f;							//ジャンプの高さ最大値
-	public float InvincibleTime = 1.0f;					//無敵時間
-	public float gravity = 9.8f;							//重力（ジャンプ時などに影響）
+	public float HighPoint = 120.0f;				//ジャンプの高さ最大値
+	public float InvincibleTime = 1.0f;				//無敵時間
+	public float gravity = 9.8f;					//重力（ジャンプ時などに影響）
 	private Vector3 moveDirection = Vector3.zero;	//プレイヤ位置方向ニュートラル設定
 	public float boostPoint;						//ブーストポイント
 	public float displayBoostPoint;					//ブーストポイント（画面表示用）
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 	private int JumpCount;							//ジャンプ回数計算用（二段ジャンプ処理に使用）
 	private float interval = 2.0f;
 	private float timer = 0.0f;				
-	public static bool ItemCount = false;							//スフィア取得個数計算用
+	public static bool ItemCount = false;			//スフィア取得個数計算用
 	public static bool GetStar = false;
 	public static bool GetBigStar = false;
 	Vector3 targetSpeed = Vector3.zero; 			//目標速度
@@ -57,13 +58,13 @@ public class PlayerController : MonoBehaviour {
 	public GameObject DashAttck;	
 	public GameObject DAEffectPrefab;				
 	public GameObject DAEffectObject;
-    //public GameObject ClearWall;
     public Transform muzzle;						
 	public Transform Attack;						//DashAttackプレハブ発生元
     public float DashBpDown = 1.0f;					//DashAttack起動時の消費ブーストポイント
 	public float DashRate = 2.0f;					//ダッシュ時の速度の掛け率
-    public float KnockBack = -18.0f;
+    public float KnockBack = 2.0f;
     int layerMask = ~0;
+
 
     /*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -513,19 +514,19 @@ public class PlayerController : MonoBehaviour {
                     Force -= Deceleration;
                     //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 }
-				//他、通常移動時ならその場に配置（即停止）
-                else if(PlayerAp.enemyAttack > 0)
-                {
-                    return;
-                    //rigidbody.AddForce((transform.forward * KnockBack));
-                    //KnockBack *= 0.99f; 
-                }
-                //他、通常移動時ならその場に配置（即停止）
-                else
+                //他、通常移動時ならその場に配置（即停止）移動速度ReForceで再開
+                else if (PlayerAp.enemyAttack == 0)
                 {
                     Vector3 v = GetComponent<Rigidbody>().velocity;
                     GetComponent<Rigidbody>().velocity = new Vector3(0, v.y, 0);
+                    Force = ReForce;
                 }
+                //ダメージを受けたら移動速度ReForceで再開
+                else if (PlayerAp.enemyAttack > 0)
+                {
+                    Force = ReForce;
+                }
+                
             }
 
         }
@@ -533,11 +534,6 @@ public class PlayerController : MonoBehaviour {
 
         // 非ブースト時ブーストポイントが徐々に回復（！は～されなければという否定形）
 		// 非ブースト時（通常移動時）最大速度で回避値3倍
-        /*if (!Input.GetButton ("Boost") && Force == MaxForce) {
-			boostPoint += 3 * RecoverPoint;
-		} else if (!Input.GetButton ("Boost") && Force < MaxForce) {
-			boostPoint += 1 * RecoverPoint;
-		}*/
         if((!isBoost) && Force == MaxForce)
         {
             boostPoint += 3 * RecoverPoint;
@@ -707,4 +703,5 @@ public class PlayerController : MonoBehaviour {
 
 	private void OnCollisionStay(Collision collisionInfo) {
 	}
+
 }
