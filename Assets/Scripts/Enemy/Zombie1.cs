@@ -87,13 +87,11 @@ public class Zombie1 : MonoBehaviour {
             }
             if (RighrtMove == true)
             {
-                //Debug.Log("右");
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 10.0f);
                 //rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed * MoveTime);
             }
             else if (LeftMove == true)
                 {
-                //Debug.Log("左");
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 10.0f);
                 //rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed * MoveTime);
             }
@@ -149,7 +147,6 @@ public class Zombie1 : MonoBehaviour {
     //攻撃が当たったらDamageTime分だけSpeedをゼロにする（動きを止める）
     IEnumerator DamageSetCoroutine ()
     {
-        int count = 2;
         iTween.MoveTo(gameObject, iTween.Hash(
             // その場からKnockBackRange数値分後(-transform.forwardで後)に移動
             "position", transform.position - (transform.forward * KnockBackRange),
@@ -158,19 +155,10 @@ public class Zombie1 : MonoBehaviour {
             "easetype", iTween.EaseType.linear
         ));
         //Debug.Log("下がった" + KnockBackRange);
-        /*while (count > 0)
-        {
-            modelColorChange.ColorChange(new Color(1, 0, 0, 1));
-            yield return new WaitForSeconds(0.1f);
-            modelColorChange.ColorChange(new Color(1, 1, 1, 1));
-            yield return new WaitForSeconds(0.1f);
-            count--;
-        }*/
         enemyBasic.DamageSet = false;
 		LastEnemySpeed = enemyBasic.EnemySpeed;			//直前の動きの速さをLastEnemySpeedとして保存
 		enemyBasic.EnemySpeed = 0;						//スピードを0にする（硬直処理）
 		yield return new WaitForSeconds(DamageTime);	//DamageTimeが経過したら
-        //iTween.MoveBy(gameObject, iTween.Hash("z", 10f, "time", 0.1f));
         enemyBasic.EnemySpeed = LastEnemySpeed;			//LastEnemySpeedに戻して再び移動可能にする
 		//Debug.Log (LastEnemySpeed);
 	}

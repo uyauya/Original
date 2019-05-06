@@ -31,11 +31,13 @@ public class BoostEffect : MonoBehaviour {
 			DashLight.SetActive (FlagDash);
 			FlagBoost = false;
 			boostLight.SetActive (false);
-		}
+		}*/
 		else 
 		{
-			return;
-		}*/
+            FlagBoost = false;
+            boostLight.SetActive(false);
+            return;
+		}
 			
 	}
 }

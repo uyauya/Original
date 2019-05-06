@@ -20,7 +20,6 @@ public class EnemyBasic : MonoBehaviour {
 	public float armorPoint;					    // HP
 	public int TargetRange;							// プレイヤをターゲット認識する距離
 	public float EnemySpeed;						// 移動スピード
-	//public float LimitedSpeed;				    // 移動スピード最大値
 	public float JumpForce;							// ジャンプ力
 	public float EnemyRotate;						// 振り向き速度
 	public float Search;							// プレイヤを探すサーチレンジ
@@ -239,10 +238,9 @@ public class EnemyBasic : MonoBehaviour {
 		if (collider.gameObject.tag == "Shot" || collider.gameObject.tag == "Shot2" || collider.gameObject.tag == "Shot3"
 		    || collider.gameObject.tag == "Shot5") {
 			if (armorPoint <= 0) {
-				//Debug.Log ("敵"+gameObject.name);
-				// Animatorを"dead"へ移行
-				// 移行後元に戻さないならBool判定にした方がよい
-				animator.SetBool ("dead", true);
+                //Debug.Log ("敵"+gameObject.name);
+                // Animatorを"dead"へ移行。移行後元に戻さないならBool判定にした方がよい
+                animator.SetBool ("dead", true);
 				// 死亡アニメーション中に敵が移動しないようにスピードをゼロにする
 				EnemySpeed = 0;
 				// 敵消滅用エフェクト発生
@@ -293,16 +291,13 @@ public class EnemyBasic : MonoBehaviour {
 		bool isbig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 		//プレイヤのタグがついていてisbig状態(巨大化中)なら
 		if (collider.gameObject.tag == "Player" && isbig == true) {
-			//Debug.Log ("一撃");
 			//armorPointからプレイヤのbigAttack値を差し引く
 			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
 			armorPoint -= bigAttack;
 			//それ以外(巨大化してない)ならDamageSet状態にする
 		} else if (collider.gameObject.tag == "Player") {
-			DamageSet = true;
+			//DamageSet = true;                                     //Playerとの接触はplayerの方をノックバックする。
 			animator.SetTrigger ("damaged");
-            //StartCoroutine("KnockBackCoroutine");
-            //Debug.Log("下がる" + KnockBackRange);
         }
 			//ライフバーからダメージ分ゲージを減らす
 			LifeBar.GetComponent<LifeBar>().UpdateArmorPointValue();
@@ -360,13 +355,6 @@ public class EnemyBasic : MonoBehaviour {
 	{
         //while文を10回ループ
         int count = 10;
-        /*iTween.MoveTo(gameObject, iTween.Hash(
-			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
-			"position", transform.position - (transform.forward * DKnockBackRange),
-			// 無敵(ダメージ判定なし)時間設定（秒）
-			"time", InvincibleTime, 
-			"easetype", iTween.EaseType.linear
-		));*/
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
 			modelColorChange.ColorChange(DamageColor);
@@ -385,13 +373,6 @@ public class EnemyBasic : MonoBehaviour {
 	{
 		//while文を10回ループ
 		int count = 10;
-		/*iTween.MoveTo(gameObject, iTween.Hash(
-			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
-			//"position", transform.position - (transform.forward * DKnockBackRange),
-			// 無敵(ダメージ判定なし)時間設定（秒）
-			"time", InvincibleTime, 
-			"easetype", iTween.EaseType.linear
-		));*/
 		// 無敵(ダメージ判定なし)にして
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
@@ -433,26 +414,6 @@ public class EnemyBasic : MonoBehaviour {
 		}
 	}
 
-    /*IEnumerator KnockBackCoroutine()
-    {
-        int count = 2;
-        iTween.MoveTo(gameObject, iTween.Hash(
-            // その場からKnockBackRange数値分後(-transform.forwardで後)に移動
-            "position", transform.position - (transform.forward * KnockBackRange),
-            // 無敵(ダメージ判定なし)時間設定（秒）
-            "time", InvincibleTime,
-            "easetype", iTween.EaseType.linear
-        ));
-        //Debug.Log("下がった" + KnockBackRange);
-        while (count > 0)
-        {
-            modelColorChange.ColorChange(new Color(1, 0, 0, 1));
-            yield return new WaitForSeconds(0.1f);
-            modelColorChange.ColorChange(new Color(1, 1, 1, 1));
-            yield return new WaitForSeconds(0.1f);
-            count--;
-        }
-    }*/
 
     // 重力設定を個別で設定
     // 常に一定の割合で処理を続ける場合はFixedUpdateを使う。操作時などの場合はUpdateの方がよい

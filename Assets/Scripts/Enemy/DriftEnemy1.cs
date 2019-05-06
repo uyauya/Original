@@ -125,7 +125,8 @@ public class DriftEnemy1 : MonoBehaviour {
             if(AttackPhase == 0)
             {
                 AttackPhase = 1;
-                iTween.RotateTo(gameObject, iTween.Hash("x", 0f, "y", 90f, "z", 0f));
+                iTween.RotateTo(gameObject, iTween.Hash("y", 90f, "time", 2f));                 //右向いて
+                iTween.RotateAdd(gameObject, iTween.Hash("y", 180f,"time", 2f, "delay", 2f));   //2秒後左向く
                 AttackPhaseTime = 0.0f;
             }
 
