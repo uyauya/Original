@@ -59,7 +59,9 @@ public class MultiWayShoot : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 		attackPoint = DataManager.AttackPoint;
-	}
+        GameObject Bullet05 = GameObject.Find("ShotM");
+        GameObject UBullet05 = GameObject.Find("UShotM");
+    }
 
 	void Update () {
 		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ

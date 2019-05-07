@@ -3,8 +3,10 @@
     "",
     "\\Assets",
     "\\Assets\\Scripts",
+    "\\Assets\\Scripts\\Block",
+    "\\Assets\\Scripts\\Boss",
     "\\Assets\\Scripts\\Enemy",
-    "\\Assets\\ToonyTinyPeople"
+    "\\Assets\\Textures"
   ],
   "PreviewInSolutionExplorer": false
 }
