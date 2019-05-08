@@ -75,7 +75,15 @@ public class PlayerShootR : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();			// ポーズ中かどうか判定用
 		attackPoint = DataManager.AttackPoint;
-
+		GameObject Bullet01 = GameObject.Find("ShotR");
+		GameObject Bullet01B = GameObject.Find("ShotBR");
+		GameObject Bullet01C = GameObject.Find("ShotCR");
+		GameObject UBullet01 = GameObject.Find("UShotR");
+		GameObject UBullet01B = GameObject.Find("UShotBR");
+		GameObject UBullet01C = GameObject.Find("UShotCR");
+		GameObject MuzzleFlash = GameObject.Find("MuzzleFlash");
+		GameObject effectPrefab = GameObject.Find("Spark");
+		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");
 	}
 
 	void Update () {

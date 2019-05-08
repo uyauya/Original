@@ -61,6 +61,8 @@ public class MultiWayShoot : MonoBehaviour {
 		attackPoint = DataManager.AttackPoint;
         GameObject Bullet05 = GameObject.Find("ShotM");
         GameObject UBullet05 = GameObject.Find("UShotM");
+		GameObject MuzzleFlash = GameObject.Find("MuzzleFlash");
+		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");
     }
 
 	void Update () {

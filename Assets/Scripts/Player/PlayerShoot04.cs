@@ -50,6 +50,8 @@ public class PlayerShoot04 : MonoBehaviour {
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 		GameObject Bullet04 = GameObject.Find("Shotsss");
 		GameObject UBullet04 = GameObject.Find("UShotsss");
+		GameObject MuzzleFlash = GameObject.Find("MuzzleFlash");
+		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");
 	}
 	
 	void Update () {

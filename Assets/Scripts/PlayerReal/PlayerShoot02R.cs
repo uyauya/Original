@@ -49,6 +49,10 @@ public class PlayerShoot02R : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 		attackPoint = DataManager.AttackPoint;
+		GameObject Bullet02 = GameObject.Find("ShotssR");
+		GameObject UBullet02 = GameObject.Find("UShotssR");
+		GameObject MuzzleFlash = GameObject.Find("MuzzleFlash");
+		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");
 	}
 
 	void Update () {

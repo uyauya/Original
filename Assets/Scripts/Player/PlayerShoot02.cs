@@ -51,6 +51,8 @@ public class PlayerShoot02 : MonoBehaviour {
 		attackPoint = DataManager.AttackPoint;
 		GameObject Bullet02 = GameObject.Find("Shotss");
 		GameObject UBullet02 = GameObject.Find("UShotss");
+		GameObject MuzzleFlash = GameObject.Find("MuzzleFlash");
+		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");
 	}
 
 	void Update () {
