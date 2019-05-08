@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEditor;
 
 // ホーミングショット
-public class PlayerShoot02 : MonoBehaviour {
+public class PlayerShoot02R : MonoBehaviour {
 
 	public GameObject Bullet02;
 	public GameObject UBullet02;
@@ -26,9 +26,9 @@ public class PlayerShoot02 : MonoBehaviour {
 	public int PlayerNo;
 	private Pause pause;
 	public bool isBig;							// 巨大化しているかどうか
-    //public BattleManager battleManager;
+	//public BattleManager battleManager;
 
-    /*[CustomEditor(typeof(PlayerShoot02))]
+	/*[CustomEditor(typeof(PlayerShoot02))]
 	public class PlayerShoot02Editor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
@@ -42,15 +42,13 @@ public class PlayerShoot02 : MonoBehaviour {
 		}
 	}*/
 
-    void Start () {
+	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 		attackPoint = DataManager.AttackPoint;
-		GameObject Bullet02 = GameObject.Find("Shotss");
-		GameObject UBullet02 = GameObject.Find("UShotss");
 	}
 
 	void Update () {
@@ -59,21 +57,21 @@ public class PlayerShoot02 : MonoBehaviour {
 		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
 		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
 		if (pause.isPause == false) {
-            isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
-            //isBig = battleManager.Player.GetComponent<PlayerAp>().isBig;
-            if (isBig == false) {
+			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
+			//isBig = battleManager.Player.GetComponent<PlayerAp>().isBig;
+			if (isBig == false) {
 				if (Input.GetButtonUp ("Fire1")) {
 					if (DataManager.Level >= PlayerLevel.PSoot02Level)
-                    {
-                        //Debug.Log("レベル" + DataManager.Level);
-                        if (GetComponent<PlayerController>().boostPoint >= BpDown)
-                        {
-                            damage = Attack += attackPoint;
-                            animator.SetTrigger("Shot");
-                            GetComponent<PlayerController>().boostPoint -= BpDown;
-                            Bullets();
-                        }
-                    }
+					{
+						//Debug.Log("レベル" + DataManager.Level);
+						if (GetComponent<PlayerController>().boostPoint >= BpDown)
+						{
+							damage = Attack += attackPoint;
+							animator.SetTrigger("Shot");
+							GetComponent<PlayerController>().boostPoint -= BpDown;
+							Bullets();
+						}
+					}
 					//マズルフラッシュを表示する
 					//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 				}
@@ -107,27 +105,28 @@ public class PlayerShoot02 : MonoBehaviour {
 		}
 
 		if ((PlayerNo == 0)|| (PlayerNo == 3))
-			{
+		{
 			SoundManager.Instance.Play(3,gameObject);
 			//SoundManagerKohaku.Instance.Play(1,gameObject);
 			SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
-			}
-			if (PlayerNo == 1) 
-			{
+		}
+		if (PlayerNo == 1) 
+		{
 			SoundManager.Instance.Play(4,gameObject);
 			//SoundManagerYuko.Instance.Play(1,gameObject);	
 			SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
-			}
-			if (PlayerNo == 2) 
-			{
+		}
+		if (PlayerNo == 2) 
+		{
 			SoundManager.Instance.Play(5,gameObject);
 			//SoundManagerMisaki.Instance.Play(1,gameObject);	
 			SoundManager2.Instance.PlayDelayed (1, 0.2f, gameObject);
-				}
 		}
+	}
 
 	public void KickEvent (){
 		Debug.Log("kick");
 	}
 
 }
+

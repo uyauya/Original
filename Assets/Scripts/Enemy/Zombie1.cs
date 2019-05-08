@@ -99,7 +99,8 @@ public class Zombie1 : MonoBehaviour {
 
         // ターゲット（プレイヤー）との距離がSearch値以内なら
         //if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
-        if (Vector3.Distance(enemyBasic.battleManager.Player.transform.position, transform.position) <= enemyBasic.Search) {
+        else if (Vector3.Distance(enemyBasic.battleManager.Player.transform.position, transform.position) <= enemyBasic.Search) 
+		{
                 //ターゲットの方を徐々に向く
                 // Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
                 // Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く

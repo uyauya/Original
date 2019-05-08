@@ -4,8 +4,8 @@ using UnityEngine.UI;
 using UnityEditor;
 
 // ボム（シューティングなどの広範囲攻撃）
-public class PlayerShoot03 : MonoBehaviour {
-	
+public class PlayerShoot03R : MonoBehaviour {
+
 	public GameObject Bullet03;
 	public GameObject UBullet03;
 	public Transform muzzle;
@@ -25,9 +25,9 @@ public class PlayerShoot03 : MonoBehaviour {
 	public int PlayerNo;
 	private Pause pause;
 	public bool isBig;							// 巨大化しているかどうか
-    //public BattleManager battleManager;
+	//public BattleManager battleManager;
 
-    /*[CustomEditor(typeof(PlayerShoot03))]
+	/*[CustomEditor(typeof(PlayerShoot03))]
 	public class PlayerShoot03Editor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
@@ -41,32 +41,30 @@ public class PlayerShoot03 : MonoBehaviour {
 		}
 	}*/
 
-    void Start () {
+	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
-		GameObject Bullet03 = GameObject.Find("Shotss");
-		GameObject UBullet03 = GameObject.Find("UShotss");
 	}
-	
+
 	void Update () {
 		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
 		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
-			if (pause.isPause == false) {
-            isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
-            //isBig = battleManager.Player.GetComponent<PlayerAp>().isBig;
-            if (isBig == false) {
+		if (pause.isPause == false) {
+			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
+			//isBig = battleManager.Player.GetComponent<PlayerAp>().isBig;
+			if (isBig == false) {
 				if (Input.GetButtonUp ("Fire1")) {
 					if (DataManager.Level >= PlayerLevel.PSoot03Level){
-					damage = Attack;
-					if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
-						animator.SetTrigger ("Shot");
-						GetComponent<PlayerController> ().boostPoint -= BpDown;
-						Bulletss ();
-						//マズルフラッシュを表示する
-						//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
+						damage = Attack;
+						if (GetComponent<PlayerController> ().boostPoint >= BpDown) {
+							animator.SetTrigger ("Shot");
+							GetComponent<PlayerController> ().boostPoint -= BpDown;
+							Bulletss ();
+							//マズルフラッシュを表示する
+							//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 						}
 					}
 				}
@@ -77,29 +75,29 @@ public class PlayerShoot03 : MonoBehaviour {
 	void Bulletss() {
 		if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 1)|| (DataManager.PlayerNo == 2)) 
 		{
-		// ショットの時間間隔
-		if (Time.time - shotInterval > shotIntervalMax) {
-			shotInterval = Time.time;
-			GameObject bulletObject = GameObject.Instantiate (Bullet03)as GameObject;
-			bulletObject.transform.position = muzzle.position;
-            //bulletObject.transform.position = Bomber.position;
-			bulletObject.GetComponent<Bullet03> ().damage = this.damage;
+			// ショットの時間間隔
+			if (Time.time - shotInterval > shotIntervalMax) {
+				shotInterval = Time.time;
+				GameObject bulletObject = GameObject.Instantiate (Bullet03)as GameObject;
+				bulletObject.transform.position = muzzle.position;
+				//bulletObject.transform.position = Bomber.position;
+				bulletObject.GetComponent<Bullet03> ().damage = this.damage;
 			}
 		}
 		else if (DataManager.PlayerNo == 0)
 		{
-		// ショットの時間間隔
-		if (Time.time - shotInterval > shotIntervalMax) {
-			shotInterval = Time.time;
-			GameObject bulletObject = GameObject.Instantiate (UBullet03)as GameObject;
-			bulletObject.transform.position = muzzle.position;
-			//bulletObject.transform.position = Bomber.position;
-			bulletObject.GetComponent<Bullet03> ().damage = this.damage;
+			// ショットの時間間隔
+			if (Time.time - shotInterval > shotIntervalMax) {
+				shotInterval = Time.time;
+				GameObject bulletObject = GameObject.Instantiate (UBullet03)as GameObject;
+				bulletObject.transform.position = muzzle.position;
+				//bulletObject.transform.position = Bomber.position;
+				bulletObject.GetComponent<Bullet03> ().damage = this.damage;
 			}
 		}
-         if ((PlayerNo == 0) || (PlayerNo == 3))
-        {
-            SoundManager.Instance.Play(6,gameObject);
+		if ((PlayerNo == 0) || (PlayerNo == 3))
+		{
+			SoundManager.Instance.Play(6,gameObject);
 			SoundManager2.Instance.PlayDelayed (2, 0.2f, gameObject);
 		}
 		if (PlayerNo == 1) {
@@ -116,4 +114,5 @@ public class PlayerShoot03 : MonoBehaviour {
 		Debug.Log("kick");
 	}
 }
+
 
