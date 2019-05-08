@@ -31,24 +31,21 @@ public class DriftEnemy1 : MonoBehaviour {
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
         rigidbody = GetComponent<Rigidbody>();
-        BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z);
+        BasicPoint = new Vector3(this.transform.position.x, this.transform.position.y + 1.3f, this.transform.position.z);
 	}
 
     void Update() {
         AttackPhaseTime += Time.deltaTime;
-        switch (AttackPhase) {
+        switch (AttackPhase)
+        {
 
             case 1:
                 rigidbody.velocity = Vector3.zero;
-                if (AttackPhaseTime >= 2) {
+                if (AttackPhaseTime >= 6)
+                {
                     AttackPhase = 2;
+                    AttackPhaseTime = 0;
                 }
-                /*iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(-20f, 0f, 0f), "time", 0.5f));
-                iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(0f, 60f, 0f), "time", 0.5f));
-                iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(0f, -120f, 0f), "time", 5f));
-                iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(0f, 60f, 0f), "time", 5f));
-                iTween.RotateUpdate(gameObject, iTween.Hash("rotation", new Vector3(20f, 0f, 0f), "time", 5f));*/
-
 
                 //一定間隔でショット
                 enemyBasic.shotInterval += Time.deltaTime;
@@ -58,12 +55,15 @@ public class DriftEnemy1 : MonoBehaviour {
                     GameObject enemyFire = GameObject.Instantiate(EnemyFire) as GameObject;
                     enemyFire.transform.position = EnemyMuzzle.position;
                     enemyFire.transform.rotation = EnemyMuzzle.transform.rotation;
-                    //Instantiate(enemyBasic.shot, transform.position, transform.rotation);
                     enemyBasic.shotInterval = 0;
                 }
                 break;
             case 2:
-
+                if (AttackPhaseTime >= 3)
+                {
+                    AttackPhase = 0;
+                    AttackPhaseTime = 0;
+                }
                 break;
         }
         damageSet = GetComponent<EnemyBasic>().DamageSet;
@@ -72,6 +72,7 @@ public class DriftEnemy1 : MonoBehaviour {
         //rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
         Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
         gameObject.transform.eulerAngles = new Vector3(1, Ros.y, 1);
+        //gameObject.transform.eulerAngles = new Vector3(Ros.x, Ros.y, 1);
         enemyBasic.timer += Time.deltaTime;
         timeCount += Time.deltaTime;
         if (AttackPhase == 0) { 
@@ -125,8 +126,10 @@ public class DriftEnemy1 : MonoBehaviour {
             if(AttackPhase == 0)
             {
                 AttackPhase = 1;
-                iTween.RotateTo(gameObject, iTween.Hash("y", 90f, "time", 2f));                 //右向いて
-                iTween.RotateAdd(gameObject, iTween.Hash("y", 180f,"time", 2f, "delay", 2f));   //2秒後左向く
+                //iTween.RotateTo(gameObject, iTween.Hash("x", 30f, "time", 0.3f, "easetype", iTween.EaseType.linear));  //右向いて
+                iTween.RotateAdd(gameObject, iTween.Hash("y", 90f, "time", 2f, "delay",0.3f,"easetype", iTween.EaseType.linear));  //右向いて
+                iTween.RotateAdd(gameObject, iTween.Hash("y", -179f,"time", 2f, "delay", 2.3f, "easetype", iTween.EaseType.linear));   //2秒後左向く
+                //iTween.RotateAdd(gameObject, iTween.Hash("x", -30f, "time", 2f, "delay", 4.3f, "easetype", iTween.EaseType.linear));  //右向いて
                 AttackPhaseTime = 0.0f;
             }
 

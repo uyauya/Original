@@ -3,10 +3,10 @@
     "",
     "\\Assets",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Block",
-    "\\Assets\\Scripts\\Boss",
     "\\Assets\\Scripts\\Enemy",
-    "\\Assets\\Textures"
+    "\\Assets\\Scripts\\Player",
+    "\\Assets\\Scripts\\PlayerReal",
+    "\\Assets\\Scripts\\System"
   ],
   "PreviewInSolutionExplorer": false
 }
