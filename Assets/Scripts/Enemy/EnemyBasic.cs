@@ -130,6 +130,7 @@ public class EnemyBasic : MonoBehaviour {
         playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 		// BattleManagerオブジェクトのBattleManagerをbattleManagerとする
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
+		GameObject DestroyEffect = GameObject.Find("Blood_1");
         GameObject Hit01Prefab = GameObject.Find("Hit01");
         GameObject Hit02Prefab = GameObject.Find("Hit02");
         GameObject Hit03Prefab = GameObject.Find("Hit03");
@@ -139,7 +140,8 @@ public class EnemyBasic : MonoBehaviour {
         GameObject BlueSphere = GameObject.Find("BlueSphere");
         GameObject GreenSphere = GameObject.Find("GreenSphere");
         GameObject YellowSphere = GameObject.Find("YellowSphere");
-        //GameObject LifeBar = GameObject.Find("LifeBar");
+		//GameObject LifeBar = GameObject.FindWithTag ("Enemy").GameObject.Find("LifeBar");
+		Transform EffectPoint = GameObject.FindWithTag ("Player").transform.Find("EffectPoint");
         GameObject Star = GameObject.Find("Star");
         GameObject BigStar = GameObject.Find("BigStar");
         target = battleManager.Player;

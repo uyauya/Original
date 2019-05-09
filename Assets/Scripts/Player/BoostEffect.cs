@@ -12,6 +12,7 @@ public class BoostEffect : MonoBehaviour {
 
 	void Start () 
 	{
+		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("BoostLight");
 		//初期設定ではライトオフ
 		boostLight.SetActive (false);
 		//DashLight.SetActive (false);

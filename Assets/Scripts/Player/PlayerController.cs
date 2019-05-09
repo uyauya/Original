@@ -96,6 +96,12 @@ public class PlayerController : MonoBehaviour {
 		isBoost = false;								// ブーストはオフに
 		gaugeImage = GameObject.Find ("BoostGauge");
 		boostText = GameObject.Find ("TextBg").GetComponent<Text> ();
+		GameObject BpHealPrefab = GameObject.Find("Aura2");
+		GameObject DashAttck = GameObject.Find("DashAttck");
+		GameObject DAEffectPrefab = GameObject.Find("Aura2");
+		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");
+		Transform Attack = GameObject.FindWithTag ("Player").transform.Find("Attack");
+		Transform EffectPoint = GameObject.FindWithTag ("Player").transform.Find("EffectPoint");
 		// 画面上(Canvas)のブーストポイントと実際(Inspector)の数値(Inspector)を同じに設定
 		displayBoostPoint = boostPoint;
 		if (!DataManager.FarstLevel) {

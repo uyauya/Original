@@ -71,7 +71,7 @@ public class DriftEnemy1 : MonoBehaviour {
 
         //rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
         Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
-        gameObject.transform.eulerAngles = new Vector3(1, Ros.y, 1);
+        //gameObject.transform.eulerAngles = new Vector3(1, Ros.y, 1);
         //gameObject.transform.eulerAngles = new Vector3(Ros.x, Ros.y, 1);
         enemyBasic.timer += Time.deltaTime;
         timeCount += Time.deltaTime;
@@ -126,7 +126,7 @@ public class DriftEnemy1 : MonoBehaviour {
             if(AttackPhase == 0)
             {
                 AttackPhase = 1;
-                //iTween.RotateTo(gameObject, iTween.Hash("x", 30f, "time", 0.3f, "easetype", iTween.EaseType.linear));  //右向いて
+                iTween.RotateTo(gameObject, iTween.Hash("x", 30f, "time", 0.3f, "easetype", iTween.EaseType.linear));  //右向いて
                 iTween.RotateAdd(gameObject, iTween.Hash("y", 90f, "time", 2f, "delay",0.3f,"easetype", iTween.EaseType.linear));  //右向いて
                 iTween.RotateAdd(gameObject, iTween.Hash("y", -179f,"time", 2f, "delay", 2.3f, "easetype", iTween.EaseType.linear));   //2秒後左向く
                 //iTween.RotateAdd(gameObject, iTween.Hash("x", -30f, "time", 2f, "delay", 4.3f, "easetype", iTween.EaseType.linear));  //右向いて

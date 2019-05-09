@@ -41,6 +41,7 @@ public class PlayerAp : MonoBehaviour {
 	public int BigAttack = 10000;			// 巨大化した時の攻撃値
 	public bool isBig;						// 巨大化しているかどうか
 	public float HealApPoint = 1000;		// アイテム取得時の回復量
+	public int WallDamage = 100;			// 壁激突時のダメージ
 
 	/*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
@@ -71,6 +72,10 @@ public class PlayerAp : MonoBehaviour {
 		attackPoint = DataManager.AttackPoint;
 		isBig = false;
 		gameObject.layer = LayerMask.NameToLayer("Player");
+		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");
+		Transform EffectPoint = GameObject.FindWithTag ("Player").transform.Find("EffectPoint");
+		GameObject DamagePrefab = GameObject.Find("MagicAttack_7");
+		GameObject HpHealPrefab = GameObject.Find("Aura2");
 	}
 
 
@@ -166,18 +171,12 @@ public class PlayerAp : MonoBehaviour {
 				armorPoint -= 0;
 			} else {
                 //プレイヤ速度がmaxForce値以上ならダメージ
-                //if (force >= maxForce) {
-                if (force >= 1.0f)
+                if (force >= maxForce) 
                 {
-                    //rigidbody.transform.position -= transform.forward * 2;
-                    //rigidbody.transform.position = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(0, 0, -2), Time.deltaTime * 2);
-                    //Vector3 force = new Vector3(0.0f, 0.0f, -5.0f);
-                    //rigidbody.AddForce(force);
-                    //Debug.Log (force);
                     //カメラに付けているShakeCameraのShakeを呼び出す（激突時の衝撃）
                     Camera.main.gameObject.GetComponent<ShakeCamera> ().Shake ();
 					//Debug.Log ("激突");
-					armorPoint -= 100;
+					armorPoint -= WallDamage;
 					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 					DamageObject.transform.SetParent (EffectPoint);
 					Panimator.SetTrigger ("Damage");

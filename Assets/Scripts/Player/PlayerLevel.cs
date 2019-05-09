@@ -63,10 +63,10 @@ public class PlayerLevel : MonoBehaviour
     public static int PSoot04Level = 2;     //PlayerShoot04使用可能レベル
     public static int PMSootLevel  = 2;     //MultiWayShoot使用可能レベル
 
-
     // Use this for initialization
     void Start () {
-		
+		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");
+		GameObject LevelUpPrefab = GameObject.Find("Eff_LvUp_2");
 	}
 	
 	// Update is called once per frame

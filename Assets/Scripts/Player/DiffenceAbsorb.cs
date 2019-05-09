@@ -49,6 +49,11 @@ public class DiffenceAbsorb : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
+		GameObject DiffenceWall = GameObject.Find("DiffenceWall");	
+		GameObject AbsorbWall = GameObject.Find("AbsorbWall");
+		GameObject BpHealPrefab = GameObject.Find("Aura2");
+		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");
+		Transform EffectPoint = GameObject.FindWithTag ("Player").transform.Find("EffectPoint");
 	}
 
 
