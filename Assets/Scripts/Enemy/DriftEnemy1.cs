@@ -30,6 +30,7 @@ public class DriftEnemy1 : MonoBehaviour {
 
     void Start () {
 		animator = GetComponent<Animator>();			// Animatorを使う場合は設定する
+		animator.enabled = false;
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
         rigidbody = GetComponent<Rigidbody>();
@@ -152,7 +153,9 @@ public class DriftEnemy1 : MonoBehaviour {
             if(AttackPhase == 0)
             {
                 AttackPhase = 1;
+				animator.enabled = true;
 				animator.SetTrigger ("BombFire");
+				animator.enabled = false;
 				Debug.Log("ファイア");
                 /*iTween.RotateTo(gameObject, iTween.Hash("x", 30f, "time", 0.3f, "easetype", iTween.EaseType.linear));  //下向いて
                 iTween.RotateAdd(gameObject, iTween.Hash("y", 90f, "time", 2f, "delay",0.3f,"easetype", iTween.EaseType.linear));  //右向いて
