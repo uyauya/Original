@@ -4,7 +4,7 @@ using UnityEngine;
 
 //プレイヤから逃げる敵
 public class EscapeEnemy1 : MonoBehaviour {
-
+	private Animator animator;		 // 《Animator》を使う
 	protected EnemyBasic enemyBasic;
 	bool dead = false;
 	bool damageSet;					 //被ダメージ処理、一時的に移動不可(下記参照)
@@ -24,6 +24,7 @@ public class EscapeEnemy1 : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+		animator = GetComponent<Animator>();			// Animatorを使う場合は設定する
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
         rigidbody = GetComponent<Rigidbody>();

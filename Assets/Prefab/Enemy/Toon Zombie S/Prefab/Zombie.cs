@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEditor;
 
 public class Zombie : MonoBehaviour {
-	private Animator animator;		// 《Animator》コンポーネント用の変数
+	private Animator animator;		// 《Animator》を使う
 	GameObject target;
 	public GameObject particle;
 	public float armorPoint;

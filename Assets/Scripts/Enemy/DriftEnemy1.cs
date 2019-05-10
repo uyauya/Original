@@ -4,6 +4,7 @@ using UnityEngine;
 
 //フヨフヨ漂いながら移動する（収縮する）、ヒットさせるとしぼんでいく
 public class DriftEnemy1 : MonoBehaviour {
+	private Animator animator;			// 《Animator》を使う
 	protected EnemyBasic enemyBasic;
     Rigidbody rigidbody;
     public Transform EnemyMuzzle;       // 弾発射元（銃口）
@@ -28,6 +29,7 @@ public class DriftEnemy1 : MonoBehaviour {
     float AttackPhaseTime = 0.0f;
 
     void Start () {
+		animator = GetComponent<Animator>();			// Animatorを使う場合は設定する
 		enemyBasic = gameObject.GetComponent<EnemyBasic> ();
 		enemyBasic.Initialize ();
         rigidbody = GetComponent<Rigidbody>();
@@ -50,8 +52,9 @@ public class DriftEnemy1 : MonoBehaviour {
                 //一定間隔でショット
                 enemyBasic.shotInterval += Time.deltaTime;
                 // 次の攻撃待ち時間が一定以上になれば
-                if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax)
+				if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax)
                 {
+					animator.SetTrigger ("BombFire");
                     GameObject enemyFire = GameObject.Instantiate(EnemyFire) as GameObject;
                     enemyFire.transform.position = EnemyMuzzle.position;
                     enemyFire.transform.rotation = EnemyMuzzle.transform.rotation;
@@ -71,8 +74,7 @@ public class DriftEnemy1 : MonoBehaviour {
 
         //rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed);
         Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
-        //gameObject.transform.eulerAngles = new Vector3(1, Ros.y, 1);
-        //gameObject.transform.eulerAngles = new Vector3(Ros.x, Ros.y, 1);
+        gameObject.transform.eulerAngles = new Vector3(1, Ros.y, 1);
         enemyBasic.timer += Time.deltaTime;
         timeCount += Time.deltaTime;
         if (AttackPhase == 0) { 
@@ -88,6 +90,31 @@ public class DriftEnemy1 : MonoBehaviour {
                 RandomMoeCount = 5;
             }
         }
+		if (RighrtMove == true)
+		{
+			//Debug.Log("右");
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 10.0f);
+			//rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed * MoveTime);
+		}
+		else if (LeftMove == true)
+		{
+			//Debug.Log("左");
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 10.0f);
+			//rigidbody.velocity = (transform.forward * enemyBasic.EnemySpeed * MoveTime);
+		}
+		else if (UpMove == true)
+		{
+			//Debug.Log("左");
+
+		}
+		//Playerが近くにいなければ敵の移動方向をランダムで変える
+		else if (timeCount > chargeTime)
+		{
+			Vector3 course = new Vector3(0, Random.Range(0, 180), 0);
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation
+				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
+			timeCount = 0;
+		}
         // 拡大、縮小繰り返す
         // MinimumのサイズからMathf.Sin式でX、Y、Z軸に拡大率をかける
         this.transform.localScale = new Vector3(this.Minimum + Mathf.Sin(Time.time * this.Magspeed) * this.Magnification,
@@ -121,33 +148,20 @@ public class DriftEnemy1 : MonoBehaviour {
             }
         }
         // ターゲット（プレイヤー）との距離がSearch以内なら
-        //if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= 5.0f) {
         if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
             if(AttackPhase == 0)
             {
                 AttackPhase = 1;
-                iTween.RotateTo(gameObject, iTween.Hash("x", 30f, "time", 0.3f, "easetype", iTween.EaseType.linear));  //右向いて
+				animator.SetTrigger ("BombFire");
+				Debug.Log("ファイア");
+                /*iTween.RotateTo(gameObject, iTween.Hash("x", 30f, "time", 0.3f, "easetype", iTween.EaseType.linear));  //下向いて
                 iTween.RotateAdd(gameObject, iTween.Hash("y", 90f, "time", 2f, "delay",0.3f,"easetype", iTween.EaseType.linear));  //右向いて
-                iTween.RotateAdd(gameObject, iTween.Hash("y", -179f,"time", 2f, "delay", 2.3f, "easetype", iTween.EaseType.linear));   //2秒後左向く
-                //iTween.RotateAdd(gameObject, iTween.Hash("x", -30f, "time", 2f, "delay", 4.3f, "easetype", iTween.EaseType.linear));  //右向いて
+                iTween.RotateAdd(gameObject, iTween.Hash("y", -179f,"time", 2f, "delay", 2.3f, "easetype", iTween.EaseType.linear));   //左向いて
+                iTween.RotateAdd(gameObject, iTween.Hash("y", 90f, "time", 2f, "delay",0.3f,"easetype", iTween.EaseType.linear));  //正面に戻して
+                iTween.RotateAdd(gameObject, iTween.Hash("x", -30f, "time", 2f, "delay", 4.3f, "easetype", iTween.EaseType.linear));  //上向いて元に戻す*/
                 AttackPhaseTime = 0.0f;
             }
-
-            //Debug.Log ("検出");
-            //if (Vector3.Distance (Player.target.transform.position, transform.position) <= enemyBasic.Search) {
-            //ターゲットの方を徐々に向く
-            // Quaternion.LookRotation(A位置-B位置）でB位置からA位置を向いた状態の向きを計算
-            // Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
-            /*transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
-				(enemyBasic.target.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemyRotate);
-			transform.position += transform.forward * Time.deltaTime * enemyBasic.EnemySpeed;
-			//一定間隔でショット
-			enemyBasic.shotInterval += Time.deltaTime;*/
-			// 次の攻撃待ち時間が一定以上になれば
-			/*if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax) {
-                Instantiate (enemyBasic.shot, transform.position, transform.rotation);
-				enemyBasic.shotInterval = 0;
-			}*/			
+						
 		}
 		//damageSet時、スピードが0なら何もしない。0でないならDamageSetCoroutine起動（下記参照）
 		if (damageSet == true) {
@@ -167,21 +181,25 @@ public class DriftEnemy1 : MonoBehaviour {
 		}
 	}
 
+	//WallBlockに当たる寸前にランダムで方向転換（上記参照）
     public void RandomMove()
     {
         int num = Random.Range(0, 8);
+		//0～2の間なら右
         if (num <= 2)
         {
             RighrtMove = true;
             LeftMove = false;
             UpMove = false;
         }
+		//3～5の間なら左
         else if (num > 3 && num <= 5)
         {
             LeftMove = true;
             RighrtMove = false;
             UpMove = false;
         }
+		//6～8の間なら上
         else if (num > 6)
         {
             UpMove = true;

@@ -46,7 +46,7 @@ public class DiffenceAbsorb : MonoBehaviour {
 	void Start()
 	{
 		audioSource = gameObject.GetComponent<AudioSource>();
-		animator = GetComponent<Animator> ();
+		animator = GetComponent<Animator>();			// Animatorを使う場合は設定する
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 		GameObject DiffenceWall = GameObject.Find("DiffenceWall");	
