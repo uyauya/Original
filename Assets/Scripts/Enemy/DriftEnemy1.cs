@@ -55,7 +55,7 @@ public class DriftEnemy1 : MonoBehaviour {
                 // 次の攻撃待ち時間が一定以上になれば
 				if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax)
                 {
-					animator.SetTrigger ("BombFire");
+					animator.SetTrigger ("bombFire");
                     GameObject enemyFire = GameObject.Instantiate(EnemyFire) as GameObject;
                     enemyFire.transform.position = EnemyMuzzle.position;
                     enemyFire.transform.rotation = EnemyMuzzle.transform.rotation;
@@ -65,7 +65,8 @@ public class DriftEnemy1 : MonoBehaviour {
             case 2:
                 if (AttackPhaseTime >= 3)
                 {
-                    AttackPhase = 0;
+					animator.enabled = false;
+					AttackPhase = 0;
                     AttackPhaseTime = 0;
                 }
                 break;
@@ -154,8 +155,7 @@ public class DriftEnemy1 : MonoBehaviour {
             {
                 AttackPhase = 1;
 				animator.enabled = true;
-				animator.SetTrigger ("BombFire");
-				animator.enabled = false;
+				//animator.SetTrigger ("bombFire");
 				Debug.Log("ファイア");
                 /*iTween.RotateTo(gameObject, iTween.Hash("x", 30f, "time", 0.3f, "easetype", iTween.EaseType.linear));  //下向いて
                 iTween.RotateAdd(gameObject, iTween.Hash("y", 90f, "time", 2f, "delay",0.3f,"easetype", iTween.EaseType.linear));  //右向いて
