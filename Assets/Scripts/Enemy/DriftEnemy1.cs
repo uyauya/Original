@@ -55,19 +55,21 @@ public class DriftEnemy1 : MonoBehaviour {
                 // 次の攻撃待ち時間が一定以上になれば
 				if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax)
                 {
-					animator.SetTrigger ("bombFire");
+                    animator.enabled = true;
+                    animator.SetTrigger ("BombFire");
                     GameObject enemyFire = GameObject.Instantiate(EnemyFire) as GameObject;
                     enemyFire.transform.position = EnemyMuzzle.position;
                     enemyFire.transform.rotation = EnemyMuzzle.transform.rotation;
                     enemyBasic.shotInterval = 0;
+                    
                 }
                 break;
             case 2:
                 if (AttackPhaseTime >= 3)
                 {
-					animator.enabled = false;
-					AttackPhase = 0;
+                    AttackPhase = 0;
                     AttackPhaseTime = 0;
+                    animator.enabled = false;
                 }
                 break;
         }
@@ -154,15 +156,10 @@ public class DriftEnemy1 : MonoBehaviour {
             if(AttackPhase == 0)
             {
                 AttackPhase = 1;
-				animator.enabled = true;
+				//animator.enabled = true;
 				//animator.SetTrigger ("bombFire");
-				Debug.Log("ファイア");
-                /*iTween.RotateTo(gameObject, iTween.Hash("x", 30f, "time", 0.3f, "easetype", iTween.EaseType.linear));  //下向いて
-                iTween.RotateAdd(gameObject, iTween.Hash("y", 90f, "time", 2f, "delay",0.3f,"easetype", iTween.EaseType.linear));  //右向いて
-                iTween.RotateAdd(gameObject, iTween.Hash("y", -179f,"time", 2f, "delay", 2.3f, "easetype", iTween.EaseType.linear));   //左向いて
-                iTween.RotateAdd(gameObject, iTween.Hash("y", 90f, "time", 2f, "delay",0.3f,"easetype", iTween.EaseType.linear));  //正面に戻して
-                iTween.RotateAdd(gameObject, iTween.Hash("x", -30f, "time", 2f, "delay", 4.3f, "easetype", iTween.EaseType.linear));  //上向いて元に戻す*/
-                AttackPhaseTime = 0.0f;
+				//Debug.Log("ファイア");
+               AttackPhaseTime = 0.0f;
             }
 						
 		}
