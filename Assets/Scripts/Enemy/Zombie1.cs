@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor; 
@@ -106,7 +107,7 @@ public class Zombie1 : MonoBehaviour {
                 // Quaternion.Slerp（現在の向き、目標の向き、回転の早さ）でターゲットにゆっくり向く
                 transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
                 (enemyBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * enemyBasic.EnemySpeed);
-				//アニメーターをattackに変更（攻撃モーション）
+				//アニメーターをattackに変更（AnimatorのParametersと同じ名前にする）
 			//SetTriggerを使う場合、戻りの部分のHasExitTimeに✔を入れておく。入れないと戻りの判定が出来なくて
 			//アニメーションがattack後デフォルトアニメーションに戻らなくなる
             enemyBasic.animator.SetTrigger ("attack");

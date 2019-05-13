@@ -56,7 +56,7 @@ public class DriftEnemy1 : MonoBehaviour {
 				if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax)
                 {
                     animator.enabled = true;
-                    animator.SetTrigger ("BombFire");
+                    animator.SetTrigger ("bombFire");
                     GameObject enemyFire = GameObject.Instantiate(EnemyFire) as GameObject;
                     enemyFire.transform.position = EnemyMuzzle.position;
                     enemyFire.transform.rotation = EnemyMuzzle.transform.rotation;
@@ -156,9 +156,6 @@ public class DriftEnemy1 : MonoBehaviour {
             if(AttackPhase == 0)
             {
                 AttackPhase = 1;
-				//animator.enabled = true;
-				//animator.SetTrigger ("bombFire");
-				//Debug.Log("ファイア");
                AttackPhaseTime = 0.0f;
             }
 						
