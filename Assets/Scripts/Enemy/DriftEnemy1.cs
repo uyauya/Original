@@ -41,7 +41,7 @@ public class DriftEnemy1 : MonoBehaviour {
         AttackPhaseTime += Time.deltaTime;
         switch (AttackPhase)
         {
-
+			//攻撃(bombFire)
             case 1:
                 rigidbody.velocity = Vector3.zero;
                 if (AttackPhaseTime >= 6)
@@ -52,7 +52,8 @@ public class DriftEnemy1 : MonoBehaviour {
 
                 //一定間隔でショット
                 enemyBasic.shotInterval += Time.deltaTime;
-                // 次の攻撃待ち時間が一定以上になれば
+				// 次の攻撃待ち時間が一定以上になればbombFire
+				//アニメーションとスクリプトの両方でrotation操作している為、Animationstea操作時のみanimator.enabled = true;にする
 				if (enemyBasic.shotInterval > enemyBasic.shotIntervalMax)
                 {
                     animator.enabled = true;
@@ -64,6 +65,7 @@ public class DriftEnemy1 : MonoBehaviour {
                     
                 }
                 break;
+			//case 1後の待機
             case 2:
                 if (AttackPhaseTime >= 3)
                 {
@@ -151,11 +153,11 @@ public class DriftEnemy1 : MonoBehaviour {
                 timeCount = 0;
             }
         }
-        // ターゲット（プレイヤー）との距離がSearch以内なら
+		// ターゲット（プレイヤー）との距離がSearch以内ならAttackPhase1に移行（上記参照）
         if (Vector3.Distance (enemyBasic.target.transform.position, transform.position) <= enemyBasic.Search) {
             if(AttackPhase == 0)
             {
-                AttackPhase = 1;
+               AttackPhase = 1;
                AttackPhaseTime = 0.0f;
             }
 						
