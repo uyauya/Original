@@ -19,8 +19,6 @@ public class ChangeWeaponR : MonoBehaviour {
 	public RawImage weponImage3;
 	public RawImage weponImage4;
 	public RawImage weponImage5;
-	//デフォルトカラー設定inspector→ColorでRGBAのそれぞれの値を255で割った数値を入れる
-	//RGBA ※Aは透明度(0に近くなるほど透明化)
 	public Color myWhite = new Color(1, 1, 1, 1);
 	public Color myBlue = new Color(0.1f, 0.03f, 1, 1);
 	public Color myYellow = new Color (0.81f,0.99f,0,1);
@@ -31,21 +29,18 @@ public class ChangeWeaponR : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// Weapon1という名前のオブジェクトのRawImageを（このスクリプト内では）weponImage1と呼ぶことにする
 		weponImage1 = GameObject.Find ("Weapon1").GetComponent<RawImage> ();
 		weponImage2 = GameObject.Find ("Weapon2").GetComponent<RawImage> ();
 		weponImage3 = GameObject.Find ("Weapon3").GetComponent<RawImage> ();
 		weponImage4 = GameObject.Find ("Weapon4").GetComponent<RawImage> ();
 		weponImage5 = GameObject.Find ("Weapon5").GetComponent<RawImage> ();
 		battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
-		// Playerタグが付いているオブジェクトのPlayerShootスクリプトを（このスクリプト内では）pshoot1と呼ぶことにする
 		pshoot1 = battleManager.Player.GetComponent<PlayerShootR>();
 		pshoot2 = battleManager.Player.GetComponent<PlayerShoot02R>();
 		pshoot3 = battleManager.Player.GetComponent<PlayerShoot03R>();
 		pshoot4 = battleManager.Player.GetComponent<PlayerShoot04R>();
 		mshoot = battleManager.Player.GetComponent<MultiWayShootR>();
 
-		// 最初に使用できる(選択してる)のはpshoot1にする。
 		pshoot1.enabled = true;
 		pshoot2.enabled = false;
 		pshoot3.enabled = false;
@@ -57,15 +52,11 @@ public class ChangeWeaponR : MonoBehaviour {
 		weponImage5.enabled = false;
 
 	}
-
-	// Update is called once per frame
+		
 	void Update () 
 	{
-
-		// Fire2キーで下記changeWeaponを起動。その際SoundManager2の「5」に入れた音を鳴らす。
-		// Fire2キーはEdit→ProjectSetting→Inputでキー設定変更可能。
 		if (Input.GetButtonUp ("Fire2")) { 
-			changeWeapon (); 	//武器交換
+			changeWeapon (); 	
 			SoundManager2.Instance.Play(5,gameObject);}
 		if (DataManager.Level >= PlayerLevel.PSoot02Level) {
 			weponImage2.enabled = true;
@@ -89,10 +80,7 @@ public class ChangeWeaponR : MonoBehaviour {
 		pshoot3 = battleManager.Player.GetComponent<PlayerShoot03R>();
 		pshoot4 = battleManager.Player.GetComponent<PlayerShoot04R>();
 		mshoot = battleManager.Player.GetComponent<MultiWayShootR>();
-		//「値+1」を武器個数(num)で割り、余りをtypeに入れて選択武器とする
 		type = (type + 1) % num;
-		// 選択された武器には色を付けて他は白に。
-		// 選択された武器は使用可（該当スクリプトをtrueにする)にして他は不可に。
 		if (type == 0) 
 		{
 			weponImage1.color = myWhite;

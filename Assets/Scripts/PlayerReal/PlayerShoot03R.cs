@@ -6,8 +6,8 @@ using UnityEditor;
 // ボム（シューティングなどの広範囲攻撃）
 public class PlayerShoot03R : MonoBehaviour {
 
-	public GameObject Bullet03;
-	public GameObject UBullet03;
+	public GameObject Bullet03R;
+	public GameObject UBullet03R;
 	public Transform muzzle;
 	public GameObject muzzleFlash;
 	public float shotInterval;			// ショットの時間間隔
@@ -27,20 +27,6 @@ public class PlayerShoot03R : MonoBehaviour {
 	public bool isBig;							// 巨大化しているかどうか
 	//public BattleManager battleManager;
 
-	/*[CustomEditor(typeof(PlayerShoot03))]
-	public class PlayerShoot03Editor : Editor	// using UnityEditor; を入れておく
-	{
-		bool folding = false;
-
-		public override void OnInspectorGUI()
-		{
-			PlayerShoot03 Ps03 = target as PlayerShoot03;
-			Ps03.shotIntervalMax = EditorGUILayout.FloatField( "ショット間隔", Ps03.shotIntervalMax);
-			Ps03.Damage	   		 = EditorGUILayout.FloatField( "攻撃力", Ps03.Damage);
-			Ps03.BpDown		     = EditorGUILayout.FloatField( "ゲージ消費量", Ps03.BpDown);
-		}
-	}*/
-
 	void Start () {
 		gaugeImage = GameObject.Find ("BoostGauge").GetComponent<Image> ();
 		audioSource = gameObject.GetComponent<AudioSource>();
@@ -54,7 +40,6 @@ public class PlayerShoot03R : MonoBehaviour {
 	}
 
 	void Update () {
-		// ポーズ中でなく、ステージクリア時でもなく、ストップ条件もなければ
 		//if ((pause.isPause == false) && (PlayerController.IsClear == false) && (PlayerController.IsStop == true)) {
 		if (pause.isPause == false) {
 			isBig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
@@ -67,7 +52,6 @@ public class PlayerShoot03R : MonoBehaviour {
 							animator.SetTrigger ("Shot");
 							GetComponent<PlayerController> ().boostPoint -= BpDown;
 							Bulletss ();
-							//マズルフラッシュを表示する
 							//Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);
 						}
 					}
@@ -79,26 +63,23 @@ public class PlayerShoot03R : MonoBehaviour {
 	void Bulletss() {
 		if ((DataManager.PlayerNo == 0)|| (DataManager.PlayerNo == 1)|| (DataManager.PlayerNo == 2)) 
 		{
-			// ショットの時間間隔
 			if (Time.time - shotInterval > shotIntervalMax) {
 				shotInterval = Time.time;
-				GameObject bulletObject = GameObject.Instantiate (Bullet03)as GameObject;
+				GameObject bulletObject = GameObject.Instantiate (Bullet03R)as GameObject;
 				bulletObject.transform.position = muzzle.position;
-				//bulletObject.transform.position = Bomber.position;
 				bulletObject.GetComponent<Bullet03> ().damage = this.damage;
 			}
 		}
 		else if (DataManager.PlayerNo == 0)
 		{
-			// ショットの時間間隔
 			if (Time.time - shotInterval > shotIntervalMax) {
 				shotInterval = Time.time;
-				GameObject bulletObject = GameObject.Instantiate (UBullet03)as GameObject;
+				GameObject bulletObject = GameObject.Instantiate (UBullet03R)as GameObject;
 				bulletObject.transform.position = muzzle.position;
-				//bulletObject.transform.position = Bomber.position;
 				bulletObject.GetComponent<Bullet03> ().damage = this.damage;
 			}
 		}
+
 		if ((PlayerNo == 0) || (PlayerNo == 3))
 		{
 			SoundManager.Instance.Play(6,gameObject);

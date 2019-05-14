@@ -192,7 +192,11 @@ public class EnemyBasic : MonoBehaviour {
 			// ライフバー表示（下記参照）
 			StartCoroutine ("LifeBarCoroutine");
 			// Bullet01スクリプトのdamageを受け取る
-			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
+			damage = collider.gameObject.GetComponent<Bullet01>().damage;
+			if (damage == null)
+			{
+				damage = collider.gameObject.GetComponent<Bullet01R>().damage;
+			}
 			// 当たり判定用のHit01ObjectをHit01Prefabにし生成
 			Hit01Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			// ダメージコルーチン（下記参照）
@@ -209,6 +213,10 @@ public class EnemyBasic : MonoBehaviour {
 			DamageSet = true;
 			StartCoroutine ("LifeBarCoroutine");
 			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
+			/*if (damage == null)
+			{
+				damage = collider.gameObject.GetComponent<Bullet02R>().damage;
+			}*/
 			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
@@ -220,6 +228,10 @@ public class EnemyBasic : MonoBehaviour {
 			FreezeSet = true;
 			StartCoroutine ("LifeBarCoroutine");
 			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
+			/*if (damage == null)
+			{
+				damage = collider.gameObject.GetComponent<Bullet03R>().damage;
+			}*/
 			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
@@ -229,6 +241,10 @@ public class EnemyBasic : MonoBehaviour {
 			DamageSet = true;
 			StartCoroutine ("LifeBarCoroutine");
 			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
+			/*if (damage == null)
+			{
+				damage = collider.gameObject.GetComponent<Bullet05R>().damage;
+			}*/
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");

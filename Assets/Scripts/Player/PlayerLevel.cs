@@ -1,4 +1,5 @@
 ﻿
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,10 +59,10 @@ public class PlayerLevel : MonoBehaviour
 	public GameObject LevelUpObject;
 	public int PlayerNo;					//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public int MaxScore = 52000;			//レベル打ち止め用マックススコア設定
-    public static int PSoot02Level = 2;     //PlayerShoot02使用可能レベル
-    public static int PSoot03Level = 2;     //PlayerShoot03使用可能レベル
-    public static int PSoot04Level = 2;     //PlayerShoot04使用可能レベル
-    public static int PMSootLevel  = 2;     //MultiWayShoot使用可能レベル
+    public static int PSoot02Level = 1;     //PlayerShoot02使用可能レベル
+    public static int PSoot03Level = 1;     //PlayerShoot03使用可能レベル
+    public static int PSoot04Level = 1;     //PlayerShoot04使用可能レベル
+    public static int PMSootLevel  = 1;     //MultiWayShoot使用可能レベル
 
     // Use this for initialization
     void Start () {

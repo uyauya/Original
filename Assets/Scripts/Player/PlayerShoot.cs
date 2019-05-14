@@ -75,13 +75,13 @@ public class PlayerShoot : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();			// ポーズ中かどうか判定用
 		attackPoint = DataManager.AttackPoint;
-		GameObject Bullet01 = GameObject.Find("Shot");
-		GameObject Bullet01B = GameObject.Find("ShotB");
-		GameObject Bullet01C = GameObject.Find("ShotC");
-		GameObject UBullet01 = GameObject.Find("UShot");
-		GameObject UBullet01B = GameObject.Find("UShotB");
-		GameObject UBullet01C = GameObject.Find("UShotC");
-		GameObject MuzzleFlash = GameObject.Find("MuzzleFlash");
+		Bullet01 = GameObject.Find("Shot");
+		Bullet01B = GameObject.Find("ShotB");
+		Bullet01C = GameObject.Find("ShotC");
+		UBullet01 = GameObject.Find("UShot");
+		UBullet01B = GameObject.Find("UShotB");
+		UBullet01C = GameObject.Find("UShotC");
+		//MuzzleFlash = GameObject.Find("MuzzleFlash");
 		GameObject effectPrefab = GameObject.Find("Spark");
 		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");
 	}
@@ -173,6 +173,7 @@ public class PlayerShoot : MonoBehaviour {
 			{
 				// Bullet01(小弾)を生成
 				GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
+				//bulletObject = Instantiate (bulletPrefab, muzzle.position, Quaternion.identity);
 				// Bullet01の生成位置をmuzzleに設定(muzzleはCreateEmptyでmuzzleと命名し、プレイヤーの発射したい位置に設置)
 				bulletObject.transform.position = muzzle.position;
 				// Bullet01オブジェクトにダメージ計算を渡す(上記参照)
