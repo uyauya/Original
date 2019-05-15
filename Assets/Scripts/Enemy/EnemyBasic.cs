@@ -192,8 +192,11 @@ public class EnemyBasic : MonoBehaviour {
 			// ライフバー表示（下記参照）
 			StartCoroutine ("LifeBarCoroutine");
 			// Bullet01スクリプトのdamageを受け取る
+			if (damage != null)
+			{
 			damage = collider.gameObject.GetComponent<Bullet01>().damage;
-			if (damage == null)
+			}
+			else if (damage == null)
 			{
 				damage = collider.gameObject.GetComponent<Bullet01R>().damage;
 			}
