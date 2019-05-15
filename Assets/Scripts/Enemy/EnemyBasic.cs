@@ -191,15 +191,15 @@ public class EnemyBasic : MonoBehaviour {
 			DamageSet = true;
 			// ライフバー表示（下記参照）
 			StartCoroutine ("LifeBarCoroutine");
-			// Bullet01スクリプトのdamageを受け取る
-			if (damage != null)
-			{
-			damage = collider.gameObject.GetComponent<Bullet01>().damage;
-			}
-			else if (damage == null)
-			{
-				damage = collider.gameObject.GetComponent<Bullet01R>().damage;
-			}
+            // Bullet01スクリプトのdamageを受け取る
+            if (collider.gameObject.GetComponent<Bullet01>() != null)
+            {
+                damage = collider.gameObject.GetComponent<Bullet01>().damage;
+            }
+            else
+            {
+                damage = collider.gameObject.GetComponent<Bullet01R>().damage;
+            }
 			// 当たり判定用のHit01ObjectをHit01Prefabにし生成
 			Hit01Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			// ダメージコルーチン（下記参照）
