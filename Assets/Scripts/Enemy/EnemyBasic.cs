@@ -215,11 +215,14 @@ public class EnemyBasic : MonoBehaviour {
 		} else if (collider.gameObject.tag == "Shot2") {
 			DamageSet = true;
 			StartCoroutine ("LifeBarCoroutine");
-			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
-			/*if (damage == null)
+			if (collider.gameObject.GetComponent<Bullet02>() != null)
+			{
+				damage = collider.gameObject.GetComponent<Bullet02>().damage;
+			}
+			else
 			{
 				damage = collider.gameObject.GetComponent<Bullet02R>().damage;
-			}*/
+			}
 			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
@@ -230,11 +233,14 @@ public class EnemyBasic : MonoBehaviour {
 			//DamageSet = true;
 			FreezeSet = true;
 			StartCoroutine ("LifeBarCoroutine");
-			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
-			/*if (damage == null)
+			if (collider.gameObject.GetComponent<Bullet02>() != null)
+			{
+				damage = collider.gameObject.GetComponent<Bullet03>().damage;
+			}
+			else
 			{
 				damage = collider.gameObject.GetComponent<Bullet03R>().damage;
-			}*/
+			}
 			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
@@ -243,11 +249,14 @@ public class EnemyBasic : MonoBehaviour {
 		} else if (collider.gameObject.tag == "Shot5") {
 			DamageSet = true;
 			StartCoroutine ("LifeBarCoroutine");
-			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
-			/*if (damage == null)
+			if (collider.gameObject.GetComponent<Bullet02>() != null)
+			{
+				damage = collider.gameObject.GetComponent<Bullet05>().damage;
+			}
+			else
 			{
 				damage = collider.gameObject.GetComponent<Bullet05R>().damage;
-			}*/
+			}
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
