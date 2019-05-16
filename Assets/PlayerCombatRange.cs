@@ -20,7 +20,7 @@ public class PlayerCombatRange : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Enemy")
+		if ((other.tag == "Enemy")||(other.tag == "Wall"))
 		{
 			isCombatDesision = true;
 		}
@@ -28,7 +28,7 @@ public class PlayerCombatRange : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.tag == "Enemy")
+		if ((other.tag == "Enemy")||(other.tag == "Wall"))
 		{
 			isCombatDesision = false;
 		}
