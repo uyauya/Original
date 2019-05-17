@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerFootPrint : MonoBehaviour
 {
-	public GameObject footPrintPrefab;
+	public GameObject FootPrintPrefab;
 	float time = 0;
 
 	// Start is called before the first frame update
@@ -20,7 +20,7 @@ public class PlayerFootPrint : MonoBehaviour
 		if (this.time > 0.35f)
 		{
 			this.time = 0;
-			Instantiate (footPrintPrefab, transform.position, transform.rotation);
+			Instantiate (FootPrintPrefab, transform.position, transform.rotation);
 		}
 	}
 }

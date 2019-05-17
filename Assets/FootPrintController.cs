@@ -13,7 +13,7 @@ public class FootPrintController : MonoBehaviour
 		int step = 90;
 		for (int i = 0; i < step; i++)
 		{
-			GetComponent<MeshRenderer> ().material.color = new Color (1, 1, 1, 1 - 1.0f * i / step);
+			GetComponent<SpriteRenderer> ().material.color = new Color (1, 1, 1, 1 - 1.0f * i / step);
 			yield return null;
 		}
 		Destroy (gameObject);
