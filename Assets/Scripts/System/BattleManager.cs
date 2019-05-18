@@ -80,7 +80,7 @@ public class BattleManager : MonoBehaviour {
             if (DataManager.PlayerNo == 0)				//新たなプレイヤー発生
 			{
             Player = Instantiate (Prefab_Player [DataManager.PlayerNo = 3]);
-            Debug.Log("プレイヤ3");
+            //Debug.Log("プレイヤ3");
             Player.transform.position = PlayerPos;
             DataManager.Level = CurrentLevel;
             DataManager.PlayerChange = false;
@@ -97,7 +97,7 @@ public class BattleManager : MonoBehaviour {
 			if (DataManager.PlayerNo == 3)				//新たなプレイヤー発生
 			{
 				Player = Instantiate (Prefab_Player [DataManager.PlayerNo = 0]);
-                Debug.Log("プレイヤ0");
+                //Debug.Log("プレイヤ0");
                 //Debug.Break();
                 Player.transform.position = PlayerPos;
 				DataManager.Level = CurrentLevel;
@@ -112,13 +112,13 @@ public class BattleManager : MonoBehaviour {
             if ((isPChange == false)&&(DataManager.PlayerChange == false)&&(DataManager.PlayerReturn == false))
             {
                 DataManager.PlayerChange = true;
-                Debug.Log("変わるよ");
+                //Debug.Log("変わるよ");
 
             }
         if ((Input.GetButtonUp("Fire4"))&&(isPChange == true))
             {
                     DataManager.PlayerReturn = true;
-                    Debug.Log("戻るよ");
+                    //Debug.Log("戻るよ");
             }
         }
 
