@@ -14,11 +14,11 @@ public class ChangeWeaponR : MonoBehaviour {
 	PlayerShoot03R  pshoot3;
 	PlayerShoot04R  pshoot4;
 	MultiWayShootR mshoot;
-	public RawImage weponImage1;
-	public RawImage weponImage2;
-	public RawImage weponImage3;
-	public RawImage weponImage4;
-	public RawImage weponImage5;
+	public static RawImage weponImage1;
+	public static RawImage weponImage2;
+	public static RawImage weponImage3;
+	public static RawImage weponImage4;
+	public static RawImage weponImage5;
 	public Color myWhite = new Color(1, 1, 1, 1);
 	public Color myBlue = new Color(0.1f, 0.03f, 1, 1);
 	public Color myYellow = new Color (0.81f,0.99f,0,1);

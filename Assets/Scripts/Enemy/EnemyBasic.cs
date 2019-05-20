@@ -39,6 +39,7 @@ public class EnemyBasic : MonoBehaviour {
 	public float timeOut;
 	public BattleManager battleManager;
 	PlayerLevel playerLevel;
+	PlayerWeapon playerWeapon;
 	public int EnemyScore = 1000;					// 敵を倒した時の得点
 	public GameObject RedSphere;					// アーマーポイント回復用玉（アイテムタグ3）
 	public GameObject BlueSphere;					// ブーストポイント回復用玉（アイテムタグ2）
@@ -125,21 +126,11 @@ public class EnemyBasic : MonoBehaviour {
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
         // Playerタグが付いているオブジェクトをターゲットにする
         //target = GameObject.FindWithTag ("Player");	
-        
+		playerWeapon = GameObject.FindWithTag ("Player").GetComponent<PlayerWeapon> ();
         // Playerタグが付いているオブジェクトのPlayerLevelをplayerLevelとする
         playerLevel = GameObject.FindWithTag ("Player").GetComponent<PlayerLevel> ();
 		// BattleManagerオブジェクトのBattleManagerをbattleManagerとする
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
-		GameObject DestroyEffect = GameObject.Find("Blood_1");
-        GameObject Hit01Prefab = GameObject.Find("Hit01");
-        GameObject Hit02Prefab = GameObject.Find("Hit02");
-        GameObject Hit03Prefab = GameObject.Find("Hit03");
-        GameObject Hit05Prefab = GameObject.Find("Hit05");
-        GameObject DeadPrefab = GameObject.Find("Dead");
-        GameObject RedSphere = GameObject.Find("RedSphere");
-        GameObject BlueSphere = GameObject.Find("BlueSphere");
-        GameObject GreenSphere = GameObject.Find("GreenSphere");
-        GameObject YellowSphere = GameObject.Find("YellowSphere");
 		//GameObject LifeBar = GameObject.FindWithTag ("Enemy").GameObject.Find("LifeBar");
 		Transform EffectPoint = GameObject.FindWithTag ("Player").transform.Find("EffectPoint");
         GameObject Star = GameObject.Find("Star");
@@ -256,6 +247,18 @@ public class EnemyBasic : MonoBehaviour {
 			else
 			{
 				damage = collider.gameObject.GetComponent<Bullet05R>().damage;
+			}
+			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+			StartCoroutine ("DamageCoroutine");
+			animator.SetTrigger ("damaged");
+			armorPoint -= damage;
+			LifeBar.GetComponent<LifeBar> ().UpdateArmorPointValue ();
+		} else if (collider.gameObject.tag == "Weapon") {
+			DamageSet = true;
+			StartCoroutine ("LifeBarCoroutine");
+			if (playerWeapon != null)
+			{
+				damage = playerWeapon.damage;
 			}
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
