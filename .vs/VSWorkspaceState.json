@@ -3,11 +3,10 @@
     "",
     "\\Assets",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Enemy",
+    "\\Assets\\Scripts\\Block",
+    "\\Assets\\Scripts\\Boss",
     "\\Assets\\Scripts\\Player",
-    "\\Assets\\Scripts\\PlayerReal",
-    "\\Assets\\Scripts\\System"
+    "\\Assets\\Scripts\\PlayerReal"
   ],
-  "SelectedNode": "\\Logs",
   "PreviewInSolutionExplorer": false
 }

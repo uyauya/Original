@@ -19,11 +19,11 @@ public class ChangeWeaponR : MonoBehaviour {
 	public static RawImage weponImage3;
 	public static RawImage weponImage4;
 	public static RawImage weponImage5;
-	public Color myWhite = new Color(1, 1, 1, 1);
-	public Color myBlue = new Color(0.1f, 0.03f, 1, 1);
-	public Color myYellow = new Color (0.81f,0.99f,0,1);
-	public Color myGreen  = new Color (0.48f,0.97f,0.08f,1);
-	public Color myRed	  = new Color (1,0.16f,0.16f,1);
+	public static Color MyWhite = new Color(1, 1, 1, 1);
+	public static Color MyBlue = new Color(0.1f, 0.03f, 1, 1);
+	public static Color MyYellow = new Color (0.81f,0.99f,0,1);
+	public static Color MyGreen  = new Color (0.48f,0.97f,0.08f,1);
+	public static Color MyRed	  = new Color (1,0.16f,0.16f,1);
 	public BattleManager battleManager;
 
 
@@ -83,7 +83,7 @@ public class ChangeWeaponR : MonoBehaviour {
 		type = (type + 1) % num;
 		if (type == 0) 
 		{
-			weponImage1.color = myWhite;
+			weponImage1.color = MyWhite;
 			weponImage2.color = Color.white;
 			weponImage3.color = Color.white;
 			weponImage4.color = Color.white;
@@ -98,7 +98,7 @@ public class ChangeWeaponR : MonoBehaviour {
 		if (type == 1) 
 		{
 			weponImage1.color = Color.white;
-			weponImage2.color = myBlue;
+			weponImage2.color = MyBlue;
 			weponImage3.color = Color.white;
 			weponImage4.color = Color.white;
 			weponImage5.color = Color.white;
@@ -112,7 +112,7 @@ public class ChangeWeaponR : MonoBehaviour {
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;
-			weponImage3.color = myYellow;
+			weponImage3.color = MyYellow;
 			weponImage4.color = Color.white;
 			weponImage5.color = Color.white;
 			pshoot1.enabled = false;
@@ -126,7 +126,7 @@ public class ChangeWeaponR : MonoBehaviour {
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;
 			weponImage3.color = Color.white;
-			weponImage4.color = myGreen;
+			weponImage4.color = MyGreen;
 			weponImage5.color = Color.white;
 			pshoot1.enabled = false;
 			pshoot2.enabled = false;
@@ -140,7 +140,7 @@ public class ChangeWeaponR : MonoBehaviour {
 			weponImage2.color = Color.white;
 			weponImage3.color = Color.white;
 			weponImage4.color = Color.white;
-			weponImage5.color = myRed;
+			weponImage5.color = MyRed;
 			pshoot1.enabled = false;
 			pshoot2.enabled = false;
 			pshoot3.enabled = false;

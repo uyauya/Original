@@ -13,25 +13,26 @@ public class PlayerWeapon : MonoBehaviour
 	public bool isWeaponAura03 = false;
 	public bool isWeaponAura04 = false;
 	public bool isWeaponAura05 = false;
-	pshoot1 Pshoot1;
+    public BattleManager battleManager;
 
-	// Start is called before the first frame update
+
+    // Start is called before the first frame update
     void Start()
     {
 		WeaponAura02 = GameObject.Find ("WeaponAura02");
 		WeaponAura03 = GameObject.Find ("WeaponAura03");
 		WeaponAura04 = GameObject.Find ("WeaponAura04");
 		WeaponAura05 = GameObject.Find ("WeaponAura05");
-		Pshoot1 = battleManager.Player.GetComponent<ChangeWeapon>().pshoot1;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (ChangeWeaponR.weponImage2.enabled == true)
+		if (ChangeWeaponR.weponImage2.color == ChangeWeaponR.MyBlue)
 		{
-			isWeaponAura02 = true;
-			isWeaponAura03 = false;
+            isWeaponAura02 = true;
+            isWeaponAura03 = false;
 			isWeaponAura04 = false;
 			isWeaponAura05 = false;
 			if(WeaponAura02 != null)
@@ -42,8 +43,8 @@ public class PlayerWeapon : MonoBehaviour
 				WeaponAura05.SetActive(isWeaponAura05);
 			}
 		}
-		else if (ChangeWeaponR.weponImage3.enabled == true)
-		{
+		else if (ChangeWeaponR.weponImage3.color == ChangeWeaponR.MyYellow)
+        {
 			isWeaponAura02 = false;
 			isWeaponAura03 = true;
 			isWeaponAura04 = false;
@@ -56,8 +57,8 @@ public class PlayerWeapon : MonoBehaviour
 				WeaponAura05.SetActive(isWeaponAura05);
 			}
 		}
-		else if (ChangeWeaponR.weponImage4.enabled == true)
-		{
+        else if (ChangeWeaponR.weponImage4.color == ChangeWeaponR.MyGreen)
+        {
 			isWeaponAura02 = false;
 			isWeaponAura03 = false;
 			isWeaponAura04 = true;
@@ -70,8 +71,8 @@ public class PlayerWeapon : MonoBehaviour
 				WeaponAura05.SetActive(isWeaponAura05);
 			}
 		}
-		else if (ChangeWeaponR.weponImage5.enabled == true)
-		{
+        else if (ChangeWeaponR.weponImage5.color == ChangeWeaponR.MyRed)
+        {
 			isWeaponAura02 = false;
 			isWeaponAura03 = false;
 			isWeaponAura04 = false;
@@ -84,12 +85,16 @@ public class PlayerWeapon : MonoBehaviour
 				WeaponAura05.SetActive(isWeaponAura05);
 			}
 		}
-		else 
-		{
-			isWeaponAura02 = false;
-			isWeaponAura03 = false;
-			isWeaponAura04 = false;
-			isWeaponAura05 = false;
-		}
+        else
+        {
+            isWeaponAura02 = false;
+            isWeaponAura03 = false;
+            isWeaponAura04 = false;
+            isWeaponAura05 = false;
+            WeaponAura02.SetActive(isWeaponAura02);
+            WeaponAura03.SetActive(isWeaponAura03);
+            WeaponAura04.SetActive(isWeaponAura04);
+            WeaponAura05.SetActive(isWeaponAura05);
+        }
     }
 }
