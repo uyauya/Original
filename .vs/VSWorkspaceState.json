@@ -2,11 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
+    "\\Assets\\Animations",
+    "\\Assets\\Scene",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Block",
-    "\\Assets\\Scripts\\Boss",
     "\\Assets\\Scripts\\Player",
-    "\\Assets\\Scripts\\PlayerReal"
+    "\\Assets\\Scripts\\System",
+    "\\Assets\\UnityChan"
   ],
   "PreviewInSolutionExplorer": false
 }

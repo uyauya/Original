@@ -225,7 +225,7 @@ public class PlayerController : MonoBehaviour {
             // y方向にJumpForce値加算（通常ジャンプ）
             GetComponent<Rigidbody>().velocity = new Vector3(v.x, JumpForce, v.z);
             //ジャンプモーションに切り替える
-            animator.SetBool("Jump", true);
+            //animator.SetBool("Jump", true);
 			//ジャンプカウントが2だったらy方向にDoubleJump値加算（二段ジャンプ）
             if(JumpCount == 2){
                 GetComponent<Rigidbody>().velocity = new Vector3( v.x, DoubleJump, v.z );
@@ -250,6 +250,7 @@ public class PlayerController : MonoBehaviour {
             {
                 SoundManager.Instance.Play(17, gameObject);
             }
+            IsDownJumpButton = false;
         }
 		// ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
         else if (Input.GetButton("Jump") && (Input.GetButton("Boost") && boostPoint > 10))
@@ -290,7 +291,9 @@ public class PlayerController : MonoBehaviour {
                 moveDirection.y -= 0.05f * Time.deltaTime;
 				// 落下速度がDeGravity以下ならDeGravityにする（ふわっと落下させるための減速処理）
                 if (moveDirection.y <= DeGravity) moveDirection.y = DeGravity;
+
             }
+            
         }
     }
 

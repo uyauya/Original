@@ -7,56 +7,77 @@ using UnityEngine.UI;
 // インスペクタでライトのColorとIntensityで色と明るさを調整しておく。ライトの場所にも注意
 public class LightChange : MonoBehaviour {
 	public float count;						// ライト消灯・点灯時間計測用
-	public GameObject DirectionalLight;
-	private GameObject lightAfternoon;		// ディレクショナルライト昼用（明るい）
+	public GameObject directionalLight;
+    private GameObject lightMorning;        // ディレクショナルライト昼用（やや明るめ）
+    private GameObject lightAfternoon;		// ディレクショナルライト昼用（明るい）
 	private GameObject lightEvening;		// ディレクショナルライト昼用（やや暗め）
 	private GameObject lightNight;			// ディレクショナルライト昼用（暗い）
-	private GameObject lightMorning;		// ディレクショナルライト昼用（やや明るめ）
-	public bool isDirectionalLight = false;
-	public bool isLightMorning = false;
-	public bool isLightAfternoon = false;	// LightAfternoonを点灯しておく
-	public bool isLightEvening = false;
-	public bool isLightNight = false;
-	public int CountAfternoon = 5;			// lightAfternoonが消灯する時間
+	public int CountMorning = 0;           // lightNightが点灯する時間
+    public int CountAfternoon = 5;			// lightAfternoonが消灯する時間
 	public int CountEvening = 10;			// lightEveningが消灯する時間
 	public int CountNight = 15;				// lightNightが消灯する時間
-	public int CountMorning = 20;			// lightNightが点灯する時間
-	public int CountNoon = 25;				// lightAfternoonが点灯する時間
+	public int CountMidnight = 20;			// lightAfternoonが点灯する時
+    public int CountEnd = 22;          // lightAfternoonが点灯する時
 
-	void Start () {
-		// LightAfternoonという名前のオブジェクトをlightAfternoonと呼ぶことにする
-		lightAfternoon = GameObject.Find ("LightAfternoon");
+    void Start () {
+        // LightAfternoonという名前のオブジェクトをlightAfternoonと呼ぶことにする
+        lightMorning = GameObject.Find("LightMorning");
+        lightAfternoon = GameObject.Find ("LightAfternoon");
 		lightEvening = GameObject.Find ("LightEvening");
 		lightNight 	 = GameObject.Find ("LightNight");
-		lightMorning = GameObject.Find ("LightMorning");
-		DirectionalLight = GameObject.Find ("DirectionalLight");
-		DirectionalLight.SetActive(isDirectionalLight == false);
-	}
+	    directionalLight = GameObject.Find("DirectionalLight");
+        lightMorning.SetActive(false);
+        lightAfternoon.SetActive(false);
+        lightEvening.SetActive(false);
+        lightNight.SetActive(false);
+        directionalLight.SetActive(false);
+    }
 
-	void Update () {
-		// 時間経過と共にライトを消灯→点灯
-		// countに経過時間を足していく（時間計測開始）
-		count += Time.deltaTime;
-		// CountAfternoonに設定しているの時間を過ぎたらLightMorningとLightAfternoonを消灯
-		if (count > CountMorning) {
-			lightMorning.SetActive (isLightMorning == true);
-		}
-		if (count > CountAfternoon) {
-			lightMorning.SetActive(isLightMorning == false);
-			lightAfternoon.SetActive(isLightAfternoon == true);
-		}
-		if (count > CountEvening) {
-			lightAfternoon.SetActive(isLightAfternoon == false);
-			lightEvening.SetActive(isLightEvening == true);
-		}
-		if (count > CountNight) {
-			lightEvening.SetActive(isLightEvening == true);
-			lightNight.SetActive (isLightNight == true);
-		}
+    void Update()
+    {
+        // 時間経過と共にライトを消灯→点灯
+        // countに経過時間を足していく（時間計測開始）
+        count += Time.deltaTime;
+        // CountAfternoonに設定しているの時間を過ぎたらLightMorningとLightAfternoonを消灯
+        if (count > CountMorning)
+        {
+            lightMorning.SetActive(true);
+            lightAfternoon.SetActive(false);
+            lightEvening.SetActive(false);
+            lightNight.SetActive(false);
+        }
+        if (count > CountAfternoon)
+        {
+            lightMorning.SetActive(false);
+            lightAfternoon.SetActive(true);
+            lightEvening.SetActive(false);
+            lightNight.SetActive(false);
+        }
+        if (count > CountEvening)
+        {
+            lightMorning.SetActive(false);
+            lightAfternoon.SetActive(false);
+            lightEvening.SetActive(true);
+            lightNight.SetActive(false);
+        }
+        if (count > CountNight)
+        {
+            lightMorning.SetActive(false);
+            lightAfternoon.SetActive(false);
+            lightEvening.SetActive(false);
+            lightNight.SetActive(true);
+        }
 
-		if (count > CountNoon) {
-			lightNight.SetActive (isLightNight == false);
-			count = 0;
-		}
-	}
+        if (count > CountMidnight)
+        {
+            lightMorning.SetActive(false);
+            lightAfternoon.SetActive(false);
+            lightEvening.SetActive(false);
+            lightNight.SetActive(false);
+        }
+        if (count > CountMidnight)
+        {
+            count = 0;
+        }
+    }
 }
