@@ -34,4 +34,12 @@ public class MapCreator02 : MonoBehaviour
     {
         
     }
+
+	/*private void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "Goal")
+		{
+			NextScene = true;
+		}
+	}*/
 }

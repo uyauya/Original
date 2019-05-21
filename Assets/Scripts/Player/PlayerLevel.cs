@@ -1,6 +1,4 @@
-﻿
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +25,7 @@ public class PlayerLevel : MonoBehaviour
 		new UserParam(1,03,110,3870,3310,4400, string.Empty,0),		//Level03
         new UserParam(3,03,110,3870,9000,4400, string.Empty,0),		//Level03
 
-		/*new UserParam(0,04,157,3800,3630,6600, string.Empty,0),		//Level04
+		new UserParam(0,04,157,3800,3630,6600, string.Empty,0),		//Level04
 		new UserParam(2,04,200,3700,3120,6600, string.Empty,0),		//Level04
 		new UserParam(1,04,115,4260,3470,6600, string.Empty,0),		//Level04
 
@@ -49,7 +47,7 @@ public class PlayerLevel : MonoBehaviour
 
 		new UserParam(0,09,228,5300,5340,52000, string.Empty,0),	//Level09
 		new UserParam(2,09,320,4730,3900,52000, string.Empty,0),	//Level09
-		new UserParam(1,09,148,6860,4430,52000, string.Empty,0),	//Level09*/
+		new UserParam(1,09,148,6860,4430,52000, string.Empty,0),	//Level09
 		
 
 	};

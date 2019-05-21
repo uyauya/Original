@@ -28,6 +28,7 @@ public class BattleManager : MonoBehaviour {
 	int clearScore;						 	// クリア条件となるスコア  
 	public GameObject Player;			
 	public float ChangeTime = 5.0f;			// シーン変更までの時間
+	public float ChangeTime2 = 0.0f;
 	public int Count;					 	// ステージ移行する為のアイテム取得個
 	public int PlayerNo;				 	//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public static bool PlayerDead = false;	//プレイヤキャラが死亡したかどうか
@@ -37,6 +38,7 @@ public class BattleManager : MonoBehaviour {
 	public int GetBigStar = 0;
 	public static bool isClear = false;				//ステージクリアしたかどうか
 	public bool isPChange = false;
+	public GameObject GoalPosition;
 
     void Awake(){
             Player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
@@ -68,6 +70,7 @@ public class BattleManager : MonoBehaviour {
         //instantiateValueに値を代入するのをBattleManagerより早くするため
         //EnemyスクリプトにはStartでなくAwakeに記入する（起動直後に処理）
         PlayerDead = false;
+		GoalPosition = GameObject.Find("GoalPosition");
     }
 
 	void Update () {
@@ -217,8 +220,11 @@ public class BattleManager : MonoBehaviour {
 				ItemCount = 0;		// シーン移動時グリーンスフィア取得数をリセット
 				//プレイヤーの動けるようにする
 				PlayerController.isStop = false;
-			}	
-
+			}
+			else if(Player.transform.position == GoalPosition.transform.position)
+			{
+					Invoke("NextScene", ChangeTime2);	
+			}
 			// ボス撃破時スター出現
 			// スタースフィアを1個以上取得したら次面へ
 			if (PlayerController.GetStar == true)
