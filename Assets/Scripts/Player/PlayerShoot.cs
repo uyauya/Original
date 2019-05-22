@@ -75,12 +75,6 @@ public class PlayerShoot : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();			// ポーズ中かどうか判定用
 		attackPoint = DataManager.AttackPoint;
-		Bullet01 = GameObject.Find("Shot");
-		Bullet01B = GameObject.Find("ShotB");
-		Bullet01C = GameObject.Find("ShotC");
-		UBullet01 = GameObject.Find("UShot");
-		UBullet01B = GameObject.Find("UShotB");
-		UBullet01C = GameObject.Find("UShotC");
 		//MuzzleFlash = GameObject.Find("MuzzleFlash");
 		GameObject effectPrefab = GameObject.Find("Spark");
 		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");

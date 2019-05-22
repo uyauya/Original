@@ -5,39 +5,75 @@ using UnityEngine;
 public class SnowDrop : MonoBehaviour
 {
 	public float count;		
-	private GameObject HeavySnowfall;	
 	private GameObject Snowfall;
+	private GameObject HeavySnowfall;	
 	private GameObject Snowstorm;
-	public bool isHeavySnowfall = false;
-	public bool isSnowfall = false;
-	public bool isSnowstorm = false;
+	public static bool isSnowfall = false;
+	public static bool isHeavySnowfall = false;
+	public static bool isSnowstorm = false;
+	public int CountSnowfall = 0;	
 	public int CountHeavySnowfall = 5;	
-	public int CountSnowfall = 10;	
-	public int CountSnowstorm = 15;
-	public int CountNothing = 20;
+	public int CountSnowstorm = 10;
+	public int CountNothing = 15;
+	public int CountReset = 17;
+	private Vector3 offset;
+	public BattleManager battleManager;
 
 	void Start () {
-		HeavySnowfall = GameObject.Find ("HeavySnowfall");
-		Snowfall = GameObject.Find ("Snowfall");
-		Snowstorm 	 = GameObject.Find ("Snowstorm");
+		Snowfall = GameObject.Find ("SnowFall");
+		HeavySnowfall = GameObject.Find ("HeavySnowFall");
+		Snowstorm 	 = GameObject.Find ("SnowStorm");
+		battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
+		offset = transform.position - battleManager.Player.transform.position;
 	}
 
-	void Update () {
+	void Update () 
+	{
 		count += Time.deltaTime;
-		if (count > CountSnowfall) {
-			Snowfall.SetActive(isSnowfall == true);
+		if (count > CountSnowfall)
+		{
+			Snowfall.SetActive(true);
+			HeavySnowfall.SetActive(false);
+			Snowstorm.SetActive(false);
+			isSnowfall = true;
+			isHeavySnowfall = false;
+			isSnowstorm = false;
 		}
-		if (count > CountHeavySnowfall) {
-			HeavySnowfall.SetActive(isHeavySnowfall == true);
-			Snowfall.SetActive(isSnowfall == false);
+		if (count > CountHeavySnowfall)
+		{
+			Snowfall.SetActive(true);
+			HeavySnowfall.SetActive(true);
+			Snowstorm.SetActive(false);
+			isSnowfall = false;
+			isHeavySnowfall = true;
+			isSnowstorm = false;
 		}
-		if (count > CountSnowstorm) {
-			Snowstorm.SetActive (isSnowstorm == true);
-			HeavySnowfall.SetActive(isHeavySnowfall == false);
+		if (count > CountSnowstorm)
+		{
+			Snowfall.SetActive(true);
+			HeavySnowfall.SetActive(true);
+			Snowstorm.SetActive(true);
+			isSnowfall = false;
+			isHeavySnowfall = false;
+			isSnowstorm = true;
 		}
-		if (count > CountNothing) {
-			HeavySnowfall.SetActive(isHeavySnowfall == false);
+		if (count > CountNothing)
+		{
+			Snowfall.SetActive(false);
+			HeavySnowfall.SetActive(false);
+			Snowstorm.SetActive(false);
+			isSnowfall = false;
+			isHeavySnowfall = false;
+			isSnowstorm = false;
+		}
+		if (count > CountReset)
+		{
 			count = 0;
 		}
+	}
+
+	void LateUpdate ()
+	{
+		transform.position = battleManager.Player.transform.position + offset;
 	}
 }

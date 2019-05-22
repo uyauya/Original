@@ -4,8 +4,8 @@ using System.Collections;
 // プレイヤを自動追尾するメインカメラ（正面視点）
 public class CameraFollow : MonoBehaviour 
 {
-	public Transform target;
-	public float height;
+	//public Transform target;
+	//public float height;
 	private Vector3 offset;
     public BattleManager battleManager;
 

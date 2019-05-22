@@ -221,10 +221,7 @@ public class BattleManager : MonoBehaviour {
 				//プレイヤーの動けるようにする
 				PlayerController.isStop = false;
 			}
-			else if(Player.transform.position == GoalPosition.transform.position)
-			{
-					Invoke("NextScene", ChangeTime2);	
-			}
+
 			// ボス撃破時スター出現
 			// スタースフィアを1個以上取得したら次面へ
 			if (PlayerController.GetStar == true)
@@ -266,7 +263,13 @@ public class BattleManager : MonoBehaviour {
 		}
 	}
 
-
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "Goal")
+		{
+			Invoke("NextScene", ChangeTime2);	
+		}
+	}
 
 	//次面移動処理
 	private void NextScene(){

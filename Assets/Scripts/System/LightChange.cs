@@ -17,7 +17,7 @@ public class LightChange : MonoBehaviour {
 	public int CountEvening = 10;			// lightEveningが消灯する時間
 	public int CountNight = 15;				// lightNightが消灯する時間
 	public int CountMidnight = 20;			// lightAfternoonが点灯する時
-    public int CountEnd = 22;          // lightAfternoonが点灯する時
+    public int CountReset = 22;          // lightAfternoonが点灯する時
 
     void Start () {
         // LightAfternoonという名前のオブジェクトをlightAfternoonと呼ぶことにする
@@ -75,7 +75,7 @@ public class LightChange : MonoBehaviour {
             lightEvening.SetActive(false);
             lightNight.SetActive(false);
         }
-        if (count > CountMidnight)
+		if (count > CountReset)
         {
             count = 0;
         }
