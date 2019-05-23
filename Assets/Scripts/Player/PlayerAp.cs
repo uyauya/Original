@@ -42,8 +42,11 @@ public class PlayerAp : MonoBehaviour {
 	public bool isBig;						// 巨大化しているかどうか
 	public float HealApPoint = 1000;		// アイテム取得時の回復量
 	public int WallDamage = 100;			// 壁激突時のダメージ
+    public float PDamagePoint = 100;
+    public float FDamagePoint = 10;
+    public float HealPoint = 10;
 
-	/*[CustomEditor(typeof(PlayerAp))]
+    /*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
 	{
 		bool folding = false;
@@ -59,7 +62,7 @@ public class PlayerAp : MonoBehaviour {
 		}
 	}*/
 
-	void Start () {
+    void Start () {
         rigidbody = GetComponent<Rigidbody>();
         armorPoint = DataManager.ArmorPointMax;
 		// 画面上のarmorPointとPlayerApのarmorPointを連動させる
@@ -198,30 +201,6 @@ public class PlayerAp : MonoBehaviour {
 				}
 			}
 		}
-		if (collider.gameObject.tag == "Poison") {
-			poisonAttack = collider.gameObject.GetComponent<B2Floor> ().PoisonAttack;
-			if (isBig == true) {
-				armorPoint -= 0;
-			} else {
-				armorPoint -= poisonAttack;
-				DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
-				DamageObject.transform.SetParent (EffectPoint);
-                /*if ((PlayerNo == 0)|| (PlayerNo == 3)) {
-						SoundManager.Instance.Play(24,gameObject);	
-						SoundManager.Instance.PlayDelayed (27, 0.2f, gameObject);
-					}
-					if (PlayerNo == 1) {
-						SoundManager.Instance.Play(25,gameObject);	
-						SoundManager.Instance.PlayDelayed (28, 0.2f, gameObject);
-					}
-					if (PlayerNo == 2) {
-						SoundManager.Instance.Play(26,gameObject);	
-						SoundManager.Instance.PlayDelayed (29, 0.2f, gameObject);
-					}*/
-                //コルーチン処理（下記参照）
-                StartCoroutine("PoisonDamageCoroutine");
-			}
-		}
 
 		//Itemタグをつけたもの（RedSphere）を取ったら体力1000回復
 		if (collider.gameObject.tag == "Item") {
@@ -284,9 +263,27 @@ public class PlayerAp : MonoBehaviour {
 		}
 	}
 
-	// Itweenを使ってコルーチン作成（Itweenインストール必要あり）
-	// 敵接触時の点滅（オブジェクトの色をStandardなどにしておかないと点滅しない場合がある）
-	IEnumerator EnemyDamageCoroutine ()
+    void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.tag == "Fire")
+        {
+            armorPoint -= PDamagePoint;
+            StartCoroutine("PoisonDamageCoroutine");
+        }
+        if (other.gameObject.tag == "Fire")
+        {
+            armorPoint -= FDamagePoint;
+            StartCoroutine("FireDamageCoroutine");
+        }
+        if (other.gameObject.tag == "Fire")
+        {
+            armorPoint += HealPoint;
+        }
+    }
+
+    // Itweenを使ってコルーチン作成（Itweenインストール必要あり）
+    // 敵接触時の点滅（オブジェクトの色をStandardなどにしておかないと点滅しない場合がある）
+    IEnumerator EnemyDamageCoroutine ()
 	{
 		// プレイヤのレイヤーをInvincibleに変更
 		// Edit→ProjectSetting→Tags and LayersでInvicibleを追加
@@ -347,8 +344,9 @@ public class PlayerAp : MonoBehaviour {
 	// 毒床触時の点滅
 	IEnumerator PoisonDamageCoroutine ()
 	{
-		//while文を10回ループ
-		int count = 4;
+        gameObject.layer = LayerMask.NameToLayer("Invincible");
+        //while文を10回ループ
+        int count = 4;
 		iTween.MoveTo(gameObject, iTween.Hash(
 			"position", transform.position - (transform.forward * KnockBackRange),
 			"time", FlashTime, // 点滅時間（秒）
@@ -356,18 +354,43 @@ public class PlayerAp : MonoBehaviour {
 		));
 		while (count > 0){
 			//透明にする
-			modelColorChange.ColorChange(new Color (1,0,0,1));
+			modelColorChange.ColorChange(new Color (0.8f,0,0,1));
 			//0.1秒待つ
 			yield return new WaitForSeconds(0.1f);
 			//元に戻す
-			modelColorChange.ColorChange(new Color (1,1,1,1));
+			modelColorChange.ColorChange(new Color (0.8f,1,1,1));
 			//0.1秒待つ
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
-	}
+        gameObject.layer = LayerMask.NameToLayer("Player");
+    }
 
-	IEnumerator BigCoroutine ()
+    // 炎床触時の点滅
+    IEnumerator FireDamageCoroutine()
+    {
+        //while文を10回ループ
+        int count = 4;
+        iTween.MoveTo(gameObject, iTween.Hash(
+            "position", transform.position - (transform.forward * KnockBackRange),
+            "time", FlashTime, // 点滅時間（秒）
+            "easetype", iTween.EaseType.linear
+        ));
+        while (count > 0)
+        {
+            //透明にする
+            modelColorChange.ColorChange(new Color(0.6f, 0, 0, 1));
+            //0.1秒待つ
+            yield return new WaitForSeconds(0.1f);
+            //元に戻す
+            modelColorChange.ColorChange(new Color(0.6f, 1, 1, 1));
+            //0.1秒待つ
+            yield return new WaitForSeconds(0.1f);
+            count--;
+        }
+    }
+
+    IEnumerator BigCoroutine ()
 	{
 		// 巨大化
 		iTween.ScaleTo (gameObject, iTween.Hash ("x", 3, "y", 3, "z", 3, "time", 3f,"easetype", iTween.EaseType.linear));

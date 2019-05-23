@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour {
 	public float DashRate = 2.0f;					//ダッシュ時の速度の掛け率
     public float KnockBack = 2.0f;
     int layerMask = ~0;
+    public static bool Goal = false;
 
 
     /*[CustomEditor(typeof(PlayerController))]
@@ -672,8 +673,17 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	// ブースト時の点滅
-	IEnumerator BoostCoroutine ()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Goal")
+        {
+            //Invoke("NextScene", ChangeTime2);
+            Goal = true;
+        }
+    }
+
+    // ブースト時の点滅
+    IEnumerator BoostCoroutine ()
 	{
 		// 無敵処理
 		// Edit→ProjectSetting→PhysicsでInvicivleとEnemyやBossの交差部分の✔を外して接触判定無効にする
