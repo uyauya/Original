@@ -39,6 +39,7 @@ public class BattleManager : MonoBehaviour {
 	public static bool isClear = false;				//ステージクリアしたかどうか
 	public bool isPChange = false;
 	public GameObject GoalPosition;
+	public static bool ResetColor = false;
 
     void Awake(){
             Player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
@@ -114,14 +115,16 @@ public class BattleManager : MonoBehaviour {
         {
             if ((isPChange == false)&&(DataManager.PlayerChange == false)&&(DataManager.PlayerReturn == false))
             {
-                DataManager.PlayerChange = true;
+				ChangeWeapon.Weptype = 0;
+				DataManager.PlayerChange = true;
                 //Debug.Log("変わるよ");
 
             }
         if ((Input.GetButtonUp("Fire4"))&&(isPChange == true))
             {
-                    DataManager.PlayerReturn = true;
-                    //Debug.Log("戻るよ");
+				ChangeWeaponR.WePRtype = 0;
+				DataManager.PlayerReturn = true;
+				//Debug.Log("戻るよ");
             }
         }
 

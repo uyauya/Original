@@ -7,8 +7,8 @@ using UnityEngine.UI;
 // 選択した武器を使用可にして、他を不可にする仕様
 public class ChangeWeaponR : MonoBehaviour {
 
-	private int type = 0;			//武器識別用No.
-	private int num = 5;			//武器の種類数
+	public static int WePRtype = 0;			//武器識別用No.
+	public static int WepRnum = 5;			//武器の種類数
 	PlayerShootR   pshoot1;
 	PlayerShoot02R　pshoot2;
 	PlayerShoot03R  pshoot3;
@@ -80,8 +80,8 @@ public class ChangeWeaponR : MonoBehaviour {
 		pshoot3 = battleManager.Player.GetComponent<PlayerShoot03R>();
 		pshoot4 = battleManager.Player.GetComponent<PlayerShoot04R>();
 		mshoot = battleManager.Player.GetComponent<MultiWayShootR>();
-		type = (type + 1) % num;
-		if (type == 0) 
+		WePRtype = (WePRtype + 1) % WepRnum;
+		if ((WePRtype == 0)||(BattleManager.ResetColor == true))
 		{
 			weponImage1.color = MyWhite;
 			weponImage2.color = Color.white;
@@ -95,7 +95,7 @@ public class ChangeWeaponR : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (type == 1) 
+		if (WePRtype == 1) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = MyBlue;
@@ -108,7 +108,7 @@ public class ChangeWeaponR : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (type == 2) 
+		if (WePRtype == 2) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;
@@ -121,7 +121,7 @@ public class ChangeWeaponR : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (type == 3) 
+		if (WePRtype == 3) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;
@@ -134,7 +134,7 @@ public class ChangeWeaponR : MonoBehaviour {
 			pshoot4.enabled = true;
 			mshoot.enabled = false;
 		}
-		if (type == 4) 
+		if (WePRtype == 4) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;

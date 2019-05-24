@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,8 +8,8 @@ using UnityEngine.UI;
 // 選択した武器を使用可にして、他を不可にする仕様
 public class ChangeWeapon : MonoBehaviour {
 	
-	private int type = 0;			//武器識別用No.
-	private int num = 5;			//武器の種類数
+	public static int Weptype = 0;	//武器識別用No.
+	private int Wepnum = 5;		//武器の種類数
 	PlayerShoot   pshoot1;
 	PlayerShoot02　pshoot2;
 	PlayerShoot03  pshoot3;
@@ -40,15 +41,6 @@ public class ChangeWeapon : MonoBehaviour {
         battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
         // Playerタグが付いているオブジェクトのPlayerShootスクリプトを（このスクリプト内では）pshoot1と呼ぶことにする
         pshoot1 = battleManager.Player.GetComponent<PlayerShoot>();
-        /*GameObject player;
-        if (battleManager.Player)
-        {
-            Debug.Log("いる");
-        }
-        else
-        {
-            Debug.Log("いない");
-        }*/
         pshoot2 = battleManager.Player.GetComponent<PlayerShoot02>();
         pshoot3 = battleManager.Player.GetComponent<PlayerShoot03>();
         pshoot4 = battleManager.Player.GetComponent<PlayerShoot04>();
@@ -60,6 +52,7 @@ public class ChangeWeapon : MonoBehaviour {
 		pshoot3.enabled = false;
 		pshoot4.enabled = false;
 		mshoot.enabled = false;
+		weponImage1.enabled = true;
 		weponImage2.enabled = false;
 		weponImage3.enabled = false;
 		weponImage4.enabled = false;
@@ -89,20 +82,20 @@ public class ChangeWeapon : MonoBehaviour {
 			weponImage5.enabled = true;
 		}
 	}
-
-
+		
+		
 	private void changeWeapon ()
 	{
-        pshoot1 = battleManager.Player.GetComponent<PlayerShoot>();
-        pshoot2 = battleManager.Player.GetComponent<PlayerShoot02>();
-        pshoot3 = battleManager.Player.GetComponent<PlayerShoot03>();
-        pshoot4 = battleManager.Player.GetComponent<PlayerShoot04>();
-        mshoot = battleManager.Player.GetComponent<MultiWayShoot>();
+        //pshoot1 = battleManager.Player.GetComponent<PlayerShoot>();
+        //pshoot2 = battleManager.Player.GetComponent<PlayerShoot02>();
+        //pshoot3 = battleManager.Player.GetComponent<PlayerShoot03>();
+        //pshoot4 = battleManager.Player.GetComponent<PlayerShoot04>();
+        //mshoot = battleManager.Player.GetComponent<MultiWayShoot>();
         //「値+1」を武器個数(num)で割り、余りをtypeに入れて選択武器とする
-        type = (type + 1) % num;
+        Weptype = (Weptype + 1) % Wepnum;
 		// 選択された武器には色を付けて他は白に。
 		// 選択された武器は使用可（該当スクリプトをtrueにする)にして他は不可に。
-		if (type == 0) 
+		if (Weptype == 0)
 		{
 			weponImage1.color = myWhite;
 			weponImage2.color = Color.white;
@@ -116,7 +109,7 @@ public class ChangeWeapon : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (type == 1) 
+		if (Weptype == 1) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = myBlue;
@@ -129,7 +122,7 @@ public class ChangeWeapon : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (type == 2) 
+		if (Weptype == 2) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;
@@ -142,7 +135,7 @@ public class ChangeWeapon : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (type == 3) 
+		if (Weptype == 3) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;
@@ -155,7 +148,7 @@ public class ChangeWeapon : MonoBehaviour {
 			pshoot4.enabled = true;
 			mshoot.enabled = false;
 		}
-		if (type == 4) 
+		if (Weptype == 4) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;

@@ -35,8 +35,6 @@ public class PlayerShoot04R : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
-		GameObject Bullet04 = GameObject.Find("Shotsss");
-		GameObject UBullet04 = GameObject.Find("UShotsss");
 		GameObject MuzzleFlash = GameObject.Find("MuzzleFlash");
 		Transform muzzle = GameObject.FindWithTag ("Player").transform.Find("muzzle");
 	}
@@ -79,7 +77,7 @@ public class PlayerShoot04R : MonoBehaviour {
 					+ new Vector3(0, -0.3f, 0);
 			}
 		}
-		else if (DataManager.PlayerNo == 0)
+		else if (DataManager.PlayerNo == 3)
 		{
 			if (Time.time - shotInterval > shotIntervalMax) {
 				shotInterval = Time.time;

@@ -65,6 +65,9 @@ public class PlayerController : MonoBehaviour {
     public float KnockBack = 2.0f;
     int layerMask = ~0;
     public static bool Goal = false;
+	public static bool WeaponEquip = false;
+	public GameObject Wep01;
+	public GameObject Wep02;
 
 
     /*[CustomEditor(typeof(PlayerController))]
@@ -301,6 +304,29 @@ public class PlayerController : MonoBehaviour {
     //一定時間間隔で常にUpdateする
     void FixedUpdate()
 	{
+		if (WeaponEquip == true)
+		{
+			if (Wep01 != null) 
+			{
+				Wep01.SetActive(true);
+			}
+			if (Wep02 != null)
+			{
+				Wep02.SetActive(false);
+			}
+		}
+		if (WeaponEquip == false)
+		{
+			if (Wep01 != null) 
+			{
+				Wep01.SetActive(false);
+			}
+			if (Wep02 != null)
+			{
+				Wep02.SetActive(true);
+			}
+		}
+
 		//プレイヤー死亡条件になってたらDeadアニメーション
 		if (BattleManager.PlayerDead == true)
 		{
@@ -505,6 +531,7 @@ public class PlayerController : MonoBehaviour {
 		{
             // 何も押されていないニュートラル状態ではmove解除
             animator.SetBool("Move", false);
+			WeaponEquip = true;
 			//進行方向キー押していなければダッシュもしない）
 			isDash = false;
             // アッドフォースされた速度がMaxForce以上ならフォースにマイナス処理して減速（滑り止め）
@@ -677,7 +704,6 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.tag == "Goal")
         {
-            //Invoke("NextScene", ChangeTime2);
             Goal = true;
         }
     }

@@ -67,16 +67,16 @@ public class PlayerShoot03R : MonoBehaviour {
 				shotInterval = Time.time;
 				GameObject bulletObject = GameObject.Instantiate (Bullet03R)as GameObject;
 				bulletObject.transform.position = muzzle.position;
-				bulletObject.GetComponent<Bullet03> ().damage = this.damage;
+				bulletObject.GetComponent<Bullet03R> ().damage = this.damage;
 			}
 		}
-		else if (DataManager.PlayerNo == 0)
+		else if (DataManager.PlayerNo == 3)
 		{
 			if (Time.time - shotInterval > shotIntervalMax) {
 				shotInterval = Time.time;
-				GameObject bulletObject = GameObject.Instantiate (UBullet03R)as GameObject;
+				GameObject bulletObject = GameObject.Instantiate (Bullet03R)as GameObject;
 				bulletObject.transform.position = muzzle.position;
-				bulletObject.GetComponent<Bullet03> ().damage = this.damage;
+				bulletObject.GetComponent<Bullet03R> ().damage = this.damage;
 			}
 		}
 

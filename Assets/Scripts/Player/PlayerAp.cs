@@ -263,23 +263,27 @@ public class PlayerAp : MonoBehaviour {
 		}
 	}
 
-    void OnCollisionStay(Collision other)
+	void OnOnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Fire")
-        {
-            armorPoint -= PDamagePoint;
-            StartCoroutine("PoisonDamageCoroutine");
-        }
-        if (other.gameObject.tag == "Fire")
+		if (other.tag == "Fire")
         {
             armorPoint -= FDamagePoint;
             StartCoroutine("FireDamageCoroutine");
         }
-        if (other.gameObject.tag == "Fire")
+		if (other.tag == "Heal")
         {
             armorPoint += HealPoint;
         }
     }
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "Poison")
+		{
+			armorPoint -= PDamagePoint;
+			StartCoroutine("PoisonDamageCoroutine");
+		}
+	}
 
     // Itweenを使ってコルーチン作成（Itweenインストール必要あり）
     // 敵接触時の点滅（オブジェクトの色をStandardなどにしておかないと点滅しない場合がある）

@@ -90,7 +90,7 @@ public class MultiWayShootR : MonoBehaviour {
 					bulletObject.transform.rotation = Quaternion.LookRotation (bulletObject.transform.position - transform.position);
 					bulletObject.transform.position = bulletObject.transform.position + new Vector3(0,1,0);
 					GetComponent<PlayerController> ().boostPoint -= BpDown;
-					bulletObject.GetComponent<Bullet05> ().damage = this.damage;
+					bulletObject.GetComponent<Bullet05R> ().damage = this.damage;
 				}
 		}
 		else if(DataManager.PlayerNo == 3)
