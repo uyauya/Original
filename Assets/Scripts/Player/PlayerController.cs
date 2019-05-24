@@ -315,6 +315,7 @@ public class PlayerController : MonoBehaviour {
 				Wep02.SetActive(false);
 			}
 		}
+        Debug.Log("手");
 		if (WeaponEquip == false)
 		{
 			if (Wep01 != null) 
@@ -325,7 +326,8 @@ public class PlayerController : MonoBehaviour {
 			{
 				Wep02.SetActive(true);
 			}
-		}
+        Debug.Log("背中");
+        }
 
 		//プレイヤー死亡条件になってたらDeadアニメーション
 		if (BattleManager.PlayerDead == true)
@@ -348,13 +350,15 @@ public class PlayerController : MonoBehaviour {
 				Force += Time.deltaTime * BPlusForce;		// MaxBoostForceまでMaxForce(通常最大速度)に加速
 				Force = Mathf.Min(Force, MaxBoostForce);	// ForceがMaxBoostForceの値を超えない
 				animator.SetBool("Boost",true);
-				//Debug.Log (Force);
-			}
+                WeaponEquip = false;
+                //Debug.Log (Force);
+            }
 			//ブースト状態ならアニメーターをBoostに切り替える
 			if(isBoost)
 			{
 				animator.SetBool("Boost",true);
-			}
+                WeaponEquip = false;
+            }
 		}
 		else　　　　　　　　　　　　　　　　　　　　　　　　　　
 		{
@@ -370,32 +374,35 @@ public class PlayerController : MonoBehaviour {
 			
 
 		//モーションを切り替える
-		if (Input.GetAxis("Horizontal") > 0)	// 右移動（右が押されている場合）
-		{
+		if (Input.GetAxis("Horizontal") > 0)    // 右移動（右が押されている場合）
+        {
 			//ダッシュアタック時
 			if (isDash == true)
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
+                WeaponEquip = true;
                 RaycastHit hit;
                 if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
                {
                     transform.position = hit.point - transform.forward;
-                }else
+                }
+                else
                 {
                     GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                    WeaponEquip = false;
                 }
                 //gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
 				DashAttack ();
-				isDash = false;
-			}
+                WeaponEquip = true;
+            }
 			//ショットを撃っている状態（減速処理）
 			if (PlayerShoot.isShoot == true)
             {
 				//撃たない時より動作速度を落とす（敵を狙いやすくする）
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
-                
+                WeaponEquip = true;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
                 //rigidbody.velocity = (transform.forward * Force * 0.5f);
 			}
@@ -406,6 +413,7 @@ public class PlayerController : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
 			// アニメーターをMoveに切り替え
 			animator.SetBool("Move", true);
+            WeaponEquip = false;
                 // プレイヤに速度を加える（transform.Translateは移動だが、アッドフォースは後ろから押すような操作なので、坂道など段差が
                 // ある場合、自動で加減速処理して移動する
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force);
@@ -420,6 +428,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
+                WeaponEquip = false;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
                 {
@@ -428,6 +437,7 @@ public class PlayerController : MonoBehaviour {
                 else
                 {
                     GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                    WeaponEquip = true;
                 }
                 //rigidbody.transform.position += transform.forward * DashRate;
                 DashAttack();
@@ -438,6 +448,7 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 2.0f);
                 animator.SetBool("Move", true);
+                WeaponEquip = true;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
                 //rigidbody.velocity = (transform.forward * Force * 0.5f);
             }
@@ -446,6 +457,7 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
                 animator.SetBool("Move", true);
+                WeaponEquip = false;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force);
                 //rigidbody.velocity = (transform.forward * Force);
             }
@@ -457,6 +469,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
+                WeaponEquip = true;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
                 {
@@ -465,6 +478,7 @@ public class PlayerController : MonoBehaviour {
                 else
                 {
                     GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                    WeaponEquip = true;
                 }
                 //rigidbody.transform.position += transform.forward * DashRate;
 				DashAttack ();
@@ -476,6 +490,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
+                WeaponEquip = true;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
                 //rigidbody.velocity = (transform.forward * Force * 0.5f);
 			}
@@ -484,6 +499,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
+                WeaponEquip = false;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force);
                 //rigidbody.velocity = (transform.forward * Force);
                 //Debug.Log("速度" + Force);
@@ -497,6 +513,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -18, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
+                WeaponEquip = true;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
                 {
@@ -505,6 +522,7 @@ public class PlayerController : MonoBehaviour {
                 else
                 {
                     GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
+                    WeaponEquip = true;
                 }
                 //rigidbody.transform.position += transform.forward * DashRate;
                 DashAttack();
@@ -515,6 +533,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
+                WeaponEquip = true;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
                 //rigidbody.velocity = (transform.forward * Force * 0.5f);
 			}
@@ -523,6 +542,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
+                WeaponEquip = false;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force);
                 //rigidbody.velocity = (transform.forward * Force);
 			}
