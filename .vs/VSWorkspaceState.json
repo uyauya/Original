@@ -2,13 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Animations",
-    "\\Assets\\Scene",
+    "\\Assets\\Prefab",
     "\\Assets\\Scripts",
+    "\\Assets\\Scripts\\Block",
+    "\\Assets\\Scripts\\Boss",
+    "\\Assets\\Scripts\\Enemy",
     "\\Assets\\Scripts\\Player",
-    "\\Assets\\Scripts\\System",
-    "\\Assets\\UnityChan"
+    "\\Assets\\Scripts\\PlayerReal",
+    "\\Assets\\Scripts\\System"
   ],
-  "SelectedNode": "\\Logs",
   "PreviewInSolutionExplorer": false
 }

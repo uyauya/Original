@@ -113,18 +113,29 @@ public class BattleManager : MonoBehaviour {
 
         if (Input.GetButtonUp("Fire4"))
         {
-            if ((isPChange == false)&&(DataManager.PlayerChange == false)&&(DataManager.PlayerReturn == false))
+            //if ((isPChange == false)&&(DataManager.PlayerChange == false)&&(DataManager.PlayerReturn == false))
+            if (isPChange == false)
             {
-				ChangeWeapon.Weptype = 0;
+                ChangeWeapon.Weptype = 0;
 				DataManager.PlayerChange = true;
                 //Debug.Log("変わるよ");
+                if(ChangeWeapon.Weptype != 0)
+                {
+                    ChangeWeaponR.WePRtype = 0;
+                    DataManager.PlayerChange = true;
+                }
 
             }
         if ((Input.GetButtonUp("Fire4"))&&(isPChange == true))
             {
-				ChangeWeaponR.WePRtype = 0;
+                ChangeWeapon.Weptype = 0;
 				DataManager.PlayerReturn = true;
-				//Debug.Log("戻るよ");
+                //Debug.Log("戻るよ");
+                if (ChangeWeapon.Weptype != 0)
+                {
+                    ChangeWeaponR.WePRtype = 0;
+                    DataManager.PlayerReturn = true;
+                }
             }
         }
 

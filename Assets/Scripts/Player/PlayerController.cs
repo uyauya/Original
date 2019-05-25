@@ -65,9 +65,9 @@ public class PlayerController : MonoBehaviour {
     public float KnockBack = 2.0f;
     int layerMask = ~0;
     public static bool Goal = false;
-	public static bool WeaponEquip = false;
-	public GameObject Wep01;
-	public GameObject Wep02;
+	//public static bool WeaponEquip = false;
+	//public GameObject Wep01;
+	//public GameObject Wep02;
 
 
     /*[CustomEditor(typeof(PlayerController))]
@@ -126,8 +126,9 @@ public class PlayerController : MonoBehaviour {
 		//ProjectSettigでJumpに割り当てたキーが押されたら
 		if (Input.GetButtonDown("Jump"))
 		{
-			//ジャンプボタンをオンにする
-			IsDownJumpButton = true;
+            PlayerEquip.WeaponEquip = false;
+            //ジャンプボタンをオンにする
+            IsDownJumpButton = true;
 		}
 		//現在のブーストゲージと最大ブーストゲージをUI Textに表示する
 		//boostText.text = string.Format("{0:0000} / {1:0000}", displayBoostPoint, DataManager.BoostPointMax);
@@ -136,6 +137,7 @@ public class PlayerController : MonoBehaviour {
         //プレイヤー死亡条件になってたらDeadアニメーション
         if (BattleManager.PlayerDead == true)
         {
+            PlayerEquip.WeaponEquip = false;
             animator.SetBool("Dead", true);
         }
     
@@ -149,15 +151,16 @@ public class PlayerController : MonoBehaviour {
 				//再度ブーストボタン押してダッシュ（下記参照）
 				if (Input.GetButtonDown("Boost"))
 				{
-					isDash = true;							//ダッシュ切り替え
-					Debug.Log("ダッシュ");
+                    PlayerEquip.WeaponEquip = false;
+                    isDash = true;							//ダッシュ切り替え
+					//Debug.Log("ダッシュ");
 					boostPoint -= DashBpDown;  
 				}
 			}
 			//それ以外（何も押さなければ）ブーストを維持
 			else
 			{
-				Debug.Log("ブースト");
+                //Debug.Log("ブースト");
 				isBoost = true;                             		//ブースト切り替え
             	StartCoroutine("BoostCoroutine");           		//コルーチン処理（下記参照）
 				                                          			// プレイヤのレイヤーをInvincibleに変更
@@ -197,7 +200,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				//ブースト解除
 				(isBoost) = false;
-				Debug.Log("ブースト解除");
+				//Debug.Log("ブースト解除");
 				//移送速度がMaxForce以下ならMaxForceになるまで加速（通常移動）
 				if (Force <= MaxForce)
 				{
@@ -220,6 +223,7 @@ public class PlayerController : MonoBehaviour {
         //ジャンプが押されて1回目なら（2回目でないなら）（一番下のコライダー処理が関係してる）
         if (Input.GetButtonDown("Jump") == true && JumpCount < 2)
         {
+            PlayerEquip.WeaponEquip = false;
             // ジャンプ数加算（2段ジャンプなので2回まで加算できる）
             JumpCount++;
             //Debug.Log(JumpCount);
@@ -304,7 +308,7 @@ public class PlayerController : MonoBehaviour {
     //一定時間間隔で常にUpdateする
     void FixedUpdate()
 	{
-		if (WeaponEquip == true)
+		/*if (WeaponEquip == true)
 		{
 			if (Wep01 != null) 
 			{
@@ -327,12 +331,13 @@ public class PlayerController : MonoBehaviour {
 				Wep02.SetActive(true);
 			}
         Debug.Log("背中");
-        }
+        }*/
 
 		//プレイヤー死亡条件になってたらDeadアニメーション
 		if (BattleManager.PlayerDead == true)
 		{
-			animator.SetBool("Dead", true);
+            PlayerEquip.WeaponEquip = false;
+            animator.SetBool("Dead", true);
 		}
 
 		//ステージクリア条件かストップ条件で動けなくする
@@ -349,15 +354,15 @@ public class PlayerController : MonoBehaviour {
 			{					
 				Force += Time.deltaTime * BPlusForce;		// MaxBoostForceまでMaxForce(通常最大速度)に加速
 				Force = Mathf.Min(Force, MaxBoostForce);	// ForceがMaxBoostForceの値を超えない
-				animator.SetBool("Boost",true);
-                WeaponEquip = false;
+                PlayerEquip.WeaponEquip = false;
+                animator.SetBool("Boost",true);
                 //Debug.Log (Force);
             }
 			//ブースト状態ならアニメーターをBoostに切り替える
 			if(isBoost)
 			{
 				animator.SetBool("Boost",true);
-                WeaponEquip = false;
+                PlayerEquip.WeaponEquip = false;
             }
 		}
 		else　　　　　　　　　　　　　　　　　　　　　　　　　　
@@ -381,7 +386,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-                WeaponEquip = true;
+                PlayerEquip.WeaponEquip = true; ;
                 RaycastHit hit;
                 if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
                {
@@ -390,11 +395,11 @@ public class PlayerController : MonoBehaviour {
                 else
                 {
                     GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
-                    WeaponEquip = false;
+                    PlayerEquip.WeaponEquip = false;
                 }
                 //gameObject.GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
 				DashAttack ();
-                WeaponEquip = true;
+                PlayerEquip.WeaponEquip = true;
             }
 			//ショットを撃っている状態（減速処理）
 			if (PlayerShoot.isShoot == true)
@@ -402,7 +407,7 @@ public class PlayerController : MonoBehaviour {
 				//撃たない時より動作速度を落とす（敵を狙いやすくする）
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
-                WeaponEquip = true;
+                PlayerEquip.WeaponEquip = true;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
                 //rigidbody.velocity = (transform.forward * Force * 0.5f);
 			}
@@ -413,7 +418,7 @@ public class PlayerController : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
 			// アニメーターをMoveに切り替え
 			animator.SetBool("Move", true);
-            WeaponEquip = false;
+            PlayerEquip.WeaponEquip = false;
                 // プレイヤに速度を加える（transform.Translateは移動だが、アッドフォースは後ろから押すような操作なので、坂道など段差が
                 // ある場合、自動で加減速処理して移動する
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force);
@@ -428,7 +433,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-                WeaponEquip = false;
+                PlayerEquip.WeaponEquip = false;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
                 {
@@ -437,7 +442,7 @@ public class PlayerController : MonoBehaviour {
                 else
                 {
                     GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
-                    WeaponEquip = true;
+                    PlayerEquip.WeaponEquip = true;
                 }
                 //rigidbody.transform.position += transform.forward * DashRate;
                 DashAttack();
@@ -448,7 +453,7 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 2.0f);
                 animator.SetBool("Move", true);
-                WeaponEquip = true;
+                PlayerEquip.WeaponEquip = true;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
                 //rigidbody.velocity = (transform.forward * Force * 0.5f);
             }
@@ -457,7 +462,7 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), Time.deltaTime * 5.0f);
                 animator.SetBool("Move", true);
-                WeaponEquip = false;
+                PlayerEquip.WeaponEquip = false;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force);
                 //rigidbody.velocity = (transform.forward * Force);
             }
@@ -469,7 +474,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-                WeaponEquip = true;
+                PlayerEquip.WeaponEquip = true;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
                 {
@@ -478,7 +483,7 @@ public class PlayerController : MonoBehaviour {
                 else
                 {
                     GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
-                    WeaponEquip = true;
+                    PlayerEquip.WeaponEquip = true;
                 }
                 //rigidbody.transform.position += transform.forward * DashRate;
 				DashAttack ();
@@ -490,7 +495,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
-                WeaponEquip = true;
+                PlayerEquip.WeaponEquip = true;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
                 //rigidbody.velocity = (transform.forward * Force * 0.5f);
 			}
@@ -499,7 +504,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-                WeaponEquip = false;
+                PlayerEquip.WeaponEquip = false;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force);
                 //rigidbody.velocity = (transform.forward * Force);
                 //Debug.Log("速度" + Force);
@@ -513,7 +518,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -18, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-                WeaponEquip = true;
+                PlayerEquip.WeaponEquip = true;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
                 {
@@ -522,7 +527,7 @@ public class PlayerController : MonoBehaviour {
                 else
                 {
                     GetComponent<Rigidbody>().transform.position += transform.forward * DashRate;
-                    WeaponEquip = true;
+                    PlayerEquip.WeaponEquip = true;
                 }
                 //rigidbody.transform.position += transform.forward * DashRate;
                 DashAttack();
@@ -533,7 +538,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * 2.0f);
 				animator.SetBool("Move", true);
-                WeaponEquip = true;
+                PlayerEquip.WeaponEquip = true;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force * 0.5f);
                 //rigidbody.velocity = (transform.forward * Force * 0.5f);
 			}
@@ -542,7 +547,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * 5.0f);
 				animator.SetBool("Move", true);
-                WeaponEquip = false;
+                PlayerEquip.WeaponEquip = false;
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force);
                 //rigidbody.velocity = (transform.forward * Force);
 			}
@@ -551,9 +556,9 @@ public class PlayerController : MonoBehaviour {
 		{
             // 何も押されていないニュートラル状態ではmove解除
             animator.SetBool("Move", false);
-			WeaponEquip = true;
-			//進行方向キー押していなければダッシュもしない）
-			isDash = false;
+            PlayerEquip.WeaponEquip = true;
+            //進行方向キー押していなければダッシュもしない）
+            isDash = false;
             // アッドフォースされた速度がMaxForce以上ならフォースにマイナス処理して減速（滑り止め）
             // プレイヤの滑り具合がグラビティを変えることによって調節できるが、変更すると重い軽いでジャンプなどにも影響が出てくる
             // Edit→Project Settings→Physicsで全体的な重力は変えられるがインスペクタ上でGravity変更した方がよい
@@ -625,8 +630,9 @@ public class PlayerController : MonoBehaviour {
 			//プレイヤーオブジェクトの子オブジェクトにするとプレイヤーにエフェクトがかかったように見える
 			BpHealObject = Instantiate (BpHealPrefab, EffectPoint.position, Quaternion.identity);
 			BpHealObject.transform.SetParent (EffectPoint);
-			// アニメーターをItemGetに変更（SetTriggerなので自動的に元に戻る）
-			animator.SetTrigger ("ItemGet");
+            // アニメーターをItemGetに変更（SetTriggerなので自動的に元に戻る）
+            PlayerEquip.WeaponEquip = false;
+            animator.SetTrigger ("ItemGet");
 			// BpHealPoint値分ブーストポイント回復
 			boostPoint += BpHealPoint;
 			// 取得時boostPointがMax以下の時の声出し
@@ -696,8 +702,9 @@ public class PlayerController : MonoBehaviour {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
 			}
 			//移動不可でSalute
-			isClear = true;	
-			animator.SetBool("Salute", true);
+			isClear = true;
+            PlayerEquip.WeaponEquip = false;
+            animator.SetBool("Salute", true);
 			//GetStar += 1;
 			GetStar = true;
 		}
@@ -712,8 +719,9 @@ public class PlayerController : MonoBehaviour {
 			if (PlayerNo == 2) {
 				SoundManager.Instance.PlayDelayed (32, 1.1f, gameObject);
 			}
-			isClear = true;	
-			animator.SetBool("Salute", true);
+			isClear = true;
+            PlayerEquip.WeaponEquip = false;
+            animator.SetBool("Salute", true);
 			//GetBigStar += 1;
 			GetBigStar = true;
 		}

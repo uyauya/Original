@@ -20,7 +20,7 @@ public class PlayerLevel : MonoBehaviour
 		new UserParam(1,02,105,3520,3150,3000, string.Empty,0),		//Level02
         new UserParam(3,02,105,3520,8150,3000, string.Empty,0),		//Level02
 
-		new UserParam(0,03,150,3500,3460,44000, string.Empty,0),		//Level03
+		new UserParam(0,03,150,3500,3460,4400, string.Empty,0),	//Level03
 		new UserParam(2,03,181,3530,2970,4400, string.Empty,0),		//Level03
 		new UserParam(1,03,110,3870,3310,4400, string.Empty,0),		//Level03
         new UserParam(3,03,110,3870,9000,4400, string.Empty,0),		//Level03
@@ -28,27 +28,32 @@ public class PlayerLevel : MonoBehaviour
 		new UserParam(0,04,157,3800,3630,6600, string.Empty,0),		//Level04
 		new UserParam(2,04,200,3700,3120,6600, string.Empty,0),		//Level04
 		new UserParam(1,04,115,4260,3470,6600, string.Empty,0),		//Level04
+        new UserParam(3,04,115,4260,3470,6600, string.Empty,0),		//Level04
 
 		new UserParam(0,05,172,4000,4000,10000, string.Empty,0),	//Level05
 		new UserParam(2,05,220,3890,3280,10000, string.Empty,0),	//Level05
 		new UserParam(1,05,121,4690,3650,10000, string.Empty,0),	//Level05
+        new UserParam(3,05,121,4690,3650,10000, string.Empty,0),	//Level05
 
 		new UserParam(0,06,180,4200,4200,15000, string.Empty,0),	//Level06
 		new UserParam(2,06,240,4080,3440,15000, string.Empty,0),	//Level06
 		new UserParam(1,06,127,5150,3830,15000, string.Empty,0),	//Level06
+        new UserParam(3,06,127,5150,3830,15000, string.Empty,0),	//Level06
 
 		new UserParam(0,07,198,4600,4620,22500, string.Empty,0),	//Level07
 		new UserParam(2,07,265,4280,3620,22500, string.Empty,0),	//Level07
 		new UserParam(1,07,134,5670,4020,22500, string.Empty,0),	//Level07
+        new UserParam(3,07,134,5670,4020,22500, string.Empty,0),	//Level07
 
 		new UserParam(0,08,208,4800,4850,33800, string.Empty,0),	//Level08
 		new UserParam(2,08,292,4500,3800,33800, string.Empty,0),	//Level08
 		new UserParam(1,08,140,6230,4220,33800, string.Empty,0),	//Level08
+        new UserParam(3,08,140,6230,4220,33800, string.Empty,0),	//Level08
 
 		new UserParam(0,09,228,5300,5340,52000, string.Empty,0),	//Level09
 		new UserParam(2,09,320,4730,3900,52000, string.Empty,0),	//Level09
 		new UserParam(1,09,148,6860,4430,52000, string.Empty,0),	//Level09
-		
+		new UserParam(3,09,148,6860,4430,52000, string.Empty,0),	//Level09
 
 	};
 

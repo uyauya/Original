@@ -38,7 +38,7 @@ public class CloseCombat : MonoBehaviour
 			{
 				if (Input.GetButtonUp ("Fire5")) 
 				{
-					PlayerController.WeaponEquip = true;
+                    PlayerEquip.WeaponEquip = true;
 					damage = Attack;
 					animator.SetTrigger ("Attack");
 					Combat ();
