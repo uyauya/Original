@@ -224,7 +224,7 @@ public class EnemyBasic : MonoBehaviour {
 			//DamageSet = true;
 			FreezeSet = true;
 			StartCoroutine ("LifeBarCoroutine");
-			if (collider.gameObject.GetComponent<Bullet02>() != null)
+			if (collider.gameObject.GetComponent<Bullet03>() != null)
 			{
 				damage = collider.gameObject.GetComponent<Bullet03>().damage;
 			}

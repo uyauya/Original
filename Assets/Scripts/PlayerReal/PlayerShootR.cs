@@ -115,12 +115,12 @@ public class PlayerShootR : MonoBehaviour {
 				bulletObject.GetComponent<Bullet01R> ().damage = this.damage;
 			} else if (ChargeTime1 < ChargeTime && ChargeTime  <= ChargeTime2) 
 			{
-				GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
+				GameObject bulletObject = GameObject.Instantiate (Bullet01B)as GameObject;
 				bulletObject.transform.position = muzzle.position;
 				bulletObject.GetComponent<Bullet01RB> ().damage = this.damage;
 			} else 
 			{
-				GameObject bulletObject = GameObject.Instantiate (Bullet01)as GameObject;
+				GameObject bulletObject = GameObject.Instantiate (Bullet01C)as GameObject;
 				bulletObject.transform.position = muzzle.position;
 				bulletObject.GetComponent<Bullet01RC> ().damage = this.damage;
 			}

@@ -88,12 +88,12 @@ public class PlayerShoot03 : MonoBehaviour {
 			bulletObject.GetComponent<Bullet03> ().damage = this.damage;
 			}
 		}
-		else if (DataManager.PlayerNo == 0)
+		else if (DataManager.PlayerNo == 3)
 		{
 		// ショットの時間間隔
 		if (Time.time - shotInterval > shotIntervalMax) {
 			shotInterval = Time.time;
-			GameObject bulletObject = GameObject.Instantiate (UBullet03)as GameObject;
+			GameObject bulletObject = GameObject.Instantiate (Bullet03)as GameObject;
 			bulletObject.transform.position = muzzle.position;
 			//bulletObject.transform.position = Bomber.position;
 			bulletObject.GetComponent<Bullet03> ().damage = this.damage;

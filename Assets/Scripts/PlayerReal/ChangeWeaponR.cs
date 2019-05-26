@@ -55,7 +55,7 @@ public class ChangeWeaponR : MonoBehaviour {
 		
 	void Update () 
 	{
-        if (DataManager.PlayerChange == true)
+        if ((DataManager.PlayerChange == true) || (DataManager.PlayerReturn == true))
         {
             DataManager.WePRtype = 0;
             weponImage1.color = MyWhite;
@@ -68,7 +68,7 @@ public class ChangeWeaponR : MonoBehaviour {
             pshoot3.enabled = false;
             pshoot4.enabled = false;
             mshoot.enabled = false;
-            Debug.Log("Weptype" + DataManager.Weptype);
+            //Debug.Log("Weptype" + DataManager.Weptype);
         }
         if (Input.GetButtonUp ("Fire2")) { 
 			changeWeapon (); 	

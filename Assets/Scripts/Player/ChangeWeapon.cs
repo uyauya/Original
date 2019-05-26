@@ -63,7 +63,7 @@ public class ChangeWeapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-       if(DataManager.PlayerChange == true)
+       if((DataManager.PlayerChange == true)||(DataManager.PlayerReturn == true))
             {
             DataManager.Weptype = 0;
             weponImage1.color = myWhite;

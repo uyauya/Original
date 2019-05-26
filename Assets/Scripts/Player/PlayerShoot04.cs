@@ -94,12 +94,12 @@ public class PlayerShoot04 : MonoBehaviour {
 				+ new Vector3(0, -0.3f, 0);
 			}
 		}
-		else if (DataManager.PlayerNo == 0)
+		else if (DataManager.PlayerNo == 3)
 		{
 			// ショットの時間間隔
 			if (Time.time - shotInterval > shotIntervalMax) {
 				shotInterval = Time.time;
-				GameObject bulletObject = GameObject.Instantiate (UBullet04)as GameObject;
+				GameObject bulletObject = GameObject.Instantiate (Bullet04)as GameObject;
 				// 弾生成場所をmuzzleの前方２、下0.3の場所に生成する
 				bulletObject.transform.position = muzzle.position + transform.TransformDirection(Vector3.forward * 2) 
 					+ new Vector3(0, -0.3f, 0);
