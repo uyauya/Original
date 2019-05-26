@@ -34,19 +34,46 @@ public class BreakBlock01 : MonoBehaviour {
 	void OnTriggerEnter(Collider collider) {
 	//private void OnCollisionEnter(Collision collider) {
 
-		if (collider.gameObject.tag == "Shot") {
-			//Instantiate(exprosion, transform.position, transform.rotation);
-			armorPoint -= collider.gameObject.GetComponent<Bullet01> ().damage;
-		} else if (collider.gameObject.tag == "Shot2") {
-			//Instantiate(exprosion, transform.position, transform.rotation);
-			armorPoint -= collider.gameObject.GetComponent<Bullet02> ().damage;
-		} else if (collider.gameObject.tag == "Shot5") {
-			//Instantiate(exprosion, transform.position, transform.rotation);
-			armorPoint -= collider.gameObject.GetComponent<Bullet05> ().damage;
-		//} else if (collider.gameObject.tag == "Player" && isbig == true) {
-		//	bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
-		//	armorPoint -= bigAttack;
-		}
+		if (collider.gameObject.tag == "Shot")
+        {
+            //Instantiate(exprosion, transform.position, transform.rotation);
+            if(collider.gameObject.GetComponent<Bullet01>() != null)
+            {
+                damage = collider.gameObject.GetComponent<Bullet01>().damage;
+            }
+            else
+            {
+                damage = collider.gameObject.GetComponent<Bullet01R>().damage;
+            }
+        }
+        else if (collider.gameObject.tag == "Shot2")
+        {
+            //Instantiate(exprosion, transform.position, transform.rotation);
+            if (collider.gameObject.GetComponent<Bullet02>() != null)
+            {
+                damage = collider.gameObject.GetComponent<Bullet02>().damage;
+            }
+            else
+            {
+                damage = collider.gameObject.GetComponent<Bullet02R>().damage;
+            }
+        }
+        else if (collider.gameObject.tag == "Shot5")
+        {
+            //Instantiate(exprosion, transform.position, transform.rotation);
+            if(collider.gameObject.GetComponent<Bullet02>() != null)
+
+            {
+                damage = collider.gameObject.GetComponent<Bullet05>().damage;
+            }
+			else
+			{
+                damage = collider.gameObject.GetComponent<Bullet05R>().damage;
+            }
+            //} else if (collider.gameObject.tag == "Player" && isbig == true) {
+            //	bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
+            //	armorPoint -= bigAttack;
+        }
 			//体力が0以下になったら消滅する
 			if (armorPoint <= 0){
 				Destroy (gameObject);

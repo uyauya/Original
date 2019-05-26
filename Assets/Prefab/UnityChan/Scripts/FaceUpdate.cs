@@ -63,9 +63,10 @@ namespace UnityChan
 
 		void ChangeFace (string str)
 		{
-			isKeepFace = true;
-			current = 1;
-			anim.CrossFade (str, 0);
+            return;
+            //isKeepFace = true;
+			//current = 1;
+			//anim.CrossFade (str, 0);
 		}
 	}
 }

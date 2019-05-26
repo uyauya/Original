@@ -376,7 +376,7 @@ public class PlayerAp : MonoBehaviour {
         //while文を10回ループ
         int count = 4;
 		iTween.MoveTo(gameObject, iTween.Hash(
-			"position", transform.position - (transform.forward * KnockBackRange),
+			//"position", transform.position - (transform.forward * KnockBackRange),
 			"time", FlashTime, // 点滅時間（秒）
 			"easetype", iTween.EaseType.linear
 		));
@@ -400,7 +400,7 @@ public class PlayerAp : MonoBehaviour {
         //while文を10回ループ
         int count = 4;
         iTween.MoveTo(gameObject, iTween.Hash(
-            "position", transform.position - (transform.forward * KnockBackRange),
+            //"position", transform.position - (transform.forward * KnockBackRange),
             "time", FlashTime, // 点滅時間（秒）
             "easetype", iTween.EaseType.linear
         ));
