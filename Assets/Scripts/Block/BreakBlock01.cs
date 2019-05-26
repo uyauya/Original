@@ -21,13 +21,15 @@ public class BreakBlock01 : MonoBehaviour {
 	public int BlueEncount = 8;
 	public int GreenEncount= 32;
 	public int YellowEncount= 32;
+    PlayerLevel playerLevel;
 
-	void Start () {
+    void Start () {
 		battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 		//ターゲットを取得
 		target = GameObject.Find("PlayerTarget");
 		armorPoint = armorPointMax;
-	}
+        playerLevel = GameObject.FindWithTag("Player").GetComponent<PlayerLevel>();
+    }
 
 	void OnTriggerEnter(Collider collider) {
 	//private void OnCollisionEnter(Collision collider) {
@@ -62,7 +64,8 @@ public class BreakBlock01 : MonoBehaviour {
 				//リザルト用のスコアを加算する
 				battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 				DataManager.Score += EnemyScore;
-			}
+                playerLevel.LevelUp();
+        }
 	}
 	void OnCollisionEnter(Collision collider) {
 		bool isbig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
@@ -87,6 +90,7 @@ public class BreakBlock01 : MonoBehaviour {
 				//リザルト用のスコアを加算する
 				battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
 				DataManager.Score += EnemyScore;
-			}
+                playerLevel.LevelUp();
+        }
 		}
 	}

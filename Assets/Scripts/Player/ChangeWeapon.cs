@@ -8,7 +8,7 @@ using UnityEngine.UI;
 // 選択した武器を使用可にして、他を不可にする仕様
 public class ChangeWeapon : MonoBehaviour {
 	
-	public static int Weptype = 0;	//武器識別用No.
+	//public static int Weptype = 0;	//武器識別用No.
 	private int Wepnum = 5;		//武器の種類数
 	PlayerShoot   pshoot1;
 	PlayerShoot02　pshoot2;
@@ -63,10 +63,24 @@ public class ChangeWeapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		
+       if(DataManager.PlayerChange == true)
+            {
+            DataManager.Weptype = 0;
+            weponImage1.color = myWhite;
+            weponImage2.color = Color.white;
+            weponImage3.color = Color.white;
+            weponImage4.color = Color.white;
+            weponImage5.color = Color.white;
+            pshoot1.enabled = true;
+            pshoot2.enabled = false;
+            pshoot3.enabled = false;
+            pshoot4.enabled = false;
+            mshoot.enabled = false;
+            //Debug.Log("Weptype" + DataManager.Weptype);
+        }
         // Fire2キーで下記changeWeaponを起動。その際SoundManager2の「5」に入れた音を鳴らす。
-		// Fire2キーはEdit→ProjectSetting→Inputでキー設定変更可能。
-		if (Input.GetButtonUp ("Fire2")) { 
+        // Fire2キーはEdit→ProjectSetting→Inputでキー設定変更可能。
+        if (Input.GetButtonUp ("Fire2")) { 
 			changeWeapon (); 	//武器交換
 			SoundManager2.Instance.Play(5,gameObject);}
         if (DataManager.Level >= PlayerLevel.PSoot02Level) {
@@ -92,11 +106,12 @@ public class ChangeWeapon : MonoBehaviour {
         //pshoot4 = battleManager.Player.GetComponent<PlayerShoot04>();
         //mshoot = battleManager.Player.GetComponent<MultiWayShoot>();
         //「値+1」を武器個数(num)で割り、余りをtypeに入れて選択武器とする
-        Weptype = (Weptype + 1) % Wepnum;
-		// 選択された武器には色を付けて他は白に。
-		// 選択された武器は使用可（該当スクリプトをtrueにする)にして他は不可に。
-		if (Weptype == 0)
-		{
+        DataManager.Weptype = (DataManager.Weptype + 1) % Wepnum;
+        // 選択された武器には色を付けて他は白に。
+        // 選択された武器は使用可（該当スクリプトをtrueにする)にして他は不可に。
+        //Debug.Log("Weptype" + DataManager.Weptype);
+        if (DataManager.Weptype == 0)
+        {
 			weponImage1.color = myWhite;
 			weponImage2.color = Color.white;
 			weponImage3.color = Color.white;
@@ -109,7 +124,7 @@ public class ChangeWeapon : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (Weptype == 1) 
+		if (DataManager.Weptype == 1) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = myBlue;
@@ -122,7 +137,7 @@ public class ChangeWeapon : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (Weptype == 2) 
+		if (DataManager.Weptype == 2) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;
@@ -135,7 +150,7 @@ public class ChangeWeapon : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (Weptype == 3) 
+		if (DataManager.Weptype == 3) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;
@@ -148,7 +163,7 @@ public class ChangeWeapon : MonoBehaviour {
 			pshoot4.enabled = true;
 			mshoot.enabled = false;
 		}
-		if (Weptype == 4) 
+		if (DataManager.Weptype == 4) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;

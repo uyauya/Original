@@ -23,6 +23,8 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
 	public static bool FarstLevel;		　//ゲーム開始時のプレイヤーレベル
     public static bool PlayerChange = false;
     public static bool PlayerReturn = false;
+    public static int Weptype = 0;
+    public static int WePRtype = 0;
 
     // Use this for initialization
     void Start () {

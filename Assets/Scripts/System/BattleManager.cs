@@ -33,13 +33,15 @@ public class BattleManager : MonoBehaviour {
 	public int PlayerNo;				 	//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public static bool PlayerDead = false;	//プレイヤキャラが死亡したかどうか
     public GameObject[] Prefab_Player;
-    private int CurrentLevel;
-	public int GetStar = 0;
+    public static int CurrentLevel;
+    public static int CurrentAttackPoint;
+    public static float CurrentBoostPointMax;
+    public static float CurrentArmorPointMax;
+    public int GetStar = 0;
 	public int GetBigStar = 0;
 	public static bool isClear = false;				//ステージクリアしたかどうか
 	public bool isPChange = false;
 	public GameObject GoalPosition;
-	public static bool ResetColor = false;
 
     void Awake(){
             Player = Instantiate (Prefab_Player [DataManager.PlayerNo]);
@@ -80,62 +82,56 @@ public class BattleManager : MonoBehaviour {
         {
             Vector3 PlayerPos = Player.transform.position;
             CurrentLevel = DataManager.Level;
+            CurrentAttackPoint = DataManager.AttackPoint;
+            CurrentBoostPointMax = DataManager.BoostPointMax;
+            CurrentArmorPointMax = DataManager.ArmorPointMax;
             Destroy(Player);
             if (DataManager.PlayerNo == 0)				//新たなプレイヤー発生
 			{
             Player = Instantiate (Prefab_Player [DataManager.PlayerNo = 3]);
-            //Debug.Log("プレイヤ3");
             Player.transform.position = PlayerPos;
             DataManager.Level = CurrentLevel;
+            DataManager.AttackPoint = CurrentAttackPoint * 3;
+            DataManager.BoostPointMax = CurrentBoostPointMax * 3;
+            DataManager.ArmorPointMax = CurrentArmorPointMax * 3;
             DataManager.PlayerChange = false;
             isPChange = true;
-            //Debug.Log("レベル" + DataManager.Level);
             }
         }
 
 		if(DataManager.PlayerReturn == true)
 		{
 			Vector3 PlayerPos = Player.transform.position;
-			CurrentLevel = DataManager.Level;
-			Destroy(Player);
+            CurrentLevel = DataManager.Level;
+            CurrentAttackPoint = DataManager.AttackPoint;
+            CurrentBoostPointMax = DataManager.BoostPointMax;
+            CurrentArmorPointMax = DataManager.ArmorPointMax;
+            Destroy(Player);
 			if (DataManager.PlayerNo == 3)				//新たなプレイヤー発生
 			{
 				Player = Instantiate (Prefab_Player [DataManager.PlayerNo = 0]);
-                //Debug.Log("プレイヤ0");
-                //Debug.Break();
                 Player.transform.position = PlayerPos;
-				DataManager.Level = CurrentLevel;
+                DataManager.Level = CurrentLevel;
+                DataManager.AttackPoint = CurrentAttackPoint / 3;
+                DataManager.BoostPointMax = CurrentBoostPointMax / 3;
+                DataManager.ArmorPointMax = CurrentArmorPointMax / 3;
                 DataManager.PlayerReturn = false;
                 isPChange = false;
-                //Debug.Log("レベル" + DataManager.Level);
             }
 		}
 
         if (Input.GetButtonUp("Fire4"))
         {
-            //if ((isPChange == false)&&(DataManager.PlayerChange == false)&&(DataManager.PlayerReturn == false))
             if (isPChange == false)
             {
-                ChangeWeapon.Weptype = 0;
-				DataManager.PlayerChange = true;
-                //Debug.Log("変わるよ");
-                if(ChangeWeapon.Weptype != 0)
-                {
-                    ChangeWeaponR.WePRtype = 0;
-                    DataManager.PlayerChange = true;
-                }
-
+                DataManager.PlayerChange = true;
+                //Debug.Log("変わるよ")
             }
-        if ((Input.GetButtonUp("Fire4"))&&(isPChange == true))
+        if (Input.GetButtonUp("Fire4"))
+            if(isPChange == true)
             {
-                ChangeWeapon.Weptype = 0;
-				DataManager.PlayerReturn = true;
+                DataManager.PlayerReturn = true;
                 //Debug.Log("戻るよ");
-                if (ChangeWeapon.Weptype != 0)
-                {
-                    ChangeWeaponR.WePRtype = 0;
-                    DataManager.PlayerReturn = true;
-                }
             }
         }
 

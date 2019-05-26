@@ -75,9 +75,10 @@ public class BlockBasic : MonoBehaviour {
 			} else if (Random.Range (0, 2) == 0) {
 				Instantiate (GreenSphere, transform.position, transform.rotation);
 			}
-			//リザルト用のスコアを加算する
-			//BattleManager.score ++;
-		}
+            //リザルト用のスコアを加算する
+            DataManager.Score += EnemyScore;
+            playerLevel.LevelUp();
+        }
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -103,5 +104,7 @@ public class BlockBasic : MonoBehaviour {
 				Instantiate (GreenSphere, transform.position, transform.rotation);
 			}
 		}
-	}
+        DataManager.Score += EnemyScore;
+        playerLevel.LevelUp();
+    }
 }

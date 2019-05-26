@@ -7,7 +7,7 @@ using UnityEngine.UI;
 // 選択した武器を使用可にして、他を不可にする仕様
 public class ChangeWeaponR : MonoBehaviour {
 
-	public static int WePRtype = 0;			//武器識別用No.
+	//public static int WePRtype = 0;			//武器識別用No.
 	public static int WepRnum = 5;			//武器の種類数
 	PlayerShootR   pshoot1;
 	PlayerShoot02R　pshoot2;
@@ -55,7 +55,22 @@ public class ChangeWeaponR : MonoBehaviour {
 		
 	void Update () 
 	{
-		if (Input.GetButtonUp ("Fire2")) { 
+        if (DataManager.PlayerChange == true)
+        {
+            DataManager.WePRtype = 0;
+            weponImage1.color = MyWhite;
+            weponImage2.color = Color.white;
+            weponImage3.color = Color.white;
+            weponImage4.color = Color.white;
+            weponImage5.color = Color.white;
+            pshoot1.enabled = true;
+            pshoot2.enabled = false;
+            pshoot3.enabled = false;
+            pshoot4.enabled = false;
+            mshoot.enabled = false;
+            Debug.Log("Weptype" + DataManager.Weptype);
+        }
+        if (Input.GetButtonUp ("Fire2")) { 
 			changeWeapon (); 	
 			SoundManager2.Instance.Play(5,gameObject);}
 		if (DataManager.Level >= PlayerLevel.PSoot02Level) {
@@ -80,8 +95,8 @@ public class ChangeWeaponR : MonoBehaviour {
 		pshoot3 = battleManager.Player.GetComponent<PlayerShoot03R>();
 		pshoot4 = battleManager.Player.GetComponent<PlayerShoot04R>();
 		mshoot = battleManager.Player.GetComponent<MultiWayShootR>();
-		WePRtype = (WePRtype + 1) % WepRnum;
-		if ((WePRtype == 0)||(BattleManager.ResetColor == true))
+        DataManager.WePRtype = (DataManager.WePRtype + 1) % WepRnum;
+		if (DataManager.WePRtype == 0)
 		{
 			weponImage1.color = MyWhite;
 			weponImage2.color = Color.white;
@@ -95,7 +110,7 @@ public class ChangeWeaponR : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (WePRtype == 1) 
+		if (DataManager.WePRtype == 1) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = MyBlue;
@@ -108,7 +123,7 @@ public class ChangeWeaponR : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (WePRtype == 2) 
+		if (DataManager.WePRtype == 2) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;
@@ -121,7 +136,7 @@ public class ChangeWeaponR : MonoBehaviour {
 			pshoot4.enabled = false;
 			mshoot.enabled = false;
 		}
-		if (WePRtype == 3) 
+		if (DataManager.WePRtype == 3) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;
@@ -134,7 +149,7 @@ public class ChangeWeaponR : MonoBehaviour {
 			pshoot4.enabled = true;
 			mshoot.enabled = false;
 		}
-		if (WePRtype == 4) 
+		if (DataManager.WePRtype == 4) 
 		{
 			weponImage1.color = Color.white;
 			weponImage2.color = Color.white;
