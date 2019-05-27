@@ -6,7 +6,7 @@ using UnityEngine;
 public class WeaponAttack : MonoBehaviour
 {
 	//public GameObject HitFlash;		
-	public float damage;				
+	public float damage = 500;				
 	public float WeaponSpeed = 5;			
 	Enemy enemy;
 	CloseCombat closeCombat;		

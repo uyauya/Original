@@ -214,7 +214,7 @@ public class EnemyBasic : MonoBehaviour {
 			{
 				damage = collider.gameObject.GetComponent<Bullet02R>().damage;
 			}
-			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+			Hit02Object = Instantiate (Hit02Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
@@ -232,7 +232,7 @@ public class EnemyBasic : MonoBehaviour {
 			{
 				damage = collider.gameObject.GetComponent<Bullet03R>().damage;
 			}
-			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+			Hit03Object = Instantiate (Hit03Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
@@ -240,7 +240,7 @@ public class EnemyBasic : MonoBehaviour {
 		} else if (collider.gameObject.tag == "Shot5") {
 			DamageSet = true;
 			StartCoroutine ("LifeBarCoroutine");
-			if (collider.gameObject.GetComponent<Bullet02>() != null)
+			if (collider.gameObject.GetComponent<Bullet05>() != null)
 			{
 				damage = collider.gameObject.GetComponent<Bullet05>().damage;
 			}
@@ -248,7 +248,7 @@ public class EnemyBasic : MonoBehaviour {
 			{
 				damage = collider.gameObject.GetComponent<Bullet05R>().damage;
 			}
-			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+			Hit05Object = Instantiate (Hit05Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
@@ -256,9 +256,9 @@ public class EnemyBasic : MonoBehaviour {
 		} else if (collider.gameObject.tag == "Weapon") {
 			DamageSet = true;
 			StartCoroutine ("LifeBarCoroutine");
-			if (playerWeapon != null)
+			if (collider.gameObject.GetComponent<WeaponAttack>() != null)
 			{
-				damage = playerWeapon.damage;
+				damage = collider.gameObject.GetComponent<WeaponAttack>().damage;
 			}
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
