@@ -1,11 +1,15 @@
 ﻿
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CloseCombat : MonoBehaviour
 {
-	public GameObject WeaponAttack;
+	public GameObject WeaponAttack00;
+	public GameObject WeaponAttack01;
+	public GameObject WeaponAttack02;
+	public GameObject WeaponAttack03;
 	public Transform WeaponRange;
 	private float Attack;
 	public float damage = 500;
@@ -16,7 +20,8 @@ public class CloseCombat : MonoBehaviour
 	private Rigidbody rb;
 	public int PlayerNo;
 	private Pause pause;
-	public bool isBig;							
+	public bool isBig;
+	public float DelayTime = 0.2f;
 
 	// Start is called before the first frame update
 	void Start()
@@ -26,6 +31,7 @@ public class CloseCombat : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		pause = GameObject.Find ("Pause").GetComponent<Pause> ();
 		Transform WeaponRange = GameObject.FindWithTag ("Player").transform.Find("WeaponRange");
+
 	}
 
 	// Update is called once per frame
@@ -41,7 +47,7 @@ public class CloseCombat : MonoBehaviour
                     PlayerEquip.WeaponEquip = true;
 					damage = Attack;
 					animator.SetTrigger ("Attack");
-					Combat ();
+					Invoke("Combat", DelayTime);
 				}
 			}
 		}
@@ -49,19 +55,25 @@ public class CloseCombat : MonoBehaviour
 
 	void Combat() 
 	{
-		if (Time.time - shotInterval > shotIntervalMax) 
+		if(PlayerNo == 0)
 		{
-			shotInterval = Time.time;
-			GameObject weaponAttack = GameObject.Instantiate (WeaponAttack)as GameObject;
+			GameObject weaponAttack = GameObject.Instantiate (WeaponAttack00)as GameObject;
 			weaponAttack.transform.position = WeaponRange.position;
+			SoundManager.Instance.Play(9,gameObject);
 		}
-		if((PlayerNo == 0) || (PlayerNo == 3)){
+		if(PlayerNo == 3){
+			GameObject weaponAttack = GameObject.Instantiate (WeaponAttack03)as GameObject;
+			weaponAttack.transform.position = WeaponRange.position;
 			SoundManager.Instance.Play(9,gameObject);
 		}
 		if (PlayerNo == 1) {
+			GameObject weaponAttack = GameObject.Instantiate (WeaponAttack01)as GameObject;
+			weaponAttack.transform.position = WeaponRange.position;
 			SoundManager.Instance.Play(10,gameObject);
 		}
 		if (PlayerNo == 2) {
+			GameObject weaponAttack = GameObject.Instantiate (WeaponAttack02)as GameObject;
+			weaponAttack.transform.position = WeaponRange.position;
 			SoundManager.Instance.Play(11,gameObject);	
 		}
 	}

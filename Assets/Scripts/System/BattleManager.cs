@@ -252,7 +252,6 @@ public class BattleManager : MonoBehaviour {
                 // 一定時間後シーン移動（ChangeTimeで時間設定）
 				// NextScene処理起動（下記参照）
 				Invoke("NextScene", ChangeTime);	
-				//playerController.GetStar = 0;		// スター取得数をリセット
 				GetStar = 0;		// スター取得数をリセット
 			}
 
@@ -267,7 +266,6 @@ public class BattleManager : MonoBehaviour {
 				Player.transform.LookAt(Camera.main.transform);
 				mesaageClear.SetActive (true);		// ステージクリア表示
 				Invoke ("END", ChangeTime);			// ChangeTime時間後END処理起動（下記参照）
-				//playerController.GetBigStar = 0;	// ビッグスター取得数をリセット	
 				GetBigStar = 0;	// ビッグスター取得数をリセット	
 		}
 		break;

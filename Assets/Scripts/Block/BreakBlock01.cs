@@ -100,30 +100,32 @@ public class BreakBlock01 : MonoBehaviour {
                 playerLevel.LevelUp();
         }
 	}
-	void OnCollisionEnter(Collision collider) {
+	void OnCollisionEnter(Collision collider) 
+	{
 		bool isbig = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().isBig;
 		if (collider.gameObject.tag == "Player" && isbig == true) {
 			bigAttack = GameObject.FindWithTag ("Player").GetComponent<PlayerAp> ().BigAttack;
 			armorPoint -= bigAttack;
 			}	
 			//体力が0以下になったら消滅する
-			if (armorPoint <= 0){
-				Destroy (gameObject);
-				Instantiate(exprosion, transform.position, transform.rotation);
-				// ブロック消滅時、一定確率（0,16で16分の1）でアイテム出現
-				if (Random.Range (0, RedEncount) == 0) {
-					Instantiate (RedSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, BlueEncount) == 0) {
-					Instantiate (BlueSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, GreenEncount) == 0) {
-					Instantiate (GreenSphere, transform.position, transform.rotation);
-				} else if (Random.Range (0, YellowEncount) == 0) {
-					Instantiate (YellowSphere, transform.position, transform.rotation);
-				}
-				//リザルト用のスコアを加算する
-				battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
-				DataManager.Score += EnemyScore;
-                playerLevel.LevelUp();
-        }
-		}
+			if (armorPoint <= 0)
+				{
+					Destroy (gameObject);
+					Instantiate(exprosion, transform.position, transform.rotation);
+					// ブロック消滅時、一定確率（0,16で16分の1）でアイテム出現
+					if (Random.Range (0, RedEncount) == 0) {
+						Instantiate (RedSphere, transform.position, transform.rotation);
+					} else if (Random.Range (0, BlueEncount) == 0) {
+						Instantiate (BlueSphere, transform.position, transform.rotation);
+					} else if (Random.Range (0, GreenEncount) == 0) {
+						Instantiate (GreenSphere, transform.position, transform.rotation);
+					} else if (Random.Range (0, YellowEncount) == 0) {
+						Instantiate (YellowSphere, transform.position, transform.rotation);
+					}
+					//リザルト用のスコアを加算する
+					battleManager = GameObject.Find ("BattleManager").GetComponent<BattleManager> ();
+					DataManager.Score += EnemyScore;
+                	playerLevel.LevelUp();
+        		}
 	}
+}

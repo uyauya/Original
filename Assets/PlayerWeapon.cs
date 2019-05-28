@@ -9,7 +9,7 @@ public class PlayerWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {		
-		damage = DataManager.AttackPoint;
+		damage = DataManager.AttackPoint + damage;
     }
 
     // Update is called once per frame

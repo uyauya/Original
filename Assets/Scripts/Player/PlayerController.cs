@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour {
     public float KnockBack = 2.0f;
     int layerMask = ~0;
     public static bool Goal = false;
-
+	public float StopTime = 0.1f;
 
     /*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
@@ -110,16 +110,17 @@ public class PlayerController : MonoBehaviour {
 		// プレイヤーのレイヤーをPlayerに設定
 		gameObject.layer = LayerMask.NameToLayer("Player");
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
+
 	}
 
 	//ボタン等が押された時など、その都度Updateする
 	void Update()
 	{
 		//ステージクリア条件かストップ条件で動けなくする
-		/*if ((isClear == true) || (isStop == true))
+		if (isStop == true)
 		{
-			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-		}*/
+			Invoke("Stop", StopTime);
+		}
 		//ProjectSettigでJumpに割り当てたキーが押されたら
 		if (Input.GetButtonDown("Jump"))
 		{
@@ -128,7 +129,6 @@ public class PlayerController : MonoBehaviour {
             IsDownJumpButton = true;
 		}
 		//現在のブーストゲージと最大ブーストゲージをUI Textに表示する
-		//boostText.text = string.Format("{0:0000} / {1:0000}", displayBoostPoint, DataManager.BoostPointMax);
 		boostText.text = string.Format("{0:0000} / {1:0000}", boostPoint, DataManager.BoostPointMax);
 
         //プレイヤー死亡条件になってたらDeadアニメーション
@@ -746,7 +746,11 @@ public class PlayerController : MonoBehaviour {
 		dattack.transform.position = muzzle.position;
 	}
 
-	private void OnCollisionStay(Collision collisionInfo) {
+	void Stop()
+	{
+		GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+		//Vector3 v = GetComponent<Rigidbody>().velocity;
+		//GetComponent<Rigidbody>().velocity = new Vector3(0, v.y, 0);
 	}
-
+		
 }

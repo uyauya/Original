@@ -7,7 +7,7 @@ public class WeaponAttack : MonoBehaviour
 {
 	//public GameObject HitFlash;		
 	public float damage = 500;				
-	public float WeaponSpeed = 5;			
+	public float WeaponSpeed = 0;			
 	Enemy enemy;
 	CloseCombat closeCombat;		
 	private Rigidbody rb;
@@ -23,7 +23,7 @@ public class WeaponAttack : MonoBehaviour
 	}	
 	void Update () {		
 		transform.position += transform.forward * Time.deltaTime * WeaponSpeed;
-		damage = damage;
+		damage = DataManager.AttackPoint + damage;
 	}	
 
 	private void OnCollisionEnter(Collision collider) {
