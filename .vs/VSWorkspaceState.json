@@ -2,13 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\Block",
-    "\\Assets\\Scripts\\Boss",
-    "\\Assets\\Scripts\\Enemy",
-    "\\Assets\\Scripts\\Player",
-    "\\Assets\\Scripts\\PlayerReal",
-    "\\Assets\\Scripts\\System"
+    "\\Assets\\Prefab",
+    "\\Assets\\Prefab\\Enemy",
+    "\\Assets\\Prefab\\Enemy\\PQAssets",
+    "\\Assets\\Prefab\\Enemy\\PQAssets\\Query-Chan-SD",
+    "\\Assets\\Prefab\\Enemy\\PQAssets\\Query-Chan-SD\\Props",
+    "\\Assets\\Prefab\\Enemy\\PQAssets\\Query-Chan-SD\\Props\\03_Hokkaido",
+    "\\Assets\\Prefab\\Enemy\\PQAssets\\Query-Chan-SD\\Props\\03_Hokkaido\\SnowBall",
+    "\\Assets\\Prefab\\Enemy\\PQAssets\\Query-Chan-SD\\Props\\03_Hokkaido\\SnowBall\\Materials"
   ],
   "PreviewInSolutionExplorer": false
 }

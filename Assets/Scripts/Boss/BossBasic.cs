@@ -62,6 +62,7 @@ public class BossBasic : MonoBehaviour {
     public Color DamageColor;                       // RGBA(248,007,007,120)ダメージ点滅色
     public Color FreezeColor;                       // RGBA(009,232,242,255)フリーズ点滅色
 	public static bool BossDead = false;			//ボスが死んだかどうかの判定
+
 	//public float StarHeight = 1.0f;
 
 	/*[CustomEditor(typeof(Zombie))]
@@ -106,7 +107,8 @@ public class BossBasic : MonoBehaviour {
 		rb = this.GetComponent<Rigidbody>();
 		// 重力を個別に設定する場合場合はデフォルト設定時のGravity設定を無効にする
 		rb.useGravity = false;
-	}
+        
+    }
 
 
 	void Update () {

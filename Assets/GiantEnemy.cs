@@ -84,8 +84,14 @@ public class GiantEnemy : MonoBehaviour
 			{
 				transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 					(bossBasic.target.transform.position - transform.position), Time.deltaTime * TargetSpeed);
-				transform.position += transform.forward * Time.deltaTime * MoveSpeed;	
-				bossBasic.animator.SetTrigger ("attack01");
+				transform.position += transform.forward * Time.deltaTime * MoveSpeed;
+                    if (bossBasic.armorPoint >= 1000) {
+                        bossBasic.animator.SetTrigger("attack01");
+                    }  else
+                    {
+                        bossBasic.animator.SetFloat("Speed", 1.3f);
+                        bossBasic.animator.SetTrigger("attack01");
+                    }
 			}
 			break;
 		case 2:
