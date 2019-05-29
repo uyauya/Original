@@ -135,7 +135,15 @@ public class BossBasic : MonoBehaviour {
 		// Shotタグが付いているオブジェクトに当たったら
 		if (collider.gameObject.tag == "Shot") {
 			// Bullet01スクリプトのdamageを受け取る
-			damage = collider.gameObject.GetComponent<Bullet01> ().damage;
+			//damage = collider.gameObject.GetComponent<Bullet01> ().damage;
+			if (collider.gameObject.GetComponent<Bullet01>() != null)
+			{
+				damage = collider.gameObject.GetComponent<Bullet01>().damage;
+			}
+			else
+			{
+				damage = collider.gameObject.GetComponent<Bullet01R>().damage;
+			}
 			// 当たり判定用のHit01ObjectをHit01Prefabにし生成
 			Hit01Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			// ダメージコルーチン（下記参照）
@@ -147,26 +155,61 @@ public class BossBasic : MonoBehaviour {
 			armorPoint -= damage;
 			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot2") {
-			damage = collider.gameObject.GetComponent<Bullet02> ().damage;
+			//damage = collider.gameObject.GetComponent<Bullet02> ().damage;
+			if (collider.gameObject.GetComponent<Bullet02>() != null)
+			{
+				damage = collider.gameObject.GetComponent<Bullet02>().damage;
+			}
+			else
+			{
+				damage = collider.gameObject.GetComponent<Bullet02R>().damage;
+			}
 			Hit02Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
 			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot3") {
-			damage = collider.gameObject.GetComponent<Bullet03> ().damage;
+			//damage = collider.gameObject.GetComponent<Bullet03> ().damage;
+			if (collider.gameObject.GetComponent<Bullet03>() != null)
+			{
+				damage = collider.gameObject.GetComponent<Bullet03>().damage;
+			}
+			else
+			{
+				damage = collider.gameObject.GetComponent<Bullet03R>().damage;
+			}
 			Hit03Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
 			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Shot5") {
-			damage = collider.gameObject.GetComponent<Bullet05> ().damage;
+			//damage = collider.gameObject.GetComponent<Bullet05> ().damage;
+			if (collider.gameObject.GetComponent<Bullet05>() != null)
+			{
+				damage = collider.gameObject.GetComponent<Bullet05>().damage;
+			}
+			else
+			{
+				damage = collider.gameObject.GetComponent<Bullet05R>().damage;
+			}
 			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
 			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
+		} else if (collider.gameObject.tag == "Weapon") {
+			DamageSet = true;
+			StartCoroutine ("LifeBarCoroutine");
+			if (collider.gameObject.GetComponent<WeaponAttack>() != null)
+			{
+				damage = collider.gameObject.GetComponent<WeaponAttack>().damage;
+			}
+			Hit05Object = Instantiate (Hit01Prefab, EffectPoint.position, Quaternion.identity);
+			StartCoroutine ("DamageCoroutine");
+			animator.SetTrigger ("damaged");
+			armorPoint -= damage;
 		}
 
 		//体力が0以下になったら消滅する
