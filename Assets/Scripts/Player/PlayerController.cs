@@ -390,7 +390,9 @@ public class PlayerController : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 5.0f);
 			// アニメーターをMoveに切り替え
 			animator.SetBool("Move", true);
-            PlayerEquip.WeaponEquip = false;
+                //animator.speed = 1.0f;                //速度変更
+                //animator.SetFloat("Speed", 10.0f);    //遷移条件速度変更
+                PlayerEquip.WeaponEquip = false;
                 // プレイヤに速度を加える（transform.Translateは移動だが、アッドフォースは後ろから押すような操作なので、坂道など段差が
                 // ある場合、自動で加減速処理して移動する
                 GetComponent<Rigidbody>().AddForce(transform.forward * Force);
