@@ -25,7 +25,7 @@ public class PlayerAp : MonoBehaviour {
     public Image gaugeImage;
 	private ModelColorChange modelColorChange;		
 	public float FlashTime =10.0f;			// 点滅時間
-	public static Animator Panimator;				// Animator（PlayerMotion)取得
+	public static Animator animator;				// Animator（PlayerMotion)取得
 	public float KnockBackRange = 2.0f;		// ノックバック距離（ダメージ受けた際に使用）
 	public int PlayerNo;					// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public Transform muzzle;				// ショット発射口位置をTransformで位置取り
@@ -68,7 +68,7 @@ public class PlayerAp : MonoBehaviour {
 		// 画面上のarmorPointとPlayerApのarmorPointを連動させる
 		displayArmorPoint = armorPoint;
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
-		Panimator = GetComponent<Animator> ();
+		animator = GetComponent<Animator> ();
 		gaugeImage = GameObject.Find ("ApGauge").GetComponent<Image> ();
 		armorText = GameObject.Find ("TextAp").GetComponent<Text> ();
 		boddy_summer = GameObject.Find("_body_summer");
@@ -151,7 +151,7 @@ public class PlayerAp : MonoBehaviour {
 			//SetParentにしてプレイヤが動いてもDamageObjectがプレイヤーに追随するようにする
 			DamageObject.transform.SetParent (EffectPoint);
 			//アニメーターをDamageに切り替え
-			Panimator.SetTrigger ("Damage");
+			animator.SetTrigger ("Damage");
 			if ((PlayerNo == 0)|| (PlayerNo == 3)) {
 				SoundManager.Instance.Play (21, gameObject);
 			}
@@ -182,7 +182,7 @@ public class PlayerAp : MonoBehaviour {
 					armorPoint -= WallDamage;
 					DamageObject = Instantiate (DamagePrefab, EffectPoint.position, Quaternion.identity);
 					DamageObject.transform.SetParent (EffectPoint);
-					Panimator.SetTrigger ("Damage");
+					animator.SetTrigger ("Damage");
                     if ((PlayerNo == 0) || (PlayerNo == 3))
                     {
                         SoundManager.Instance.Play (24, gameObject);	
@@ -241,14 +241,14 @@ public class PlayerAp : MonoBehaviour {
 			// 体力上限以上には回復しない。
 			armorPoint = Mathf.Clamp (armorPoint, 0, DataManager.ArmorPointMax);
 			//Debug.Log (armorPoint);
-			Panimator.SetTrigger ("ItemGet");
+			animator.SetTrigger ("ItemGet");
 		}
 
 		//Itemタグをつけたもの（YellowSphere）を取ったら無敵＆巨大化
 		if (collider.gameObject.tag == "Item4") {	
 			HpHealObject = Instantiate (HpHealPrefab, EffectPoint.position, Quaternion.identity);
 			HpHealObject.transform.SetParent (EffectPoint);
-			Panimator.SetTrigger ("ItemGet");
+			animator.SetTrigger ("ItemGet");
 			if ((PlayerNo == 0)|| (PlayerNo == 3)) {
 				SoundManager2.Instance.Play(6,gameObject);
 			}

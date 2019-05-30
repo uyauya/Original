@@ -11,8 +11,7 @@ public class GiantEnemy : MonoBehaviour
 	public float BeamIntervalMax = 20;
 	public GameObject exprosion;
 	int AttackPhase = 0;
-	float AttackPhaseTime = 0.0f;
-	public Transform GiantMuzzle;              
+	float AttackPhaseTime = 0.0f;              
 	public int TargetPosition;				   
 	public float TargetSpeed;				   
 	public float MoveSpeed;					   
@@ -21,6 +20,7 @@ public class GiantEnemy : MonoBehaviour
 	public static GameObject BossLifeBar;
 	private float timeCount;
 	public float RandomCount = 0;
+
 
 	void Start () {
 		bossBasic = gameObject.GetComponent<BossBasic> ();
@@ -85,13 +85,20 @@ public class GiantEnemy : MonoBehaviour
 				transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 					(bossBasic.target.transform.position - transform.position), Time.deltaTime * TargetSpeed);
 				transform.position += transform.forward * Time.deltaTime * MoveSpeed;
-                    if (bossBasic.armorPoint >= 1000) {
-                        bossBasic.animator.SetTrigger("attack01");
-                    }  else
-                    {
-                        bossBasic.animator.SetFloat("Speed", 1.3f);
-                        bossBasic.animator.SetTrigger("attack01");
-                    }
+				if (Vector3.Distance(bossBasic.battleManager.Player.transform.position, transform.position) <= bossBasic.Search) 
+				{
+					transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
+						(bossBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * bossBasic.EnemySpeed);
+					if (bossBasic.armorPoint >= bossBasic.LimitBap) 
+					{
+						bossBasic.animator.SetTrigger("attack01");
+					}  else
+					{
+						bossBasic.EnemyAttack = bossBasic.EnemyAttack + bossBasic.AddBAttack;
+						bossBasic.animator.SetFloat("Speed", 1.3f);
+						bossBasic.animator.SetTrigger("attack01");
+					}
+				}
 			}
 			break;
 		case 2:
@@ -106,10 +113,23 @@ public class GiantEnemy : MonoBehaviour
 			{
 				transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 					(bossBasic.target.transform.position - transform.position), Time.deltaTime * TargetSpeed);
-				transform.position += transform.forward * Time.deltaTime * MoveSpeed;	
-				bossBasic.animator.SetTrigger ("attack02");
+				transform.position += transform.forward * Time.deltaTime * MoveSpeed;
+				if (Vector3.Distance(bossBasic.battleManager.Player.transform.position, transform.position) <= bossBasic.Search) 
+				{
+					transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
+						(bossBasic.battleManager.Player.transform.position - transform.position), Time.deltaTime * bossBasic.EnemySpeed);
+					if (bossBasic.armorPoint >= bossBasic.LimitBap) 
+					{
+						bossBasic.animator.SetTrigger("attack02");
+					}  else
+						{
+						bossBasic.EnemyAttack = bossBasic.EnemyAttack + bossBasic.AddBAttack;
+						bossBasic.animator.SetFloat("Speed", 1.3f);
+						bossBasic.animator.SetTrigger("attack02");
+					}
+				}
 			}
-				break;
+			break;
 		case 3:
 			GetComponent<Rigidbody>().velocity = Vector3.zero;
 			if (AttackPhaseTime >= 6)
@@ -117,10 +137,16 @@ public class GiantEnemy : MonoBehaviour
 				AttackPhase = 2;
 				AttackPhaseTime = 0;
 			}
-			bossBasic.shotInterval01 += Time.deltaTime;
-			if (bossBasic.shotInterval01 > bossBasic.shotInterval01Max) 
+			if (EnemyTargetRange.isAttackDesision == true)
 			{
-				bossBasic.animator.SetTrigger ("attack03");
+				transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
+					(bossBasic.target.transform.position - transform.position), Time.deltaTime * TargetSpeed);
+				transform.position += transform.forward * Time.deltaTime * MoveSpeed * 5;
+				bossBasic.animator.SetTrigger("attack03");
+			}
+			if (EnemyTargetRange.isAttackDesision == false)
+			{
+				return;
 			}
 				break;
 		case 4:
@@ -133,7 +159,15 @@ public class GiantEnemy : MonoBehaviour
 			BeamInterval += Time.deltaTime;
 			if (BeamInterval > BeamIntervalMax) 
 			{
-				bossBasic.animator.SetTrigger ("shout");
+				if (EnemyTargetRange.isAttackDesision == true)
+				{
+					BossFire();
+					bossBasic.animator.SetTrigger ("shout");
+				}
+				if (EnemyTargetRange.isAttackDesision == false)
+				{
+					return;
+				}
 			}
 				break;
 		case 5:
@@ -169,5 +203,9 @@ public class GiantEnemy : MonoBehaviour
 		{
 			bossBasic.animator.SetTrigger ("shout");
 		}
+	}
+
+	private void BossFire()
+	{
 	}
 }

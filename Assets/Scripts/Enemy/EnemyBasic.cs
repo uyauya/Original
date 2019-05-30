@@ -73,9 +73,9 @@ public class EnemyBasic : MonoBehaviour {
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
 	public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
-	public Color DamageColor = new Color(0.96f, 0.06f, 0.24f, 0.98f);  
-    public Color FreezeColor = new Color(0.96f, 0.06f, 0.24f, 0.98f);  
-    public Color DeadColor = new Color(0.96f, 0.06f, 0.24f, 0.98f);  
+	public Color DamageColor = new Color(0.83f, 0.051f, 0.051f, 0.00f);  
+    public Color FreezeColor = new Color(0.09f, 0.96f, 0.96f, 0.00f);  
+    public Color DeadColor = new Color(0.95f, 0.165f, 0.24f, 0.894f);  
 
 
 

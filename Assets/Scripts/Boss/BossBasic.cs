@@ -14,7 +14,10 @@ public class BossBasic : MonoBehaviour {
 	public float shotInterval01Max = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
 	public float shotInterval02 = 0;				// 攻撃間隔計測開始（ショット2種類目）
 	public float shotInterval02Max = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
+	public float shotInterval03 = 0;				// 攻撃間隔計測開始（ショット2種類目）
+	public float shotInterval03Max = 1.0F;			// 攻撃間隔（～秒ごとに攻撃）
 	public float armorPointMax = 10000;				// 最大HP
+	public float LimitBap = 1000;	
 	public float armorPoint;					    // HP
 	public int TargetRange;							// プレイヤをターゲット認識する距離
 	public float EnemySpeed;						// 移動スピード
@@ -27,6 +30,7 @@ public class BossBasic : MonoBehaviour {
 		this.armorPoint -= damagedPoint;			// Playerから受けたダメージの値
 	}
 	public int EnemyAttack = 100;					// プレイヤに与えるダメージ
+	public int AddBAttack = 200;
 	public float InvincibleTime;					// 無敵時間
 	protected ModelColorChange modelColorChange;	// 点滅処理
 	public float KnockBackRange;					// 攻撃を受けた際のノックバックの距離
@@ -59,9 +63,10 @@ public class BossBasic : MonoBehaviour {
 	public float Mscale = 1.0f;						// 縮小（第一段階）				
 	public float Sscale = 1.0f;						// 縮小（第二段階）
 	public GameObject BossLifeBar;                  
-    public Color DamageColor;                       // RGBA(248,007,007,120)ダメージ点滅色
-    public Color FreezeColor;                       // RGBA(009,232,242,255)フリーズ点滅色
+	public Color DamageColor = new Color(0.83f, 0.051f, 0.051f, 0.00f);  
+	public Color FreezeColor = new Color(0.09f, 0.96f, 0.96f, 0.00f);  
 	public static bool BossDead = false;			//ボスが死んだかどうかの判定
+
 
 	//public float StarHeight = 1.0f;
 
