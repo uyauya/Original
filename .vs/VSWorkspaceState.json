@@ -5,11 +5,11 @@
     "\\Assets\\Prefab",
     "\\Assets\\Prefab\\Enemy",
     "\\Assets\\Prefab\\Enemy\\PQAssets",
-    "\\Assets\\Prefab\\Enemy\\PQAssets\\Query-Chan-SD",
-    "\\Assets\\Prefab\\Enemy\\PQAssets\\Query-Chan-SD\\Props",
-    "\\Assets\\Prefab\\Enemy\\PQAssets\\Query-Chan-SD\\Props\\03_Hokkaido",
-    "\\Assets\\Prefab\\Enemy\\PQAssets\\Query-Chan-SD\\Props\\03_Hokkaido\\SnowBall",
-    "\\Assets\\Prefab\\Enemy\\PQAssets\\Query-Chan-SD\\Props\\03_Hokkaido\\SnowBall\\Materials"
+    "\\Assets\\Prefab\\other",
+    "\\Assets\\Prefab\\UnityChan",
+    "\\Assets\\Prefab\\UnityChan\\STAGE04",
+    "\\Assets\\Scripts",
+    "\\Assets\\Scripts\\System"
   ],
   "PreviewInSolutionExplorer": false
 }
