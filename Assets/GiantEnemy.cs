@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class GiantEnemy : MonoBehaviour
 {
+	public Transform BeamMuzzle;	
 	public Transform GiantHeadMuzzle;		
 	public Transform GiantHandL;
 	public Transform GiantHandR;
-	public float BeamInterval = 0;
-	public float BeamIntervalMax = 20;
+	public GameObject GiantFire;
+	public GameObject GiantBeam;		
+	public float GiantShotInterval = 0;
+	public float GiantShotIntervalMax = 20;
 	public GameObject exprosion;
 	int AttackPhase = 0;
 	float AttackPhaseTime = 0.0f;              
@@ -20,6 +23,7 @@ public class GiantEnemy : MonoBehaviour
 	public static GameObject BossLifeBar;
 	private float timeCount;
 	public float RandomCount = 0;
+	public float Magnification = 1.3f;
 
 
 	void Start () {
@@ -95,7 +99,7 @@ public class GiantEnemy : MonoBehaviour
 					}  else
 					{
 						bossBasic.EnemyAttack = bossBasic.EnemyAttack + bossBasic.AddBAttack;
-						bossBasic.animator.SetFloat("Speed", 1.3f);
+						bossBasic.animator.SetFloat("Speed", Magnification);
 						bossBasic.animator.SetTrigger("attack01");
 					}
 				}
@@ -124,7 +128,7 @@ public class GiantEnemy : MonoBehaviour
 					}  else
 						{
 						bossBasic.EnemyAttack = bossBasic.EnemyAttack + bossBasic.AddBAttack;
-						bossBasic.animator.SetFloat("Speed", 1.3f);
+						bossBasic.animator.SetFloat("Speed", Magnification);
 						bossBasic.animator.SetTrigger("attack02");
 					}
 				}
@@ -142,7 +146,15 @@ public class GiantEnemy : MonoBehaviour
 				transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation 
 					(bossBasic.target.transform.position - transform.position), Time.deltaTime * TargetSpeed);
 				transform.position += transform.forward * Time.deltaTime * MoveSpeed * 5;
-				bossBasic.animator.SetTrigger("attack03");
+				if (bossBasic.armorPoint >= bossBasic.LimitBap) 
+				{
+					bossBasic.animator.SetTrigger("attack03");
+				}  else
+				{
+					bossBasic.EnemyAttack = bossBasic.EnemyAttack + bossBasic.AddBAttack;
+					bossBasic.animator.SetFloat("Speed", Magnification);
+					bossBasic.animator.SetTrigger("attack03");
+				}
 			}
 			if (EnemyTargetRange.isAttackDesision == false)
 			{
@@ -156,15 +168,23 @@ public class GiantEnemy : MonoBehaviour
 				AttackPhase = 2;
 				AttackPhaseTime = 0;
 			}
-			BeamInterval += Time.deltaTime;
-			if (BeamInterval > BeamIntervalMax) 
+			GiantShotInterval += Time.deltaTime;
+			if (GiantShotInterval > GiantShotIntervalMax) 
 			{
 				if (EnemyTargetRange.isAttackDesision == true)
 				{
-					BossFire();
 					bossBasic.animator.SetTrigger ("shout");
+					giantFire();
 				}
-				if (EnemyTargetRange.isAttackDesision == false)
+				if ((BeamRange.isBeamDesision == true) && (EnemyTargetRange.isAttackDesision == false))
+				{
+					if (bossBasic.armorPoint >= bossBasic.LimitBap) 
+					{
+						bossBasic.animator.SetTrigger ("shout");
+						//giantBeam();
+					}
+				}
+				if ((BeamRange.isBeamDesision == false) && (EnemyTargetRange.isAttackDesision == false))
 				{
 					return;
 				}
@@ -205,7 +225,17 @@ public class GiantEnemy : MonoBehaviour
 		}
 	}
 
-	private void BossFire()
+	private void giantFire()
 	{
+		GameObject giantFire = GameObject.Instantiate(GiantFire) as GameObject;
+		giantFire.transform.position = GiantHeadMuzzle.position;
+		giantFire.transform.rotation = GiantHeadMuzzle.transform.rotation;
 	}
+
+	/*private void GiantBeam()
+	{
+		GameObject giantBeam = GameObject.Instantiate(GiantBeam) as GameObject;
+		giantBeam.transform.position = BeamMuzzle.position;
+		giantBeam.transform.rotation = BeamMuzzle.transform.rotation;
+	}*/
 }
