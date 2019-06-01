@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour {
     public static bool Goal = false;
 	public float StopTime = 0.1f;
 
+
     /*[CustomEditor(typeof(PlayerController))]
 	public class PlayerControllerEditor : Editor	// using UnityEditor; を入れておく
 	{
@@ -110,7 +111,6 @@ public class PlayerController : MonoBehaviour {
 		// プレイヤーのレイヤーをPlayerに設定
 		gameObject.layer = LayerMask.NameToLayer("Player");
 		modelColorChange = gameObject.GetComponent<ModelColorChange>();
-
 	}
 
 	//ボタン等が押された時など、その都度Updateする
@@ -150,7 +150,6 @@ public class PlayerController : MonoBehaviour {
 				{
                     PlayerEquip.WeaponEquip = false;
                     isDash = true;							//ダッシュ切り替え
-					//Debug.Log("ダッシュ");
 					boostPoint -= DashBpDown;  
 				}
 			}
@@ -173,14 +172,12 @@ public class PlayerController : MonoBehaviour {
 						MaxForce += Time.deltaTime * PlusForce;     // MaxBoostForceまでMaxForce(通常最大速度)に加速
 						Force = Mathf.Min(Force, MaxBoostForce);    // ForceがMaxBoostForceの値を超えない
 						//Debug.Log ("速度" + Force);
-						
 						DataManager.AttackPoint *= 2;				//ブースト時プレイヤー攻撃値2倍に
 					}
 					//ブースト状態ならアニメーターをBoostに切り替える
 					if(isBoost)
 					{
 					animator.SetBool("Boost", true);
-						//Debug.Log("飛ぶ");
 					}
 			}
 		}
@@ -190,7 +187,8 @@ public class PlayerController : MonoBehaviour {
             //Debug.Log("BPダウン" + BpDown);
         }
 		//ブースト中にFire3でブースト解除
-        if (Input.GetButtonDown("Fire3")) 				
+        if (Input.GetButtonDown("Fire3")) 	
+			//animator.SetBool("Boost", false);
 		{
 			//ブースト中なら
 			if(isBoost)
@@ -209,6 +207,7 @@ public class PlayerController : MonoBehaviour {
 					//Debug.Log (Force);
 				}
 				//通常状態に戻したので、再びブースト起動条件に戻す
+				animator.SetBool("Boost", false);
 				animator.SetBool("Boost", Input.GetButtonDown("Boost") && boostPoint > 0);
 			}
 		}
@@ -258,7 +257,8 @@ public class PlayerController : MonoBehaviour {
             IsDownJumpButton = false;
         }
 		// ブースト状態でジャンプし、なおかつブーストポイントが10より多いなら）
-        else if (Input.GetButton("Jump") && (Input.GetButton("Boost") && boostPoint > 10))
+        //else if (Input.GetButton("Jump") && (Input.GetButton("Boost") && boostPoint > 10))
+		else if ((Input.GetButton("Jump") && (isBoost == true) && boostPoint > 10))
         {
             Vector3 v = GetComponent<Rigidbody>().velocity;
             // y方向にBoostJumpForce値加算（ブーストジャンプ）

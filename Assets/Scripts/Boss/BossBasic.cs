@@ -66,6 +66,7 @@ public class BossBasic : MonoBehaviour {
 	public Color DamageColor = new Color(0.83f, 0.051f, 0.051f, 0.00f);  
 	public Color FreezeColor = new Color(0.09f, 0.96f, 0.96f, 0.00f);  
 	public static bool BossDead = false;			//ボスが死んだかどうかの判定
+	public float BAttackImpact = 5;
 
 
 	//public float StarHeight = 1.0f;

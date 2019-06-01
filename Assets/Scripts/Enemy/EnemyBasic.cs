@@ -75,7 +75,8 @@ public class EnemyBasic : MonoBehaviour {
 	public GameObject LifeBar;						// 敵HP表示用（頭上に設置）
 	public Color DamageColor = new Color(0.83f, 0.051f, 0.051f, 0.00f);  
     public Color FreezeColor = new Color(0.09f, 0.96f, 0.96f, 0.00f);  
-    public Color DeadColor = new Color(0.95f, 0.165f, 0.24f, 0.894f);  
+    public Color DeadColor = new Color(0.95f, 0.165f, 0.24f, 0.894f);
+	public float EAttackImpact = 5;
 
 
 
@@ -142,6 +143,7 @@ public class EnemyBasic : MonoBehaviour {
 		rb = this.GetComponent<Rigidbody>();
 		// 重力を個別に設定する場合場合はデフォルト設定時のGravity設定を無効にする
 		rb.useGravity = false;
+		//multiwayshoot = GameObject.FindWithTag("Player").GetComponent<MultiWayShoot> ();
 	}
 
 

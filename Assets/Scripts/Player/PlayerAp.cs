@@ -24,8 +24,8 @@ public class PlayerAp : MonoBehaviour {
 	public Color PoisonColor 	= new Color (1,0.1f,0.91f,0.47f);  //毒ダメージ色
     public Image gaugeImage;
 	private ModelColorChange modelColorChange;		
-	public float FlashTime =10.0f;			// 点滅時間
-	public static Animator animator;				// Animator（PlayerMotion)取得
+	public float KockbackTime =0.5f;		// 衝突時の後退時間
+	public static Animator animator;		// Animator（PlayerMotion)取得
 	public float KnockBackRange = 2.0f;		// ノックバック距離（ダメージ受けた際に使用）
 	public int PlayerNo;					// プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public Transform muzzle;				// ショット発射口位置をTransformで位置取り
@@ -37,7 +37,10 @@ public class PlayerAp : MonoBehaviour {
 	public GameObject boddy_summer;
 	public int attackPoint;					// 攻撃値
 	public float force;						// 移動速度
+	public float reForce;						// 移動速度
 	public float maxForce;					// 移動速度最大
+	public float bAttackImpact;
+	public float eAttackImpact;
 	public int BigAttack = 10000;			// 巨大化した時の攻撃値
 	public bool isBig;						// 巨大化しているかどうか
 	public float HealApPoint = 1000;		// アイテム取得時の回復量
@@ -45,6 +48,7 @@ public class PlayerAp : MonoBehaviour {
     public float PDamagePoint = 100;
     public float FDamagePoint = 10;
     public float HealPoint = 10;
+
 
     /*[CustomEditor(typeof(PlayerAp))]
 	public class PlayerApEditor : Editor	// using UnityEditor; を入れておく
@@ -79,6 +83,7 @@ public class PlayerAp : MonoBehaviour {
 		Transform EffectPoint = GameObject.FindWithTag ("Player").transform.Find("EffectPoint");
 		GameObject DamagePrefab = GameObject.Find("MagicAttack_7");
 		GameObject HpHealPrefab = GameObject.Find("Aura2");
+		reForce = gameObject.GetComponent<PlayerController>().ReForce;
 	}
 
 
@@ -120,21 +125,26 @@ public class PlayerAp : MonoBehaviour {
 		//Debug.Log (collider.gameObject.name);
 		//プレイヤの速度判定（壁衝突時に使う）
 		force = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().Force;
+		reForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().ReForce;
 		maxForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().MaxForce;
 		//Enmey(敵)、もしくはShotEnemy(敵の弾)のタグが付いたものに衝突したら
 		if (collider.gameObject.tag == "ShotEnemy" || collider.gameObject.tag == "Enemy") {
 			//ShotEnemyタグ付きと接触し、
 			if (collider.gameObject.tag == "ShotEnemy" && collider.gameObject.GetComponent<EnemyBasic> () != null) {
 				enemyAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyAttack;
+				eAttackImpact = collider.gameObject.GetComponent<EnemyBasic> ().EAttackImpact;
 			}
 			if (collider.gameObject.tag == "ShotEnemy" && collider.gameObject.GetComponent<BossBasic>() != null) {
 				enemyAttack = collider.gameObject.GetComponent<BossBasic> ().EnemyAttack;
+				bAttackImpact = collider.gameObject.GetComponent<BossBasic> ().BAttackImpact;
 			}
 			if (collider.gameObject.tag == "Enemy" && collider.gameObject.GetComponent<EnemyBasic>() != null) {
 				enemyAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyAttack;
+				eAttackImpact = collider.gameObject.GetComponent<EnemyBasic> ().EAttackImpact;
 			} 	
 			if (collider.gameObject.tag == "Enemy" && collider.gameObject.GetComponent<BossBasic>() != null) {
 				enemyAttack = collider.gameObject.GetComponent<BossBasic> ().EnemyAttack;
+				bAttackImpact = collider.gameObject.GetComponent<BossBasic> ().BAttackImpact;
 			} 	
 
 		// 巨大化もしくはダッシュしていたらダメージなし(armorPoint差し引きを0にする)
@@ -163,6 +173,7 @@ public class PlayerAp : MonoBehaviour {
 			}
                 //コルーチン処理（下記参照）
                 //rigidbody.AddForce(transform.forward * -5f);
+
                 StartCoroutine ("EnemyDamageCoroutine");
                 //Debug.Log("ダメージ");
 			}
@@ -320,16 +331,14 @@ public class PlayerAp : MonoBehaviour {
 		// EnemeyとPlayerの交差してる✔を外す（プレイヤのLayerをPlayer、EnemyのLayerをEnemyに設定しておく）
 		gameObject.layer = LayerMask.NameToLayer("Invincible");
 		//while文を10回ループ
-		int count = 4;
+		int count = 4; // 点滅時間（秒）
         //iTween.MoveTo(gameObject, iTween.Hash("z", -0.2f));
         iTween.MoveTo(gameObject, iTween.Hash(
             //KnockBackRange値だけ後に吹っ飛ぶ
-            "position", transform.position - (transform.forward * KnockBackRange),
-            //"position", transform.position - (transform.forward * 5f),
-            "time", FlashTime, // 点滅時間（秒）
+			"position", transform.position - (transform.forward * eAttackImpact),
+			"time", KockbackTime, 
             "easetype", iTween.EaseType.linear
 		));
-        //Debug.Log("後退");
         while (count > 0){
 			//透明にする
 			modelColorChange.ColorChange(DamageColor);
@@ -350,10 +359,9 @@ public class PlayerAp : MonoBehaviour {
 	{
 		//while文を10回ループ
 		int count = 4;
-        //rigidbody.transform.position -= transform.forward * 2;
         iTween.MoveTo(gameObject, iTween.Hash(
             "position", transform.position - (transform.forward * KnockBackRange),
-            "time", FlashTime, // 点滅時間（秒）
+			"time", KockbackTime, 
 			"easetype", iTween.EaseType.linear
 		));
         while (count > 0){
@@ -375,11 +383,6 @@ public class PlayerAp : MonoBehaviour {
         gameObject.layer = LayerMask.NameToLayer("Invincible");
         //while文を10回ループ
         int count = 4;
-		iTween.MoveTo(gameObject, iTween.Hash(
-			//"position", transform.position - (transform.forward * KnockBackRange),
-			"time", FlashTime, // 点滅時間（秒）
-			"easetype", iTween.EaseType.linear
-		));
 		while (count > 0){
 			//透明にする
 			modelColorChange.ColorChange(new Color (0.8f,0,0,1));
@@ -399,11 +402,6 @@ public class PlayerAp : MonoBehaviour {
     {
         //while文を10回ループ
         int count = 4;
-        iTween.MoveTo(gameObject, iTween.Hash(
-            //"position", transform.position - (transform.forward * KnockBackRange),
-            "time", FlashTime, // 点滅時間（秒）
-            "easetype", iTween.EaseType.linear
-        ));
         while (count > 0)
         {
             //透明にする
@@ -428,10 +426,6 @@ public class PlayerAp : MonoBehaviour {
 
 		// 巨大化継続時間を設定
 		int count = 100;
-		iTween.MoveTo(gameObject, iTween.Hash(
-			"time", FlashTime, // 点滅時間（秒）
-			"easetype", iTween.EaseType.linear
-		));
 		while (count > 0){
 			//点滅時の色を設定（ModelColorChangeスクリプト参照）
 			modelColorChange.ColorChange(new Color (1,0,0,1));
