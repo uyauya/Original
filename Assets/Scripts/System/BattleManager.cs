@@ -28,7 +28,7 @@ public class BattleManager : MonoBehaviour {
 	int clearScore;						 	// クリア条件となるスコア  
 	public GameObject Player;			
 	public float ChangeTime = 5.0f;			// シーン変更までの時間
-	public float ChangeTime2 = 0.0f;
+	public float ChangeTime2 = 0.2f;
 	public int Count;					 	// ステージ移行する為のアイテム取得個
 	public int PlayerNo;				 	//プレイヤーNo取得用(0でこはく、1でゆうこ、2でみさき）
 	public static bool PlayerDead = false;	//プレイヤキャラが死亡したかどうか
@@ -233,7 +233,7 @@ public class BattleManager : MonoBehaviour {
 			}
             else if(PlayerController.Goal == true)
                 {
-                    Invoke("NextScene", ChangeTime);
+                    Invoke("NextScene", ChangeTime2);
                     PlayerController.Goal = false;
                 }
 
