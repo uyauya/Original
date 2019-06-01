@@ -208,8 +208,6 @@ public class BossBasic : MonoBehaviour {
 			armorPoint -= damage;
 			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		} else if (collider.gameObject.tag == "Weapon") {
-			DamageSet = true;
-			StartCoroutine ("LifeBarCoroutine");
 			if (collider.gameObject.GetComponent<WeaponAttack>() != null)
 			{
 				damage = collider.gameObject.GetComponent<WeaponAttack>().damage;

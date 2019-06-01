@@ -2,14 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
+    "\\Assets\\other",
     "\\Assets\\Prefab",
-    "\\Assets\\Prefab\\Enemy",
-    "\\Assets\\Prefab\\Enemy\\PQAssets",
-    "\\Assets\\Prefab\\other",
-    "\\Assets\\Prefab\\UnityChan",
-    "\\Assets\\Prefab\\UnityChan\\STAGE04",
     "\\Assets\\Scripts",
-    "\\Assets\\Scripts\\System"
+    "\\Assets\\Scripts\\Enemy",
+    "\\Assets\\Scripts\\System",
+    "\\Assets\\UnityChan"
   ],
   "PreviewInSolutionExplorer": false
 }
