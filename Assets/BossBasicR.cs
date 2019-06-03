@@ -64,8 +64,7 @@ public class BossBasicR : MonoBehaviour
 		// Rigidbodyを取得し、以後rbと略す
 		rb = this.GetComponent<Rigidbody>();
 		// 重力を個別に設定する場合場合はデフォルト設定時のGravity設定を無効にする
-		rb.useGravity = false;
-
+		rb.useGravity = false;;
 	}
 
     // Update is called once per frame
@@ -238,12 +237,12 @@ public class BossBasicR : MonoBehaviour
 		gameObject.layer = LayerMask.NameToLayer("Invincible");
 		//while文を10回ループ
 		int count = 10;
-		iTween.MoveTo(gameObject, iTween.Hash(
+		/*iTween.MoveTo(gameObject, iTween.Hash(
 			// その場からKnockBackRange数値分後(-transform.forwardで後)に移動
 			"position", transform.position - (transform.forward * KnockBackRange),
 			"time", InvincibleTime, 
 			"easetype", iTween.EaseType.linear
-		));
+		));*/
 		while (count > 0){
 			//透明にする(ModelColorChange参照)
 			modelColorChange.ColorChange(new Color (1,0,0,1));
