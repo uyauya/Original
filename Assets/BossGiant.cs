@@ -60,25 +60,26 @@ public class BossGiant : MonoBehaviour
 		//bossBasic.timer += Time.deltaTime;
 		if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= Search) 
 		{
-			animator.SetBool("walk", true);
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
+            animator.SetBool("walk", true);
+            transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 				(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * MoveSpeed);
-		}
-		//近距離
-		/*if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= TargetRange)
+                GetComponent<Rigidbody>().velocity = (transform.forward * MoveSpeed);
+        }
+        //近距離
+        if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= TargetRange)
 		{
-			if (AttackPhaseTime >= 1)
+
+            //animator.SetBool("Attack01", true);
+            /*if (AttackPhaseTime >= 1)
 			{
-				//animator.SetBool("idle", false);
-				//animator.SetBool("walk", false);
 				//animator.SetTrigger("attack01");
 				//RandomAction();
 				AttackPhaseTime = 0;
-			}
-		}*/
+			}*/
+        }
     }
 
-	public void RandomAction()
+    public void RandomAction()
 	{
 		int num = Random.Range(0, 8);
 		if (num <= 7)
