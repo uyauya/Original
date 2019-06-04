@@ -47,6 +47,7 @@ public class BossBasicR : MonoBehaviour
 	public float BAttackImpact = 5;
 	public static bool isBDamage = false;
 	public static bool isBDead = false;
+	public static bool isBStop = false;
 
 	// Start is called before the first frame update
 	void Start () {
@@ -64,7 +65,7 @@ public class BossBasicR : MonoBehaviour
 		// Rigidbodyを取得し、以後rbと略す
 		rb = this.GetComponent<Rigidbody>();
 		// 重力を個別に設定する場合場合はデフォルト設定時のGravity設定を無効にする
-		rb.useGravity = false;;
+		rb.useGravity = false;
 	}
 
     // Update is called once per frame

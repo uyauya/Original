@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossGiant : MonoBehaviour
 {
-	public Animator animator;	
+	private Animator animator;	
 	public Transform BeamMuzzle;	
 	public Transform GiantHeadMuzzle;		
 	public Transform GiantHandL;
@@ -14,9 +14,14 @@ public class BossGiant : MonoBehaviour
 	public float GiantShotInterval = 0;
 	public float GiantShotIntervalMax = 20;
 	public GameObject exprosion;
-	public int TargetRange;				   
-	public float TargetSpeed;				   
-	public float MoveSpeed;					   
+	public int CrossRange;
+	public int TargetRange;
+	public float SearchRange;
+	public float MoveSpeed = 5;
+	public float RMoveSpeed = 5;
+	public float RollSpeed;
+	public float StopTime = 3;
+	public float LastSpeed;
 	protected BossBasicR bossBasicR;			   
 	bool dead = false;
 	public float Magnification = 1.3f;
@@ -25,7 +30,6 @@ public class BossGiant : MonoBehaviour
 	public float RandomCount = 1;
 	int AttackPhase = 0;
 	float AttackPhaseTime = 0.0f;
-	public float Search;
 	public GameObject Target;	
 
 	// Start is called before the first frame update
@@ -40,8 +44,9 @@ public class BossGiant : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		
+
 	}
+
     // Update is called once per frame
     void Update()
     {
@@ -58,51 +63,55 @@ public class BossGiant : MonoBehaviour
 		Vector3 Ros = this.gameObject.transform.rotation.eulerAngles;
 		gameObject.transform.eulerAngles = new Vector3(1 ,Ros.y, 1);
 		//bossBasic.timer += Time.deltaTime;
-		if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= Search) 
+		if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= SearchRange) 
 		{
             animator.SetBool("walk", true);
             transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
-				(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * MoveSpeed);
-                GetComponent<Rigidbody>().velocity = (transform.forward * MoveSpeed);
+				(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
+				GetComponent<Rigidbody>().velocity = (transform.forward * MoveSpeed);
         }
-        //近距離
+		//遠距離
+		if ((Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= SearchRange)
+			&&(Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) > TargetRange))
+		{
+			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
+				(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
+			StartCoroutine("StopCoroutine");
+			animator.SetTrigger("shout");
+		}
+		//近距離
         if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= TargetRange)
 		{
-
-            //animator.SetBool("Attack01", true);
-            /*if (AttackPhaseTime >= 1)
-			{
-				//animator.SetTrigger("attack01");
-				//RandomAction();
-				AttackPhaseTime = 0;
-			}*/
+			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
+				(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
+				RandomAction();
         }
+		if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= CrossRange)
+		{
+			StartCoroutine("StopCoroutine");
+			//Debug.Log(MoveSpeed);
+		}
     }
 
     public void RandomAction()
 	{
-		int num = Random.Range(0, 8);
-		if (num <= 7)
+		int num = Random.Range(0, 9);
+		if (num <= 4)
 		{
-			if(AttackPhase == 0)
-			{
-				animator.SetTrigger("attack01");
-				AttackPhase = 1;
-				AttackPhaseTime = 0.0f;
-			}
+			animator.SetTrigger("attack01");
 		}
-		/*else if (num > 3 && num <= 5)
-		{
-			if(AttackPhase == 0)
-			{
-				AttackPhase = 1;
-				AttackPhaseTime = 0.0f;
-			}
-		}*/
 		else
 		{
-			animator.SetTrigger ("shout");
+			animator.SetTrigger("attack02");
 		}
+	}
+
+	IEnumerator StopCoroutine()
+	{         
+		MoveSpeed = 0;                      
+		yield return new WaitForSeconds(StopTime); 
+		MoveSpeed = RMoveSpeed;   
+		Debug.Log(MoveSpeed);
 	}
 
 }
