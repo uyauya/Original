@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class TrailEquip : MonoBehaviour
 {
-    //public TrailRenderer trailRenderer;
     TrailRenderer[] trailRenderers;
+	public static bool TrailOn = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        //this.trailRenderer = GetComponent<TrailRenderer>();
-        //trailRenderer.enabled = false;
         trailRenderers = GetComponentsInChildren<TrailRenderer>();
         foreach (TrailRenderer trail in trailRenderers)
         {
@@ -22,6 +20,12 @@ public class TrailEquip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+		if(TrailOn == true)
+		{
+			foreach (TrailRenderer trail in trailRenderers)
+			{
+				trail.enabled = true;
+			}
+		}
     }
 }

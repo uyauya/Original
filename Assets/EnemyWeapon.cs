@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyWeapon : MonoBehaviour
 {
-	public int EnemyAttack;
+	public int EWeaponAttack = 100;
+	public float EWeaponImpact = 1;
 
 	// Start is called before the first frame update
     void Start()

@@ -9,7 +9,9 @@ public class PlayerAp : MonoBehaviour {
 
     Rigidbody rigidbody;
     public static float armorPoint;			// プレイヤー体力
-	public static int enemyAttack;					// 敵の攻撃値
+	public static int enemyAttack;			// 敵の攻撃値
+	public static int eWeaponAttack = 100;			// 敵の攻撃値
+	public static float eWeaponImpact = 1;			// 敵の攻撃値
 	public float poisonAttack;				// 毒
 	public Text armorText;
 	float displayArmorPoint;				// 画面表示用HPゲージ
@@ -41,6 +43,7 @@ public class PlayerAp : MonoBehaviour {
 	public float maxForce;					// 移動速度最大
 	public float bAttackImpact;
 	public float eAttackImpact;
+	public float bAttackImpactR;
 	public int BigAttack = 10000;			// 巨大化した時の攻撃値
 	public bool isBig;						// 巨大化しているかどうか
 	public float HealApPoint = 1000;		// アイテム取得時の回復量
@@ -145,7 +148,12 @@ public class PlayerAp : MonoBehaviour {
 			if (collider.gameObject.tag == "Enemy" && collider.gameObject.GetComponent<BossBasic>() != null) {
 				enemyAttack = collider.gameObject.GetComponent<BossBasic> ().EnemyAttack;
 				bAttackImpact = collider.gameObject.GetComponent<BossBasic> ().BAttackImpact;
-			} 	
+			} 
+			if (collider.gameObject.tag == "Boss" && collider.gameObject.GetComponent<BossBasicR>() != null) {
+				enemyAttack = collider.gameObject.GetComponent<BossBasicR> ().BossAttackR;
+				bAttackImpactR = collider.gameObject.GetComponent<BossBasicR> ().BAttackImpactR;
+			} 
+
 
 		// 巨大化もしくはダッシュしていたらダメージなし(armorPoint差し引きを0にする)
 		if (isBig == true) {
@@ -317,7 +325,13 @@ public class PlayerAp : MonoBehaviour {
             {
                 return;
             }
+			if (GetComponent<Collider>().gameObject.tag == "EWeapon") {
+				eWeaponAttack = GetComponent<Collider>().gameObject.GetComponent<EnemyWeapon> ().EWeaponAttack;
+				eWeaponImpact = GetComponent<Collider>().gameObject.GetComponent<EnemyWeapon> ().EWeaponImpact;
+				armorPoint -= eWeaponAttack;
+			} 
         }
+
     }
 
     // Itweenを使ってコルーチン作成（Itweenインストール必要あり）

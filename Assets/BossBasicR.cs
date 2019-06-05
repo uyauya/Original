@@ -44,10 +44,12 @@ public class BossBasicR : MonoBehaviour
 	public Color DamageColor = new Color(0.83f, 0.051f, 0.051f, 0.00f);  
 	public Color FreezeColor = new Color(0.09f, 0.96f, 0.96f, 0.00f);  
 	public static bool BossDead = false;			//ボスが死んだかどうかの判定
-	public float BAttackImpact = 5;
+	public int BossAttackR = 100;
+	public int BPlusAttack = 100;
+	public float BAttackImpactR = 5;
 	public static bool isBDamage = false;
 	public static bool isBDead = false;
-	public static bool isBStop = false;
+	public static bool isPowerUp = false;
 
 	// Start is called before the first frame update
 	void Start () {

@@ -40,11 +40,28 @@ public class BossGiant : MonoBehaviour
 		BossLifeBar = GameObject.Find ("BossLife");
 		BossLifeBar.SetActive(true);
 		Target = GameObject.FindWithTag ("Player");	
+		RMoveSpeed = MoveSpeed;
     }
 
 	void FixedUpdate()
 	{
-
+		if(BossBasicR.isBDamage == true)
+		{
+			animator.SetTrigger("damaged");
+		}
+		if(BossBasicR.isBDead == true)
+		{
+			animator.SetBool("dead", true);
+		}
+		if( bossBasicR.armorPoint <= 1000f)
+		{
+			TrailEquip.TrailOn = true;
+			BossBasicR.isPowerUp = true;
+		}
+		if(BossBasicR.isPowerUp == true)
+		{
+			
+		}	
 	}
 
     // Update is called once per frame
