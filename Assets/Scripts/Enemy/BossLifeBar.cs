@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BossLifeBar : MonoBehaviour {
 
 	public BossBasic bossBasic;
+    public BossBasicR bossBasicR;
 	private Slider hpSlider;
 
 	// Use this for initialization
@@ -14,7 +15,8 @@ public class BossLifeBar : MonoBehaviour {
 		//ボスライフバー（画面表示用）とボスライフを連動させる
 		hpSlider = transform.Find ("Slider").GetComponent <Slider>();
 		hpSlider.value = (float) bossBasic.GetarmorPointMax () / (float)bossBasic.GetarmorPointMax ();
-	}
+        hpSlider.value = (float)bossBasicR.GetarmorPointMax() / (float)bossBasicR.GetarmorPointMax();
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -31,8 +33,9 @@ public class BossLifeBar : MonoBehaviour {
 		//Debug.Log (hpSlider);
 		if(hpSlider != null) {
 			hpSlider.value = (float) bossBasic.GetarmorPoint () / (float) bossBasic.GetarmorPointMax ();
-			//Debug.Log ("armorPoint");
-		}
+            hpSlider.value = (float)bossBasicR.GetarmorPoint() / (float)bossBasicR.GetarmorPointMax();
+            //Debug.Log ("armorPoint");
+        }
 	}
 
 }
