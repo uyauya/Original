@@ -132,26 +132,32 @@ public class PlayerAp : MonoBehaviour {
 		maxForce = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ().MaxForce;
 		//Enmey(敵)、もしくはShotEnemy(敵の弾)のタグが付いたものに衝突したら
 		if (collider.gameObject.tag == "ShotEnemy" || collider.gameObject.tag == "Enemy") {
+			
 			//ShotEnemyタグ付きと接触し、
 			if (collider.gameObject.tag == "ShotEnemy" && collider.gameObject.GetComponent<EnemyBasic> () != null) {
 				enemyAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyAttack;
 				eAttackImpact = collider.gameObject.GetComponent<EnemyBasic> ().EAttackImpact;
+				animator.SetTrigger ("Damage");
 			}
 			if (collider.gameObject.tag == "ShotEnemy" && collider.gameObject.GetComponent<BossBasic>() != null) {
 				enemyAttack = collider.gameObject.GetComponent<BossBasic> ().EnemyAttack;
 				bAttackImpact = collider.gameObject.GetComponent<BossBasic> ().BAttackImpact;
+				animator.SetTrigger ("Damage");
 			}
 			if (collider.gameObject.tag == "Enemy" && collider.gameObject.GetComponent<EnemyBasic>() != null) {
 				enemyAttack = collider.gameObject.GetComponent<EnemyBasic> ().EnemyAttack;
 				eAttackImpact = collider.gameObject.GetComponent<EnemyBasic> ().EAttackImpact;
+				animator.SetTrigger ("Damage");
 			} 	
 			if (collider.gameObject.tag == "Enemy" && collider.gameObject.GetComponent<BossBasic>() != null) {
 				enemyAttack = collider.gameObject.GetComponent<BossBasic> ().EnemyAttack;
 				bAttackImpact = collider.gameObject.GetComponent<BossBasic> ().BAttackImpact;
+				animator.SetTrigger ("Damage");
 			} 
 			if (collider.gameObject.tag == "Boss" && collider.gameObject.GetComponent<BossBasicR>() != null) {
 				enemyAttack = collider.gameObject.GetComponent<BossBasicR> ().BossAttackR;
 				bAttackImpactR = collider.gameObject.GetComponent<BossBasicR> ().BAttackImpactR;
+				animator.SetTrigger ("Damage");
 			} 
 
 
@@ -179,9 +185,6 @@ public class PlayerAp : MonoBehaviour {
 			if (PlayerNo == 2) {
 				SoundManager.Instance.Play (23, gameObject);
 			}
-                //コルーチン処理（下記参照）
-                //rigidbody.AddForce(transform.forward * -5f);
-
                 StartCoroutine ("EnemyDamageCoroutine");
                 //Debug.Log("ダメージ");
 			}
@@ -325,11 +328,17 @@ public class PlayerAp : MonoBehaviour {
             {
                 return;
             }
-			if (GetComponent<Collider>().gameObject.tag == "EWeapon") {
-				eWeaponAttack = GetComponent<Collider>().gameObject.GetComponent<EnemyWeapon> ().EWeaponAttack;
-				eWeaponImpact = GetComponent<Collider>().gameObject.GetComponent<EnemyWeapon> ().EWeaponImpact;
-				armorPoint -= eWeaponAttack;
-			} 
+		} 
+		if (other.tag == "EWeapon") 
+		{
+			//Debug.Log("武器攻撃");
+			armorPoint -= EnemyWeapon.EWeaponDamage;
+			if(armorPoint <= 0)
+			{
+				armorPoint = 0;
+			}
+			animator.SetTrigger ("Damage");
+			StartCoroutine ("EnemyDamageCoroutine");
         }
 
     }
@@ -338,6 +347,7 @@ public class PlayerAp : MonoBehaviour {
     // 敵接触時の点滅（オブジェクトの色をStandardなどにしておかないと点滅しない場合がある）
     IEnumerator EnemyDamageCoroutine ()
 	{
+		
 		// プレイヤのレイヤーをInvincibleに変更
 		// Edit→ProjectSetting→Tags and LayersでInvicibleを追加
 		// Edit→ProjectSetting→Physicsで衝突させたくない対象と交差している所の✔を外す
@@ -346,13 +356,24 @@ public class PlayerAp : MonoBehaviour {
 		gameObject.layer = LayerMask.NameToLayer("Invincible");
 		//while文を10回ループ
 		int count = 4; // 点滅時間（秒）
-        //iTween.MoveTo(gameObject, iTween.Hash("z", -0.2f));
-        iTween.MoveTo(gameObject, iTween.Hash(
-            //KnockBackRange値だけ後に吹っ飛ぶ
-			"position", transform.position - (transform.forward * eAttackImpact),
-			"time", KockbackTime, 
-            "easetype", iTween.EaseType.linear
-		));
+		if(EnemyWeapon.EWeaponImpact != null)
+		{
+        	iTween.MoveTo(gameObject, iTween.Hash(
+				//KnockBackRange値だけ後に吹っ飛ぶ
+				"position", transform.position - (transform.forward * EnemyWeapon.EWeaponImpact),
+				"time", KockbackTime, 
+            	"easetype", iTween.EaseType.linear
+			));
+		}
+		else
+		{
+			iTween.MoveTo(gameObject, iTween.Hash(
+				//KnockBackRange値だけ後に吹っ飛ぶ
+				"position", transform.position - (transform.forward * KnockBackRange),
+				"time", KockbackTime, 
+				"easetype", iTween.EaseType.linear
+			));
+		}
         while (count > 0){
 			//透明にする
 			modelColorChange.ColorChange(DamageColor);

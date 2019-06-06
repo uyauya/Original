@@ -51,6 +51,7 @@ public class BossBasicR : MonoBehaviour
 	public static bool isBDead = false;
 	public static bool isPowerUp = false;
 
+
 	// Start is called before the first frame update
 	void Start () {
 		BossLifeBar.SetActive (true);

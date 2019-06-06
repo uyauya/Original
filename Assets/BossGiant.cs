@@ -9,10 +9,10 @@ public class BossGiant : MonoBehaviour
 	public Transform GiantHeadMuzzle;		
 	public Transform GiantHandL;
 	public Transform GiantHandR;
-	public GameObject GiantFire;
+	public GameObject GiantBullet;
 	public GameObject GiantBeam;		
-	public float GiantShotInterval = 0;
-	public float GiantShotIntervalMax = 20;
+	public float ShotInterval = 0;
+	public float ShotIntervalMax = 2;
 	public GameObject exprosion;
 	public int CrossRange;
 	public int TargetRange;
@@ -30,7 +30,23 @@ public class BossGiant : MonoBehaviour
 	public float RandomCount = 1;
 	int AttackPhase = 0;
 	float AttackPhaseTime = 0.0f;
-	public GameObject Target;	
+	public GameObject Target;
+	private float ShotSpeed;			// 射出速度
+	private Vector3 ShotDirection;		// 射出方向
+	public float XspeedS = -0.1f;		// X方向最低速度
+	public float XspeedL = 0.1f;		// X方向最高速度	
+	public float YspeedS = -0.1f;
+	public float YspeedL = 0.1f;
+	public float ZspeedS = -0.1f;
+	public float ZspeedL = 0.1f;
+	public float XdirectionS = -0.1f;	// X方向範囲（ここから）
+	public float XdirectionL = 0.1f;	// X方向範囲（ここまで）
+	public float YdirectionS = -0.1f;
+	public float YdirectionL = 0.1f;
+	public float ZdirectionS = -0.1f;
+	public float ZdirectionL = 0.1f;
+	private int SFrameCount = 0;			 
+	public int ShotCount = 10;
 
 	// Start is called before the first frame update
     void Start()
@@ -94,7 +110,15 @@ public class BossGiant : MonoBehaviour
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 				(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
 			StartCoroutine("StopCoroutine");
-			animator.SetTrigger("shout");
+			SFrameCount += 1;
+			if (SFrameCount >= ShotCount)
+			{
+				SFrameCount = 0;
+				animator.SetTrigger("shout");
+				GiantShot();
+			}
+
+
 		}
 		//近距離
         if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= TargetRange)
@@ -110,6 +134,8 @@ public class BossGiant : MonoBehaviour
 		}
     }
 
+
+
     public void RandomAction()
 	{
 		int num = Random.Range(0, 9);
@@ -123,12 +149,42 @@ public class BossGiant : MonoBehaviour
 		}
 	}
 
+	private void GiantShot()
+	{
+		if (GiantBullet != null)
+		{
+
+			GameObject giantBullet = Instantiate(GiantBullet, this.transform.position, Quaternion.identity);
+			giantBullet.transform.position = GiantHeadMuzzle.position;
+			Rigidbody rid = giantBullet.GetComponent<Rigidbody>();
+			{
+				// スピードをランダムにする（Random.Rangeの場合はfloatにする）
+				float x = Random.Range (XspeedS,XspeedL);	//XspeedSからXspeedLまでの数値のランダム
+				float y = Random.Range (YspeedS,YspeedL);
+				float z = Random.Range (ZspeedS,ZspeedL);
+				ShotSpeed = Random.Range (1, 9) / 10f;
+				// 方向をランダムにする
+				x = Random.Range (XdirectionS,XdirectionL);
+				y = Random.Range (YdirectionS,YdirectionL);
+				z = Random.Range (ZdirectionS,ZdirectionL);
+				ShotDirection = new Vector3 (x, y, z);
+				ShotDirection = ShotDirection.normalized;
+			}
+			// 弾を(ShotSpeed速度* ShotDirection方向）で前進。後ろにForceMode.Impulseをつけて瞬間的に力を加える
+			rid.AddForce(ShotSpeed * ShotDirection, ForceMode.Impulse);
+		}
+		else
+		{
+			return;
+		}
+	}
+
 	IEnumerator StopCoroutine()
 	{         
 		MoveSpeed = 0;                      
 		yield return new WaitForSeconds(StopTime); 
 		MoveSpeed = RMoveSpeed;   
-		Debug.Log(MoveSpeed);
+		//Debug.Log(MoveSpeed);
 	}
 
 }

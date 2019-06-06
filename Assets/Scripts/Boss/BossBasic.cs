@@ -113,7 +113,6 @@ public class BossBasic : MonoBehaviour {
 		rb = this.GetComponent<Rigidbody>();
 		// 重力を個別に設定する場合場合はデフォルト設定時のGravity設定を無効にする
 		rb.useGravity = false;
-        
     }
 
 
