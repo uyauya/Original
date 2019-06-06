@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossBasicR : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class BossBasicR : MonoBehaviour
 	public GameObject BossLifeBar;                  
 	public Color DamageColor = new Color(0.83f, 0.051f, 0.051f, 0.00f);  
 	public Color FreezeColor = new Color(0.09f, 0.96f, 0.96f, 0.00f);  
-	public static bool BossDead = false;			//ボスが死んだかどうかの判定
+	//public static bool BossDead = false;			//ボスが死んだかどうかの判定
 	public int BossAttackR = 100;
 	public int BPlusAttack = 100;
 	public float BAttackImpactR = 5;
@@ -93,8 +94,9 @@ public class BossBasicR : MonoBehaviour
 	void OnTriggerEnter(Collider collider) {
 		//既に死んでいたら何もしない
 		//if (animator.GetBool ("dead") == true) {
+		if (armorPoint <= 0) {
 			return;
-		//}
+		}
 		// Shotタグが付いているオブジェクトに当たったら
 		if (collider.gameObject.tag == "Shot") {
 			// Bullet01スクリプトのdamageを受け取る
@@ -173,7 +175,7 @@ public class BossBasicR : MonoBehaviour
 		if (collider.gameObject.tag == "Shot" || collider.gameObject.tag == "Shot2" || collider.gameObject.tag == "Shot3"
 			|| collider.gameObject.tag == "Shot5") {
 			if (armorPoint <= 0) {
-				BossDead = true;
+				//BossDead = true;
 				//Debug.Log ("敵"+gameObject.name);
 				// Animatorを"dead"へ移行
 				isBDead = true;

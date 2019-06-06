@@ -71,7 +71,8 @@ public class Bullet02 : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision collider) {
 		//衝突時に爆発エフェクトを表示する(敵か壁か床に当たったら)
-		if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Wall" || collider.gameObject.tag == "Floor") {
+		if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Wall" 
+			|| collider.gameObject.tag == "Floor"|| collider.gameObject.tag == "Boss") {
 			Instantiate (explosion, transform.position, transform.rotation);
 			//着弾後、弾消滅
 			Destroy (gameObject);
