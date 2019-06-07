@@ -219,7 +219,7 @@ public class BossBasic : MonoBehaviour {
 
 		//体力が0以下になったら消滅する
 		if (collider.gameObject.tag == "Shot" || collider.gameObject.tag == "Shot2" || collider.gameObject.tag == "Shot3"
-			|| collider.gameObject.tag == "Shot5") {
+			|| collider.gameObject.tag == "Shot5"||collider.gameObject.tag == "Weapon") {
 			if (armorPoint <= 0) {
 				BossDead = true;
 				//Debug.Log ("敵"+gameObject.name);

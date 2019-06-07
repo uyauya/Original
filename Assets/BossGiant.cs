@@ -47,6 +47,8 @@ public class BossGiant : MonoBehaviour
 	public int ShotCount = 10;
 	public float DushRate = 10;
 	public float ChargeTime = 0;
+	public float ChargeTimeMax = 10;
+	public float LimitBap = 3000;
 
 	// Start is called before the first frame update
     void Start()
@@ -70,22 +72,23 @@ public class BossGiant : MonoBehaviour
 		{
 			animator.SetBool("dead", true);
 		}
-		if( bossBasicR.armorPoint <= 1000f)
+		if( bossBasicR.armorPoint <= LimitBap)
 		{
 			TrailEquip.TrailOn = true;
 			BossBasicR.isPowerUp = true;
 		}
 		if(BossBasicR.isPowerUp == true)
 		{
-			
+
 		}	
 	}
 
     // Update is called once per frame
     void Update()
     {
-		animator.SetBool("walk", false);
+		//animator.SetBool("walk", false);
 		ChargeTime += Time.deltaTime;
+		Debug.Log("ChargeTime" + ChargeTime);
 		if( bossBasicR.armorPoint <= 0f)
 		{
 			BossLifeBar.SetActive(false);
@@ -100,6 +103,7 @@ public class BossGiant : MonoBehaviour
 		if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= SearchRange) 
 		{
             animator.SetBool("walk", true);
+			animator.SetBool("run", false);
             transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 				(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
 				GetComponent<Rigidbody>().velocity = (transform.forward * MoveSpeed);
@@ -108,8 +112,6 @@ public class BossGiant : MonoBehaviour
 		if ((Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= SearchRange)
 			&&(Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) > TargetRange))
 		{
-			//if(ChargeTime > 10)
-			//{
 				transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 				(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
 				StartCoroutine("StopCoroutine");
@@ -120,10 +122,6 @@ public class BossGiant : MonoBehaviour
 					animator.SetTrigger("shout");
 					//GiantShot();
 				}
-			//ChargeTime = 0;
-			//Debug.Log("リセット");
-			//}
-			//ChargeTime = 0;
 		}
 
 		//近距離
@@ -134,15 +132,36 @@ public class BossGiant : MonoBehaviour
 				RandomAction();
         }
 
-		//ターゲットレンジ内で突進
-		if (EnemyTargetRange.isAttackDesision == true)
+		//チャージタイムが溜まったら
+		if(ChargeTime >= ChargeTimeMax)
 		{
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
-				(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
-			GetComponent<Rigidbody>().velocity = (transform.forward * MoveSpeed * DushRate);
-			animator.SetTrigger("attack03");
-			EnemyTargetRange.isAttackDesision = false;
+			if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= SearchRange)
+			{
+				animator.SetBool("walk", false);
+				animator.SetBool("run", true);
+				transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
+					(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
+				GetComponent<Rigidbody>().velocity = (transform.forward * MoveSpeed * DushRate);
+				Debug.Log("突撃");
+				if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= TargetRange)
+				{
+					transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
+						(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
+					animator.SetTrigger("attack03");
+					Debug.Log("ラッシュ");
+					ChargeTime = 0;
+					Debug.Log("チャージリセット");
+				}
+				animator.SetBool("walk", true);
+				animator.SetBool("run", false);
+				Debug.Log("歩く");
+			}
 		}
+		else
+		{
+			return;
+		}
+
 		if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= CrossRange)
 		{
 			StartCoroutine("StopCoroutine");

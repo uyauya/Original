@@ -11,7 +11,6 @@ public class BossLifeBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//enemyBasic = transform.root.GetComponent <EnemyBasic> ();
 		//ボスライフバー（画面表示用）とボスライフを連動させる
 		hpSlider = transform.Find ("Slider").GetComponent <Slider>();
 		hpSlider.value = (float) bossBasic.GetarmorPointMax () / (float)bossBasic.GetarmorPointMax ();
@@ -20,9 +19,7 @@ public class BossLifeBar : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		//transform.rotation = Camera.main.transform.rotation;
-		//transform.LookAt(Camera.main.transform);
-		//gameObject.transform.LookAt(GameObject.Find("MainCamera").transform);
+
 	}
 
 	public void SetDisable() {

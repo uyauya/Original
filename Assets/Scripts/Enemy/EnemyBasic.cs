@@ -270,7 +270,7 @@ public class EnemyBasic : MonoBehaviour {
 
 		//プレイヤーのいずれかの弾に当たって体力が0以下になったら消滅する
 		if (collider.gameObject.tag == "Shot" || collider.gameObject.tag == "Shot2" || collider.gameObject.tag == "Shot3"
-		    || collider.gameObject.tag == "Shot5") {
+			|| collider.gameObject.tag == "Shot5"||collider.gameObject.tag == "Weapon") {
 			if (armorPoint <= 0) {
                 //Debug.Log ("敵"+gameObject.name);
                 // Animatorを"dead"へ移行。移行後元に戻さないならBool判定にした方がよい

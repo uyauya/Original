@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BossBasicR : MonoBehaviour
 {
 	public float armorPointMax = 10000;				// 最大HP
-	public float LimitBap = 1000;	
+		
 	public float armorPoint;					    // HP
 	protected float damage;							// playerからのダメージ判定
 	public void Damaged(float damagedPoint){
@@ -173,7 +173,7 @@ public class BossBasicR : MonoBehaviour
 
 		//体力が0以下になったら消滅する
 		if (collider.gameObject.tag == "Shot" || collider.gameObject.tag == "Shot2" || collider.gameObject.tag == "Shot3"
-			|| collider.gameObject.tag == "Shot5") {
+			|| collider.gameObject.tag == "Shot5"||collider.gameObject.tag == "Weapon") {
 			if (armorPoint <= 0) {
 				//BossDead = true;
 				//Debug.Log ("敵"+gameObject.name);
