@@ -212,6 +212,7 @@ public class BossBasicR : MonoBehaviour
 	// ダメージ時の点滅処理
 	IEnumerator DamageCoroutine ()
 	{
+		isBDamage = true;
 		//while文を10回ループ
 		int count = 10;
 		iTween.MoveTo(gameObject, iTween.Hash(
@@ -232,11 +233,13 @@ public class BossBasicR : MonoBehaviour
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
+		isBDamage = false;
 	}
 
 	// 死亡時処理
 	IEnumerator DeadCoroutine ()
 	{
+		isBDead = true;
 		//レイヤーをInvincibleに変更して死亡処理時にプレイヤと接触しないようにする。
 		// Edit→ProjectSetting→Tags and LayersでInvicibleを追加
 		// Edit→ProjectSetting→Physicsで衝突させたくない対象(Player)と交差している所の✔を外
@@ -260,6 +263,7 @@ public class BossBasicR : MonoBehaviour
 			yield return new WaitForSeconds(0.1f);
 			count--;
 		}
+		isBDead = false;
 	}
 
 	// 重力設定を個別で設定

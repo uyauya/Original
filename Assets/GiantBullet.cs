@@ -25,10 +25,11 @@ public class GiantBullet : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collider)
 	{
-		if (collider.gameObject.tag == "Player" || collider.gameObject.tag == "Shot"||collider.gameObject.tag == "Weapon")
+		if (collider.gameObject.tag == "Player" || collider.gameObject.tag == "Shot"||collider.gameObject.tag == "Weapon"
+			||collider.gameObject.tag == "Floor")
 		{
 			Destroy(gameObject);
-			Instantiate(explosion, transform.position, transform.rotation);
+			//Instantiate(explosion, transform.position, transform.rotation);
 		}
 	}
 

@@ -5,17 +5,16 @@ using UnityEngine;
 public class BossGiant : MonoBehaviour
 {
 	private Animator animator;	
-	public Transform BeamMuzzle;	
 	public Transform GiantHeadMuzzle;		
 	public Transform GiantHandL;
 	public Transform GiantHandR;
-	public GameObject GiantBullet;
-	public GameObject GiantBeam;		
+	public GameObject GiantBullet;		
 	public float ShotInterval = 0;
 	public float ShotIntervalMax = 2;
 	public GameObject exprosion;
 	public int CrossRange;
 	public int TargetRange;
+	public int ShotRange;
 	public float SearchRange;
 	public float MoveSpeed = 5;
 	public float RMoveSpeed = 5;
@@ -44,7 +43,7 @@ public class BossGiant : MonoBehaviour
 	public float ZdirectionS = -0.1f;
 	public float ZdirectionL = 0.1f;
 	private int SFrameCount = 0;			 
-	public int ShotCount = 10;
+	public int ShotCount = 50;
 	public float DushRate = 10;
 	public float ChargeTime = 0;
 	public float ChargeTimeMax = 10;
@@ -63,14 +62,24 @@ public class BossGiant : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		
+	}
+
+    // Update is called once per frame
+    void Update()
+    {
 		if(BossBasicR.isBDamage == true)
 		{
+			Debug.Log("ダメージ");
 			animator.SetTrigger("damaged");
-			BossBasicR.isBDamage = false;
 		}
 		if(BossBasicR.isBDead == true)
 		{
-			animator.SetBool("dead", true);
+			Debug.Log("デッド");
+			MoveSpeed = 0;
+			TrailEquip.TrailOn = false;
+			animator.SetTrigger("isdead");
+			//animator.SetBool("dead", true);
 		}
 		if( bossBasicR.armorPoint <= LimitBap)
 		{
@@ -81,14 +90,10 @@ public class BossGiant : MonoBehaviour
 		{
 
 		}	
-	}
-
-    // Update is called once per frame
-    void Update()
-    {
-		//animator.SetBool("walk", false);
+		//animator.SetBool("walk", true);
+		//animator.SetBool("run", false);
 		ChargeTime += Time.deltaTime;
-		Debug.Log("ChargeTime" + ChargeTime);
+		//Debug.Log("ChargeTime" + ChargeTime);
 		if( bossBasicR.armorPoint <= 0f)
 		{
 			BossLifeBar.SetActive(false);
@@ -103,14 +108,14 @@ public class BossGiant : MonoBehaviour
 		if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= SearchRange) 
 		{
             animator.SetBool("walk", true);
-			animator.SetBool("run", false);
+			//animator.SetBool("run", false);
             transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 				(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
 				GetComponent<Rigidbody>().velocity = (transform.forward * MoveSpeed);
         }
 		//遠距離
 		if ((Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= SearchRange)
-			&&(Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) > TargetRange))
+			&&(Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) > ShotRange))
 		{
 				transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 				(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
@@ -118,9 +123,9 @@ public class BossGiant : MonoBehaviour
 				SFrameCount += 1;
 				if (SFrameCount >= ShotCount)
 				{
-					SFrameCount = 0;
 					animator.SetTrigger("shout");
-					//GiantShot();
+					GiantShot();
+					SFrameCount = 0;
 				}
 		}
 
@@ -137,8 +142,8 @@ public class BossGiant : MonoBehaviour
 		{
 			if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= SearchRange)
 			{
-				animator.SetBool("walk", false);
-				animator.SetBool("run", true);
+				animator.SetBool("walk", true);
+				animator.SetTrigger("running");
 				transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 					(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
 				GetComponent<Rigidbody>().velocity = (transform.forward * MoveSpeed * DushRate);
@@ -152,8 +157,6 @@ public class BossGiant : MonoBehaviour
 					ChargeTime = 0;
 					Debug.Log("チャージリセット");
 				}
-				animator.SetBool("walk", true);
-				animator.SetBool("run", false);
 				Debug.Log("歩く");
 			}
 		}
