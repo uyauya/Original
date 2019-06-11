@@ -88,6 +88,10 @@ public class BossBasicR : MonoBehaviour
 				gameObject.transform.localScale.x * Sscale
 			);
 		}
+		if(isPowerUp == true)
+		{
+			BossAttackR = BossAttackR + BPlusAttack;
+		}	
 	}
 
 	// ショット衝突判定

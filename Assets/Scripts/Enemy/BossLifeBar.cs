@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//ボスのライフバー表示用
 public class BossLifeBar : MonoBehaviour {
 
 	public BossBasic bossBasic;
