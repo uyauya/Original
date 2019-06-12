@@ -61,6 +61,8 @@ public class BossGiant : MonoBehaviour
 		BossLifeBar.SetActive(true);
 		Target = GameObject.FindWithTag ("Player");	
 		RMoveSpeed = MoveSpeed;
+		animator.SetTrigger("shout");
+		StartCoroutine("StopCoroutine");
     }
 
 	void FixedUpdate()
@@ -81,13 +83,13 @@ public class BossGiant : MonoBehaviour
 		{
 			Debug.Log("デッド");
 			MoveSpeed = 0;
-			TrailEquip.TrailOn = false;
+			//TrailEquip.TrailOn = false;
 			animator.SetTrigger("isdead");
 		}
 		if( bossBasicR.armorPoint <= LimitBap)
 		{
-			TrailEquip.TrailOn = true;
-			BossBasicR.isPowerUp = true;
+			//TrailEquip.TrailOn = true;
+			//BossBasicR.isPowerUp = true;
 		}
 
 		animator.SetBool("walk", true);
@@ -119,11 +121,13 @@ public class BossGiant : MonoBehaviour
 				if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= TargetRange)
 					{
 						AttackPhase = 2;
+						StartCoroutine("StopCoroutine");
 					}	
 				//チャージタイムが溜まったら
 				if(ChargeTime >= ChargeTimeMax)
 					{
 						AttackPhase = 3;
+						StartCoroutine("StopCoroutine");
 					}	
         }
 
@@ -143,6 +147,7 @@ public class BossGiant : MonoBehaviour
 				SFrameCount += 1;
 				if (SFrameCount >= ShotCount)
 				{
+					StartCoroutine("StopCoroutine");
 					animator.SetTrigger("shout");
 					GiantShot();
 					SFrameCount = 0;
@@ -159,6 +164,7 @@ public class BossGiant : MonoBehaviour
 			case 3:
 				if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= SearchRange)
 					{
+						
 						animator.SetTrigger("running");
 						transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 						(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
@@ -166,9 +172,11 @@ public class BossGiant : MonoBehaviour
 						Debug.Log("突撃");
 						if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= TargetRange)
 						{
+							TrailEquip.TrailOn = true;
 							transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 							(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
 							animator.SetTrigger("attack03");
+							TrailEquip.TrailOn = false;
 							Debug.Log("ラッシュ");
 							ChargeTime = 0;
 							Debug.Log("チャージリセット");
@@ -235,7 +243,7 @@ public class BossGiant : MonoBehaviour
 	{         
 		MoveSpeed = 0;                      
 		yield return new WaitForSeconds(StopTime); 
-		MoveSpeed = RMoveSpeed;   
+		MoveSpeed = RMoveSpeed;  
 	}
 
 }

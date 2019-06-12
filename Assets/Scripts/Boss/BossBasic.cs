@@ -215,6 +215,7 @@ public class BossBasic : MonoBehaviour {
 			StartCoroutine ("DamageCoroutine");
 			animator.SetTrigger ("damaged");
 			armorPoint -= damage;
+			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		}
 
 		//体力が0以下になったら消滅する

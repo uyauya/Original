@@ -173,6 +173,7 @@ public class BossBasicR : MonoBehaviour
 			StartCoroutine ("DamageCoroutine");
 			isBDamage = true;
 			armorPoint -= damage;
+			BossLifeBar.GetComponent<BossLifeBar> ().UpdateArmorPointValue ();
 		}
 
 		//体力が0以下になったら消滅する
