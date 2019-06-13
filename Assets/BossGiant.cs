@@ -78,6 +78,7 @@ public class BossGiant : MonoBehaviour
 		{
 			Debug.Log("ダメージ");
 			animator.SetTrigger("damaged");
+			animator.SetFloat("Speed",0.7f);
 		}
 		if(BossBasicR.isBDead == true)
 		{
@@ -85,9 +86,11 @@ public class BossGiant : MonoBehaviour
 			MoveSpeed = 0;
 			//TrailEquip.TrailOn = false;
 			animator.SetTrigger("isdead");
+			animator.SetFloat("Speed",0.5f);
 		}
 		if( bossBasicR.armorPoint <= LimitBap)
 		{
+			ParticleEquip.ParticleOn = true;
 			//TrailEquip.TrailOn = true;
 			//BossBasicR.isPowerUp = true;
 		}
@@ -116,18 +119,18 @@ public class BossGiant : MonoBehaviour
 					&&(Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) > ShotRange))
 					{
 						AttackPhase = 1;
-						StartCoroutine("StopCoroutine");
+						//StartCoroutine("StopCoroutine");
 					}	
 				if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= TargetRange)
 					{
 						AttackPhase = 2;
-						StartCoroutine("StopCoroutine");
+						//StartCoroutine("StopCoroutine");
 					}	
 				//チャージタイムが溜まったら
 				if(ChargeTime >= ChargeTimeMax)
 					{
 						AttackPhase = 3;
-						StartCoroutine("StopCoroutine");
+						//StartCoroutine("StopCoroutine");
 					}	
         }
 
@@ -172,11 +175,13 @@ public class BossGiant : MonoBehaviour
 						Debug.Log("突撃");
 						if (Vector3.Distance(bossBasicR.battleManager.Player.transform.position, transform.position) <= TargetRange)
 						{
-							TrailEquip.TrailOn = true;
+							ParticleEquip.ParticleOn = true;
+							//TrailEquip.TrailOn = true;
 							transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation
 							(bossBasicR.battleManager.Player.transform.position - transform.position), Time.deltaTime * RollSpeed);
 							animator.SetTrigger("attack03");
-							TrailEquip.TrailOn = false;
+							ParticleEquip.ParticleOn = false;
+							//TrailEquip.TrailOn = false;
 							Debug.Log("ラッシュ");
 							ChargeTime = 0;
 							Debug.Log("チャージリセット");

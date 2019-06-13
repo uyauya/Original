@@ -184,6 +184,7 @@ public class BossBasicR : MonoBehaviour
 				//Debug.Log ("敵"+gameObject.name);
 				// Animatorを"dead"へ移行
 				isBDead = true;
+				ParticleEquip.ParticleOn = false;
 				// 移行後元に戻さないならBool判定にした方がよい
 				//animator.SetBool ("dead", true);
 				// 敵消滅用エフェクト発生
